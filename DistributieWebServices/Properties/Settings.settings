@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="DistributieWebServices.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="DistributieWebServices_SMSService_SMSServiceService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://www.bizpack.ro/wsi/service.php</Value>
+    </Setting>
+    <Setting Name="DistributieWebServices_SapWebService_ZARTICOLE_CT" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://sap-prd6a.arabesque.ro:8036/sap/bc/srt/rfc/sap/zarticole_ct/900/zarticole_ct/zarticole_ct</Value>
+    </Setting>
+    <Setting Name="DistributieWebServices_BordSapService_ZWS_CANT_BORD" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://sap-prd6a.arabesque.ro:8036/sap/bc/srt/rfc/sap/zws_cant_bord/900/zws_cant_bord/zws_cant_bord</Value>
+    </Setting>
+    <Setting Name="DistributieWebServices_BordDistService_ZARTICOLE_BORD" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://sap-prd6a.arabesque.ro:8036/sap/bc/srt/rfc/sap/zarticole_bord/900/zarticole_bord/zarticole_bord</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

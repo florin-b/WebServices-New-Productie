@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiteSFAWebServices", "WebService1\LiteSFAWebServices.csproj", "{0B21B8E2-4876-4A15-8B54-99A7EE3978CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistributieWebServices", "DistributieWebServices\DistributieWebServices.csproj", "{C696CC5C-A854-4657-B7E2-37A4AB36C610}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TiparireDocumente", "TiparireDocumente\TiparireDocumente.csproj", "{73424195-B443-487E-8820-745C51711198}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlotaService", "FlotaService\FlotaService.csproj", "{E2DDC635-F9D9-4E2A-887A-2B9FFD390778}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0B21B8E2-4876-4A15-8B54-99A7EE3978CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B21B8E2-4876-4A15-8B54-99A7EE3978CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B21B8E2-4876-4A15-8B54-99A7EE3978CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B21B8E2-4876-4A15-8B54-99A7EE3978CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C696CC5C-A854-4657-B7E2-37A4AB36C610}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C696CC5C-A854-4657-B7E2-37A4AB36C610}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C696CC5C-A854-4657-B7E2-37A4AB36C610}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C696CC5C-A854-4657-B7E2-37A4AB36C610}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73424195-B443-487E-8820-745C51711198}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73424195-B443-487E-8820-745C51711198}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73424195-B443-487E-8820-745C51711198}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73424195-B443-487E-8820-745C51711198}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2DDC635-F9D9-4E2A-887A-2B9FFD390778}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2DDC635-F9D9-4E2A-887A-2B9FFD390778}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2DDC635-F9D9-4E2A-887A-2B9FFD390778}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2DDC635-F9D9-4E2A-887A-2B9FFD390778}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="urn:sap-com:document:sap:soap:functions:mc-style" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:n1="urn:sap-com:document:sap:rfc:functions" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" targetNamespace="urn:sap-com:document:sap:soap:functions:mc-style" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation>
+    <sidl:sidl xmlns:sidl="http://www.sap.com/2007/03/sidl" />
+  </wsdl:documentation>
+  <wsp:UsingPolicy wsdl:required="true" />
+  <wsp:Policy wsu:Id="BN_ZTBL_WEBSERVICE">
+    <wsaw:UsingAddressing xmlns:wsaw="http://schemas.xmlsoap.org/ws/2004/08/addressing" />
+    <saptrnbnd:OptimizedXMLTransfer uri="http://xml.sap.com/2006/11/esi/esp/binxml" xmlns:saptrnbnd="http://www.sap.com/webas/710/soap/features/transportbinding/" wsp:Optional="true" />
+    <sapattahnd:Enabled xmlns:sapattahnd="http://www.sap.com/710/features/attachment/">false</sapattahnd:Enabled>
+    <wsp:ExactlyOne xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:sapsp="http://www.sap.com/webas/630/soap/features/security/policy" xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702" xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:wsu="http://schemas.xmlsoap.org/ws/2002/07/utility">
+      <wsp:All>
+        <sp:TransportBinding>
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <sp:HttpsToken>
+                  <wsp:Policy>
+                    <sp:HttpBasicAuthentication />
+                  </wsp:Policy>
+                </sp:HttpsToken>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:TripleDesRsa15 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="IF_ZTBL_WEBSERVICE">
+    <sapsession:Session xmlns:sapsession="http://www.sap.com/webas/630/soap/features/session/">
+      <sapsession:enableSession>false</sapsession:enableSession>
+    </sapsession:Session>
+    <sapcentraladmin:CentralAdministration xmlns:sapcentraladmin="http://www.sap.com/webas/700/soap/features/CentralAdministration/" wsp:Optional="true">
+      <sapcentraladmin:BusinessApplicationID>5BDF274EA49D2253E10000000A010348</sapcentraladmin:BusinessApplicationID>
+    </sapcentraladmin:CentralAdministration>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="OP_ZstareComanda">
+    <sapcomhnd:enableCommit xmlns:sapcomhnd="http://www.sap.com/NW05/soap/features/commit/">false</sapcomhnd:enableCommit>
+    <sapblock:enableBlocking xmlns:sapblock="http://www.sap.com/NW05/soap/features/blocking/">true</sapblock:enableBlocking>
+    <saptrhnw05:required xmlns:saptrhnw05="http://www.sap.com/NW05/soap/features/transaction/">no</saptrhnw05:required>
+    <saprmnw05:enableWSRM xmlns:saprmnw05="http://www.sap.com/NW05/soap/features/wsrm/">false</saprmnw05:enableWSRM>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="OP_ZgetPrice">
+    <sapcomhnd:enableCommit xmlns:sapcomhnd="http://www.sap.com/NW05/soap/features/commit/">false</sapcomhnd:enableCommit>
+    <sapblock:enableBlocking xmlns:sapblock="http://www.sap.com/NW05/soap/features/blocking/">true</sapblock:enableBlocking>
+    <saptrhnw05:required xmlns:saptrhnw05="http://www.sap.com/NW05/soap/features/transaction/">no</saptrhnw05:required>
+    <saprmnw05:enableWSRM xmlns:saprmnw05="http://www.sap.com/NW05/soap/features/wsrm/">false</saprmnw05:enableWSRM>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="OP_ZcalcTrapSite">
+    <sapcomhnd:enableCommit xmlns:sapcomhnd="http://www.sap.com/NW05/soap/features/commit/">false</sapcomhnd:enableCommit>
+    <sapblock:enableBlocking xmlns:sapblock="http://www.sap.com/NW05/soap/features/blocking/">true</sapblock:enableBlocking>
+    <saptrhnw05:required xmlns:saptrhnw05="http://www.sap.com/NW05/soap/features/transaction/">no</saptrhnw05:required>
+    <saprmnw05:enableWSRM xmlns:saprmnw05="http://www.sap.com/NW05/soap/features/wsrm/">false</saprmnw05:enableWSRM>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="OP_ZcreazaComanda">
+    <sapcomhnd:enableCommit xmlns:sapcomhnd="http://www.sap.com/NW05/soap/features/commit/">false</sapcomhnd:enableCommit>
+    <sapblock:enableBlocking xmlns:sapblock="http://www.sap.com/NW05/soap/features/blocking/">true</sapblock:enableBlocking>
+    <saptrhnw05:required xmlns:saptrhnw05="http://www.sap.com/NW05/soap/features/transaction/">no</saptrhnw05:required>
+    <saprmnw05:enableWSRM xmlns:saprmnw05="http://www.sap.com/NW05/soap/features/wsrm/">false</saprmnw05:enableWSRM>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="OP_ZcalcTrap">
+    <sapcomhnd:enableCommit xmlns:sapcomhnd="http://www.sap.com/NW05/soap/features/commit/">false</sapcomhnd:enableCommit>
+    <sapblock:enableBlocking xmlns:sapblock="http://www.sap.com/NW05/soap/features/blocking/">true</sapblock:enableBlocking>
+    <saptrhnw05:required xmlns:saptrhnw05="http://www.sap.com/NW05/soap/features/transaction/">no</saptrhnw05:required>
+    <saprmnw05:enableWSRM xmlns:saprmnw05="http://www.sap.com/NW05/soap/features/wsrm/">false</saprmnw05:enableWSRM>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="OP_ZactDiscMaxim">
+    <sapcomhnd:enableCommit xmlns:sapcomhnd="http://www.sap.com/NW05/soap/features/commit/">false</sapcomhnd:enableCommit>
+    <sapblock:enableBlocking xmlns:sapblock="http://www.sap.com/NW05/soap/features/blocking/">true</sapblock:enableBlocking>
+    <saptrhnw05:required xmlns:saptrhnw05="http://www.sap.com/NW05/soap/features/transaction/">no</saptrhnw05:required>
+    <saprmnw05:enableWSRM xmlns:saprmnw05="http://www.sap.com/NW05/soap/features/wsrm/">false</saprmnw05:enableWSRM>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema attributeFormDefault="qualified" targetNamespace="urn:sap-com:document:sap:rfc:functions">
+      <xsd:simpleType name="char1">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="1" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char10">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="10" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char14">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="14" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char18">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="18" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char2">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char200">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="200" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char220">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="220" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char25">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="25" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char3">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="3" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char4">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="4" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="cuky5">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="5" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="curr15.2">
+        <xsd:restriction base="xsd:decimal">
+          <xsd:totalDigits value="15" />
+          <xsd:fractionDigits value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="numeric8">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="8" />
+          <xsd:pattern value="\d*" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="quantum13.3">
+        <xsd:restriction base="xsd:decimal">
+          <xsd:totalDigits value="13" />
+          <xsd:fractionDigits value="3" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="unit3">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="3" />
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:schema>
+    <xsd:schema xmlns:n0="urn:sap-com:document:sap:rfc:functions" attributeFormDefault="qualified" targetNamespace="urn:sap-com:document:sap:soap:functions:mc-style">
+      <xsd:import namespace="urn:sap-com:document:sap:rfc:functions" />
+      <xsd:complexType name="ZtrapSite">
+        <xsd:sequence>
+          <xsd:element name="Matnr" type="n0:char18" />
+          <xsd:element name="Netwr" type="n0:curr15.2" />
+          <xsd:element name="Menge" type="n0:quantum13.3" />
+          <xsd:element name="Meins" type="n0:unit3" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="TableOfZtrapSite">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:ZtrapSite" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="ZcalcTrapSite">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="GvKunnr" type="n0:char10" />
+            <xsd:element minOccurs="0" name="GvOras" type="n0:char25" />
+            <xsd:element minOccurs="0" name="GvRegio" type="n0:char3" />
+            <xsd:element minOccurs="0" name="GvTipplata" type="n0:char4" />
+            <xsd:element minOccurs="0" name="GvWerks" type="n0:char4" />
+            <xsd:element name="ItMatnr" type="tns:TableOfZtrapSite" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ZcalcTrapSiteResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="GvTraty" type="n0:char4" />
+            <xsd:element name="ItMatnr" type="tns:TableOfZtrapSite" />
+            <xsd:element name="ValTrap" type="n0:curr15.2" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ZcreazaComanda">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="GvEvent" type="n0:char1" />
+            <xsd:element name="Id" type="n0:char10" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ZcreazaComandaResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="VOk" type="n0:char2" />
+            <xsd:element name="VTrans" type="n0:curr15.2" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ZcalcTrap">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="VCity" type="n0:char25" />
+            <xsd:element minOccurs="0" name="VKunnr" type="n0:char10" />
+            <xsd:element minOccurs="0" name="VNetwr" type="n0:curr15.2" />
+            <xsd:element minOccurs="0" name="VRegio" type="n0:char3" />
+            <xsd:element minOccurs="0" name="VUl" type="n0:char4" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ZcalcTrapResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="VTrap" type="n0:curr15.2" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ZactDiscMaxim">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="PattId" type="n0:char14" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ZactDiscMaximResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="VOk" type="n0:char2" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ZgetPrice">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="GvCant" type="n0:quantum13.3" />
+            <xsd:element name="GvKunnr" type="n0:char10" />
+            <xsd:element name="GvLgort" type="n0:char4" />
+            <xsd:element name="GvMatnr" type="n0:char18" />
+            <xsd:element minOccurs="0" name="GvSite" type="n0:char1" />
+            <xsd:element name="GvSpart" type="n0:char2" />
+            <xsd:element minOccurs="0" name="GvVrkme" type="n0:unit3" />
+            <xsd:element name="GvWerks" type="n0:char4" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ZgetPriceResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="GvCant" type="n0:quantum13.3" />
+            <xsd:element name="GvCantFree" type="n0:quantum13.3" />
+            <xsd:element name="GvCond" type="n0:char200" />
+            <xsd:element name="GvCurrency" type="n0:cuky5" />
+            <xsd:element name="GvMatnrFree" type="n0:char18" />
+            <xsd:element name="GvNetwr" type="n0:curr15.2" />
+            <xsd:element name="GvNetwrFree" type="n0:curr15.2" />
+            <xsd:element name="GvNetwrList" type="n0:curr15.2" />
+            <xsd:element name="GvNoDisc" type="n0:char1" />
+            <xsd:element name="GvVrkme" type="n0:unit3" />
+            <xsd:element name="GvVrkmeFree" type="n0:unit3" />
+            <xsd:element name="Multiplu" type="n0:quantum13.3" />
+            <xsd:element name="OutCantUmb" type="n0:quantum13.3" />
+            <xsd:element name="OutUmb" type="n0:unit3" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ZstareComanda">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="NrCom" type="n0:char10" />
+            <xsd:element name="PernrCh" type="n0:numeric8" />
+            <xsd:element name="Stare" type="n0:char1" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ZstareComandaResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="VMess" type="n0:char220" />
+            <xsd:element name="VOk" type="n0:char1" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ZcalcTrapSite">
+    <wsdl:part name="parameters" element="tns:ZcalcTrapSite" />
+  </wsdl:message>
+  <wsdl:message name="ZcalcTrapSiteResponse">
+    <wsdl:part name="parameter" element="tns:ZcalcTrapSiteResponse" />
+  </wsdl:message>
+  <wsdl:message name="ZcreazaComanda">
+    <wsdl:part name="parameters" element="tns:ZcreazaComanda" />
+  </wsdl:message>
+  <wsdl:message name="ZcreazaComandaResponse">
+    <wsdl:part name="parameter" element="tns:ZcreazaComandaResponse" />
+  </wsdl:message>
+  <wsdl:message name="ZcalcTrap">
+    <wsdl:part name="parameters" element="tns:ZcalcTrap" />
+  </wsdl:message>
+  <wsdl:message name="ZcalcTrapResponse">
+    <wsdl:part name="parameter" element="tns:ZcalcTrapResponse" />
+  </wsdl:message>
+  <wsdl:message name="ZactDiscMaxim">
+    <wsdl:part name="parameters" element="tns:ZactDiscMaxim" />
+  </wsdl:message>
+  <wsdl:message name="ZactDiscMaximResponse">
+    <wsdl:part name="parameter" element="tns:ZactDiscMaximResponse" />
+  </wsdl:message>
+  <wsdl:message name="ZgetPrice">
+    <wsdl:part name="parameters" element="tns:ZgetPrice" />
+  </wsdl:message>
+  <wsdl:message name="ZgetPriceResponse">
+    <wsdl:part name="parameter" element="tns:ZgetPriceResponse" />
+  </wsdl:message>
+  <wsdl:message name="ZstareComanda">
+    <wsdl:part name="parameters" element="tns:ZstareComanda" />
+  </wsdl:message>
+  <wsdl:message name="ZstareComandaResponse">
+    <wsdl:part name="parameter" element="tns:ZstareComandaResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ZTBL_WEBSERVICE">
+    <wsp:Policy>
+      <wsp:PolicyReference URI="#IF_ZTBL_WEBSERVICE" />
+    </wsp:Policy>
+    <wsdl:operation name="ZcalcTrapSite">
+      <wsp:Policy>
+        <wsp:PolicyReference URI="#OP_ZcalcTrapSite" />
+      </wsp:Policy>
+      <wsdl:input message="tns:ZcalcTrapSite" />
+      <wsdl:output message="tns:ZcalcTrapSiteResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="ZcreazaComanda">
+      <wsp:Policy>
+        <wsp:PolicyReference URI="#OP_ZcreazaComanda" />
+      </wsp:Policy>
+      <wsdl:input message="tns:ZcreazaComanda" />
+      <wsdl:output message="tns:ZcreazaComandaResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="ZcalcTrap">
+      <wsp:Policy>
+        <wsp:PolicyReference URI="#OP_ZcalcTrap" />
+      </wsp:Policy>
+      <wsdl:input message="tns:ZcalcTrap" />
+      <wsdl:output message="tns:ZcalcTrapResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="ZactDiscMaxim">
+      <wsp:Policy>
+        <wsp:PolicyReference URI="#OP_ZactDiscMaxim" />
+      </wsp:Policy>
+      <wsdl:input message="tns:ZactDiscMaxim" />
+      <wsdl:output message="tns:ZactDiscMaximResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="ZgetPrice">
+      <wsp:Policy>
+        <wsp:PolicyReference URI="#OP_ZgetPrice" />
+      </wsp:Policy>
+      <wsdl:input message="tns:ZgetPrice" />
+      <wsdl:output message="tns:ZgetPriceResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="ZstareComanda">
+      <wsp:Policy>
+        <wsp:PolicyReference URI="#OP_ZstareComanda" />
+      </wsp:Policy>
+      <wsdl:input message="tns:ZstareComanda" />
+      <wsdl:output message="tns:ZstareComandaResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ZTBL_WEBSERVICE" type="tns:ZTBL_WEBSERVICE">
+    <wsp:Policy>
+      <wsp:PolicyReference URI="#BN_ZTBL_WEBSERVICE" />
+    </wsp:Policy>
+    <wsa:EndpointReference xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing">
+      <wsa:ReferenceParameters />
+    </wsa:EndpointReference>
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ZcalcTrapSite">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZcreazaComanda">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZcalcTrap">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZactDiscMaxim">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZgetPrice">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZstareComanda">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ZTBL_WEBSERVICE">
+    <wsdl:port name="ZTBL_WEBSERVICE" binding="tns:ZTBL_WEBSERVICE">
+      <soap:address location="http://sap-test1a.arabesque.ro:8081/sap/bc/srt/rfc/sap/ztbl_webservice/900/ztbl_webservice/ztbl_webservice" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,1 @@
+﻿<%@ WebService Language="C#" CodeBehind="TiparireService.asmx.cs" Class="TiparireDocumente.Service1" %>

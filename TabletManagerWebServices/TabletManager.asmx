@@ -1,0 +1,1 @@
+﻿<%@ WebService Language="C#" CodeBehind="TabletManager.asmx.cs" Class="TabletManagerWebServices.Service1" %>

@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsoap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:tns="urn:sap-com:document:sap:soap:functions:mc-style" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:n1="urn:sap-com:document:sap:rfc:functions" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" targetNamespace="urn:sap-com:document:sap:soap:functions:mc-style" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation>
+    <sidl:sidl xmlns:sidl="http://www.sap.com/2007/03/sidl" />
+  </wsdl:documentation>
+  <wsp:UsingPolicy wsdl:required="true" />
+  <wsp:Policy wsu:Id="BN__ZWMS_UL10_GET_STOCK_ARAB">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sapattahnd:Enabled xmlns:sapattahnd="http://www.sap.com/710/features/attachment/">false</sapattahnd:Enabled>
+        <saptrnbnd:OptimizedMimeSerialization xmlns:saptrnbnd="http://schemas.xmlsoap.org/ws/2004/09/policy/optimizedmimeserialization" wsp:Optional="true" />
+        <wsaw:UsingAddressing xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" wsp:Optional="true" />
+        <wsp:All xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy">
+          <sp:TransportBinding xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702" xmlns:sapsp="http://www.sap.com/webas/630/soap/features/security/policy" xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:wst="http://docs.oasis-open.org/ws-sx/ws-trust/200512" xmlns:wsu="http://schemas.xmlsoap.org/ws/2002/07/utility" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex">
+            <wsp:Policy>
+              <sp:TransportToken>
+                <wsp:Policy>
+                  <sp:HttpsToken>
+                    <wsp:Policy>
+                      <sp:HttpBasicAuthentication />
+                    </wsp:Policy>
+                  </sp:HttpsToken>
+                </wsp:Policy>
+              </sp:TransportToken>
+              <sp:AlgorithmSuite>
+                <wsp:Policy>
+                  <sp:Basic128Rsa15 />
+                </wsp:Policy>
+              </sp:AlgorithmSuite>
+              <sp:Layout>
+                <wsp:Policy>
+                  <sp:Strict />
+                </wsp:Policy>
+              </sp:Layout>
+            </wsp:Policy>
+          </sp:TransportBinding>
+        </wsp:All>
+      </wsp:All>
+      <wsp:All>
+        <sapattahnd:Enabled xmlns:sapattahnd="http://www.sap.com/710/features/attachment/">false</sapattahnd:Enabled>
+        <saptrnbnd:OptimizedXMLTransfer uri="http://xml.sap.com/2006/11/esi/esp/binxml" xmlns:saptrnbnd="http://www.sap.com/webas/710/soap/features/transportbinding/" wsp:Optional="true" />
+        <wsaw:UsingAddressing xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" wsp:Optional="true" />
+        <wsp:All xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy">
+          <sp:TransportBinding xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702" xmlns:sapsp="http://www.sap.com/webas/630/soap/features/security/policy" xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:wst="http://docs.oasis-open.org/ws-sx/ws-trust/200512" xmlns:wsu="http://schemas.xmlsoap.org/ws/2002/07/utility" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex">
+            <wsp:Policy>
+              <sp:TransportToken>
+                <wsp:Policy>
+                  <sp:HttpsToken>
+                    <wsp:Policy>
+                      <sp:HttpBasicAuthentication />
+                    </wsp:Policy>
+                  </sp:HttpsToken>
+                </wsp:Policy>
+              </sp:TransportToken>
+              <sp:AlgorithmSuite>
+                <wsp:Policy>
+                  <sp:Basic128Rsa15 />
+                </wsp:Policy>
+              </sp:AlgorithmSuite>
+              <sp:Layout>
+                <wsp:Policy>
+                  <sp:Strict />
+                </wsp:Policy>
+              </sp:Layout>
+            </wsp:Policy>
+          </sp:TransportBinding>
+        </wsp:All>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="BN__ZWMS_UL10_GET_STOCK_ARAB_soap12">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sapattahnd:Enabled xmlns:sapattahnd="http://www.sap.com/710/features/attachment/">false</sapattahnd:Enabled>
+        <saptrnbnd:OptimizedMimeSerialization xmlns:saptrnbnd="http://schemas.xmlsoap.org/ws/2004/09/policy/optimizedmimeserialization" wsp:Optional="true" />
+        <wsaw:UsingAddressing xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" wsp:Optional="true" />
+        <wsp:All xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy">
+          <sp:TransportBinding xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702" xmlns:sapsp="http://www.sap.com/webas/630/soap/features/security/policy" xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:wst="http://docs.oasis-open.org/ws-sx/ws-trust/200512" xmlns:wsu="http://schemas.xmlsoap.org/ws/2002/07/utility" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex">
+            <wsp:Policy>
+              <sp:TransportToken>
+                <wsp:Policy>
+                  <sp:HttpsToken>
+                    <wsp:Policy>
+                      <sp:HttpBasicAuthentication />
+                    </wsp:Policy>
+                  </sp:HttpsToken>
+                </wsp:Policy>
+              </sp:TransportToken>
+              <sp:AlgorithmSuite>
+                <wsp:Policy>
+                  <sp:Basic128Rsa15 />
+                </wsp:Policy>
+              </sp:AlgorithmSuite>
+              <sp:Layout>
+                <wsp:Policy>
+                  <sp:Strict />
+                </wsp:Policy>
+              </sp:Layout>
+            </wsp:Policy>
+          </sp:TransportBinding>
+        </wsp:All>
+      </wsp:All>
+      <wsp:All>
+        <sapattahnd:Enabled xmlns:sapattahnd="http://www.sap.com/710/features/attachment/">false</sapattahnd:Enabled>
+        <saptrnbnd:OptimizedXMLTransfer uri="http://xml.sap.com/2006/11/esi/esp/binxml" xmlns:saptrnbnd="http://www.sap.com/webas/710/soap/features/transportbinding/" wsp:Optional="true" />
+        <wsaw:UsingAddressing xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" wsp:Optional="true" />
+        <wsp:All xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy">
+          <sp:TransportBinding xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702" xmlns:sapsp="http://www.sap.com/webas/630/soap/features/security/policy" xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:wst="http://docs.oasis-open.org/ws-sx/ws-trust/200512" xmlns:wsu="http://schemas.xmlsoap.org/ws/2002/07/utility" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex">
+            <wsp:Policy>
+              <sp:TransportToken>
+                <wsp:Policy>
+                  <sp:HttpsToken>
+                    <wsp:Policy>
+                      <sp:HttpBasicAuthentication />
+                    </wsp:Policy>
+                  </sp:HttpsToken>
+                </wsp:Policy>
+              </sp:TransportToken>
+              <sp:AlgorithmSuite>
+                <wsp:Policy>
+                  <sp:Basic128Rsa15 />
+                </wsp:Policy>
+              </sp:AlgorithmSuite>
+              <sp:Layout>
+                <wsp:Policy>
+                  <sp:Strict />
+                </wsp:Policy>
+              </sp:Layout>
+            </wsp:Policy>
+          </sp:TransportBinding>
+        </wsp:All>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="IF__ZWMS_UL10_GET_STOCK_ARAB">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sapsession:Session xmlns:sapsession="http://www.sap.com/webas/630/soap/features/session/">
+          <sapsession:enableSession>false</sapsession:enableSession>
+        </sapsession:Session>
+        <sapcentraladmin:CentralAdministration xmlns:sapcentraladmin="http://www.sap.com/webas/700/soap/features/CentralAdministration/" wsp:Optional="true">
+          <sapcentraladmin:BusinessApplicationID>5BDF274EA49D2253E10000000A010348</sapcentraladmin:BusinessApplicationID>
+        </sapcentraladmin:CentralAdministration>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="OP__ZwmsUl10GetStockArab">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <saptrhnw05:required xmlns:saptrhnw05="http://www.sap.com/NW05/soap/features/transaction/">no</saptrhnw05:required>
+        <sapcomhnd:enableCommit xmlns:sapcomhnd="http://www.sap.com/NW05/soap/features/commit/">false</sapcomhnd:enableCommit>
+        <sapblock:enableBlocking xmlns:sapblock="http://www.sap.com/NW05/soap/features/blocking/">true</sapblock:enableBlocking>
+        <saprmnw05:enableWSRM xmlns:saprmnw05="http://www.sap.com/NW05/soap/features/wsrm/">false</saprmnw05:enableWSRM>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema attributeFormDefault="qualified" targetNamespace="urn:sap-com:document:sap:rfc:functions">
+      <xsd:simpleType name="char1">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="1" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char10">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="10" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char16">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="16" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char18">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="18" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char2">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char20">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="20" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char25">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="25" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char3">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="3" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char4">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="4" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char40">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="40" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char9">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="9" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="clnt3">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="3" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="date10">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="10" />
+          <xsd:pattern value="\d\d\d\d-\d\d-\d\d" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="numeric8">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="8" />
+          <xsd:pattern value="\d*" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="quantum13.3">
+        <xsd:restriction base="xsd:decimal">
+          <xsd:totalDigits value="13" />
+          <xsd:fractionDigits value="3" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="unit3">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="3" />
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:schema>
+    <xsd:schema xmlns:n0="urn:sap-com:document:sap:rfc:functions" attributeFormDefault="qualified" targetNamespace="urn:sap-com:document:sap:soap:functions:mc-style">
+      <xsd:import namespace="urn:sap-com:document:sap:rfc:functions" />
+      <xsd:simpleType name="RfcException.Message.Number">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="3" />
+          <xsd:pattern value="\d*" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:complexType name="ZstWmsLqua">
+        <xsd:sequence>
+          <xsd:element name="Lgpla" type="n0:char10" />
+          <xsd:element name="Lenum" type="n0:char20" />
+          <xsd:element name="Verme" type="n0:quantum13.3" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ZwmsShortLqua">
+        <xsd:sequence>
+          <xsd:element name="Mandt" type="n0:clnt3" />
+          <xsd:element name="Lgnum" type="n0:char3" />
+          <xsd:element name="Matnr" type="n0:char18" />
+          <xsd:element name="Werks" type="n0:char4" />
+          <xsd:element name="Charg" type="n0:char10" />
+          <xsd:element name="Bestq" type="n0:char1" />
+          <xsd:element name="Sobkz" type="n0:char1" />
+          <xsd:element name="Sonum" type="n0:char16" />
+          <xsd:element name="Lgtyp" type="n0:char3" />
+          <xsd:element name="Lgpla" type="n0:char10" />
+          <xsd:element name="Letyp" type="n0:char3" />
+          <xsd:element name="Meins" type="n0:unit3" />
+          <xsd:element name="Gesme" type="n0:quantum13.3" />
+          <xsd:element name="Verme" type="n0:quantum13.3" />
+          <xsd:element name="Einme" type="n0:quantum13.3" />
+          <xsd:element name="Ausme" type="n0:quantum13.3" />
+          <xsd:element name="Betyp" type="n0:char1" />
+          <xsd:element name="Benum" type="n0:char10" />
+          <xsd:element name="Lenum" type="n0:char20" />
+          <xsd:element name="Vfdat" type="n0:date10" />
+          <xsd:element name="Lgort" type="n0:char4" />
+          <xsd:element name="Matkl" type="n0:char9" />
+          <xsd:element name="Spart" type="n0:char2" />
+          <xsd:element name="Maktx" type="n0:char40" />
+          <xsd:element name="Name1" type="n0:char40" />
+          <xsd:element name="Ltypt" type="n0:char25" />
+          <xsd:element name="Letyt" type="n0:char20" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="RfcException.Message">
+        <xsd:sequence>
+          <xsd:element name="ID" type="xsd:string" />
+          <xsd:element name="Number" type="tns:RfcException.Message.Number" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ZwmsUl10GetStockArab.RfcException">
+        <xsd:sequence>
+          <xsd:element name="Name" type="tns:ZwmsUl10GetStockArab.RfcExceptions" />
+          <xsd:element minOccurs="0" name="Text" type="xsd:string" />
+          <xsd:element minOccurs="0" name="Message" type="tns:RfcException.Message" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ZttWmsLqua">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:ZstWmsLqua" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="TableOfZwmsShortLqua">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:ZwmsShortLqua" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:simpleType name="ZwmsUl10GetStockArab.RfcExceptions">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="WrongParameters" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:element name="ZwmsUl10GetStockArab.Exception" type="tns:ZwmsUl10GetStockArab.RfcException" />
+      <xsd:element name="ZwmsUl10GetStockArab">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="Department" type="n0:char2" />
+            <xsd:element minOccurs="0" name="MatGroup" type="n0:char9" />
+            <xsd:element minOccurs="0" name="Material" type="n0:char18" />
+            <xsd:element minOccurs="0" name="PersonalNo" type="n0:numeric8" />
+            <xsd:element name="Stock" type="tns:TableOfZwmsShortLqua" />
+            <xsd:element name="StockFinal" type="tns:ZttWmsLqua" />
+            <xsd:element name="Warehouse" type="n0:char3" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ZwmsUl10GetStockArabResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Stock" type="tns:TableOfZwmsShortLqua" />
+            <xsd:element name="StockFinal" type="tns:ZttWmsLqua" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ZwmsUl10GetStockArab">
+    <wsdl:part name="parameters" element="tns:ZwmsUl10GetStockArab" />
+  </wsdl:message>
+  <wsdl:message name="ZwmsUl10GetStockArabResponse">
+    <wsdl:part name="parameter" element="tns:ZwmsUl10GetStockArabResponse" />
+  </wsdl:message>
+  <wsdl:message name="ZwmsUl10GetStockArab.Exception">
+    <wsdl:part name="ZwmsUl10GetStockArab.Exception" element="tns:ZwmsUl10GetStockArab.Exception" />
+  </wsdl:message>
+  <wsdl:portType name="ZWMS_UL10_GET_STOCK_ARAB">
+    <wsp:Policy>
+      <wsp:PolicyReference URI="#IF__ZWMS_UL10_GET_STOCK_ARAB" />
+    </wsp:Policy>
+    <wsdl:operation name="ZwmsUl10GetStockArab">
+      <wsp:Policy>
+        <wsp:PolicyReference URI="#OP__ZwmsUl10GetStockArab" />
+      </wsp:Policy>
+      <wsdl:input message="tns:ZwmsUl10GetStockArab" />
+      <wsdl:output message="tns:ZwmsUl10GetStockArabResponse" />
+      <wsdl:fault name="ZwmsUl10GetStockArab.Exception" message="tns:ZwmsUl10GetStockArab.Exception" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ZWMS_UL10_GET_STOCK_ARAB" type="tns:ZWMS_UL10_GET_STOCK_ARAB">
+    <wsp:Policy>
+      <wsp:PolicyReference URI="#BN__ZWMS_UL10_GET_STOCK_ARAB" />
+    </wsp:Policy>
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ZwmsUl10GetStockArab">
+      <soap:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZWMS_UL10_GET_STOCK_ARAB:ZwmsUl10GetStockArabRequest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ZwmsUl10GetStockArab.Exception">
+        <soap:fault use="literal" name="ZwmsUl10GetStockArab.Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ZWMS_UL10_GET_STOCK_ARAB_soap12" type="tns:ZWMS_UL10_GET_STOCK_ARAB">
+    <wsp:Policy>
+      <wsp:PolicyReference URI="#BN__ZWMS_UL10_GET_STOCK_ARAB_soap12" />
+    </wsp:Policy>
+    <wsoap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ZwmsUl10GetStockArab">
+      <wsoap12:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZWMS_UL10_GET_STOCK_ARAB:ZwmsUl10GetStockArabRequest" style="document" />
+      <wsdl:input>
+        <wsoap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsoap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ZwmsUl10GetStockArab.Exception">
+        <wsoap12:fault use="literal" name="ZwmsUl10GetStockArab.Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ZWMS_UL10_GET_STOCK_ARAB">
+    <wsdl:port name="ZWMS_UL10_GET_STOCK_ARAB" binding="tns:ZWMS_UL10_GET_STOCK_ARAB">
+      <soap:address location="http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/rfc/sap/zwms_ul10_get_stock_arab/900/zwms_ul10_get_stock_arab/zwms_ul10_get_stock_arab" />
+    </wsdl:port>
+    <wsdl:port name="ZWMS_UL10_GET_STOCK_ARAB_soap12" binding="tns:ZWMS_UL10_GET_STOCK_ARAB_soap12">
+      <wsoap12:address location="http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/rfc/sap/zwms_ul10_get_stock_arab/900/zwms_ul10_get_stock_arab/zwms_ul10_get_stock_arab" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

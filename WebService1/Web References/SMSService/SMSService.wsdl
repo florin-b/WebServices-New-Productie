@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:SMSService" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" xmlns="http://schemas.xmlsoap.org/wsdl/" name="SMSService" targetNamespace="urn:SMSService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="SMSService" />
+  </wsdl:types>
+  <wsdl:message name="sendRequest">
+    <wsdl:part name="phone" type="xsd:string" />
+    <wsdl:part name="message" type="xsd:string" />
+    <wsdl:part name="date" type="xsd:dateTime" />
+    <wsdl:part name="sender" type="xsd:string" />
+    <wsdl:part name="validity" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="sendResponse">
+    <wsdl:part name="id" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="SendSmsRequest">
+    <wsdl:part name="username" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+    <wsdl:part name="source" type="xsd:string" />
+    <wsdl:part name="destination" type="xsd:string" />
+    <wsdl:part name="body" type="xsd:string" />
+    <wsdl:part name="isUnicode" type="xsd:boolean" />
+    <wsdl:part name="scheduleDate" type="xsd:dateTime" />
+    <wsdl:part name="callbackUrl" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="SendSmsResponse">
+    <wsdl:part name="id" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="sendSmsAuthKeyRequest">
+    <wsdl:part name="username" type="xsd:string" />
+    <wsdl:part name="authKey" type="xsd:string" />
+    <wsdl:part name="sender" type="xsd:string" />
+    <wsdl:part name="recipient" type="xsd:string" />
+    <wsdl:part name="message" type="xsd:string" />
+    <wsdl:part name="scheduleDate" type="xsd:dateTime" />
+    <wsdl:part name="validity" type="xsd:int" />
+    <wsdl:part name="callbackUrl" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="sendSmsAuthKeyResponse">
+    <wsdl:part name="id" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="sendWapPushRequest">
+    <wsdl:part name="phone" type="xsd:string" />
+    <wsdl:part name="url" type="xsd:string" />
+    <wsdl:part name="message" type="xsd:string" />
+    <wsdl:part name="date" type="xsd:dateTime" />
+    <wsdl:part name="sender" type="xsd:string" />
+    <wsdl:part name="validity" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="sendWapPushResponse">
+    <wsdl:part name="id" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="sendVCalendarRequest">
+    <wsdl:part name="recipient" type="xsd:string" />
+    <wsdl:part name="subject" type="xsd:string" />
+    <wsdl:part name="location" type="xsd:string" />
+    <wsdl:part name="description" type="xsd:string" />
+    <wsdl:part name="startDatetime" type="xsd:dateTime" />
+    <wsdl:part name="endDatetime" type="xsd:dateTime" />
+    <wsdl:part name="alarmDatetime" type="xsd:dateTime" />
+    <wsdl:part name="sendDatetime" type="xsd:dateTime" />
+    <wsdl:part name="sender" type="xsd:string" />
+    <wsdl:part name="validity" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="sendVCalendarResponse">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="sendVCardRequest">
+    <wsdl:part name="recipient" type="xsd:string" />
+    <wsdl:part name="firstname" type="xsd:string" />
+    <wsdl:part name="lastname" type="xsd:string" />
+    <wsdl:part name="mobilephone" type="xsd:string" />
+    <wsdl:part name="email" type="xsd:string" />
+    <wsdl:part name="organization" type="xsd:string" />
+    <wsdl:part name="sendDatetime" type="xsd:dateTime" />
+    <wsdl:part name="sender" type="xsd:string" />
+    <wsdl:part name="validity" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="sendVCardResponse">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="sendSmsFlashRequest">
+    <wsdl:part name="phone" type="xsd:string" />
+    <wsdl:part name="message" type="xsd:string" />
+    <wsdl:part name="date" type="xsd:dateTime" />
+    <wsdl:part name="sender" type="xsd:string" />
+    <wsdl:part name="validity" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="sendSmsFlashResponse">
+    <wsdl:part name="id" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="checkStatusRequest">
+    <wsdl:part name="messageId" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="checkStatusResponse">
+    <wsdl:part name="status" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="openSessionRequest">
+    <wsdl:part name="username" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="openSessionResponse">
+    <wsdl:part name="sessid" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="closeSessionRequest">
+    <wsdl:part name="sessid" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="closeSessionResponse">
+    <wsdl:part name="result" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="sendSessionRequest">
+    <wsdl:part name="sessid" type="xsd:string" />
+    <wsdl:part name="phone" type="xsd:string" />
+    <wsdl:part name="message" type="xsd:string" />
+    <wsdl:part name="date" type="xsd:dateTime" />
+    <wsdl:part name="sender" type="xsd:string" />
+    <wsdl:part name="validity" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="sendSessionResponse">
+    <wsdl:part name="id" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="sendSessionWapPushRequest">
+    <wsdl:part name="sessid" type="xsd:string" />
+    <wsdl:part name="phone" type="xsd:string" />
+    <wsdl:part name="url" type="xsd:string" />
+    <wsdl:part name="message" type="xsd:string" />
+    <wsdl:part name="date" type="xsd:dateTime" />
+    <wsdl:part name="sender" type="xsd:string" />
+    <wsdl:part name="validity" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="sendSessionWapPushResponse">
+    <wsdl:part name="id" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="sendSessionVCalendarRequest">
+    <wsdl:part name="sessid" type="xsd:string" />
+    <wsdl:part name="recipient" type="xsd:string" />
+    <wsdl:part name="subject" type="xsd:string" />
+    <wsdl:part name="location" type="xsd:string" />
+    <wsdl:part name="description" type="xsd:string" />
+    <wsdl:part name="startDatetime" type="xsd:dateTime" />
+    <wsdl:part name="endDatetime" type="xsd:dateTime" />
+    <wsdl:part name="alarmDatetime" type="xsd:dateTime" />
+    <wsdl:part name="sendDatetime" type="xsd:dateTime" />
+    <wsdl:part name="sender" type="xsd:string" />
+    <wsdl:part name="validity" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="sendSessionVCalendarResponse">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="sendSessionVCardRequest">
+    <wsdl:part name="sessid" type="xsd:string" />
+    <wsdl:part name="recipient" type="xsd:string" />
+    <wsdl:part name="firstname" type="xsd:string" />
+    <wsdl:part name="lastname" type="xsd:string" />
+    <wsdl:part name="mobilephone" type="xsd:string" />
+    <wsdl:part name="email" type="xsd:string" />
+    <wsdl:part name="organization" type="xsd:string" />
+    <wsdl:part name="sendDatetime" type="xsd:dateTime" />
+    <wsdl:part name="sender" type="xsd:string" />
+    <wsdl:part name="validity" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="sendSessionVCardResponse">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="sendSessionSmsFlashRequest">
+    <wsdl:part name="sessid" type="xsd:string" />
+    <wsdl:part name="phone" type="xsd:string" />
+    <wsdl:part name="message" type="xsd:string" />
+    <wsdl:part name="date" type="xsd:dateTime" />
+    <wsdl:part name="sender" type="xsd:string" />
+    <wsdl:part name="validity" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="sendSessionSmsFlashResponse">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="showIpRequest" />
+  <wsdl:message name="showIpResponse">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:portType name="SMSServicePort">
+    <wsdl:operation name="send">
+      <documentation>Send a simple SMS using IP based authentication</documentation>
+      <wsdl:input message="tns:sendRequest" />
+      <wsdl:output message="tns:sendResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="SendSms">
+      <documentation>Send a simple SMS using username and password authentication</documentation>
+      <wsdl:input message="tns:SendSmsRequest" />
+      <wsdl:output message="tns:SendSmsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="sendSmsAuthKey">
+      <documentation>Send a SMS using API Key authentication</documentation>
+      <wsdl:input message="tns:sendSmsAuthKeyRequest" />
+      <wsdl:output message="tns:sendSmsAuthKeyResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="sendWapPush">
+      <documentation>Send an Wap Push using IP based authentication</documentation>
+      <wsdl:input message="tns:sendWapPushRequest" />
+      <wsdl:output message="tns:sendWapPushResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="sendVCalendar">
+      <documentation>Send an appoinment using IP based authentication</documentation>
+      <wsdl:input message="tns:sendVCalendarRequest" />
+      <wsdl:output message="tns:sendVCalendarResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="sendVCard">
+      <documentation>Send a VCARD using IP based authentication</documentation>
+      <wsdl:input message="tns:sendVCardRequest" />
+      <wsdl:output message="tns:sendVCardResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="sendSmsFlash">
+      <documentation>Send a SMS FLASH using IP based authentication</documentation>
+      <wsdl:input message="tns:sendSmsFlashRequest" />
+      <wsdl:output message="tns:sendSmsFlashResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="checkStatus">
+      <documentation>Check delivery report status for a SMS</documentation>
+      <wsdl:input message="tns:checkStatusRequest" />
+      <wsdl:output message="tns:checkStatusResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="openSession">
+      <documentation>Opens a SMS sending session using username/password authentication</documentation>
+      <wsdl:input message="tns:openSessionRequest" />
+      <wsdl:output message="tns:openSessionResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="closeSession">
+      <documentation>Closes a SMS sending session previously openned with openSession method</documentation>
+      <wsdl:input message="tns:closeSessionRequest" />
+      <wsdl:output message="tns:closeSessionResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="sendSession">
+      <documentation>Send a simple SMS using session ID authentication (previously openned with openSession method)</documentation>
+      <wsdl:input message="tns:sendSessionRequest" />
+      <wsdl:output message="tns:sendSessionResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="sendSessionWapPush">
+      <documentation>Send an Wap Push using session ID authentication (previously openned with openSession method)</documentation>
+      <wsdl:input message="tns:sendSessionWapPushRequest" />
+      <wsdl:output message="tns:sendSessionWapPushResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="sendSessionVCalendar">
+      <documentation>Send an appoinment using session ID authentication (previously openned with openSession method)</documentation>
+      <wsdl:input message="tns:sendSessionVCalendarRequest" />
+      <wsdl:output message="tns:sendSessionVCalendarResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="sendSessionVCard">
+      <documentation>Send a VCARD using session ID authentication (previously openned with openSession method)</documentation>
+      <wsdl:input message="tns:sendSessionVCardRequest" />
+      <wsdl:output message="tns:sendSessionVCardResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="sendSessionSmsFlash">
+      <documentation>Send a SMS Flash using session ID authentication (previously openned with openSession method)</documentation>
+      <wsdl:input message="tns:sendSessionSmsFlashRequest" />
+      <wsdl:output message="tns:sendSessionSmsFlashResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="showIp">
+      <documentation>Returns the IP of the calling client</documentation>
+      <wsdl:input message="tns:showIpRequest" />
+      <wsdl:output message="tns:showIpResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SMSServiceBinding" type="tns:SMSServicePort">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="send">
+      <soap:operation soapAction="http://schemas.xmlsoap.org/soap/envelope/#SMSService#send" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="https://www.bizpack.ro/wsi/service.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="https://www.bizpack.ro/wsi/service.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendSms">
+      <soap:operation soapAction="http://schemas.xmlsoap.org/soap/envelope/#SMSService#SendSms" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="https://www.bizpack.ro/wsi/service.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="https://www.bizpack.ro/wsi/service.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendSmsAuthKey">
+      <soap:operation soapAction="http://schemas.xmlsoap.org/soap/envelope/#SMSService#sendSmsAuthKey" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="https://www.bizpack.ro/wsi/service.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="https://www.bizpack.ro/wsi/service.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendWapPush">
+      <soap:operation soapAction="http://schemas.xmlsoap.org/soap/envelope/#SMSService#sendWapPush" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="https://www.bizpack.ro/wsi/service.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="https://www.bizpack.ro/wsi/service.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendVCalendar">
+      <soap:operation soapAction="http://schemas.xmlsoap.org/soap/envelope/#SMSService#sendVCalendar" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="https://www.bizpack.ro/wsi/service.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="https://www.bizpack.ro/wsi/service.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendVCard">
+      <soap:operation soapAction="http://schemas.xmlsoap.org/soap/envelope/#SMSService#sendVCard" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="https://www.bizpack.ro/wsi/service.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="https://www.bizpack.ro/wsi/service.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendSmsFlash">
+      <soap:operation soapAction="http://schemas.xmlsoap.org/soap/envelope/#SMSService#sendSmsFlash" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://ws.bizpack.ro/service.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://ws.bizpack.ro/service.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="checkStatus">
+      <soap:operation soapAction="http://schemas.xmlsoap.org/soap/envelope/#SMSService#checkStatus" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="https://www.bizpack.ro/wsi/service.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="https://www.bizpack.ro/wsi/service.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="openSession">
+      <soap:operation soapAction="http://schemas.xmlsoap.org/soap/envelope/#SMSService#openSession" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="https://www.bizpack.ro/wsi/service.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="https://www.bizpack.ro/wsi/service.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="closeSession">
+      <soap:operation soapAction="http://schemas.xmlsoap.org/soap/envelope/#SMSService#closeSession" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="https://www.bizpack.ro/wsi/service.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="https://www.bizpack.ro/wsi/service.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendSession">
+      <soap:operation soapAction="http://schemas.xmlsoap.org/soap/envelope/#SMSService#sendSession" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="https://www.bizpack.ro/wsi/service.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="https://www.bizpack.ro/wsi/service.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendSessionWapPush">
+      <soap:operation soapAction="http://schemas.xmlsoap.org/soap/envelope/#SMSService#sendSessionWapPush" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="https://www.bizpack.ro/wsi/service.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="https://www.bizpack.ro/wsi/service.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendSessionVCalendar">
+      <soap:operation soapAction="http://schemas.xmlsoap.org/soap/envelope/#SMSService#sendSessionVCalendar" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="https://www.bizpack.ro/wsi/service.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="https://www.bizpack.ro/wsi/service.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendSessionVCard">
+      <soap:operation soapAction="http://schemas.xmlsoap.org/soap/envelope/#SMSService#sendSessionVCard" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="https://www.bizpack.ro/wsi/service.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="https://www.bizpack.ro/wsi/service.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendSessionSmsFlash">
+      <soap:operation soapAction="http://schemas.xmlsoap.org/soap/envelope/#SMSService#sendSessionSmsFlash" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="https://www.bizpack.ro/service.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="https://www.bizpack.ro/service.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="showIp">
+      <soap:operation soapAction="http://schemas.xmlsoap.org/soap/envelope/#SMSService#showIp" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="https://www.bizpack.ro/wsi/service.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="https://www.bizpack.ro/wsi/service.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SMSServiceService">
+    <wsdl:port name="SMSServicePort" binding="tns:SMSServiceBinding">
+      <soap:address location="https://www.bizpack.ro/wsi/service.php" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

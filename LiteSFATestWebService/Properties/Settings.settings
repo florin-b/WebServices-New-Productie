@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="LiteSFATestWebService.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="LiteSFATestWebService_WEBTable_ZTEST_ITABService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://sap-test2.arabesque.ro:8000/sap/bc/srt/rfc/sap/ztest_itab/900/ztest_itab/ztest_itab</Value>
+    </Setting>
+    <Setting Name="LiteSFATestWebService_WebNecesar1_ZWBS_ZNECESAR1Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/rfc/sap/zwbs_znecesar1/900/zwbs_znecesar1/zwbs_znecesar1</Value>
+    </Setting>
+    <Setting Name="LiteSFATestWebService_SapWebServices_ZTBL_WEBSERVICE" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://sap-test1a.arabesque.ro:8081/sap/bc/srt/rfc/sap/ztbl_webservice/900/ztbl_webservice/ztbl_webservice</Value>
+    </Setting>
+    <Setting Name="LiteSFATestWebService_SAPWebServiceCLP_ZCLP_WEBSERVICEService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://sap-test1a.arabesque.ro:8081/sap/bc/srt/rfc/sap/zclp_webservice/900/zclp_webservice/zclp_webservice</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

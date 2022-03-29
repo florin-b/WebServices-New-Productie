@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DiscoveryClientResultsFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Results>
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/wsdl/flv_10002A111AD1/bndg_url/sap/bc/srt/rfc/sap/zwms_ul10_get_stock_arab/900/zwms_ul10_get_stock_arab/zwms_ul10_get_stock_arab?sap-client=900" filename="zwms_ul10_get_stock_arab.wsdl" />
+  </Results>
+</DiscoveryClientResultsFile>
