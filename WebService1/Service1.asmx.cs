@@ -3723,7 +3723,7 @@ namespace WebService1
             }
             catch (Exception ex)
             {
-                ErrorHandling.sendErrorToMail(ex.ToString());
+                ErrorHandling.sendErrorToMail(ex.ToString() + " , " +  nrCmd + " , " + afisCond + " , " + tipUser + " , " + departament);
             }
             finally
             {
@@ -6016,7 +6016,7 @@ namespace WebService1
             catch (Exception ex)
             {
                 response = ex.ToString();
-                ErrorHandling.sendErrorToMail("sendSMS2: " + nrTel + " , " + msgText + " , " + ex.ToString());
+                
             }
 
 

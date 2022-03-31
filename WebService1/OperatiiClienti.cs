@@ -769,7 +769,10 @@ namespace WebService1
                         if (oReader.HasRows)
                         {
                             oReader.Read();
-                            detaliiClient.tipPlata = oReader.GetString(1);
+                            if (oReader.GetString(1).ToUpper().Equals("B") || oReader.GetString(1).ToUpper().Equals("C"))
+                                detaliiClient.tipPlata = oReader.GetString(1);
+                            else
+                                detaliiClient.tipPlata = " ";
                         }
                         else {
                             detaliiClient.tipPlata = " ";
@@ -1162,7 +1165,10 @@ namespace WebService1
                 DatabaseConnections.CloseConnections(oReader, cmd);
             }
 
-            return tipPlata;
+            if (tipPlata.ToUpper().Equals("B") || tipPlata.ToUpper().Equals("C"))
+                return tipPlata;
+            else
+                return "";
         }
 
 
