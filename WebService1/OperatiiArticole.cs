@@ -67,7 +67,7 @@ namespace WebService1
                 }
 
                 string conditieDepart = " ";
-                if (!codDepart.Equals("00"))
+                if (!codDepart.Equals("00") && !codDepart.Trim().Equals(""))
                     conditieDepart = " b.grup_vz =:depart and ";
 
                 if (codDepart.StartsWith("04"))
@@ -94,7 +94,7 @@ namespace WebService1
                 cmd.Parameters.Add(":furniz", OracleType.VarChar, 30).Direction = ParameterDirection.Input;
                 cmd.Parameters[0].Value = furnizor;
 
-                if (!codDepart.Equals("00"))
+                if (!codDepart.Equals("00") && !codDepart.Trim().Equals(""))
                 {
                     cmd.Parameters.Add(":depart", OracleType.VarChar, 9).Direction = ParameterDirection.Input;
                     cmd.Parameters[1].Value = codDepart;

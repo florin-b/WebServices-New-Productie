@@ -886,6 +886,29 @@ namespace WebService1
                     oReader.Read();
                     dataLivrare = oReader.GetString(0);
                 }
+                else if (tipTransport.Equals("TCLI"))
+                {
+
+                    cmd.CommandText = " select nvl((select k.daten from sapprd.vbfa f, sapprd.vttp p, sapprd.vttk k " +
+                                      " where f.mandt = '900' and f.vbeln = :nrDoc and f.vbtyp_v = 'J' and f.vbtyp_n = 'M' " +
+                                      " and f.mandt = p.mandt and f.vbelv = p.vbeln and p.mandt = k.mandt and p.tknum = k.tknum and rownum = 1), " +
+                                      " (select v.fkdat from sapprd.vbrk v where v.mandt = '900' and v.vbeln = :nrDoc and v.traty = 'TCLI')) daten from dual ";
+
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Parameters.Clear();
+
+                    cmd.Parameters.Add(":nrDoc", OracleType.VarChar, 30).Direction = ParameterDirection.Input;
+                    cmd.Parameters[0].Value = nrDocument;
+
+                    oReader = cmd.ExecuteReader();
+
+                    if (oReader.HasRows)
+                    {
+                        oReader.Read();
+                        dataLivrare = oReader.GetString(0);
+                    }
+
+                }
 
 
             }

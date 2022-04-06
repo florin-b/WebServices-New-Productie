@@ -1169,7 +1169,7 @@ namespace WebService1
         public string getArticoleDocumentReturSAP(string idComanda)
         {
             OperatiiRetur opRetur = new OperatiiRetur();
-            return opRetur.getArticoleDocumentSAP(idComanda);
+            return opRetur.getArticoleDocumentSalvat(idComanda);
         }
 
         [WebMethod]
@@ -3589,6 +3589,8 @@ namespace WebService1
 
                         if (!tipUser.Equals("DV") && !tipUser.Equals("DD"))
                             articol.listCabluri = new Cabluri05().getCabluriArticol(connection, nrCmd, articol.codArticol);
+                        else
+                            articol.listCabluri = new JavaScriptSerializer().Serialize(new List<CantCablu>());
 
                         listArticole.Add(articol);
 

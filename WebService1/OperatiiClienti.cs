@@ -769,10 +769,7 @@ namespace WebService1
                         if (oReader.HasRows)
                         {
                             oReader.Read();
-                            if (oReader.GetString(1).ToUpper().Equals("B") || oReader.GetString(1).ToUpper().Equals("C"))
-                                detaliiClient.tipPlata = oReader.GetString(1);
-                            else
-                                detaliiClient.tipPlata = " ";
+                            detaliiClient.tipPlata = oReader.GetString(1);
                         }
                         else {
                             detaliiClient.tipPlata = " ";
@@ -1165,10 +1162,8 @@ namespace WebService1
                 DatabaseConnections.CloseConnections(oReader, cmd);
             }
 
-            if (tipPlata.ToUpper().Equals("B") || tipPlata.ToUpper().Equals("C"))
-                return tipPlata;
-            else
-                return "";
+            return tipPlata;
+            
         }
 
 
@@ -1188,6 +1183,49 @@ namespace WebService1
                                   " and k.kunnr = :codClient and b.kunnr = k.kunnr " +
                                   " and (exists (select 1 from sapprd.knvv v where v.mandt = '900' and v.kunnr = b.kunnr and v.vtweg = '20' and v.spart = '11' and v.kdgrp = '18') " +
                                   " or ( c.ZDATAEXPCTR != '00000000' and to_date(c.ZDATAEXPCTR, 'yyyymmdd') >= sysdate )) ";
+
+                cmd.CommandType = CommandType.Text;
+                cmd.Parameters.Clear();
+
+                cmd.Parameters.Add(":codClient", OracleType.VarChar, 30).Direction = ParameterDirection.Input;
+                cmd.Parameters[0].Value = codClient;
+
+                oReader = cmd.ExecuteReader();
+                if (oReader.HasRows)
+                {
+                    oReader.Read();
+                    tipPlata = oReader.GetString(1);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorHandling.sendErrorToMail(ex.ToString() + " , " + codClient);
+            }
+            finally
+            {
+                DatabaseConnections.CloseConnections(oReader, cmd);
+            }
+
+            return tipPlata;
+        }
+
+        private string getTipPlataContractIP19(OracleConnection connection, string codClient)
+        {
+
+            OracleDataReader oReader = null;
+            OracleCommand cmd = new OracleCommand();
+            string tipPlata = "";
+
+            try
+            {
+                cmd = connection.CreateCommand();
+
+                cmd.CommandText = " select k.klimk, b.zwels from sapprd.knkk k, sapprd.knb1 b, sapprd.kna1 c " +
+                                  " where k.mandt = '900' and b.mandt = '900' and c.mandt = '900' and c.kunnr = k.kunnr " +
+                                  " and k.kunnr = :codClient and b.kunnr = k.kunnr " +
+                                  " and(exists(select * from sapprd.knvv v where v.mandt = '900' and v.kunnr = b.kunnr and v.vtweg = '20' and v.spart = '11' and v.kdgrp = '19') " +
+                                  " or(c.ZDATAEXPCTR != '00000000' and to_date(c.ZDATAEXPCTR, 'yyyymmdd') >= sysdate)) ";
 
                 cmd.CommandType = CommandType.Text;
                 cmd.Parameters.Clear();
@@ -1264,6 +1302,8 @@ namespace WebService1
         public string getListClientiInstPublice(string numeClient, string unitLog, string tipUser, string tipClient)
         {
 
+            
+
             OracleConnection connection = new OracleConnection();
             OracleCommand cmd = new OracleCommand();
             OracleDataReader oReader = null;
@@ -1329,7 +1369,7 @@ namespace WebService1
                         if (tipClientIP.Equals("18"))
                             tipPlataContract = getTipPlataContractIP18(connection, unClient.codClient);
                         else
-                            tipPlataContract = getTipPlataContract(connection, unClient.codClient);
+                            tipPlataContract = getTipPlataContractIP19(connection, unClient.codClient);
 
                         if (tipPlataContract.Trim().Equals(String.Empty))
                         {
