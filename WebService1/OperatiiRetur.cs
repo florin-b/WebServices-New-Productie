@@ -646,7 +646,7 @@ namespace WebService1
 
             string condPaleti = "";
             string condData = "";
-            string nrZileIstoric = "45";
+            string nrZileIstoric = "30";
             string condDepart = "";
 
             if (tipDocument == null || (tipDocument != null && tipDocument.Equals("PAL")))

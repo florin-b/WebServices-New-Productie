@@ -769,7 +769,16 @@ namespace WebService1
                         if (oReader.HasRows)
                         {
                             oReader.Read();
-                            detaliiClient.tipPlata = oReader.GetString(1);
+
+                            if (oReader.GetDouble(0) > 1)
+                            {
+                                if (oReader.GetString(1) != null && oReader.GetString(1).Trim() != "")
+                                    detaliiClient.tipPlata = oReader.GetString(1);
+                                else
+                                    detaliiClient.tipPlata = "O";
+                            }
+                            else
+                                detaliiClient.tipPlata = "";
                         }
                         else {
                             detaliiClient.tipPlata = " ";
@@ -1149,7 +1158,14 @@ namespace WebService1
                 if (oReader.HasRows)
                 {
                     oReader.Read();
-                    tipPlata = oReader.GetString(1);
+
+                    if (oReader.GetDouble(0) > 1)
+                    {
+                        if (oReader.GetString(1) != null && oReader.GetString(1).Trim() != "")
+                            tipPlata = oReader.GetString(1);
+                        else
+                            tipPlata = "O";
+                    }
 
                 }
             }
@@ -1194,7 +1210,14 @@ namespace WebService1
                 if (oReader.HasRows)
                 {
                     oReader.Read();
-                    tipPlata = oReader.GetString(1);
+
+                    if (oReader.GetDouble(0) > 1)
+                    {
+                        if (oReader.GetString(1) != null && oReader.GetString(1).Trim() != "")
+                            tipPlata = oReader.GetString(1);
+                        else
+                            tipPlata = "O";
+                    }
 
                 }
             }
@@ -1237,7 +1260,14 @@ namespace WebService1
                 if (oReader.HasRows)
                 {
                     oReader.Read();
-                    tipPlata = oReader.GetString(1);
+
+                    if (oReader.GetDouble(0) > 1)
+                    {
+                        if (oReader.GetString(1) != null && oReader.GetString(1).Trim() != "")
+                            tipPlata = oReader.GetString(1);
+                        else
+                            tipPlata = "O";
+                    }
 
                 }
             }
