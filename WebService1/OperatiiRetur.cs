@@ -886,13 +886,13 @@ namespace WebService1
                     oReader.Read();
                     dataLivrare = oReader.GetString(0);
                 }
-                else if (tipTransport.Equals("TCLI"))
+                else if (tipTransport.Equals("TCLI") || tipTransport.Equals("TFRN"))
                 {
 
                     cmd.CommandText = " select nvl((select k.daten from sapprd.vbfa f, sapprd.vttp p, sapprd.vttk k " +
                                       " where f.mandt = '900' and f.vbeln = :nrDoc and f.vbtyp_v = 'J' and f.vbtyp_n = 'M' " +
                                       " and f.mandt = p.mandt and f.vbelv = p.vbeln and p.mandt = k.mandt and p.tknum = k.tknum and rownum = 1), " +
-                                      " (select v.fkdat from sapprd.vbrk v where v.mandt = '900' and v.vbeln = :nrDoc and v.traty = 'TCLI')) daten from dual ";
+                                      " (select v.fkdat from sapprd.vbrk v where v.mandt = '900' and v.vbeln = :nrDoc and v.traty in ('TCLI','TFRN') )) daten from dual ";
 
                     cmd.CommandType = CommandType.Text;
                     cmd.Parameters.Clear();
@@ -1599,7 +1599,7 @@ namespace WebService1
 
 
 
-        public string getListClientiCV(string numeClient, string unitLog, string tipCmd)
+        public string getListClientiCV(string numeClient, string unitLog, string tipCmd, string tipUserSap)
         {
             string serializedResult = "";
 
@@ -1616,6 +1616,10 @@ namespace WebService1
             if (tipCmd != null && !tipCmd.Equals(String.Empty) && tipCmd.Equals("CMD"))
                 sintPaleti = "";
 
+            string critFiliala = " and p.prctr =:unitLog ";
+            if (tipUserSap != null && (tipUserSap.Equals("CVIP") || tipUserSap.Equals("SDIP")))
+                critFiliala = "";
+
             try
             {
                 string connectionString = DatabaseConnections.ConnectToProdEnvironment();
@@ -1624,18 +1628,21 @@ namespace WebService1
                 connection.ConnectionString = connectionString;
                 connection.Open();
 
-                cmd.CommandText = " select distinct c.name1 from sapprd.vbrk k, sapprd.vbrp p, sapprd.vbpa a, sapprd.adrc c " +
+                cmd.CommandText = " select distinct c.name1, k.kunrg from sapprd.vbrk k, sapprd.vbrp p, sapprd.vbpa a, sapprd.adrc c " +
                                   " where k.mandt = p.mandt and k.vbeln = p.vbeln and k.mandt = '900' and k.fkart in ('ZFM','ZFMC','ZFS','ZFSC','ZFPA', 'ZFVS','ZFCS') " +
-                                  " and k.fksto <> 'X' and k.fkdat >= to_char(sysdate-945,'yyyymmdd') " + sintPaleti +
-                                  " and k.mandt = a.mandt and k.vbeln = a.vbeln and a.parvw = 'WE' " +
-                                  " and p.prctr =:unitLog and a.mandt = c.client and a.adrnr = c.addrnumber  and " + criteriuCautare + " order by c.name1 ";
+                                  " and k.fksto <> 'X' and k.fkdat >= to_char(sysdate-45,'yyyymmdd') " + sintPaleti +
+                                  " and k.mandt = a.mandt and k.vbeln = a.vbeln and a.parvw = 'WE' " + critFiliala + 
+                                  " and a.mandt = c.client and a.adrnr = c.addrnumber  and " + criteriuCautare + " order by c.name1 ";
 
 
                 cmd.CommandType = CommandType.Text;
                 cmd.Parameters.Clear();
 
-                cmd.Parameters.Add(":unitLog", OracleType.VarChar, 30).Direction = ParameterDirection.Input;
-                cmd.Parameters[0].Value = unitLog;
+                if (!critFiliala.Equals(String.Empty))
+                {
+                    cmd.Parameters.Add(":unitLog", OracleType.VarChar, 30).Direction = ParameterDirection.Input;
+                    cmd.Parameters[0].Value = unitLog;
+                }
 
                 oReader = cmd.ExecuteReader();
 
@@ -1650,7 +1657,7 @@ namespace WebService1
                         unClient.numeClient = oReader.GetString(0);
                         unClient.codClient = oReader.GetString(0);
                         unClient.tipClient = "0";
-                        unClient.tipClientIP = HelperClienti.getDateClientInstPublica(connection, unClient.codClient).tipClientInstPublica;
+                        unClient.tipClientIP = HelperClienti.getDateClientInstPublica(connection, oReader.GetString(1)).tipClientInstPublica;
                         listaClienti.Add(unClient);
                     }
                 }

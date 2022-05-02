@@ -205,6 +205,8 @@ namespace WebService1
         public string sintetic;
         public double lungime = 0;
         public string umPalet;
+        public double aczcDeLivrat = 0;
+        public double aczcLivrat = 0;
     }
 
 
@@ -291,6 +293,7 @@ namespace WebService1
         public string ciDelegat = "";
         public string autoDelegat = "";
         public string refClient = "";
+        public bool isComandaACZC;
     }
 
 
@@ -311,6 +314,8 @@ namespace WebService1
         public double marjaBrutaPalProc = 0;
         public double marjaBrutaCantProc = 0;
         public bool isClientBlocat = false;
+        public double limitaCredit = 0;
+        public string nrCmdClp;
 
     }
 
@@ -404,6 +409,7 @@ namespace WebService1
         public double bazaSalariala = 0;
         public string tipClientInstPublica;
         public bool isAprobatDistrib;
+        public bool isComandaACZC;
 
     }
 

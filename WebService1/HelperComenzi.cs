@@ -161,5 +161,135 @@ namespace WebService1
             return isAprob1 && isAprob2;
         }
 
+
+        public static void setLivrariArtACZC(OracleConnection connection, string nrComanda, ArticolComandaRap articol)
+        {
+
+            OracleCommand cmd = new OracleCommand();
+            OracleDataReader oReader = null;
+
+            if (articol.codArticol.StartsWith("30"))
+            {
+                articol.aczcDeLivrat = 0;
+                articol.aczcLivrat = 0;
+                return;
+            }
+
+            try
+            {
+                cmd = connection.CreateCommand();
+
+                cmd.CommandText = " select nvl(sum(e.vmeng),0) qty_de_livrat from sapprd.vbbe e where " +
+                                  " e.mandt = '900' and e.vbeln = :nrComanda and matnr = :codArticol ";
+
+                cmd.CommandType = CommandType.Text;
+
+                cmd.Parameters.Clear();
+
+                cmd.Parameters.Add(":nrComanda", OracleType.VarChar, 30).Direction = ParameterDirection.Input;
+                cmd.Parameters[0].Value = nrComanda;
+
+                cmd.Parameters.Add(":codArticol", OracleType.VarChar, 54).Direction = ParameterDirection.Input;
+                cmd.Parameters[1].Value = "0000000000" + articol.codArticol;
+
+                oReader = cmd.ExecuteReader();
+
+                if (oReader.HasRows)
+                {
+                    oReader.Read();
+                    articol.aczcDeLivrat = oReader.GetDouble(0);
+
+                }
+                else
+                    articol.aczcDeLivrat = 0;
+
+
+
+                cmd.CommandText = " select  nvl(sum(rfmng),0) qty_livr from sapprd.vbfa f, sapprd.vbap p " +
+                                   " where f.mandt = '900' and f.vbelv = :nrComanda  and p.matnr = :codArticol " +
+                                   " and f.vbtyp_v = 'C' and f.vbtyp_n = 'J' and f.mandt = p.mandt and f.vbelv = p.vbeln and f.posnv = p.posnr ";
+
+                cmd.CommandType = CommandType.Text;
+
+                cmd.Parameters.Clear();
+
+                cmd.Parameters.Add(":nrComanda", OracleType.VarChar, 30).Direction = ParameterDirection.Input;
+                cmd.Parameters[0].Value = nrComanda;
+
+                cmd.Parameters.Add(":codArticol", OracleType.VarChar, 54).Direction = ParameterDirection.Input;
+                cmd.Parameters[1].Value = "0000000000" + articol.codArticol;
+
+                oReader = cmd.ExecuteReader();
+
+                if (oReader.HasRows)
+                {
+                    oReader.Read();
+                    articol.aczcLivrat = oReader.GetDouble(0);
+
+                }
+                else
+                    articol.aczcLivrat = 0;
+
+            }
+            catch (Exception ex)
+            {
+                ErrorHandling.sendErrorToMail(ex.ToString() + " , " + nrComanda + " , " + articol.codArticol);
+            }
+            finally
+            {
+                DatabaseConnections.CloseConnections(oReader, cmd);
+            }
+
+        }
+
+        public static string getNrCmdClp(OracleConnection connection, string nrCmd)
+        {
+            string nrCmdClp = "";
+
+            OracleCommand cmd = new OracleCommand();
+            OracleDataReader oReader = null;
+
+            try
+            {
+                cmd = connection.CreateCommand();
+
+                cmd.CommandText = " select distinct vbeln from sapprd.vbfa f, sapprd.zcomhead_tableta b where f.mandt = '900' and b.mandt = '900' " +
+                                  " and b.id =:idCmd and f.vbelv = b.nrcmdsap and f.vbtyp_v = 'C' and f.vbtyp_n = 'V' ";
+
+                cmd.CommandType = CommandType.Text;
+
+                cmd.Parameters.Clear();
+
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add(":idcmd", OracleType.Int32, 20).Direction = ParameterDirection.Input;
+                cmd.Parameters[0].Value = Int32.Parse(nrCmd); ;
+
+                oReader = cmd.ExecuteReader();
+
+                if (oReader.HasRows)
+                {
+                    while (oReader.Read())
+                    {
+                        if (nrCmdClp.Equals(String.Empty))
+                            nrCmdClp = oReader.GetString(0);
+                        else
+                            nrCmdClp += ";" + oReader.GetString(0);
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorHandling.sendErrorToMail(ex.ToString() + " , " + nrCmd);
+            }
+            finally
+            {
+                DatabaseConnections.CloseConnections(oReader, cmd);
+            }
+
+
+            return nrCmdClp;
+        }
+
     }
 }

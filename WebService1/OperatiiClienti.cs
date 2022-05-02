@@ -727,23 +727,8 @@ namespace WebService1
                         detaliiClient.divizii = "";
 
                     //contract activ
-                    bool contractActiv = false;
-                    cmd = connection.CreateCommand();
-
-                    cmd.CommandText = " select 1 from sapprd.kna1 k where k.mandt = '900' and k.kunnr = :codClient " +
-                                      " and k.ZDATAEXPCTR !='00000000' and to_date(k.ZDATAEXPCTR, 'yyyymmdd') >= sysdate ";
-
-                    cmd.CommandType = CommandType.Text;
-                    cmd.Parameters.Clear();
-
-                    cmd.Parameters.Add(":codClient", OracleType.VarChar, 30).Direction = ParameterDirection.Input;
-                    cmd.Parameters[0].Value = codClient;
-
-                    oReader = cmd.ExecuteReader();
-                    if (oReader.HasRows)
-                    {
-                        contractActiv = true;
-                    }
+                    //nu se mai verifica din 13.04.2022
+                    bool contractActiv = true;
 
 
                     if (!contractActiv)
@@ -1450,7 +1435,7 @@ namespace WebService1
                 cmd.CommandText = " select u.zterm from sapprd.T052u u, sapprd.TVZBT t where u.mandt = '900' and  u.spras = '4' " +
                                   " and u.mandt = t.mandt and u.spras = t.spras and u.zterm = t.zterm  and u.zterm " +
                                   " <= (select max(p.zterm) from sapprd.knvv p where p.mandt = '900' " +
-                                  " and p.kunnr = :codClient and p.vtweg = '20'  and p.spart = '11' ) and u.zterm != 'C000' order by u.zterm ";
+                                  " and p.kunnr = :codClient and p.vtweg = '20'  and p.spart = '11' ) order by u.zterm ";
 
                 cmd.CommandType = CommandType.Text;
                 cmd.Parameters.Clear();
