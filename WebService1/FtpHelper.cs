@@ -85,6 +85,7 @@ namespace WebService1
 
             }
 
+            ftpIp = "0.0.0.0";
 
             return ftpIp;
         }

@@ -636,6 +636,7 @@ namespace WebService1
         public string tipTransport;
         public string dataLivrare;
         public string extraDate;
+        public bool isCmdACZC;
     }
 
     public class ExtraDate

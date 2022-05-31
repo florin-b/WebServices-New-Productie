@@ -66,7 +66,7 @@ namespace WebService1
 
                 }
 
-                string condArtFurn = " and c.dismm not in ('AC','ZC') ";
+                string condArtFurn = " ";
                 if (aczc != null && aczc.Equals("true"))
                 {
                     condArtFurn = " and c.dismm in ('AC','ZC') ";
@@ -114,7 +114,7 @@ namespace WebService1
                 if (filiala != null && !filiala.Trim().Equals(String.Empty))
                 {
                     cmd.Parameters.Add(":filiala", OracleType.VarChar, 12).Direction = ParameterDirection.Input;
-                    cmd.Parameters[nrParam].Value = codDepart.Equals("11") ? Utils.getFilialaGed(filiala) : filiala;
+                    cmd.Parameters[nrParam].Value = codDepart.Equals("11") || codDepart.Trim().Equals(String.Empty) ? Utils.getFilialaGed(filiala) : filiala;
                     nrParam++;
                 }
 

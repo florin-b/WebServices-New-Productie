@@ -63,7 +63,7 @@ namespace WebService1
 
 
 
-        public static void getDateArticole(string nrCmd, DateLivrareCmd dateLivrare, List<ArticolComandaRap> listArticole)
+        public static void getDateArticole(string nrCmd, DateLivrareCmd dateLivrare, List<ArticolComandaRap> listArticole, string tipUser)
         {
 
             string nrCmdSap = OperatiiComenzi.getNrComandaSap(nrCmd);
@@ -95,6 +95,9 @@ namespace WebService1
                     {
                         art.valT1 = Double.Parse(response.ItDet[i].t1.ToString());
                         art.procT1 = Double.Parse(response.ItDet[i].T1Proc.ToString());
+
+                        if (tipUser.Equals("DV"))
+                            art.cmp = Double.Parse(response.ItDet[i].Cmp.ToString());
                         break;
 
                     }

@@ -2943,6 +2943,8 @@ namespace WebService1
             return new ArticoleCant().getArticoleCant(unitLog, codArtPal);
         }
 
+
+
         [WebMethod]
         public string getCmdArt(string nrCmd, string afisCond, string tipUser)
         {
@@ -3641,7 +3643,7 @@ namespace WebService1
                 //articole conditii
 
                 if (tipUser.Equals("SD") || tipUser.Equals("DV"))
-                    InfoComenziSap.getDateArticole(nrCmd, dateLivrare, listArticole);
+                    InfoComenziSap.getDateArticole(nrCmd, dateLivrare, listArticole, tipUser);
 
                 //antet
                 string condAfis = "";
@@ -5126,8 +5128,8 @@ namespace WebService1
                                 conditieTransp = elimTransp;
                             }
 
-                            //comenzile fara rezervare de stoc nu se creaza automat dupa toate aprobarile primite
-                            if (codStare != null && !codStare.Equals("21"))
+                            //comenzile cu sau fara rezervare de stoc nu se creaza automat dupa toate aprobarile primite
+                            if (codStare != null && !codStare.Equals("21") && !codStare.Equals("20"))
                             {
 
                                 SAPWebServices.ZstareComanda inParam = new SAPWebServices.ZstareComanda();
@@ -6468,6 +6470,10 @@ namespace WebService1
                         condTipAg = " and a.tip in ('CVIP','SDIP') ";
                         filialaIP = " or a.filiala in (select prctr from sapprd.zsd_ip where mandt='900' and pernr = '" + codAgent + "' ) ";
                     }
+                    else if (tipUserSap != null && tipUserSap.Equals("SMG"))
+                    {
+                        condTipAg = " and a.tip in ('SMG', 'CAG', 'CAG1', 'CAG2', 'CAG3', 'CVG', 'CVA')";
+                    }
                     else
                         condTipAg = " and a.tip in ('CONS-GED','SM','CAG', 'CAG1', 'CAG2', 'SMG', 'CVIP', 'SDIP') ";
                 }
@@ -6927,8 +6933,9 @@ namespace WebService1
                         if (codUser == "00010281" || codUser == "00018768")
                         {
                             localDepart = "11";
-                            condHome = " and h.filiala = a.ul and a.aprob_cv_necesar like '%11%' and a.aprob_cv_realiz not like '%11%' ";
-                            tabelaHome = ", sapprd.zfilhome h";
+                            condHome = " and a.aprob_cv_necesar like '%11%' and a.aprob_cv_realiz not like '%11%' ";
+                            tabelaHome = "";
+
                         }
                         else
                         {
@@ -7343,7 +7350,7 @@ namespace WebService1
                                " clienti b, agenti ag " + tabDV +
                                " where a.cod_client=b.cod and ag.cod = a.cod_agent and a.tip_pers in ('CV','CVS') " +
                                " and a.status_aprov in ('1','4','6','21') and a.status in ('2','11') " +
-                               " and v.pernr = '" + codUser + "' and v.spart = '" + localDepart + "' and substr(v.prctr,0,2) = substr(a.ul,0,2) and a.depart='11' " +
+                               " and v.pernr = '" + codUser + "' and v.spart = '" + localDepart + "' and substr(v.prctr,0,2) = substr(a.ul,0,2) and substr(a.ul,3,1) != 4 and a.depart='11' " +
                                " and decode(decode(a.accept1,'X',a.ora_accept1,'1'),'000000',1,0)=0 and decode(a.status_aprov,'21',decode(a.accept2,'X',a.ora_accept2,'000000'),'000000') = '000000' " +
                                " and ((a.aprob_cv_necesar like '%" + localDepart + "%' and a.aprob_cv_realiz not like '%" + localDepart + "%') " + condSuplGed + "  ) " +
                                " and a.cond_cv not like '%" + localDepart + "%' " +
