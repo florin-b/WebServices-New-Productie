@@ -79,6 +79,7 @@
     <Compile Include="BeanClient.cs" />
     <Compile Include="BeanComenzi.cs" />
     <Compile Include="BeanDocumente.cs" />
+    <Compile Include="BeanMathaus.cs" />
     <Compile Include="BeanPierderi.cs" />
     <Compile Include="Beans.cs" />
     <Compile Include="BeanSalarizare.cs" />
@@ -122,6 +123,7 @@
     <Compile Include="OperatiiConditiiComanda.cs" />
     <Compile Include="OperatiiDocumente.cs" />
     <Compile Include="OperatiiMacara.cs" />
+    <Compile Include="OperatiiMathaus.cs" />
     <Compile Include="OperatiiNecesar.cs" />
     <Compile Include="OperatiiObiectiveCVA.cs" />
     <Compile Include="OperatiiObiectiveKA.cs" />
@@ -279,6 +281,9 @@
       <DependentUpon>Reference.map</DependentUpon>
     </None>
     <Content Include="Web References\SAPWebServices\ZcustChLivrareResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SAPWebServices\ZdetTransportResponse.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <None Include="Web References\SAPWebServices\ZextindeClientResponse.datasource">

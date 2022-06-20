@@ -776,8 +776,14 @@ namespace WebService1
 
                 if (oReader.HasRows)
                 {
-                    oReader.Read();
-                    filiala = oReader.GetString(0);
+                    while (oReader.Read())
+                    {
+                        if (filiala.Equals(String.Empty))
+                            filiala = oReader.GetString(0);
+                        else
+                            filiala += "," + oReader.GetString(0);
+
+                    }
                 }
 
             }

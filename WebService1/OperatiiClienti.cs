@@ -960,16 +960,13 @@ namespace WebService1
                                 " and exists (select 1 from sapprd.ZTB_COD_MESERIAS s where s.cod_meserias = c.kunnr) order by c.name1 ";
 
                 else {
-                    tipConsilier = Utils.getTipConsilier(connection, codUser);
-
-                    if (tipConsilier.ToUpper().StartsWith("CAG") || tipConsilier.ToUpper().Equals("CVG"))
-                        sqlString = " select c.name1 nume, c.kunnr cod from sapprd.kna1 c where  c.ktokd = '1180' and c.sperr != 'X' and exists " +
-                                    " (select 1 from sapprd.knvp p where p.mandt = '900' and p.kunnr = c.kunnr  and p.vtweg = '20' and p.parvw in ('ZC') and p.pernr =:codAgent )  " +
+                        sqlString = " select c.name1 nume, c.kunnr cod from sapprd.kna1 c where c.ktokd = '1180' and c.sperr != 'X' " +
+                                    " and exists (select 1 from sapprd.knvp p where p.mandt = '900' and p.kunnr = c.kunnr and p.vtweg = '20' " +
+                                    " and p.parvw in ('ZA', 'ZS') and p.kunn2 = :filiala ) " +
+                                    " and (exists(select 1 from sapprd.knvp p where p.mandt = '900' and p.kunnr = c.kunnr and p.vtweg = '20' " +
+                                    " and p.parvw in ('ZC', 'VE') and p.pernr = :codAgent) " +
+                                    " or exists (select 1 from websap.agenti a where a.tip in ('SMR', 'CVR', 'CVS') and a.cod = :codAgent )) " +
                                     " order by c.name1 ";
-                    else
-                        sqlString = " select c.name1 nume, c.kunnr cod from sapprd.kna1 c where  c.ktokd = '1180' and c.sperr != 'X' and exists " +
-                                   " (select 1 from sapprd.knvp p where p.mandt = '900' and p.kunnr = c.kunnr  and p.vtweg = '20' and p.parvw in ('ZA', 'ZS') and p.kunn2 =:filiala )  " +
-                                   " order by c.name1 ";
                 }
 
 
@@ -979,24 +976,11 @@ namespace WebService1
                 cmd.CommandType = CommandType.Text;
                 cmd.Parameters.Clear();
 
-                if (tipUser.Equals("AV") || (!tipConsilier.ToUpper().StartsWith("CAG") && !tipConsilier.ToUpper().StartsWith("CVG")))
-                {
-                    cmd.Parameters.Add(":filiala", OracleType.VarChar, 30).Direction = ParameterDirection.Input;
-                    cmd.Parameters[0].Value = codFiliala;
+                cmd.Parameters.Add(":filiala", OracleType.VarChar, 30).Direction = ParameterDirection.Input;
+                cmd.Parameters[0].Value = codFiliala;
 
-                    if (tipUser.Equals("AV"))
-                    {
-                        cmd.Parameters.Add(":codAgent", OracleType.VarChar, 24).Direction = ParameterDirection.Input;
-                        cmd.Parameters[1].Value = codUser;
-
-                    }
-                }
-                else if (tipConsilier.ToUpper().StartsWith("CAG") || tipConsilier.ToUpper().Equals("CVG"))
-                {
-                    cmd.Parameters.Add(":codAgent", OracleType.VarChar, 24).Direction = ParameterDirection.Input;
-                    cmd.Parameters[0].Value = codUser;
-                }
-
+                cmd.Parameters.Add(":codAgent", OracleType.VarChar, 24).Direction = ParameterDirection.Input;
+                cmd.Parameters[1].Value = codUser;
 
                 oReader = cmd.ExecuteReader();
                 if (oReader.HasRows)

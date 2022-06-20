@@ -2938,6 +2938,48 @@ namespace WebService1
         }
 
         [WebMethod]
+        public string getArticoleCategorieMathaus(string codCategorie, string filiala, string depart, string pagina, string tipArticol)
+        {
+            return new OperatiiMathaus().getArticoleCategorie(codCategorie, filiala, depart, pagina, tipArticol);
+        }
+
+        [WebMethod]
+        public string getCategoriiMathaus()
+        {
+            return new OperatiiMathaus().getListaCategorii();
+        }
+
+        [WebMethod]
+        public string getStocMathaus(string filiala, string codArticol, string um)
+        {
+            return new OperatiiMathaus().getStocMathaus(filiala, codArticol, um);
+        }
+
+        [WebMethod]
+        public string getLivrariMathaus(string antetComanda, string comandaMathaus)
+        {
+            return new OperatiiMathaus().getLivrariComanda(antetComanda, comandaMathaus);
+        }
+
+        [WebMethod]
+        public string cautaArticoleMathaus(string codArticol, string tipCautare, string filiala, string depart, string pagina)
+        {
+            return new OperatiiMathaus().cautaArticoleMathaus(codArticol, tipCautare, filiala, depart, pagina);
+        }
+
+        [WebMethod]
+        public string cautaArticoleLocal(string codArticol, string tipCautare, string filiala, string depart, string pagina)
+        {
+            return new OperatiiMathaus().cautaArticoleLocal(codArticol, tipCautare, filiala, depart, pagina);
+        }
+
+        [WebMethod]
+        public string getInfoPretMathaus(string parametruPret, string cantitati)
+        {
+            return new OperatiiArticole().getInfoPretMathaus(parametruPret, cantitati);
+        }
+
+        [WebMethod]
         public string getArticoleCant(string unitLog, string codArtPal)
         {
             return new ArticoleCant().getArticoleCant(unitLog, codArtPal);
@@ -12055,20 +12097,16 @@ namespace WebService1
         public string saveNewCmdAndroid(string comanda, bool alertSD, bool alertDV, bool cmdAngajament, string tipUser, string JSONArt, string JSONComanda, string JSONDateLivrare, string tipUserSap)
         {
 
-           
-
             string retVal = "-1";
 
             if (tipUser.Equals("KA"))
             {
-                retVal = verificaArticoleMAV(comanda, alertSD, alertDV, cmdAngajament, tipUser, JSONArt, JSONComanda, JSONDateLivrare,"");
+                retVal = verificaArticoleMAV_Mathaus(comanda, alertSD, alertDV, cmdAngajament, tipUser, JSONArt, JSONComanda, JSONDateLivrare,"");
             }
             else
             {
-
                 
                 string localtipUserSap = "";
-
 
                 if (!tipUser.Equals("AV"))
                 {
@@ -12090,7 +12128,7 @@ namespace WebService1
                 }
                 else
                 {
-                    retVal = verificaArticoleMAV(comanda, alertSD, alertDV, cmdAngajament, tipUser, JSONArt, JSONComanda, JSONDateLivrare, localtipUserSap);
+                    retVal = verificaArticoleMAV_Mathaus(comanda, alertSD, alertDV, cmdAngajament, tipUser, JSONArt, JSONComanda, JSONDateLivrare, localtipUserSap);
 
                 }
 
@@ -12136,6 +12174,258 @@ namespace WebService1
             else
                 return false;
 
+        }
+
+        private string verificaArticoleMAV_Mathaus(string comanda, bool alertSD, bool alertDV, bool cmdAngajament, string tipUser, string JSONArt, string JSONComanda, string JSONDateLivrare, string tipUserSap)
+        {
+            string retVal = "-1";
+
+            var serializer = new JavaScriptSerializer();
+
+            try
+            {
+
+                DateLivrare dateLivrareGed, dateLivrareDistrib;
+                List<ArticolComanda> articoleGed, articoleDistrib;
+
+                double totalComandaGed = 0, totalComandaDistrib = 0;
+
+                ComandaVanzare comandaVanzare = serializer.Deserialize<ComandaVanzare>(JSONComanda);
+                DateLivrare dateLivrare = serializer.Deserialize<DateLivrare>(JSONDateLivrare);
+                List<ArticolComanda> articolComanda = serializer.Deserialize<List<ArticolComanda>>(JSONArt);
+
+                List<CostTransportMathaus> costTransport = new List<CostTransportMathaus>();
+
+                if (dateLivrare.costTransportMathaus != null)
+                    costTransport = serializer.Deserialize<List<CostTransportMathaus>>(dateLivrare.costTransportMathaus);
+
+                dateLivrareGed = dateLivrare;
+                dateLivrareDistrib = dateLivrare;
+
+                comandaVanzare.parrentId = GeneralUtils.getUniqueIdFromCode(dateLivrareDistrib.codAgent);
+
+                bool isCmdGed = isUnitLogGed(dateLivrare.unitLog);
+
+                articoleGed = new List<ArticolComanda>();
+                articoleDistrib = new List<ArticolComanda>();
+
+                if (isCmdGed)
+                {
+                    articoleGed = articolComanda;
+                    totalComandaGed = Double.Parse(dateLivrare.totalComanda, CultureInfo.InvariantCulture);
+                }
+                else
+                {
+
+                    foreach (var articol in articolComanda)
+                    {
+                        if (articol.depart.Equals("11"))
+                        {
+                            articoleGed.Add(articol);
+                            totalComandaGed += articol.pret;
+                        }
+                        else
+                        {
+                            articoleDistrib.Add(articol);
+
+                            if (comandaVanzare.nrCmdSap.Length < 4)
+                            {
+                                totalComandaDistrib += (articol.pretUnit / articol.multiplu) * Double.Parse(articol.cantUmb, CultureInfo.InvariantCulture);
+                            }
+                            else
+                            {
+                                totalComandaDistrib += articol.pretUnit * Double.Parse(articol.cantUmb, CultureInfo.InvariantCulture);
+                            }
+
+
+                        }
+                    }
+                }
+
+                if (articoleDistrib.Count > 0)
+                {
+                    dateLivrareDistrib.totalComanda = totalComandaDistrib.ToString();
+                    List<ArticolComanda> sortedArticoleDistrib = articoleDistrib.OrderBy(order => order.depart).ThenBy(order => order.filialaSite).ToList();
+
+                    if (tipUser.Equals("KA"))
+                    {
+                        retVal = saveKANewCmd(comanda, alertSD, alertDV, cmdAngajament, tipUser, serializer.Serialize(sortedArticoleDistrib), JSONComanda, serializer.Serialize(dateLivrareDistrib), true);
+                    }
+                    else
+                    {
+                        string departArt = sortedArticoleDistrib[0].depart;
+                        string ulStoc = sortedArticoleDistrib[0].filialaSite;
+                        string tipTranspCmd = "";
+
+                        List<ArticolComanda> articoleAgenti = new List<ArticolComanda>();
+                        double totalComanda = 0;
+
+                        foreach (var articol in sortedArticoleDistrib)
+                        {
+                            if (!departArt.Equals(articol.depart) || (ulStoc != null && articol.filialaSite != null && !ulStoc.Equals(articol.filialaSite)))
+                            {
+                                dateLivrareDistrib.totalComanda = totalComanda.ToString();
+
+                                if (!articol.filialaSite.Equals(dateLivrareDistrib.unitLog) && !articol.filialaSite.Equals("BV90") && !ulStoc.Equals("BV90"))
+                                    dateLivrareDistrib.filialaCLP = ulStoc;
+
+                                if (tipTranspCmd != null && !tipTranspCmd.Equals(String.Empty))
+                                    dateLivrareDistrib.Transport = tipTranspCmd;
+
+                                retVal = saveAVNewCmd(comanda, alertSD, alertDV, cmdAngajament, tipUser, serializer.Serialize(articoleAgenti), serializer.Serialize(comandaVanzare), serializer.Serialize(dateLivrareDistrib), false, tipUserSap);
+                                articoleAgenti.Clear();
+                                totalComanda = 0;
+                            }
+
+
+                            if (comandaVanzare.nrCmdSap.Length < 4)
+                            {
+                                totalComanda += (articol.pretUnit / articol.multiplu) * Double.Parse(articol.cantUmb, CultureInfo.InvariantCulture);
+                            }
+                            else
+                            {
+                                totalComanda += articol.pretUnit * Double.Parse(articol.cantUmb, CultureInfo.InvariantCulture);
+                            }
+
+
+                            articoleAgenti.Add(articol);
+                            departArt = articol.depart;
+                            ulStoc = articol.filialaSite;
+                            tipTranspCmd = articol.tipTransport;
+
+                        }
+
+                        dateLivrareDistrib.totalComanda = totalComanda.ToString();
+
+                        if (ulStoc != null && !ulStoc.Equals(dateLivrareDistrib.unitLog) && !ulStoc.Equals("BV90"))
+                            dateLivrareDistrib.filialaCLP = ulStoc;
+
+
+                        if (tipTranspCmd != null && !tipTranspCmd.Equals(String.Empty))
+                            dateLivrareDistrib.Transport = tipTranspCmd;
+
+                        retVal = saveAVNewCmd(comanda, alertSD, alertDV, cmdAngajament, tipUser, serializer.Serialize(articoleAgenti), serializer.Serialize(comandaVanzare), serializer.Serialize(dateLivrareDistrib), true, tipUserSap);
+                    }
+
+
+                }
+
+                if (articoleGed.Count > 0)
+                {
+
+                    if (!dateLivrareGed.unitLog.Contains("40"))
+                        dateLivrareGed.unitLog = dateLivrareGed.unitLog.Substring(0, 2) + "2" + dateLivrareGed.unitLog.Substring(3, 1);
+
+                    dateLivrareGed.totalComanda = totalComandaGed.ToString();
+
+                    List<ArticolComanda> sortedArticoleDistrib = articoleGed.OrderBy(order => order.filialaSite).ToList();
+
+                    bool calcTransport = dateLivrareGed.Transport.Equals("TRAP");
+
+                    bool alertSDGed = false;
+                    bool alertDVGed = getTipAlertDVGed(articoleGed);
+
+                    if (alertDVGed)
+                        alertSDGed = true;
+                    else
+                        alertSDGed = getTipAlertSDGed(articoleGed);
+
+                    if (tipUser.Equals("KA"))
+                    {
+                        retVal = saveKANewCmd(comanda, alertSDGed, alertDVGed, cmdAngajament, tipUser, serializer.Serialize(articoleGed), serializer.Serialize(comandaVanzare), serializer.Serialize(dateLivrareGed), calcTransport);
+                    }
+                    else
+                    {
+
+                        string ulStoc = sortedArticoleDistrib[0].filialaSite;
+                        List<ArticolComanda> articoleAgenti = new List<ArticolComanda>();
+                        double totalComanda = 0;
+                        string comenziGed = "";
+                        double valTransp = 0;
+                        string tipTranspCmd = "";
+
+                        foreach (var articol in sortedArticoleDistrib)
+                        {
+
+                            if ((ulStoc != null && articol.filialaSite != null && !ulStoc.Equals(articol.filialaSite)))
+                            {
+                                dateLivrareDistrib.totalComanda = totalComanda.ToString();
+
+                                if (!articol.filialaSite.Equals(dateLivrareDistrib.unitLog) && !articol.filialaSite.Equals("BV90") && !ulStoc.Equals("BV90"))
+                                    dateLivrareDistrib.filialaCLP = ulStoc;
+
+                                if (tipTranspCmd != null && !tipTranspCmd.Equals(String.Empty))
+                                    dateLivrareDistrib.Transport = tipTranspCmd;
+
+                                retVal = saveAVNewCmd(comanda, alertSD, alertDV, cmdAngajament, tipUser, serializer.Serialize(articoleAgenti), serializer.Serialize(comandaVanzare), serializer.Serialize(dateLivrareDistrib), calcTransport, tipUserSap);
+
+                                if (retVal.Contains("#"))
+                                {
+                                    string[] varArrayI = retVal.Split('#');
+
+                                    if (comenziGed == String.Empty)
+                                        comenziGed = varArrayI[2];
+                                    else
+                                        comenziGed += "," + varArrayI[2];
+
+                                    valTransp += Double.Parse(varArrayI[1]);
+                                }
+
+                                articoleAgenti.Clear();
+                                totalComanda = 0;
+                            }
+
+                            if (!comandaVanzare.nrCmdSap.Equals("-1") || comandaVanzare.nrCmdSap.Length < 4)
+                            {
+                                totalComanda += (articol.pretUnit / articol.multiplu) * Double.Parse(articol.cantUmb, CultureInfo.InvariantCulture);
+                            }
+                            else
+                            {
+                                totalComanda += articol.pretUnit * Double.Parse(articol.cantUmb, CultureInfo.InvariantCulture);
+                            }
+
+                            articoleAgenti.Add(articol);
+                            ulStoc = articol.filialaSite;
+                            tipTranspCmd = articol.tipTransport;
+                        }
+
+
+                        dateLivrareDistrib.totalComanda = totalComanda.ToString();
+
+                        if (ulStoc != null && !ulStoc.Equals(dateLivrareDistrib.unitLog) && !ulStoc.Equals("BV90"))
+                            dateLivrareDistrib.filialaCLP = ulStoc;
+
+                        if (tipTranspCmd != null && !tipTranspCmd.Equals(String.Empty))
+                            dateLivrareDistrib.Transport = tipTranspCmd;
+
+                        retVal = saveAVNewCmd(comanda, alertSD, alertDV, cmdAngajament, tipUser, serializer.Serialize(articoleAgenti), serializer.Serialize(comandaVanzare), serializer.Serialize(dateLivrareDistrib), calcTransport, tipUserSap);
+
+                        if (retVal.Contains("#"))
+                        {
+                            string[] varArray = retVal.Split('#');
+
+                            if (comenziGed == String.Empty)
+                                comenziGed = varArray[2];
+                            else
+                                comenziGed += "," + varArray[2];
+
+                            valTransp += Double.Parse(varArray[1]);
+
+                            retVal = "100#" + valTransp + "#" + comenziGed;
+                        }
+
+
+                    }
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                sendErrorToMail(ex.ToString());
+            }
+
+            return retVal;
         }
 
 
@@ -12278,7 +12568,6 @@ namespace WebService1
 
                     if (tipUser.Equals("KA"))
                     {
-                        //comandaVanzare.alerteKA = "!";
                         retVal = saveKANewCmd(comanda, alertSDGed, alertDVGed, cmdAngajament, tipUser, serializer.Serialize(articoleGed), serializer.Serialize(comandaVanzare), serializer.Serialize(dateLivrareGed), calcTransport);
                     }
                     else
@@ -13101,13 +13390,8 @@ namespace WebService1
                     inParam.GvEvent = paramCmd;  //C - creaza comanda, S - simulare pret transport
                     inParam.Canal = isComandaWood(uLog) ? "40" : comandaVanzare.canalDistrib;
 
-
+                  
                     SAPWebServices.ZcreazaComandaResponse outParam = webService.ZcreazaComanda(inParam);
-                    
-
-                    //sf. scriere comanda
-
-
 
                     if ((uLog.Substring(2, 1).Equals("2") && comandaVanzare.canalDistrib.Equals("20") && (transp.Equals("TRAP") || transp.Equals("TERT")) && refSAP.Equals("-1")) || (isComandaWood(uLog) && refSAP.Equals("-1") && transp.Equals("TRAP")))
                     {
@@ -13122,8 +13406,6 @@ namespace WebService1
                     {
                         retVal = outParam.VOk.ToString();
                     }
-
-
 
                     webService.Dispose();
 

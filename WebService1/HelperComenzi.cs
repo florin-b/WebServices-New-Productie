@@ -291,5 +291,57 @@ namespace WebService1
             return nrCmdClp;
         }
 
+
+        public static string getDepartExtra(string divizie)
+        {
+            string depExtra = null;
+
+
+            if (divizie.Equals("01"))
+                depExtra = "'02'";
+
+            if (divizie.Equals("041"))
+                if (depExtra == null)
+                    depExtra = "'040'";
+                else
+                    depExtra += ",'040'";
+
+
+            if (divizie.Equals("040"))
+                if (depExtra == null)
+                    depExtra = "'041'";
+                else
+                    depExtra += ",'041'";
+
+
+            if (divizie.Equals("07"))
+                if (depExtra == null)
+                    depExtra = "'03','06'";
+                else
+                    depExtra += ",'03','06'";
+
+
+            if (divizie.Equals("03"))
+                if (depExtra == null)
+                    depExtra = "'07','06'";
+                else
+                    depExtra += ",'07','06'";
+
+
+            if (divizie.Equals("06"))
+                if (depExtra == null)
+                    depExtra = "'03','07'";
+                else
+                    depExtra += ",'03','07'";
+
+            if (depExtra == null)
+                depExtra = "('" + divizie + "')";
+            else
+                depExtra = "(" + depExtra + ",'" + divizie + "')";
+
+            return depExtra;
+
+        }
+
     }
 }

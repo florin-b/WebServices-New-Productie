@@ -1807,6 +1807,34 @@ namespace WebService1
 
         }
 
+        public string getInfoPretMathaus(string parametruPret, string cantitati)
+        {
+
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            string infoRes = "";
+
+            ParametruPretGed paramPret = serializer.Deserialize<ParametruPretGed>(parametruPret);
+            string[] cantArt = cantitati.Split('#');
+
+            foreach (string cant in cantArt)
+            {
+                paramPret.cantitate = cant;
+
+                if (paramPret.articol.Length == 8)
+                    paramPret.articol = "0000000000" + paramPret.articol;
+
+                string serPret = serializer.Serialize(paramPret);
+
+                if (infoRes.Equals(String.Empty))
+                    infoRes = getPretGed(serPret);
+                else
+                    infoRes += "#" + getPretGed(serPret);
+
+            }
+
+            return infoRes;
+        }
+
         private static string getFilialaCustodie(string filiala)
         {
             if (filiala.Equals("BU10"))

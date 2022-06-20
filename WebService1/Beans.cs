@@ -166,6 +166,7 @@ namespace WebService1
         public string valTransport;
         public string procTransport;
         public string listCabluri;
+        public string tipTransport;
 
         public override string ToString()
         {
@@ -293,6 +294,7 @@ namespace WebService1
         public string ciDelegat = "";
         public string autoDelegat = "";
         public string refClient = "";
+        public string costTransportMathaus;
         public bool isComandaACZC;
     }
 
