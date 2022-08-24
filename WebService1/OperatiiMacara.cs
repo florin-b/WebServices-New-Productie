@@ -65,6 +65,7 @@ namespace WebService1
 
             CostDescarcare costDescarcare = new CostDescarcare();
             costDescarcare.sePermite = !resp.EpMacara.Equals("X");
+            costDescarcare.filiala = unitLog;
 
             List<ArticolDescarcare> listArticole = new List<ArticolDescarcare>();
 
@@ -73,7 +74,7 @@ namespace WebService1
             for (int i = 0; i < valPaleti.Length; i++)
             {
                 articol = new ArticolDescarcare();
-                articol.cod = valPaleti[i].Matnr;
+                articol.cod = valPaleti[i].Matnr.TrimStart('0');
                 articol.depart = valPaleti[i].Spart.Equals("04") ? "041" : valPaleti[i].Spart;
                 articol.valoare = valPaleti[i].Valpal.Trim();
                 articol.cantitate = valPaleti[i].Nrpal.ToString();
@@ -120,6 +121,24 @@ namespace WebService1
 
         }
 
+
+        public string getCostMacaraComenzi(string codAgent, string codClient, string codFurnizor, string listComenzi)
+        {
+            List<CostDescarcare> costDescarcare = new List<CostDescarcare>();
+
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            List<ComandaCalculDescarcare> listCom = serializer.Deserialize<List<ComandaCalculDescarcare>>(listComenzi);
+
+            foreach (ComandaCalculDescarcare comanda in listCom)
+            {
+                string costDescComanda = getCostMacara(comanda.filiala, codAgent, codClient, codFurnizor, comanda.listArticole);
+                costDescarcare.Add(serializer.Deserialize<CostDescarcare>(costDescComanda));
+            }
+
+
+
+            return serializer.Serialize(costDescarcare);
+        }
 
         private List<ArticolPalet> getPaletiDistincti(List<ArticolPalet> listPaleti)
         {

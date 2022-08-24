@@ -107,7 +107,7 @@ namespace WebService1
             cmd.Parameters[17].Value = antetComanda.tipTransport;
 
             cmd.Parameters.Add(":depozDest", OracleType.VarChar, 12).Direction = ParameterDirection.Input;
-            cmd.Parameters[18].Value = articole[0].depozit;
+            cmd.Parameters[18].Value = antetComanda.depozDest.Replace("041", "04").Replace("040", "04");
 
             cmd.Parameters.Add(":codAgent2", OracleType.VarChar, 24).Direction = ParameterDirection.Input;
             cmd.Parameters[19].Value = antetComanda.selectedAgent;

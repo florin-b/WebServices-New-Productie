@@ -73,7 +73,7 @@ namespace WebService1
 
                     string condDepart = " and b.divizie like '" + depart + "%' ";
 
-                    if (Utils.isFilialaMica04(filiala, depart))
+                    if (Utils.isFilialaMicaDep04(filiala, depart))
                         condDepart = " and substr(b.divizie,0,2) = '" + depart.Substring(0, 2) + "' ";
 
                     query = " select a.id, a.nrdocument, a.numeclient, to_char(to_date(a.datacreare,'yyyymmdd')),  a.statusaprob , b.nume from sapprd.zreturhead a, agenti b where " +

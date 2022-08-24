@@ -610,7 +610,7 @@ namespace WebService1
 
             if (!departament.Equals("00") && !departament.Equals("12") && departament.Length > 0)
             {
-                if (Utils.isFilialaMica04(filiala, departament) && modulCautare != null && modulCautare.Equals("CLP"))
+                if (Utils.isFilialaMicaDep04(filiala, departament) && modulCautare != null && modulCautare.Equals("CLP"))
                     condDepart = " and ( substr(a.grup_vz,0,2) like '" + departament.Substring(0, 2) + "%') ";
                 else
                     condDepart = " and (a.grup_vz like '" + departament + "%') ";

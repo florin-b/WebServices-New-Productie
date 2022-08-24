@@ -5,9 +5,16 @@ using System.Web;
 
 namespace WebService1
 {
+
+    public class ComandaCalculDescarcare
+    {
+        public string filiala;
+        public string listArticole;
+    }
+
     public class CostDescarcare
     {
-
+        public string filiala;
         public List<ArticolDescarcare> articoleDescarcare;
         public bool sePermite;
         public List<ArticolPalet> articolePaleti;

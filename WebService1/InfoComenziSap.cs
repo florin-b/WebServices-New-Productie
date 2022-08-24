@@ -85,6 +85,10 @@ namespace WebService1
             dateLivrare.marjaT1 = Double.Parse(antet.t1.ToString());
             dateLivrare.procentT1 = Double.Parse(antet.T1Proc.ToString()) / 100;
 
+            dateLivrare.marjaBruta = Double.Parse(antet.t0.ToString());
+            dateLivrare.procMarjaBruta = Double.Parse(antet.T0Proc.ToString());
+
+
             for (int i = 0; i < response.ItDet.Length; i++)
             {
                 string codArt = response.ItDet[i].Matnr.TrimStart('0');

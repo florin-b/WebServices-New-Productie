@@ -199,5 +199,72 @@ namespace WebService1
 
         }
 
+        public double getValoareComenziNumerar(string codClient, string dataLivrare, string tipClient)
+        {
+
+            double valoareComenzi = 0;
+
+            OracleConnection connection = new OracleConnection();
+            OracleCommand cmd = new OracleCommand();
+            OracleDataReader oReader = null;
+
+            try
+            {
+                string connectionString = DatabaseConnections.ConnectToProdEnvironment();
+
+                connection.ConnectionString = connectionString;
+                connection.Open();
+
+                cmd = connection.CreateCommand();
+
+                string condClient = " cod_client = :codClient ";
+
+                if (tipClient.Equals("PF"))
+                    condClient = " telefon = :codClient ";
+                else if (tipClient.Equals("PJG"))
+                    condClient = " regexp_replace(stceg, 'RO', '') = :codClient ";
+
+                cmd.CommandText = " select nvl(sum(valoare),0) from sapprd.zcomhead_tableta where status = 2 and status_aprov in (0, 2, 15) and " +
+                                    condClient + " and tip_plata in ('E','E1') and ketdat = :dataLivrare  ";
+
+
+                cmd.CommandType = CommandType.Text;
+                cmd.Parameters.Clear();
+
+                cmd.Parameters.Add(":codClient", OracleType.VarChar, 30).Direction = ParameterDirection.Input;
+                cmd.Parameters[0].Value = codClient;
+
+                cmd.Parameters.Add(":dataLivrare", OracleType.VarChar, 30).Direction = ParameterDirection.Input;
+                cmd.Parameters[1].Value = formatDataSap(dataLivrare);
+
+                oReader = cmd.ExecuteReader();
+
+                if (oReader.HasRows)
+                {
+                    oReader.Read();
+                    valoareComenzi = oReader.GetDouble(0);
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                ErrorHandling.sendErrorToMail("getValoareComenzi: " + ex.ToString() + " params: " + codClient + " , " + dataLivrare + " , " + tipClient);
+            }
+            finally
+            {
+                DatabaseConnections.CloseConnections(oReader, cmd, connection);
+            }
+
+            return valoareComenzi;
+        }
+
+        private static string formatDataSap(string dataRaw)
+        {
+            string[] dataArray = dataRaw.Split('.');
+
+            return dataArray[2] + dataArray[1] + dataArray[0];
+        }
+
     }
 }

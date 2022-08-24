@@ -292,6 +292,15 @@ namespace WebService1
         }
 
 
+        public static bool isUlEquals(string ul1, string ul2)
+        {
+            string ulBrut1 = ul1.Substring(0, 2) + "X" + ul1.Substring(3, 1);
+
+            string ulBrut2 = ul2.Substring(0, 2) + "X" + ul2.Substring(3, 1);
+
+            return ulBrut1.Equals(ulBrut2);
+        }
+
         public static string getDepartExtra(string divizie)
         {
             string depExtra = null;

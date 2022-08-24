@@ -172,6 +172,12 @@ namespace WebService1
             return new OperatiiMacara().getCostMacara(unitLog, codAgent, codClient, codFurnizor, listArt);
         }
 
+        [WebMethod]
+        public string getCostMacaraComenzi(string codAgent, string codClient, string codFurnizor, string listComenzi)
+        {
+            return new OperatiiMacara().getCostMacaraComenzi(codAgent, codClient, codFurnizor, listComenzi);
+        }
+
 
         [WebMethod]
         public String salarizareAV(string codAgent, string departament, string filiala, string dataRap)
@@ -2980,6 +2986,12 @@ namespace WebService1
         }
 
         [WebMethod]
+        public double getValoareComenziNumerar(string codClient, string dataLivrare, string tipClient)
+        {
+            return new HelperClienti().getValoareComenziNumerar(codClient, dataLivrare, tipClient);
+        }
+
+        [WebMethod]
         public string getArticoleCant(string unitLog, string codArtPal)
         {
             return new ArticoleCant().getArticoleCant(unitLog, codArtPal);
@@ -3951,7 +3963,7 @@ namespace WebService1
                     {
                         string localFilGed = filiala.Substring(0, 2) + "2" + filiala.Substring(3, 1);  //cu 20
 
-                        if (Utils.isFilialaMica04(filiala, depart))
+                        if (Utils.isFilialaMicaDep04(connection,filiala, depart))
                         {
                             tipAprov = " and a.ul in ('" + filiala + "','" + localFilGed + "') and (a.accept1 = 'X' or a.accept2 = 'X' or a.ac_zc = 'X') and ora_accept1 = '000000' " +
                                   " and a.status_aprov in ('1','6','21')  and " +
@@ -3996,14 +4008,20 @@ namespace WebService1
                             tipAprov = " and decode(decode(a.accept1,'X',a.ora_accept1,'1'),'000000',1,0)=0 and ((a.accept2 = 'X' and ora_accept2 = '000000'  and a.status_aprov in ('1','6') " +
                                        " and a.aprob_cv_necesar=' ')  ";
 
-                            tipAprov += " or (a.tip_pers = 'CV' and a.aprob_cv_necesar like '%" + localDepart + "%' and " +
-                                        " a.status_aprov in ('1','4','6','21') and a.aprob_cv_realiz not like '%" + localDepart + "%' and " +
-                                        " a.cond_cv not like '%" + localDepart + "%' ))  ";
+                            if (localDepart.Equals("99"))
+                            {
+                                tipAprov += " ) ";
+                                condDV = " and v.pernr = '" + agCode + "' and substr(v.prctr,0,2) = substr(a.ul,0,2) and substr(a.ul,3,1) != 4 ";
 
+                            }
+                            else {
+                                tipAprov += " or (a.tip_pers = 'CV' and a.aprob_cv_necesar like '%" + localDepart + "%' and " +
+                                            " a.status_aprov in ('1','4','6','21') and a.aprob_cv_realiz not like '%" + localDepart + "%' and " +
+                                            " a.cond_cv not like '%" + localDepart + "%' ))  ";
 
-
-                            condDV = " and v.pernr = '" + agCode + "' and v.spart ='" + localDepart + "' and substr(v.prctr,0,2) = substr(a.ul,0,2) and substr(a.ul,3,1) != 4 and " +
-                                     " ( v.spart = substr(ag.divizie,0,2) or v.spart = a.depart or ag.divizie = '11' ) ";
+                                condDV = " and v.pernr = '" + agCode + "' and v.spart ='" + localDepart + "' and substr(v.prctr,0,2) = substr(a.ul,0,2) and substr(a.ul,3,1) != 4 and " +
+                                         " ( v.spart = substr(ag.divizie,0,2) or v.spart = a.depart or ag.divizie = '11' ) ";
+                            }
                         }
                     }
 
@@ -6528,7 +6546,7 @@ namespace WebService1
                 }
 
 
-                if (Utils.isFilialaMica04(filiala, depart) || depart.Equals("04"))
+                if (Utils.isFilialaMicaDep04(connection,filiala, depart) || depart.Equals("04"))
                 {
                     cmd.CommandText = " select distinct a.nume, a.cod from agenti a, sapprd.zpern_filiale b where (a.filiala=:fil or b.prctr=:fil " + filialaIP + ") and b.pernr(+) = a.cod and " +
                                       " substr(a.divizie,0,2) = substr(:div,0,2)  " + condTipAg + " and a.activ = 1 order by nume ";
@@ -6659,7 +6677,7 @@ namespace WebService1
 
 
                 
-                if (Utils.isFilialaMica04(filiala, depart) || depart.Equals("04"))
+                if (Utils.isFilialaMicaDep04(connection,filiala, depart) || depart.Equals("04"))
                 {
                     cmd.CommandText = " select distinct a.nume, a.cod from agenti a, sapprd.zpern_filiale b where (a.filiala=:fil or b.prctr=:fil " + filialaIP + " ) and b.pernr(+) = a.cod and " +
                                      "  substr(a.divizie,0,2) =substr(:div,0,2)  " + condTipAg + " and a.activ = 1 order by nume ";
@@ -6817,7 +6835,7 @@ namespace WebService1
                     }
                     else
                     {
-                        if (Utils.isFilialaMica04(filiala, depart) || depart.Equals("04"))
+                        if (Utils.isFilialaMicaDep04(connection,filiala, depart) || depart.Equals("04"))
                             condUser = " and substr(a.ul,0,2) = '" + filiala.Substring(0, 2) + "' and substr(ag.divizie,0,2) = '" + depart.Substring(0, 2) + "' " + condExtraUser;
                         else
                             condUser = " and substr(a.ul,0,2) = '" + filiala.Substring(0, 2) + "' and ag.divizie = '" + depart + "' " + condExtraUser;
@@ -6950,7 +6968,7 @@ namespace WebService1
                         string localFilGed = filiala.Substring(0, 2) + "2" + filiala.Substring(3, 1);  //cu 20
 
 
-                        if (Utils.isFilialaMica04(filiala, depart))
+                        if (Utils.isFilialaMicaDep04(connection,filiala, depart))
                         {
                             selCmd = " and (a.accept1 = 'X' or a.accept2 = 'X' or a.ac_zc = 'X') and ora_accept1 = '000000' and " +
                                      " (( substr(ag.divizie,0,2) = '" + depart.Substring(0, 2) + "'  and a.depart='11') or substr(a.depart,0,2) = '" + depart.Substring(0, 2) + "') and a.ul in ('" + filiala + "','" + localFilGed + "')";
@@ -7036,7 +7054,7 @@ namespace WebService1
                     else if (tipUser.Equals("SD"))
                     {
 
-                        if (Utils.isFilialaMica04(filiala, depart))
+                        if (Utils.isFilialaMicaDep04(connection, filiala, depart))
                             tipComanda = " and a.ul = '" + filiala + "' and substr(a.depart,0,2) = '" + depart.Substring(0, 2) + "' and a.status not in ('6') and a.status_aprov in ('10') ";
                         else
                             tipComanda = " and a.ul = '" + filiala + "' and a.depart = '" + depart + "' and a.status not in ('6') and a.status_aprov in ('10') ";
@@ -7387,7 +7405,7 @@ namespace WebService1
                                " decode(a.nrcmdsap,' ','-1',a.nrcmdsap) cmdsap, nvl(a.status_aprov,-1) status_aprov, a.fact_red,  a.ul, a.accept1, a.accept2, " +
                                " ' ' cl_tip, ag.nume, decode(a.pmnttrms,'',' ',a.pmnttrms) pmnttrms, a.datac, nvl(a.docin,-1) docin1, " +
                                " nvl(a.adr_noua,-1) adr_noua1, a.city ||', '|| a.adr_livrare adr_livrare1, ag.divizie, a.nume_client, a.depart, " +
-                               " a.aprob_cv_necesar, nvl(a.aprob_cv_realiz,' ') aprob_cv_realiz, nvl(ag.nrtel,'-1') telAgent, a.client_raft, a.ac_zc " +
+                               " a.aprob_cv_necesar, nvl(a.aprob_cv_realiz,' ') aprob_cv_realiz, nvl(ag.nrtel,'-1') telAgent, a.client_raft, a.ac_zc, a.lifnr " +
                                " from sapprd.zcomhead_tableta a, " +
                                " clienti b, agenti ag " + tabDV +
                                " where a.cod_client=b.cod and ag.cod = a.cod_agent and a.tip_pers in ('CV','CVS') " +
@@ -7405,7 +7423,7 @@ namespace WebService1
                     {
                         sqlString = " select x.id, x.nume1, to_char(to_date(x.datac,'yyyymmdd')), x.valoare, x.status, x.cod_client, x.cmdsap, x.status_aprov, " +
                                     " x.fact_red, x.ul, x.accept1, x.accept2, ' ' x_tip, x.nume, x.pmnttrms, x.datac, x.docin1, " +
-                                    " x.adr_noua1, x.adr_livrare1, x.divizie, x.nume_client, x.depart, x.aprob_cv_necesar, x.aprob_cv_realiz, x.telAgent,x.client_raft, x.ac_zc   from ( " + sqlString + " ) x where rownum<=200 ";
+                                    " x.adr_noua1, x.adr_livrare1, x.divizie, x.nume_client, x.depart, x.aprob_cv_necesar, x.aprob_cv_realiz, x.telAgent,x.client_raft, x.ac_zc, x.lifnr   from ( " + sqlString + " ) x where rownum<=200 ";
                     }
 
 
@@ -7414,6 +7432,8 @@ namespace WebService1
                     cmd.CommandText = sqlString;
                     cmd.Parameters.Clear();
                     oReader = cmd.ExecuteReader();
+
+                    isDL = " ";
 
                     if (oReader.HasRows)
                     {
@@ -7425,13 +7445,20 @@ namespace WebService1
                             strNumeClient = oReader.GetString(1);
 
 
+                            if (oReader.GetString(oReader.GetOrdinal("lifnr")).Length == 4)
+                                isDL = " (CLP)";
+                            else if (oReader.GetString(oReader.GetOrdinal("lifnr")).Length > 4 && !oReader.GetString(oReader.GetOrdinal("ac_zc")).Equals("X"))
+                                isDL = " (DL)";
+                            else
+                                isDL = " ";
+
                             if (oReader.GetString(20).Trim().Length > 2)
                                 strNumeClient = oReader.GetString(20);
 
 
                             comanda = new Comanda();
                             comanda.idComanda = oReader.GetInt32(0).ToString();
-                            comanda.numeClient = strNumeClient;
+                            comanda.numeClient = strNumeClient + isDL;
                             comanda.dataComanda = oReader.GetString(2);
                             comanda.sumaComanda = oReader.GetFloat(3).ToString();
 
@@ -7893,7 +7920,7 @@ namespace WebService1
 
                     string condDepart = " and a.depart = '" + depart + "'";
 
-                    if (Utils.isFilialaMica04(filiala, depart))
+                    if (Utils.isFilialaMicaDep04(filiala, depart))
                         condDepart = " and substr(a.depart,0,2) = '" + depart.Substring(0, 2) + "'";
 
                     tipComanda = " and a.ul = '" + filiala + "' " + condDepart;
@@ -10040,6 +10067,8 @@ namespace WebService1
                 if (dateLivrare.isComandaACZC)
                     cmdStatus = "1";
 
+         
+
                 unitLogAlt = comandaVanzare.filialaAlternativa;
                 codClient = comandaVanzare.codClient;
 
@@ -12129,7 +12158,6 @@ namespace WebService1
                 else
                 {
                     retVal = verificaArticoleMAV_Mathaus(comanda, alertSD, alertDV, cmdAngajament, tipUser, JSONArt, JSONComanda, JSONDateLivrare, localtipUserSap);
-
                 }
 
             }
@@ -12184,6 +12212,7 @@ namespace WebService1
 
             try
             {
+
 
                 DateLivrare dateLivrareGed, dateLivrareDistrib;
                 List<ArticolComanda> articoleGed, articoleDistrib;
@@ -12269,6 +12298,7 @@ namespace WebService1
                                 if (!articol.filialaSite.Equals(dateLivrareDistrib.unitLog) && !articol.filialaSite.Equals("BV90") && !ulStoc.Equals("BV90"))
                                     dateLivrareDistrib.filialaCLP = ulStoc;
 
+
                                 if (tipTranspCmd != null && !tipTranspCmd.Equals(String.Empty))
                                     dateLivrareDistrib.Transport = tipTranspCmd;
 
@@ -12276,6 +12306,7 @@ namespace WebService1
                                 articoleAgenti.Clear();
                                 totalComanda = 0;
                             }
+
 
 
                             if (comandaVanzare.nrCmdSap.Length < 4)
@@ -12351,7 +12382,7 @@ namespace WebService1
                             {
                                 dateLivrareDistrib.totalComanda = totalComanda.ToString();
 
-                                if (!articol.filialaSite.Equals(dateLivrareDistrib.unitLog) && !articol.filialaSite.Equals("BV90") && !ulStoc.Equals("BV90"))
+                                if (!articol.filialaSite.Equals(dateLivrareDistrib.unitLog) && !HelperComenzi.isUlEquals(articol.filialaSite, dateLivrareDistrib.unitLog) && !articol.filialaSite.Equals("BV90") && !ulStoc.Equals("BV90"))
                                     dateLivrareDistrib.filialaCLP = ulStoc;
 
                                 if (tipTranspCmd != null && !tipTranspCmd.Equals(String.Empty))
@@ -12392,7 +12423,7 @@ namespace WebService1
 
                         dateLivrareDistrib.totalComanda = totalComanda.ToString();
 
-                        if (ulStoc != null && !ulStoc.Equals(dateLivrareDistrib.unitLog) && !ulStoc.Equals("BV90"))
+                        if (ulStoc != null && !ulStoc.Equals(dateLivrareDistrib.unitLog) && !HelperComenzi.isUlEquals(ulStoc, dateLivrareDistrib.unitLog) && !ulStoc.Equals("BV90"))
                             dateLivrareDistrib.filialaCLP = ulStoc;
 
                         if (tipTranspCmd != null && !tipTranspCmd.Equals(String.Empty))
@@ -12422,7 +12453,7 @@ namespace WebService1
             }
             catch (Exception ex)
             {
-                sendErrorToMail(ex.ToString());
+                sendErrorToMail("verificaArticoleMav: " + ex.ToString() + " \n " + alertSD + " \n " + alertDV + " \n " + cmdAngajament + " \n " + tipUser + " \n " + JSONArt + " \n " + JSONComanda + " \n " + JSONDateLivrare + " \n " + tipUserSap);
             }
 
             return retVal;
@@ -12737,6 +12768,7 @@ namespace WebService1
 
                 if (dateLivrare.isComandaACZC)
                     cmdStatus = "1";
+
 
                 OracleCommand cmd = connection.CreateCommand();
 
@@ -13376,7 +13408,13 @@ namespace WebService1
                         paramCmd = "C";
                     }
 
+                    string calcPretTransp = " ";
 
+                    if (dateLivrare.codAgent.Contains("86265") || dateLivrare.codAgent.Contains("86406") || dateLivrare.codAgent.Contains("56029") || dateLivrare.codAgent.Contains("56305") || dateLivrare.codAgent.Contains("74421") || dateLivrare.codAgent.Contains("74637") || dateLivrare.codAgent.Contains("56368") || dateLivrare.codAgent.Contains("56335") || dateLivrare.codAgent.Contains("56308") || dateLivrare.codAgent.Contains("56292"))
+                    {
+                        if (comandaVanzare.canalDistrib.Equals("10"))
+                            calcPretTransp = "X";
+                    }
 
                     webService = new ZTBL_WEBSERVICE();
 
@@ -13389,8 +13427,8 @@ namespace WebService1
                     inParam.FaraTransp = calcTransport ? " " : "X";
                     inParam.GvEvent = paramCmd;  //C - creaza comanda, S - simulare pret transport
                     inParam.Canal = isComandaWood(uLog) ? "40" : comandaVanzare.canalDistrib;
-
-                  
+                    inParam.Vers = calcPretTransp;
+                                      
                     SAPWebServices.ZcreazaComandaResponse outParam = webService.ZcreazaComanda(inParam);
 
                     if ((uLog.Substring(2, 1).Equals("2") && comandaVanzare.canalDistrib.Equals("20") && (transp.Equals("TRAP") || transp.Equals("TERT")) && refSAP.Equals("-1")) || (isComandaWood(uLog) && refSAP.Equals("-1") && transp.Equals("TRAP")))

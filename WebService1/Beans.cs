@@ -318,6 +318,8 @@ namespace WebService1
         public bool isClientBlocat = false;
         public double limitaCredit = 0;
         public string nrCmdClp;
+        public double marjaBruta = 0;
+        public double procMarjaBruta = 0;
 
     }
 

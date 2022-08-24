@@ -930,7 +930,7 @@ namespace WebService1
         private void setDetaliiArticol(ArticolMathaus articol)
         {
 
-            string serviceUrl = "https://wse1-sap-prod.arabesque.ro/solr/master_erp_Product_default/select?q=code_string:" + articol.cod;
+            string serviceUrl = "https://wse1-sap-hybris-prod.arabesque.ro/solr/master_erp_Product_default/select?q=code_string:" + articol.cod;
 
             System.Net.ServicePointManager.Expect100Continue = false;
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
@@ -1210,6 +1210,8 @@ namespace WebService1
 
                 foreach (DateArticolMathaus dateArticol in articole)
                 {
+                    if (!dateArticol.tip2.Equals("S"))
+                        continue;
 
                     DateArticolMathaus articol = new DateArticolMathaus();
                     articol.productCode = "0000000000" + dateArticol.productCode;
@@ -1231,7 +1233,8 @@ namespace WebService1
                 foreach (DateArticolMathaus dateArticol in articole)
                 {
 
-                    dateArticol.productCode = "0000000000" + dateArticol.productCode;
+                    if (!dateArticol.productCode.StartsWith("0000000000"))
+                        dateArticol.productCode = "0000000000" + dateArticol.productCode;
 
                     artFound = false;
                     foreach (DateArticolMathaus dateArticolRez in comandaRezultat.deliveryEntryDataList)

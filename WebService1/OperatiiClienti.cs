@@ -150,11 +150,7 @@ namespace WebService1
                                 condClient += condExtraClient;
                     }
 
-                  
-
-
                 }
-
 
                 cmd.CommandText = " select x.nume, x.cod, x.tip_pers from (select c.nume, c.cod, c.tip_pers  from clienti c " +
                                   " where upper(c.nume) like upper('" + numeClient.Replace("'", "") + "%')  " + condClient +

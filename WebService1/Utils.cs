@@ -188,13 +188,102 @@ namespace WebService1
             if (filiala == null)
                 return false;
                                                 
-            if (departament.StartsWith("04") && (filiala.Equals("HD10") || filiala.Equals("VN10") || filiala.Equals("BU12") || filiala.Equals("BZ10") || filiala.Equals("MS10") || filiala.Equals("BC10") || filiala.Equals("CT10") || filiala.Equals("TM10") || filiala.Equals("CJ10") || filiala.Equals("SB10") || filiala.Equals("AG10") || filiala.Equals("NT10") || filiala.Equals("BV10") || filiala.Equals("DJ10") || filiala.Equals("BU11") || filiala.Equals("MM10") || filiala.Equals("BH10") || filiala.Equals("PH10")))
+            if (departament.StartsWith("04") && (filiala.Equals("HD10") || filiala.Equals("VN10") || filiala.Equals("BU12") || filiala.Equals("BZ10") || filiala.Equals("MS10") || filiala.Equals("BC10") || filiala.Equals("CT10") || filiala.Equals("TM10") || filiala.Equals("CJ10") || filiala.Equals("SB10") || filiala.Equals("AG10") || filiala.Equals("NT10") || filiala.Equals("BV10") || filiala.Equals("DJ10") || filiala.Equals("BU11") || filiala.Equals("MM10") || filiala.Equals("BH10") || filiala.Equals("PH10") || filiala.Equals("GL10")))
                 return true;
 
             return false;
 
 
         }
+
+        public static bool isFilialaMicaDep04(OracleConnection connection, string filiala, string depart)
+        {
+
+            bool isFilialaMica = false;
+
+            if (filiala == null || !depart.StartsWith("04"))
+                return false;
+            else
+            {
+                OracleCommand cmd = new OracleCommand();
+                OracleDataReader oReader = null;
+
+                cmd = connection.CreateCommand();
+
+                cmd.CommandText = " select count(distinct cod) from agenti where activ = 1 and divizie like '04%' and tip = 'SD' and filiala = :filiala ";
+
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add(":filiala", OracleType.VarChar, 12).Direction = ParameterDirection.Input;
+                cmd.Parameters[0].Value = filiala;
+
+                oReader = cmd.ExecuteReader();
+
+                if (oReader.HasRows)
+                {
+                    oReader.Read();
+
+                    if (oReader.GetInt32(0) == 1)
+                        isFilialaMica = true;
+                    else
+                        isFilialaMica = false;
+
+                }
+                else
+                    isFilialaMica = false;
+
+                DatabaseConnections.CloseConnections(oReader, cmd);
+
+                return isFilialaMica;
+            }
+        }
+
+        public static bool isFilialaMicaDep04(string filiala, string depart)
+        {
+
+            bool isFilialaMica = false;
+
+            if (filiala == null || !depart.StartsWith("04"))
+                return false;
+            else
+            {
+                OracleConnection connection = new OracleConnection();
+                OracleCommand cmd = new OracleCommand();
+                OracleDataReader oReader = null;
+
+                string connectionString = DatabaseConnections.ConnectToProdEnvironment();
+
+                connection.ConnectionString = connectionString;
+                connection.Open();
+
+                cmd = connection.CreateCommand();
+
+                cmd.CommandText = " select count(distinct cod) from agenti where activ = 1 and divizie like '04%' and  tip = 'SD' and filiala = :filiala ";
+
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add(":filiala", OracleType.VarChar, 12).Direction = ParameterDirection.Input;
+                cmd.Parameters[0].Value = filiala;
+
+                oReader = cmd.ExecuteReader();
+
+                if (oReader.HasRows)
+                {
+                    oReader.Read();
+
+                    if (oReader.GetInt32(0) == 1)
+                        isFilialaMica = true;
+                    else
+                        isFilialaMica = false;
+
+                }
+                else
+                    isFilialaMica = false;
+
+                DatabaseConnections.CloseConnections(oReader, cmd, connection);
+
+                return isFilialaMica;
+            }
+        }
+
 
 
         public static string getTipConsilier(OracleConnection connection, string codConsilier)
