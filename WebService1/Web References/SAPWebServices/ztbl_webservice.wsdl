@@ -294,6 +294,16 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="OP__ZstareCurentaRetur">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <saptrhnw05:required xmlns:saptrhnw05="http://www.sap.com/NW05/soap/features/transaction/">no</saptrhnw05:required>
+        <sapcomhnd:enableCommit xmlns:sapcomhnd="http://www.sap.com/NW05/soap/features/commit/">false</sapcomhnd:enableCommit>
+        <sapblock:enableBlocking xmlns:sapblock="http://www.sap.com/NW05/soap/features/blocking/">true</sapblock:enableBlocking>
+        <saprmnw05:enableWSRM xmlns:saprmnw05="http://www.sap.com/NW05/soap/features/wsrm/">false</saprmnw05:enableWSRM>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsp:Policy wsu:Id="OP__ZstocReturAvansat">
     <wsp:ExactlyOne>
       <wsp:All>
@@ -819,6 +829,7 @@
           <xsd:element name="Vstel" type="n0:char4" />
           <xsd:element name="ValTr" type="n0:curr15.2" />
           <xsd:element name="Matnr" type="n0:char18" />
+          <xsd:element name="Spart" type="n0:char2" />
         </xsd:sequence>
       </xsd:complexType>
       <xsd:complexType name="ZsitemsComanda">
@@ -3565,6 +3576,20 @@
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
+      <xsd:element name="ZstareCurentaRetur">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="IpVbeln" type="n0:char10" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ZstareCurentaReturResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="EtStatus" type="tns:ZttStareCurenta" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
       <xsd:element name="ZstocReturAvansat">
         <xsd:complexType>
           <xsd:sequence>
@@ -3781,6 +3806,12 @@
   <wsdl:message name="ZstareCurentaResponse">
     <wsdl:part name="parameter" element="tns:ZstareCurentaResponse" />
   </wsdl:message>
+  <wsdl:message name="ZstareCurentaRetur">
+    <wsdl:part name="parameters" element="tns:ZstareCurentaRetur" />
+  </wsdl:message>
+  <wsdl:message name="ZstareCurentaReturResponse">
+    <wsdl:part name="parameter" element="tns:ZstareCurentaReturResponse" />
+  </wsdl:message>
   <wsdl:message name="ZstocReturAvansat">
     <wsdl:part name="parameters" element="tns:ZstocReturAvansat" />
   </wsdl:message>
@@ -3931,6 +3962,13 @@
       </wsp:Policy>
       <wsdl:input message="tns:ZstareCurenta" />
       <wsdl:output message="tns:ZstareCurentaResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="ZstareCurentaRetur">
+      <wsp:Policy>
+        <wsp:PolicyReference URI="#OP__ZstareCurentaRetur" />
+      </wsp:Policy>
+      <wsdl:input message="tns:ZstareCurentaRetur" />
+      <wsdl:output message="tns:ZstareCurentaReturResponse" />
     </wsdl:operation>
     <wsdl:operation name="ZstocReturAvansat">
       <wsp:Policy>
@@ -4115,6 +4153,15 @@
     </wsdl:operation>
     <wsdl:operation name="ZstareCurenta">
       <soap:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZTBL_WEBSERVICE:ZstareCurentaRequest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZstareCurentaRetur">
+      <soap:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZTBL_WEBSERVICE:ZstareCurentaReturRequest" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -4319,6 +4366,15 @@
     </wsdl:operation>
     <wsdl:operation name="ZstareCurenta">
       <wsoap12:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZTBL_WEBSERVICE:ZstareCurentaRequest" style="document" />
+      <wsdl:input>
+        <wsoap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsoap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZstareCurentaRetur">
+      <wsoap12:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZTBL_WEBSERVICE:ZstareCurentaReturRequest" style="document" />
       <wsdl:input>
         <wsoap12:body use="literal" />
       </wsdl:input>

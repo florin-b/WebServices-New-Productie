@@ -224,8 +224,8 @@ namespace WebService1
                 else if (tipClient.Equals("PJG"))
                     condClient = " regexp_replace(stceg, 'RO', '') = :codClient ";
 
-                cmd.CommandText = " select nvl(sum(valoare),0) from sapprd.zcomhead_tableta where status = 2 and status_aprov in (0, 2, 15) and " +
-                                    condClient + " and tip_plata in ('E','E1') and ketdat = :dataLivrare  ";
+                cmd.CommandText = " select nvl(sum(valoare),0) from sapprd.zcomhead_tableta where status = '2' and status_aprov in ('0', '2', '15') and " +
+                                    condClient + " and tip_plata in ('E','E1') and ketdat = :dataLivrare ";
 
 
                 cmd.CommandType = CommandType.Text;

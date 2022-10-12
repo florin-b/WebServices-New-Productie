@@ -1099,7 +1099,7 @@ namespace WebService1
                 pretArticolGed.valTrap = outParam.ValTrap.ToString();
                 pretArticolGed.errMsg = outParam.VMess;
                 pretArticolGed.pretFaraTva = ((outParam.GvNetwrFtva / outParam.GvCant) * outParam.Multiplu).ToString();
-
+                
 
                 //---verificare cmp
 

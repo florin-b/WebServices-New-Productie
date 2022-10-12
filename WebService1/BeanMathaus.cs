@@ -43,12 +43,26 @@ namespace WebService1
         public string depart;
     }
 
+    public class DateTransportMathaus
+    {
+        public List<CostTransportMathaus> listCostTransport;
+        public List<DepozitArticolTransport> listDepozite;
+    }
+
     public class CostTransportMathaus
     {
         public string filiala;
         public string tipTransp;
         public string valTransp;
         public string codArtTransp;
+        public string depart;
+    }
+
+    public class DepozitArticolTransport
+    {
+        public string codArticol;
+        public string filiala;
+        public string depozit;
     }
 
     public class ComandaMathaus
@@ -71,6 +85,7 @@ namespace WebService1
         public string unit;
         public double valPoz;
         public string tip2;
+        public string depozit;
     }
 
     public class StockMathaus

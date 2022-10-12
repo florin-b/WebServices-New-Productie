@@ -2949,6 +2949,16 @@ namespace WebService1
             return new OperatiiMathaus().getArticoleCategorie(codCategorie, filiala, depart, pagina, tipArticol);
         }
 
+
+        [WebMethod]
+        public int getNrArticoleCategorieMathaus(string codCategorie, string filiala, string depart)
+        {
+            return new OperatiiMathaus().getNrArticoleCategorie( codCategorie,  filiala,  depart);
+        }
+
+        
+
+
         [WebMethod]
         public string getCategoriiMathaus()
         {
@@ -12276,11 +12286,6 @@ namespace WebService1
                     dateLivrareDistrib.totalComanda = totalComandaDistrib.ToString();
                     List<ArticolComanda> sortedArticoleDistrib = articoleDistrib.OrderBy(order => order.depart).ThenBy(order => order.filialaSite).ToList();
 
-                    if (tipUser.Equals("KA"))
-                    {
-                        retVal = saveKANewCmd(comanda, alertSD, alertDV, cmdAngajament, tipUser, serializer.Serialize(sortedArticoleDistrib), JSONComanda, serializer.Serialize(dateLivrareDistrib), true);
-                    }
-                    else
                     {
                         string departArt = sortedArticoleDistrib[0].depart;
                         string ulStoc = sortedArticoleDistrib[0].filialaSite;
@@ -12344,6 +12349,10 @@ namespace WebService1
                 if (articoleGed.Count > 0)
                 {
 
+                    bool paramAlertDVGed = alertDV;
+                    if ((tipUser.Equals("AV") || tipUser.Equals("SD") || tipUser.Equals("KA")) && comandaVanzare.canalDistrib.Equals("10"))
+                        paramAlertDVGed = false;
+
                     if (!dateLivrareGed.unitLog.Contains("40"))
                         dateLivrareGed.unitLog = dateLivrareGed.unitLog.Substring(0, 2) + "2" + dateLivrareGed.unitLog.Substring(3, 1);
 
@@ -12361,11 +12370,6 @@ namespace WebService1
                     else
                         alertSDGed = getTipAlertSDGed(articoleGed);
 
-                    if (tipUser.Equals("KA"))
-                    {
-                        retVal = saveKANewCmd(comanda, alertSDGed, alertDVGed, cmdAngajament, tipUser, serializer.Serialize(articoleGed), serializer.Serialize(comandaVanzare), serializer.Serialize(dateLivrareGed), calcTransport);
-                    }
-                    else
                     {
 
                         string ulStoc = sortedArticoleDistrib[0].filialaSite;
@@ -12388,7 +12392,7 @@ namespace WebService1
                                 if (tipTranspCmd != null && !tipTranspCmd.Equals(String.Empty))
                                     dateLivrareDistrib.Transport = tipTranspCmd;
 
-                                retVal = saveAVNewCmd(comanda, alertSD, alertDV, cmdAngajament, tipUser, serializer.Serialize(articoleAgenti), serializer.Serialize(comandaVanzare), serializer.Serialize(dateLivrareDistrib), calcTransport, tipUserSap);
+                                retVal = saveAVNewCmd(comanda, alertSD, paramAlertDVGed, cmdAngajament, tipUser, serializer.Serialize(articoleAgenti), serializer.Serialize(comandaVanzare), serializer.Serialize(dateLivrareDistrib), calcTransport, tipUserSap);
 
                                 if (retVal.Contains("#"))
                                 {
@@ -12429,7 +12433,7 @@ namespace WebService1
                         if (tipTranspCmd != null && !tipTranspCmd.Equals(String.Empty))
                             dateLivrareDistrib.Transport = tipTranspCmd;
 
-                        retVal = saveAVNewCmd(comanda, alertSD, alertDV, cmdAngajament, tipUser, serializer.Serialize(articoleAgenti), serializer.Serialize(comandaVanzare), serializer.Serialize(dateLivrareDistrib), calcTransport, tipUserSap);
+                        retVal = saveAVNewCmd(comanda, alertSD, paramAlertDVGed, cmdAngajament, tipUser, serializer.Serialize(articoleAgenti), serializer.Serialize(comandaVanzare), serializer.Serialize(dateLivrareDistrib), calcTransport, tipUserSap);
 
                         if (retVal.Contains("#"))
                         {
@@ -13171,7 +13175,7 @@ namespace WebService1
                 cmd.Parameters[45].Value = dateLivrare.isAdresaObiectiv ? "X" : " ";
 
                 cmd.Parameters.Add(":parent_id", OracleType.Number, 11).Direction = ParameterDirection.Input;
-                cmd.Parameters[46].Value = -1;
+                cmd.Parameters[46].Value = comandaVanzare.parrentId != null ? long.Parse(comandaVanzare.parrentId) : -1;
 
 
                 cmd.Parameters.Add(":client_raft", OracleType.VarChar, 3).Direction = ParameterDirection.Input;
@@ -13410,11 +13414,8 @@ namespace WebService1
 
                     string calcPretTransp = " ";
 
-                    if (dateLivrare.codAgent.Contains("86265") || dateLivrare.codAgent.Contains("86406") || dateLivrare.codAgent.Contains("56029") || dateLivrare.codAgent.Contains("56305") || dateLivrare.codAgent.Contains("74421") || dateLivrare.codAgent.Contains("74637") || dateLivrare.codAgent.Contains("56368") || dateLivrare.codAgent.Contains("56335") || dateLivrare.codAgent.Contains("56308") || dateLivrare.codAgent.Contains("56292"))
-                    {
-                        if (comandaVanzare.canalDistrib.Equals("10"))
-                            calcPretTransp = "X";
-                    }
+                    if (comandaVanzare.canalDistrib.Equals("10"))
+                        calcPretTransp = "X";
 
                     webService = new ZTBL_WEBSERVICE();
 

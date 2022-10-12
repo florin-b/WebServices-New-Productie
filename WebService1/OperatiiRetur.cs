@@ -855,6 +855,7 @@ namespace WebService1
             try
             {
 
+               
                 if (tipTransport.Equals("TRAP") || tipTransport.Equals("TCLI"))
                 {
                     cmd.CommandText = " select k.daten from sapprd.vbfa f, sapprd.vttp p, sapprd.vttk k " +
@@ -863,18 +864,13 @@ namespace WebService1
 
 
                 }
-                else if (tipTransport.Equals("TERT"))
+                else if (tipTransport.Equals("TERT") || tipTransport.Equals("TFRN"))
                 {
                     cmd.CommandText = " select to_char(to_date(s.eventdate,'yyyy-mm-dd HH24:mi:ss'),'yyyymmdd') " +
                                       " from sapprd.vbfa f, sapprd.ZPOSTIS_EVENTS s where f.mandt = '900' " +
                                       " and f.vbeln = :nrDoc and f.vbtyp_v = 'C' and f.vbtyp_n = 'M' " +
                                       " and f.vbelv = s.vbeln and s.defaultclientid = 5 and rownum = 1 ";
                 }
-                else {
-                    cmd.Dispose();
-                    return dataLivrare;
-                }
-
 
 
                 cmd.CommandType = CommandType.Text;

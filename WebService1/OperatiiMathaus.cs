@@ -96,7 +96,7 @@ namespace WebService1
         }
 
 
-        private int getNrArticoleCategorie(string codCategorie, string filiala, string depart)
+        public int getNrArticoleCategorie(string codCategorie, string filiala, string depart)
         {
 
 
@@ -106,6 +106,11 @@ namespace WebService1
             OracleDataReader oReader = null;
 
             string connectionString = DatabaseConnections.ConnectToProdEnvironment();
+
+            string condDepart = " and (substr(ar.grup_vz, 0, 2) in " + HelperComenzi.getDepartExtra(depart) + " or ar.grup_vz = '11') ";
+
+            if (depart != null && (depart.Equals("00") || depart.Equals("11")))
+                condDepart = "";
 
             connection.ConnectionString = connectionString;
             connection.Open();
@@ -118,7 +123,7 @@ namespace WebService1
                                   " from sapprd.zpath_hybris s, sapprd.marc c, websap.articole ar, sapprd.mvke e " +
                                   " where (s.nivel_0 = :codCateg or s.nivel_1 = :codCateg or s.nivel_2 = :codCateg or " +
                                   " s.nivel_3 = :codCateg or s.nivel_4 = :codCateg or s.nivel_5 = :codCateg or s.nivel_6 = :codCateg) " +
-                                  " and (substr(ar.grup_vz, 0, 2) = :depart or ar.grup_vz = '11') " +
+                                  condDepart +
                                   " and ar.cod = s.matnr and s.mandt = c.mandt and s.matnr = c.matnr " +
                                   " and e.mandt = '900' and e.matnr = s.matnr and e.vtweg = '20' ";
 
@@ -128,8 +133,7 @@ namespace WebService1
                 cmd.Parameters.Add(":codCateg", OracleType.VarChar, 60).Direction = ParameterDirection.Input;
                 cmd.Parameters[0].Value = codCategorie;
 
-                cmd.Parameters.Add(":depart", OracleType.VarChar, 12).Direction = ParameterDirection.Input;
-                cmd.Parameters[1].Value = depart;
+ 
 
                 oReader = cmd.ExecuteReader();
 
@@ -145,7 +149,7 @@ namespace WebService1
             }
             catch (Exception ex)
             {
-                ErrorHandling.sendErrorToMail(ex.ToString());
+                ErrorHandling.sendErrorToMail(ex.ToString() + " , " +  codCategorie + " , " +  filiala + " , " + depart);
             }
             finally
             {
@@ -157,9 +161,6 @@ namespace WebService1
 
         public RezultatArtMathaus getArticoleCategorie(string codCategorie, string filiala, string depart, string pagina)
         {
-
-
-
 
 
             RezultatArtMathaus rezultat = new RezultatArtMathaus();
@@ -175,6 +176,11 @@ namespace WebService1
 
             string connectionString = DatabaseConnections.ConnectToProdEnvironment();
 
+            string condDepart = " and (substr(ar.grup_vz, 0, 2) in " + HelperComenzi.getDepartExtra(depart) + " or ar.grup_vz = '11') ";
+
+            if (depart != null && (depart.Equals("00") || depart.Equals("11")))
+                condDepart = "";
+
             connection.ConnectionString = connectionString;
             connection.Open();
 
@@ -188,7 +194,7 @@ namespace WebService1
                                   " from sapprd.zpath_hybris s, sapprd.marc c, websap.articole ar, sapprd.mvke e " +
                                   " where (s.nivel_0 = :codCateg or s.nivel_1 = :codCateg or s.nivel_2 = :codCateg or " +
                                   " s.nivel_3 = :codCateg or s.nivel_4 = :codCateg or s.nivel_5 = :codCateg or s.nivel_6 = :codCateg) " +
-                                  " and (substr(ar.grup_vz, 0, 2) in " + HelperComenzi.getDepartExtra(depart) + " or ar.grup_vz = '11') " +
+                                  condDepart +
                                   " and ar.cod = s.matnr and s.mandt = c.mandt and s.matnr = c.matnr " +
                                   " and e.mandt = '900' and e.matnr = s.matnr and e.vtweg = '20' " +
                                   " order by s.matnr OFFSET :paginaCrt ROWS FETCH NEXT 10 ROWS ONLY ";
@@ -395,7 +401,7 @@ namespace WebService1
 
                 cmd.CommandText = " select count(distinct c.matnr) from sapprd.marc c, sapprd.zstoc_job b, websap.articole a, websap.sintetice g " +
                                   " where c.mandt = '900' and c.werks = :filiala and c.dismm = 'ND' and b.mandt = c.mandt and b.matnr = c.matnr " +
-                                  " and b.werks = c.werks and b.stocne > 0 and not exists " +
+                                  " and (b.werks = c.werks or (a.spart in ('02', '05') and b.werks = 'BV90')) and b.stocne > 0 and not exists " +
                                   " (select * from sapprd.zpath_hybris s where s.mandt = '900' and s.matnr = c.matnr) and c.matnr = a.cod " +
                                   " and a.sintetic = g.cod and (substr(a.grup_vz,0,2) =:depart or a.grup_vz = '11' ) order by c.matnr ";
 
@@ -459,7 +465,7 @@ namespace WebService1
                 cmd.CommandText = " select * from (" +
                                   " select distinct c.matnr, a.nume, row_number() over (ORDER BY c.matnr ASC) line_number from sapprd.marc c, sapprd.zstoc_job b, websap.articole a, websap.sintetice g " +
                                   " where c.mandt = '900' and c.werks = :filiala and c.dismm = 'ND' and b.mandt = c.mandt and b.matnr = c.matnr " +
-                                  " and b.werks = c.werks and b.stocne > 0 and not exists " +
+                                  " and (b.werks = c.werks or (a.spart in ('02', '05') and b.werks = 'BV90')) and b.stocne > 0 and not exists " +
                                   " (select * from sapprd.zpath_hybris s where s.mandt = '900' and s.matnr = c.matnr) and c.matnr = a.cod " +
                                   " and a.sintetic = g.cod and (substr(a.grup_vz,0,2) =:depart or a.grup_vz = '11' ) order by c.matnr ) " +
                                   " where line_number between :pageMin and :pageMax order by line_number ";
@@ -716,14 +722,19 @@ namespace WebService1
             connection.ConnectionString = connectionString;
             connection.Open();
 
+            string condDepart = " (substr(ar.grup_vz,0,2) in " + HelperComenzi.getDepartExtra(depart) + " or ar.grup_vz = '11' ) and ";
+
+            if (depart.Equals("00"))
+                condDepart = "";
+
             OracleCommand cmd = connection.CreateCommand();
             try
             {
                 cmd.CommandText = " select distinct s.matnr, ar.nume, c.dismm, " +
                                   " (select e.versg from sapprd.mvke e where e.mandt = '900' and e.matnr = s.matnr and e.vtweg = '20') par_s " +
                                   " from sapprd.zpath_hybris s, sapprd.marc c, articole ar " +
-                                  " where (substr(ar.grup_vz,0,2) in " + HelperComenzi.getDepartExtra(depart) + " or ar.grup_vz = '11' ) " +
-                                  " and ar.cod = s.matnr and s.mandt = c.mandt and s.matnr = c.matnr and c.werks = :filiala " + cautare + " order by s.matnr  " +
+                                  " where " + condDepart +
+                                  " ar.cod = s.matnr and s.mandt = c.mandt and s.matnr = c.matnr and c.werks = :filiala " + cautare + " order by s.matnr  " +
                                   " OFFSET :paginaCrt ROWS FETCH NEXT 10 ROWS ONLY ";
 
 
@@ -1015,7 +1026,7 @@ namespace WebService1
             try
             {
 
-                cmd.CommandText = " select distinct a.cod, a.sintetic, b.cod_nivel1, a.umvanz10, a.umvanz, nvl(a.tip_mat, ' '),  b.cod nume_sint, " +
+                cmd.CommandText = " select distinct a.cod, a.sintetic, b.cod_nivel1, a.um, a.umvanz, nvl(a.tip_mat, ' '),  b.cod nume_sint, " +
                                   " decode(a.grup_vz, ' ', '-1', a.grup_vz), decode(trim(a.dep_aprobare), '', '00', a.dep_aprobare)  dep_aprobare, " +
                                   " (select nvl((select 1 from sapprd.mara m where m.mandt = '900' and m.matnr = a.cod and m.categ_mat in ('PA','AM')),-1) " +
                                   " palet from dual) palet  , nvl ((select sum(stocne) from sapprd.zstoc_job where matnr=a.cod and werks=:filiala2),-1) stoc , categ_mat, " +
@@ -1054,7 +1065,7 @@ namespace WebService1
                                 articol.sintetic = oReader.GetString(1);
                                 articol.nivel1 = oReader.GetString(2);
                                 articol.umVanz10 = oReader.GetString(3);
-                                articol.umVanz = oReader.GetString(7).Substring(0, 2).Equals("11") ? oReader.GetString(4) : oReader.GetString(3);
+                                articol.umVanz = oReader.GetString(3);
                                 articol.tipAB = oReader.GetString(5);
                                 articol.depart = oReader.GetString(7);
                                 articol.departAprob = oReader.GetString(8);
@@ -1189,8 +1200,6 @@ namespace WebService1
         public string getLivrariComanda(string antetComanda, string strComanda)
         {
 
-            ErrorHandling.sendErrorToMail("getLivrariComanda: " + antetComanda + " \n\n " + strComanda);
-
             JavaScriptSerializer serializer = new JavaScriptSerializer();
             LivrareMathaus livrareMathaus = new LivrareMathaus();
 
@@ -1215,7 +1224,7 @@ namespace WebService1
 
                     DateArticolMathaus articol = new DateArticolMathaus();
                     articol.productCode = "0000000000" + dateArticol.productCode;
-                    articol.quantity = dateArticol.quantity;
+                    articol.quantity = Math.Ceiling(dateArticol.quantity);
                     articol.unit = dateArticol.unit;
                     deliveryEntryDataList.Add(articol);
 
@@ -1223,9 +1232,7 @@ namespace WebService1
 
                 comanda.deliveryEntryDataList = deliveryEntryDataList;
 
-
                 string strComandaRezultat = callDeliveryService(serializer.Serialize(comanda));
-
 
                 ComandaMathaus comandaRezultat = serializer.Deserialize<ComandaMathaus>(strComandaRezultat);
 
@@ -1253,20 +1260,33 @@ namespace WebService1
 
                 }
 
-                List<CostTransportMathaus> listCostTransport = null;
+                DateTransportMathaus dateTransport = null;
 
                 if (antetCmdMathaus != null)
-                    listCostTransport = getTransportService(antetCmdMathaus, comandaMathaus);
+                    dateTransport = getTransportService(antetCmdMathaus, comandaMathaus);
+
+                foreach (DateArticolMathaus articolMathaus in comandaMathaus.deliveryEntryDataList)
+                {
+                    foreach (DepozitArticolTransport depozitArticol in dateTransport.listDepozite)
+
+                    {
+                        if (articolMathaus.productCode.Equals(depozitArticol.codArticol) && articolMathaus.deliveryWarehouse.Equals(depozitArticol.filiala))
+                        {
+                            articolMathaus.depozit = depozitArticol.depozit;
+                            break;
+                        }
+                    }
+                }
 
 
                 livrareMathaus.comandaMathaus = comandaMathaus;
-                livrareMathaus.costTransport = listCostTransport;
+                livrareMathaus.costTransport = dateTransport.listCostTransport;
 
 
             }
             catch (Exception ex)
             {
-                ErrorHandling.sendErrorToMail("getLivrariComanda: " + ex.ToString());
+                ErrorHandling.sendErrorToMail("getLivrariComanda: " + ex.ToString() + " , " + antetComanda + " \n\n " + strComanda);
             }
 
             return serializer.Serialize(livrareMathaus);
@@ -1362,8 +1382,6 @@ namespace WebService1
         private string callStockService(string jsonData)
         {
 
-            ErrorHandling.sendErrorToMail("callStockService: " + jsonData);
-
             System.Net.ServicePointManager.Expect100Continue = false;
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
@@ -1394,11 +1412,11 @@ namespace WebService1
         }
 
 
-        private List<CostTransportMathaus> getTransportService(AntetCmdMathaus antetCmd, ComandaMathaus comandaMathaus)
+        private DateTransportMathaus getTransportService(AntetCmdMathaus antetCmd, ComandaMathaus comandaMathaus)
         {
+            DateTransportMathaus dateTransport = new DateTransportMathaus();
             List<CostTransportMathaus> listCostTransp = new List<CostTransportMathaus>();
-
-           
+            List<DepozitArticolTransport> listArticoleDepoz = new List<DepozitArticolTransport>();
 
             try
             {
@@ -1426,7 +1444,7 @@ namespace WebService1
                     items[ii].Matnr = dateArticol.productCode;
                     items[ii].Kwmeng = Decimal.Parse(dateArticol.quantity.ToString());
                     items[ii].Vrkme = dateArticol.unit;
-                    items[ii].ValPoz = Decimal.Parse(String.Format("{0:0.00}",dateArticol.valPoz));
+                    items[ii].ValPoz = Decimal.Parse(String.Format("{0:0.00}", dateArticol.valPoz));
                     items[ii].Werks = dateArticol.deliveryWarehouse;
                     ii++;
                 }
@@ -1471,6 +1489,11 @@ namespace WebService1
 
                     }
 
+                    DepozitArticolTransport depozitArticol = new DepozitArticolTransport();
+                    depozitArticol.codArticol = itemCmd.Matnr;
+                    depozitArticol.filiala = itemCmd.Werks;
+                    depozitArticol.depozit = itemCmd.Lgort;
+                    listArticoleDepoz.Add(depozitArticol);
 
                 }
 
@@ -1485,6 +1508,7 @@ namespace WebService1
                         {
                             costTransp.valTransp = itemCost.ValTr.ToString();
                             costTransp.codArtTransp = itemCost.Matnr;
+                            costTransp.depart = itemCost.Spart;
                             break;
                         }
                     }
@@ -1497,11 +1521,10 @@ namespace WebService1
                 ErrorHandling.sendErrorToMail("getTransportService: " + ex.ToString());
             }
 
+            dateTransport.listCostTransport = listCostTransp;
+            dateTransport.listDepozite = listArticoleDepoz;
 
-    
-
-
-            return listCostTransp;
+            return dateTransport;
 
         }
 

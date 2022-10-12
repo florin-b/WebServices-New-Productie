@@ -331,6 +331,9 @@
     <Content Include="Web References\SAPWebServices\ZstocReturAvansatResponse.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
+    <Content Include="Web References\SAPWebServices\ZstareCurentaReturResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
     <None Include="Web References\SAPWebServices\ztbl_webservice.wsdl" />
     <Content Include="Web References\SapWsCabluri05\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>

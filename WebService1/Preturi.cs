@@ -45,6 +45,8 @@ namespace WebService1
 
             try
             {
+                if (depoz != null && (depoz.Equals("040V1") || depoz.Equals("041V1")))
+                    depoz = "04V1";
 
                 webService = new ZTBL_WEBSERVICE();
                 SAPWebServices.ZgetPrice inParam = new SAPWebServices.ZgetPrice();
