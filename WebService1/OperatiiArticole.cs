@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Script.Serialization;
 using System.Data.OracleClient;
 using System.Data;
+using WebService1.General;
+using System.Globalization;
 
 namespace WebService1
 {
@@ -1524,7 +1526,7 @@ namespace WebService1
                 }
                 else
                 {
-                    string[] str = new Service1().getStocDepozit(articol.cod, articol.unitLog, articol.depozit, articol.depart).Split('#');
+                    string[] str = new Service1().getStocDepozit(articol.cod, articol.unitLog, articol.depozit, articol.depart,"").Split('#');
                     resultArt.cod = getCleanCodArt(articol.cod);
                     resultArt.depozit = articol.depozit;
                     resultArt.stoc = Double.Parse(str[0]);
@@ -1807,6 +1809,199 @@ namespace WebService1
 
         }
 
+
+        public string getStocDepozit(string codArt, string filiala, string depozit, string depart, string isArtMathaus)
+        {
+            //stoc articol
+            string retVal = "";
+            OracleConnection connection = new OracleConnection();
+            OracleCommand cmd = new OracleCommand();
+            OracleDataReader oReader = null;
+            string umArt = "";
+            string cant = "0", sinteticArt = "";
+            string showStocVal = "1";
+            string localDepozit = depozit;
+
+            if (depart != null && (depart.Equals("040") || depart.Equals("041")))
+                depart = "04";
+
+            try
+            {
+                string connectionString = DatabaseConnections.ConnectToProdEnvironment();
+
+                connection.ConnectionString = connectionString;
+                connection.Open();
+
+                if ((depozit.Equals("01V1")) && OperatiiArticole.isArticolExceptie02(connection, codArt))
+                    localDepozit = "02V1";
+                else if ((depozit.Equals("01V2")) && OperatiiArticole.isArticolExceptie02(connection, codArt))
+                    localDepozit = "02V2";
+
+                string condDepozit1 = "lgort=:dep";
+                if (isArtMathausExceptieStoc(isArtMathaus))
+                    condDepozit1 = "lgort in (select lgort from sapprd.zhybris_lgort h, articole ar where h.mandt = '900' and h.werks = :fil and h.spart = ar.spart and ar.cod=:art)";
+
+                cmd = connection.CreateCommand();
+
+
+                cmd.CommandText = " select nvl(sum(labst),0) stoc, meins, ar.sintetic from " +
+                                 " (select m.labst , mn.meins, mn.matnr  from sapprd.mard m, sapprd.mara mn " +
+                                 " where m.mandt = '900' and m.mandt = mn.mandt " +
+                                 " and m.matnr = mn.matnr and m.matnr =:art  and m.werks =:fil and m." + condDepozit1 +
+                                 " union all " +
+                                 " select -1 * nvl(sum(e.omeng),0), e.meins, e.matnr  from sapprd.vbbe e " +
+                                 " where e.mandt = '900' and e.matnr =:art and e.werks =:fil and e." + condDepozit1 + " and e.sobkz <> 'E' " +
+                                 " group by e.meins, e.matnr " +
+                                 " union all " +
+                                 " select - 1 * sum(b.bdmng) stoc, b.meins, b.matnr from sapprd.resb b " +
+                                 " where b.mandt = '900' and b.bwart = '921' and b.xloek <> 'X' and bdter >= to_char(sysdate - 365, 'yyyymmdd') " +
+                                 " and b.matnr = :art and b.werks = :fil and b." + condDepozit1 +
+                                 " group by b.meins, b.matnr ), articole ar where ar.cod = matnr group by meins, ar.sintetic ";
+
+
+                cmd.CommandType = CommandType.Text;
+
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add(":art", OracleType.VarChar, 54).Direction = ParameterDirection.Input;
+                cmd.Parameters[0].Value = codArt;
+
+                cmd.Parameters.Add(":fil", OracleType.VarChar, 12).Direction = ParameterDirection.Input;
+                cmd.Parameters[1].Value = depozit.Equals("MAV2") || depozit.Equals("DSCM") ? getUnitLogGed(filiala) : filiala;
+
+                if (!isArtMathausExceptieStoc(isArtMathaus))
+                {
+                    cmd.Parameters.Add(":dep", OracleType.VarChar, 12).Direction = ParameterDirection.Input;
+                    cmd.Parameters[2].Value = localDepozit;
+                }
+
+                oReader = cmd.ExecuteReader();
+
+                if (oReader.HasRows)
+                {
+                    oReader.Read();
+
+                    cant = oReader.GetDouble(0).ToString() != "" ? oReader.GetDouble(0).ToString() : "-1";
+                    umArt = oReader.GetString(1);
+                    sinteticArt = oReader.GetString(2);
+
+                    retVal = cant + "#" + umArt + "#" + showStocVal + "#";
+                }
+                else
+                {
+                    retVal = "0# #" + showStocVal + "#";
+                }
+
+
+                oReader.Close();
+
+                string condDepozit2 = "reslo=:dep";
+                if (isArtMathausExceptieStoc(isArtMathaus))
+                    condDepozit2 = "reslo in (select lgort from sapprd.zhybris_lgort h, articole ar where h.mandt = '900' and h.werks = :fil and h.spart = ar.spart and ar.cod=:art)";
+
+
+                cmd.CommandText = " select nvl(sum(w.menge - w.wamng),0) from sapprd.eket w, sapprd.ekpo o, sapprd.ekko q where w.menge <> w.wamng " +
+                                  " and w.mandt = '900' and w.mandt = o.mandt and w.ebeln = o.ebeln and w.ebelp = o.ebelp and o.loekz <> 'L' and o.elikz <> 'X' " +
+                                  " and o.matnr =:art and o.mandt = q.mandt and o.ebeln = q.ebeln and q.loekz <> 'L' and q.reswk =:fil and o." + condDepozit2 +
+                                  " and not exists (select * from sapprd.ekbe e where e.mandt = '900' and e.ebeln = q.ebeln and e.ebelp = o.ebelp and bewtp = 'L') " +
+                                  " and q.aedat >= to_char(sysdate-30,'yyyymmyy')";
+
+
+                cmd.CommandType = CommandType.Text;
+
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add(":art", OracleType.VarChar, 54).Direction = ParameterDirection.Input;
+                cmd.Parameters[0].Value = codArt;
+
+                cmd.Parameters.Add(":fil", OracleType.VarChar, 12).Direction = ParameterDirection.Input;
+                cmd.Parameters[1].Value = depozit.Equals("MAV2") || depozit.Equals("DSCM") ? getUnitLogGed(filiala) : filiala;
+
+                if (!isArtMathausExceptieStoc(isArtMathaus))
+                {
+                    cmd.Parameters.Add(":dep", OracleType.VarChar, 12).Direction = ParameterDirection.Input;
+                    cmd.Parameters[2].Value = depozit;
+                }
+
+                oReader = cmd.ExecuteReader();
+                string stocBV90 = "";
+                double stocFinal = 0;
+                if (oReader.HasRows)
+                {
+                    oReader.Read();
+                    stocBV90 = oReader.GetDouble(0).ToString() != "" ? oReader.GetDouble(0).ToString() : "-1";
+
+                }
+
+                if (!cant.Equals("-1") && !stocBV90.Equals("-1"))
+                    stocFinal = Double.Parse(cant, CultureInfo.InvariantCulture) - Double.Parse(stocBV90, CultureInfo.InvariantCulture);
+
+                cant = stocFinal.ToString();
+
+                //exceptii vanzare articole
+                if (filiala.Equals("BV90") || filiala.Equals("BV92"))
+                {
+
+                    //tratare exceptii sintetice feronerie
+                    if (depart != null && (depart.Equals("02") || depart.Equals("05")))
+                    {
+
+                        if (OperatiiArticole.isArtPermBV90(codArt, filiala))
+                        {
+                            showStocVal = "1";
+                        }
+                        else  //nu este permisa vanzarea altor articole, se afiseaza fara stoc
+                        {
+                            cant = "0";
+                            umArt = "";
+                            showStocVal = "1";
+                        }
+                    }
+                }
+
+                retVal = cant + "#" + umArt + "#" + showStocVal + "#";
+
+
+                //exceptie material transport
+                if (Utils.isMatTransport(codArt))
+                {
+                    retVal = "1#BUC#1";
+                }
+
+                if (ArticoleUtils.isMaterialServiciiWood(codArt))
+                {
+                    retVal = "9999#" + ArticoleUtils.getUmServicii(connection, codArt) + "#1";
+                }
+
+                //sf. exceptie
+
+
+                oReader.Close();
+                oReader.Dispose();
+
+            }
+            catch (Exception ex)
+            {
+                ErrorHandling.sendErrorToMail(ex.ToString() + "\n\n" + codArt + "\n\n" + filiala + "\n\n" + depozit + "\n\n" + depart);
+                retVal = "-1";
+            }
+            finally
+            {
+                cmd.Dispose();
+                connection.Close();
+                connection.Dispose();
+            }
+
+
+            return retVal;
+        }
+
+        private static bool isArtMathausExceptieStoc(string isArtMathaus)
+        {
+            if (isArtMathaus == null || !isArtMathaus.Equals("true"))
+                return false;
+
+            return true;
+        }
+
         public string getInfoPretMathaus(string parametruPret, string cantitati)
         {
 
@@ -1859,7 +2054,10 @@ namespace WebService1
                 return filiala.Substring(0, 2) + "12";
         }
 
-
+        private string getUnitLogGed(string untiLog)
+        {
+            return untiLog.Substring(0, 2) + "2" + untiLog.Substring(3, 1);
+        }
 
 
 

@@ -643,6 +643,12 @@ namespace WebService1
         public bool isCmdACZC;
     }
 
+    public class StareDocumentRetur
+    {
+        public string nrDocument;
+        public string stare;
+    }
+
     public class ExtraDate
     {
         public string codJudet;
@@ -689,6 +695,7 @@ namespace WebService1
         public string status;
         public string transpBack;
         public string inlocuire;
+        public string listStari;
     }
 
     public class ArticolRetur

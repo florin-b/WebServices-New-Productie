@@ -396,14 +396,18 @@ namespace WebService1
 
             OracleCommand cmd = connection.CreateCommand();
 
+            string condDepart = " and (substr(a.grup_vz,0,2) =:depart or a.grup_vz = '11') ";
+            if (depart.Equals("00"))
+                condDepart = "";
+
             try
             {
 
                 cmd.CommandText = " select count(distinct c.matnr) from sapprd.marc c, sapprd.zstoc_job b, websap.articole a, websap.sintetice g " +
                                   " where c.mandt = '900' and c.werks = :filiala and c.dismm = 'ND' and b.mandt = c.mandt and b.matnr = c.matnr " +
-                                  " and (b.werks = c.werks or (a.spart in ('02', '05') and b.werks = 'BV90')) and b.stocne > 0 and not exists " +
+                                  " and (b.werks = c.werks or (a.spart in ('01', '02', '05') and b.werks = 'BV90')) and b.stocne > 0 and not exists " +
                                   " (select * from sapprd.zpath_hybris s where s.mandt = '900' and s.matnr = c.matnr) and c.matnr = a.cod " +
-                                  " and a.sintetic = g.cod and (substr(a.grup_vz,0,2) =:depart or a.grup_vz = '11' ) order by c.matnr ";
+                                  " and a.sintetic = g.cod " + condDepart + " order by c.matnr ";
 
                 cmd.CommandType = CommandType.Text;
                 cmd.Parameters.Clear();
@@ -411,8 +415,11 @@ namespace WebService1
                 cmd.Parameters.Add(":filiala", OracleType.VarChar, 12).Direction = ParameterDirection.Input;
                 cmd.Parameters[0].Value = filiala;
 
-                cmd.Parameters.Add(":depart", OracleType.VarChar, 12).Direction = ParameterDirection.Input;
-                cmd.Parameters[1].Value = depart.Substring(0, 2);
+                if (!depart.Equals("00"))
+                {
+                    cmd.Parameters.Add(":depart", OracleType.VarChar, 12).Direction = ParameterDirection.Input;
+                    cmd.Parameters[1].Value = depart.Substring(0, 2);
+                }
 
                 oReader = cmd.ExecuteReader();
 
@@ -459,16 +466,20 @@ namespace WebService1
 
             OracleCommand cmd = connection.CreateCommand();
 
+            string condDepart = " and (substr(a.grup_vz,0,2) =:depart or a.grup_vz = '11') ";
+            if (depart.Equals("00"))
+                condDepart = "";
+
             try
             {
 
                 cmd.CommandText = " select * from (" +
-                                  " select distinct c.matnr, a.nume, row_number() over (ORDER BY c.matnr ASC) line_number from sapprd.marc c, sapprd.zstoc_job b, websap.articole a, websap.sintetice g " +
-                                  " where c.mandt = '900' and c.werks = :filiala and c.dismm = 'ND' and b.mandt = c.mandt and b.matnr = c.matnr " +
-                                  " and (b.werks = c.werks or (a.spart in ('02', '05') and b.werks = 'BV90')) and b.stocne > 0 and not exists " +
-                                  " (select * from sapprd.zpath_hybris s where s.mandt = '900' and s.matnr = c.matnr) and c.matnr = a.cod " +
-                                  " and a.sintetic = g.cod and (substr(a.grup_vz,0,2) =:depart or a.grup_vz = '11' ) order by c.matnr ) " +
-                                  " where line_number between :pageMin and :pageMax order by line_number ";
+                                 " select distinct c.matnr, a.nume, dismm, row_number() over (ORDER BY c.matnr ASC) line_number from sapprd.marc c, sapprd.zstoc_job b, websap.articole a, websap.sintetice g " +
+                                 " where c.mandt = '900' and c.werks = :filiala and c.dismm = 'ND' and b.mandt = c.mandt and b.matnr = c.matnr " +
+                                 " and (b.werks = c.werks or (a.spart in ('01', '02', '05') and b.werks = 'BV90')) and b.stocne > 0 and not exists " +
+                                 " (select * from sapprd.zpath_hybris s where s.mandt = '900' and s.matnr = c.matnr) and c.matnr = a.cod " +
+                                 " and a.sintetic = g.cod " + condDepart + "  order by c.matnr ) " +
+                                 " where line_number between :pageMin and :pageMax order by line_number ";
 
                 cmd.CommandType = CommandType.Text;
                 cmd.Parameters.Clear();
@@ -476,15 +487,18 @@ namespace WebService1
                 cmd.Parameters.Add(":filiala", OracleType.VarChar, 12).Direction = ParameterDirection.Input;
                 cmd.Parameters[0].Value = filiala;
 
-                cmd.Parameters.Add(":depart", OracleType.VarChar, 12).Direction = ParameterDirection.Input;
-                cmd.Parameters[1].Value = depart.Substring(0, 2);
-
 
                 cmd.Parameters.Add(":pageMin", OracleType.VarChar, 3).Direction = ParameterDirection.Input;
-                cmd.Parameters[2].Value = paginaMin;
+                cmd.Parameters[1].Value = paginaMin;
 
                 cmd.Parameters.Add(":pageMax", OracleType.VarChar, 3).Direction = ParameterDirection.Input;
-                cmd.Parameters[3].Value = paginaMax;
+                cmd.Parameters[2].Value = paginaMax;
+
+                if (!depart.Equals("00"))
+                {
+                    cmd.Parameters.Add(":depart", OracleType.VarChar, 12).Direction = ParameterDirection.Input;
+                    cmd.Parameters[3].Value = depart.Substring(0, 2);
+                }
 
 
                 oReader = cmd.ExecuteReader();
@@ -496,6 +510,7 @@ namespace WebService1
                         ArticolMathaus articol = new ArticolMathaus();
                         articol.cod = oReader.GetString(0);
                         articol.nume = oReader.GetString(1);
+                        articol.planificator = oReader.GetString(2);
                         articol.isLocal = true;
                         articol.isArticolSite = false;
                         setDetaliiArticol(articol);
@@ -636,10 +651,13 @@ namespace WebService1
 
             string cautare;
             if (tipCautare.Equals("c"))
-                cautare = " and lower(ar.cod) like '0000000000" + codArticol.ToLower() + "%'";
+                cautare = " and lower(a.cod) like '0000000000" + codArticol.ToLower() + "%'";
             else
-                cautare = " and lower(ar.nume) like '" + codArticol.ToLower() + "%'";
+                cautare = " and lower(a.nume) like '" + codArticol.ToLower() + "%'";
 
+            string condDepart = " and (substr(a.grup_vz,0,2) in " + HelperComenzi.getDepartExtra(depart) + " or a.grup_vz = '11' )  ";
+            if (depart.Equals("00"))
+                condDepart = "";
 
 
             OracleConnection connection = new OracleConnection();
@@ -653,10 +671,10 @@ namespace WebService1
             OracleCommand cmd = connection.CreateCommand();
             try
             {
-                cmd.CommandText = " select count (distinct s.matnr) " +
-                                  " from sapprd.zpath_hybris s, sapprd.marc c, articole ar " +
-                                  " where (substr(ar.grup_vz,0,2) =:depart or ar.grup_vz = '11' ) " +
-                                  " and ar.cod = s.matnr and s.mandt = c.mandt and s.matnr = c.matnr and c.werks = :filiala " + cautare + "  ";
+                cmd.CommandText = " select count(distinct a.cod)  " +
+                                 " from articole a, sintetice b, sapprd.marc c where c.mandt = '900' " +
+                                 " and c.matnr = a.cod and c.werks = :filiala and c.mmsta <> '01'  and a.sintetic = b.cod and a.cod != 'MAT GENERIC PROD' " +
+                                 " and a.blocat <> '01' " + cautare + condDepart;
 
 
                 cmd.CommandType = CommandType.Text;
@@ -665,8 +683,7 @@ namespace WebService1
                 cmd.Parameters.Add(":filiala", OracleType.VarChar, 12).Direction = ParameterDirection.Input;
                 cmd.Parameters[0].Value = filiala;
 
-                cmd.Parameters.Add(":depart", OracleType.VarChar, 12).Direction = ParameterDirection.Input;
-                cmd.Parameters[1].Value = depart;
+    
 
                 oReader = cmd.ExecuteReader();
 
@@ -708,9 +725,9 @@ namespace WebService1
 
             string cautare;
             if (tipCautare.Equals("c"))
-                cautare = " and lower(ar.cod) like '0000000000" + codArticol.ToLower() + "%'";
+                cautare = " and lower(a.cod) like '0000000000" + codArticol.ToLower() + "%'";
             else
-                cautare = " and lower(ar.nume) like '" + codArticol.ToLower() + "%'";
+                cautare = " and lower(a.nume) like '" + codArticol.ToLower() + "%'";
 
             rezultat.nrTotalArticole = getNrArticoleCautare(codArticol, tipCautare, filiala, depart).ToString();
 
@@ -722,7 +739,7 @@ namespace WebService1
             connection.ConnectionString = connectionString;
             connection.Open();
 
-            string condDepart = " (substr(ar.grup_vz,0,2) in " + HelperComenzi.getDepartExtra(depart) + " or ar.grup_vz = '11' ) and ";
+            string condDepart = " and (substr(a.grup_vz,0,2) in " + HelperComenzi.getDepartExtra(depart) + " or a.grup_vz = '11' )  ";
 
             if (depart.Equals("00"))
                 condDepart = "";
@@ -730,12 +747,12 @@ namespace WebService1
             OracleCommand cmd = connection.CreateCommand();
             try
             {
-                cmd.CommandText = " select distinct s.matnr, ar.nume, c.dismm, " +
-                                  " (select e.versg from sapprd.mvke e where e.mandt = '900' and e.matnr = s.matnr and e.vtweg = '20') par_s " +
-                                  " from sapprd.zpath_hybris s, sapprd.marc c, articole ar " +
-                                  " where " + condDepart +
-                                  " ar.cod = s.matnr and s.mandt = c.mandt and s.matnr = c.matnr and c.werks = :filiala " + cautare + " order by s.matnr  " +
-                                  " OFFSET :paginaCrt ROWS FETCH NEXT 10 ROWS ONLY ";
+                cmd.CommandText = " select a.cod ,a.nume, c.dismm, " +
+                                  " (select e.versg from sapprd.mvke e where e.mandt = '900' and e.matnr = a.cod and e.vtweg = '20') par_s " +
+                                  " from articole a, sintetice b, sapprd.marc c where c.mandt = '900' " +
+                                  " and c.matnr = a.cod and c.werks = :filiala and c.mmsta <> '01'  and a.sintetic = b.cod and a.cod != 'MAT GENERIC PROD' " +
+                                  " and a.blocat <> '01' " + cautare + condDepart + "  order by a.cod " +
+                                  " OFFSET :paginaCrt ROWS FETCH NEXT 10 ROWS ONLY  ";
 
 
 
@@ -760,6 +777,7 @@ namespace WebService1
                         articol.nume = oReader.GetString(1);
                         articol.tip1 = oReader.GetString(2);
                         articol.tip2 = oReader.GetString(3);
+                        articol.planificator = oReader.GetString(2);
                         articol.isLocal = true;
                         articol.isArticolSite = false;
                         setDetaliiArticol(articol);
@@ -883,7 +901,7 @@ namespace WebService1
             {
 
                 cmd.CommandText = " select * from (" +
-                                  " select distinct c.matnr, a.nume, row_number() over (ORDER BY c.matnr ASC) line_number from sapprd.marc c, sapprd.zstoc_job b, websap.articole a, websap.sintetice g " +
+                                  " select distinct c.matnr, a.nume, c.dismm , row_number() over (ORDER BY c.matnr ASC) line_number from sapprd.marc c, sapprd.zstoc_job b, websap.articole a, websap.sintetice g " +
                                   " where c.mandt = '900' and c.werks = :filiala and c.dismm = 'ND' and b.mandt = c.mandt and b.matnr = c.matnr " +
                                   " and b.werks = c.werks and b.stocne > 0 and not exists " +
                                   " (select * from sapprd.zpath_hybris s where s.mandt = '900' and s.matnr = c.matnr) and c.matnr = a.cod " + cautare +
@@ -915,6 +933,7 @@ namespace WebService1
                         ArticolMathaus articol = new ArticolMathaus();
                         articol.cod = oReader.GetString(0);
                         articol.nume = oReader.GetString(1);
+                        articol.planificator = oReader.GetString(2);
                         articol.isLocal = true;
                         articol.isArticolSite = false;
                         setDetaliiArticol(articol);
@@ -1256,7 +1275,12 @@ namespace WebService1
                     }
 
                     if (!artFound)
-                        dateArticol.deliveryWarehouse = dateArticol.productCode.StartsWith("0000000000111") ? getULGed(comanda.sellingPlant) : comanda.sellingPlant;
+                    {
+                        if (dateArticol.ulStoc != null && dateArticol.ulStoc.Equals("BV90"))
+                            dateArticol.deliveryWarehouse = "BV90";
+                        else
+                            dateArticol.deliveryWarehouse = dateArticol.productCode.StartsWith("0000000000111") ? getULGed(comanda.sellingPlant) : comanda.sellingPlant;
+                    }
 
                 }
 

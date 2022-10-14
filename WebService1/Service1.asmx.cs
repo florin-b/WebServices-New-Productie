@@ -8014,11 +8014,10 @@ namespace WebService1
 
 
                 sqlString = " select distinct a.id,nvl(b.nume,' '),nvl(c.nume,' '), nvl(to_char(to_date(a.datac,'yyyymmdd')),' '), a.ul, decode(a.nrcmdsap,' ','-1',a.nrcmdsap) cmdsap, " +
-                            " a.status_aprov, a.depoz_dest,a.ul_dest, a.name1, a.obs, a.status, nvl(c.nrtel,' ')  " +
+                            " a.status_aprov, (select p.depoz from sapprd.zclpdet p where p.mandt = '900' and p.id = a.id and p.depoz <> ' ' and rownum = 1) depoz_dest,a.ul_dest, a.name1, a.obs, a.status, nvl(c.nrtel,' ')  " +
                             " from sapprd.zclphead a, " +
                             " clienti b, agenti c  where " + statusCmd +
                             " and a.cod_client = b.cod(+) and a.dl <> 'X' and c.cod(+) = a.cod_agent " + tipComanda + condData + " order by a.id desc ";
-
 
 
                 cmd.CommandText = sqlString;
@@ -15547,24 +15546,7 @@ namespace WebService1
 
 
         //materiale transport
-        private bool isMatTransport(string codArt)
-        {
-            bool isMat = false;
-
-            string[] articolePermise = { "000000000030101220", "000000000030101221", "000000000030101223", "000000000030101224", "000000000030101225", "000000000030101226", "000000000030101227", "000000000030101228", "000000000030101230", "000000000030101222", "000000000030101111", "000000000030101240" };
-
-            for (int i = 0; i < articolePermise.Length; i++)
-            {
-                if (articolePermise[i].Equals(codArt))
-                {
-                    isMat = true;
-                    break;
-                }
-            }
-
-
-            return isMat;
-        }
+       
 
 
         //consilieri vanzari site
@@ -15595,7 +15577,7 @@ namespace WebService1
             string retVal = "";
 
             OperatiiArticole opArticole = new OperatiiArticole();
-            string stocDepozit = getStocDepozit(codArt, filiala, depozit, depart);
+            string stocDepozit = getStocDepozit(codArt, filiala, depozit, depart,"");
 
             string umStocArticol = stocDepozit.Split('#')[1];
 
@@ -15641,7 +15623,13 @@ namespace WebService1
         }
 
         [WebMethod]
-        public string getStocDepozit(string codArt, string filiala, string depozit, string depart)
+        public string getStocDepozit(string codArt, string filiala, string depozit, string depart, string isArtMathaus)
+        {
+            return new OperatiiArticole().getStocDepozit(codArt, filiala, depozit, depart, isArtMathaus);
+        }
+
+        [WebMethod]
+        public string getStocDepozit_old(string codArt, string filiala, string depozit, string depart)
         {
 
 
@@ -15780,7 +15768,7 @@ namespace WebService1
 
 
                 //exceptie material transport
-                if (isMatTransport(codArt))
+                if (Utils.isMatTransport(codArt))
                 {
                     retVal = "1#BUC#1";
                 }

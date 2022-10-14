@@ -26,6 +26,7 @@ namespace WebService1
         public string tip2;
         public bool isLocal;
         public bool isArticolSite;
+        public string planificator;
     }
 
     public class RezultatArtMathaus
@@ -86,6 +87,7 @@ namespace WebService1
         public double valPoz;
         public string tip2;
         public string depozit;
+        public string ulStoc;
     }
 
     public class StockMathaus

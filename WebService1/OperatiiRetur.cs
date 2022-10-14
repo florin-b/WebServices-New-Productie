@@ -535,12 +535,13 @@ namespace WebService1
             connection.Open();
 
             OracleCommand cmd = connection.CreateCommand();
+            string nrDocument = "";
 
             try
             {
 
                 cmd.CommandText = " select datalivrare, tiptransport, numeperscontact, telperscontact, codjudet, localitate, strada,  " +
-                                  " nrdocument, codagent, tipagent, motivretur, inlocuire " +
+                                  " nrdocument, codagent, tipagent, motivretur, inlocuire, nrDocument " +
                                   " from sapprd.zreturhead where id =:idComanda ";
 
                 cmd.CommandType = CommandType.Text;
@@ -569,6 +570,7 @@ namespace WebService1
                         retur.tipAgent = oReader.GetString(9);
                         retur.motivRetur = oReader.GetString(10);
                         retur.inlocuire = oReader.GetString(11);
+                        nrDocument = oReader.GetString(12);
 
                     }
 
@@ -607,8 +609,10 @@ namespace WebService1
 
                 JavaScriptSerializer serializer = new JavaScriptSerializer();
                 String listaArticoleSer = serializer.Serialize(listArticole);
+                string listStariSer = serializer.Serialize(new OperatiiRetur().getStareRetur(nrDocument));
 
                 retur.listaArticole = listaArticoleSer;
+                retur.listStari = listStariSer;
                 serializedResult = serializer.Serialize(retur);
 
             }
@@ -627,6 +631,31 @@ namespace WebService1
         }
 
 
+        public List<StareDocumentRetur> getStareRetur(string nrDocument)
+        {
+            List<StareDocumentRetur> listStari = new List<StareDocumentRetur>();
+
+            SAPWebServices.ZTBL_WEBSERVICE webService = new ZTBL_WEBSERVICE();
+
+            SAPWebServices.ZstareCurentaRetur inParam = new ZstareCurentaRetur();
+            System.Net.NetworkCredential nc = new System.Net.NetworkCredential(Auth.getUser(), Auth.getPass());
+            webService.Credentials = nc;
+            webService.Timeout = 300000;
+
+            inParam.IpVbeln = nrDocument;
+
+            SAPWebServices.ZstareCurentaReturResponse resp = webService.ZstareCurentaRetur(inParam);
+
+            foreach (ZstStareCurenta stare in resp.EtStatus)
+            {
+                StareDocumentRetur stareDoc = new StareDocumentRetur();
+                stareDoc.nrDocument = stare.Vbeln;
+                stareDoc.stare = stare.StatusLong;
+                listStari.Add(stareDoc);
+            }
+
+            return listStari;
+        }
 
 
         public string getDocumenteRetur(string codClient, string codDepartament, string unitLog, string tipDocument, string interval, string tipUserSap)
