@@ -12350,7 +12350,10 @@ namespace WebService1
 
                     bool paramAlertDVGed = alertDV;
                     if ((tipUser.Equals("AV") || tipUser.Equals("SD") || tipUser.Equals("KA")) && comandaVanzare.canalDistrib.Equals("10"))
+                    {
                         paramAlertDVGed = false;
+                        comandaVanzare.comandaBlocata = "0";
+                    }
 
                     if (!dateLivrareGed.unitLog.Contains("40"))
                         dateLivrareGed.unitLog = dateLivrareGed.unitLog.Substring(0, 2) + "2" + dateLivrareGed.unitLog.Substring(3, 1);
@@ -13324,7 +13327,8 @@ namespace WebService1
 
                         ulStoc = unitLogAlt;
 
-                        if (articolComanda[i].filialaSite != null && (articolComanda[i].depart.Equals("01") || articolComanda[i].depart.Equals("02")))
+
+                        if (articolComanda[i].filialaSite != null && !articolComanda[i].filialaSite.Trim().Equals(String.Empty))
                         {
                             ulStoc = articolComanda[i].filialaSite;
                         }

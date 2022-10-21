@@ -1045,7 +1045,7 @@ namespace WebService1
             try
             {
 
-                cmd.CommandText = " select distinct a.cod, a.sintetic, b.cod_nivel1, a.um, a.umvanz, nvl(a.tip_mat, ' '),  b.cod nume_sint, " +
+                cmd.CommandText = " select distinct a.cod, a.sintetic, b.cod_nivel1, a.umvanz10, a.umvanz, nvl(a.tip_mat, ' '),  b.cod nume_sint, " +
                                   " decode(a.grup_vz, ' ', '-1', a.grup_vz), decode(trim(a.dep_aprobare), '', '00', a.dep_aprobare)  dep_aprobare, " +
                                   " (select nvl((select 1 from sapprd.mara m where m.mandt = '900' and m.matnr = a.cod and m.categ_mat in ('PA','AM')),-1) " +
                                   " palet from dual) palet  , nvl ((select sum(stocne) from sapprd.zstoc_job where matnr=a.cod and werks=:filiala2),-1) stoc , categ_mat, " +
@@ -1084,7 +1084,7 @@ namespace WebService1
                                 articol.sintetic = oReader.GetString(1);
                                 articol.nivel1 = oReader.GetString(2);
                                 articol.umVanz10 = oReader.GetString(3);
-                                articol.umVanz = oReader.GetString(3);
+                                articol.umVanz = oReader.GetString(4);
                                 articol.tipAB = oReader.GetString(5);
                                 articol.depart = oReader.GetString(7);
                                 articol.departAprob = oReader.GetString(8);
@@ -1395,11 +1395,58 @@ namespace WebService1
             dateArticol.deliveryWarehouse = stockResponse.stockEntryDataList[0].warehouse;
             dateArticol.quantity = stockResponse.stockEntryDataList[0].availableQuantity;
             dateArticol.productCode = stockResponse.stockEntryDataList[0].productCode;
-            dateArticol.unit = um;
+            dateArticol.unit = getUmBaza(stockEntry.productCode);
             deliveryEntryDataList.Add(dateArticol);
             comandaMathaus.deliveryEntryDataList = deliveryEntryDataList;
 
             return serializer.Serialize(comandaMathaus);
+
+        }
+
+
+        private string getUmBaza(string codArticol)
+        {
+
+            string umBaza = "BUC";
+            OracleConnection connection = new OracleConnection();
+            OracleCommand cmd = null;
+            OracleDataReader oReader = null;
+
+            try
+            {
+                string connectionString = DatabaseConnections.ConnectToProdEnvironment();
+
+                connection.ConnectionString = connectionString;
+                connection.Open();
+
+                cmd = connection.CreateCommand();
+
+                cmd.CommandText = " select um from articole where cod = :codArticol ";
+
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add(":codArticol", OracleType.NVarChar, 54).Direction = ParameterDirection.Input;
+                cmd.Parameters[0].Value = codArticol;
+
+                oReader = cmd.ExecuteReader();
+
+                if (oReader.HasRows)
+                {
+                    oReader.Read();
+                    umBaza = oReader.GetString(0);
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                ErrorHandling.sendErrorToMail(ex.ToString());
+            }
+            finally
+            {
+                DatabaseConnections.CloseConnections(oReader, cmd, connection);
+            }
+
+            return umBaza;
 
         }
 
