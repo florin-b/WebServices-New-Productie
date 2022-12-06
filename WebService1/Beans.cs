@@ -167,6 +167,7 @@ namespace WebService1
         public string procTransport;
         public string listCabluri;
         public string tipTransport;
+        public string greutate;
 
         public override string ToString()
         {
@@ -296,6 +297,7 @@ namespace WebService1
         public string refClient = "";
         public string costTransportMathaus;
         public bool isComandaACZC;
+        public string tipPersAgent;
     }
 
 
@@ -772,6 +774,7 @@ namespace WebService1
         public string errMsg;
         public string procReducereCmp;
         public string pretFaraTva;
+        public string greutate;
 
     }
 

@@ -651,11 +651,11 @@ namespace WebService1
 
             string cautare;
             if (tipCautare.Equals("c"))
-                cautare = " and lower(a.cod) like '0000000000" + codArticol.ToLower() + "%'";
+                cautare = " and lower(decode(length(a.cod),18,substr(a.cod,-8),a.cod)) like lower('" + codArticol.ToLower() + "%')";
             else
                 cautare = " and lower(a.nume) like '" + codArticol.ToLower() + "%'";
 
-            string condDepart = " and (substr(a.grup_vz,0,2) in " + HelperComenzi.getDepartExtra(depart) + " or a.grup_vz = '11' )  ";
+            string condDepart = " and (a.grup_vz in " + HelperComenzi.getDepartExtra(depart) + " or a.grup_vz = '11' )  ";
             if (depart.Equals("00"))
                 condDepart = "";
 
@@ -725,7 +725,7 @@ namespace WebService1
 
             string cautare;
             if (tipCautare.Equals("c"))
-                cautare = " and lower(a.cod) like '0000000000" + codArticol.ToLower() + "%'";
+                cautare = " and lower(decode(length(a.cod),18,substr(a.cod,-8),a.cod)) like lower('" + codArticol.ToLower() + "%')";
             else
                 cautare = " and lower(a.nume) like '" + codArticol.ToLower() + "%'";
 
@@ -739,7 +739,7 @@ namespace WebService1
             connection.ConnectionString = connectionString;
             connection.Open();
 
-            string condDepart = " and (substr(a.grup_vz,0,2) in " + HelperComenzi.getDepartExtra(depart) + " or a.grup_vz = '11' )  ";
+            string condDepart = " and ( a.grup_vz in " + HelperComenzi.getDepartExtra(depart) + " or a.grup_vz = '11' )  ";
 
             if (depart.Equals("00"))
                 condDepart = "";

@@ -695,11 +695,16 @@ namespace WebService1
             if (!codDepartament.Equals("00") && !codDepartament.Equals("11"))
                 condDepart = " and p.spart = substr(:depart,0,2) ";
 
+
+
+
             try
             {
 
                 if (codDepartament.Equals("11"))
                 {
+
+                 
 
                     string tipDocuRetur = " ('ZFM','ZFMC','ZFS','ZFSC','ZFPA','ZFVS') ";
 
@@ -717,7 +722,7 @@ namespace WebService1
                                       " and k.mandt = a.mandt  and k.vbeln = a.vbeln  and a.parvw = 'WE' " +
                                       " and p.prctr =:unitLog  and a.mandt = c.client and a.adrnr = c.addrnumber " +
                                       condData +
-                                      " and lower(c.name1) like lower('%" + codClient + "%')  order by to_date(k.fkdat,'yyyymmdd') ";
+                                      " and c.name1 =  :numeClient  order by to_date(k.fkdat,'yyyymmdd') ";
 
 
                 }
@@ -744,6 +749,9 @@ namespace WebService1
                 {
                     cmd.Parameters.Add(":unitLog", OracleType.VarChar, 30).Direction = ParameterDirection.Input;
                     cmd.Parameters[0].Value = unitLog;
+
+                    cmd.Parameters.Add(":numeClient", OracleType.VarChar, 120).Direction = ParameterDirection.Input;
+                    cmd.Parameters[1].Value = codClient;
                 }
                 else
                 {

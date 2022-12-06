@@ -64,6 +64,8 @@ namespace DistributieWebServices
 
                         string statusLink = getStatusLink(nrDocument, notificare);
 
+                        
+
                         string msgExtra = textComanda + " dumneavoastra" + dataDocument + textDepartament + notificare.dateComanda.departament +
                                                         " se " + prep + " livra astazi, " + getRoCurrentDate() + statusLink + ". Va multumim! ";
 

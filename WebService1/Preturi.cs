@@ -87,7 +87,7 @@ namespace WebService1
                 string Umb = outParam.OutUmb.ToString() != "" ? outParam.OutUmb.ToString() : "-1";
                 string impachetare = outParam.Impachet.ToString() != "" ? outParam.Impachet.ToString() : " ";
                 string pretGed = outParam.GvNetwrFtva.ToString();
-
+                string greutateArt = outParam.GvBrgew.ToString();
 
                 string extindere11 = outParam.ErrorCode.ToString();
 
@@ -295,7 +295,7 @@ namespace WebService1
 
                 retVal += discMaxAV + "#" + discMaxSD + "#" + discMaxDV + "#" +
                          Convert.ToInt32(Double.Parse(multiplu)).ToString() + "#" +
-                         cantUmb + "#" + Umb + "#" + discMaxKA + "#" + cmpArticol.ToString() + "#" + pretMediu + "#" + impachetare + "#" + istoricPret + "#" + procRedCmp + "#" + pretGed + "#";
+                         cantUmb + "#" + Umb + "#" + discMaxKA + "#" + cmpArticol.ToString() + "#" + pretMediu + "#" + impachetare + "#" + istoricPret + "#" + procRedCmp + "#" + pretGed + "#" + greutateArt + "#";
 
 
                 if (pretOut.Equals("0.0"))

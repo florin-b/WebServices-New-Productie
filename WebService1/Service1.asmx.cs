@@ -290,10 +290,6 @@ namespace WebService1
 
 
 
-
-
-
-
         [WebMethod]
         public string getValTransportConsilieri(string oras, string codClient, string valCmd, string codJudet, string unitLog, string articole)
         {
@@ -3355,7 +3351,7 @@ namespace WebService1
                                   " a.adr_livrare_d, a.city_d, a.region_d, a.macara, a.nume_client, a.stceg, a.id_obiectiv, a.adresa_obiectiv, " +
                                   " nvl((select latitude||','||longitude from sapprd.zcoordcomenzi where idcomanda = a.id),'0,0') coord, " +
                                   " 0 tonaj, nvl(client_raft,' '), a.meserias, a.fact_palet_separat, a.lifnr, a.lifnr_prod, a.descoperita,  nvl((trim(a.prog_livr)),'0'),  " +
-                                  " a.livr_sambata, a.bloc, a.cod_client, a.ref_client , a.docin, a.ac_zc, a.nrcmdsap " +
+                                  " a.livr_sambata, a.bloc, a.cod_client, a.ref_client , a.docin, a.ac_zc, a.nrcmdsap, a.tip_pers tip_pers_av " +
                                   " from sapprd.zcomhead_tableta a, clienti b " +
                                   " where a.id=:idcmd and a.cod_client = b.cod ";
 
@@ -3397,13 +3393,18 @@ namespace WebService1
                     dateLivrare.codJudetD = oReader.GetString(18);
                     dateLivrare.macara = oReader.GetString(19);
                     dateLivrare.numeClient = oReader.GetString(20);
-                    dateLivrare.cnpClient = oReader.GetString(21);
+
+                    if (tipPersClient.Equals("PF"))
+                        dateLivrare.cnpClient = HelperClienti.getCnpClient(connection, Int32.Parse(nrCmd));
+                    else
+                        dateLivrare.cnpClient = oReader.GetString(21);
+
                     dateLivrare.idObiectiv = oReader.GetInt32(22).ToString();
                     dateLivrare.isAdresaObiectiv = oReader.GetString(23).Equals("X") ? true : false;
                     dateLivrare.coordonateGps = oReader.GetString(24);
                     dateLivrare.tonaj = oReader.GetDouble(25).ToString();
                     dateLivrare.clientRaft = oReader.GetString(26).ToString();
-                    //dateLivrare.meserias = oReader.GetString(27);
+
                     dateLivrare.meserias = " ";
                     dateLivrare.factPaletiSeparat = oReader.GetString(28).Equals("X") ? true : false;
 
@@ -3442,6 +3443,8 @@ namespace WebService1
                     isComandaACZC = oReader.GetString(oReader.GetOrdinal("ac_zc")).Equals("X");
 
                     nrCmdSap = oReader.GetString(oReader.GetOrdinal("nrcmdsap"));
+                    dateLivrare.tipPersAgent = oReader.GetString(oReader.GetOrdinal("tip_pers_av"));
+
                 }
 
 
@@ -3490,15 +3493,12 @@ namespace WebService1
                                   " ,nvl(a.cant_umb,0) cant_umb , nvl(a.umb,' ') umb, a.ul_stoc, z.depart, nvl(b.tip_mat,' '), nvl(a.ponderat,'-1'), nvl(b.spart,' '), " +
                                   " decode(trim(b.dep_aprobare),'','00', b.dep_aprobare)  dep_aprobare " + condBlocAprov + istoricPret + vechime + infoPretTransp + sinteticArt +
                                   lungimeArt +
-                                  " , (select nvl((select 1 from sapprd.mara m where m.mandt = '900' and m.matnr = a.cod and m.categ_mat in ('PA','AM')),-1) palet from dual) palet " +
+                                  " , (select nvl((select 1 from sapprd.mara m where m.mandt = '900' and m.matnr = a.cod and m.categ_mat in ('PA','AM')),-1) palet from dual) palet, nvl(a.brgew,0) greutate " +
                                   " from sapprd.zcomdet_tableta a, sapprd.zdisc_pers_sint a1,  sintetice c," +
                                   " articole b, sapprd.zpretsubcmp s " + condTabKA + " where a.cod = b.cod(+) " + condIdKA + " and " +
                                   " a1.inactiv(+) <> 'X' and a1.functie(+)='AV' and a1.spart(+)=substr(c.COD_NIVEL1,2,2) and a1.werks(+) ='" + unitLog1 + "' " +
                                   " and b.sintetic = c.cod(+) and a1.matkl(+) = c.cod " + conditieDepart +
                                   " and s.mandt(+)='900' and s.matkl(+) = c.cod order by " + condOrderKA;
-
-
-
 
 
                 cmd.Parameters.Clear();
@@ -3520,17 +3520,6 @@ namespace WebService1
 
                         lnumeArt = oReader1.GetString(2).Replace("#", "");
                         lDepoz = oReader1.GetString(4);
-
-                        if (oReader1.GetString(22).Equals("BV90") && depart.Equals("02"))
-                        {
-                            // lDepoz = "02T1";
-                        }
-
-                        if (oReader1.GetString(22).Equals("BV90") && depart.Equals("05"))
-                        {
-                            //lDepoz = "BV90";
-                        }
-
 
 
                         if (tipMat.Trim() != "")
@@ -3561,9 +3550,7 @@ namespace WebService1
                         articol.procentFact = oReader1.GetDouble(8);
                         articol.conditie = false;
 
-
                         articol.cmp = oReader1.GetString(10).Trim().Equals(".0000") ? 0.0 : getTipValoare(Double.Parse(oReader1.GetString(10)), dateLivrare.unitLog, tipUser, isClientInstPubl);
-
 
                         articol.discClient = oReader1.GetDouble(11);
                         articol.discountAg = oReader1.GetDouble(12);
@@ -3591,6 +3578,7 @@ namespace WebService1
                         articol.lungime = oReader1.GetDouble(33);
                         articol.filialaSite = unitLogAlt;
                         articol.umPalet = oReader1.GetInt32(34).ToString();
+                        articol.greutate = oReader1.GetDouble(35).ToString();
 
                         //verificare factori conversie
                         double factorConversie = 1.0;
@@ -10365,7 +10353,6 @@ namespace WebService1
 
                         if (dateLivrare.tipPlata.Trim().Equals("LC"))
                         {
-                            ErrorHandling.sendErrorToMail("saveAVNewCmd PROD LC: " + comanda + " \n\n " + alertSD + " \n\n " + alertDV + " \n\n " + cmdAngajament + " \n\n " + tipUser + " \n\n " + JSONArt + " \n\n " + JSONComanda + " \n\n " + JSONDateLivrare + " \n\n " + calcTransport + " \n\n KA" );
                             return "-1";
                         }
 
@@ -10619,15 +10606,17 @@ namespace WebService1
                     if (dateLivrare.filialaCLP!= null && dateLivrare.filialaCLP.Trim().Length > 0)
                         ulStoc = dateLivrare.filialaCLP;
 
+                    string greutateArticol = articolComanda[i].greutate == null ? "0" : articolComanda[i].greutate;
+
                     query = " insert into sapprd.zcomdet_tableta(mandt,id,poz,status,cod,cantitate,valoare,depoz, " +
                             " transfer,valoaresap,ppoz,procent,um,procent_fc,conditie,disclient,procent_aprob,multiplu, " +
-                            " val_poz,inf_pret,cant_umb,umb,ul_stoc, istoric_pret) " +
+                            " val_poz,inf_pret,cant_umb,umb,ul_stoc, istoric_pret, brgew) " +
                             " values ('900'," + idCmd.Value + ",'" + pozArt + "','" + cmdStatus + "','" + codArticol + "'," + articolComanda[i].cantitate.ToString(nfi) + ", " +
                             "" + pretUnitarArt.ToString(nfi) + ",'" + articolComanda[i].depozit + "','0',0,'0'," + articolComanda[i].procent.ToString(nfi) + ",'" +
                             articolComanda[i].um + "'," + articolComanda[i].procentFact.ToString(nfi) + ",' '," +
                             articolComanda[i].discClient.ToString(nfi) + "," + articolComanda[i].procAprob.ToString(nfi) + "," + articolComanda[i].multiplu.ToString(nfi) + "," +
                             valPoz.ToString(nfi) + ",'" + articolComanda[i].infoArticol + "'," + articolComanda[i].cantUmb + ",'" +
-                            articolComanda[i].Umb + "', '" + ulStoc + "', '" + articolComanda[i].istoricPret + "' ) ";
+                            articolComanda[i].Umb + "', '" + ulStoc + "', '" + articolComanda[i].istoricPret + "'," + greutateArticol + " ) ";
 
 
                     cmd.CommandText = query;
@@ -12183,19 +12172,24 @@ namespace WebService1
         private string getCnpFromComanda(string comanda)
         {
             string cnpClient = "-1";
+
+            if (comanda.Trim().Equals(""))
+                return cnpClient;
             try
             {
 
                 string[] mainToken = comanda.Split('@');
                 string[] antetCmdToken = mainToken[0].Split('#');
                 string[] dateClient = antetCmdToken[0].Split('~');
-                cnpClient = dateClient[2];
+
+                if (dateClient.Length >= 2)
+                    cnpClient = dateClient[2];
 
 
             }
             catch (Exception ex)
             {
-                sendErrorToMail(ex.ToString());
+                sendErrorToMail(ex.ToString() + " , " + comanda);
             }
 
             return cnpClient;
@@ -12804,6 +12798,11 @@ namespace WebService1
 
                     codClient = comandaVanzare.codClient;
 
+                    cnpClient = getCnpFromComanda(comanda);
+
+                    if (comandaVanzare.cnpClient != null && comandaVanzare.cnpClient.Length == 13)
+                        cnpClient = comandaVanzare.cnpClient;
+
 
                     string codArtDepart = articolComanda[0].codArticol;
 
@@ -12868,7 +12867,7 @@ namespace WebService1
 
 
                 refSAP = comandaVanzare.nrCmdSap.Trim().Length == 0 ? "-1" : comandaVanzare.nrCmdSap;
-                conditieID = comandaVanzare.conditieID;
+                conditieID = comandaVanzare.conditieID != null ? comandaVanzare.conditieID : "-1";
 
                 {
                     termenPlata = dateLivrare.termenPlata;
@@ -13101,7 +13100,12 @@ namespace WebService1
                 cmd.Parameters[29].Value = comandaVanzare.numeClient == null ? "-1" : Regex.Replace(comandaVanzare.numeClient, "\\(.*", "");
 
                 cmd.Parameters.Add(":cnpClient", OracleType.VarChar, 60).Direction = ParameterDirection.Input;
-                cmd.Parameters[30].Value = cnpClient.Equals("-1") ? " " : Utils.checkROCnpClient(cnpClient);
+                string localCnpClient;
+                if (cnpClient.Length == 13)
+                    localCnpClient = " ";
+                else
+                    localCnpClient = cnpClient.Equals("-1") ? " " : Utils.checkROCnpClient(cnpClient);
+                cmd.Parameters[30].Value = localCnpClient;
 
                 cmd.Parameters.Add(":tipPers", OracleType.VarChar, 6).Direction = ParameterDirection.Input;
 
@@ -13283,7 +13287,7 @@ namespace WebService1
                     else if (tipUserSap.Equals("WOOD"))
                         ulStoc = articolComanda[i].filialaSite == null || articolComanda[i].filialaSite == "" ? " " : articolComanda[i].filialaSite;
 
-                    
+                    string greutateArticol = articolComanda[i].greutate == null ? "0" : articolComanda[i].greutate;
 
                     if (tipUser.Equals("CV"))
                     {
@@ -13300,14 +13304,14 @@ namespace WebService1
 
                         query = " insert into sapprd.zcomdet_tableta(mandt,id,poz,status,cod,cantitate,valoare,depoz, " +
                                 " transfer,valoaresap,ppoz,procent,um,pret_cl,conditie,disclient,procent_aprob,multiplu, " +
-                                " val_poz,inf_pret,cant_umb,umb, ul_stoc, fake, ponderat, istoric_pret, val_transp) " +
+                                " val_poz,inf_pret,cant_umb,umb, ul_stoc, fake, ponderat, istoric_pret, val_transp, brgew) " +
                                 " values ('900'," + idCmd.Value + ",'" + pozArt + "','" + cmdStatus + "','" + codArt + "'," + articolComanda[i].cantitate.ToString(nfi) + ", " +
                                 "" + pretUnit.ToString(nfi) + ",'" + articolComanda[i].depozit + "','0',0,'0'," + articolComanda[i].procent.ToString(nfi) + ",'" +
                                 articolComanda[i].um + "'," + articolComanda[i].pretUnitarClient.ToString(nfi) + ",' '," +
                                 articolComanda[i].discClient.ToString(nfi) + "," + articolComanda[i].procAprob.ToString(nfi) + "," + articolComanda[i].multiplu.ToString(nfi) + "," +
                                 valPoz.ToString(nfi) + ",'" + articolComanda[i].infoArticol + "'," + articolComanda[i].cantUmb + ",'" +
                                 articolComanda[i].Umb + "','" + ulStoc + "', '" + fakeArt + "','" + ponderareArt + "','" + articolComanda[i].istoricPret + "', " +
-                                valTransport + " ) ";
+                                valTransport + "," + greutateArticol + " ) ";
 
 
                     }
@@ -13343,13 +13347,13 @@ namespace WebService1
 
                         query = " insert into sapprd.zcomdet_tableta(mandt,id,poz,status,cod,cantitate,valoare,depoz, " +
                                 " transfer,valoaresap,ppoz,procent,um,procent_fc,conditie,disclient,procent_aprob,multiplu, " +
-                                " val_poz,inf_pret,cant_umb,umb, ul_stoc, fake,istoric_pret) " +
+                                " val_poz,inf_pret,cant_umb,umb, ul_stoc, fake,istoric_pret, brgew) " +
                                 " values ('900'," + idCmd.Value + ",'" + pozArt + "','" + cmdStatus + "','" + codArt + "'," + articolComanda[i].cantitate.ToString(nfi) + ", " +
                                 "" + pretUnit.ToString(nfi) + ",'" + articolComanda[i].depozit + "','0',0,'0'," + articolComanda[i].procent.ToString(nfi) + ",'" +
                                 articolComanda[i].um + "'," + articolComanda[i].procentFact.ToString(nfi) + ",' '," +
                                 articolComanda[i].discClient.ToString(nfi) + "," + articolComanda[i].procAprob.ToString(nfi) + "," + articolComanda[i].multiplu.ToString(nfi) + "," +
                                 valPoz.ToString(nfi) + ",'" + articolComanda[i].infoArticol + "'," + articolComanda[i].cantUmb + ",'" +
-                                articolComanda[i].Umb + "','" + ulStoc + "', '" + fakeArt + "','" + articolComanda[i].istoricPret + "' ) ";
+                                articolComanda[i].Umb + "','" + ulStoc + "', '" + fakeArt + "','" + articolComanda[i].istoricPret + "'," + greutateArticol + " ) ";
 
 
                        
@@ -13489,6 +13493,11 @@ namespace WebService1
                 if (!cnpClient.Equals("-1"))
                 {
                     OperatiiSuplimentare.saveDatePersonale(connection, dateLivrare, comandaVanzare);
+                }
+
+                if (cnpClient.Length == 13)
+                {
+                    OperatiiSuplimentare.saveCnpPF(connection, Int32.Parse(idCmd.Value.ToString()), comandaVanzare.cnpClient);
                 }
 
                 if (valSD.Equals("X"))

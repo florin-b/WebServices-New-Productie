@@ -829,7 +829,7 @@
           <xsd:element name="Vstel" type="n0:char4" />
           <xsd:element name="ValTr" type="n0:curr15.2" />
           <xsd:element name="Matnr" type="n0:char18" />
-          <xsd:element name="Spart" type="n0:char2" />
+          <xsd:element name="Spart" type="n0:char3" />
         </xsd:sequence>
       </xsd:complexType>
       <xsd:complexType name="ZsitemsComanda">
@@ -3203,8 +3203,10 @@
           <xsd:sequence>
             <xsd:element minOccurs="0" name="IpCity" type="n0:char25" />
             <xsd:element minOccurs="0" name="IpKunnr" type="n0:char10" />
+            <xsd:element minOccurs="0" name="IpPernr" type="n0:numeric8" />
             <xsd:element minOccurs="0" name="IpRegio" type="n0:char3" />
             <xsd:element minOccurs="0" name="IpTippers" type="tns:char12" />
+            <xsd:element minOccurs="0" name="IpTraty" type="n0:char4" />
             <xsd:element minOccurs="0" name="IpVkgrp" type="n0:char3" />
             <xsd:element minOccurs="0" name="IpWerks" type="n0:char4" />
             <xsd:element name="ItFilCost" type="tns:TableOfZsfilTransp" />
@@ -3262,6 +3264,7 @@
         <xsd:complexType>
           <xsd:sequence>
             <xsd:element name="ErrorCode" type="xsd:unsignedByte" />
+            <xsd:element name="GvBrgew" type="tns:quantum13.3" />
             <xsd:element minOccurs="0" name="GvCant" type="n0:quantum13.3" />
             <xsd:element name="GvCantFree" type="n0:quantum13.3" />
             <xsd:element name="GvCond" type="n0:char200" />

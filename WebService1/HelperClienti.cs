@@ -259,6 +259,46 @@ namespace WebService1
             return valoareComenzi;
         }
 
+        public static string getCnpClient(OracleConnection connection, Int32 idComanda)
+        {
+            string cnpClient = " ";
+            OracleDataReader oReader = null;
+
+            try
+            {
+                OracleCommand cmd = connection.CreateCommand();
+
+                string query = " select stceg from sapprd.ZSFA_ID_CNP where mandt='900' and id =:idComanda ";
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = query;
+                cmd.Parameters.Clear();
+
+                cmd.Parameters.Add(":idComanda", OracleType.Int32, 10).Direction = ParameterDirection.Input;
+                cmd.Parameters[0].Value = idComanda;
+
+                oReader = cmd.ExecuteReader();
+                oReader.Read();
+
+                if (oReader.HasRows)
+                {
+                    cnpClient = oReader.GetString(0);
+                }
+
+                if (oReader != null)
+                    oReader.Close();
+
+                cmd.Dispose();
+
+            }
+            catch (Exception ex)
+            {
+                ErrorHandling.sendErrorToMail(ex.ToString());
+            }
+
+            return cnpClient;
+
+        }
+
         private static string formatDataSap(string dataRaw)
         {
             string[] dataArray = dataRaw.Split('.');

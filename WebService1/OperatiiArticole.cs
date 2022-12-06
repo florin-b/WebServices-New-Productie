@@ -344,7 +344,7 @@ namespace WebService1
             }
             catch (Exception ex)
             {
-                ErrorHandling.sendErrorToMail(ex.ToString());
+                ErrorHandling.sendErrorToMail(ex.ToString() + " : " + listaArticole);
             }
             finally
             {
@@ -1083,6 +1083,7 @@ namespace WebService1
                 string impachetare = outParam.Impachet.ToString() != "" ? outParam.Impachet.ToString() : " ";
                 string pretFaraTva = outParam.GvNetwrFtva.ToString();
 
+
                 pretArticolGed.pret = pretOut;
                 pretArticolGed.um = umOut;
                 pretArticolGed.faraDiscount = noDiscOut;
@@ -1101,9 +1102,7 @@ namespace WebService1
                 pretArticolGed.valTrap = outParam.ValTrap.ToString();
                 pretArticolGed.errMsg = outParam.VMess;
                 pretArticolGed.pretFaraTva = ((outParam.GvNetwrFtva / outParam.GvCant) * outParam.Multiplu).ToString();
-                
-
-                //---verificare cmp
+                pretArticolGed.greutate = outParam.GvBrgew.ToString();
 
                 OracleConnection connection = new OracleConnection();
                 OracleCommand cmd = new OracleCommand();
