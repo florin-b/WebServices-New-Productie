@@ -298,6 +298,7 @@ namespace WebService1
         public string costTransportMathaus;
         public bool isComandaACZC;
         public string tipPersAgent;
+        public string filialaPlata;
     }
 
 
@@ -775,6 +776,8 @@ namespace WebService1
         public string procReducereCmp;
         public string pretFaraTva;
         public string greutate;
+        public string dataExp;
+        public string articoleRecomandate;
 
     }
 
@@ -795,6 +798,12 @@ namespace WebService1
         public string model;
         public string appName;
         public string appVer;
+    }
+
+    public class Articol
+    {
+        public string cod;
+        public string nume;
     }
 
 }

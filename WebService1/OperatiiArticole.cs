@@ -1100,6 +1100,7 @@ namespace WebService1
                 pretArticolGed.procTransport = procentTransport;
                 pretArticolGed.impachetare = impachetare;
                 pretArticolGed.valTrap = outParam.ValTrap.ToString();
+                pretArticolGed.dataExp = outParam.GvDatbi;
                 pretArticolGed.errMsg = outParam.VMess;
                 pretArticolGed.pretFaraTva = ((outParam.GvNetwrFtva / outParam.GvCant) * outParam.Multiplu).ToString();
                 pretArticolGed.greutate = outParam.GvBrgew.ToString();
@@ -1300,6 +1301,7 @@ namespace WebService1
                 if (paramPret.codClientParavan != null && paramPret.codClientParavan.Trim().Length > 0)
                     istoricPret = new Preturi().getIstoricPret(connection, paramPret.articol, paramPret.codClientParavan);
 
+                pretArticolGed.articoleRecomandate = new OperatiiArticole().getArticoleRecomandate(connection, paramPret.articol, "11");
 
                 DatabaseConnections.CloseConnections(oReader, cmd, connection);
 
@@ -1836,6 +1838,9 @@ namespace WebService1
                 else if ((depozit.Equals("01V2")) && OperatiiArticole.isArticolExceptie02(connection, codArt))
                     localDepozit = "02V2";
 
+                if (depozit.Contains("D1"))
+                    isArtMathaus = "false";
+
                 string condDepozit1 = "lgort=:dep";
                 if (isArtMathausExceptieStoc(isArtMathaus))
                     condDepozit1 = "lgort in (select lgort from sapprd.zhybris_lgort h, articole ar where h.mandt = '900' and h.werks = :fil and h.spart = ar.spart and ar.cod=:art)";
@@ -2058,7 +2063,58 @@ namespace WebService1
             return untiLog.Substring(0, 2) + "2" + untiLog.Substring(3, 1);
         }
 
+        public string getArticoleRecomandate(OracleConnection conn, string codArticol, string depart)
+        {
 
+            List<Articol> listArticole = new List<Articol>();
+
+            /*
+            OracleCommand cmd = new OracleCommand();
+            OracleDataReader oReader = null;
+
+            
+            try
+            {
+                cmd = conn.CreateCommand();
+
+                cmd.CommandText = " select b.cod, b.nume from sapprd.zrecomart a, articole b where a.produs = :produs and trim(a.coprodus) = b.cod "
+                                + " and a.depart=:depart ";
+
+                cmd.Parameters.Clear();
+
+                cmd.Parameters.Add(":produs", OracleType.NVarChar, 54).Direction = ParameterDirection.Input;
+                cmd.Parameters[0].Value = codArticol;
+
+                cmd.Parameters.Add(":depart", OracleType.NVarChar, 6).Direction = ParameterDirection.Input;
+                cmd.Parameters[1].Value = depart;
+
+                oReader = cmd.ExecuteReader();
+
+                if (oReader.HasRows)
+                {
+                    while (oReader.Read())
+                    {
+                        Articol articol = new Articol();
+                        articol.cod = oReader.GetString(0);
+                        articol.nume = oReader.GetString(1);
+                        listArticole.Add(articol);
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                ErrorHandling.sendErrorToMail(ex.ToString());
+            }
+            finally
+            {
+                DatabaseConnections.CloseConnections(oReader, cmd);
+            }
+            */
+
+            return new JavaScriptSerializer().Serialize(listArticole);
+
+        }
 
 
     }

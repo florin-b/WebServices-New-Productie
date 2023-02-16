@@ -42,6 +42,8 @@ namespace WebService1
         public string codClient;
         public string tipPers;
         public string depart;
+        public string codPers;
+        public string tipTransp;
     }
 
     public class DateTransportMathaus

@@ -58,6 +58,8 @@ namespace WebService1
         }
 
 
+
+
         [WebMethod]
         public string retVal(string param1, string param2)
         {
@@ -169,13 +171,13 @@ namespace WebService1
         [WebMethod]
         public string getCostMacara(string unitLog, string codAgent, string codClient, string codFurnizor, string listArt)
         {
-            return new OperatiiMacara().getCostMacara(unitLog, codAgent, codClient, codFurnizor, listArt);
+            return new OperatiiMacara().getCostMacara(unitLog, codAgent, codClient, codFurnizor, listArt, "");
         }
 
         [WebMethod]
-        public string getCostMacaraComenzi(string codAgent, string codClient, string codFurnizor, string listComenzi)
+        public string getCostMacaraComenzi(string codAgent, string codClient, string codFurnizor, string listComenzi, string canal)
         {
-            return new OperatiiMacara().getCostMacaraComenzi(codAgent, codClient, codFurnizor, listComenzi);
+            return new OperatiiMacara().getCostMacaraComenzi(codAgent, codClient, codFurnizor, listComenzi, canal);
         }
 
 
@@ -1238,7 +1240,11 @@ namespace WebService1
             return new PierderiVanzari().getVanzariTotal(codDepart);
         }
 
-
+        [WebMethod]
+        public string getAdresaFiliala(string filiala)
+        {
+            return new Utils().getAdresaFiliala(filiala);
+        }
 
         [WebMethod]
         public string getMeseriasi(string codFiliala, string tipUser, string codUser, string codDepart)
@@ -2968,9 +2974,9 @@ namespace WebService1
         }
 
         [WebMethod]
-        public string getLivrariMathaus(string antetComanda, string comandaMathaus)
+        public string getLivrariMathaus(string antetComanda, string comandaMathaus, string canal)
         {
-            return new OperatiiMathaus().getLivrariComanda(antetComanda, comandaMathaus);
+            return new OperatiiMathaus().getLivrariComanda(antetComanda, comandaMathaus, canal);
         }
 
         [WebMethod]
@@ -3351,7 +3357,7 @@ namespace WebService1
                                   " a.adr_livrare_d, a.city_d, a.region_d, a.macara, a.nume_client, a.stceg, a.id_obiectiv, a.adresa_obiectiv, " +
                                   " nvl((select latitude||','||longitude from sapprd.zcoordcomenzi where idcomanda = a.id),'0,0') coord, " +
                                   " 0 tonaj, nvl(client_raft,' '), a.meserias, a.fact_palet_separat, a.lifnr, a.lifnr_prod, a.descoperita,  nvl((trim(a.prog_livr)),'0'),  " +
-                                  " a.livr_sambata, a.bloc, a.cod_client, a.ref_client , a.docin, a.ac_zc, a.nrcmdsap, a.tip_pers tip_pers_av " +
+                                  " a.livr_sambata, a.bloc, a.cod_client, a.ref_client , a.docin, a.ac_zc, a.nrcmdsap, a.tip_pers tip_pers_av, fil_plata, a.cod_agent  " +
                                   " from sapprd.zcomhead_tableta a, clienti b " +
                                   " where a.id=:idcmd and a.cod_client = b.cod ";
 
@@ -3444,6 +3450,22 @@ namespace WebService1
 
                     nrCmdSap = oReader.GetString(oReader.GetOrdinal("nrcmdsap"));
                     dateLivrare.tipPersAgent = oReader.GetString(oReader.GetOrdinal("tip_pers_av"));
+
+                    dateLivrare.filialaPlata = oReader.GetString(oReader.GetOrdinal("fil_plata"));
+
+                    if ((dateLivrare.tipPersAgent.Equals("CV") || dateLivrare.tipPersAgent.Equals("SITE")) && Utils.isUserTest(oReader.GetString(oReader.GetOrdinal("cod_agent"))))
+                    {
+
+                        dateLivrare.dateLivrare = oReader.GetString(16);
+                        dateLivrare.Oras = oReader.GetString(17);
+                        dateLivrare.codJudet = oReader.GetString(18);
+
+                        dateLivrare.adresaD = oReader.GetString(2);
+                        dateLivrare.orasD = oReader.GetString(7);
+                        dateLivrare.codJudetD = oReader.GetString(8);
+                    }
+
+
 
                 }
 
@@ -8879,9 +8901,6 @@ namespace WebService1
 
             }
 
-
-
-
             return retVal;
 
         }
@@ -10308,11 +10327,11 @@ namespace WebService1
                         query = " insert into sapprd.zcomhead_tableta(mandt,id,cod_client,ul,status,status_aprov ,datac,cantar,cod_agent,cod_init,tip_plata,pers_contact,telefon,adr_livrare, " +
                                " valoare,mt,com_referinta,accept1,accept2,fact_red, city, region, pmnttrms , obstra, timpc, ketdat, docin, adr_noua, depart, obsplata, addrnumber, nume_client, " +
                                " stceg, tip_pers, val_incasata, site, email, mod_av, cod_j, adr_livrare_d, city_d, region_d, macara, id_obiectiv, adresa_obiectiv, client_raft,fact_palet_separat, " +
-                               " lifnr, lifnr_prod, descoperita, prog_livr, livr_sambata, bloc, ref_client, ac_zc  ) " +
+                               " lifnr, lifnr_prod, descoperita, prog_livr, livr_sambata, bloc, ref_client, ac_zc, fil_plata  ) " +
                                " values ('900',pk_key.nextval, :codCl,:ul,:status,:status_aprov, " +
                                " :datac,:cantar,:agent,:codinit,:plata,:perscont,:tel,:adr,:valoare,:transp,:comsap,:accept1,:accept2,:factred,:city,:region,:termplt,:obslivr,:timpc,:datalivrare, " +
                                " :tipDocIn, :adrNoua, :depart, :obsplata, :adrnumber, :numeClient, :cnpClient, :tipPers, :valIncasata, :cmdSite, :email, :mod_av, :codJ, " +
-                               " :adr_livrare_d, :city_d, :region_d,:macara, :idObiectiv, :adresaObiectiv, :client_raft, :factPaletSeparat, :lifnr, :lifnr_prod, :descoperita, :progrLivr, :livrSambata, :bloc, :refClient, :aczc  ) " +
+                               " :adr_livrare_d, :city_d, :region_d,:macara, :idObiectiv, :adresaObiectiv, :client_raft, :factPaletSeparat, :lifnr, :lifnr_prod, :descoperita, :progrLivr, :livrSambata, :bloc, :refClient, :aczc, :filPlata  ) " +
                                " returning id into :id ";
 
 
@@ -10543,6 +10562,9 @@ namespace WebService1
 
                         cmd.Parameters.Add(":aczc", OracleType.VarChar, 3).Direction = ParameterDirection.Input;
                         cmd.Parameters[52].Value = dateLivrare.isComandaACZC ? "X" : " ";
+
+                        cmd.Parameters.Add(":filPlata", OracleType.VarChar, 12).Direction = ParameterDirection.Input;
+                        cmd.Parameters[53].Value = dateLivrare.filialaPlata != null && dateLivrare.filialaPlata.Trim().Length > 0 ? dateLivrare.filialaPlata : " ";
 
                         idCmd = new OracleParameter("id", OracleType.Number);
                         idCmd.Direction = ParameterDirection.Output;
@@ -12135,9 +12157,11 @@ namespace WebService1
                 
                 string localtipUserSap = "";
 
+
+                DateLivrare dateLivrare = new JavaScriptSerializer().Deserialize<DateLivrare>(JSONDateLivrare);
                 if (!tipUser.Equals("AV"))
                 {
-                    DateLivrare dateLivrare = new JavaScriptSerializer().Deserialize<DateLivrare>(JSONDateLivrare);
+                    
                     if (tipUserSap == null || tipUserSap.Trim().Length == 0)
                         localtipUserSap = Utils.getTipAngajat(dateLivrare.codAgent);
                     else
@@ -12145,7 +12169,11 @@ namespace WebService1
                 }
 
 
-                if (tipUser.Equals("CV") || tipUser.Equals("KA3"))
+                if (Utils.isUserTest(dateLivrare.codAgent))
+                {
+                    retVal = verificaArticoleMAV_nou(comanda, alertSD, alertDV, cmdAngajament, tipUser, JSONArt, JSONComanda, JSONDateLivrare, localtipUserSap, "-1");
+                }
+                else if (tipUser.Equals("CV") || tipUser.Equals("KA3"))
                 {
                     retVal = OperatiiComenzi.trateazaComenziGED(comanda, alertSD, alertDV, cmdAngajament, tipUser, JSONArt, JSONComanda, JSONDateLivrare, localtipUserSap);
                 }
@@ -12459,9 +12487,262 @@ namespace WebService1
             return retVal;
         }
 
+        private string verificaArticoleMAV_nou(string comanda, bool alertSD, bool alertDV, bool cmdAngajament, string tipUser, string JSONArt, string JSONComanda, string JSONDateLivrare, string tipUserSap, string idCmdAmob)
+        {
+            string retVal = "-1";
+
+            var serializer = new JavaScriptSerializer();
+
+            try
+            {
+
+                DateLivrare dateLivrareGed, dateLivrareDistrib;
+                List<ArticolComanda> articoleGed, articoleDistrib;
+
+                double totalComandaGed = 0, totalComandaDistrib = 0;
+
+                ComandaVanzare comandaVanzare = serializer.Deserialize<ComandaVanzare>(JSONComanda);
+                DateLivrare dateLivrare = serializer.Deserialize<DateLivrare>(JSONDateLivrare);
+                List<ArticolComanda> articolComanda = serializer.Deserialize<List<ArticolComanda>>(JSONArt);
+
+                List<CostTransportMathaus> costTransport = new List<CostTransportMathaus>();
+
+                if (dateLivrare.costTransportMathaus != null)
+                    costTransport = serializer.Deserialize<List<CostTransportMathaus>>(dateLivrare.costTransportMathaus);
+
+                dateLivrareGed = dateLivrare;
+                dateLivrareDistrib = dateLivrare;
+
+                comandaVanzare.parrentId = GeneralUtils.getUniqueIdFromCode(dateLivrareDistrib.codAgent);
+
+                bool isCmdGed = isUnitLogGed(dateLivrare.unitLog);
+
+                articoleGed = new List<ArticolComanda>();
+                articoleDistrib = new List<ArticolComanda>();
+
+                if (isCmdGed)
+                {
+                    articoleGed = articolComanda;
+                    totalComandaGed = Double.Parse(dateLivrare.totalComanda, CultureInfo.InvariantCulture);
+                }
+                else
+                {
+
+                    foreach (var articol in articolComanda)
+                    {
+                        if (articol.depart.Equals("11"))
+                        {
+                            articoleGed.Add(articol);
+                            totalComandaGed += articol.pret;
+                        }
+                        else
+                        {
+                            articoleDistrib.Add(articol);
+
+                            if (comandaVanzare.nrCmdSap.Length < 4)
+                            {
+                                totalComandaDistrib += (articol.pretUnit / articol.multiplu) * Double.Parse(articol.cantUmb, CultureInfo.InvariantCulture);
+                            }
+                            else
+                            {
+                                totalComandaDistrib += articol.pretUnit * Double.Parse(articol.cantUmb, CultureInfo.InvariantCulture);
+                            }
 
 
-        private string verificaArticoleMAV(string comanda, bool alertSD, bool alertDV, bool cmdAngajament, string tipUser, string JSONArt, string JSONComanda, string JSONDateLivrare, string tipUserSap)
+                        }
+                    }
+                }
+
+                if (articoleDistrib.Count > 0)
+                {
+                    dateLivrareDistrib.totalComanda = totalComandaDistrib.ToString();
+                    List<ArticolComanda> sortedArticoleDistrib = articoleDistrib.OrderBy(order => order.depart).ThenBy(order => order.filialaSite).ToList();
+
+
+                    {
+                        string departArt = sortedArticoleDistrib[0].depart;
+                        string ulStoc = sortedArticoleDistrib[0].filialaSite;
+                        string tipTranspCmd = "";
+
+                        List<ArticolComanda> articoleAgenti = new List<ArticolComanda>();
+                        double totalComanda = 0;
+
+                        foreach (var articol in sortedArticoleDistrib)
+                        {
+                            if (!departArt.Equals(articol.depart) || (ulStoc != null && articol.filialaSite != null && !ulStoc.Equals(articol.filialaSite)))
+                            {
+                                dateLivrareDistrib.totalComanda = totalComanda.ToString();
+
+                                if (!articol.filialaSite.Equals(dateLivrareDistrib.unitLog) && !articol.filialaSite.Equals("BV90") && !ulStoc.Equals("BV90"))
+                                    dateLivrareDistrib.filialaCLP = ulStoc;
+
+
+                                if (tipTranspCmd != null && !tipTranspCmd.Equals(String.Empty))
+                                    dateLivrareDistrib.Transport = tipTranspCmd;
+
+                                retVal = saveAVNewCmd(comanda, alertSD, alertDV, cmdAngajament, tipUser, serializer.Serialize(articoleAgenti), serializer.Serialize(comandaVanzare), serializer.Serialize(dateLivrareDistrib), false, tipUserSap);
+                                articoleAgenti.Clear();
+                                totalComanda = 0;
+                                dateLivrareDistrib.filialaCLP = " ";
+                            }
+
+
+
+                            if (comandaVanzare.nrCmdSap.Length < 4)
+                            {
+                                totalComanda += (articol.pretUnit / articol.multiplu) * Double.Parse(articol.cantUmb, CultureInfo.InvariantCulture);
+                            }
+                            else
+                            {
+                                totalComanda += articol.pretUnit * Double.Parse(articol.cantUmb, CultureInfo.InvariantCulture);
+                            }
+
+
+                            articoleAgenti.Add(articol);
+                            departArt = articol.depart;
+                            ulStoc = articol.filialaSite;
+                            tipTranspCmd = articol.tipTransport;
+
+                        }
+
+                        dateLivrareDistrib.totalComanda = totalComanda.ToString();
+
+                        if (ulStoc != null && !ulStoc.Equals(dateLivrareDistrib.unitLog) && !ulStoc.Equals("BV90"))
+                            dateLivrareDistrib.filialaCLP = ulStoc;
+
+
+                        if (tipTranspCmd != null && !tipTranspCmd.Equals(String.Empty))
+                            dateLivrareDistrib.Transport = tipTranspCmd;
+
+                        retVal = saveAVNewCmd(comanda, alertSD, alertDV, cmdAngajament, tipUser, serializer.Serialize(articoleAgenti), serializer.Serialize(comandaVanzare), serializer.Serialize(dateLivrareDistrib), true, tipUserSap);
+                    }
+
+
+                }
+
+                if (articoleGed.Count > 0)
+                {
+
+                    bool paramAlertDVGed = alertDV;
+                    if ((tipUser.Equals("AV") || tipUser.Equals("SD") || tipUser.Equals("KA")) && comandaVanzare.canalDistrib.Equals("10"))
+                    {
+                        paramAlertDVGed = false;
+                        comandaVanzare.comandaBlocata = "0";
+                    }
+
+                    if (!dateLivrareGed.unitLog.Contains("40"))
+                        dateLivrareGed.unitLog = dateLivrareGed.unitLog.Substring(0, 2) + "2" + dateLivrareGed.unitLog.Substring(3, 1);
+
+                    dateLivrareGed.totalComanda = totalComandaGed.ToString();
+
+                    List<ArticolComanda> sortedArticoleDistrib = articoleGed.OrderBy(order => order.filialaSite).ToList();
+
+                    bool calcTransport = dateLivrareGed.Transport.Equals("TRAP");
+
+                    bool alertSDGed = false;
+                    bool alertDVGed = getTipAlertDVGed(articoleGed);
+
+                    if (alertDVGed)
+                        alertSDGed = true;
+                    else
+                        alertSDGed = getTipAlertSDGed(articoleGed);
+
+
+                    {
+
+                        string ulStoc = sortedArticoleDistrib[0].filialaSite;
+                        List<ArticolComanda> articoleAgenti = new List<ArticolComanda>();
+                        double totalComanda = 0;
+                        string comenziGed = "";
+                        double valTransp = 0;
+                        string tipTranspCmd = "";
+
+                        foreach (var articol in sortedArticoleDistrib)
+                        {
+
+                            if ((ulStoc != null && articol.filialaSite != null && !ulStoc.Equals(articol.filialaSite)))
+                            {
+                                dateLivrareDistrib.totalComanda = totalComanda.ToString();
+
+                                if (!HelperComenzi.isUlEquals(ulStoc, dateLivrareDistrib.unitLog) && !articol.filialaSite.Equals("BV90") && !ulStoc.Equals("BV90"))
+                                    dateLivrareDistrib.filialaCLP = ulStoc;
+
+                                if (tipTranspCmd != null && !tipTranspCmd.Equals(String.Empty))
+                                    dateLivrareDistrib.Transport = tipTranspCmd;
+
+                                retVal = saveAVNewCmd(comanda, alertSD, paramAlertDVGed, cmdAngajament, tipUser, serializer.Serialize(articoleAgenti), serializer.Serialize(comandaVanzare), serializer.Serialize(dateLivrareDistrib), calcTransport, tipUserSap);
+
+                                if (retVal.Contains("#"))
+                                {
+                                    string[] varArrayI = retVal.Split('#');
+
+                                    if (comenziGed == String.Empty)
+                                        comenziGed = varArrayI[2];
+                                    else
+                                        comenziGed += "," + varArrayI[2];
+
+                                    valTransp += Double.Parse(varArrayI[1]);
+                                }
+
+                                articoleAgenti.Clear();
+                                totalComanda = 0;
+                                dateLivrareDistrib.filialaCLP = " ";
+                            }
+
+                            if (!comandaVanzare.nrCmdSap.Equals("-1") || comandaVanzare.nrCmdSap.Length < 4)
+                            {
+                                totalComanda += (articol.pretUnit / articol.multiplu) * Double.Parse(articol.cantUmb, CultureInfo.InvariantCulture);
+                            }
+                            else
+                            {
+                                totalComanda += articol.pretUnit * Double.Parse(articol.cantUmb, CultureInfo.InvariantCulture);
+                            }
+
+                            articoleAgenti.Add(articol);
+                            ulStoc = articol.filialaSite;
+                            tipTranspCmd = articol.tipTransport;
+                        }
+
+
+                        dateLivrareDistrib.totalComanda = totalComanda.ToString();
+
+                        if (ulStoc != null && !HelperComenzi.isUlEquals(ulStoc, dateLivrareDistrib.unitLog) && !ulStoc.Equals("BV90"))
+                            dateLivrareDistrib.filialaCLP = ulStoc;
+
+                        if (tipTranspCmd != null && !tipTranspCmd.Equals(String.Empty))
+                            dateLivrareDistrib.Transport = tipTranspCmd;
+
+                        retVal = saveAVNewCmd(comanda, alertSD, paramAlertDVGed, cmdAngajament, tipUser, serializer.Serialize(articoleAgenti), serializer.Serialize(comandaVanzare), serializer.Serialize(dateLivrareDistrib), calcTransport, tipUserSap);
+
+                        if (retVal.Contains("#"))
+                        {
+                            string[] varArray = retVal.Split('#');
+
+                            if (comenziGed == String.Empty)
+                                comenziGed = varArray[2];
+                            else
+                                comenziGed += "," + varArray[2];
+
+                            valTransp += Double.Parse(varArray[1]);
+
+                            retVal = "100#" + valTransp + "#" + comenziGed;
+                        }
+
+
+                    }
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                sendErrorToMail(ex.ToString());
+            }
+
+            return retVal;
+        }
+
+        private string verificaArticoleMAV_old(string comanda, bool alertSD, bool alertDV, bool cmdAngajament, string tipUser, string JSONArt, string JSONComanda, string JSONDateLivrare, string tipUserSap)
         {
             string retVal = "-1";
 
@@ -12893,6 +13174,7 @@ namespace WebService1
 
                 //adresa livrare consilieri
                 string codJudetLivrare = " ", orasLivrare = " ", stradaLivrare = " ";
+                string codJudetLivrareComanda = dateLivrare.codJudet, orasLivrareComanda = dateLivrare.Oras, stradaLivrareComanda = dateLivrare.Strada + " ";
 
                 if (comandaVanzare.adresaLivrareGed.Trim().Length > 0)
                 {
@@ -12901,6 +13183,17 @@ namespace WebService1
                     codJudetLivrare = oAdrLivrare.codJudet;
                     orasLivrare = oAdrLivrare.oras;
                     stradaLivrare = oAdrLivrare.strada;
+
+                    if (Utils.isUserTest(dateLivrare.codAgent))
+                    {
+                        codJudetLivrareComanda = oAdrLivrare.codJudet;
+                        orasLivrareComanda = oAdrLivrare.oras;
+                        stradaLivrareComanda = oAdrLivrare.strada + " ";
+
+                        codJudetLivrare = dateLivrare.codJudet;
+                        orasLivrare = dateLivrare.Oras;
+                        stradaLivrare = dateLivrare.Strada;
+                    }
                 }
 
                 //sf. adresa livrare
@@ -12914,11 +13207,11 @@ namespace WebService1
                 query = " insert into sapprd.zcomhead_tableta(mandt,id,cod_client,ul,status,status_aprov ,datac,cantar,cod_agent,cod_init,tip_plata,pers_contact,telefon,adr_livrare, " +
                         " valoare,mt,com_referinta,accept1,accept2,fact_red, city, region, pmnttrms , obstra, timpc, ketdat, docin, adr_noua, depart, obsplata, addrnumber, nume_client, " +
                         " stceg, tip_pers, val_incasata, site, email, mod_av, cod_j, adr_livrare_d, city_d, region_d, aprob_cv_necesar, macara, val_min_tr, id_obiectiv, " +
-                        " adresa_obiectiv, parent_id, client_raft, meserias,fact_palet_separat, lifnr, lifnr_prod, descoperita, prog_livr, livr_sambata, bloc, ref_client, ac_zc) " +
+                        " adresa_obiectiv, parent_id, client_raft, meserias,fact_palet_separat, lifnr, lifnr_prod, descoperita, prog_livr, livr_sambata, bloc, ref_client, ac_zc, fil_plata) " +
                         " values ('900',pk_key.nextval, :codCl,:ul,:status,:status_aprov, " +
                         " :datac,:cantar,:agent,:codinit,:plata,:perscont,:tel,:adr,:valoare,:transp,:comsap,:accept1,:accept2,:factred,:city,:region,:termplt,:obslivr,:timpc,:datalivrare, " +
                         " :tipDocIn, :adrNoua, :depart, :obsplata, :adrnumber, :numeClient, :cnpClient, :tipPers, :valIncasata, :cmdSite, :email, :mod_av, :codJ, :adr_livrare_d, :city_d, :region_d, " +
-                        " :necesarCVAprob, :macara, :val_min_tr, :idObiectiv, :adresaObiectiv, :parent_id, :client_raft, :meserias, :factPaletSeparat, :lifnr, :lifnr_prod, :descoperita, :progrLivr, :livrSambata, :bloc, :refClient, :aczc ) " +
+                        " :necesarCVAprob, :macara, :val_min_tr, :idObiectiv, :adresaObiectiv, :parent_id, :client_raft, :meserias, :factPaletSeparat, :lifnr, :lifnr_prod, :descoperita, :progrLivr, :livrSambata, :bloc, :refClient, :aczc, :filPlata ) " +
                         " returning id into :id ";
 
 
@@ -12973,7 +13266,6 @@ namespace WebService1
 
                 if (dateLivrare.tipPlata.Trim().Equals("LC"))
                 {
-                    ErrorHandling.sendErrorToMail("saveAVNewCmd PROD LC: " + comanda + " \n\n " + alertSD + " \n\n " + alertDV + " \n\n " + cmdAngajament + " \n\n " + tipUser + " \n\n " + JSONArt + " \n\n " + JSONComanda + " \n\n " + JSONDateLivrare + " \n\n " + calcTransport + " \n\n " + tipUserSap);
                     return "-1";
                 }
 
@@ -12984,7 +13276,7 @@ namespace WebService1
                 cmd.Parameters[10].Value = dateLivrare.nrTel;
 
                 cmd.Parameters.Add(":adr", OracleType.VarChar, 150).Direction = ParameterDirection.Input;
-                cmd.Parameters[11].Value = dateLivrare.Strada + " ";
+                cmd.Parameters[11].Value = stradaLivrareComanda;
 
                 cmd.Parameters.Add(":valoare", OracleType.Number, 15).Direction = ParameterDirection.Input;
                 string strValoareComanda = dateLivrare.totalComanda;
@@ -13061,10 +13353,10 @@ namespace WebService1
                 cmd.Parameters[17].Value = factRed;
 
                 cmd.Parameters.Add(":city", OracleType.VarChar, 75).Direction = ParameterDirection.Input;
-                cmd.Parameters[18].Value = dateLivrare.Oras;
+                cmd.Parameters[18].Value = orasLivrareComanda;
 
                 cmd.Parameters.Add(":region", OracleType.VarChar, 9).Direction = ParameterDirection.Input;
-                cmd.Parameters[19].Value = dateLivrare.codJudet;
+                cmd.Parameters[19].Value = codJudetLivrareComanda;
 
                 cmd.Parameters.Add(":termplt", OracleType.VarChar, 12).Direction = ParameterDirection.Input;
                 cmd.Parameters[20].Value = dateLivrare.termenPlata;
@@ -13101,7 +13393,7 @@ namespace WebService1
 
                 cmd.Parameters.Add(":cnpClient", OracleType.VarChar, 60).Direction = ParameterDirection.Input;
                 string localCnpClient;
-                if (cnpClient.Length == 13)
+                if (Regex.Replace(cnpClient.ToUpper(), @"RO+", "").Length == 13)
                     localCnpClient = " ";
                 else
                     localCnpClient = cnpClient.Equals("-1") ? " " : Utils.checkROCnpClient(cnpClient);
@@ -13227,6 +13519,9 @@ namespace WebService1
                 cmd.Parameters.Add(":aczc", OracleType.VarChar, 3).Direction = ParameterDirection.Input;
                 cmd.Parameters[57].Value = dateLivrare.isComandaACZC ? "X" : " ";
 
+                cmd.Parameters.Add(":filPlata", OracleType.VarChar, 12).Direction = ParameterDirection.Input;
+                cmd.Parameters[58].Value = dateLivrare.filialaPlata != null && dateLivrare.filialaPlata.Trim().Length > 0 ? dateLivrare.filialaPlata : " ";
+
                 OracleParameter idCmd = new OracleParameter("id", OracleType.Number);
                 idCmd.Direction = ParameterDirection.Output;
                 cmd.Parameters.Add(idCmd);
@@ -13291,6 +13586,16 @@ namespace WebService1
 
                     if (tipUser.Equals("CV"))
                     {
+
+                        if (Utils.isUserTest(dateLivrare.codAgent))
+                        {
+                            if (articolComanda[i].filialaSite != null || !articolComanda[i].filialaSite.Trim().Equals(String.Empty))
+                                ulStoc = articolComanda[i].filialaSite;
+
+                            if (dateLivrare.filialaCLP != null && dateLivrare.filialaCLP.Trim().Length > 0)
+                                ulStoc = dateLivrare.filialaCLP;
+                        }
+
 
                         pretUnit = articolComanda[i].pretUnit;
                         valPoz = articolComanda[i].pretUnit * Double.Parse(articolComanda[i].cantUmb, CultureInfo.InvariantCulture);
@@ -13410,7 +13715,11 @@ namespace WebService1
 
                     //vanzare din GED cu transp. ARBSQ se calculeaza intai pretul
                     double pretTransp = 0;
-                    if ((uLog.Substring(2, 1).Equals("2") && comandaVanzare.canalDistrib.Equals("20") && (transp.Equals("TRAP") || transp.Equals("TERT")) && refSAP.Equals("-1")) || (isComandaWood(uLog) && refSAP.Equals("-1") && transp.Equals("TRAP")))
+                    if (Utils.isUserTest(dateLivrare.codAgent))
+                    {
+                        paramCmd = "C";
+                    }
+                    else if ((uLog.Substring(2, 1).Equals("2") && comandaVanzare.canalDistrib.Equals("20") && (transp.Equals("TRAP") || transp.Equals("TERT")) && refSAP.Equals("-1")) || (isComandaWood(uLog) && refSAP.Equals("-1") && transp.Equals("TRAP")))
                     {
                         paramCmd = "S";
                     }
@@ -14372,7 +14681,7 @@ namespace WebService1
 
                 string consSite = " ";
 
-                if (isConsVanzSite(idAg.Value.ToString()) || tipAgent.Equals("CVO"))
+                if (isConsVanzSite(idAg.Value.ToString()) || tipAgent.Equals("CVO") || tipAgent.Equals("SVO"))
                     consSite = "X";
                 else if (tipAgent.ToUpper().Contains("CONS"))
                     consSite = "Y";
@@ -14461,11 +14770,7 @@ namespace WebService1
                 if (tipAgent.Equals("SDCVA"))
                     tipAgent = "CAG1";
 
-                //if (tipAgent.Equals("SDIP"))
-                //    tipAgent = "SDCVA";
 
-                //if (tipAgent.Equals("CVIP"))
-                //    tipAgent = "CVR";
 
                 //rezolvat problema comenzilor fara articole la aprobare
                 filialaHome = "false";

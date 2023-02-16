@@ -190,7 +190,8 @@ namespace WebService1
 
 
 
-                cmd.CommandText = " select distinct s.matnr, ar.nume,  e.versg " +
+                cmd.CommandText = " select distinct s.matnr, ar.nume,  e.versg,  " +
+                                  " (select dismm from sapprd.marc c where mandt = '900' and matnr = s.matnr and werks = :filiala) planif " +
                                   " from sapprd.zpath_hybris s, sapprd.marc c, websap.articole ar, sapprd.mvke e " +
                                   " where (s.nivel_0 = :codCateg or s.nivel_1 = :codCateg or s.nivel_2 = :codCateg or " +
                                   " s.nivel_3 = :codCateg or s.nivel_4 = :codCateg or s.nivel_5 = :codCateg or s.nivel_6 = :codCateg) " +
@@ -203,11 +204,14 @@ namespace WebService1
                 cmd.CommandType = CommandType.Text;
                 cmd.Parameters.Clear();
 
+                cmd.Parameters.Add(":filiala", OracleType.VarChar, 56).Direction = ParameterDirection.Input;
+                cmd.Parameters[0].Value = filiala;
+
                 cmd.Parameters.Add(":codCateg", OracleType.VarChar, 60).Direction = ParameterDirection.Input;
-                cmd.Parameters[0].Value = codCategorie;
+                cmd.Parameters[1].Value = codCategorie;
 
                 cmd.Parameters.Add(":paginaCrt", OracleType.VarChar, 3).Direction = ParameterDirection.Input;
-                cmd.Parameters[1].Value = paginaCrt;
+                cmd.Parameters[2].Value = paginaCrt;
 
                 oReader = cmd.ExecuteReader();
 
@@ -220,6 +224,7 @@ namespace WebService1
                         articol.nume = oReader.GetString(1);
                         articol.tip1 = "";
                         articol.tip2 = oReader.GetString(2);
+                        articol.planificator = oReader.GetString(3);
                         articol.isLocal = true;
                         articol.isArticolSite = false;
                         setDetaliiArticol(articol);
@@ -656,6 +661,7 @@ namespace WebService1
                 cautare = " and lower(a.nume) like '" + codArticol.ToLower() + "%'";
 
             string condDepart = " and (a.grup_vz in " + HelperComenzi.getDepartExtra(depart) + " or a.grup_vz = '11' )  ";
+
             if (depart.Equals("00"))
                 condDepart = "";
 
@@ -1214,9 +1220,134 @@ namespace WebService1
 
 
 
+        public string getLivrariComanda(string antetComanda, string strComanda, string canal)
+        {
 
 
-        public string getLivrariComanda(string antetComanda, string strComanda)
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            LivrareMathaus livrareMathaus = new LivrareMathaus();
+
+            try
+            {
+
+                AntetCmdMathaus antetCmdMathaus = null;
+                if (antetComanda != null)
+                    antetCmdMathaus = serializer.Deserialize<AntetCmdMathaus>(antetComanda);
+
+                ComandaMathaus comandaMathaus = serializer.Deserialize<ComandaMathaus>(strComanda);
+                List<DateArticolMathaus> articole = comandaMathaus.deliveryEntryDataList;
+
+                ComandaMathaus comanda = new ComandaMathaus();
+                comanda.sellingPlant = comandaMathaus.sellingPlant;
+
+                List<DateArticolMathaus> deliveryEntryDataList = new List<DateArticolMathaus>();
+
+                foreach (DateArticolMathaus dateArticol in articole)
+                {
+
+                    if (!dateArticol.tip2.Equals("S"))
+                        continue;
+
+                    DateArticolMathaus articol = new DateArticolMathaus();
+                    articol.productCode = "0000000000" + dateArticol.productCode;
+                    articol.quantity = Math.Ceiling(dateArticol.quantity);
+                    articol.unit = dateArticol.unit;
+                    deliveryEntryDataList.Add(articol);
+
+                }
+
+                comanda.deliveryEntryDataList = deliveryEntryDataList;
+
+                ComandaMathaus comandaRezultat;
+                if (comanda.deliveryEntryDataList.Count > 0)
+                {
+                    string strComandaRezultat = callDeliveryService(serializer.Serialize(comanda));
+                    comandaRezultat = serializer.Deserialize<ComandaMathaus>(strComandaRezultat);
+                }
+                else
+                {
+                    ComandaMathaus cmdMathaus = new ComandaMathaus();
+                    cmdMathaus.sellingPlant = comandaMathaus.sellingPlant;
+                    cmdMathaus.deliveryEntryDataList = new List<DateArticolMathaus>();
+                    comandaRezultat = cmdMathaus;
+                }
+
+                bool artFound = false;
+                foreach (DateArticolMathaus dateArticol in articole)
+                {
+
+                    if (!dateArticol.productCode.StartsWith("0000000000"))
+                        dateArticol.productCode = "0000000000" + dateArticol.productCode;
+
+                    artFound = false;
+                    foreach (DateArticolMathaus dateArticolRez in comandaRezultat.deliveryEntryDataList)
+                    {
+                        if (dateArticolRez.productCode.Equals(dateArticol.productCode) && dateArticolRez.deliveryWarehouse != null && !dateArticolRez.deliveryWarehouse.Trim().Equals(String.Empty))
+                        {
+
+                            if (canal != null && canal.Equals("20") && !dateArticolRez.deliveryWarehouse.Equals("BV90"))
+                            {
+                                dateArticol.deliveryWarehouse = getULGed(dateArticolRez.deliveryWarehouse);
+                                dateArticol.deliveryWarehouse = dateArticolRez.deliveryWarehouse;
+                            }
+
+                            else
+                                dateArticol.deliveryWarehouse = dateArticolRez.deliveryWarehouse;
+
+                            artFound = true;
+                            break;
+                        }
+
+                    }
+
+                    if (!artFound)
+                    {
+                        if (dateArticol.ulStoc != null && dateArticol.ulStoc.Equals("BV90"))
+                            dateArticol.deliveryWarehouse = "BV90";
+                        else if (canal != null && canal.Equals("20") && (dateArticol.ulStoc == null || !dateArticol.ulStoc.Equals("BV90")))
+                            dateArticol.deliveryWarehouse = comanda.sellingPlant;
+                        else
+                            dateArticol.deliveryWarehouse = dateArticol.productCode.StartsWith("0000000000111") ? getULGed(comanda.sellingPlant) : comanda.sellingPlant;
+                    }
+
+                }
+
+                DateTransportMathaus dateTransport = null;
+
+                if (antetCmdMathaus != null)
+                    dateTransport = getTransportService(antetCmdMathaus, comandaMathaus, canal);
+
+                foreach (DateArticolMathaus articolMathaus in comandaMathaus.deliveryEntryDataList)
+                {
+                    foreach (DepozitArticolTransport depozitArticol in dateTransport.listDepozite)
+
+                    {
+                        if (articolMathaus.productCode.Equals(depozitArticol.codArticol) && articolMathaus.deliveryWarehouse.Equals(depozitArticol.filiala))
+                        {
+                            articolMathaus.depozit = depozitArticol.depozit;
+                            break;
+                        }
+                    }
+                }
+
+
+                livrareMathaus.comandaMathaus = comandaMathaus;
+                livrareMathaus.costTransport = dateTransport.listCostTransport;
+
+
+            }
+            catch (Exception ex)
+            {
+                ErrorHandling.sendErrorToMail("getLivrariComanda: " + ex.ToString());
+            }
+
+            return serializer.Serialize(livrareMathaus);
+
+        }
+
+
+
+        public string getLivrariComanda_old(string antetComanda, string strComanda, string canal)
         {
 
             JavaScriptSerializer serializer = new JavaScriptSerializer();
@@ -1251,9 +1382,19 @@ namespace WebService1
 
                 comanda.deliveryEntryDataList = deliveryEntryDataList;
 
-                string strComandaRezultat = callDeliveryService(serializer.Serialize(comanda));
-
-                ComandaMathaus comandaRezultat = serializer.Deserialize<ComandaMathaus>(strComandaRezultat);
+                ComandaMathaus comandaRezultat;
+                if (comanda.deliveryEntryDataList.Count > 0)
+                {
+                    string strComandaRezultat = callDeliveryService(serializer.Serialize(comanda));
+                    comandaRezultat = serializer.Deserialize<ComandaMathaus>(strComandaRezultat);
+                }
+                else
+                {
+                    ComandaMathaus cmdMathaus = new ComandaMathaus();
+                    cmdMathaus.sellingPlant = comandaMathaus.sellingPlant;
+                    cmdMathaus.deliveryEntryDataList = new List<DateArticolMathaus>();
+                    comandaRezultat = cmdMathaus;
+                }
 
                 bool artFound = false;
                 foreach (DateArticolMathaus dateArticol in articole)
@@ -1287,7 +1428,7 @@ namespace WebService1
                 DateTransportMathaus dateTransport = null;
 
                 if (antetCmdMathaus != null)
-                    dateTransport = getTransportService(antetCmdMathaus, comandaMathaus);
+                    dateTransport = getTransportService_old(antetCmdMathaus, comandaMathaus);
 
                 foreach (DateArticolMathaus articolMathaus in comandaMathaus.deliveryEntryDataList)
                 {
@@ -1333,7 +1474,7 @@ namespace WebService1
                 System.Net.ServicePointManager.Expect100Continue = false;
                 ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://pcm.arabesque.ro/arbsqintegration/optimiseDeliveryB2B");
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://b2c.arabesque.ro/arbsqintegration/optimiseDeliveryB2B");
 
                 request.Method = "POST";
                 request.ContentType = "application/json";
@@ -1456,7 +1597,7 @@ namespace WebService1
             System.Net.ServicePointManager.Expect100Continue = false;
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://pcm.arabesque.ro/arbsqintegration/getStocksB2B");
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://b2c.arabesque.ro/arbsqintegration/getStocksB2B");
             request.Method = "POST";
             request.ContentType = "application/json";
             request.ContentLength = jsonData.Length;
@@ -1483,7 +1624,175 @@ namespace WebService1
         }
 
 
-        private DateTransportMathaus getTransportService(AntetCmdMathaus antetCmd, ComandaMathaus comandaMathaus)
+        private DateTransportMathaus getTransportService(AntetCmdMathaus antetCmd, ComandaMathaus comandaMathaus, string canal)
+        {
+            DateTransportMathaus dateTransport = new DateTransportMathaus();
+            List<CostTransportMathaus> listCostTransp = new List<CostTransportMathaus>();
+            List<DepozitArticolTransport> listArticoleDepoz = new List<DepozitArticolTransport>();
+
+
+            string werks = comandaMathaus.sellingPlant;
+            string departCmd = antetCmd.depart;
+
+            if (canal != null && canal.Equals("20"))
+            {
+                werks = getULGed(comandaMathaus.sellingPlant);
+                departCmd = "11";
+            }
+
+            try
+            {
+
+                SAPWebServices.ZTBL_WEBSERVICE webService = new SAPWebServices.ZTBL_WEBSERVICE();
+
+                SAPWebServices.ZdetTransport inParam = new SAPWebServices.ZdetTransport();
+                System.Net.NetworkCredential nc = new System.Net.NetworkCredential(Auth.getUser(), Auth.getPass());
+                webService.Credentials = nc;
+                webService.Timeout = 300000;
+
+                inParam.IpCity = antetCmd.localitate;
+                inParam.IpRegio = antetCmd.codJudet;
+                inParam.IpKunnr = antetCmd.codClient;
+                inParam.IpTippers = antetCmd.tipPers;
+                inParam.IpWerks = werks;
+                inParam.IpVkgrp = departCmd;
+                inParam.IpPernr = antetCmd.codPers;
+                inParam.IpTraty = antetCmd.tipTransp;
+
+                SAPWebServices.ZsitemsComanda[] items = new SAPWebServices.ZsitemsComanda[comandaMathaus.deliveryEntryDataList.Count];
+
+                int ii = 0;
+                foreach (DateArticolMathaus dateArticol in comandaMathaus.deliveryEntryDataList)
+                {
+                    items[ii] = new SAPWebServices.ZsitemsComanda();
+                    items[ii].Matnr = dateArticol.productCode;
+                    items[ii].Kwmeng = Decimal.Parse(dateArticol.quantity.ToString());
+                    items[ii].Vrkme = dateArticol.unit;
+                    items[ii].ValPoz = Decimal.Parse(String.Format("{0:0.00}", dateArticol.valPoz));
+                    items[ii].Werks = dateArticol.deliveryWarehouse;
+                    if (dateArticol.depozit != null && dateArticol.depozit.Trim() != "")
+                        items[ii].Lgort = dateArticol.depozit;
+
+                    ii++;
+                }
+
+                inParam.ItItems = items;
+                SAPWebServices.ZsfilTransp[] filCost = new SAPWebServices.ZsfilTransp[1];
+                inParam.ItFilCost = filCost;
+
+                SAPWebServices.ZdetTransportResponse resp = webService.ZdetTransport(inParam);
+
+                int nrItems = resp.ItItems.Count();
+
+                bool artFound = false;
+                foreach (SAPWebServices.ZsitemsComanda itemCmd in resp.ItItems)
+                {
+                    if (listCostTransp.Count == 0)
+                    {
+                        CostTransportMathaus cost = new CostTransportMathaus();
+                        cost.filiala = itemCmd.Werks;
+                        cost.tipTransp = itemCmd.Traty;
+                        listCostTransp.Add(cost);
+                    }
+                    else
+                    {
+                        artFound = false;
+                        foreach (CostTransportMathaus costTransp in listCostTransp)
+                        {
+                            if (costTransp.filiala.Equals(itemCmd.Werks))
+                            {
+                                artFound = true;
+                                break;
+                            }
+                        }
+
+                        if (!artFound)
+                        {
+                            CostTransportMathaus cost = new CostTransportMathaus();
+                            cost.filiala = itemCmd.Werks;
+                            cost.tipTransp = itemCmd.Traty;
+                            listCostTransp.Add(cost);
+                        }
+
+                    }
+
+                    DepozitArticolTransport depozitArticol = new DepozitArticolTransport();
+                    depozitArticol.codArticol = itemCmd.Matnr;
+                    depozitArticol.filiala = itemCmd.Werks;
+                    depozitArticol.depozit = itemCmd.Lgort;
+                    listArticoleDepoz.Add(depozitArticol);
+
+                }
+
+                nrItems = resp.ItFilCost.Count();
+
+                foreach (SAPWebServices.ZsfilTransp itemCost in resp.ItFilCost)
+                {
+
+                    foreach (CostTransportMathaus costTransp in listCostTransp)
+                    {
+                        if (costTransp.filiala.Equals(itemCost.Werks))
+                        {
+                            costTransp.valTransp = itemCost.ValTr.ToString();
+                            costTransp.codArtTransp = itemCost.Matnr;
+                            costTransp.depart = itemCost.Spart;
+                            break;
+                        }
+                    }
+
+                }
+
+                if (Utils.isUnitLogGed(comandaMathaus.sellingPlant) || (canal != null && canal.Equals("20")))
+                    trateazaLivrariGed(comandaMathaus, resp);
+
+            }
+            catch (Exception ex)
+            {
+                ErrorHandling.sendErrorToMail("getTransportService: " + ex.ToString());
+            }
+
+            dateTransport.listCostTransport = listCostTransp;
+            dateTransport.listDepozite = listArticoleDepoz;
+
+            return dateTransport;
+
+        }
+
+
+        private void trateazaLivrariGed(ComandaMathaus comandaMathaus, SAPWebServices.ZdetTransportResponse resp)
+        {
+
+            HashSet<string> filialeLivrare = new HashSet<string>();
+            foreach (SAPWebServices.ZsitemsComanda itemCmd in resp.ItItems)
+            {
+                if (Utils.isUnitLogGed(itemCmd.Werks))
+                    filialeLivrare.Add(itemCmd.Vstel);
+            }
+
+
+            foreach (string filLivrare in filialeLivrare)
+            {
+                foreach (SAPWebServices.ZsitemsComanda itemCmd in resp.ItItems)
+                {
+                    if (filLivrare.Equals(itemCmd.Vstel))
+                    {
+                        foreach (DateArticolMathaus articol in comandaMathaus.deliveryEntryDataList)
+                        {
+                            if (itemCmd.Matnr.Equals(articol.productCode))
+                            {
+                                articol.deliveryWarehouse = getULGed(articol.deliveryWarehouse);
+                                break;
+                            }
+                        }
+                    }
+                }
+
+            }
+
+
+        }
+
+        private DateTransportMathaus getTransportService_old(AntetCmdMathaus antetCmd, ComandaMathaus comandaMathaus)
         {
             DateTransportMathaus dateTransport = new DateTransportMathaus();
             List<CostTransportMathaus> listCostTransp = new List<CostTransportMathaus>();
@@ -1505,6 +1814,12 @@ namespace WebService1
                 inParam.IpTippers = antetCmd.tipPers;
                 inParam.IpWerks = comandaMathaus.sellingPlant;
                 inParam.IpVkgrp = antetCmd.depart;
+
+                if (antetCmd.codPers != null)
+                {
+                    inParam.IpPernr = antetCmd.codPers;
+                    inParam.IpTraty = antetCmd.tipTransp;
+                }
 
                 SAPWebServices.ZsitemsComanda[] items = new SAPWebServices.ZsitemsComanda[comandaMathaus.deliveryEntryDataList.Count];
 

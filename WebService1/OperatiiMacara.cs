@@ -12,7 +12,122 @@ namespace WebService1
     public class OperatiiMacara
     {
 
-        public String getCostMacara(string unitLog, string codAgent, string codClient, string codFurnizor, string listArt)
+        public String getCostMacara(string unitLog, string codAgent, string codClient, string codFurnizor, string listArt, string canal)
+        {
+
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            List<ArticolCalculDesc> listArtCmd = serializer.Deserialize<List<ArticolCalculDesc>>(listArt);
+
+            SAPWebServices.ZTBL_WEBSERVICE webService = new ZTBL_WEBSERVICE();
+
+            SAPWebServices.ZNrPaleti inParam = new SAPWebServices.ZNrPaleti();
+            System.Net.NetworkCredential nc = new System.Net.NetworkCredential(Service1.getUser(), Service1.getPass());
+            webService.Credentials = nc;
+            webService.Timeout = 300000;
+
+            OracleConnection connection = new OracleConnection();
+            string connectionString = DatabaseConnections.ConnectToProdEnvironment();
+
+            connection.ConnectionString = connectionString;
+            connection.Open();
+
+            SAPWebServices.ZstNrPaleti[] nrpal = new ZstNrPaleti[listArtCmd.Count];
+            string tempDepoz = "";
+            for (int i = 0; i < listArtCmd.Count; i++)
+            {
+                nrpal[i] = new ZstNrPaleti();
+
+                string codArt = listArtCmd[i].cod;
+                if (listArtCmd[i].cod.Length == 8)
+                    codArt = "0000000000" + listArtCmd[i].cod;
+
+
+                nrpal[i].Matnr = codArt;
+                nrpal[i].Meins = listArtCmd[i].um;
+                nrpal[i].Menge = Convert.ToDecimal(listArtCmd[i].cant);
+                tempDepoz = listArtCmd[i].depoz;
+                nrpal[i].Lgort = tempDepoz;
+
+            }
+
+            string unitLogParam = unitLog;
+
+            if (canal != null && canal.Equals("20"))
+                unitLogParam = Utils.getFilialaGed(unitLog);
+
+            inParam.ItTable = nrpal;
+            inParam.IpWerks = unitLogParam;
+            inParam.IpPernr = codAgent;
+            inParam.IpKunnr = codClient;
+            inParam.IpLifnr = codFurnizor;
+
+            SAPWebServices.ZNrPaletiResponse resp = webService.ZNrPaleti(inParam);
+            SAPWebServices.ZstEtPaleti[] valPaleti = resp.EtValpal;
+            SAPWebServices.ZstEtMarfaPalet[] listMarfaPaleti = resp.EtMarfaPalet;
+
+            CostDescarcare costDescarcare = new CostDescarcare();
+            costDescarcare.sePermite = !resp.EpMacara.Equals("X");
+            costDescarcare.filiala = unitLog;
+
+            List<ArticolDescarcare> listArticole = new List<ArticolDescarcare>();
+
+            ArticolDescarcare articol = new ArticolDescarcare();
+
+            for (int i = 0; i < valPaleti.Length; i++)
+            {
+                articol = new ArticolDescarcare();
+                articol.cod = valPaleti[i].Matnr.TrimStart('0');
+                articol.depart = valPaleti[i].Spart.Equals("04") ? "041" : valPaleti[i].Spart;
+                articol.valoare = valPaleti[i].Valpal.Trim();
+                articol.cantitate = valPaleti[i].Nrpal.ToString();
+                articol.valoareMin = valPaleti[i].Valmin.Trim();
+                listArticole.Add(articol);
+            }
+
+            if (valPaleti.Length == 0)
+            {
+                articol = new ArticolDescarcare();
+                articol.cod = "30101791";
+                articol.depart = "01";
+                articol.valoare = "0";
+                articol.cantitate = "0";
+                articol.valoareMin = "0";
+                listArticole.Add(articol);
+            }
+
+
+
+            List<ArticolPalet> listPaleti = new List<ArticolPalet>();
+
+            for (int i = 0; i < listMarfaPaleti.Length; i++)
+            {
+                ArticolPalet artPalet = new ArticolPalet();
+                artPalet.codPalet = listMarfaPaleti[i].MatnrPalet.TrimStart('0');
+                artPalet.depart = listMarfaPaleti[i].SpartPalet;
+                artPalet.cantitate = Decimal.ToInt32(listMarfaPaleti[i].CantPalet).ToString();
+                artPalet.numePalet = getNumeArticol(connection, listMarfaPaleti[i].MatnrPalet);
+                artPalet.codArticol = listMarfaPaleti[i].MatnrMarfa.TrimStart('0');
+                artPalet.numeArticol = getNumeArticol(connection, listMarfaPaleti[i].MatnrMarfa);
+                artPalet.furnizor = listMarfaPaleti[i].FurnizorPalet;
+                artPalet.pretUnit = listMarfaPaleti[i].PretPalet.ToString();
+                artPalet.cantArticol = listMarfaPaleti[i].CantMarfa.ToString();
+                artPalet.umArticol = listMarfaPaleti[i].MeinsMarfa;
+                listPaleti.Add(artPalet);
+
+
+            }
+
+            connection.Close();
+
+            costDescarcare.articoleDescarcare = listArticole;
+            costDescarcare.articolePaleti = getPaletiDistincti(listPaleti);
+
+            return new JavaScriptSerializer().Serialize(costDescarcare);
+
+        }
+
+
+        public String getCostMacara_old(string unitLog, string codAgent, string codClient, string codFurnizor, string listArt)
         {
 
 
@@ -122,7 +237,7 @@ namespace WebService1
         }
 
 
-        public string getCostMacaraComenzi(string codAgent, string codClient, string codFurnizor, string listComenzi)
+        public string getCostMacaraComenzi(string codAgent, string codClient, string codFurnizor, string listComenzi, string canal)
         {
             List<CostDescarcare> costDescarcare = new List<CostDescarcare>();
 
@@ -131,7 +246,7 @@ namespace WebService1
 
             foreach (ComandaCalculDescarcare comanda in listCom)
             {
-                string costDescComanda = getCostMacara(comanda.filiala, codAgent, codClient, codFurnizor, comanda.listArticole);
+                string costDescComanda = getCostMacara(comanda.filiala, codAgent, codClient, codFurnizor, comanda.listArticole, canal);
                 costDescarcare.Add(serializer.Deserialize<CostDescarcare>(costDescComanda));
             }
 
