@@ -1099,6 +1099,8 @@ namespace WebService1
             DateLivrareCmd dateLivrare = new DateLivrareCmd();
             List<ArticolComandaRap> listArticole = new List<ArticolComandaRap>();
             Conditii conditii = new Conditii();
+            conditii.header = new ConditiiHeader();
+            conditii.articole = new List<ConditiiArticole>();
 
             try
             {
@@ -1161,6 +1163,9 @@ namespace WebService1
                     dateLivrare.furnizorProduse = " ";
                     dateLivrare.isCamionDescoperit = oReader.GetString(11).Equals("X") ? true : false;
                     dateLivrare.diviziiClient = " ";
+                    dateLivrare.filialaCLP = " ";
+                    dateLivrare.nrCmdClp = " ";
+                    dateLivrare.tipPlata = " ";
 
 
 
@@ -1231,6 +1236,10 @@ namespace WebService1
                         articol.adaosMediu = "0.0";
                         articol.unitMasPretMediu = "0.0";
                         articol.coefCorectie = "0.0";
+                        articol.dataExp = "00000000";
+                        articol.greutate = "0";
+                        articol.listCabluri = new JavaScriptSerializer().Serialize(new List<CantCablu>());
+
 
                         listArticole.Add(articol);
 
@@ -1948,7 +1957,11 @@ namespace WebService1
             return retVal;
         }
 
-
+        public string getProcMarjaComenziIP(string codAgent, string codClient)
+        {
+            //procent + blocare comanda
+            return "10#false";
+        }
 
     }
 

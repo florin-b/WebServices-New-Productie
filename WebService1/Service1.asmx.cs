@@ -3452,6 +3452,7 @@ namespace WebService1
                     dateLivrare.tipPersAgent = oReader.GetString(oReader.GetOrdinal("tip_pers_av"));
 
                     dateLivrare.filialaPlata = oReader.GetString(oReader.GetOrdinal("fil_plata"));
+                    dateLivrare.tonaj = OperatiiSuplimentare.getTonajComanda(connection, nrCmd);
 
                     if ((dateLivrare.tipPersAgent.Equals("CV") || dateLivrare.tipPersAgent.Equals("SITE")) && Utils.isUserTest(oReader.GetString(oReader.GetOrdinal("cod_agent"))))
                     {
@@ -3599,6 +3600,7 @@ namespace WebService1
                         articol.sintetic = oReader1.GetString(32);
                         articol.lungime = oReader1.GetDouble(33);
                         articol.filialaSite = unitLogAlt;
+                        articol.dataExp = "00000000";
                         articol.umPalet = oReader1.GetInt32(34).ToString();
                         articol.greutate = oReader1.GetDouble(35).ToString();
 
@@ -13762,6 +13764,9 @@ namespace WebService1
                         retVal = outParam.VOk.ToString();
                     }
 
+                    if (Utils.isUserTest(dateLivrare.codAgent))
+                        retVal = outParam.VOk.ToString();
+
                     webService.Dispose();
 
 
@@ -14213,6 +14218,12 @@ namespace WebService1
         public string getListClientiInstPublice(string numeClient, string unitLog, string tipUser, string tipClient)
         {
             return new OperatiiClienti().getListClientiInstPublice(numeClient, unitLog, tipUser, tipClient);
+        }
+
+        [WebMethod]
+        public string getProcMarjaComenziIP(string codAgent, string codClient)
+        {
+            return new OperatiiComenzi().getProcMarjaComenziIP(codAgent, codClient);
         }
 
         [WebMethod]

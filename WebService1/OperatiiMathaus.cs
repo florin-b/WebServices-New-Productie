@@ -201,17 +201,34 @@ namespace WebService1
                                   " order by s.matnr OFFSET :paginaCrt ROWS FETCH NEXT 10 ROWS ONLY ";
 
 
+                cmd.CommandText = " select distinct s.matnr, ar.nume, e.versg, " +
+                                  " (select c.dismm from sapprd.marc c, articole ar where c.mandt = '900' and c.matnr = s.matnr " +
+                                  " and ar.cod = c.matnr and c.werks = decode(ar.spart, 11, :filialaGed, :filiala)) planif1, " +
+                                  " decode((select c.dismm from sapprd.marc c, articole ar where c.mandt = '900' and c.matnr = s.matnr " +
+                                  " and ar.cod = c.matnr and c.werks = decode(ar.spart, 11, :filialaGed, :filiala)), " +
+                                  " 'AR',1,'ZM',2,'AC',3,'ND',4,'ZM',5,'VM',6,7) cod_planif " +
+                                  " from sapprd.zpath_hybris s, sapprd.marc c, websap.articole ar, sapprd.mvke e " +
+                                  " where (s.nivel_0 = :codCateg or s.nivel_1 = :codCateg or s.nivel_2 = :codCateg or " +
+                                  " s.nivel_3 = :codCateg or s.nivel_4 = :codCateg or s.nivel_5 = :codCateg or s.nivel_6 = :codCateg) " +
+                                  condDepart +
+                                  " and ar.cod = s.matnr and s.mandt = c.mandt and s.matnr = c.matnr " +
+                                  " and e.mandt = '900' and e.matnr = s.matnr and e.vtweg = '20' " +
+                                  " order by cod_planif, s.matnr OFFSET :paginaCrt ROWS FETCH NEXT 10 ROWS ONLY ";
+
                 cmd.CommandType = CommandType.Text;
                 cmd.Parameters.Clear();
 
-                cmd.Parameters.Add(":filiala", OracleType.VarChar, 56).Direction = ParameterDirection.Input;
-                cmd.Parameters[0].Value = filiala;
-
                 cmd.Parameters.Add(":codCateg", OracleType.VarChar, 60).Direction = ParameterDirection.Input;
-                cmd.Parameters[1].Value = codCategorie;
+                cmd.Parameters[0].Value = codCategorie;
 
                 cmd.Parameters.Add(":paginaCrt", OracleType.VarChar, 3).Direction = ParameterDirection.Input;
-                cmd.Parameters[2].Value = paginaCrt;
+                cmd.Parameters[1].Value = paginaCrt;
+
+                cmd.Parameters.Add(":filialaGed", OracleType.VarChar, 12).Direction = ParameterDirection.Input;
+                cmd.Parameters[2].Value = Utils.getFilialaGed(filiala);
+
+                cmd.Parameters.Add(":filiala", OracleType.VarChar, 12).Direction = ParameterDirection.Input;
+                cmd.Parameters[3].Value = filiala;
 
                 oReader = cmd.ExecuteReader();
 
@@ -753,14 +770,18 @@ namespace WebService1
             OracleCommand cmd = connection.CreateCommand();
             try
             {
-                cmd.CommandText = " select a.cod ,a.nume, c.dismm, " +
-                                  " (select e.versg from sapprd.mvke e where e.mandt = '900' and e.matnr = a.cod and e.vtweg = '20') par_s " +
-                                  " from articole a, sintetice b, sapprd.marc c where c.mandt = '900' " +
-                                  " and c.matnr = a.cod and c.werks = :filiala and c.mmsta <> '01'  and a.sintetic = b.cod and a.cod != 'MAT GENERIC PROD' " +
-                                  " and a.blocat <> '01' " + cautare + condDepart + "  order by a.cod " +
-                                  " OFFSET :paginaCrt ROWS FETCH NEXT 10 ROWS ONLY  ";
-
-
+                cmd.CommandText = " select a.cod ,a.nume, " +
+                                  " (select c.dismm from sapprd.marc c, articole ar where c.mandt = '900' and c.matnr = a.cod " +
+                                  " and ar.cod = c.matnr and c.werks = decode(ar.spart, 11, :filialaGed, :filiala)) planif, " +
+                                  " decode((select c.dismm from sapprd.marc c, articole ar where c.mandt = '900' and c.matnr = a.cod " +
+                                  " and ar.cod = c.matnr and c.werks = decode(ar.spart, 11, :filialaGed, :filiala)), " +
+                                  " 'AR',1,'ZM',2,'AC',3,'ND',4,'ZM',5,'VM',6,7) cod_planif, " +
+                                  " (select e.versg from sapprd.mvke e where e.mandt = '900' and " +
+                                  " e.matnr = a.cod and e.vtweg = '20') par_s from articole a, sintetice b, sapprd.marc c " +
+                                  " where c.mandt = '900'  and c.matnr = a.cod and c.werks = :filiala and c.mmsta <> '01' " +
+                                  " and a.sintetic = b.cod and a.cod != 'MAT GENERIC PROD'  and a.blocat <> '01' " +
+                                    cautare + condDepart +
+                                  " order by cod_planif, a.nume  OFFSET :paginaCrt ROWS FETCH NEXT 10 ROWS ONLY ";
 
 
                 cmd.CommandType = CommandType.Text;
@@ -772,6 +793,9 @@ namespace WebService1
                 cmd.Parameters.Add(":paginaCrt", OracleType.VarChar, 3).Direction = ParameterDirection.Input;
                 cmd.Parameters[1].Value = paginaCrt;
 
+                cmd.Parameters.Add(":filialaGed", OracleType.VarChar, 12).Direction = ParameterDirection.Input;
+                cmd.Parameters[2].Value = Utils.getFilialaGed(filiala);
+
                 oReader = cmd.ExecuteReader();
 
                 if (oReader.HasRows)
@@ -782,7 +806,7 @@ namespace WebService1
                         articol.cod = oReader.GetString(0);
                         articol.nume = oReader.GetString(1);
                         articol.tip1 = oReader.GetString(2);
-                        articol.tip2 = oReader.GetString(3);
+                        articol.tip2 = oReader.GetString(4);
                         articol.planificator = oReader.GetString(2);
                         articol.isLocal = true;
                         articol.isArticolSite = false;

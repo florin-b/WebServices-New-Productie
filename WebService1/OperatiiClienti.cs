@@ -1058,6 +1058,7 @@ namespace WebService1
                             datePersonale.clientBlocat = false;
                             datePersonale.tipPlata = " ";
                             datePersonale.termenPlata = new List<string>() { "C000" };
+                            datePersonale.cnp = "";
                         }
                         else {
 

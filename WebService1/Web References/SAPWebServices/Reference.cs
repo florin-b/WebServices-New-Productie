@@ -1244,6 +1244,14 @@ namespace WebService1.SAPWebServices {
         
         private string waersField;
         
+        private decimal t1TotField;
+        
+        private decimal t1TotProcField;
+        
+        private decimal t0TotField;
+        
+        private decimal t0TotProcField;
+        
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         public string Nrcmdsap {
@@ -1340,6 +1348,50 @@ namespace WebService1.SAPWebServices {
             }
             set {
                 this.waersField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal T1Tot {
+            get {
+                return this.t1TotField;
+            }
+            set {
+                this.t1TotField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal T1TotProc {
+            get {
+                return this.t1TotProcField;
+            }
+            set {
+                this.t1TotProcField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal T0Tot {
+            get {
+                return this.t0TotField;
+            }
+            set {
+                this.t0TotField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal T0TotProc {
+            get {
+                return this.t0TotProcField;
+            }
+            set {
+                this.t0TotProcField = value;
             }
         }
     }

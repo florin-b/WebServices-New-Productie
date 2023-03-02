@@ -73,6 +73,46 @@ namespace WebService1
         }
 
 
+        public static string getTonajComanda(OracleConnection connection, string idComanda)
+        {
+            string tonajComanda = "-1";
+
+            OracleDataReader oReader = null;
+
+            try
+            {
+                OracleCommand cmd = connection.CreateCommand();
+
+                string query = " select greutate from sapprd.ztonajcomanda where idcomanda=:cmdId ";
+
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = query;
+                cmd.Parameters.Clear();
+
+                cmd.Parameters.Add(":cmdId", OracleType.Number, 11).Direction = ParameterDirection.Input;
+                cmd.Parameters[0].Value = idComanda;
+
+                oReader = cmd.ExecuteReader();
+
+                if (oReader.HasRows)
+                {
+                    oReader.Read();
+                    tonajComanda = oReader.GetDouble(0).ToString();
+                }
+
+                oReader.Close();
+                oReader.Dispose();
+                cmd.Dispose();
+
+            }
+            catch (Exception ex)
+            {
+                ErrorHandling.sendErrorToMail(ex.ToString());
+            }
+
+            return tonajComanda;
+        }
+
         public static void saveTonajComanda(OracleConnection connection, string idComanda, string tonaj)
         {
 
