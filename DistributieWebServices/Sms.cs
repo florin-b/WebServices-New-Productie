@@ -223,7 +223,7 @@ namespace DistributieWebServices
 
                 if (latMasina > 0 && latClient > 0)
                 {
-                    statusLink = ". Pentru a afla pozitia gps a camionului accesati https://expeditie.arabesque.ro:8443/inf/stat?p=" + nrDocument + "-" + idAdresa;
+                    statusLink = ". Pentru a afla pozitia gps a camionului accesati https://client.arabesque.ro/info-livrare/stat?p=" + nrDocument + "-" + idAdresa;
 
                    // if (clientMat)
                    //     ErrorHandling.sendErrorToMail(statusLink);

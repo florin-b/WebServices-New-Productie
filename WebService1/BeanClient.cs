@@ -36,6 +36,7 @@ namespace WebService1
         public List<string> termenPlata;
         public bool clientBlocat;
         public string tipPlata;
+        public string codClient;
     }
 
     public class CreditClient

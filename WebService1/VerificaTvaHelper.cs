@@ -41,6 +41,9 @@ namespace WebService1
         public string numeClient;
         public string nrInreg;
         public string errMessage;
+        public string codJudet;
+        public string localitate;
+        public string strada;
 
         public override string ToString()
         {

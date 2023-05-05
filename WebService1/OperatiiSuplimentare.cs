@@ -478,6 +478,10 @@ namespace WebService1
 
         public static bool existaDatePersonale(OracleConnection connection, DateLivrare dateLivrare, ComandaVanzare comandaVanzare)
         {
+
+            if (comandaVanzare.cnpClient == null || comandaVanzare.cnpClient.Trim().Equals(String.Empty))
+                return true;
+
             bool existaDatePers = false;
 
             OracleDataReader oReader = null;
@@ -544,7 +548,8 @@ namespace WebService1
             }
             catch (Exception ex)
             {
-                ErrorHandling.sendErrorToMail(ex.ToString());
+                JavaScriptSerializer ser = new JavaScriptSerializer();
+                ErrorHandling.sendErrorToMail(ex.ToString() + " \n " + ser.Serialize(dateLivrare) + " \n " + ser.Serialize(comandaVanzare));
                 existaDatePers = false;
             }
 

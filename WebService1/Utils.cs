@@ -648,7 +648,7 @@ namespace WebService1
                     retVal = "B-dul Bucuresti nr. 12#Focsani#39#Vrancea#45.67#23.81";
                     break;
                 case "GL10":
-                    retVal = "Str. Drumul de Centura nr. 39Galati#17#Galati#45.67#23.81";
+                    retVal = "Str. Drumul de Centura nr. 39#Galati#17#Galati#45.67#23.81";
                     break;
                 case "IS10":
                 case "IS20":
@@ -705,7 +705,7 @@ namespace WebService1
 
         public static bool isUserTest(string codUser)
         {
-            string agentiTest = "18768#59733#59566#60055#60185#59530#95180#140755#89378#86148#86608#86603#59867#60223#19061#60144";
+            string agentiTest = "18768#59733#59566#60055#60185#59530#95180#140755#89378#86148#86608#86603#59867#60223#19061#60114";
             return agentiTest.Contains(codUser.TrimStart('0'));
         }
 

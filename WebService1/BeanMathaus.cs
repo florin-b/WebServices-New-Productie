@@ -71,6 +71,7 @@ namespace WebService1
     public class ComandaMathaus
     {
         public string sellingPlant;
+        public string countyCode;
         public List<DateArticolMathaus> deliveryEntryDataList;
     }
 

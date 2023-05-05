@@ -152,10 +152,14 @@ namespace WebService1
 
                 }
 
-                cmd.CommandText = " select x.nume, x.cod, x.tip_pers from (select c.nume, c.cod, c.tip_pers  from clienti c " +
-                                  " where upper(c.nume) like upper('" + numeClient.Replace("'", "") + "%')  " + condClient +
+                cmd.CommandText = " select x.nume, x.cod, x.tip_pers, x.city1, x.street ||' '|| x.house_num1, x.region " +
+                                  " from (select c.nume, c.cod, c.tip_pers, a.city1, a.street, a.house_num1, a.region from clienti c, sapprd.adrc a " +
+                                  " where upper(c.nume) like upper('" + numeClient.Replace("'", "") + "%')  " +
+                                  " and a.client = '900' and a.addrnumber = " +
+                                  " (select k.adrnr from sapprd.kna1 k where k.mandt = '900' and k.kunnr = c.cod) " +
+                                  condClient +
                                   "  ) x " +
-                                  " where rownum<=50  order by x.nume ";
+                                  " where rownum<=50 order by x.nume ";
 
 
 
@@ -177,6 +181,9 @@ namespace WebService1
                         unClient.numeClient = oReader.GetString(0);
                         unClient.codClient = oReader.GetString(1);
                         unClient.tipClient = oReader.GetString(2);
+                        unClient.localitate = oReader.GetString(3);
+                        unClient.strada = oReader.GetString(4);
+                        unClient.codJudet = oReader.GetString(5);
 
                         if (tipUserSap != null && tipUserSap.Equals(Constants.tipSuperAv))
                         {
@@ -1027,17 +1034,19 @@ namespace WebService1
 
                 cmd = connection.CreateCommand();
 
-                string sqlString = " select name1, stceg, regio, city1, street from sapprd.zinformclmag where mandt='900' " +
-                                   " and lower(name1) like lower('" + numeClient + "%') and tip_cl =:tipClient order by name1 ";
+                string sqlString;
+
+                if (tipClient.Equals("PF"))
+                    sqlString = " select name1, stceg, regio, city1, street||' '||nr from sapprd.zinformclmag where mandt='900' " +
+                                       " and lower(name1) like lower('" + numeClient.Trim() + "%') and tip_cl ='PF' order by name1 ";
+                else
+                    sqlString = " select z.numefirma, z.cui, z.judet, z.localitate, z.adresa||' '||z.nr, " +
+                                " nvl((select k.cod from clienti k where k.tip2 in ('1000', 'OCAV', 'OCAZ') and k.tip_pers='PJ' " +
+                                " and k.cui = TRANSLATE(z.cui, '0' || TRANSLATE(z.cui, '.0123456789', '.'), '0')),'-1') codclient " +
+                                " from sapprd.zverifcui z where z.mandt='900' and " +
+                                " lower(z.numefirma) like lower('" + numeClient.Trim() + "%') and rownum <= 30 order by z.numefirma ";
 
                 cmd.CommandText = sqlString;
-
-                cmd.CommandType = CommandType.Text;
-                cmd.Parameters.Clear();
-
-                cmd.Parameters.Add(":tipClient", OracleType.VarChar, 6).Direction = ParameterDirection.Input;
-                cmd.Parameters[0].Value = tipClient;
-
 
                 oReader = cmd.ExecuteReader();
                 if (oReader.HasRows)
@@ -1064,6 +1073,7 @@ namespace WebService1
 
                             datePersonale.termenPlata = getTermenPlataClient(connection, datePersonale.cnp);
                             datePersonale.clientBlocat = HelperClienti.isClientBlocat(connection, datePersonale.cnp);
+                            datePersonale.codClient = oReader.GetString(oReader.GetOrdinal("codClient"));
 
                             string tipPlataContract = getTipPlataContract(connection, datePersonale.cnp);
 
@@ -1086,7 +1096,7 @@ namespace WebService1
             }
             catch (Exception ex)
             {
-                ErrorHandling.sendErrorToMail(ex.ToString());
+                ErrorHandling.sendErrorToMail(ex.ToString() + " : " + numeClient + " , " +  tipClient);
             }
             finally
             {

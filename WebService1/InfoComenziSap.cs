@@ -85,14 +85,26 @@ namespace WebService1
             dateLivrare.marjaT1 = Double.Parse(antet.t1.ToString());
             dateLivrare.procentT1 = Double.Parse(antet.T1Proc.ToString()) / 100;
 
-            dateLivrare.marjaBruta = Double.Parse(antet.t0.ToString());
-            dateLivrare.procMarjaBruta = Double.Parse(antet.T0Proc.ToString());
-
             dateLivrare.marjaT1Tot = Double.Parse(antet.T1Tot.ToString());
             dateLivrare.procentT1Tot = Double.Parse(antet.T1TotProc.ToString()) / 100;
 
-            dateLivrare.marjaBrutaTot = Double.Parse(antet.T0Tot.ToString());
-            dateLivrare.procMarjaBrutaTot = Double.Parse(antet.T0TotProc.ToString());
+
+            if (tipUser.Equals("DV"))
+            {
+                dateLivrare.marjaBruta = Double.Parse(antet.t0.ToString());
+                dateLivrare.procMarjaBruta = Double.Parse(antet.T0Proc.ToString());
+
+                dateLivrare.marjaBrutaTot = Double.Parse(antet.T0Tot.ToString());
+                dateLivrare.procMarjaBrutaTot = Double.Parse(antet.T0TotProc.ToString());
+            }
+            else
+            {
+                dateLivrare.marjaBruta = 0;
+                dateLivrare.procMarjaBruta = 0;
+
+                dateLivrare.marjaBrutaTot = 0;
+                dateLivrare.procMarjaBrutaTot = 0;
+            }
 
 
             for (int i = 0; i < response.ItDet.Length; i++)

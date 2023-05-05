@@ -189,31 +189,24 @@ namespace WebService1
             {
 
 
-
-                cmd.CommandText = " select distinct s.matnr, ar.nume,  e.versg,  " +
-                                  " (select dismm from sapprd.marc c where mandt = '900' and matnr = s.matnr and werks = :filiala) planif " +
-                                  " from sapprd.zpath_hybris s, sapprd.marc c, websap.articole ar, sapprd.mvke e " +
-                                  " where (s.nivel_0 = :codCateg or s.nivel_1 = :codCateg or s.nivel_2 = :codCateg or " +
-                                  " s.nivel_3 = :codCateg or s.nivel_4 = :codCateg or s.nivel_5 = :codCateg or s.nivel_6 = :codCateg) " +
-                                  condDepart +
-                                  " and ar.cod = s.matnr and s.mandt = c.mandt and s.matnr = c.matnr " +
-                                  " and e.mandt = '900' and e.matnr = s.matnr and e.vtweg = '20' " +
-                                  " order by s.matnr OFFSET :paginaCrt ROWS FETCH NEXT 10 ROWS ONLY ";
-
-
-                cmd.CommandText = " select distinct s.matnr, ar.nume, e.versg, " +
+                cmd.CommandText = " select distinct s.matnr, ar.nume,  e.versg, " +
                                   " (select c.dismm from sapprd.marc c, articole ar where c.mandt = '900' and c.matnr = s.matnr " +
-                                  " and ar.cod = c.matnr and c.werks = decode(ar.spart, 11, :filialaGed, :filiala)) planif1, " +
+                                  " and ar.cod = c.matnr and c.werks = decode(ar.spart, '11', :filialaGed, :filiala)) planif1, " +
                                   " decode((select c.dismm from sapprd.marc c, articole ar where c.mandt = '900' and c.matnr = s.matnr " +
-                                  " and ar.cod = c.matnr and c.werks = decode(ar.spart, 11, :filialaGed, :filiala)), " +
-                                  " 'AR',1,'ZM',2,'AC',3,'ND',4,'ZM',5,'VM',6,7) cod_planif " +
+                                  " and ar.cod = c.matnr and c.werks = decode(ar.spart, '11', :filialaGed, :filiala)), " +
+                                  " 'AR',1,'ZM',2,'AC',3,'ND',4,'ZM',5,'VM',6,7) cod_planif, " +
+                                   " (select e.versg from sapprd.mvke e where e.mandt = '900' and " +
+                                  " e.matnr = s.matnr and e.vtweg = '20') par_s, " +
+                                  " nvl((select z.labst from sapprd.zhybris_zhstock z, sapprd.zhybris_artmas a, articole ar where " +
+                                  " a.mandt = z.mandt and a.matnr = z.matnr and a.valid = 'X' and ar.cod = z.matnr " +
+                                  " and z.matnr = s.matnr and z.b2b <> 'X' and z.werks = decode(ar.spart, '11', :filialaGed, :filiala)),0) stoc_art " +
                                   " from sapprd.zpath_hybris s, sapprd.marc c, websap.articole ar, sapprd.mvke e " +
                                   " where (s.nivel_0 = :codCateg or s.nivel_1 = :codCateg or s.nivel_2 = :codCateg or " +
                                   " s.nivel_3 = :codCateg or s.nivel_4 = :codCateg or s.nivel_5 = :codCateg or s.nivel_6 = :codCateg) " +
                                   condDepart +
                                   " and ar.cod = s.matnr and s.mandt = c.mandt and s.matnr = c.matnr " +
                                   " and e.mandt = '900' and e.matnr = s.matnr and e.vtweg = '20' " +
-                                  " order by cod_planif, s.matnr OFFSET :paginaCrt ROWS FETCH NEXT 10 ROWS ONLY ";
+                                  " order by cod_planif, stoc_art desc, s.matnr OFFSET :paginaCrt ROWS FETCH NEXT 10 ROWS ONLY ";
 
                 cmd.CommandType = CommandType.Text;
                 cmd.Parameters.Clear();
@@ -770,18 +763,23 @@ namespace WebService1
             OracleCommand cmd = connection.CreateCommand();
             try
             {
+  
                 cmd.CommandText = " select a.cod ,a.nume, " +
                                   " (select c.dismm from sapprd.marc c, articole ar where c.mandt = '900' and c.matnr = a.cod " +
-                                  " and ar.cod = c.matnr and c.werks = decode(ar.spart, 11, :filialaGed, :filiala)) planif, " +
+                                  " and ar.cod = c.matnr and c.werks = decode(ar.spart, '11', :filialaGed, :filiala)) planif, " +
                                   " decode((select c.dismm from sapprd.marc c, articole ar where c.mandt = '900' and c.matnr = a.cod " +
-                                  " and ar.cod = c.matnr and c.werks = decode(ar.spart, 11, :filialaGed, :filiala)), " +
+                                  " and ar.cod = c.matnr and c.werks = decode(ar.spart, '11', :filialaGed, :filiala)), " +
                                   " 'AR',1,'ZM',2,'AC',3,'ND',4,'ZM',5,'VM',6,7) cod_planif, " +
                                   " (select e.versg from sapprd.mvke e where e.mandt = '900' and " +
-                                  " e.matnr = a.cod and e.vtweg = '20') par_s from articole a, sintetice b, sapprd.marc c " +
+                                  " e.matnr = a.cod and e.vtweg = '20') par_s, " +
+                                  " nvl((select z.labst from sapprd.zhybris_zhstock z, sapprd.zhybris_artmas a, articole ar where " +
+                                  " a.mandt = z.mandt and a.matnr = z.matnr and a.valid = 'X' and ar.cod = z.matnr " +
+                                  " and z.matnr = a.cod and z.b2b <> 'X' and z.werks = decode(ar.spart, '11', :filialaGed, :filiala)),0) stoc_art " +
+                                  " from articole a, sintetice b, sapprd.marc c " +
                                   " where c.mandt = '900'  and c.matnr = a.cod and c.werks = :filiala and c.mmsta <> '01' " +
                                   " and a.sintetic = b.cod and a.cod != 'MAT GENERIC PROD'  and a.blocat <> '01' " +
                                     cautare + condDepart +
-                                  " order by cod_planif, a.nume  OFFSET :paginaCrt ROWS FETCH NEXT 10 ROWS ONLY ";
+                                  " order by cod_planif, stoc_art desc, a.nume  OFFSET :paginaCrt ROWS FETCH NEXT 10 ROWS ONLY ";
 
 
                 cmd.CommandType = CommandType.Text;
@@ -819,7 +817,7 @@ namespace WebService1
             }
             catch (Exception ex)
             {
-                ErrorHandling.sendErrorToMail(ex.ToString());
+                ErrorHandling.sendErrorToMail(ex.ToString() + " , " +  codArticol + " , " +  tipCautare + " , " + filiala + " , " + depart + " , " + pagina);
             }
             finally
             {
@@ -1263,6 +1261,7 @@ namespace WebService1
 
                 ComandaMathaus comanda = new ComandaMathaus();
                 comanda.sellingPlant = comandaMathaus.sellingPlant;
+                comanda.countyCode = antetCmdMathaus.codJudet;
 
                 List<DateArticolMathaus> deliveryEntryDataList = new List<DateArticolMathaus>();
 
@@ -1285,7 +1284,7 @@ namespace WebService1
                 ComandaMathaus comandaRezultat;
                 if (comanda.deliveryEntryDataList.Count > 0)
                 {
-                    string strComandaRezultat = callDeliveryService(serializer.Serialize(comanda));
+                    string strComandaRezultat = callDeliveryService(serializer.Serialize(comanda), canal, antetCmdMathaus.tipPers, antetCmdMathaus.codPers);
                     comandaRezultat = serializer.Deserialize<ComandaMathaus>(strComandaRezultat);
                 }
                 else
@@ -1409,7 +1408,7 @@ namespace WebService1
                 ComandaMathaus comandaRezultat;
                 if (comanda.deliveryEntryDataList.Count > 0)
                 {
-                    string strComandaRezultat = callDeliveryService(serializer.Serialize(comanda));
+                    string strComandaRezultat = callDeliveryService(serializer.Serialize(comanda),"","","");
                     comandaRezultat = serializer.Deserialize<ComandaMathaus>(strComandaRezultat);
                 }
                 else
@@ -1487,7 +1486,7 @@ namespace WebService1
 
 
 
-        private string callDeliveryService(string jsonData)
+        private string callDeliveryService(string jsonData, string canal, string tipPers, string codPers)
         {
 
             string result = "";
@@ -1498,7 +1497,24 @@ namespace WebService1
                 System.Net.ServicePointManager.Expect100Continue = false;
                 ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://b2c.arabesque.ro/arbsqintegration/optimiseDeliveryB2B");
+                string urlDeliveryService = "https://b2c.arabesque.ro/arbsqintegration/optimiseDeliveryB2B";
+
+                if (codPers != null && Utils.isUserTest(codPers))
+                {
+                    if (canal.Equals("10"))
+                        urlDeliveryService = "https://wse1-hybris-b2c-prod.arabesque.ro/arbsqintegration/cumulativeOptimiseDeliveryB2B";
+                    else
+                    {
+                        if (tipPers.Equals("AV") || tipPers.Equals("SD"))
+                            urlDeliveryService = "https://wse1-hybris-b2c-prod.arabesque.ro/arbsqintegration/cumulativeOptimiseDeliveryB2B";
+                        else
+                            urlDeliveryService = "https://wse1-hybris-b2c-prod.arabesque.ro/arbsqintegration/cumulativeOptimiseDeliveryB2C";
+
+                    }
+                }
+
+
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(urlDeliveryService);
 
                 request.Method = "POST";
                 request.ContentType = "application/json";
@@ -1516,18 +1532,21 @@ namespace WebService1
                 System.Net.WebResponse response = request.GetResponse();
                 System.IO.StreamReader sr = new System.IO.StreamReader(response.GetResponseStream());
 
-                result = sr.ReadToEnd().Trim();
+                string deliveryResponse = sr.ReadToEnd().Trim();
+
+
+                result = deliveryResponse;
             }
             catch (Exception ex)
             {
-                ErrorHandling.sendErrorToMail("callDeliveryService: " + ex.ToString());
+                ErrorHandling.sendErrorToMail("callDeliveryService: " + ex.ToString() + " , " + jsonData  + " , " + canal + " , " + tipPers + " , " + codPers);
             }
 
             return result;
 
         }
 
-        public string getStocMathaus(string filiala, string codArticol, string um)
+        public string getStocMathaus(string filiala, string codArticol, string um, string tipCmd, string tipUserSap, string codUser)
         {
 
             StockMathaus stockMathaus = new StockMathaus();
@@ -1549,7 +1568,7 @@ namespace WebService1
 
             JavaScriptSerializer serializer = new JavaScriptSerializer();
 
-            StockMathaus stockResponse = serializer.Deserialize<StockMathaus>(callStockService(serializer.Serialize(stockMathaus)));
+            StockMathaus stockResponse = serializer.Deserialize<StockMathaus>(callStockService(serializer.Serialize(stockMathaus), tipCmd, tipUserSap, codUser));
 
             ComandaMathaus comandaMathaus = new ComandaMathaus();
             comandaMathaus.sellingPlant = stockResponse.plant;
@@ -1615,13 +1634,31 @@ namespace WebService1
 
         }
 
-        private string callStockService(string jsonData)
+        private string callStockService(string jsonData, string tipCmd, string tipUserSap, string codUser)
         {
 
             System.Net.ServicePointManager.Expect100Continue = false;
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://b2c.arabesque.ro/arbsqintegration/getStocksB2B");
+            string urlStockService = "https://b2c.arabesque.ro/arbsqintegration/getStocksB2B";
+
+            if (codUser != null && Utils.isUserTest(codUser))
+            {
+                if (tipCmd != null && tipCmd.Equals("D"))
+                {
+                    urlStockService = "https://wse1-hybris-b2c-prod.arabesque.ro/arbsqintegration/getCumulativeStocksB2B";
+                }
+                else if (tipCmd != null && tipCmd.Equals("G"))
+                {
+                    if (tipUserSap.Equals("AV") || tipUserSap.Equals("SD"))
+                        urlStockService = "https://wse1-hybris-b2c-prod.arabesque.ro/arbsqintegration/getCumulativeStocksB2B";
+                    else
+                        urlStockService = "https://wse1-hybris-b2c-prod.arabesque.ro/arbsqintegration/getCumulativeStocksB2C";
+                }
+
+            }
+
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(urlStockService);
             request.Method = "POST";
             request.ContentType = "application/json";
             request.ContentLength = jsonData.Length;
@@ -1638,7 +1675,10 @@ namespace WebService1
             System.Net.WebResponse response = request.GetResponse();
             System.IO.StreamReader sr = new System.IO.StreamReader(response.GetResponseStream());
 
-            return sr.ReadToEnd().Trim();
+            string stockResponse = sr.ReadToEnd().Trim();
+
+
+            return stockResponse;
 
         }
 
@@ -1653,6 +1693,10 @@ namespace WebService1
             DateTransportMathaus dateTransport = new DateTransportMathaus();
             List<CostTransportMathaus> listCostTransp = new List<CostTransportMathaus>();
             List<DepozitArticolTransport> listArticoleDepoz = new List<DepozitArticolTransport>();
+
+
+
+            
 
 
             string werks = comandaMathaus.sellingPlant;
@@ -1685,9 +1729,13 @@ namespace WebService1
 
                 SAPWebServices.ZsitemsComanda[] items = new SAPWebServices.ZsitemsComanda[comandaMathaus.deliveryEntryDataList.Count];
 
+
+                JavaScriptSerializer ser = new JavaScriptSerializer();
+
                 int ii = 0;
                 foreach (DateArticolMathaus dateArticol in comandaMathaus.deliveryEntryDataList)
                 {
+
                     items[ii] = new SAPWebServices.ZsitemsComanda();
                     items[ii].Matnr = dateArticol.productCode;
                     items[ii].Kwmeng = Decimal.Parse(dateArticol.quantity.ToString());
