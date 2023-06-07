@@ -209,9 +209,21 @@ namespace WebService1
             if (outParam.EtStatus.Length > 0)
                 stareResponse = "";
 
+            string transfer = "";
+            string livrare = "";
+
             for (int i = 0; i < outParam.EtStatus.Length; i++)
             {
-                stareResponse += "Cmd. " + outParam.EtStatus[i].Vbeln + " - " + outParam.EtStatus[i].StatusLong + "." + System.Environment.NewLine;
+                transfer = "";
+                livrare = "";
+
+                if (outParam.EtStatus[i].Ebeln != null && outParam.EtStatus[i].Ebeln.Trim() != "")
+                    transfer = " Transf. " + outParam.EtStatus[i].Ebeln + ". ";
+
+                if (outParam.EtStatus[i].Livr != null && outParam.EtStatus[i].Livr.Trim() != "")
+                    livrare = " Livr. " + outParam.EtStatus[i].Livr + ". ";
+
+                stareResponse += "Cmd. " + outParam.EtStatus[i].Vbeln + " - " + transfer + livrare + outParam.EtStatus[i].StatusLong + "." + System.Environment.NewLine;
             }
 
             webService.Dispose();

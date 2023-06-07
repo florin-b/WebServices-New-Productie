@@ -1241,6 +1241,167 @@ namespace WebService1
         }
 
 
+        public string getLivrariComandaCumulative(string antetComanda, string strComanda, string canal)
+        {
+
+            
+
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            LivrareMathaus livrareMathaus = new LivrareMathaus();
+
+            try
+            {
+
+                AntetCmdMathaus antetCmdMathaus = null;
+                if (antetComanda != null)
+                    antetCmdMathaus = serializer.Deserialize<AntetCmdMathaus>(antetComanda);
+
+
+                ComandaMathaus comandaMathaus = serializer.Deserialize<ComandaMathaus>(strComanda);
+                List<DateArticolMathaus> articole = comandaMathaus.deliveryEntryDataList;
+
+                ComandaMathaus comanda = new ComandaMathaus();
+                comanda.sellingPlant = comandaMathaus.sellingPlant;
+                comanda.countyCode = antetCmdMathaus.codJudet;
+
+                List<DateArticolMathaus> deliveryEntryDataList = new List<DateArticolMathaus>();
+
+                foreach (DateArticolMathaus dateArticol in articole)
+                {
+
+                    if (!dateArticol.tip2.Equals("S"))
+                        continue;
+
+                    DateArticolMathaus articol = new DateArticolMathaus();
+                    articol.productCode = "0000000000" + dateArticol.productCode;
+                    articol.quantity = Math.Ceiling(dateArticol.quantity);
+                    articol.unit = dateArticol.unit;
+                    deliveryEntryDataList.Add(articol);
+
+                }
+
+                comanda.deliveryEntryDataList = deliveryEntryDataList;
+
+                ComandaMathaus comandaRezultat;
+                if (comanda.deliveryEntryDataList.Count > 0)
+                {
+                    string strComandaRezultat = callDeliveryService(serializer.Serialize(comanda), canal, antetCmdMathaus.tipPers, antetCmdMathaus.codPers);
+                    comandaRezultat = serializer.Deserialize<ComandaMathaus>(strComandaRezultat);
+                }
+                else
+                {
+                    ComandaMathaus cmdMathaus = new ComandaMathaus();
+                    cmdMathaus.sellingPlant = comandaMathaus.sellingPlant;
+                    cmdMathaus.deliveryEntryDataList = new List<DateArticolMathaus>();
+                    comandaRezultat = cmdMathaus;
+                }
+
+                bool artFound = false;
+
+                List<DateArticolMathaus> listArticoleComanda = new List<DateArticolMathaus>();
+
+                foreach (DateArticolMathaus dateArticol in articole)
+                {
+
+                    DateArticolMathaus articolComanda = null;
+
+                    if (!dateArticol.productCode.StartsWith("0000000000"))
+                        dateArticol.productCode = "0000000000" + dateArticol.productCode;
+
+                    artFound = false;
+                    foreach (DateArticolMathaus dateArticolRez in comandaRezultat.deliveryEntryDataList)
+                    {
+                        if (dateArticolRez.productCode.Equals(dateArticol.productCode) && dateArticolRez.deliveryWarehouse != null && !dateArticolRez.deliveryWarehouse.Trim().Equals(String.Empty))
+                        {
+
+                            if (canal != null && canal.Equals("20") && !dateArticolRez.deliveryWarehouse.Equals("BV90"))
+                            {
+                                dateArticol.deliveryWarehouse = dateArticolRez.deliveryWarehouse;
+                            }
+
+                            else
+                                dateArticol.deliveryWarehouse = dateArticolRez.deliveryWarehouse;
+
+                            artFound = true;
+
+                            articolComanda = new DateArticolMathaus();
+                            articolComanda.productCode = dateArticolRez.productCode;
+                            articolComanda.deliveryWarehouse = dateArticolRez.deliveryWarehouse;
+                            articolComanda.depozit = dateArticol.depozit;
+                            articolComanda.ulStoc = dateArticol.ulStoc;
+                            articolComanda.tip2 = dateArticol.tip2;
+                            articolComanda.unit = dateArticol.unit;
+                            articolComanda.quantity = dateArticolRez.quantity;
+                            articolComanda.valPoz = Math.Round(((dateArticol.valPoz / dateArticol.quantity) * dateArticolRez.quantity), 2);
+
+                            listArticoleComanda.Add(articolComanda);
+
+                        }
+
+                    }
+
+                    if (!artFound)
+                    {
+
+                        articolComanda = new DateArticolMathaus();
+
+                        if (dateArticol.ulStoc != null && dateArticol.ulStoc.Equals("BV90"))
+                            articolComanda.deliveryWarehouse = "BV90";
+                        else if (canal != null && canal.Equals("20") && (dateArticol.ulStoc == null || !dateArticol.ulStoc.Equals("BV90")))
+                            articolComanda.deliveryWarehouse = comanda.sellingPlant;
+                        else
+                            articolComanda.deliveryWarehouse = dateArticol.productCode.StartsWith("0000000000111") ? getULGed(comanda.sellingPlant) : comanda.sellingPlant;
+
+                        articolComanda.productCode = dateArticol.productCode;
+                        articolComanda.depozit = dateArticol.depozit;
+                        articolComanda.ulStoc = dateArticol.ulStoc;
+                        articolComanda.tip2 = dateArticol.tip2;
+                        articolComanda.unit = dateArticol.unit;
+                        articolComanda.quantity = dateArticol.quantity;
+                        articolComanda.valPoz = Math.Round(dateArticol.valPoz, 2);
+                        listArticoleComanda.Add(articolComanda);
+                    }
+
+
+                }
+
+                DateTransportMathaus dateTransport = null;
+
+                comandaMathaus.deliveryEntryDataList = listArticoleComanda;
+
+                if (antetCmdMathaus != null)
+                    dateTransport = getTransportService(antetCmdMathaus, comandaMathaus, canal);
+
+                foreach (DateArticolMathaus articolMathaus in comandaMathaus.deliveryEntryDataList)
+                {
+                    foreach (DepozitArticolTransport depozitArticol in dateTransport.listDepozite)
+
+                    {
+                        if (articolMathaus.productCode.Equals(depozitArticol.codArticol) && articolMathaus.deliveryWarehouse.Equals(depozitArticol.filiala))
+                        {
+                            articolMathaus.depozit = depozitArticol.depozit;
+                            break;
+                        }
+                    }
+                }
+
+
+                livrareMathaus.comandaMathaus = comandaMathaus;
+                livrareMathaus.costTransport = dateTransport.listCostTransport;
+
+
+            }
+            catch (Exception ex)
+            {
+                ErrorHandling.sendErrorToMail("getLivrariComanda: " + ex.ToString());
+            }
+
+
+            return serializer.Serialize(livrareMathaus);
+
+        }
+
+
 
         public string getLivrariComanda(string antetComanda, string strComanda, string canal)
         {
@@ -1511,6 +1672,7 @@ namespace WebService1
                             urlDeliveryService = "https://wse1-hybris-b2c-prod.arabesque.ro/arbsqintegration/cumulativeOptimiseDeliveryB2C";
 
                     }
+
                 }
 
 
@@ -1533,7 +1695,6 @@ namespace WebService1
                 System.IO.StreamReader sr = new System.IO.StreamReader(response.GetResponseStream());
 
                 string deliveryResponse = sr.ReadToEnd().Trim();
-
 
                 result = deliveryResponse;
             }

@@ -2960,7 +2960,6 @@ namespace WebService1
 
         
 
-
         [WebMethod]
         public string getCategoriiMathaus()
         {
@@ -2976,7 +2975,15 @@ namespace WebService1
         [WebMethod]
         public string getLivrariMathaus(string antetComanda, string comandaMathaus, string canal)
         {
-            return new OperatiiMathaus().getLivrariComanda(antetComanda, comandaMathaus, canal);
+
+            AntetCmdMathaus antetCmdMathaus = null;
+            if (antetComanda != null)
+                antetCmdMathaus = new JavaScriptSerializer().Deserialize<AntetCmdMathaus>(antetComanda);
+
+            if (antetCmdMathaus.codPers != null && Utils.isUserTest(antetCmdMathaus.codPers))
+                return new OperatiiMathaus().getLivrariComandaCumulative(antetComanda, comandaMathaus, canal);
+            else
+                return new OperatiiMathaus().getLivrariComanda(antetComanda, comandaMathaus, canal);
         }
 
         [WebMethod]
@@ -6555,6 +6562,10 @@ namespace WebService1
                     {
                         condTipAg = " and a.tip in ('SMG', 'CAG', 'CAG1', 'CAG2', 'CAG3', 'CVG', 'CVA')";
                     }
+                    else if (tipUserSap != null && tipUserSap.Equals("SDCVA"))
+                    {
+                        condTipAg = " and a.tip in ('SDCVA', 'CVA')";
+                    }
                     else
                         condTipAg = " and a.tip in ('CONS-GED','SM','CAG', 'CAG1', 'CAG2', 'SMG', 'CVIP', 'SDIP') ";
                 }
@@ -6670,7 +6681,7 @@ namespace WebService1
                     {
                         if (tipAgent != null && tipAgent.Equals("SDCVA"))
                         {
-                            condTipAg = " and a.tip in ('SDCVA','CAG', 'CAG1', 'CAG2') ";
+                            condTipAg = " and a.tip in ('SDCVA','CAG', 'CAG1', 'CAG2', 'CVA') ";
                         }
                         else if (tipAgent != null && tipAgent.Equals("SDIP") && codAgent != null)
                         {
@@ -12575,7 +12586,8 @@ namespace WebService1
                             {
                                 dateLivrareDistrib.totalComanda = totalComanda.ToString();
 
-                                if (!articol.filialaSite.Equals(dateLivrareDistrib.unitLog) && !articol.filialaSite.Equals("BV90") && !ulStoc.Equals("BV90"))
+                                
+                                if (!HelperComenzi.isUlEquals(ulStoc, dateLivrareDistrib.unitLog) && !articol.filialaSite.Equals("BV90") && !ulStoc.Equals("BV90"))
                                     dateLivrareDistrib.filialaCLP = ulStoc;
 
 
@@ -12609,8 +12621,9 @@ namespace WebService1
 
                         dateLivrareDistrib.totalComanda = totalComanda.ToString();
 
-                        if (ulStoc != null && !ulStoc.Equals(dateLivrareDistrib.unitLog) && !ulStoc.Equals("BV90"))
-                            dateLivrareDistrib.filialaCLP = ulStoc;
+                        
+                        if (ulStoc != null && !HelperComenzi.isUlEquals(ulStoc, dateLivrareDistrib.unitLog) && !ulStoc.Equals("BV90"))
+                             dateLivrareDistrib.filialaCLP = ulStoc;
 
 
                         if (tipTranspCmd != null && !tipTranspCmd.Equals(String.Empty))
@@ -13005,6 +13018,9 @@ namespace WebService1
             ComandaVanzare comandaVanzare = serializer.Deserialize<ComandaVanzare>(JSONComanda);
             DateLivrare dateLivrare = serializer.Deserialize<DateLivrare>(JSONDateLivrare);
             List<ArticolComanda> articolComanda = serializer.Deserialize<List<ArticolComanda>>(JSONArt);
+
+            if (tipUser.Equals("SITE"))
+                HelperComenzi.tansformaCLPinCV(articolComanda, dateLivrare);
 
             SAPWebServices.ZTBL_WEBSERVICE webService = null;
             OracleConnection connection = new OracleConnection();
@@ -14781,9 +14797,6 @@ namespace WebService1
 
                 if (tipAgent.Equals("KA3") || tipAgent.Equals("KA1") || tipAgent.Equals("SDKA"))
                     tipAgent = "KA";
-
-                if (tipAgent.Equals("SDCVA"))
-                    tipAgent = "CAG1";
 
 
 

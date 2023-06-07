@@ -291,6 +291,34 @@ namespace WebService1
             return nrCmdClp;
         }
 
+        public static void tansformaCLPinCV(List<ArticolComanda> listArticole, DateLivrare dateLivrare)
+        {
+
+            if (dateLivrare.filialaCLP == null || dateLivrare.filialaCLP.Trim().Equals(String.Empty))
+                return;
+
+            string filialaClp = "";
+
+            foreach (ArticolComanda articol in listArticole)
+            {
+                if (articol.filialaSite != null && !articol.filialaSite.Trim().Equals(String.Empty))
+                {
+                    filialaClp = articol.filialaSite;
+                    break;
+                }
+            }
+
+            if (filialaClp.Trim().Equals(String.Empty))
+                return;
+
+            string filialaComanda = Utils.isUnitLogGed(dateLivrare.unitLog) ? Utils.getFilialaGed(filialaClp) : filialaClp;
+
+            dateLivrare.unitLog = filialaComanda;
+            dateLivrare.filialaCLP = "";
+
+
+        }
+
 
         public static bool isUlEquals(string ul1, string ul2)
         {

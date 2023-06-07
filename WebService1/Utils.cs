@@ -705,6 +705,9 @@ namespace WebService1
 
         public static bool isUserTest(string codUser)
         {
+            if (codUser == null || codUser.Trim().Length == 0)
+                return false;
+
             string agentiTest = "18768#59733#59566#60055#60185#59530#95180#140755#89378#86148#86608#86603#59867#60223#19061#60114";
             return agentiTest.Contains(codUser.TrimStart('0'));
         }
