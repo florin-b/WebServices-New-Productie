@@ -81,6 +81,7 @@
     <Compile Include="BeanDocumente.cs" />
     <Compile Include="BeanMathaus.cs" />
     <Compile Include="BeanPierderi.cs" />
+    <Compile Include="BeanPoligoane.cs" />
     <Compile Include="Beans.cs" />
     <Compile Include="BeanSalarizare.cs" />
     <Compile Include="BeansArticole.cs" />
@@ -112,6 +113,7 @@
     <Compile Include="JurnalAprobari.cs" />
     <Compile Include="Mail.cs" />
     <Compile Include="MeniuTableta.cs" />
+    <Compile Include="ModelPoligoane.cs" />
     <Compile Include="Neincasate.cs" />
     <Compile Include="ObiectiveConsilieri.cs" />
     <Compile Include="OperatiiAdresa.cs" />
@@ -127,6 +129,9 @@
     <Compile Include="OperatiiNecesar.cs" />
     <Compile Include="OperatiiObiectiveCVA.cs" />
     <Compile Include="OperatiiObiectiveKA.cs" />
+    <Compile Include="OperatiiPoligoane.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="OperatiiRetur.cs" />
     <Compile Include="OperatiiSemiactivi.cs" />
     <Compile Include="OperatiiSuplimentare.cs" />

@@ -14,6 +14,11 @@ namespace WebService1
             return filiala.Substring(0, 2) + "2" + filiala.Substring(3, 1);
         }
 
+        public static string getFilialaDistrib(string filiala)
+        {
+            return filiala.Substring(0, 2) + "1" + filiala.Substring(3, 1);
+        }
+
         public static string getCurrentDate()
         {
             string mDate = "";
@@ -703,13 +708,85 @@ namespace WebService1
 
         }
 
-        public static bool isUserTest(string codUser)
+        public static bool isUserTest_Str(string codUser)
         {
             if (codUser == null || codUser.Trim().Length == 0)
                 return false;
 
-            string agentiTest = "18768#59733#59566#60055#60185#59530#95180#140755#89378#86148#86608#86603#59867#60223#19061#60114";
+            string agentiTest = "18768#59733#59566#60055#60185#59530#95180#140755#89378#86148#86608#86603#59867#60223#19061#60114#60289#59783#89328#71390#71440#59972";
             return agentiTest.Contains(codUser.TrimStart('0'));
+        }
+
+        public static bool isUserTest(string codUser)
+        {
+
+            if (codUser == null || codUser.Trim().Length == 0)
+                return false;
+
+            bool isUsrTest = false;
+            int nrRecords = 0;
+
+            OracleConnection connection = new OracleConnection();
+            OracleCommand cmd = new OracleCommand();
+            OracleDataReader oReader = null;
+
+            try
+            {
+                string connectionString = DatabaseConnections.ConnectToProdEnvironment();
+
+                connection.ConnectionString = connectionString;
+                connection.Open();
+
+                cmd = connection.CreateCommand();
+
+                //
+
+                cmd.CommandText = " select count(*) from sapprd.zuseritestsfa ";
+
+                cmd.CommandType = CommandType.Text;
+
+
+                oReader = cmd.ExecuteReader();
+                oReader.Read();
+                nrRecords = oReader.GetInt32(0);
+
+                //if (nrRecords == 0)
+                //    isUsrTest = true;
+
+                //if (nrRecords > 0)
+                {
+
+                    cmd.CommandText = " select 1 from sapprd.zuseritestsfa where ltrim(cod_agent,'0') =:codAgent ";
+
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Parameters.Clear();
+
+                    cmd.Parameters.Add(":codAgent", OracleType.VarChar, 24).Direction = ParameterDirection.Input;
+                    cmd.Parameters[0].Value = codUser.TrimStart('0');
+
+                    oReader = cmd.ExecuteReader();
+
+                    if (oReader.HasRows)
+                    {
+                        isUsrTest = true;
+                    }
+                    else
+                        isUsrTest = false;
+
+                }
+
+
+            }
+            catch(Exception ex)
+            {
+                ErrorHandling.sendErrorToMail(ex.ToString());
+            }
+            finally
+            {
+                DatabaseConnections.CloseConnections(oReader, cmd, connection);
+            }
+
+            return isUsrTest;
         }
 
 

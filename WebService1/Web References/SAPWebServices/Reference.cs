@@ -26248,6 +26248,8 @@ namespace WebService1.SAPWebServices {
         
         private string matnrField;
         
+        private decimal brgewMatnrField;
+        
         private decimal kwmengField;
         
         private string vrkmeField;
@@ -26270,6 +26272,17 @@ namespace WebService1.SAPWebServices {
             }
             set {
                 this.matnrField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal BrgewMatnr {
+            get {
+                return this.brgewMatnrField;
+            }
+            set {
+                this.brgewMatnrField = value;
             }
         }
         
@@ -26369,6 +26382,8 @@ namespace WebService1.SAPWebServices {
         
         private string spartField;
         
+        private string maktxField;
+        
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         public string Werks {
@@ -26423,6 +26438,143 @@ namespace WebService1.SAPWebServices {
                 this.spartField = value;
             }
         }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Maktx {
+            get {
+                return this.maktxField;
+            }
+            set {
+                this.maktxField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class ZstTaxeAcces {
+        
+        private string tipComandaField;
+        
+        private decimal greutMarfaField;
+        
+        private string zonaField;
+        
+        private string masinaDescoperitaField;
+        
+        private string macaraField;
+        
+        private string camionScurtField;
+        
+        private string camionIvecoField;
+        
+        private string poligonField;
+        
+        private decimal limitaTonajField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string TipComanda {
+            get {
+                return this.tipComandaField;
+            }
+            set {
+                this.tipComandaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal GreutMarfa {
+            get {
+                return this.greutMarfaField;
+            }
+            set {
+                this.greutMarfaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Zona {
+            get {
+                return this.zonaField;
+            }
+            set {
+                this.zonaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string MasinaDescoperita {
+            get {
+                return this.masinaDescoperitaField;
+            }
+            set {
+                this.masinaDescoperitaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Macara {
+            get {
+                return this.macaraField;
+            }
+            set {
+                this.macaraField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CamionScurt {
+            get {
+                return this.camionScurtField;
+            }
+            set {
+                this.camionScurtField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CamionIveco {
+            get {
+                return this.camionIvecoField;
+            }
+            set {
+                this.camionIvecoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Poligon {
+            get {
+                return this.poligonField;
+            }
+            set {
+                this.poligonField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal LimitaTonaj {
+            get {
+                return this.limitaTonajField;
+            }
+            set {
+                this.limitaTonajField = value;
+            }
+        }
     }
     
     /// <remarks/>
@@ -26470,6 +26622,8 @@ namespace WebService1.SAPWebServices {
         private string ipVkgrpField;
         
         private string ipWerksField;
+        
+        private ZstTaxeAcces isTaxaAccesField;
         
         private ZsfilTransp[] itFilCostField;
         
@@ -26560,6 +26714,17 @@ namespace WebService1.SAPWebServices {
             }
             set {
                 this.ipWerksField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public ZstTaxeAcces IsTaxaAcces {
+            get {
+                return this.isTaxaAccesField;
+            }
+            set {
+                this.isTaxaAccesField = value;
             }
         }
         
@@ -26937,6 +27102,8 @@ namespace WebService1.SAPWebServices {
         
         private decimal gvBrgewField;
         
+        private decimal gvBrgewMatnrField;
+        
         private decimal gvCantField;
         
         private bool gvCantFieldSpecified;
@@ -26998,6 +27165,17 @@ namespace WebService1.SAPWebServices {
             }
             set {
                 this.gvBrgewField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal GvBrgewMatnr {
+            get {
+                return this.gvBrgewMatnrField;
+            }
+            set {
+                this.gvBrgewMatnrField = value;
             }
         }
         

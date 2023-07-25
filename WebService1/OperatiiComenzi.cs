@@ -1957,6 +1957,107 @@ namespace WebService1
             return retVal;
         }
 
+
+        public string getOptiuniMasini(string filiala, string camionDescoperit, string macara, string zona, string greutateComanda, string comandaEnergofaga, string comandaExtralungi)
+        {
+
+            OracleConnection connection = new OracleConnection();
+            OracleDataReader oReader = null;
+
+            string connectionString = DatabaseConnections.ConnectToProdEnvironment();
+
+            connection.ConnectionString = connectionString;
+            connection.Open();
+
+            OracleCommand cmd = connection.CreateCommand();
+
+            bool camionScurt = false;
+            bool camionIveco = false;
+
+            try
+            {
+
+                cmd.CommandText = " select distinct camion_scurt, camion_iveco from sapprd.ZTIP_CAMION where masina_descoperita = :descoperit and macara = :macara " +
+                                  " and zona = :zona and tip_comanda = :tipComanda and :greutate between greutate_min * 1000 and greutate_max * 1000 " +
+                                  " and tip_camion in " +
+                                  " (select distinct case " +
+                                  " when substr(tip, 1, 5) = 'IV_SA' THEN 'IV_SA' WHEN substr(tip, 1, 5) = 'IV_IV' THEN 'IVECO' " +
+                                  " WHEN tip = 'DAF_LFD' THEN 'DAF_LF' WHEN tip = 'DAF_SA' THEN 'DAF_CF' ELSE TIP END AS TIP " +
+                                  " from sapprd.zszmasini_sort where mandt = '900' and tdlnr = :filiala AND DISPONIBILITATE_MAINE = 'DISPONIBILA' " +
+                                  " AND TIP <> 'DAF_R' and erdat || erzet = (select max(erdat || erzet) " +
+                                  " from sapprd.zszmasini_sort where mandt = '900' and tdlnr = :filiala " +
+                                  " AND DISPONIBILITATE_MAINE = 'DISPONIBILA' AND TIP <> 'DAF_R')) ";
+
+
+                cmd.CommandType = CommandType.Text;
+                cmd.Parameters.Clear();
+
+                cmd.Parameters.Add(":descoperit", OracleType.VarChar, 3).Direction = ParameterDirection.Input;
+                cmd.Parameters[0].Value = camionDescoperit.Equals("true") ? "X" : " ";
+
+                cmd.Parameters.Add(":macara", OracleType.VarChar, 3).Direction = ParameterDirection.Input;
+                cmd.Parameters[1].Value = macara.Equals("true") ? "X" : " ";
+
+                string zonaPoligon = zona;
+
+                if (zona.ToUpper().Equals("ZM"))
+                    zonaPoligon = "METRO";
+                else if (zona.ToUpper().Equals("ZMA"))
+                    zonaPoligon = "EXTRA_A";
+                else if (zona.ToUpper().Equals("ZMB"))
+                    zonaPoligon = "EXTRA_B";
+
+                cmd.Parameters.Add(":zona", OracleType.VarChar, 12).Direction = ParameterDirection.Input;
+                cmd.Parameters[2].Value = zonaPoligon;
+
+                string tipComanda = "NORMALA";
+                if (comandaExtralungi.Equals("true"))
+                    tipComanda = "ETRALUNGI";
+                if (comandaEnergofaga.Equals("true"))
+                    tipComanda = "ENERGOFAGA";
+
+
+                cmd.Parameters.Add(":tipComanda", OracleType.VarChar, 60).Direction = ParameterDirection.Input;
+                cmd.Parameters[3].Value = tipComanda;
+
+                cmd.Parameters.Add(":greutate", OracleType.Number, 15).Direction = ParameterDirection.Input;
+                cmd.Parameters[4].Value = Double.Parse(greutateComanda);
+
+                cmd.Parameters.Add(":filiala", OracleType.VarChar, 30).Direction = ParameterDirection.Input;
+                cmd.Parameters[5].Value = Utils.getFilialaDistrib(filiala);
+
+                oReader = cmd.ExecuteReader();
+
+                if (oReader.HasRows)
+                {
+                    while (oReader.Read())
+                    {
+                        if (oReader.GetString(0).ToLower().Equals("y") || oReader.GetString(0).ToLower().Equals("n"))
+                            camionScurt = true;
+
+                        if (oReader.GetString(1).ToLower().Equals("y") || oReader.GetString(1).ToLower().Equals("n"))
+                            camionIveco = true;
+                    }
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                ErrorHandling.sendErrorToMail(ex.ToString());
+            }
+
+
+            string optiuniCamion = camionScurt ? "Camion scurt" : " ";
+            optiuniCamion += "#";
+            optiuniCamion += camionIveco ? "Camioneta IVECO" : " ";
+
+            if (!camionScurt && !camionIveco)
+                optiuniCamion = " ";
+
+            return optiuniCamion;
+        }
+
         public string getProcMarjaComenziIP(string codAgent, string codClient)
         {
             //procent + blocare comanda

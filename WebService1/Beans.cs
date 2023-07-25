@@ -172,6 +172,10 @@ namespace WebService1
         public string tipTransport;
         public string greutate;
         public string dataExp;
+        public string greutateBruta;
+        public string lungimeArt;
+        public string tipMarfa;
+        public string cantitateInit;
 
         public override string ToString()
         {
@@ -786,6 +790,10 @@ namespace WebService1
         public string greutate;
         public string dataExp;
         public string articoleRecomandate;
+        public string tipMarfa;
+        public string greutateBruta;
+        public string lungime;
+
 
     }
 
@@ -812,6 +820,23 @@ namespace WebService1
     {
         public string cod;
         public string nume;
+    }
+
+    public class ArticolProps
+    {
+        public string tipMarfa;
+        public string lungime;
+
+        public ArticolProps()
+        {
+
+        }
+
+        public ArticolProps(string tipMarfa, string lungime)
+        {
+            this.tipMarfa = tipMarfa;
+            this.lungime = lungime;
+        }
     }
 
 }

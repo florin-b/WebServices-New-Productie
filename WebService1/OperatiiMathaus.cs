@@ -1241,10 +1241,8 @@ namespace WebService1
         }
 
 
-        public string getLivrariComandaCumulative(string antetComanda, string strComanda, string canal)
+        public string getLivrariComandaCumulative(string antetComanda, string strComanda, string canal, string strPoligon)
         {
-
-            
 
             JavaScriptSerializer serializer = new JavaScriptSerializer();
             LivrareMathaus livrareMathaus = new LivrareMathaus();
@@ -1256,15 +1254,23 @@ namespace WebService1
                 if (antetComanda != null)
                     antetCmdMathaus = serializer.Deserialize<AntetCmdMathaus>(antetComanda);
 
-
                 ComandaMathaus comandaMathaus = serializer.Deserialize<ComandaMathaus>(strComanda);
                 List<DateArticolMathaus> articole = comandaMathaus.deliveryEntryDataList;
+
+                DatePoligon datePoligon = new DatePoligon("", "", "", "", "");
+
+                if (strPoligon != null && strPoligon.Trim().Length > 0)
+                {
+                    datePoligon = serializer.Deserialize<DatePoligon>(strPoligon);
+                }
 
                 ComandaMathaus comanda = new ComandaMathaus();
                 comanda.sellingPlant = comandaMathaus.sellingPlant;
                 comanda.countyCode = antetCmdMathaus.codJudet;
 
                 List<DateArticolMathaus> deliveryEntryDataList = new List<DateArticolMathaus>();
+
+                Dictionary<string, string> dictionarUmIso = HelperComenzi.getDictionarUmIso(articole);
 
                 foreach (DateArticolMathaus dateArticol in articole)
                 {
@@ -1273,9 +1279,14 @@ namespace WebService1
                         continue;
 
                     DateArticolMathaus articol = new DateArticolMathaus();
-                    articol.productCode = "0000000000" + dateArticol.productCode;
+                    if (Char.IsDigit(dateArticol.productCode, 0))
+                        articol.productCode = "0000000000" + dateArticol.productCode;
+                    else
+                        articol.productCode = dateArticol.productCode;
+
                     articol.quantity = Math.Ceiling(dateArticol.quantity);
-                    articol.unit = dateArticol.unit;
+                    articol.unit = dictionarUmIso[dateArticol.unit];
+
                     deliveryEntryDataList.Add(articol);
 
                 }
@@ -1287,6 +1298,8 @@ namespace WebService1
                 {
                     string strComandaRezultat = callDeliveryService(serializer.Serialize(comanda), canal, antetCmdMathaus.tipPers, antetCmdMathaus.codPers);
                     comandaRezultat = serializer.Deserialize<ComandaMathaus>(strComandaRezultat);
+                    var reversedDictionarUmIso = dictionarUmIso.ToDictionary(x => x.Value, x => x.Key);
+                    HelperComenzi.convertUmFromIso(reversedDictionarUmIso, comandaRezultat.deliveryEntryDataList);
                 }
                 else
                 {
@@ -1333,6 +1346,7 @@ namespace WebService1
                             articolComanda.unit = dateArticol.unit;
                             articolComanda.quantity = dateArticolRez.quantity;
                             articolComanda.valPoz = Math.Round(((dateArticol.valPoz / dateArticol.quantity) * dateArticolRez.quantity), 2);
+                            articolComanda.greutate = dateArticol.greutate;
 
                             listArticoleComanda.Add(articolComanda);
 
@@ -1359,6 +1373,7 @@ namespace WebService1
                         articolComanda.unit = dateArticol.unit;
                         articolComanda.quantity = dateArticol.quantity;
                         articolComanda.valPoz = Math.Round(dateArticol.valPoz, 2);
+                        articolComanda.greutate = dateArticol.greutate;
                         listArticoleComanda.Add(articolComanda);
                     }
 
@@ -1370,14 +1385,14 @@ namespace WebService1
                 comandaMathaus.deliveryEntryDataList = listArticoleComanda;
 
                 if (antetCmdMathaus != null)
-                    dateTransport = getTransportService(antetCmdMathaus, comandaMathaus, canal);
+                    dateTransport = getTransportService(antetCmdMathaus, comandaMathaus, canal, datePoligon);
 
                 foreach (DateArticolMathaus articolMathaus in comandaMathaus.deliveryEntryDataList)
                 {
                     foreach (DepozitArticolTransport depozitArticol in dateTransport.listDepozite)
 
                     {
-                        if (articolMathaus.productCode.Equals(depozitArticol.codArticol) && articolMathaus.deliveryWarehouse.Equals(depozitArticol.filiala))
+                        if (articolMathaus.productCode.TrimStart('0').Equals(depozitArticol.codArticol.TrimStart('0')) && articolMathaus.deliveryWarehouse.Equals(depozitArticol.filiala))
                         {
                             articolMathaus.depozit = depozitArticol.depozit;
                             break;
@@ -1385,10 +1400,8 @@ namespace WebService1
                     }
                 }
 
-
                 livrareMathaus.comandaMathaus = comandaMathaus;
                 livrareMathaus.costTransport = dateTransport.listCostTransport;
-
 
             }
             catch (Exception ex)
@@ -1396,16 +1409,14 @@ namespace WebService1
                 ErrorHandling.sendErrorToMail("getLivrariComanda: " + ex.ToString());
             }
 
-
             return serializer.Serialize(livrareMathaus);
 
         }
 
 
 
-        public string getLivrariComanda(string antetComanda, string strComanda, string canal)
+        public string getLivrariComanda(string antetComanda, string strComanda, string canal, string strPoligon)
         {
-
 
             JavaScriptSerializer serializer = new JavaScriptSerializer();
             LivrareMathaus livrareMathaus = new LivrareMathaus();
@@ -1420,11 +1431,19 @@ namespace WebService1
                 ComandaMathaus comandaMathaus = serializer.Deserialize<ComandaMathaus>(strComanda);
                 List<DateArticolMathaus> articole = comandaMathaus.deliveryEntryDataList;
 
+                DatePoligon datePoligon = new DatePoligon("", "", "", "", "");
+
+                if (strPoligon != null && strPoligon.Trim().Length > 0)
+                {
+                    datePoligon = serializer.Deserialize<DatePoligon>(strPoligon);
+                }
+
                 ComandaMathaus comanda = new ComandaMathaus();
                 comanda.sellingPlant = comandaMathaus.sellingPlant;
                 comanda.countyCode = antetCmdMathaus.codJudet;
 
                 List<DateArticolMathaus> deliveryEntryDataList = new List<DateArticolMathaus>();
+                Dictionary<string, string> dictionarUmIso = HelperComenzi.getDictionarUmIso(articole);
 
                 foreach (DateArticolMathaus dateArticol in articole)
                 {
@@ -1434,8 +1453,8 @@ namespace WebService1
 
                     DateArticolMathaus articol = new DateArticolMathaus();
                     articol.productCode = "0000000000" + dateArticol.productCode;
-                    articol.quantity = Math.Ceiling(dateArticol.quantity);
-                    articol.unit = dateArticol.unit;
+                    articol.quantity = Math.Ceiling(dateArticol.quantity); 
+                    articol.unit = dictionarUmIso[dateArticol.unit];
                     deliveryEntryDataList.Add(articol);
 
                 }
@@ -1447,6 +1466,8 @@ namespace WebService1
                 {
                     string strComandaRezultat = callDeliveryService(serializer.Serialize(comanda), canal, antetCmdMathaus.tipPers, antetCmdMathaus.codPers);
                     comandaRezultat = serializer.Deserialize<ComandaMathaus>(strComandaRezultat);
+                    var reversedDictionarUmIso = dictionarUmIso.ToDictionary(x => x.Value, x => x.Key);
+                    HelperComenzi.convertUmFromIso(reversedDictionarUmIso, comandaRezultat.deliveryEntryDataList);
                 }
                 else
                 {
@@ -1499,7 +1520,7 @@ namespace WebService1
                 DateTransportMathaus dateTransport = null;
 
                 if (antetCmdMathaus != null)
-                    dateTransport = getTransportService(antetCmdMathaus, comandaMathaus, canal);
+                    dateTransport = getTransportService(antetCmdMathaus, comandaMathaus, canal, datePoligon);
 
                 foreach (DateArticolMathaus articolMathaus in comandaMathaus.deliveryEntryDataList)
                 {
@@ -1647,7 +1668,7 @@ namespace WebService1
 
 
 
-        private string callDeliveryService(string jsonData, string canal, string tipPers, string codPers)
+        public string callDeliveryService(string jsonData, string canal, string tipPers, string codPers)
         {
 
             string result = "";
@@ -1674,6 +1695,8 @@ namespace WebService1
                     }
 
                 }
+
+                urlDeliveryService = "https://b2c.arabesque.ro/arbsqintegration/optimiseDeliveryB2B";
 
 
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(urlDeliveryService);
@@ -1709,6 +1732,8 @@ namespace WebService1
 
         public string getStocMathaus(string filiala, string codArticol, string um, string tipCmd, string tipUserSap, string codUser)
         {
+
+            
 
             StockMathaus stockMathaus = new StockMathaus();
 
@@ -1819,6 +1844,8 @@ namespace WebService1
 
             }
 
+            urlStockService = "https://b2c.arabesque.ro/arbsqintegration/getStocksB2B";
+
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(urlStockService);
             request.Method = "POST";
             request.ContentType = "application/json";
@@ -1849,16 +1876,18 @@ namespace WebService1
         }
 
 
-        private DateTransportMathaus getTransportService(AntetCmdMathaus antetCmd, ComandaMathaus comandaMathaus, string canal)
+        private DateTransportMathaus getTransportService(AntetCmdMathaus antetCmd, ComandaMathaus comandaMathaus, string canal, DatePoligon datePoligon)
         {
             DateTransportMathaus dateTransport = new DateTransportMathaus();
             List<CostTransportMathaus> listCostTransp = new List<CostTransportMathaus>();
             List<DepozitArticolTransport> listArticoleDepoz = new List<DepozitArticolTransport>();
+            List<CostTransportMathaus> listTaxeTransp = new List<CostTransportMathaus>();
 
-
-
-            
-
+            List<OptiuneCamion> optiuniCamion;
+            if (antetCmd.tipCamion != null)
+                optiuniCamion = new JavaScriptSerializer().Deserialize<List<OptiuneCamion>>(antetCmd.tipCamion);
+            else
+                optiuniCamion = new List<OptiuneCamion>();
 
             string werks = comandaMathaus.sellingPlant;
             string departCmd = antetCmd.depart;
@@ -1888,23 +1917,60 @@ namespace WebService1
                 inParam.IpPernr = antetCmd.codPers;
                 inParam.IpTraty = antetCmd.tipTransp;
 
+                SAPWebServices.ZstTaxeAcces taxeAcces = new SAPWebServices.ZstTaxeAcces();
+
+                string zonaPoligon = datePoligon.tipZona;
+
+                if (datePoligon.tipZona.ToUpper().Equals("ZM"))
+                    zonaPoligon = "METRO";
+                else if (datePoligon.tipZona.ToUpper().Equals("ZMA") || datePoligon.tipZona.ToUpper().Equals("ZEMA"))
+                    zonaPoligon = "EXTRA_A";
+                else if (datePoligon.tipZona.ToUpper().Equals("ZMB") || datePoligon.tipZona.ToUpper().Equals("ZEMB"))
+                    zonaPoligon = "EXTRA_B";
+
+                if (antetCmd.tipComandaCamion != null && antetCmd.tipComandaCamion.Trim() != "")
+                    taxeAcces.TipComanda = antetCmd.tipComandaCamion;
+                else
+                    taxeAcces.TipComanda = "";
+
+                if (antetCmd.greutateComanda != null && antetCmd.greutateComanda.Trim() != "")
+                    taxeAcces.GreutMarfa = Decimal.Parse(antetCmd.greutateComanda);
+                else
+                    taxeAcces.GreutMarfa = 0;
+
+                taxeAcces.Zona = zonaPoligon;
+                taxeAcces.MasinaDescoperita = antetCmd.camionDescoperit != null && Boolean.Parse(antetCmd.camionDescoperit) ? "X" : " ";
+                taxeAcces.Macara = antetCmd.macara != null && Boolean.Parse(antetCmd.macara) ? "X" : " ";
+                taxeAcces.CamionScurt = HelperComenzi.getOptiuneCamion(optiuniCamion, "Camion scurt");
+                taxeAcces.CamionIveco = HelperComenzi.getOptiuneCamion(optiuniCamion, "Camioneta IVECO");
+                taxeAcces.Poligon = datePoligon.nume;
+
+                if (datePoligon.limitareTonaj != null && datePoligon.limitareTonaj.Trim() != "")
+                    taxeAcces.LimitaTonaj = Decimal.Parse(datePoligon.limitareTonaj);
+
+                inParam.IsTaxaAcces = taxeAcces;
+
                 SAPWebServices.ZsitemsComanda[] items = new SAPWebServices.ZsitemsComanda[comandaMathaus.deliveryEntryDataList.Count];
-
-
-                JavaScriptSerializer ser = new JavaScriptSerializer();
 
                 int ii = 0;
                 foreach (DateArticolMathaus dateArticol in comandaMathaus.deliveryEntryDataList)
                 {
-
                     items[ii] = new SAPWebServices.ZsitemsComanda();
                     items[ii].Matnr = dateArticol.productCode;
                     items[ii].Kwmeng = Decimal.Parse(dateArticol.quantity.ToString());
                     items[ii].Vrkme = dateArticol.unit;
                     items[ii].ValPoz = Decimal.Parse(String.Format("{0:0.00}", dateArticol.valPoz));
+
+                    
                     items[ii].Werks = dateArticol.deliveryWarehouse;
+
                     if (dateArticol.depozit != null && dateArticol.depozit.Trim() != "")
                         items[ii].Lgort = dateArticol.depozit;
+
+                    if (dateArticol.greutate != null && dateArticol.greutate.Trim() != "")
+                        items[ii].BrgewMatnr = Decimal.Parse(dateArticol.greutate);
+                    else
+                        items[ii].BrgewMatnr = 0;
 
                     ii++;
                 }
@@ -1959,6 +2025,7 @@ namespace WebService1
 
                 nrItems = resp.ItFilCost.Count();
 
+
                 foreach (SAPWebServices.ZsfilTransp itemCost in resp.ItFilCost)
                 {
 
@@ -1966,14 +2033,22 @@ namespace WebService1
                     {
                         if (costTransp.filiala.Equals(itemCost.Werks))
                         {
-                            costTransp.valTransp = itemCost.ValTr.ToString();
-                            costTransp.codArtTransp = itemCost.Matnr;
-                            costTransp.depart = itemCost.Spart;
+
+                            CostTransportMathaus taxaTransport = new CostTransportMathaus();
+                            taxaTransport.filiala = costTransp.filiala;
+                            taxaTransport.tipTransp = costTransp.tipTransp;
+
+                            taxaTransport.valTransp = itemCost.ValTr.ToString();
+                            taxaTransport.codArtTransp = itemCost.Matnr;
+                            taxaTransport.depart = itemCost.Spart;
+                            taxaTransport.numeCost = itemCost.Maktx.ToUpper();
+                            listTaxeTransp.Add(taxaTransport);
                             break;
                         }
                     }
 
                 }
+
 
                 if (Utils.isUnitLogGed(comandaMathaus.sellingPlant) || (canal != null && canal.Equals("20")))
                     trateazaLivrariGed(comandaMathaus, resp);
@@ -1984,7 +2059,8 @@ namespace WebService1
                 ErrorHandling.sendErrorToMail("getTransportService: " + ex.ToString());
             }
 
-            dateTransport.listCostTransport = listCostTransp;
+
+            dateTransport.listCostTransport = listTaxeTransp;
             dateTransport.listDepozite = listArticoleDepoz;
 
             return dateTransport;

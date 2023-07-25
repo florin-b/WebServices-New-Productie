@@ -44,6 +44,15 @@ namespace WebService1
         public string depart;
         public string codPers;
         public string tipTransp;
+        public string camionDescoperit;
+        public string macara;
+        public string tipCamion;
+        public string greutateComanda;
+        public string tipComandaCamion;
+
+
+
+
     }
 
     public class DateTransportMathaus
@@ -59,6 +68,7 @@ namespace WebService1
         public string valTransp;
         public string codArtTransp;
         public string depart;
+        public string numeCost;
     }
 
     public class DepozitArticolTransport
@@ -91,6 +101,8 @@ namespace WebService1
         public string tip2;
         public string depozit;
         public string ulStoc;
+        public string greutate;
+        public double initQuantity;
     }
 
     public class StockMathaus
@@ -104,5 +116,12 @@ namespace WebService1
         public string productCode;
         public double availableQuantity;
         public string warehouse;
+    }
+
+    public class OptiuneCamion
+    {
+        public string nume;
+        public bool exista;
+        public bool selectat;
     }
 }

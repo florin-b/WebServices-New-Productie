@@ -13,7 +13,7 @@ namespace WebService1
     public class Preturi
     {
 
-        public string getPret(string client, string articol, string cantitate, string depart, string um, string ul, string tipUser, string depoz, string codUser, string canalDistrib, string filialaAlternativa, string filialaClp)
+        public string getPret(string client, string articol, string cantitate, string depart, string um, string ul, string tipUser, string depoz, string codUser, string canalDistrib, string filialaAlternativa, string filialaClp, string tipTransport)
         {
             string retVal = "";
             SAPWebServices.ZTBL_WEBSERVICE webService = null;
@@ -23,8 +23,6 @@ namespace WebService1
             string month = cDate.Month.ToString("00");
             string day = cDate.Day.ToString("00");
             string nowDate = year + month + day;
-
-
 
 
             OracleConnection connection = new OracleConnection();
@@ -67,7 +65,8 @@ namespace WebService1
                 inParam.GvSite = " ";
                 inParam.TipPers = tipUserLocal;
                 inParam.Canal = canalDistrib;
-                inParam.UlStoc = filialaClp != null ? filialaClp : " ";
+                inParam.UlStoc = filialaAlternativa.Equals("BV90") ? "BV90" : filialaClp != null ? filialaClp : " ";
+                inParam.Traty = tipTransport != null ? tipTransport : " ";
 
 
                 SAPWebServices.ZgetPriceResponse outParam = webService.ZgetPrice(inParam);
@@ -90,6 +89,9 @@ namespace WebService1
                 string greutateArt = outParam.GvBrgew.ToString();
                 string dataExp = outParam.GvDatbi;
 
+                string greutateBruta = outParam.GvBrgewMatnr.ToString();
+
+
                 string extindere11 = outParam.ErrorCode.ToString();
 
 
@@ -97,11 +99,11 @@ namespace WebService1
                 {
                     if (Service1.extindeClient(client).Equals("0"))
                     {
-                        return getPret(client, articol, cantitate, depart, um, ul, tipUserLocal, depoz, codUser, canalDistrib, filialaAlternativa, filialaClp);
+                        return getPret(client, articol, cantitate, depart, um, ul, tipUserLocal, depoz, codUser, canalDistrib, filialaAlternativa, filialaClp, tipTransport);
                     }
                     else
                     {
-                        return "-1";
+                        return "Eroare extindere client.";
                     }
                 }
 
@@ -295,14 +297,17 @@ namespace WebService1
 
                 string articoleRecom = new OperatiiArticole().getArticoleRecomandate(connection, articol, depart);
 
+                ArticolProps articolProps = new OperatiiArticole().getPropsArticol(connection, articol);
+
                 retVal += discMaxAV + "#" + discMaxSD + "#" + discMaxDV + "#" +
                          Convert.ToInt32(Double.Parse(multiplu)).ToString() + "#" +
                          cantUmb + "#" + Umb + "#" + discMaxKA + "#" + cmpArticol.ToString() + "#" + pretMediu + "#" + impachetare + "#" + 
-                         istoricPret + "#" + procRedCmp + "#" + pretGed + "#" + greutateArt + "#" + dataExp + "#" + articoleRecom + "#";
+                         istoricPret + "#" + procRedCmp + "#" + pretGed + "#" + greutateArt + "#" + dataExp + "#" + articoleRecom + "#"
+                          + articolProps.tipMarfa + "#" + greutateBruta + "#" + articolProps.lungime + "#";
 
 
                 if (pretOut.Equals("0.0"))
-                    retVal = "-1";
+                    retVal = outParam.VMess + ".";
 
 
 
@@ -312,7 +317,7 @@ namespace WebService1
             {
                 string context =  client + "\n " +  articol + "\n " + cantitate + "\n " + depart + "\n " + um + "\n " + ul + "\n " + tipUser + "\n " + depoz + "\n " + codUser + "\n " + canalDistrib + "\n " + filialaAlternativa;
                 ErrorHandling.sendErrorToMail(ex.ToString() + " context: " + context);
-                retVal = "-1";
+                retVal = "Eroare interogare preturi.";
             }
             finally
             {

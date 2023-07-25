@@ -14,5 +14,7 @@ namespace WebService1.General
         public static string tipSSCM = "SSCM";
         public static string tipCGED = "CGED";
         public static string tipOIVPD = "OIVPD";
+
+        public static string GPS_DATA_FOLDER = "~/resources/gpxdata";
     }
 }

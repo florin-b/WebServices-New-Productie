@@ -800,6 +800,16 @@
           <xsd:maxLength value="40" />
         </xsd:restriction>
       </xsd:simpleType>
+      <xsd:simpleType name="char50">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="50" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char7">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="7" />
+        </xsd:restriction>
+      </xsd:simpleType>
       <xsd:simpleType name="date10">
         <xsd:restriction base="xsd:string">
           <xsd:maxLength value="10" />
@@ -830,11 +840,26 @@
           <xsd:element name="ValTr" type="n0:curr15.2" />
           <xsd:element name="Matnr" type="n0:char18" />
           <xsd:element name="Spart" type="n0:char3" />
+          <xsd:element name="Maktx" type="n0:char40" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ZstTaxeAcces">
+        <xsd:sequence>
+          <xsd:element name="TipComanda" type="tns:char20" />
+          <xsd:element name="GreutMarfa" type="tns:quantum13.3" />
+          <xsd:element name="Zona" type="tns:char7" />
+          <xsd:element name="MasinaDescoperita" type="n0:char1" />
+          <xsd:element name="Macara" type="n0:char1" />
+          <xsd:element name="CamionScurt" type="n0:char1" />
+          <xsd:element name="CamionIveco" type="n0:char1" />
+          <xsd:element name="Poligon" type="tns:char50" />
+          <xsd:element name="LimitaTonaj" type="tns:quantum13.3" />
         </xsd:sequence>
       </xsd:complexType>
       <xsd:complexType name="ZsitemsComanda">
         <xsd:sequence>
           <xsd:element name="Matnr" type="n0:char18" />
+          <xsd:element name="BrgewMatnr" type="tns:quantum13.3" />
           <xsd:element name="Kwmeng" type="n0:quantum15.3" />
           <xsd:element name="Vrkme" type="n0:unit3" />
           <xsd:element name="ValPoz" type="n0:curr15.2" />
@@ -3213,6 +3238,7 @@
             <xsd:element minOccurs="0" name="IpTraty" type="n0:char4" />
             <xsd:element minOccurs="0" name="IpVkgrp" type="n0:char3" />
             <xsd:element minOccurs="0" name="IpWerks" type="n0:char4" />
+            <xsd:element minOccurs="0" name="IsTaxaAcces" type="tns:ZstTaxeAcces" />
             <xsd:element name="ItFilCost" type="tns:TableOfZsfilTransp" />
             <xsd:element name="ItItems" type="tns:TableOfZsitemsComanda" />
           </xsd:sequence>
@@ -3269,6 +3295,7 @@
           <xsd:sequence>
             <xsd:element name="ErrorCode" type="xsd:unsignedByte" />
             <xsd:element name="GvBrgew" type="tns:quantum13.3" />
+            <xsd:element name="GvBrgewMatnr" type="tns:quantum13.3" />
             <xsd:element minOccurs="0" name="GvCant" type="n0:quantum13.3" />
             <xsd:element name="GvCantFree" type="n0:quantum13.3" />
             <xsd:element name="GvCond" type="n0:char200" />

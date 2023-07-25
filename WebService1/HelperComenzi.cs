@@ -320,6 +320,87 @@ namespace WebService1
         }
 
 
+        public static Dictionary<string, string> getDictionarUmIso(List<DateArticolMathaus> listArticole)
+        {
+
+            Dictionary<string, string> dictionarUmIso = new Dictionary<string, string>();
+
+            string umArt = "";
+
+            foreach (DateArticolMathaus articol in listArticole)
+            {
+                if (umArt == "")
+                    umArt = "'" + articol.unit + "'";
+                else
+                    umArt += "," + "'" + articol.unit + "'";
+            }
+
+            OracleConnection connection = new OracleConnection();
+            OracleDataReader oReader = null;
+
+            string connectionString = DatabaseConnections.ConnectToProdEnvironment();
+            connection.ConnectionString = connectionString;
+            connection.Open();
+            OracleCommand cmd = connection.CreateCommand();
+
+            try
+            {
+                cmd.CommandText = " select distinct t.msehi, t.isocode from sapprd.t006 t where t.mandt = '900' and t.msehi in (" + umArt + ") ";
+                oReader = cmd.ExecuteReader();
+
+                if (oReader.HasRows)
+                {
+                    while (oReader.Read())
+                    {
+                        dictionarUmIso.Add(oReader.GetString(0), oReader.GetString(1));
+                    }
+                }
+            }
+
+            catch (Exception ex)
+            {
+                ErrorHandling.sendErrorToMail(ex.ToString());
+            }
+            finally
+            {
+                DatabaseConnections.CloseConnections(oReader, cmd, connection);
+            }
+
+
+            return dictionarUmIso;
+
+        }
+
+        public static void convertUmFromIso(Dictionary<string, string> dictionarUmIso, List<DateArticolMathaus> listArticole)
+        {
+            foreach (DateArticolMathaus articol in listArticole)
+            {
+                articol.unit = dictionarUmIso[articol.unit];
+            }
+        }
+
+        public static string getOptiuneCamion(List<OptiuneCamion> listOptiuni, string tipCamion)
+        {
+            string optiune = "n/a";
+
+            if (listOptiuni == null || listOptiuni.Count == 0)
+                return optiune;
+
+            foreach (OptiuneCamion optCamion in listOptiuni)
+            {
+                if (optCamion.nume.ToLower().Equals(tipCamion.ToLower()))
+                {
+                    if (!optCamion.exista)
+                        optiune = "n/a";
+                    else
+                        optiune = optCamion.selectat ? "y" : "n";
+
+                }
+            }
+
+            return optiune;
+        }
+
         public static bool isUlEquals(string ul1, string ul2)
         {
             string ulBrut1 = ul1.Substring(0, 2) + "X" + ul1.Substring(3, 1);

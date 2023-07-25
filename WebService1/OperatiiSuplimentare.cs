@@ -219,7 +219,7 @@ namespace WebService1
 
 
 
-            if (tipPrelucrare == null || tipPrelucrare.Equals("-1"))
+            if (tipPrelucrare == null || tipPrelucrare.Equals("-1") || tipPrelucrare.Trim().Equals(""))
                 return;
 
             string query = "";
