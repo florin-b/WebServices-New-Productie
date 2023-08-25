@@ -1362,7 +1362,7 @@ namespace WebService1
                         if (dateArticol.ulStoc != null && dateArticol.ulStoc.Equals("BV90"))
                             articolComanda.deliveryWarehouse = "BV90";
                         else if (canal != null && canal.Equals("20") && (dateArticol.ulStoc == null || !dateArticol.ulStoc.Equals("BV90")))
-                            articolComanda.deliveryWarehouse = comanda.sellingPlant;
+                            articolComanda.deliveryWarehouse = dateArticol.productCode.StartsWith("0000000000111") ? getULGed(comanda.sellingPlant) : comanda.sellingPlant;
                         else
                             articolComanda.deliveryWarehouse = dateArticol.productCode.StartsWith("0000000000111") ? getULGed(comanda.sellingPlant) : comanda.sellingPlant;
 
@@ -1452,7 +1452,12 @@ namespace WebService1
                         continue;
 
                     DateArticolMathaus articol = new DateArticolMathaus();
-                    articol.productCode = "0000000000" + dateArticol.productCode;
+
+                    if (Char.IsDigit(dateArticol.productCode, 0))
+                        articol.productCode = "0000000000" + dateArticol.productCode;
+                    else
+                        articol.productCode = dateArticol.productCode;
+
                     articol.quantity = Math.Ceiling(dateArticol.quantity); 
                     articol.unit = dictionarUmIso[dateArticol.unit];
                     deliveryEntryDataList.Add(articol);
@@ -1491,11 +1496,7 @@ namespace WebService1
                         {
 
                             if (canal != null && canal.Equals("20") && !dateArticolRez.deliveryWarehouse.Equals("BV90"))
-                            {
-                                dateArticol.deliveryWarehouse = getULGed(dateArticolRez.deliveryWarehouse);
                                 dateArticol.deliveryWarehouse = dateArticolRez.deliveryWarehouse;
-                            }
-
                             else
                                 dateArticol.deliveryWarehouse = dateArticolRez.deliveryWarehouse;
 
@@ -1510,7 +1511,7 @@ namespace WebService1
                         if (dateArticol.ulStoc != null && dateArticol.ulStoc.Equals("BV90"))
                             dateArticol.deliveryWarehouse = "BV90";
                         else if (canal != null && canal.Equals("20") && (dateArticol.ulStoc == null || !dateArticol.ulStoc.Equals("BV90")))
-                            dateArticol.deliveryWarehouse = comanda.sellingPlant;
+                            dateArticol.deliveryWarehouse = dateArticol.productCode.StartsWith("0000000000111") ? getULGed(comanda.sellingPlant) : comanda.sellingPlant;
                         else
                             dateArticol.deliveryWarehouse = dateArticol.productCode.StartsWith("0000000000111") ? getULGed(comanda.sellingPlant) : comanda.sellingPlant;
                     }
@@ -1527,7 +1528,7 @@ namespace WebService1
                     foreach (DepozitArticolTransport depozitArticol in dateTransport.listDepozite)
 
                     {
-                        if (articolMathaus.productCode.Equals(depozitArticol.codArticol) && articolMathaus.deliveryWarehouse.Equals(depozitArticol.filiala))
+                        if (articolMathaus.productCode.TrimStart('0').Equals(depozitArticol.codArticol.TrimStart('0')) && articolMathaus.deliveryWarehouse.Equals(depozitArticol.filiala))
                         {
                             articolMathaus.depozit = depozitArticol.depozit;
                             break;
@@ -1876,7 +1877,7 @@ namespace WebService1
         }
 
 
-        private DateTransportMathaus getTransportService(AntetCmdMathaus antetCmd, ComandaMathaus comandaMathaus, string canal, DatePoligon datePoligon)
+        public DateTransportMathaus getTransportService(AntetCmdMathaus antetCmd, ComandaMathaus comandaMathaus, string canal, DatePoligon datePoligon)
         {
             DateTransportMathaus dateTransport = new DateTransportMathaus();
             List<CostTransportMathaus> listCostTransp = new List<CostTransportMathaus>();
@@ -1934,7 +1935,7 @@ namespace WebService1
                     taxeAcces.TipComanda = "";
 
                 if (antetCmd.greutateComanda != null && antetCmd.greutateComanda.Trim() != "")
-                    taxeAcces.GreutMarfa = Decimal.Parse(antetCmd.greutateComanda);
+                    taxeAcces.GreutMarfa = Decimal.Parse(String.Format("{0:0.00}", Double.Parse(antetCmd.greutateComanda)));
                 else
                     taxeAcces.GreutMarfa = 0;
 
@@ -1968,7 +1969,7 @@ namespace WebService1
                         items[ii].Lgort = dateArticol.depozit;
 
                     if (dateArticol.greutate != null && dateArticol.greutate.Trim() != "")
-                        items[ii].BrgewMatnr = Decimal.Parse(dateArticol.greutate);
+                        items[ii].BrgewMatnr = Decimal.Parse(String.Format("{0:0.00}", Double.Parse(dateArticol.greutate)));
                     else
                         items[ii].BrgewMatnr = 0;
 
@@ -2050,13 +2051,11 @@ namespace WebService1
                 }
 
 
-                if (Utils.isUnitLogGed(comandaMathaus.sellingPlant) || (canal != null && canal.Equals("20")))
-                    trateazaLivrariGed(comandaMathaus, resp);
-
             }
             catch (Exception ex)
             {
-                ErrorHandling.sendErrorToMail("getTransportService: " + ex.ToString());
+                JavaScriptSerializer ser = new JavaScriptSerializer();
+                ErrorHandling.sendErrorToMail("getTransportService: " + ex.ToString() + " \n\n antetCmd: " + ser.Serialize(antetCmd) + "\n\n comandaMathaus: " + ser.Serialize(comandaMathaus) + "\n\n canal:" + canal + "\n\n datePoligon: " + ser.Serialize(datePoligon));
             }
 
 

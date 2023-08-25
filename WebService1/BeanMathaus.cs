@@ -103,6 +103,7 @@ namespace WebService1
         public string ulStoc;
         public string greutate;
         public double initQuantity;
+
     }
 
     public class StockMathaus

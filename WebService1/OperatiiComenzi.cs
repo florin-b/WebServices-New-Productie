@@ -2002,9 +2002,9 @@ namespace WebService1
 
                 if (zona.ToUpper().Equals("ZM"))
                     zonaPoligon = "METRO";
-                else if (zona.ToUpper().Equals("ZMA"))
+                else if (zona.ToUpper().Equals("ZMA") || zona.ToUpper().Equals("ZEMA"))
                     zonaPoligon = "EXTRA_A";
-                else if (zona.ToUpper().Equals("ZMB"))
+                else if (zona.ToUpper().Equals("ZMB") || zona.ToUpper().Equals("ZEMB"))
                     zonaPoligon = "EXTRA_B";
 
                 cmd.Parameters.Add(":zona", OracleType.VarChar, 12).Direction = ParameterDirection.Input;
