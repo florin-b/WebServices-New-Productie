@@ -67,7 +67,7 @@ namespace WebService1
                 inParam.Canal = canalDistrib;
                 inParam.UlStoc = filialaAlternativa.Equals("BV90") ? "BV90" : filialaClp != null ? filialaClp : " ";
                 inParam.Traty = tipTransport != null ? tipTransport : " ";
-
+                inParam.CuRotunj = Utils.isUserTest(codUser, Constants.USER_TEST_1) ? "X" : " ";
 
                 SAPWebServices.ZgetPriceResponse outParam = webService.ZgetPrice(inParam);
 
@@ -90,6 +90,9 @@ namespace WebService1
                 string dataExp = outParam.GvDatbi;
 
                 string greutateBruta = outParam.GvBrgewMatnr.ToString();
+
+                string um50 = outParam.GvUm50;
+                string cantitate50 = outParam.GvQty50.ToString();
 
 
                 string extindere11 = outParam.ErrorCode.ToString();
@@ -303,7 +306,7 @@ namespace WebService1
                          Convert.ToInt32(Double.Parse(multiplu)).ToString() + "#" +
                          cantUmb + "#" + Umb + "#" + discMaxKA + "#" + cmpArticol.ToString() + "#" + pretMediu + "#" + impachetare + "#" + 
                          istoricPret + "#" + procRedCmp + "#" + pretGed + "#" + greutateArt + "#" + dataExp + "#" + articoleRecom + "#"
-                          + articolProps.tipMarfa + "#" + greutateBruta + "#" + articolProps.lungime + "#";
+                          + articolProps.tipMarfa + "#" + greutateBruta + "#" + articolProps.lungime + "#" + cantitate50 + "#" + um50 + "#";
 
 
                 if (pretOut.Equals("0.0"))

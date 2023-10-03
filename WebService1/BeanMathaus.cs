@@ -102,7 +102,9 @@ namespace WebService1
         public string depozit;
         public string ulStoc;
         public string greutate;
-        public double initQuantity;
+        public double quantity50;
+        public string unit50;
+        public double cantUmb;
 
     }
 

@@ -26872,6 +26872,8 @@ namespace WebService1.SAPWebServices {
         
         private string cityField;
         
+        private string cuRotunjField;
+        
         private string dztermField;
         
         private decimal gvCantField;
@@ -26921,6 +26923,17 @@ namespace WebService1.SAPWebServices {
             }
             set {
                 this.cityField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CuRotunj {
+            get {
+                return this.cuRotunjField;
+            }
+            set {
+                this.cuRotunjField = value;
             }
         }
         
@@ -27128,6 +27141,10 @@ namespace WebService1.SAPWebServices {
         
         private string gvNoDiscField;
         
+        private decimal gvQty50Field;
+        
+        private string gvUm50Field;
+        
         private string gvVrkmeField;
         
         private string gvVrkmeFreeField;
@@ -27308,6 +27325,28 @@ namespace WebService1.SAPWebServices {
             }
             set {
                 this.gvNoDiscField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal GvQty50 {
+            get {
+                return this.gvQty50Field;
+            }
+            set {
+                this.gvQty50Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string GvUm50 {
+            get {
+                return this.gvUm50Field;
+            }
+            set {
+                this.gvUm50Field = value;
             }
         }
         

@@ -850,8 +850,8 @@
           <xsd:element name="Zona" type="tns:char7" />
           <xsd:element name="MasinaDescoperita" type="n0:char1" />
           <xsd:element name="Macara" type="n0:char1" />
-          <xsd:element name="CamionScurt" type="n0:char1" />
-          <xsd:element name="CamionIveco" type="n0:char1" />
+          <xsd:element name="CamionScurt" type="n0:char3" />
+          <xsd:element name="CamionIveco" type="n0:char3" />
           <xsd:element name="Poligon" type="tns:char50" />
           <xsd:element name="LimitaTonaj" type="tns:quantum13.3" />
         </xsd:sequence>
@@ -3273,6 +3273,7 @@
           <xsd:sequence>
             <xsd:element minOccurs="0" name="Canal" type="n0:char2" />
             <xsd:element minOccurs="0" name="City" type="n0:char25" />
+            <xsd:element minOccurs="0" name="CuRotunj" type="n0:char1" />
             <xsd:element minOccurs="0" name="Dzterm" type="n0:char4" />
             <xsd:element minOccurs="0" name="GvCant" type="n0:quantum13.3" />
             <xsd:element name="GvKunnr" type="n0:char10" />
@@ -3307,6 +3308,8 @@
             <xsd:element name="GvNetwrFtva" type="n0:curr15.2" />
             <xsd:element name="GvNetwrList" type="n0:curr15.2" />
             <xsd:element name="GvNoDisc" type="n0:char1" />
+            <xsd:element name="GvQty50" type="n0:quantum13.3" />
+            <xsd:element name="GvUm50" type="n0:unit3" />
             <xsd:element minOccurs="0" name="GvVrkme" type="n0:unit3" />
             <xsd:element name="GvVrkmeFree" type="n0:unit3" />
             <xsd:element name="Impachet" type="n0:string" />

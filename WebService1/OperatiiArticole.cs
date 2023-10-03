@@ -589,7 +589,7 @@ namespace WebService1
             return DateTime.Now.AddMonths(-6).ToString("yyyyMMdd");
         }
 
-        public string getListArticoleDistributie(string searchString, string tipArticol, string tipCautare, string filiala, string departament, string afisStoc, string codUser, string modulCautare)
+        public string getListArticoleDistributie(string searchString, string tipArticol, string tipCautare, string filiala, string departament, string afisStoc, string codUser, string modulCautare, string tipComanda)
         {
 
             string condExtraDepart = " ";
@@ -697,6 +697,10 @@ namespace WebService1
                     if (searchString.StartsWith("111"))
                         condFil = filiala.Substring(0, 2) + "2" + filiala.Substring(3, 1);
 
+                    string conditiiFasonate = "";
+                    if (tipComanda != null && tipComanda.ToLower().Contains("fasonat"))
+                        conditiiFasonate = " and x.sintetic in " + HelperComenzi.getSinteticeFasonate();
+
                     cmd.CommandText = " select x.* from ( " +
                                    " select distinct decode(length(a.cod),18,substr(a.cod,-8),a.cod) codart,a.nume, a.sintetic, b.cod_nivel1, a.umvanz10, a.umvanz, nvl(a.tip_mat,' '), " +
                                    " b.cod nume_sint,  " +
@@ -707,7 +711,7 @@ namespace WebService1
                                    " from articole a, " +
                                    " sintetice b, sapprd.marc c " + condTabCodBare + " where c.mandt = '900' and c.matnr = a.cod and c.werks = '" + condFil + "' and c.mmsta <> '01' " +
                                    " and a.sintetic = b.cod and a.cod != 'MAT GENERIC PROD' and a.blocat <> '01' and " + condCautare + condDepart +
-                                   " ) x  where  " + condLimit + condExtraDepart + " order by x.nume ";
+                                   " ) x  where  " + condLimit + condExtraDepart + conditiiFasonate + " order by x.nume ";
                 }
                 else// consilieri
                 {
@@ -716,6 +720,10 @@ namespace WebService1
                     if (filiala != null && filiala.Length > 0)
                         filGed = filiala.Substring(0, 2) + "2" + filiala.Substring(3, 1);
 
+                    string conditiiFasonate = "";
+                    if (tipComanda != null && tipComanda.ToLower().Contains("fasonat"))
+                        conditiiFasonate = " and a.sintetic in " + HelperComenzi.getSinteticeFasonate();
+
                     cmd.CommandText = " select distinct decode(length(a.cod),18,substr(a.cod,-8),a.cod) codart,a.nume, a.sintetic, b.cod_nivel1, a.umvanz10, a.umvanz, nvl(a.tip_mat,' '), b.cod nume_sint, " +
                                      " decode(a.grup_vz,' ','-1', a.grup_vz), decode(trim(a.dep_aprobare),'','00', a.dep_aprobare), " +
                                      " (select nvl( " +
@@ -723,7 +731,8 @@ namespace WebService1
                                      valStoc + ", categ_mat, lungime " +
                                      " from articole a, " +
                                      " sintetice b, sapprd.marc c " + condTabCodBare + " where c.mandt = '900' and c.matnr = a.cod and c.werks = '" + filGed + "' and c.mmsta <> '01'" +
-                                     " and a.sintetic = b.cod and a.cod != 'MAT GENERIC PROD' and a.blocat <> '01' and " + condCautare + condDepart + " and " + condLimit + "  order by a.nume ";
+                                     " and a.sintetic = b.cod and a.cod != 'MAT GENERIC PROD' and a.blocat <> '01' and " + condCautare + condDepart + conditiiFasonate +
+                                     " and " + condLimit + "  order by a.nume ";
 
                 }
 
@@ -1046,6 +1055,8 @@ namespace WebService1
                 inParam.City = paramPret.localitate == null ? " " : paramPret.localitate.Length <= 25 ? paramPret.localitate : paramPret.localitate.Substring(0, 25);
                 inParam.UlStoc = paramPret.filialaAlternativa.Equals("BV90") ? "BV90" : paramPret.filialaClp != null ? paramPret.filialaClp : " ";
                 inParam.Traty = paramPret.tipTransport != null ? paramPret.tipTransport : " ";
+                inParam.CuRotunj = Utils.isUserTest(paramPret.codUser, Constants.USER_TEST_1) ? "X" : " ";
+
 
                 SAPWebServices.ZgetPriceResponse outParam = webService.ZgetPrice(inParam);
 
@@ -1083,7 +1094,7 @@ namespace WebService1
                 string pretFaraTva = outParam.GvNetwrFtva.ToString();
 
                 string greutateBruta = outParam.GvBrgewMatnr.ToString();
-
+                
 
                 pretArticolGed.pret = pretOut;
                 pretArticolGed.um = umOut;
@@ -1105,6 +1116,9 @@ namespace WebService1
                 pretArticolGed.errMsg = outParam.VMess;
                 pretArticolGed.pretFaraTva = ((outParam.GvNetwrFtva / outParam.GvCant) * outParam.Multiplu).ToString();
                 pretArticolGed.greutate = outParam.GvBrgew.ToString();
+
+                pretArticolGed.um50 = outParam.GvUm50;
+                pretArticolGed.cantitate50 = outParam.GvQty50.ToString();
 
                 OracleConnection connection = new OracleConnection();
                 OracleCommand cmd = new OracleCommand();

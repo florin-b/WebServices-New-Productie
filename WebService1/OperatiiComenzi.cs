@@ -2012,7 +2012,7 @@ namespace WebService1
 
                 string tipComanda = "NORMALA";
                 if (comandaExtralungi.Equals("true"))
-                    tipComanda = "ETRALUNGI";
+                    tipComanda = "EXTRALUNGI";
                 if (comandaEnergofaga.Equals("true"))
                     tipComanda = "ENERGOFAGA";
 

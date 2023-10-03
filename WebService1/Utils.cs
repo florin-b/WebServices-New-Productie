@@ -632,64 +632,70 @@ namespace WebService1
             switch (unitLog)
             {
                 case "BC10":
-                    retVal = "Str. Constantin Musat nr. 1#Bacau#04#Bacau#45.67#23.81";
+                    retVal = "Str. Constantin Musat nr. 1#Bacau#04#Bacau#46.55487582684765#26.90338310116168";
                     break;
                 case "MM10":
-                    retVal = "Str. Independentei nr. 80#Baia Mare#24#Maramures#45.67#23.81";
+                    retVal = "Str. Independentei nr. 80#Baia Mare#24#Maramures#47.656458552468685#23.515027451992797";
                     break;
                 case "BV10":
-                    retVal = "Str. Bucegi nr. 1#Brasov#08#Brasov#45.67#23.81";
+                    retVal = "Str. Bucegi nr. 1#Brasov#08#Brasov#45.66067452455647#25.545861874340353";
                     break;
                 case "CJ10":
-                    retVal = "Str. Calea Floresti nr. 147-153#Cluj Napoca#12#Cluj#45.67#23.81";
+                    retVal = "Str. Calea Floresti nr. 147-153#Cluj Napoca#12#Cluj#46.75454790717061#23.537448192185416";
                     break;
                 case "CT10":
-                    retVal = "B-dul Aurel Vlaicu nr. 171#Constanta#13#Constanta#45.67#23.81";
+                    retVal = "B-dul Aurel Vlaicu nr. 171#Constanta#13#Constanta#44.18382945854235#28.595962231681764";
                     break;
                 case "DJ10":
-                    retVal = "B-dul Decebal nr. 111A#Craiova#16#Dolj#45.67#23.81";
+                    retVal = "B-dul Decebal nr. 111A#Craiova#16#Dolj#44.30038467977317#23.83460388880816";
                     break;
                 case "VN10":
-                    retVal = "B-dul Bucuresti nr. 12#Focsani#39#Vrancea#45.67#23.81";
+                    retVal = "B-dul Bucuresti nr. 12#Focsani#39#Vrancea#45.716460259106384#27.16264003203066";
                     break;
                 case "GL10":
-                    retVal = "Str. Drumul de Centura nr. 39#Galati#17#Galati#45.67#23.81";
+                    retVal = "Str. Drumul de Centura nr. 39#Galati#17#Galati#45.4245602490232#28.005324518149003";
                     break;
                 case "IS10":
                 case "IS20":
-                    retVal = "Comuna Miroslava, Sat Uricani, Trup Izolat, nr. 1#Iasi#22#Iasi#45.67#23.81";
+                    retVal = "Comuna Miroslava, Sat Uricani, Trup Izolat, nr. 1#Iasi#22#Iasi#47.179582902583455#27.475228691348015";
                     break;
                 case "NT10":
-                    retVal = "Comuna Savinesti, Str. Uzinei, nr. 1#Piatra Neamt#27#Neamt#45.67#23.81";
+                    retVal = "Comuna Savinesti, Str. Uzinei, nr. 1#Piatra Neamt#27#Neamt#46.930562133577666#26.35957463676251";
                     break;
                 case "BH10":
-                    retVal = "Str. Calea Santandrei nr. 3A#Oradea#05#Bihor#45.67#23.81";
+                    retVal = "Str. Calea Santandrei nr. 3A#Oradea#05#Bihor#47.047994795431116#21.895566522025952";
                     break;
                 case "AG10":
                 case "AG20":
-                    retVal = "Comuna Bradu DN 65B#Pitesti#03#Arges#45.67#23.81";
+                    retVal = "Comuna Bradu DN 65B#Pitesti#03#Arges#44.82454633607773#24.90829740165149";
                     break;
                 case "PH10":
-                    retVal = "Str. Poligonului nr. 5#Ploiesti#29#Prahova#45.67#23.81";
+                    retVal = "Str. Poligonului nr. 5#Ploiesti#29#Prahova#44.95067400326734#25.99013215742942";
                     break;
                 case "MS10":
-                    retVal = "Str. Depozitelor nr. 26#Targu Mures#26#Mures#45.67#23.81";
+                    retVal = "Str. Depozitelor nr. 26#Targu Mures#26#Mures#46.52375988748359#24.525497066622783";
                     break;
                 case "TM10":
-                    retVal = "Str. Calea Sagului nr. 205#Timisoara#35#Timis#45.67#23.81";
+                    retVal = "Str. Calea Sagului nr. 205#Timisoara#35#Timis#45.71132392091665#21.192902041519208";
                     break;
                 case "BU13":
-                    retVal = "Soseaua Andronache nr. 203, Sector 2#Bucuresti#40#Bucuresti#45.67#23.81";
+                    retVal = "Soseaua Andronache nr. 203, Sector 2#Bucuresti#40#Bucuresti#44.47901744847611#26.159451897542727";
                     break;
                 case "BU10":
                 case "BU20":
-                    retVal = "Str. Drumul intre Tarlale, nr. 61A, sector 3#Bucuresti#40#Bucuresti#45.67#23.81";
+                    retVal = "Str. Drumul intre Tarlale, nr. 61A, sector 3#Bucuresti#40#Bucuresti#44.408351161138505#26.21965945769171";
                     break;
                 case "BU12":
-                    retVal = "Str. Aleea Teisani, nr. 3-21, Sector 1#Bucuresti#40#Bucuresti#45.67#23.81";
+                    retVal = "Str. Aleea Teisani, nr. 3-21, Sector 1#Bucuresti#40#Bucuresti#44.53443269618948#26.07030375717042";
                     break;
                 case "BU11":
-                    retVal = "Str. Drumul Osiei, nr. 8-16, Sector 6#Bucuresti#40#Bucuresti#45.67#23.81";
+                    retVal = "Str. Drumul Osiei, nr. 8-16, Sector 6#Bucuresti#40#Bucuresti#44.43538503092358#25.989049968214726";
+                    break;
+                case "SV10":
+                    retVal = "Str. Traian Vuia nr. 17#Suceava#33#Suceava#47.65715885314641#26.2591477";
+                    break;
+                case "HD10":
+                    retVal = "Str. Dorobanţilor nr. 34#Deva#20#Hunedoara#45.871323015722076#22.92019456931883";
                     break;
             }
 
@@ -717,7 +723,13 @@ namespace WebService1
             return agentiTest.Contains(codUser.TrimStart('0'));
         }
 
-        public static bool isUserTest(string codUser)
+        public static bool isUserTest(string codUser, string nrVers)
+        {
+            return true;
+        }
+
+
+        public static bool isUserTestDB(string codUser, string nrVers)
         {
 
             if (codUser == null || codUser.Trim().Length == 0)
@@ -738,25 +750,10 @@ namespace WebService1
                 connection.Open();
 
                 cmd = connection.CreateCommand();
-
-                //
-
-                cmd.CommandText = " select count(*) from sapprd.zuseritestsfa ";
-
-                cmd.CommandType = CommandType.Text;
-
-
-                oReader = cmd.ExecuteReader();
-                oReader.Read();
-                nrRecords = oReader.GetInt32(0);
-
-                //if (nrRecords == 0)
-                //    isUsrTest = true;
-
-                //if (nrRecords > 0)
+                
                 {
 
-                    cmd.CommandText = " select 1 from sapprd.zuseritestsfa where ltrim(cod_agent,'0') =:codAgent ";
+                    cmd.CommandText = " select 1 from sapprd.zuseritestsfa where ltrim(cod_agent,'0') =:codAgent and vers in (" + nrVers + ")" ;
 
                     cmd.CommandType = CommandType.Text;
                     cmd.Parameters.Clear();
