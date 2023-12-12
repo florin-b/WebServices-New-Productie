@@ -281,10 +281,10 @@
   </wsdl:binding>
   <wsdl:service name="ZARTICOLE_BORD">
     <wsdl:port name="ZARTICOLE_BORD" binding="tns:ZARTICOLE_BORD">
-      <soap:address location="http://sap-prd6a.arabesque.ro:8036/sap/bc/srt/rfc/sap/zarticole_bord/900/zarticole_bord/zarticole_bord" />
+      <soap:address location="http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/rfc/sap/zarticole_bord/900/zarticole_bord/zarticole_bord" />
     </wsdl:port>
     <wsdl:port name="ZARTICOLE_BORD_soap12" binding="tns:ZARTICOLE_BORD_soap12">
-      <wsoap12:address location="http://sap-prd6a.arabesque.ro:8036/sap/bc/srt/rfc/sap/zarticole_bord/900/zarticole_bord/zarticole_bord" />
+      <wsoap12:address location="http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/rfc/sap/zarticole_bord/900/zarticole_bord/zarticole_bord" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

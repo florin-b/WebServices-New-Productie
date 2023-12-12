@@ -353,10 +353,10 @@
   </wsdl:binding>
   <wsdl:service name="ZWS_CL_FACT_AVSD">
     <wsdl:port name="ZWS_CL_FACT_AVSD" binding="tns:ZWS_CL_FACT_AVSD">
-      <soap:address location="http://sap-prd6a.arabesque.ro:8036/sap/bc/srt/rfc/sap/zws_cl_fact_avsd/900/zws_cl_fact_avsd/zws_cl_fact_avsd" />
+      <soap:address location="http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/rfc/sap/zws_cl_fact_avsd/900/zws_cl_fact_avsd/zws_cl_fact_avsd" />
     </wsdl:port>
     <wsdl:port name="ZWS_CL_FACT_AVSD_soap12" binding="tns:ZWS_CL_FACT_AVSD_soap12">
-      <wsoap12:address location="http://sap-prd6a.arabesque.ro:8036/sap/bc/srt/rfc/sap/zws_cl_fact_avsd/900/zws_cl_fact_avsd/zws_cl_fact_avsd" />
+      <wsoap12:address location="http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/rfc/sap/zws_cl_fact_avsd/900/zws_cl_fact_avsd/zws_cl_fact_avsd" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

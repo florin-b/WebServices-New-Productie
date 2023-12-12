@@ -1055,7 +1055,7 @@ namespace WebService1
                 inParam.City = paramPret.localitate == null ? " " : paramPret.localitate.Length <= 25 ? paramPret.localitate : paramPret.localitate.Substring(0, 25);
                 inParam.UlStoc = paramPret.filialaAlternativa.Equals("BV90") ? "BV90" : paramPret.filialaClp != null ? paramPret.filialaClp : " ";
                 inParam.Traty = paramPret.tipTransport != null ? paramPret.tipTransport : " ";
-                inParam.CuRotunj = Utils.isUserTest(paramPret.codUser, Constants.USER_TEST_1) ? "X" : " ";
+                inParam.CuRotunj = "X";
 
 
                 SAPWebServices.ZgetPriceResponse outParam = webService.ZgetPrice(inParam);
@@ -1125,6 +1125,14 @@ namespace WebService1
                 OracleDataReader oReader = null;
 
 
+                string strFilialaCmp = paramPret.ul;
+
+                if (paramPret.filialaClp != null && paramPret.filialaClp.Trim() != "")
+                    strFilialaCmp = paramPret.filialaClp.Substring(0, 2) + "2" + paramPret.filialaClp.Substring(3, 1);
+
+                if (!paramPret.depart.Equals("11"))
+                    strFilialaCmp = strFilialaCmp.Substring(0, 2) + "1" + strFilialaCmp.Substring(3, 1);
+
                 string connectionString = DatabaseConnections.ConnectToProdEnvironment();
 
                 connection.ConnectionString = connectionString;
@@ -1142,7 +1150,7 @@ namespace WebService1
                 cmd.Parameters[0].Value = paramPret.articol;
 
                 cmd.Parameters.Add(":unitLog", OracleType.VarChar, 12).Direction = ParameterDirection.Input;
-                cmd.Parameters[1].Value = paramPret.ul;   //ul. ged
+                cmd.Parameters[1].Value = strFilialaCmp;   //ul. ged
 
 
 
@@ -1177,6 +1185,9 @@ namespace WebService1
 
 
                 }
+
+                if (HelperComenzi.isArticolPromo(connection, paramPret.articol))
+                    cmpArticol = 0;
 
                 //---sf. verificare cmp
 
@@ -2179,6 +2190,80 @@ namespace WebService1
             }
 
             return totalCuTva;
+        }
+
+        public string getFilialeTCLI()
+        {
+            List<FilialaTCLI> listFiliale = new List<FilialaTCLI>();
+
+            List<Depozit> listDepozite = new List<Depozit>();
+            HashSet<string> numeDepozite = new HashSet<string>();
+
+            OracleConnection connection = new OracleConnection();
+            OracleCommand cmd = new OracleCommand();
+            OracleDataReader oReader = null;
+
+            try
+            {
+                string connectionString = DatabaseConnections.ConnectToProdEnvironment();
+
+                connection.ConnectionString = connectionString;
+                connection.Open();
+
+                cmd = connection.CreateCommand();
+                cmd.CommandText = " select a.name, b.vstel, b.lgort, b.werks from sapprd.zlocatii a, sapprd.zexp_lgort b where a.werks = b.werks " +
+                                  " and a.vstel = b.vstel order by a.name, b.lgort ";
+
+                cmd.CommandType = CommandType.Text;
+                oReader = cmd.ExecuteReader();
+
+                if (oReader.HasRows)
+                {
+                    while (oReader.Read())
+                    {
+                        Depozit depozit = new Depozit();
+                        depozit.name = oReader.GetString(0);
+                        depozit.vstel = oReader.GetString(1);
+                        depozit.lgort = oReader.GetString(2);
+                        depozit.werks = oReader.GetString(3);
+                        listDepozite.Add(depozit);
+                        numeDepozite.Add(depozit.name);
+                    }
+
+                }
+
+                List<string> listNumeDepozite = new List<string>();
+                foreach (string numeDepozit in numeDepozite)
+                {
+                    FilialaTCLI filialaTCLI = new FilialaTCLI();
+                    filialaTCLI.nume = numeDepozit;
+
+                    foreach (Depozit depozit in listDepozite)
+                    {
+                        if (numeDepozit.Equals(depozit.name))
+                        {
+                            listNumeDepozite.Add(depozit.lgort);
+                            filialaTCLI.werks = depozit.werks;
+                        }
+                    }
+
+                    filialaTCLI.depozite = listNumeDepozite;
+                    listFiliale.Add(filialaTCLI);
+                    listNumeDepozite = new List<string>();
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                ErrorHandling.sendErrorToMail(ex.ToString());
+            }
+            finally
+            {
+                DatabaseConnections.CloseConnections(oReader, cmd, connection);
+            }
+
+            return new JavaScriptSerializer().Serialize(listFiliale);
         }
 
         public string getArticoleRecomandate(OracleConnection conn, string codArticol, string depart)

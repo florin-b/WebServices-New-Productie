@@ -232,6 +232,21 @@
     </xsd:schema>
     <xsd:schema xmlns:n0="urn:sap-com:document:sap:rfc:functions" attributeFormDefault="qualified" targetNamespace="urn:sap-com:document:sap:soap:functions:mc-style">
       <xsd:import namespace="urn:sap-com:document:sap:rfc:functions" />
+      <xsd:simpleType name="char10">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="10" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:complexType name="Zsintetice">
+        <xsd:sequence>
+          <xsd:element name="Matkl" type="n0:char9" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="Zmateriale">
+        <xsd:sequence>
+          <xsd:element name="Matnr" type="n0:char18" />
+        </xsd:sequence>
+      </xsd:complexType>
       <xsd:complexType name="ZintrarimarfaRez">
         <xsd:sequence>
           <xsd:element name="Matnr" type="n0:char18" />
@@ -260,24 +275,14 @@
           <xsd:element name="Werks" type="n0:char10" />
         </xsd:sequence>
       </xsd:complexType>
-      <xsd:complexType name="Zmateriale">
-        <xsd:sequence>
-          <xsd:element name="Matnr" type="n0:char18" />
-        </xsd:sequence>
-      </xsd:complexType>
       <xsd:complexType name="Znivel1">
         <xsd:sequence>
           <xsd:element name="Znivel1" type="n0:char18" />
         </xsd:sequence>
       </xsd:complexType>
-      <xsd:complexType name="Zsintetice">
+      <xsd:complexType name="TableOfZsintetice">
         <xsd:sequence>
-          <xsd:element name="Matkl" type="n0:char9" />
-        </xsd:sequence>
-      </xsd:complexType>
-      <xsd:complexType name="TableOfZintrarimarfaRez">
-        <xsd:sequence>
-          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:ZintrarimarfaRez" />
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:Zsintetice" />
         </xsd:sequence>
       </xsd:complexType>
       <xsd:complexType name="TableOfZmateriale">
@@ -285,14 +290,14 @@
           <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:Zmateriale" />
         </xsd:sequence>
       </xsd:complexType>
+      <xsd:complexType name="TableOfZintrarimarfaRez">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:ZintrarimarfaRez" />
+        </xsd:sequence>
+      </xsd:complexType>
       <xsd:complexType name="TableOfZnivel1">
         <xsd:sequence>
           <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:Znivel1" />
-        </xsd:sequence>
-      </xsd:complexType>
-      <xsd:complexType name="TableOfZsintetice">
-        <xsd:sequence>
-          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:Zsintetice" />
         </xsd:sequence>
       </xsd:complexType>
       <xsd:element name="ZgetIntrarimarfa">
@@ -310,6 +315,7 @@
             <xsd:element minOccurs="0" name="GtNivel1" type="tns:TableOfZnivel1" />
             <xsd:element name="GtRezultat" type="tns:TableOfZintrarimarfaRez" />
             <xsd:element minOccurs="0" name="GtSintetice" type="tns:TableOfZsintetice" />
+            <xsd:element minOccurs="0" name="IpLifnr" type="tns:char10" />
             <xsd:element name="MatCuAr" type="n0:char1" />
             <xsd:element name="Ul" type="n0:char4" />
             <xsd:element name="Valoric" type="n0:char1" />
@@ -378,10 +384,10 @@
   </wsdl:binding>
   <wsdl:service name="ZWBS_ZINTRARIMARFA">
     <wsdl:port name="ZWBS_ZINTRARIMARFA" binding="tns:ZWBS_ZINTRARIMARFA">
-      <soap:address location="http://sap-prd6a.arabesque.ro:8036/sap/bc/srt/rfc/sap/zwbs_zintrarimarfa/900/zwbs_zintrarimarfa/zwbs_zintrarimarfa" />
+      <soap:address location="http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/rfc/sap/zwbs_zintrarimarfa/900/zwbs_zintrarimarfa/zwbs_zintrarimarfa" />
     </wsdl:port>
     <wsdl:port name="ZWBS_ZINTRARIMARFA_soap12" binding="tns:ZWBS_ZINTRARIMARFA_soap12">
-      <wsoap12:address location="http://sap-prd6a.arabesque.ro:8036/sap/bc/srt/rfc/sap/zwbs_zintrarimarfa/900/zwbs_zintrarimarfa/zwbs_zintrarimarfa" />
+      <wsoap12:address location="http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/rfc/sap/zwbs_zintrarimarfa/900/zwbs_zintrarimarfa/zwbs_zintrarimarfa" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

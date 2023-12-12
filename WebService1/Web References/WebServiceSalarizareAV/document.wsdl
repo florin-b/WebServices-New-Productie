@@ -306,6 +306,26 @@
           <xsd:element name="Tip" type="n0:char2" />
         </xsd:sequence>
       </xsd:complexType>
+      <xsd:complexType name="Ztmarja">
+        <xsd:sequence>
+          <xsd:element name="Pernr" type="n0:numeric8" />
+          <xsd:element name="VenitMarja" type="n0:curr15.2" />
+          <xsd:element name="MarjaAnCurent" type="n0:curr13.2" />
+          <xsd:element name="MarjaAnPreced" type="n0:curr13.2" />
+          <xsd:element name="ProcMarja" type="n0:decimal7.3" />
+          <xsd:element name="CoefRealiz" type="n0:decimal7.3" />
+          <xsd:element name="Ename" type="n0:char50" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="Zspenalty">
+        <xsd:sequence>
+          <xsd:element name="Pernr" type="n0:numeric8" />
+          <xsd:element name="VenitPenalizat" type="n0:curr15.2" />
+          <xsd:element name="CoefPenalizare" type="n0:curr13.2" />
+          <xsd:element name="ValNeincasata" type="n0:curr13.2" />
+          <xsd:element name="Ename" type="n0:char50" />
+        </xsd:sequence>
+      </xsd:complexType>
       <xsd:complexType name="ZtprsSapreport">
         <xsd:sequence>
           <xsd:element name="Pernr" type="n0:numeric8" />
@@ -329,26 +349,6 @@
           <xsd:element name="Descriere" type="n0:char80" />
         </xsd:sequence>
       </xsd:complexType>
-      <xsd:complexType name="Ztmarja">
-        <xsd:sequence>
-          <xsd:element name="Pernr" type="n0:numeric8" />
-          <xsd:element name="VenitMarja" type="n0:curr15.2" />
-          <xsd:element name="MarjaAnCurent" type="n0:curr13.2" />
-          <xsd:element name="MarjaAnPreced" type="n0:curr13.2" />
-          <xsd:element name="ProcMarja" type="n0:decimal7.3" />
-          <xsd:element name="CoefRealiz" type="n0:decimal7.3" />
-          <xsd:element name="Ename" type="n0:char50" />
-        </xsd:sequence>
-      </xsd:complexType>
-      <xsd:complexType name="Zspenalty">
-        <xsd:sequence>
-          <xsd:element name="Pernr" type="n0:numeric8" />
-          <xsd:element name="VenitPenalizat" type="n0:curr15.2" />
-          <xsd:element name="CoefPenalizare" type="n0:curr13.2" />
-          <xsd:element name="ValNeincasata" type="n0:curr13.2" />
-          <xsd:element name="Ename" type="n0:char50" />
-        </xsd:sequence>
-      </xsd:complexType>
       <xsd:complexType name="Zpernr">
         <xsd:sequence>
           <xsd:element name="Pernr" type="n0:numeric8" />
@@ -369,11 +369,6 @@
           <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:Zstcf" />
         </xsd:sequence>
       </xsd:complexType>
-      <xsd:complexType name="TableOfZtprsSapreport">
-        <xsd:sequence>
-          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:ZtprsSapreport" />
-        </xsd:sequence>
-      </xsd:complexType>
       <xsd:complexType name="TableOfZtmarja">
         <xsd:sequence>
           <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:Ztmarja" />
@@ -382,6 +377,11 @@
       <xsd:complexType name="TableOfZspenalty">
         <xsd:sequence>
           <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:Zspenalty" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="TableOfZtprsSapreport">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:ZtprsSapreport" />
         </xsd:sequence>
       </xsd:complexType>
       <xsd:complexType name="TableOfZpernr">
@@ -456,7 +456,7 @@
   </wsdl:binding>
   <wsdl:service name="ZWBS_SAL_AV">
     <wsdl:port name="ZWBS_SAL_AV" binding="tns:ZWBS_SAL_AV">
-      <soap:address location="http://sap-prd6a.arabesque.ro:8036/sap/bc/srt/rfc/sap/zwbs_sal_av/900/zwbs_sal_av/zwbs_sal_av" />
+      <soap:address location="http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/rfc/sap/zwbs_sal_av/900/zwbs_sal_av/zwbs_sal_av" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

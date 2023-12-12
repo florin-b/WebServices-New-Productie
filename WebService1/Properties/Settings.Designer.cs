@@ -37,7 +37,7 @@ namespace WebService1.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://sap-prd6a.arabesque.ro:8036/sap/bc/srt/rfc/sap/zclp_webservice/900/zclp_we" +
+        [global::System.Configuration.DefaultSettingValueAttribute("http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/rfc/sap/zclp_webservice/900/zclp_we" +
             "bservice/zclp_webservice")]
         public string WebService1_SapWsClp_ZCLP_WEBSERVICE {
             get {
@@ -48,7 +48,7 @@ namespace WebService1.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://sap-prd6a.arabesque.ro:8036/sap/bc/srt/rfc/sap/zwbs_zintrarimarfa/900/zwbs" +
+        [global::System.Configuration.DefaultSettingValueAttribute("http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/rfc/sap/zwbs_zintrarimarfa/900/zwbs" +
             "_zintrarimarfa/zwbs_zintrarimarfa")]
         public string WebService1_WebNecesar1_ZWBS_ZINTRARIMARFA {
             get {
@@ -69,7 +69,7 @@ namespace WebService1.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://sap-prd6a.arabesque.ro:8036/sap/bc/srt/rfc/sap/zwbs_semiactivi/900/zwbs_se" +
+        [global::System.Configuration.DefaultSettingValueAttribute("http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/rfc/sap/zwbs_semiactivi/900/zwbs_se" +
             "miactivi/zwbs_semiactivi")]
         public string WebService1_ClientiSemiactivi_ZWBS_SEMIACTIVI {
             get {
@@ -80,7 +80,7 @@ namespace WebService1.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://sap-prd6a.arabesque.ro:8036/sap/bc/srt/rfc/sap/zwbs_sal_av/900/zwbs_sal_av" +
+        [global::System.Configuration.DefaultSettingValueAttribute("http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/rfc/sap/zwbs_sal_av/900/zwbs_sal_av" +
             "/zwbs_sal_av")]
         public string WebService1_WebServiceSalarizareAV_ZWBS_SAL_AV {
             get {
@@ -91,7 +91,7 @@ namespace WebService1.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://sap-prd6a.arabesque.ro:8036/sap/bc/srt/rfc/sap/zfg_instr_plata/900/zfg_ins" +
+        [global::System.Configuration.DefaultSettingValueAttribute("http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/rfc/sap/zfg_instr_plata/900/zfg_ins" +
             "tr_plata/zfg_instr_plata")]
         public string WebService1_PlataNeincasate_ZFG_INSTR_PLATA {
             get {
@@ -102,7 +102,7 @@ namespace WebService1.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://sap-prd6a.arabesque.ro:8036/sap/bc/srt/rfc/sap/zws_custodie/900/zwbs_custo" +
+        [global::System.Configuration.DefaultSettingValueAttribute("http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/rfc/sap/zws_custodie/900/zwbs_custo" +
             "die/zwbs_custodie")]
         public string WebService1_SAPWSCustodie1_ZWBS_CUSTODIE {
             get {
@@ -113,7 +113,7 @@ namespace WebService1.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://sap-prd6a.arabesque.ro:8036/sap/bc/srt/rfc/sap/zws_salarizare_2019/900/zws" +
+        [global::System.Configuration.DefaultSettingValueAttribute("http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/rfc/sap/zws_salarizare_2019/900/zws" +
             "_salarizare_2019/zws_salarizare_2019")]
         public string WebService1_Salarizare2019_ZWS_SALARIZARE_2019 {
             get {
@@ -124,7 +124,7 @@ namespace WebService1.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://sap-prd6a.arabesque.ro:8036/sap/bc/srt/rfc/sap/zws_sal_ka_2019/900/zws_sal" +
+        [global::System.Configuration.DefaultSettingValueAttribute("http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/rfc/sap/zws_sal_ka_2019/900/zws_sal" +
             "_ka_2019/zws_sal_ka_2019")]
         public string WebService1_SalarizareKA_ZWS_SAL_KA_2019 {
             get {
@@ -135,7 +135,7 @@ namespace WebService1.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://sap-prd6a.arabesque.ro:8036/sap/bc/srt/rfc/sap/zws_cl_fact_avsd/900/zws_cl" +
+        [global::System.Configuration.DefaultSettingValueAttribute("http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/rfc/sap/zws_cl_fact_avsd/900/zws_cl" +
             "_fact_avsd/zws_cl_fact_avsd")]
         public string WebService1_SapWSPierderiVanzari_ZWS_CL_FACT_AVSD {
             get {

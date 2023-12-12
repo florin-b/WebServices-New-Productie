@@ -750,6 +750,51 @@ namespace WebService1
 
         }
 
+        public static string getPlafonNumerar(OracleConnection connection)
+        {
+
+            string maxPFizica = "0";
+            string maxPJuridica = "0";
+
+            OracleDataReader oReader = null;
+            OracleCommand cmd = connection.CreateCommand();
+
+            try
+            {
+
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = " select tip_kunnr, valoare from sapprd.ZVAL_PF_PJ ";
+
+                oReader = cmd.ExecuteReader();
+
+                if (oReader.HasRows)
+                {
+                    while (oReader.Read())
+                    {
+                        if (oReader.GetString(0).ToUpper().Contains("PF"))
+                            maxPFizica = oReader.GetDouble(1).ToString();
+
+                        if (oReader.GetString(0).ToUpper().Contains("PJ"))
+                            maxPJuridica = oReader.GetDouble(1).ToString();
+                    }
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                ErrorHandling.sendErrorToMail(ex.ToString());
+            }
+            finally
+            {
+                DatabaseConnections.CloseConnections(oReader, cmd);
+            }
+
+            return maxPFizica + "#" + maxPJuridica;
+
+            
+        }
+
 
     }
 }

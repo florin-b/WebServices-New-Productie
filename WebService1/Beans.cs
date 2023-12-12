@@ -33,6 +33,21 @@ namespace WebService1
         public string agentObiectiv;
     }
 
+    public class FilialaTCLI
+    {
+        public string nume;
+        public string werks;
+        public List<string> depozite;
+    }
+
+    public class Depozit
+    {
+        public string name;
+        public string vstel;
+        public string lgort;
+        public string werks;
+    }
+
 
     public class Client
     {
@@ -92,6 +107,7 @@ namespace WebService1
         public string isFurnizor;
         public string divizii;
         public string tipPlata;
+        public string email;
     }
 
 

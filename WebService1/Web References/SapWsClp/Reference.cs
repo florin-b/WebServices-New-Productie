@@ -24,21 +24,21 @@ namespace WebService1.SapWsClp {
     
     /// <remarks/>
     // CODEGEN: The optional WSDL extension element 'Policy' from namespace 'http://schemas.xmlsoap.org/ws/2004/09/policy' was not handled.
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="ZCLP_WEBSERVICE", Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
     public partial class ZCLP_WEBSERVICE : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
-        private System.Threading.SendOrPostCallback ZcreazaCaDlOperationCompleted;
+        private System.Threading.SendOrPostCallback ZlivrareStoIesireOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback ZstergeStoOperationCompleted;
         
         private System.Threading.SendOrPostCallback ZcreazaStoOperationCompleted;
         
         private System.Threading.SendOrPostCallback ZaprobaComandaOperationCompleted;
         
-        private System.Threading.SendOrPostCallback ZlivrareStoIesireOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback ZstergeStoOperationCompleted;
+        private System.Threading.SendOrPostCallback ZcreazaCaDlOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
@@ -79,7 +79,10 @@ namespace WebService1.SapWsClp {
         }
         
         /// <remarks/>
-        public event ZcreazaCaDlCompletedEventHandler ZcreazaCaDlCompleted;
+        public event ZlivrareStoIesireCompletedEventHandler ZlivrareStoIesireCompleted;
+        
+        /// <remarks/>
+        public event ZstergeStoCompletedEventHandler ZstergeStoCompleted;
         
         /// <remarks/>
         public event ZcreazaStoCompletedEventHandler ZcreazaStoCompleted;
@@ -88,39 +91,67 @@ namespace WebService1.SapWsClp {
         public event ZaprobaComandaCompletedEventHandler ZaprobaComandaCompleted;
         
         /// <remarks/>
-        public event ZlivrareStoIesireCompletedEventHandler ZlivrareStoIesireCompleted;
+        public event ZcreazaCaDlCompletedEventHandler ZcreazaCaDlCompleted;
         
         /// <remarks/>
-        public event ZstergeStoCompletedEventHandler ZstergeStoCompleted;
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:sap-com:document:sap:soap:functions:mc-style:ZCLP_WEBSERVICE:ZcreazaCaDlReque" +
-            "st", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Bare)]
-        [return: System.Xml.Serialization.XmlElementAttribute("ZcreazaCaDlResponse", Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
-        public ZcreazaCaDlResponse ZcreazaCaDl([System.Xml.Serialization.XmlElementAttribute("ZcreazaCaDl", Namespace="urn:sap-com:document:sap:soap:functions:mc-style")] ZcreazaCaDl ZcreazaCaDl1) {
-            object[] results = this.Invoke("ZcreazaCaDl", new object[] {
-                        ZcreazaCaDl1});
-            return ((ZcreazaCaDlResponse)(results[0]));
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:sap-com:document:sap:soap:functions:mc-style:ZCLP_WEBSERVICE:ZlivrareStoIesir" +
+            "eRequest", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Bare)]
+        [return: System.Xml.Serialization.XmlElementAttribute("ZlivrareStoIesireResponse", Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+        public ZlivrareStoIesireResponse ZlivrareStoIesire([System.Xml.Serialization.XmlElementAttribute("ZlivrareStoIesire", Namespace="urn:sap-com:document:sap:soap:functions:mc-style")] ZlivrareStoIesire ZlivrareStoIesire1) {
+            object[] results = this.Invoke("ZlivrareStoIesire", new object[] {
+                        ZlivrareStoIesire1});
+            return ((ZlivrareStoIesireResponse)(results[0]));
         }
         
         /// <remarks/>
-        public void ZcreazaCaDlAsync(ZcreazaCaDl ZcreazaCaDl1) {
-            this.ZcreazaCaDlAsync(ZcreazaCaDl1, null);
+        public void ZlivrareStoIesireAsync(ZlivrareStoIesire ZlivrareStoIesire1) {
+            this.ZlivrareStoIesireAsync(ZlivrareStoIesire1, null);
         }
         
         /// <remarks/>
-        public void ZcreazaCaDlAsync(ZcreazaCaDl ZcreazaCaDl1, object userState) {
-            if ((this.ZcreazaCaDlOperationCompleted == null)) {
-                this.ZcreazaCaDlOperationCompleted = new System.Threading.SendOrPostCallback(this.OnZcreazaCaDlOperationCompleted);
+        public void ZlivrareStoIesireAsync(ZlivrareStoIesire ZlivrareStoIesire1, object userState) {
+            if ((this.ZlivrareStoIesireOperationCompleted == null)) {
+                this.ZlivrareStoIesireOperationCompleted = new System.Threading.SendOrPostCallback(this.OnZlivrareStoIesireOperationCompleted);
             }
-            this.InvokeAsync("ZcreazaCaDl", new object[] {
-                        ZcreazaCaDl1}, this.ZcreazaCaDlOperationCompleted, userState);
+            this.InvokeAsync("ZlivrareStoIesire", new object[] {
+                        ZlivrareStoIesire1}, this.ZlivrareStoIesireOperationCompleted, userState);
         }
         
-        private void OnZcreazaCaDlOperationCompleted(object arg) {
-            if ((this.ZcreazaCaDlCompleted != null)) {
+        private void OnZlivrareStoIesireOperationCompleted(object arg) {
+            if ((this.ZlivrareStoIesireCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.ZcreazaCaDlCompleted(this, new ZcreazaCaDlCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.ZlivrareStoIesireCompleted(this, new ZlivrareStoIesireCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:sap-com:document:sap:soap:functions:mc-style:ZCLP_WEBSERVICE:ZstergeStoReques" +
+            "t", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Bare)]
+        [return: System.Xml.Serialization.XmlElementAttribute("ZstergeStoResponse", Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+        public ZstergeStoResponse ZstergeSto([System.Xml.Serialization.XmlElementAttribute("ZstergeSto", Namespace="urn:sap-com:document:sap:soap:functions:mc-style")] ZstergeSto ZstergeSto1) {
+            object[] results = this.Invoke("ZstergeSto", new object[] {
+                        ZstergeSto1});
+            return ((ZstergeStoResponse)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ZstergeStoAsync(ZstergeSto ZstergeSto1) {
+            this.ZstergeStoAsync(ZstergeSto1, null);
+        }
+        
+        /// <remarks/>
+        public void ZstergeStoAsync(ZstergeSto ZstergeSto1, object userState) {
+            if ((this.ZstergeStoOperationCompleted == null)) {
+                this.ZstergeStoOperationCompleted = new System.Threading.SendOrPostCallback(this.OnZstergeStoOperationCompleted);
+            }
+            this.InvokeAsync("ZstergeSto", new object[] {
+                        ZstergeSto1}, this.ZstergeStoOperationCompleted, userState);
+        }
+        
+        private void OnZstergeStoOperationCompleted(object arg) {
+            if ((this.ZstergeStoCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ZstergeStoCompleted(this, new ZstergeStoCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -187,64 +218,33 @@ namespace WebService1.SapWsClp {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:sap-com:document:sap:soap:functions:mc-style:ZCLP_WEBSERVICE:ZlivrareStoIesir" +
-            "eRequest", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Bare)]
-        [return: System.Xml.Serialization.XmlElementAttribute("ZlivrareStoIesireResponse", Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
-        public ZlivrareStoIesireResponse ZlivrareStoIesire([System.Xml.Serialization.XmlElementAttribute("ZlivrareStoIesire", Namespace="urn:sap-com:document:sap:soap:functions:mc-style")] ZlivrareStoIesire ZlivrareStoIesire1) {
-            object[] results = this.Invoke("ZlivrareStoIesire", new object[] {
-                        ZlivrareStoIesire1});
-            return ((ZlivrareStoIesireResponse)(results[0]));
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:sap-com:document:sap:soap:functions:mc-style:ZCLP_WEBSERVICE:ZcreazaCaDlReque" +
+            "st", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Bare)]
+        [return: System.Xml.Serialization.XmlElementAttribute("ZcreazaCaDlResponse", Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+        public ZcreazaCaDlResponse ZcreazaCaDl([System.Xml.Serialization.XmlElementAttribute("ZcreazaCaDl", Namespace="urn:sap-com:document:sap:soap:functions:mc-style")] ZcreazaCaDl ZcreazaCaDl1) {
+            object[] results = this.Invoke("ZcreazaCaDl", new object[] {
+                        ZcreazaCaDl1});
+            return ((ZcreazaCaDlResponse)(results[0]));
         }
         
         /// <remarks/>
-        public void ZlivrareStoIesireAsync(ZlivrareStoIesire ZlivrareStoIesire1) {
-            this.ZlivrareStoIesireAsync(ZlivrareStoIesire1, null);
+        public void ZcreazaCaDlAsync(ZcreazaCaDl ZcreazaCaDl1) {
+            this.ZcreazaCaDlAsync(ZcreazaCaDl1, null);
         }
         
         /// <remarks/>
-        public void ZlivrareStoIesireAsync(ZlivrareStoIesire ZlivrareStoIesire1, object userState) {
-            if ((this.ZlivrareStoIesireOperationCompleted == null)) {
-                this.ZlivrareStoIesireOperationCompleted = new System.Threading.SendOrPostCallback(this.OnZlivrareStoIesireOperationCompleted);
+        public void ZcreazaCaDlAsync(ZcreazaCaDl ZcreazaCaDl1, object userState) {
+            if ((this.ZcreazaCaDlOperationCompleted == null)) {
+                this.ZcreazaCaDlOperationCompleted = new System.Threading.SendOrPostCallback(this.OnZcreazaCaDlOperationCompleted);
             }
-            this.InvokeAsync("ZlivrareStoIesire", new object[] {
-                        ZlivrareStoIesire1}, this.ZlivrareStoIesireOperationCompleted, userState);
+            this.InvokeAsync("ZcreazaCaDl", new object[] {
+                        ZcreazaCaDl1}, this.ZcreazaCaDlOperationCompleted, userState);
         }
         
-        private void OnZlivrareStoIesireOperationCompleted(object arg) {
-            if ((this.ZlivrareStoIesireCompleted != null)) {
+        private void OnZcreazaCaDlOperationCompleted(object arg) {
+            if ((this.ZcreazaCaDlCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.ZlivrareStoIesireCompleted(this, new ZlivrareStoIesireCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:sap-com:document:sap:soap:functions:mc-style:ZCLP_WEBSERVICE:ZstergeStoReques" +
-            "t", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Bare)]
-        [return: System.Xml.Serialization.XmlElementAttribute("ZstergeStoResponse", Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
-        public ZstergeStoResponse ZstergeSto([System.Xml.Serialization.XmlElementAttribute("ZstergeSto", Namespace="urn:sap-com:document:sap:soap:functions:mc-style")] ZstergeSto ZstergeSto1) {
-            object[] results = this.Invoke("ZstergeSto", new object[] {
-                        ZstergeSto1});
-            return ((ZstergeStoResponse)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void ZstergeStoAsync(ZstergeSto ZstergeSto1) {
-            this.ZstergeStoAsync(ZstergeSto1, null);
-        }
-        
-        /// <remarks/>
-        public void ZstergeStoAsync(ZstergeSto ZstergeSto1, object userState) {
-            if ((this.ZstergeStoOperationCompleted == null)) {
-                this.ZstergeStoOperationCompleted = new System.Threading.SendOrPostCallback(this.OnZstergeStoOperationCompleted);
-            }
-            this.InvokeAsync("ZstergeSto", new object[] {
-                        ZstergeSto1}, this.ZstergeStoOperationCompleted, userState);
-        }
-        
-        private void OnZstergeStoOperationCompleted(object arg) {
-            if ((this.ZstergeStoCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.ZstergeStoCompleted(this, new ZstergeStoCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.ZcreazaCaDlCompleted(this, new ZcreazaCaDlCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -268,178 +268,7 @@ namespace WebService1.SapWsClp {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
-    public partial class ZcreazaCaDl {
-        
-        private decimal vIdField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal VId {
-            get {
-                return this.vIdField;
-            }
-            set {
-                this.vIdField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
-    public partial class ZcreazaCaDlResponse {
-        
-        private string vOkField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string VOk {
-            get {
-                return this.vOkField;
-            }
-            set {
-                this.vOkField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
-    public partial class ZcreazaSto {
-        
-        private decimal vIdField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal VId {
-            get {
-                return this.vIdField;
-            }
-            set {
-                this.vIdField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
-    public partial class ZcreazaStoResponse {
-        
-        private string vMessField;
-        
-        private string vOkField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string VMess {
-            get {
-                return this.vMessField;
-            }
-            set {
-                this.vMessField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string VOk {
-            get {
-                return this.vOkField;
-            }
-            set {
-                this.vOkField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
-    public partial class ZaprobaComanda {
-        
-        private string pernrChField;
-        
-        private decimal vIdField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string PernrCh {
-            get {
-                return this.pernrChField;
-            }
-            set {
-                this.pernrChField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal VId {
-            get {
-                return this.vIdField;
-            }
-            set {
-                this.vIdField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
-    public partial class ZaprobaComandaResponse {
-        
-        private string vMessField;
-        
-        private string vOkField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string VMess {
-            get {
-                return this.vMessField;
-            }
-            set {
-                this.vMessField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string VOk {
-            get {
-                return this.vOkField;
-            }
-            set {
-                this.vOkField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -461,7 +290,7 @@ namespace WebService1.SapWsClp {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -496,7 +325,7 @@ namespace WebService1.SapWsClp {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -544,7 +373,7 @@ namespace WebService1.SapWsClp {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -579,89 +408,182 @@ namespace WebService1.SapWsClp {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
-    public delegate void ZcreazaCaDlCompletedEventHandler(object sender, ZcreazaCaDlCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class ZcreazaCaDlCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class ZcreazaSto {
         
-        private object[] results;
-        
-        internal ZcreazaCaDlCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
+        private decimal vIdField;
         
         /// <remarks/>
-        public ZcreazaCaDlResponse Result {
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal VId {
             get {
-                this.RaiseExceptionIfNecessary();
-                return ((ZcreazaCaDlResponse)(this.results[0]));
+                return this.vIdField;
+            }
+            set {
+                this.vIdField = value;
             }
         }
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
-    public delegate void ZcreazaStoCompletedEventHandler(object sender, ZcreazaStoCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class ZcreazaStoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class ZcreazaStoResponse {
         
-        private object[] results;
+        private string vMessField;
         
-        internal ZcreazaStoCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
+        private string vOkField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string VMess {
+            get {
+                return this.vMessField;
+            }
+            set {
+                this.vMessField = value;
+            }
         }
         
         /// <remarks/>
-        public ZcreazaStoResponse Result {
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string VOk {
             get {
-                this.RaiseExceptionIfNecessary();
-                return ((ZcreazaStoResponse)(this.results[0]));
+                return this.vOkField;
+            }
+            set {
+                this.vOkField = value;
             }
         }
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
-    public delegate void ZaprobaComandaCompletedEventHandler(object sender, ZaprobaComandaCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class ZaprobaComandaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class ZaprobaComanda {
         
-        private object[] results;
+        private string pernrChField;
         
-        internal ZaprobaComandaCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
+        private decimal vIdField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PernrCh {
+            get {
+                return this.pernrChField;
+            }
+            set {
+                this.pernrChField = value;
+            }
         }
         
         /// <remarks/>
-        public ZaprobaComandaResponse Result {
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal VId {
             get {
-                this.RaiseExceptionIfNecessary();
-                return ((ZaprobaComandaResponse)(this.results[0]));
+                return this.vIdField;
+            }
+            set {
+                this.vIdField = value;
             }
         }
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class ZaprobaComandaResponse {
+        
+        private string vMessField;
+        
+        private string vOkField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string VMess {
+            get {
+                return this.vMessField;
+            }
+            set {
+                this.vMessField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string VOk {
+            get {
+                return this.vOkField;
+            }
+            set {
+                this.vOkField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class ZcreazaCaDl {
+        
+        private decimal vIdField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal VId {
+            get {
+                return this.vIdField;
+            }
+            set {
+                this.vIdField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class ZcreazaCaDlResponse {
+        
+        private string vOkField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string VOk {
+            get {
+                return this.vOkField;
+            }
+            set {
+                this.vOkField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void ZlivrareStoIesireCompletedEventHandler(object sender, ZlivrareStoIesireCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class ZlivrareStoIesireCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -683,11 +605,11 @@ namespace WebService1.SapWsClp {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void ZstergeStoCompletedEventHandler(object sender, ZstergeStoCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class ZstergeStoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -704,6 +626,84 @@ namespace WebService1.SapWsClp {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((ZstergeStoResponse)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void ZcreazaStoCompletedEventHandler(object sender, ZcreazaStoCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ZcreazaStoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ZcreazaStoCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public ZcreazaStoResponse Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((ZcreazaStoResponse)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void ZaprobaComandaCompletedEventHandler(object sender, ZaprobaComandaCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ZaprobaComandaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ZaprobaComandaCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public ZaprobaComandaResponse Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((ZaprobaComandaResponse)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void ZcreazaCaDlCompletedEventHandler(object sender, ZcreazaCaDlCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ZcreazaCaDlCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ZcreazaCaDlCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public ZcreazaCaDlResponse Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((ZcreazaCaDlResponse)(this.results[0]));
             }
         }
     }

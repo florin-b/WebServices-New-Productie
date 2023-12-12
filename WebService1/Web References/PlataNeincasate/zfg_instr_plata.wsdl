@@ -238,6 +238,13 @@
           <xsd:element name="Docdate" type="n0:date10" />
         </xsd:sequence>
       </xsd:complexType>
+      <xsd:complexType name="ZstDocsClearing">
+        <xsd:sequence>
+          <xsd:element name="NrDocument" type="n0:char10" />
+          <xsd:element name="AnDocument" type="n0:numeric4" />
+          <xsd:element name="SumaDocument" type="n0:curr13.2" />
+        </xsd:sequence>
+      </xsd:complexType>
       <xsd:complexType name="ZfiBoCec">
         <xsd:sequence>
           <xsd:element name="StareCambie" type="n0:char1" />
@@ -248,13 +255,6 @@
           <xsd:element name="DataEmitere" type="n0:char10" />
           <xsd:element name="CodAgent" type="n0:numeric8" />
           <xsd:element name="Sgtxt" type="tns:char50" />
-        </xsd:sequence>
-      </xsd:complexType>
-      <xsd:complexType name="ZstDocsClearing">
-        <xsd:sequence>
-          <xsd:element name="NrDocument" type="n0:char10" />
-          <xsd:element name="AnDocument" type="n0:numeric4" />
-          <xsd:element name="SumaDocument" type="n0:curr13.2" />
         </xsd:sequence>
       </xsd:complexType>
       <xsd:complexType name="Ztneincasate">
@@ -382,10 +382,10 @@
   </wsdl:binding>
   <wsdl:service name="ZFG_INSTR_PLATA">
     <wsdl:port name="ZFG_INSTR_PLATA" binding="tns:ZFG_INSTR_PLATA">
-      <soap:address location="http://sap-prd6a.arabesque.ro:8036/sap/bc/srt/rfc/sap/zfg_instr_plata/900/zfg_instr_plata/zfg_instr_plata" />
+      <soap:address location="http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/rfc/sap/zfg_instr_plata/900/zfg_instr_plata/zfg_instr_plata" />
     </wsdl:port>
     <wsdl:port name="ZFG_INSTR_PLATA_soap12" binding="tns:ZFG_INSTR_PLATA_soap12">
-      <wsoap12:address location="http://sap-prd6a.arabesque.ro:8036/sap/bc/srt/rfc/sap/zfg_instr_plata/900/zfg_instr_plata/zfg_instr_plata" />
+      <wsoap12:address location="http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/rfc/sap/zfg_instr_plata/900/zfg_instr_plata/zfg_instr_plata" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

@@ -36,7 +36,7 @@ namespace DistributieWebServices.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://sap-prd6a.arabesque.ro:8036/sap/bc/srt/rfc/sap/zarticole_ct/900/zarticole_" +
+        [global::System.Configuration.DefaultSettingValueAttribute("http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/rfc/sap/zarticole_ct/900/zarticole_" +
             "ct/zarticole_ct")]
         public string DistributieWebServices_SapWebService_ZARTICOLE_CT {
             get {
@@ -47,7 +47,7 @@ namespace DistributieWebServices.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://sap-prd6a.arabesque.ro:8036/sap/bc/srt/rfc/sap/zws_cant_bord/900/zws_cant_" +
+        [global::System.Configuration.DefaultSettingValueAttribute("http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/rfc/sap/zws_cant_bord/900/zws_cant_" +
             "bord/zws_cant_bord")]
         public string DistributieWebServices_BordSapService_ZWS_CANT_BORD {
             get {
@@ -58,7 +58,7 @@ namespace DistributieWebServices.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://sap-prd6a.arabesque.ro:8036/sap/bc/srt/rfc/sap/zarticole_bord/900/zarticol" +
+        [global::System.Configuration.DefaultSettingValueAttribute("http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/rfc/sap/zarticole_bord/900/zarticol" +
             "e_bord/zarticole_bord")]
         public string DistributieWebServices_BordDistService_ZARTICOLE_BORD {
             get {

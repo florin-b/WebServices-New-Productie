@@ -241,16 +241,34 @@
     </xsd:schema>
     <xsd:schema xmlns:n0="urn:sap-com:document:sap:rfc:functions" attributeFormDefault="qualified" targetNamespace="urn:sap-com:document:sap:soap:functions:mc-style">
       <xsd:import namespace="urn:sap-com:document:sap:rfc:functions" />
-      <xsd:element name="ZcreazaCaDl">
+      <xsd:element name="ZlivrareStoIesire">
         <xsd:complexType>
           <xsd:sequence>
+            <xsd:element name="VEbeln" type="n0:char10" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ZlivrareStoIesireResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="VOk" type="n0:char2" />
+            <xsd:element name="VVbeln" type="n0:char10" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ZstergeSto">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="PernrCh" type="n0:numeric8" />
+            <xsd:element name="Stare" type="n0:char1" />
             <xsd:element name="VId" type="n0:decimal11.0" />
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
-      <xsd:element name="ZcreazaCaDlResponse">
+      <xsd:element name="ZstergeStoResponse">
         <xsd:complexType>
           <xsd:sequence>
+            <xsd:element name="VErr" type="n0:char73" />
             <xsd:element name="VOk" type="n0:char2" />
           </xsd:sequence>
         </xsd:complexType>
@@ -286,45 +304,33 @@
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
-      <xsd:element name="ZlivrareStoIesire">
+      <xsd:element name="ZcreazaCaDl">
         <xsd:complexType>
           <xsd:sequence>
-            <xsd:element name="VEbeln" type="n0:char10" />
-          </xsd:sequence>
-        </xsd:complexType>
-      </xsd:element>
-      <xsd:element name="ZlivrareStoIesireResponse">
-        <xsd:complexType>
-          <xsd:sequence>
-            <xsd:element name="VOk" type="n0:char2" />
-            <xsd:element name="VVbeln" type="n0:char10" />
-          </xsd:sequence>
-        </xsd:complexType>
-      </xsd:element>
-      <xsd:element name="ZstergeSto">
-        <xsd:complexType>
-          <xsd:sequence>
-            <xsd:element name="PernrCh" type="n0:numeric8" />
-            <xsd:element name="Stare" type="n0:char1" />
             <xsd:element name="VId" type="n0:decimal11.0" />
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
-      <xsd:element name="ZstergeStoResponse">
+      <xsd:element name="ZcreazaCaDlResponse">
         <xsd:complexType>
           <xsd:sequence>
-            <xsd:element name="VErr" type="n0:char73" />
             <xsd:element name="VOk" type="n0:char2" />
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="ZcreazaCaDl">
-    <wsdl:part name="parameters" element="tns:ZcreazaCaDl" />
+  <wsdl:message name="ZlivrareStoIesire">
+    <wsdl:part name="parameters" element="tns:ZlivrareStoIesire" />
   </wsdl:message>
-  <wsdl:message name="ZcreazaCaDlResponse">
-    <wsdl:part name="parameter" element="tns:ZcreazaCaDlResponse" />
+  <wsdl:message name="ZlivrareStoIesireResponse">
+    <wsdl:part name="parameter" element="tns:ZlivrareStoIesireResponse" />
+  </wsdl:message>
+  <wsdl:message name="ZstergeSto">
+    <wsdl:part name="parameters" element="tns:ZstergeSto" />
+  </wsdl:message>
+  <wsdl:message name="ZstergeStoResponse">
+    <wsdl:part name="parameter" element="tns:ZstergeStoResponse" />
   </wsdl:message>
   <wsdl:message name="ZcreazaSto">
     <wsdl:part name="parameters" element="tns:ZcreazaSto" />
@@ -338,28 +344,29 @@
   <wsdl:message name="ZaprobaComandaResponse">
     <wsdl:part name="parameter" element="tns:ZaprobaComandaResponse" />
   </wsdl:message>
-  <wsdl:message name="ZlivrareStoIesire">
-    <wsdl:part name="parameters" element="tns:ZlivrareStoIesire" />
+  <wsdl:message name="ZcreazaCaDl">
+    <wsdl:part name="parameters" element="tns:ZcreazaCaDl" />
   </wsdl:message>
-  <wsdl:message name="ZlivrareStoIesireResponse">
-    <wsdl:part name="parameter" element="tns:ZlivrareStoIesireResponse" />
-  </wsdl:message>
-  <wsdl:message name="ZstergeSto">
-    <wsdl:part name="parameters" element="tns:ZstergeSto" />
-  </wsdl:message>
-  <wsdl:message name="ZstergeStoResponse">
-    <wsdl:part name="parameter" element="tns:ZstergeStoResponse" />
+  <wsdl:message name="ZcreazaCaDlResponse">
+    <wsdl:part name="parameter" element="tns:ZcreazaCaDlResponse" />
   </wsdl:message>
   <wsdl:portType name="ZCLP_WEBSERVICE">
     <wsp:Policy>
       <wsp:PolicyReference URI="#IF__ZCLP_WEBSERVICE" />
     </wsp:Policy>
-    <wsdl:operation name="ZcreazaCaDl">
+    <wsdl:operation name="ZlivrareStoIesire">
       <wsp:Policy>
-        <wsp:PolicyReference URI="#OP__ZcreazaCaDl" />
+        <wsp:PolicyReference URI="#OP__ZlivrareStoIesire" />
       </wsp:Policy>
-      <wsdl:input message="tns:ZcreazaCaDl" />
-      <wsdl:output message="tns:ZcreazaCaDlResponse" />
+      <wsdl:input message="tns:ZlivrareStoIesire" />
+      <wsdl:output message="tns:ZlivrareStoIesireResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="ZstergeSto">
+      <wsp:Policy>
+        <wsp:PolicyReference URI="#OP__ZstergeSto" />
+      </wsp:Policy>
+      <wsdl:input message="tns:ZstergeSto" />
+      <wsdl:output message="tns:ZstergeStoResponse" />
     </wsdl:operation>
     <wsdl:operation name="ZcreazaSto">
       <wsp:Policy>
@@ -375,19 +382,12 @@
       <wsdl:input message="tns:ZaprobaComanda" />
       <wsdl:output message="tns:ZaprobaComandaResponse" />
     </wsdl:operation>
-    <wsdl:operation name="ZlivrareStoIesire">
+    <wsdl:operation name="ZcreazaCaDl">
       <wsp:Policy>
-        <wsp:PolicyReference URI="#OP__ZlivrareStoIesire" />
+        <wsp:PolicyReference URI="#OP__ZcreazaCaDl" />
       </wsp:Policy>
-      <wsdl:input message="tns:ZlivrareStoIesire" />
-      <wsdl:output message="tns:ZlivrareStoIesireResponse" />
-    </wsdl:operation>
-    <wsdl:operation name="ZstergeSto">
-      <wsp:Policy>
-        <wsp:PolicyReference URI="#OP__ZstergeSto" />
-      </wsp:Policy>
-      <wsdl:input message="tns:ZstergeSto" />
-      <wsdl:output message="tns:ZstergeStoResponse" />
+      <wsdl:input message="tns:ZcreazaCaDl" />
+      <wsdl:output message="tns:ZcreazaCaDlResponse" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="ZCLP_WEBSERVICE" type="tns:ZCLP_WEBSERVICE">
@@ -395,8 +395,17 @@
       <wsp:PolicyReference URI="#BN__ZCLP_WEBSERVICE" />
     </wsp:Policy>
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="ZcreazaCaDl">
-      <soap:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZCLP_WEBSERVICE:ZcreazaCaDlRequest" style="document" />
+    <wsdl:operation name="ZlivrareStoIesire">
+      <soap:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZCLP_WEBSERVICE:ZlivrareStoIesireRequest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZstergeSto">
+      <soap:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZCLP_WEBSERVICE:ZstergeStoRequest" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -422,17 +431,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="ZlivrareStoIesire">
-      <soap:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZCLP_WEBSERVICE:ZlivrareStoIesireRequest" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="ZstergeSto">
-      <soap:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZCLP_WEBSERVICE:ZstergeStoRequest" style="document" />
+    <wsdl:operation name="ZcreazaCaDl">
+      <soap:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZCLP_WEBSERVICE:ZcreazaCaDlRequest" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -446,8 +446,17 @@
       <wsp:PolicyReference URI="#BN__ZCLP_WEBSERVICE_soap12" />
     </wsp:Policy>
     <wsoap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="ZcreazaCaDl">
-      <wsoap12:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZCLP_WEBSERVICE:ZcreazaCaDlRequest" style="document" />
+    <wsdl:operation name="ZlivrareStoIesire">
+      <wsoap12:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZCLP_WEBSERVICE:ZlivrareStoIesireRequest" style="document" />
+      <wsdl:input>
+        <wsoap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsoap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZstergeSto">
+      <wsoap12:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZCLP_WEBSERVICE:ZstergeStoRequest" style="document" />
       <wsdl:input>
         <wsoap12:body use="literal" />
       </wsdl:input>
@@ -473,17 +482,8 @@
         <wsoap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="ZlivrareStoIesire">
-      <wsoap12:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZCLP_WEBSERVICE:ZlivrareStoIesireRequest" style="document" />
-      <wsdl:input>
-        <wsoap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <wsoap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="ZstergeSto">
-      <wsoap12:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZCLP_WEBSERVICE:ZstergeStoRequest" style="document" />
+    <wsdl:operation name="ZcreazaCaDl">
+      <wsoap12:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZCLP_WEBSERVICE:ZcreazaCaDlRequest" style="document" />
       <wsdl:input>
         <wsoap12:body use="literal" />
       </wsdl:input>
@@ -494,10 +494,10 @@
   </wsdl:binding>
   <wsdl:service name="ZCLP_WEBSERVICE">
     <wsdl:port name="ZCLP_WEBSERVICE" binding="tns:ZCLP_WEBSERVICE">
-      <soap:address location="http://sap-prd6a.arabesque.ro:8036/sap/bc/srt/rfc/sap/zclp_webservice/900/zclp_webservice/zclp_webservice" />
+      <soap:address location="http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/rfc/sap/zclp_webservice/900/zclp_webservice/zclp_webservice" />
     </wsdl:port>
     <wsdl:port name="ZCLP_WEBSERVICE_soap12" binding="tns:ZCLP_WEBSERVICE_soap12">
-      <wsoap12:address location="http://sap-prd6a.arabesque.ro:8036/sap/bc/srt/rfc/sap/zclp_webservice/900/zclp_webservice/zclp_webservice" />
+      <wsoap12:address location="http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/rfc/sap/zclp_webservice/900/zclp_webservice/zclp_webservice" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

@@ -67,7 +67,7 @@ namespace WebService1
                 inParam.Canal = canalDistrib;
                 inParam.UlStoc = filialaAlternativa.Equals("BV90") ? "BV90" : filialaClp != null ? filialaClp : " ";
                 inParam.Traty = tipTransport != null ? tipTransport : " ";
-                inParam.CuRotunj = Utils.isUserTest(codUser, Constants.USER_TEST_1) ? "X" : " ";
+                inParam.CuRotunj = "X";
 
                 SAPWebServices.ZgetPriceResponse outParam = webService.ZgetPrice(inParam);
 
@@ -117,12 +117,21 @@ namespace WebService1
 
                 string filialaCmp = filialaAlternativa;
 
-                if (depart.Equals("11"))
+                if (filialaClp != null && filialaClp.Trim() != "")
+                    filialaCmp = filialaClp;
+
+                if (depart.Equals("11") || depoz.Contains("MAV"))
                 {
                     if (filialaAlternativa.Equals("BV90"))
                         filialaCmp = "BV92";
                     else
-                        filialaCmp = filialaAlternativa.Substring(0, 2) + "2" + filialaAlternativa.Substring(3, 1);
+                    {
+                        if (filialaClp != null && filialaClp.Trim() != "")
+                            filialaCmp = filialaClp.Substring(0, 2) + "2" + filialaClp.Substring(3, 1);
+                        else
+                            filialaCmp = filialaAlternativa.Substring(0, 2) + "2" + filialaAlternativa.Substring(3, 1);
+                    }
+                        
                 }
 
                 string connectionString = DatabaseConnections.ConnectToProdEnvironment();
@@ -158,6 +167,9 @@ namespace WebService1
 
                     cmpArticol = cmpArticol * (100 - procRedCmp) / 100;
                 }
+
+                if (HelperComenzi.isArticolPromo(connection, articol))
+                    cmpArticol = 0;
 
                 //---sf. verificare cmp
 

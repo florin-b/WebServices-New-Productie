@@ -331,10 +331,10 @@
   </wsdl:binding>
   <wsdl:service name="ZWBS_SEMIACTIVI">
     <wsdl:port name="ZWBS_SEMIACTIVI" binding="tns:ZWBS_SEMIACTIVI">
-      <soap:address location="http://sap-prd6a.arabesque.ro:8036/sap/bc/srt/rfc/sap/zwbs_semiactivi/900/zwbs_semiactivi/zwbs_semiactivi" />
+      <soap:address location="http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/rfc/sap/zwbs_semiactivi/900/zwbs_semiactivi/zwbs_semiactivi" />
     </wsdl:port>
     <wsdl:port name="ZWBS_SEMIACTIVI_soap12" binding="tns:ZWBS_SEMIACTIVI_soap12">
-      <wsoap12:address location="http://sap-prd6a.arabesque.ro:8036/sap/bc/srt/rfc/sap/zwbs_semiactivi/900/zwbs_semiactivi/zwbs_semiactivi" />
+      <wsoap12:address location="http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/rfc/sap/zwbs_semiactivi/900/zwbs_semiactivi/zwbs_semiactivi" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

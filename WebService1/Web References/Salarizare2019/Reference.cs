@@ -24,15 +24,15 @@ namespace WebService1.Salarizare2019 {
     
     /// <remarks/>
     // CODEGEN: The optional WSDL extension element 'Policy' from namespace 'http://schemas.xmlsoap.org/ws/2004/09/policy' was not handled.
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="ZWS_SALARIZARE_2019", Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
     public partial class ZWS_SALARIZARE_2019 : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
-        private System.Threading.SendOrPostCallback ZgetSalav2019OperationCompleted;
-        
         private System.Threading.SendOrPostCallback ZgetSalsd2019OperationCompleted;
+        
+        private System.Threading.SendOrPostCallback ZgetSalav2019OperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
@@ -73,41 +73,10 @@ namespace WebService1.Salarizare2019 {
         }
         
         /// <remarks/>
-        public event ZgetSalav2019CompletedEventHandler ZgetSalav2019Completed;
-        
-        /// <remarks/>
         public event ZgetSalsd2019CompletedEventHandler ZgetSalsd2019Completed;
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:sap-com:document:sap:soap:functions:mc-style:ZWS_SALARIZARE_2019:ZgetSalav201" +
-            "9Request", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Bare)]
-        [return: System.Xml.Serialization.XmlElementAttribute("ZgetSalav2019Response", Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
-        public ZgetSalav2019Response ZgetSalav2019([System.Xml.Serialization.XmlElementAttribute("ZgetSalav2019", Namespace="urn:sap-com:document:sap:soap:functions:mc-style")] ZgetSalav2019 ZgetSalav20191) {
-            object[] results = this.Invoke("ZgetSalav2019", new object[] {
-                        ZgetSalav20191});
-            return ((ZgetSalav2019Response)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void ZgetSalav2019Async(ZgetSalav2019 ZgetSalav20191) {
-            this.ZgetSalav2019Async(ZgetSalav20191, null);
-        }
-        
-        /// <remarks/>
-        public void ZgetSalav2019Async(ZgetSalav2019 ZgetSalav20191, object userState) {
-            if ((this.ZgetSalav2019OperationCompleted == null)) {
-                this.ZgetSalav2019OperationCompleted = new System.Threading.SendOrPostCallback(this.OnZgetSalav2019OperationCompleted);
-            }
-            this.InvokeAsync("ZgetSalav2019", new object[] {
-                        ZgetSalav20191}, this.ZgetSalav2019OperationCompleted, userState);
-        }
-        
-        private void OnZgetSalav2019OperationCompleted(object arg) {
-            if ((this.ZgetSalav2019Completed != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.ZgetSalav2019Completed(this, new ZgetSalav2019CompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
+        public event ZgetSalav2019CompletedEventHandler ZgetSalav2019Completed;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:sap-com:document:sap:soap:functions:mc-style:ZWS_SALARIZARE_2019:ZgetSalsd201" +
@@ -141,6 +110,37 @@ namespace WebService1.Salarizare2019 {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:sap-com:document:sap:soap:functions:mc-style:ZWS_SALARIZARE_2019:ZgetSalav201" +
+            "9Request", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Bare)]
+        [return: System.Xml.Serialization.XmlElementAttribute("ZgetSalav2019Response", Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+        public ZgetSalav2019Response ZgetSalav2019([System.Xml.Serialization.XmlElementAttribute("ZgetSalav2019", Namespace="urn:sap-com:document:sap:soap:functions:mc-style")] ZgetSalav2019 ZgetSalav20191) {
+            object[] results = this.Invoke("ZgetSalav2019", new object[] {
+                        ZgetSalav20191});
+            return ((ZgetSalav2019Response)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ZgetSalav2019Async(ZgetSalav2019 ZgetSalav20191) {
+            this.ZgetSalav2019Async(ZgetSalav20191, null);
+        }
+        
+        /// <remarks/>
+        public void ZgetSalav2019Async(ZgetSalav2019 ZgetSalav20191, object userState) {
+            if ((this.ZgetSalav2019OperationCompleted == null)) {
+                this.ZgetSalav2019OperationCompleted = new System.Threading.SendOrPostCallback(this.OnZgetSalav2019OperationCompleted);
+            }
+            this.InvokeAsync("ZgetSalav2019", new object[] {
+                        ZgetSalav20191}, this.ZgetSalav2019OperationCompleted, userState);
+        }
+        
+        private void OnZgetSalav2019OperationCompleted(object arg) {
+            if ((this.ZgetSalav2019Completed != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ZgetSalav2019Completed(this, new ZgetSalav2019CompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         public new void CancelAsync(object userState) {
             base.CancelAsync(userState);
         }
@@ -160,30 +160,32 @@ namespace WebService1.Salarizare2019 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
-    public partial class ZgetSalav2019 {
+    public partial class ZgetSalsd2019 {
         
         private string anField;
         
         private string divizieField;
         
-        private ZsalBazaMatkl[] gtBazaclExpField;
+        private ZsalBazaMatklSd[] gtBazaclExpField;
         
-        private ZsalCorrInc[] gtCorrIncField;
+        private ZSAL_CORR_INC[] gtCorrIncField;
         
-        private ZsalCorr08[] gtInc08ExField;
+        private Zcvss2019[] gtCvssField;
         
-        private ZsalCorrMalus[] gtIncmaExField;
+        private ZSAL_CORR_08[] gtInc08ExField;
         
-        private ZsalFactMalus[] gtMalExField;
+        private ZSAL_CORR_MALUS[] gtIncmaExField;
         
-        private Zsalav19[] gtOuttabAvField;
+        private ZSAL_FACT_MALUS[] gtMalExField;
         
-        private ZsalNtcf[] gtTcfField;
+        private Zsalsd19[] gtOuttabSdField;
+        
+        private ZSAL_NTCF[] gtTcfField;
         
         private string lunaField;
         
@@ -216,7 +218,7 @@ namespace WebService1.Salarizare2019 {
         /// <remarks/>
         [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
-        public ZsalBazaMatkl[] GtBazaclExp {
+        public ZsalBazaMatklSd[] GtBazaclExp {
             get {
                 return this.gtBazaclExpField;
             }
@@ -228,7 +230,7 @@ namespace WebService1.Salarizare2019 {
         /// <remarks/>
         [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
-        public ZsalCorrInc[] GtCorrInc {
+        public ZSAL_CORR_INC[] GtCorrInc {
             get {
                 return this.gtCorrIncField;
             }
@@ -240,7 +242,19 @@ namespace WebService1.Salarizare2019 {
         /// <remarks/>
         [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
-        public ZsalCorr08[] GtInc08Ex {
+        public Zcvss2019[] GtCvss {
+            get {
+                return this.gtCvssField;
+            }
+            set {
+                this.gtCvssField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
+        public ZSAL_CORR_08[] GtInc08Ex {
             get {
                 return this.gtInc08ExField;
             }
@@ -252,7 +266,7 @@ namespace WebService1.Salarizare2019 {
         /// <remarks/>
         [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
-        public ZsalCorrMalus[] GtIncmaEx {
+        public ZSAL_CORR_MALUS[] GtIncmaEx {
             get {
                 return this.gtIncmaExField;
             }
@@ -264,7 +278,7 @@ namespace WebService1.Salarizare2019 {
         /// <remarks/>
         [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
-        public ZsalFactMalus[] GtMalEx {
+        public ZSAL_FACT_MALUS[] GtMalEx {
             get {
                 return this.gtMalExField;
             }
@@ -276,19 +290,19 @@ namespace WebService1.Salarizare2019 {
         /// <remarks/>
         [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
-        public Zsalav19[] GtOuttabAv {
+        public Zsalsd19[] GtOuttabSd {
             get {
-                return this.gtOuttabAvField;
+                return this.gtOuttabSdField;
             }
             set {
-                this.gtOuttabAvField = value;
+                this.gtOuttabSdField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
-        public ZsalNtcf[] GtTcf {
+        public ZSAL_NTCF[] GtTcf {
             get {
                 return this.gtTcfField;
             }
@@ -332,1366 +346,7 @@ namespace WebService1.Salarizare2019 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
-    public partial class ZsalBazaMatkl {
-        
-        private string kdgrpField;
-        
-        private string kunnrField;
-        
-        private string name1Field;
-        
-        private string matklField;
-        
-        private string wgbezField;
-        
-        private decimal valNetField;
-        
-        private decimal t0Field;
-        
-        private decimal t1aField;
-        
-        private decimal t1dField;
-        
-        private decimal t1Field;
-        
-        private decimal venitBazaField;
-        
-        private string waersField;
-        
-        private string pernrField;
-        
-        private string coefXField;
-        
-        private string t1aProcField;
-        
-        private string t1dProcField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Kdgrp {
-            get {
-                return this.kdgrpField;
-            }
-            set {
-                this.kdgrpField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Kunnr {
-            get {
-                return this.kunnrField;
-            }
-            set {
-                this.kunnrField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Name1 {
-            get {
-                return this.name1Field;
-            }
-            set {
-                this.name1Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Matkl {
-            get {
-                return this.matklField;
-            }
-            set {
-                this.matklField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Wgbez {
-            get {
-                return this.wgbezField;
-            }
-            set {
-                this.wgbezField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal ValNet {
-            get {
-                return this.valNetField;
-            }
-            set {
-                this.valNetField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal t0 {
-            get {
-                return this.t0Field;
-            }
-            set {
-                this.t0Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal T1a {
-            get {
-                return this.t1aField;
-            }
-            set {
-                this.t1aField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal T1d {
-            get {
-                return this.t1dField;
-            }
-            set {
-                this.t1dField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal t1 {
-            get {
-                return this.t1Field;
-            }
-            set {
-                this.t1Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal VenitBaza {
-            get {
-                return this.venitBazaField;
-            }
-            set {
-                this.venitBazaField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Waers {
-            get {
-                return this.waersField;
-            }
-            set {
-                this.waersField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Pernr {
-            get {
-                return this.pernrField;
-            }
-            set {
-                this.pernrField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CoefX {
-            get {
-                return this.coefXField;
-            }
-            set {
-                this.coefXField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string T1aProc {
-            get {
-                return this.t1aProcField;
-            }
-            set {
-                this.t1aProcField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string T1dProc {
-            get {
-                return this.t1dProcField;
-            }
-            set {
-                this.t1dProcField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:rfc:functions")]
-    public partial class ZSAL_NTCF {
-        
-        private string pERNRField;
-        
-        private decimal vENIT_BAZAField;
-        
-        private string nRCL_ANTERIORField;
-        
-        private string tARGETField;
-        
-        private string nRCL_CURENTField;
-        
-        private decimal cOEFField;
-        
-        private decimal vENITTCFField;
-        
-        private string eNAMEField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string PERNR {
-            get {
-                return this.pERNRField;
-            }
-            set {
-                this.pERNRField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal VENIT_BAZA {
-            get {
-                return this.vENIT_BAZAField;
-            }
-            set {
-                this.vENIT_BAZAField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string NRCL_ANTERIOR {
-            get {
-                return this.nRCL_ANTERIORField;
-            }
-            set {
-                this.nRCL_ANTERIORField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string TARGET {
-            get {
-                return this.tARGETField;
-            }
-            set {
-                this.tARGETField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string NRCL_CURENT {
-            get {
-                return this.nRCL_CURENTField;
-            }
-            set {
-                this.nRCL_CURENTField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal COEF {
-            get {
-                return this.cOEFField;
-            }
-            set {
-                this.cOEFField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal VENITTCF {
-            get {
-                return this.vENITTCFField;
-            }
-            set {
-                this.vENITTCFField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ENAME {
-            get {
-                return this.eNAMEField;
-            }
-            set {
-                this.eNAMEField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
-    public partial class Zsalsd19 {
-        
-        private string mandtField;
-        
-        private string tippartField;
-        
-        private string dentipField;
-        
-        private string anvField;
-        
-        private string lunaField;
-        
-        private string bzirkField;
-        
-        private string prctrField;
-        
-        private string vkgrpField;
-        
-        private string pernrField;
-        
-        private string enameField;
-        
-        private decimal bazaField;
-        
-        private decimal venittcfField;
-        
-        private decimal corectIncasField;
-        
-        private decimal venitCvsField;
-        
-        private decimal venitfinalField;
-        
-        private string waersField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Mandt {
-            get {
-                return this.mandtField;
-            }
-            set {
-                this.mandtField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Tippart {
-            get {
-                return this.tippartField;
-            }
-            set {
-                this.tippartField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Dentip {
-            get {
-                return this.dentipField;
-            }
-            set {
-                this.dentipField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Anv {
-            get {
-                return this.anvField;
-            }
-            set {
-                this.anvField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Luna {
-            get {
-                return this.lunaField;
-            }
-            set {
-                this.lunaField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Bzirk {
-            get {
-                return this.bzirkField;
-            }
-            set {
-                this.bzirkField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Prctr {
-            get {
-                return this.prctrField;
-            }
-            set {
-                this.prctrField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Vkgrp {
-            get {
-                return this.vkgrpField;
-            }
-            set {
-                this.vkgrpField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Pernr {
-            get {
-                return this.pernrField;
-            }
-            set {
-                this.pernrField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Ename {
-            get {
-                return this.enameField;
-            }
-            set {
-                this.enameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal Baza {
-            get {
-                return this.bazaField;
-            }
-            set {
-                this.bazaField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal Venittcf {
-            get {
-                return this.venittcfField;
-            }
-            set {
-                this.venittcfField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal CorectIncas {
-            get {
-                return this.corectIncasField;
-            }
-            set {
-                this.corectIncasField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal VenitCvs {
-            get {
-                return this.venitCvsField;
-            }
-            set {
-                this.venitCvsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal Venitfinal {
-            get {
-                return this.venitfinalField;
-            }
-            set {
-                this.venitfinalField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Waers {
-            get {
-                return this.waersField;
-            }
-            set {
-                this.waersField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:rfc:functions")]
-    public partial class ZSAL_FACT_MALUS {
-        
-        private string mANDTField;
-        
-        private string kUNNRField;
-        
-        private string xBLNRField;
-        
-        private string pRCTRField;
-        
-        private string bUDAT_INCField;
-        
-        private string lUNAField;
-        
-        private string zANField;
-        
-        private decimal vAL_INCField;
-        
-        private string pERNRField;
-        
-        private string vKGRPField;
-        
-        private string nAME1Field;
-        
-        private decimal vAL_FACTField;
-        
-        private decimal tP_FACTField;
-        
-        private decimal tP_AGREATField;
-        
-        private decimal tP_ISTField;
-        
-        private string bUDAT_FACField;
-        
-        private decimal tERM_GRATIEField;
-        
-        private decimal zILE_INTField;
-        
-        private decimal cOEF_YField;
-        
-        private string wAERSField;
-        
-        private decimal mALUSField;
-        
-        private string cOD_SDField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string MANDT {
-            get {
-                return this.mANDTField;
-            }
-            set {
-                this.mANDTField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string KUNNR {
-            get {
-                return this.kUNNRField;
-            }
-            set {
-                this.kUNNRField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string XBLNR {
-            get {
-                return this.xBLNRField;
-            }
-            set {
-                this.xBLNRField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string PRCTR {
-            get {
-                return this.pRCTRField;
-            }
-            set {
-                this.pRCTRField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string BUDAT_INC {
-            get {
-                return this.bUDAT_INCField;
-            }
-            set {
-                this.bUDAT_INCField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string LUNA {
-            get {
-                return this.lUNAField;
-            }
-            set {
-                this.lUNAField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ZAN {
-            get {
-                return this.zANField;
-            }
-            set {
-                this.zANField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal VAL_INC {
-            get {
-                return this.vAL_INCField;
-            }
-            set {
-                this.vAL_INCField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string PERNR {
-            get {
-                return this.pERNRField;
-            }
-            set {
-                this.pERNRField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string VKGRP {
-            get {
-                return this.vKGRPField;
-            }
-            set {
-                this.vKGRPField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string NAME1 {
-            get {
-                return this.nAME1Field;
-            }
-            set {
-                this.nAME1Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal VAL_FACT {
-            get {
-                return this.vAL_FACTField;
-            }
-            set {
-                this.vAL_FACTField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal TP_FACT {
-            get {
-                return this.tP_FACTField;
-            }
-            set {
-                this.tP_FACTField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal TP_AGREAT {
-            get {
-                return this.tP_AGREATField;
-            }
-            set {
-                this.tP_AGREATField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal TP_IST {
-            get {
-                return this.tP_ISTField;
-            }
-            set {
-                this.tP_ISTField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string BUDAT_FAC {
-            get {
-                return this.bUDAT_FACField;
-            }
-            set {
-                this.bUDAT_FACField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal TERM_GRATIE {
-            get {
-                return this.tERM_GRATIEField;
-            }
-            set {
-                this.tERM_GRATIEField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal ZILE_INT {
-            get {
-                return this.zILE_INTField;
-            }
-            set {
-                this.zILE_INTField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal COEF_Y {
-            get {
-                return this.cOEF_YField;
-            }
-            set {
-                this.cOEF_YField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string WAERS {
-            get {
-                return this.wAERSField;
-            }
-            set {
-                this.wAERSField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal MALUS {
-            get {
-                return this.mALUSField;
-            }
-            set {
-                this.mALUSField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string COD_SD {
-            get {
-                return this.cOD_SDField;
-            }
-            set {
-                this.cOD_SDField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:rfc:functions")]
-    public partial class ZSAL_CORR_MALUS {
-        
-        private string pERNRField;
-        
-        private string kUNNRField;
-        
-        private string nAME1Field;
-        
-        private string kDGRPField;
-        
-        private decimal mALUSField;
-        
-        private decimal vEN_COR_INCField;
-        
-        private string wAERSField;
-        
-        private string tP_FACTField;
-        
-        private string tP_AGREField;
-        
-        private string tP_ISTORICField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string PERNR {
-            get {
-                return this.pERNRField;
-            }
-            set {
-                this.pERNRField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string KUNNR {
-            get {
-                return this.kUNNRField;
-            }
-            set {
-                this.kUNNRField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string NAME1 {
-            get {
-                return this.nAME1Field;
-            }
-            set {
-                this.nAME1Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string KDGRP {
-            get {
-                return this.kDGRPField;
-            }
-            set {
-                this.kDGRPField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal MALUS {
-            get {
-                return this.mALUSField;
-            }
-            set {
-                this.mALUSField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal VEN_COR_INC {
-            get {
-                return this.vEN_COR_INCField;
-            }
-            set {
-                this.vEN_COR_INCField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string WAERS {
-            get {
-                return this.wAERSField;
-            }
-            set {
-                this.wAERSField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string TP_FACT {
-            get {
-                return this.tP_FACTField;
-            }
-            set {
-                this.tP_FACTField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string TP_AGRE {
-            get {
-                return this.tP_AGREField;
-            }
-            set {
-                this.tP_AGREField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string TP_ISTORIC {
-            get {
-                return this.tP_ISTORICField;
-            }
-            set {
-                this.tP_ISTORICField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:rfc:functions")]
-    public partial class ZSAL_CORR_08 {
-        
-        private string pERNRField;
-        
-        private string kUNNRField;
-        
-        private string nAME1Field;
-        
-        private string kDGRPField;
-        
-        private decimal iNCAS_0_8Field;
-        
-        private decimal vEN_COR_INCField;
-        
-        private string wAERSField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string PERNR {
-            get {
-                return this.pERNRField;
-            }
-            set {
-                this.pERNRField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string KUNNR {
-            get {
-                return this.kUNNRField;
-            }
-            set {
-                this.kUNNRField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string NAME1 {
-            get {
-                return this.nAME1Field;
-            }
-            set {
-                this.nAME1Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string KDGRP {
-            get {
-                return this.kDGRPField;
-            }
-            set {
-                this.kDGRPField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal INCAS_0_8 {
-            get {
-                return this.iNCAS_0_8Field;
-            }
-            set {
-                this.iNCAS_0_8Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal VEN_COR_INC {
-            get {
-                return this.vEN_COR_INCField;
-            }
-            set {
-                this.vEN_COR_INCField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string WAERS {
-            get {
-                return this.wAERSField;
-            }
-            set {
-                this.wAERSField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
-    public partial class Zcvss2019 {
-        
-        private string tipField;
-        
-        private string sdField;
-        
-        private string agField;
-        
-        private string snameField;
-        
-        private decimal p6vField;
-        
-        private decimal targetvalrField;
-        
-        private decimal venitwtvaField;
-        
-        private decimal pondereField;
-        
-        private decimal cvsField;
-        
-        private decimal bazaField;
-        
-        private decimal venitcvsField;
-        
-        private string waersField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Tip {
-            get {
-                return this.tipField;
-            }
-            set {
-                this.tipField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Sd {
-            get {
-                return this.sdField;
-            }
-            set {
-                this.sdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Ag {
-            get {
-                return this.agField;
-            }
-            set {
-                this.agField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Sname {
-            get {
-                return this.snameField;
-            }
-            set {
-                this.snameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal P6v {
-            get {
-                return this.p6vField;
-            }
-            set {
-                this.p6vField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal Targetvalr {
-            get {
-                return this.targetvalrField;
-            }
-            set {
-                this.targetvalrField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal Venitwtva {
-            get {
-                return this.venitwtvaField;
-            }
-            set {
-                this.venitwtvaField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal Pondere {
-            get {
-                return this.pondereField;
-            }
-            set {
-                this.pondereField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal Cvs {
-            get {
-                return this.cvsField;
-            }
-            set {
-                this.cvsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal Baza {
-            get {
-                return this.bazaField;
-            }
-            set {
-                this.bazaField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal Venitcvs {
-            get {
-                return this.venitcvsField;
-            }
-            set {
-                this.venitcvsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Waers {
-            get {
-                return this.waersField;
-            }
-            set {
-                this.waersField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:rfc:functions")]
-    public partial class ZSAL_CORR_INC {
-        
-        private string pERNRField;
-        
-        private string nUME_AVField;
-        
-        private decimal bAZAField;
-        
-        private decimal iNCAS_0_8Field;
-        
-        private decimal mALUSField;
-        
-        private decimal vEN_COR_INCField;
-        
-        private string wAERSField;
-        
-        private string cOD_SDField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string PERNR {
-            get {
-                return this.pERNRField;
-            }
-            set {
-                this.pERNRField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string NUME_AV {
-            get {
-                return this.nUME_AVField;
-            }
-            set {
-                this.nUME_AVField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal BAZA {
-            get {
-                return this.bAZAField;
-            }
-            set {
-                this.bAZAField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal INCAS_0_8 {
-            get {
-                return this.iNCAS_0_8Field;
-            }
-            set {
-                this.iNCAS_0_8Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal MALUS {
-            get {
-                return this.mALUSField;
-            }
-            set {
-                this.mALUSField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal VEN_COR_INC {
-            get {
-                return this.vEN_COR_INCField;
-            }
-            set {
-                this.vEN_COR_INCField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string WAERS {
-            get {
-                return this.wAERSField;
-            }
-            set {
-                this.wAERSField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string COD_SD {
-            get {
-                return this.cOD_SDField;
-            }
-            set {
-                this.cOD_SDField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1921,7 +576,7 @@ namespace WebService1.Salarizare2019 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2034,7 +689,7 @@ namespace WebService1.Salarizare2019 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2238,7 +893,7 @@ namespace WebService1.Salarizare2019 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2533,7 +1188,7 @@ namespace WebService1.Salarizare2019 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2672,7 +1327,7 @@ namespace WebService1.Salarizare2019 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2772,7 +1427,7 @@ namespace WebService1.Salarizare2019 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2885,272 +1540,174 @@ namespace WebService1.Salarizare2019 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
-    public partial class ZgetSalav2019Response {
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class ZsalBazaMatkl {
         
-        private ZsalBazaMatkl[] gtBazaclExpField;
+        private string kdgrpField;
         
-        private ZsalCorrInc[] gtCorrIncField;
+        private string kunnrField;
         
-        private ZsalCorr08[] gtInc08ExField;
+        private string name1Field;
         
-        private ZsalCorrMalus[] gtIncmaExField;
+        private string matklField;
         
-        private ZsalFactMalus[] gtMalExField;
+        private string wgbezField;
         
-        private Zsalav19[] gtOuttabAvField;
+        private decimal valNetField;
         
-        private ZsalNtcf[] gtTcfField;
+        private decimal t0Field;
         
-        /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
-        public ZsalBazaMatkl[] GtBazaclExp {
-            get {
-                return this.gtBazaclExpField;
-            }
-            set {
-                this.gtBazaclExpField = value;
-            }
-        }
+        private decimal t1aField;
         
-        /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
-        public ZsalCorrInc[] GtCorrInc {
-            get {
-                return this.gtCorrIncField;
-            }
-            set {
-                this.gtCorrIncField = value;
-            }
-        }
+        private decimal t1dField;
         
-        /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
-        public ZsalCorr08[] GtInc08Ex {
-            get {
-                return this.gtInc08ExField;
-            }
-            set {
-                this.gtInc08ExField = value;
-            }
-        }
+        private decimal t1Field;
         
-        /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
-        public ZsalCorrMalus[] GtIncmaEx {
-            get {
-                return this.gtIncmaExField;
-            }
-            set {
-                this.gtIncmaExField = value;
-            }
-        }
+        private decimal venitBazaField;
         
-        /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
-        public ZsalFactMalus[] GtMalEx {
-            get {
-                return this.gtMalExField;
-            }
-            set {
-                this.gtMalExField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
-        public Zsalav19[] GtOuttabAv {
-            get {
-                return this.gtOuttabAvField;
-            }
-            set {
-                this.gtOuttabAvField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
-        public ZsalNtcf[] GtTcf {
-            get {
-                return this.gtTcfField;
-            }
-            set {
-                this.gtTcfField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
-    public partial class ZgetSalsd2019 {
-        
-        private string anField;
-        
-        private string divizieField;
-        
-        private ZsalBazaMatklSd[] gtBazaclExpField;
-        
-        private ZSAL_CORR_INC[] gtCorrIncField;
-        
-        private Zcvss2019[] gtCvssField;
-        
-        private ZSAL_CORR_08[] gtInc08ExField;
-        
-        private ZSAL_CORR_MALUS[] gtIncmaExField;
-        
-        private ZSAL_FACT_MALUS[] gtMalExField;
-        
-        private Zsalsd19[] gtOuttabSdField;
-        
-        private ZSAL_NTCF[] gtTcfField;
-        
-        private string lunaField;
+        private string waersField;
         
         private string pernrField;
         
-        private string ulField;
+        private string coefXField;
+        
+        private string t1aProcField;
+        
+        private string t1dProcField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string An {
+        public string Kdgrp {
             get {
-                return this.anField;
+                return this.kdgrpField;
             }
             set {
-                this.anField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Divizie {
-            get {
-                return this.divizieField;
-            }
-            set {
-                this.divizieField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
-        public ZsalBazaMatklSd[] GtBazaclExp {
-            get {
-                return this.gtBazaclExpField;
-            }
-            set {
-                this.gtBazaclExpField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
-        public ZSAL_CORR_INC[] GtCorrInc {
-            get {
-                return this.gtCorrIncField;
-            }
-            set {
-                this.gtCorrIncField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
-        public Zcvss2019[] GtCvss {
-            get {
-                return this.gtCvssField;
-            }
-            set {
-                this.gtCvssField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
-        public ZSAL_CORR_08[] GtInc08Ex {
-            get {
-                return this.gtInc08ExField;
-            }
-            set {
-                this.gtInc08ExField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
-        public ZSAL_CORR_MALUS[] GtIncmaEx {
-            get {
-                return this.gtIncmaExField;
-            }
-            set {
-                this.gtIncmaExField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
-        public ZSAL_FACT_MALUS[] GtMalEx {
-            get {
-                return this.gtMalExField;
-            }
-            set {
-                this.gtMalExField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
-        public Zsalsd19[] GtOuttabSd {
-            get {
-                return this.gtOuttabSdField;
-            }
-            set {
-                this.gtOuttabSdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
-        public ZSAL_NTCF[] GtTcf {
-            get {
-                return this.gtTcfField;
-            }
-            set {
-                this.gtTcfField = value;
+                this.kdgrpField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Luna {
+        public string Kunnr {
             get {
-                return this.lunaField;
+                return this.kunnrField;
             }
             set {
-                this.lunaField = value;
+                this.kunnrField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Name1 {
+            get {
+                return this.name1Field;
+            }
+            set {
+                this.name1Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Matkl {
+            get {
+                return this.matklField;
+            }
+            set {
+                this.matklField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Wgbez {
+            get {
+                return this.wgbezField;
+            }
+            set {
+                this.wgbezField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal ValNet {
+            get {
+                return this.valNetField;
+            }
+            set {
+                this.valNetField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal t0 {
+            get {
+                return this.t0Field;
+            }
+            set {
+                this.t0Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal T1a {
+            get {
+                return this.t1aField;
+            }
+            set {
+                this.t1aField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal T1d {
+            get {
+                return this.t1dField;
+            }
+            set {
+                this.t1dField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal t1 {
+            get {
+                return this.t1Field;
+            }
+            set {
+                this.t1Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal VenitBaza {
+            get {
+                return this.venitBazaField;
+            }
+            set {
+                this.venitBazaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Waers {
+            get {
+                return this.waersField;
+            }
+            set {
+                this.waersField = value;
             }
         }
         
@@ -3167,18 +1724,1182 @@ namespace WebService1.Salarizare2019 {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Ul {
+        public string CoefX {
             get {
-                return this.ulField;
+                return this.coefXField;
             }
             set {
-                this.ulField = value;
+                this.coefXField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string T1aProc {
+            get {
+                return this.t1aProcField;
+            }
+            set {
+                this.t1aProcField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string T1dProc {
+            get {
+                return this.t1dProcField;
+            }
+            set {
+                this.t1dProcField = value;
             }
         }
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:rfc:functions")]
+    public partial class ZSAL_NTCF {
+        
+        private string pERNRField;
+        
+        private decimal vENIT_BAZAField;
+        
+        private string nRCL_ANTERIORField;
+        
+        private string tARGETField;
+        
+        private string nRCL_CURENTField;
+        
+        private decimal cOEFField;
+        
+        private decimal vENITTCFField;
+        
+        private string eNAMEField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PERNR {
+            get {
+                return this.pERNRField;
+            }
+            set {
+                this.pERNRField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal VENIT_BAZA {
+            get {
+                return this.vENIT_BAZAField;
+            }
+            set {
+                this.vENIT_BAZAField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string NRCL_ANTERIOR {
+            get {
+                return this.nRCL_ANTERIORField;
+            }
+            set {
+                this.nRCL_ANTERIORField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string TARGET {
+            get {
+                return this.tARGETField;
+            }
+            set {
+                this.tARGETField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string NRCL_CURENT {
+            get {
+                return this.nRCL_CURENTField;
+            }
+            set {
+                this.nRCL_CURENTField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal COEF {
+            get {
+                return this.cOEFField;
+            }
+            set {
+                this.cOEFField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal VENITTCF {
+            get {
+                return this.vENITTCFField;
+            }
+            set {
+                this.vENITTCFField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ENAME {
+            get {
+                return this.eNAMEField;
+            }
+            set {
+                this.eNAMEField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class Zsalsd19 {
+        
+        private string mandtField;
+        
+        private string tippartField;
+        
+        private string dentipField;
+        
+        private string anvField;
+        
+        private string lunaField;
+        
+        private string bzirkField;
+        
+        private string prctrField;
+        
+        private string vkgrpField;
+        
+        private string pernrField;
+        
+        private string enameField;
+        
+        private decimal bazaField;
+        
+        private decimal venittcfField;
+        
+        private decimal corectIncasField;
+        
+        private decimal venitCvsField;
+        
+        private decimal venitfinalField;
+        
+        private string waersField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Mandt {
+            get {
+                return this.mandtField;
+            }
+            set {
+                this.mandtField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Tippart {
+            get {
+                return this.tippartField;
+            }
+            set {
+                this.tippartField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Dentip {
+            get {
+                return this.dentipField;
+            }
+            set {
+                this.dentipField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Anv {
+            get {
+                return this.anvField;
+            }
+            set {
+                this.anvField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Luna {
+            get {
+                return this.lunaField;
+            }
+            set {
+                this.lunaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Bzirk {
+            get {
+                return this.bzirkField;
+            }
+            set {
+                this.bzirkField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Prctr {
+            get {
+                return this.prctrField;
+            }
+            set {
+                this.prctrField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Vkgrp {
+            get {
+                return this.vkgrpField;
+            }
+            set {
+                this.vkgrpField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Pernr {
+            get {
+                return this.pernrField;
+            }
+            set {
+                this.pernrField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Ename {
+            get {
+                return this.enameField;
+            }
+            set {
+                this.enameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal Baza {
+            get {
+                return this.bazaField;
+            }
+            set {
+                this.bazaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal Venittcf {
+            get {
+                return this.venittcfField;
+            }
+            set {
+                this.venittcfField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal CorectIncas {
+            get {
+                return this.corectIncasField;
+            }
+            set {
+                this.corectIncasField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal VenitCvs {
+            get {
+                return this.venitCvsField;
+            }
+            set {
+                this.venitCvsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal Venitfinal {
+            get {
+                return this.venitfinalField;
+            }
+            set {
+                this.venitfinalField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Waers {
+            get {
+                return this.waersField;
+            }
+            set {
+                this.waersField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:rfc:functions")]
+    public partial class ZSAL_FACT_MALUS {
+        
+        private string mANDTField;
+        
+        private string kUNNRField;
+        
+        private string xBLNRField;
+        
+        private string pRCTRField;
+        
+        private string bUDAT_INCField;
+        
+        private string lUNAField;
+        
+        private string zANField;
+        
+        private decimal vAL_INCField;
+        
+        private string pERNRField;
+        
+        private string vKGRPField;
+        
+        private string nAME1Field;
+        
+        private decimal vAL_FACTField;
+        
+        private decimal tP_FACTField;
+        
+        private decimal tP_AGREATField;
+        
+        private decimal tP_ISTField;
+        
+        private string bUDAT_FACField;
+        
+        private decimal tERM_GRATIEField;
+        
+        private decimal zILE_INTField;
+        
+        private decimal cOEF_YField;
+        
+        private string wAERSField;
+        
+        private decimal mALUSField;
+        
+        private string cOD_SDField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string MANDT {
+            get {
+                return this.mANDTField;
+            }
+            set {
+                this.mANDTField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string KUNNR {
+            get {
+                return this.kUNNRField;
+            }
+            set {
+                this.kUNNRField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string XBLNR {
+            get {
+                return this.xBLNRField;
+            }
+            set {
+                this.xBLNRField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PRCTR {
+            get {
+                return this.pRCTRField;
+            }
+            set {
+                this.pRCTRField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string BUDAT_INC {
+            get {
+                return this.bUDAT_INCField;
+            }
+            set {
+                this.bUDAT_INCField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string LUNA {
+            get {
+                return this.lUNAField;
+            }
+            set {
+                this.lUNAField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ZAN {
+            get {
+                return this.zANField;
+            }
+            set {
+                this.zANField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal VAL_INC {
+            get {
+                return this.vAL_INCField;
+            }
+            set {
+                this.vAL_INCField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PERNR {
+            get {
+                return this.pERNRField;
+            }
+            set {
+                this.pERNRField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string VKGRP {
+            get {
+                return this.vKGRPField;
+            }
+            set {
+                this.vKGRPField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string NAME1 {
+            get {
+                return this.nAME1Field;
+            }
+            set {
+                this.nAME1Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal VAL_FACT {
+            get {
+                return this.vAL_FACTField;
+            }
+            set {
+                this.vAL_FACTField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal TP_FACT {
+            get {
+                return this.tP_FACTField;
+            }
+            set {
+                this.tP_FACTField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal TP_AGREAT {
+            get {
+                return this.tP_AGREATField;
+            }
+            set {
+                this.tP_AGREATField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal TP_IST {
+            get {
+                return this.tP_ISTField;
+            }
+            set {
+                this.tP_ISTField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string BUDAT_FAC {
+            get {
+                return this.bUDAT_FACField;
+            }
+            set {
+                this.bUDAT_FACField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal TERM_GRATIE {
+            get {
+                return this.tERM_GRATIEField;
+            }
+            set {
+                this.tERM_GRATIEField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal ZILE_INT {
+            get {
+                return this.zILE_INTField;
+            }
+            set {
+                this.zILE_INTField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal COEF_Y {
+            get {
+                return this.cOEF_YField;
+            }
+            set {
+                this.cOEF_YField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string WAERS {
+            get {
+                return this.wAERSField;
+            }
+            set {
+                this.wAERSField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal MALUS {
+            get {
+                return this.mALUSField;
+            }
+            set {
+                this.mALUSField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string COD_SD {
+            get {
+                return this.cOD_SDField;
+            }
+            set {
+                this.cOD_SDField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:rfc:functions")]
+    public partial class ZSAL_CORR_MALUS {
+        
+        private string pERNRField;
+        
+        private string kUNNRField;
+        
+        private string nAME1Field;
+        
+        private string kDGRPField;
+        
+        private decimal mALUSField;
+        
+        private decimal vEN_COR_INCField;
+        
+        private string wAERSField;
+        
+        private string tP_FACTField;
+        
+        private string tP_AGREField;
+        
+        private string tP_ISTORICField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PERNR {
+            get {
+                return this.pERNRField;
+            }
+            set {
+                this.pERNRField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string KUNNR {
+            get {
+                return this.kUNNRField;
+            }
+            set {
+                this.kUNNRField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string NAME1 {
+            get {
+                return this.nAME1Field;
+            }
+            set {
+                this.nAME1Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string KDGRP {
+            get {
+                return this.kDGRPField;
+            }
+            set {
+                this.kDGRPField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal MALUS {
+            get {
+                return this.mALUSField;
+            }
+            set {
+                this.mALUSField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal VEN_COR_INC {
+            get {
+                return this.vEN_COR_INCField;
+            }
+            set {
+                this.vEN_COR_INCField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string WAERS {
+            get {
+                return this.wAERSField;
+            }
+            set {
+                this.wAERSField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string TP_FACT {
+            get {
+                return this.tP_FACTField;
+            }
+            set {
+                this.tP_FACTField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string TP_AGRE {
+            get {
+                return this.tP_AGREField;
+            }
+            set {
+                this.tP_AGREField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string TP_ISTORIC {
+            get {
+                return this.tP_ISTORICField;
+            }
+            set {
+                this.tP_ISTORICField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:rfc:functions")]
+    public partial class ZSAL_CORR_08 {
+        
+        private string pERNRField;
+        
+        private string kUNNRField;
+        
+        private string nAME1Field;
+        
+        private string kDGRPField;
+        
+        private decimal iNCAS_0_8Field;
+        
+        private decimal vEN_COR_INCField;
+        
+        private string wAERSField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PERNR {
+            get {
+                return this.pERNRField;
+            }
+            set {
+                this.pERNRField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string KUNNR {
+            get {
+                return this.kUNNRField;
+            }
+            set {
+                this.kUNNRField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string NAME1 {
+            get {
+                return this.nAME1Field;
+            }
+            set {
+                this.nAME1Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string KDGRP {
+            get {
+                return this.kDGRPField;
+            }
+            set {
+                this.kDGRPField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal INCAS_0_8 {
+            get {
+                return this.iNCAS_0_8Field;
+            }
+            set {
+                this.iNCAS_0_8Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal VEN_COR_INC {
+            get {
+                return this.vEN_COR_INCField;
+            }
+            set {
+                this.vEN_COR_INCField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string WAERS {
+            get {
+                return this.wAERSField;
+            }
+            set {
+                this.wAERSField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class Zcvss2019 {
+        
+        private string tipField;
+        
+        private string sdField;
+        
+        private string agField;
+        
+        private string snameField;
+        
+        private decimal p6vField;
+        
+        private decimal targetvalrField;
+        
+        private decimal venitwtvaField;
+        
+        private decimal pondereField;
+        
+        private decimal cvsField;
+        
+        private decimal bazaField;
+        
+        private decimal venitcvsField;
+        
+        private string waersField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Tip {
+            get {
+                return this.tipField;
+            }
+            set {
+                this.tipField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Sd {
+            get {
+                return this.sdField;
+            }
+            set {
+                this.sdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Ag {
+            get {
+                return this.agField;
+            }
+            set {
+                this.agField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Sname {
+            get {
+                return this.snameField;
+            }
+            set {
+                this.snameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal P6v {
+            get {
+                return this.p6vField;
+            }
+            set {
+                this.p6vField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal Targetvalr {
+            get {
+                return this.targetvalrField;
+            }
+            set {
+                this.targetvalrField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal Venitwtva {
+            get {
+                return this.venitwtvaField;
+            }
+            set {
+                this.venitwtvaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal Pondere {
+            get {
+                return this.pondereField;
+            }
+            set {
+                this.pondereField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal Cvs {
+            get {
+                return this.cvsField;
+            }
+            set {
+                this.cvsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal Baza {
+            get {
+                return this.bazaField;
+            }
+            set {
+                this.bazaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal Venitcvs {
+            get {
+                return this.venitcvsField;
+            }
+            set {
+                this.venitcvsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Waers {
+            get {
+                return this.waersField;
+            }
+            set {
+                this.waersField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:rfc:functions")]
+    public partial class ZSAL_CORR_INC {
+        
+        private string pERNRField;
+        
+        private string nUME_AVField;
+        
+        private decimal bAZAField;
+        
+        private decimal iNCAS_0_8Field;
+        
+        private decimal mALUSField;
+        
+        private decimal vEN_COR_INCField;
+        
+        private string wAERSField;
+        
+        private string cOD_SDField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PERNR {
+            get {
+                return this.pERNRField;
+            }
+            set {
+                this.pERNRField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string NUME_AV {
+            get {
+                return this.nUME_AVField;
+            }
+            set {
+                this.nUME_AVField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal BAZA {
+            get {
+                return this.bAZAField;
+            }
+            set {
+                this.bAZAField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal INCAS_0_8 {
+            get {
+                return this.iNCAS_0_8Field;
+            }
+            set {
+                this.iNCAS_0_8Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal MALUS {
+            get {
+                return this.mALUSField;
+            }
+            set {
+                this.mALUSField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal VEN_COR_INC {
+            get {
+                return this.vEN_COR_INCField;
+            }
+            set {
+                this.vEN_COR_INCField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string WAERS {
+            get {
+                return this.wAERSField;
+            }
+            set {
+                this.wAERSField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string COD_SD {
+            get {
+                return this.cOD_SDField;
+            }
+            set {
+                this.cOD_SDField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3299,37 +3020,290 @@ namespace WebService1.Salarizare2019 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
-    public delegate void ZgetSalav2019CompletedEventHandler(object sender, ZgetSalav2019CompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class ZgetSalav2019CompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class ZgetSalav2019 {
         
-        private object[] results;
+        private string anField;
         
-        internal ZgetSalav2019CompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
+        private string divizieField;
+        
+        private ZsalBazaMatkl[] gtBazaclExpField;
+        
+        private ZsalCorrInc[] gtCorrIncField;
+        
+        private ZsalCorr08[] gtInc08ExField;
+        
+        private ZsalCorrMalus[] gtIncmaExField;
+        
+        private ZsalFactMalus[] gtMalExField;
+        
+        private Zsalav19[] gtOuttabAvField;
+        
+        private ZsalNtcf[] gtTcfField;
+        
+        private string lunaField;
+        
+        private string pernrField;
+        
+        private string ulField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string An {
+            get {
+                return this.anField;
+            }
+            set {
+                this.anField = value;
+            }
         }
         
         /// <remarks/>
-        public ZgetSalav2019Response Result {
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Divizie {
             get {
-                this.RaiseExceptionIfNecessary();
-                return ((ZgetSalav2019Response)(this.results[0]));
+                return this.divizieField;
+            }
+            set {
+                this.divizieField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
+        public ZsalBazaMatkl[] GtBazaclExp {
+            get {
+                return this.gtBazaclExpField;
+            }
+            set {
+                this.gtBazaclExpField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
+        public ZsalCorrInc[] GtCorrInc {
+            get {
+                return this.gtCorrIncField;
+            }
+            set {
+                this.gtCorrIncField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
+        public ZsalCorr08[] GtInc08Ex {
+            get {
+                return this.gtInc08ExField;
+            }
+            set {
+                this.gtInc08ExField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
+        public ZsalCorrMalus[] GtIncmaEx {
+            get {
+                return this.gtIncmaExField;
+            }
+            set {
+                this.gtIncmaExField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
+        public ZsalFactMalus[] GtMalEx {
+            get {
+                return this.gtMalExField;
+            }
+            set {
+                this.gtMalExField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
+        public Zsalav19[] GtOuttabAv {
+            get {
+                return this.gtOuttabAvField;
+            }
+            set {
+                this.gtOuttabAvField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
+        public ZsalNtcf[] GtTcf {
+            get {
+                return this.gtTcfField;
+            }
+            set {
+                this.gtTcfField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Luna {
+            get {
+                return this.lunaField;
+            }
+            set {
+                this.lunaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Pernr {
+            get {
+                return this.pernrField;
+            }
+            set {
+                this.pernrField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Ul {
+            get {
+                return this.ulField;
+            }
+            set {
+                this.ulField = value;
             }
         }
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class ZgetSalav2019Response {
+        
+        private ZsalBazaMatkl[] gtBazaclExpField;
+        
+        private ZsalCorrInc[] gtCorrIncField;
+        
+        private ZsalCorr08[] gtInc08ExField;
+        
+        private ZsalCorrMalus[] gtIncmaExField;
+        
+        private ZsalFactMalus[] gtMalExField;
+        
+        private Zsalav19[] gtOuttabAvField;
+        
+        private ZsalNtcf[] gtTcfField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
+        public ZsalBazaMatkl[] GtBazaclExp {
+            get {
+                return this.gtBazaclExpField;
+            }
+            set {
+                this.gtBazaclExpField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
+        public ZsalCorrInc[] GtCorrInc {
+            get {
+                return this.gtCorrIncField;
+            }
+            set {
+                this.gtCorrIncField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
+        public ZsalCorr08[] GtInc08Ex {
+            get {
+                return this.gtInc08ExField;
+            }
+            set {
+                this.gtInc08ExField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
+        public ZsalCorrMalus[] GtIncmaEx {
+            get {
+                return this.gtIncmaExField;
+            }
+            set {
+                this.gtIncmaExField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
+        public ZsalFactMalus[] GtMalEx {
+            get {
+                return this.gtMalExField;
+            }
+            set {
+                this.gtMalExField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
+        public Zsalav19[] GtOuttabAv {
+            get {
+                return this.gtOuttabAvField;
+            }
+            set {
+                this.gtOuttabAvField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
+        public ZsalNtcf[] GtTcf {
+            get {
+                return this.gtTcfField;
+            }
+            set {
+                this.gtTcfField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void ZgetSalsd2019CompletedEventHandler(object sender, ZgetSalsd2019CompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class ZgetSalsd2019CompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -3346,6 +3320,32 @@ namespace WebService1.Salarizare2019 {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((ZgetSalsd2019Response)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void ZgetSalav2019CompletedEventHandler(object sender, ZgetSalav2019CompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ZgetSalav2019CompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ZgetSalav2019CompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public ZgetSalav2019Response Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((ZgetSalav2019Response)(this.results[0]));
             }
         }
     }

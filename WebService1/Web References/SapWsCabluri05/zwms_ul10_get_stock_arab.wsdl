@@ -322,7 +322,7 @@
             <xsd:element minOccurs="0" name="MatGroup" type="n0:char9" />
             <xsd:element minOccurs="0" name="Material" type="n0:char18" />
             <xsd:element minOccurs="0" name="PersonalNo" type="n0:numeric8" />
-            <xsd:element name="Stock" type="tns:TableOfZwmsShortLqua" />
+            <xsd:element minOccurs="0" name="Stock" type="tns:TableOfZwmsShortLqua" />
             <xsd:element name="StockFinal" type="tns:ZttWmsLqua" />
             <xsd:element name="Warehouse" type="n0:char3" />
           </xsd:sequence>
@@ -331,7 +331,7 @@
       <xsd:element name="ZwmsUl10GetStockArabResponse">
         <xsd:complexType>
           <xsd:sequence>
-            <xsd:element name="Stock" type="tns:TableOfZwmsShortLqua" />
+            <xsd:element minOccurs="0" name="Stock" type="tns:TableOfZwmsShortLqua" />
             <xsd:element name="StockFinal" type="tns:ZttWmsLqua" />
           </xsd:sequence>
         </xsd:complexType>

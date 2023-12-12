@@ -169,10 +169,10 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://sap-prd6a.arabesque.ro:8036/sap/bc/srt/wsdl/flv_10002A111AD1/bndg_url/sap/bc/srt/rfc/sap/zarticole_bord/900/zarticole_bord/zarticole_bord%3fsap-client=900">
+    <WebReferenceUrl Include="http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/wsdl/flv_10002A111AD1/bndg_url/sap/bc/srt/rfc/sap/zarticole_bord/900/zarticole_bord/zarticole_bord%3fsap-client=900">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\BordDistService\</RelPath>
-      <UpdateFromURL>http://sap-prd6a.arabesque.ro:8036/sap/bc/srt/wsdl/flv_10002A111AD1/bndg_url/sap/bc/srt/rfc/sap/zarticole_bord/900/zarticole_bord/zarticole_bord%3fsap-client=900</UpdateFromURL>
+      <UpdateFromURL>http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/wsdl/flv_10002A111AD1/bndg_url/sap/bc/srt/rfc/sap/zarticole_bord/900/zarticole_bord/zarticole_bord%3fsap-client=900</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
@@ -180,10 +180,10 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>DistributieWebServices_BordDistService_ZARTICOLE_BORD</CachedSettingsPropName>
     </WebReferenceUrl>
-    <WebReferenceUrl Include="http://sap-prd6a.arabesque.ro:8036/sap/bc/srt/wsdl/flv_10002A111AD1/bndg_url/sap/bc/srt/rfc/sap/zarticole_ct/900/zarticole_ct/zarticole_ct%3fsap-client=900">
+    <WebReferenceUrl Include="http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/wsdl/flv_10002A111AD1/bndg_url/sap/bc/srt/rfc/sap/zarticole_ct/900/zarticole_ct/zarticole_ct%3fsap-client=900">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\SapWebService\</RelPath>
-      <UpdateFromURL>http://sap-prd6a.arabesque.ro:8036/sap/bc/srt/wsdl/flv_10002A111AD1/bndg_url/sap/bc/srt/rfc/sap/zarticole_ct/900/zarticole_ct/zarticole_ct%3fsap-client=900</UpdateFromURL>
+      <UpdateFromURL>http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/wsdl/flv_10002A111AD1/bndg_url/sap/bc/srt/rfc/sap/zarticole_ct/900/zarticole_ct/zarticole_ct%3fsap-client=900</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
@@ -191,10 +191,10 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>DistributieWebServices_SapWebService_ZARTICOLE_CT</CachedSettingsPropName>
     </WebReferenceUrl>
-    <WebReferenceUrl Include="http://sap-prd6a.arabesque.ro:8036/sap/bc/srt/wsdl/flv_10002A111AD1/bndg_url/sap/bc/srt/rfc/sap/zws_cant_bord/900/zws_cant_bord/zws_cant_bord%3fsap-client=900">
+    <WebReferenceUrl Include="http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/wsdl/flv_10002A111AD1/bndg_url/sap/bc/srt/rfc/sap/zws_cant_bord/900/zws_cant_bord/zws_cant_bord%3fsap-client=900">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\BordSapService\</RelPath>
-      <UpdateFromURL>http://sap-prd6a.arabesque.ro:8036/sap/bc/srt/wsdl/flv_10002A111AD1/bndg_url/sap/bc/srt/rfc/sap/zws_cant_bord/900/zws_cant_bord/zws_cant_bord%3fsap-client=900</UpdateFromURL>
+      <UpdateFromURL>http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/wsdl/flv_10002A111AD1/bndg_url/sap/bc/srt/rfc/sap/zws_cant_bord/900/zws_cant_bord/zws_cant_bord%3fsap-client=900</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>

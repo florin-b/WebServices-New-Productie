@@ -776,6 +776,24 @@ namespace WebService1
 
                     }
 
+                    detaliiClient.email = " ";
+
+                    cmd = connection.CreateCommand();
+
+                    cmd.CommandText = " select nvl(adrs_mail,' ') from clienti where cod = :codClient ";
+
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Parameters.Clear();
+
+                    cmd.Parameters.Add(":codClient", OracleType.VarChar, 30).Direction = ParameterDirection.Input;
+                    cmd.Parameters[0].Value = codClient;
+
+                    oReader = cmd.ExecuteReader();
+                    if (oReader.HasRows)
+                    {
+                        oReader.Read();
+                        detaliiClient.email = oReader.GetString(0);
+                    }
 
                     oReader.Close();
                     oReader.Dispose();
@@ -1533,7 +1551,7 @@ namespace WebService1
                                   " and u.mandt = t.mandt and u.spras = t.spras and u.zterm = t.zterm  and u.zterm " +
                                   " <= (select max(p.zterm) from sapprd.knvv p where p.mandt = '900' " +
                                   " and p.kunnr = :codClient and p.vtweg = '20' and p.spart = (select divizie from agenti where activ = 1 and cod=:codAgent)) " +
-                                  " and u.zterm != 'C000' order by u.zterm ";
+                                  " and u.zterm != 'C000' and u.zterm like 'C%' order by u.zterm ";
 
 
                 cmd.CommandType = CommandType.Text;

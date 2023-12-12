@@ -9,6 +9,17 @@ namespace WebService1
     {
         public double lat;
         public double lon;
+
+        public LatLng()
+        {
+
+        }
+
+        public LatLng(double lat, double lon)
+        {
+            this.lat = lat;
+            this.lon = lon;
+        }
     }
 
     public class Poligon

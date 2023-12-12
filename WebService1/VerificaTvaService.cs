@@ -28,10 +28,13 @@ namespace WebService1
                 string jsonResponse = sr.ReadToEnd().Trim();
                
 
-                if (jsonResponse != null && !jsonResponse.ToLower().Contains("error") && !jsonResponse.ToLower().Contains("invalid"))
+                if (jsonResponse != null && !jsonResponse.ToLower().Contains("error"))
                 {
                     var serializer = new JavaScriptSerializer();
                     starePlatitor = serializer.Deserialize<StarePlatitorTva>(jsonResponse);
+
+                    if (!starePlatitor.Raspuns.ToLower().Equals("valid"))
+                        starePlatitor.errMessage = jsonResponse;
                 }
                 else
                 {

@@ -1288,6 +1288,7 @@ namespace WebService1
                 ComandaMathaus comanda = new ComandaMathaus();
                 comanda.sellingPlant = comandaMathaus.sellingPlant;
                 comanda.countyCode = antetCmdMathaus.codJudet;
+                comanda.deliveryZoneType = HelperComenzi.getTipZonaMathaus(datePoligon.tipZona);
 
                 List<DateArticolMathaus> deliveryEntryDataList = new List<DateArticolMathaus>();
 
@@ -1720,21 +1721,17 @@ namespace WebService1
 
                 string urlDeliveryService = "https://wse1-hybris-b2c-prod.arabesque.ro/arbsqintegration/optimiseDeliveryB2B";
 
-                if (codPers != null && Utils.isUserTest(codPers, General.Constants.USER_TEST_1))
+
+                if (canal.Equals("10"))
+                    urlDeliveryService = "https://wse1-hybris-b2c-prod.arabesque.ro/arbsqintegration/cumulativeOptimiseDeliveryB2B";
+                else
                 {
-                    if (canal.Equals("10"))
+                    if (tipPers.Equals("AV") || tipPers.Equals("SD"))
                         urlDeliveryService = "https://wse1-hybris-b2c-prod.arabesque.ro/arbsqintegration/cumulativeOptimiseDeliveryB2B";
                     else
-                    {
-                        if (tipPers.Equals("AV") || tipPers.Equals("SD"))
-                            urlDeliveryService = "https://wse1-hybris-b2c-prod.arabesque.ro/arbsqintegration/cumulativeOptimiseDeliveryB2B";
-                        else
-                            urlDeliveryService = "https://wse1-hybris-b2c-prod.arabesque.ro/arbsqintegration/cumulativeOptimiseDeliveryB2C";
-
-                    }
+                        urlDeliveryService = "https://wse1-hybris-b2c-prod.arabesque.ro/arbsqintegration/cumulativeOptimiseDeliveryB2C";
 
                 }
-
 
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(urlDeliveryService);
 
@@ -1767,7 +1764,7 @@ namespace WebService1
 
         }
 
-        public string getStocMathaus(string filiala, string codArticol, string um, string tipCmd, string tipUserSap, string codUser)
+        public string getStocMathaus(string filiala, string codArticol, string um, string tipCmd, string tipUserSap, string codUser, string tipZona)
         {
 
             
@@ -1775,6 +1772,7 @@ namespace WebService1
             StockMathaus stockMathaus = new StockMathaus();
 
             stockMathaus.plant = filiala;
+            stockMathaus.deliveryZoneType = HelperComenzi.getTipZonaMathaus(tipZona);
             List<StockEntryDataList> stockEntryDataList = new List<StockEntryDataList>();
 
             StockEntryDataList stockEntry = new StockEntryDataList();
@@ -1868,21 +1866,20 @@ namespace WebService1
                 System.Net.ServicePointManager.Expect100Continue = false;
                 ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
-                if (codUser != null && Utils.isUserTest(codUser, General.Constants.USER_TEST_1))
-                {
-                    if (tipCmd != null && tipCmd.Equals("D"))
-                    {
-                        urlStockService = "https://wse1-hybris-b2c-prod.arabesque.ro/arbsqintegration/getCumulativeStocksB2B";
-                    }
-                    else if (tipCmd != null && tipCmd.Equals("G"))
-                    {
-                        if (tipUserSap.Equals("AV") || tipUserSap.Equals("SD"))
-                            urlStockService = "https://wse1-hybris-b2c-prod.arabesque.ro/arbsqintegration/getCumulativeStocksB2B";
-                        else
-                            urlStockService = "https://wse1-hybris-b2c-prod.arabesque.ro/arbsqintegration/getCumulativeStocksB2C";
-                    }
 
+                if (tipCmd != null && tipCmd.Equals("D"))
+                {
+                    urlStockService = "https://wse1-hybris-b2c-prod.arabesque.ro/arbsqintegration/getCumulativeStocksB2B";
                 }
+                else if (tipCmd != null && tipCmd.Equals("G"))
+                {
+                    if (tipUserSap.Equals("AV") || tipUserSap.Equals("SD"))
+                        urlStockService = "https://wse1-hybris-b2c-prod.arabesque.ro/arbsqintegration/getCumulativeStocksB2B";
+                    else
+                        urlStockService = "https://wse1-hybris-b2c-prod.arabesque.ro/arbsqintegration/getCumulativeStocksB2C";
+                }
+
+
 
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(urlStockService);
                 request.Method = "POST";
@@ -1964,14 +1961,6 @@ namespace WebService1
 
                 SAPWebServices.ZstTaxeAcces taxeAcces = new SAPWebServices.ZstTaxeAcces();
 
-                string zonaPoligon = datePoligon.tipZona;
-
-                if (datePoligon.tipZona.ToUpper().Equals("ZM"))
-                    zonaPoligon = "METRO";
-                else if (datePoligon.tipZona.ToUpper().Equals("ZMA") || datePoligon.tipZona.ToUpper().Equals("ZEMA"))
-                    zonaPoligon = "EXTRA_A";
-                else if (datePoligon.tipZona.ToUpper().Equals("ZMB") || datePoligon.tipZona.ToUpper().Equals("ZEMB"))
-                    zonaPoligon = "EXTRA_B";
 
                 if (antetCmd.tipComandaCamion != null && antetCmd.tipComandaCamion.Trim() != "")
                     taxeAcces.TipComanda = antetCmd.tipComandaCamion;
@@ -1983,7 +1972,7 @@ namespace WebService1
                 else
                     taxeAcces.GreutMarfa = 0;
 
-                taxeAcces.Zona = zonaPoligon;
+                taxeAcces.Zona = HelperComenzi.getTipZonaMathaus(datePoligon.tipZona);
                 taxeAcces.MasinaDescoperita = antetCmd.camionDescoperit != null && Boolean.Parse(antetCmd.camionDescoperit) ? "X" : " ";
                 taxeAcces.Macara = antetCmd.macara != null && Boolean.Parse(antetCmd.macara) ? "X" : " ";
                 taxeAcces.CamionScurt = HelperComenzi.getOptiuneCamion(optiuniCamion, "Camion scurt");

@@ -696,7 +696,7 @@ namespace WebService1
                 condDepart = " and p.spart = substr(:depart,0,2) ";
 
 
-
+            string critFiliala = "";
 
             try
             {
@@ -711,6 +711,10 @@ namespace WebService1
                     if (tipUserSap != null && (tipUserSap.Equals("CVO") || tipUserSap.Equals("SVO")))
                         tipDocuRetur = " ('ZFHC','ZF2H','ZFVS','ZFCS','ZFVS') ";
 
+                    critFiliala = " and p.prctr =:unitLog ";
+                    if (tipUserSap != null && tipUserSap.Contains("VO"))
+                        critFiliala = "";
+
                     cmd.CommandText = " select distinct k.vbeln, to_date(k.fkdat,'yyyymmdd'),  " +
                                       " nvl((select traty from sapprd.ekko e, sapprd.vbfa f where e.mandt = '900' and e.mandt = f.mandt and " +
                                       " e.ebeln = f.vbeln and f.vbelv = p.aubel and f.vbtyp_v = 'C' and f.vbtyp_n = 'V' and rownum = 1),k.traty) traty, " +
@@ -719,10 +723,10 @@ namespace WebService1
                                       " and k.vbeln = p.vbeln  and k.mandt = '900'  and k.fkart in " + tipDocuRetur +
                                       " and k.fksto <> 'X'  and k.fkdat >= to_char(sysdate - " + nrZileIstoric + ",'yyyymmdd') " +
                                       condPaleti +
-                                      " and k.mandt = a.mandt  and k.vbeln = a.vbeln  and a.parvw = 'WE' " +
-                                      " and p.prctr =:unitLog  and a.mandt = c.client and a.adrnr = c.addrnumber " +
+                                      " and k.mandt = a.mandt  and k.vbeln = a.vbeln  and a.parvw = 'WE' and c.name1 =  :numeClient " +
+                                      critFiliala + " and a.mandt = c.client and a.adrnr = c.addrnumber " +
                                       condData +
-                                      " and c.name1 =  :numeClient  order by to_date(k.fkdat,'yyyymmdd') ";
+                                      " order by to_date(k.fkdat,'yyyymmdd') ";
 
 
                 }
@@ -747,11 +751,14 @@ namespace WebService1
 
                 if (codDepartament.Equals("11"))
                 {
-                    cmd.Parameters.Add(":unitLog", OracleType.VarChar, 30).Direction = ParameterDirection.Input;
-                    cmd.Parameters[0].Value = unitLog;
-
                     cmd.Parameters.Add(":numeClient", OracleType.VarChar, 120).Direction = ParameterDirection.Input;
-                    cmd.Parameters[1].Value = codClient;
+                    cmd.Parameters[0].Value = codClient;
+
+                    if (!critFiliala.Equals(String.Empty))
+                    {
+                        cmd.Parameters.Add(":unitLog", OracleType.VarChar, 30).Direction = ParameterDirection.Input;
+                        cmd.Parameters[1].Value = unitLog;
+                    }
                 }
                 else
                 {
@@ -1654,7 +1661,7 @@ namespace WebService1
                 sintPaleti = "";
 
             string critFiliala = " and p.prctr =:unitLog ";
-            if (tipUserSap != null && (tipUserSap.Equals("CVIP") || tipUserSap.Equals("SDIP")))
+            if (tipUserSap != null && (tipUserSap.Equals("CVIP") || tipUserSap.Equals("SDIP") || tipUserSap.Contains("VO")))
                 critFiliala = "";
 
             string tipDocuRetur = " ('ZFM','ZFMC','ZFS','ZFSC','ZFPA', 'ZFVS','ZFCS') ";

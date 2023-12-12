@@ -261,20 +261,6 @@
           <xsd:pattern value="\d*" />
         </xsd:restriction>
       </xsd:simpleType>
-      <xsd:complexType name="ZSAL_CORR_MALUS">
-        <xsd:sequence>
-          <xsd:element name="PERNR" type="n1:numeric8" />
-          <xsd:element name="KUNNR" type="n1:char10" />
-          <xsd:element name="NAME1" type="n1:char30" />
-          <xsd:element name="KDGRP" type="n1:char2" />
-          <xsd:element name="MALUS" type="n1:curr15.2" />
-          <xsd:element name="VEN_COR_INC" type="n1:curr15.2" />
-          <xsd:element name="WAERS" type="n1:cuky5" />
-          <xsd:element name="TP_FACT" type="n1:char4" />
-          <xsd:element name="TP_AGRE" type="n1:char4" />
-          <xsd:element name="TP_ISTORIC" type="n1:char4" />
-        </xsd:sequence>
-      </xsd:complexType>
       <xsd:complexType name="ZSAL_CORR_08">
         <xsd:sequence>
           <xsd:element name="PERNR" type="n1:numeric8" />
@@ -284,18 +270,6 @@
           <xsd:element name="INCAS_0_8" type="n1:curr15.2" />
           <xsd:element name="VEN_COR_INC" type="n1:curr15.2" />
           <xsd:element name="WAERS" type="n1:cuky5" />
-        </xsd:sequence>
-      </xsd:complexType>
-      <xsd:complexType name="ZSAL_CORR_INC">
-        <xsd:sequence>
-          <xsd:element name="PERNR" type="n1:numeric8" />
-          <xsd:element name="NUME_AV" type="n1:char40" />
-          <xsd:element name="BAZA" type="n1:curr15.2" />
-          <xsd:element name="INCAS_0_8" type="n1:curr15.2" />
-          <xsd:element name="MALUS" type="n1:curr15.2" />
-          <xsd:element name="VEN_COR_INC" type="n1:curr15.2" />
-          <xsd:element name="WAERS" type="n1:cuky5" />
-          <xsd:element name="COD_SD" type="n1:numeric8" />
         </xsd:sequence>
       </xsd:complexType>
       <xsd:complexType name="ZSAL_FACT_MALUS">
@@ -325,9 +299,30 @@
           <xsd:element name="COD_SD" type="n1:numeric8" />
         </xsd:sequence>
       </xsd:complexType>
-      <xsd:complexType name="TABLE_OF_ZSAL_CORR_MALUS">
+      <xsd:complexType name="ZSAL_CORR_MALUS">
         <xsd:sequence>
-          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="n1:ZSAL_CORR_MALUS" />
+          <xsd:element name="PERNR" type="n1:numeric8" />
+          <xsd:element name="KUNNR" type="n1:char10" />
+          <xsd:element name="NAME1" type="n1:char30" />
+          <xsd:element name="KDGRP" type="n1:char2" />
+          <xsd:element name="MALUS" type="n1:curr15.2" />
+          <xsd:element name="VEN_COR_INC" type="n1:curr15.2" />
+          <xsd:element name="WAERS" type="n1:cuky5" />
+          <xsd:element name="TP_FACT" type="n1:char4" />
+          <xsd:element name="TP_AGRE" type="n1:char4" />
+          <xsd:element name="TP_ISTORIC" type="n1:char4" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ZSAL_CORR_INC">
+        <xsd:sequence>
+          <xsd:element name="PERNR" type="n1:numeric8" />
+          <xsd:element name="NUME_AV" type="n1:char40" />
+          <xsd:element name="BAZA" type="n1:curr15.2" />
+          <xsd:element name="INCAS_0_8" type="n1:curr15.2" />
+          <xsd:element name="MALUS" type="n1:curr15.2" />
+          <xsd:element name="VEN_COR_INC" type="n1:curr15.2" />
+          <xsd:element name="WAERS" type="n1:cuky5" />
+          <xsd:element name="COD_SD" type="n1:numeric8" />
         </xsd:sequence>
       </xsd:complexType>
       <xsd:complexType name="TABLE_OF_ZSAL_CORR_08">
@@ -335,31 +330,60 @@
           <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="n1:ZSAL_CORR_08" />
         </xsd:sequence>
       </xsd:complexType>
-      <xsd:complexType name="TABLE_OF_ZSAL_CORR_INC">
-        <xsd:sequence>
-          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="n1:ZSAL_CORR_INC" />
-        </xsd:sequence>
-      </xsd:complexType>
       <xsd:complexType name="TABLE_OF_ZSAL_FACT_MALUS">
         <xsd:sequence>
           <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="n1:ZSAL_FACT_MALUS" />
         </xsd:sequence>
       </xsd:complexType>
+      <xsd:complexType name="TABLE_OF_ZSAL_CORR_MALUS">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="n1:ZSAL_CORR_MALUS" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="TABLE_OF_ZSAL_CORR_INC">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="n1:ZSAL_CORR_INC" />
+        </xsd:sequence>
+      </xsd:complexType>
     </xsd:schema>
     <xsd:schema xmlns:n0="urn:sap-com:document:sap:rfc:functions" attributeFormDefault="qualified" targetNamespace="urn:sap-com:document:sap:soap:functions:mc-style">
       <xsd:import namespace="urn:sap-com:document:sap:rfc:functions" />
-      <xsd:complexType name="ZsalCorrMalus">
+      <xsd:complexType name="ZsalCorr08">
         <xsd:sequence>
           <xsd:element name="Pernr" type="n0:numeric8" />
           <xsd:element name="Kunnr" type="n0:char10" />
           <xsd:element name="Name1" type="n0:char30" />
           <xsd:element name="Kdgrp" type="n0:char2" />
-          <xsd:element name="Malus" type="n0:curr15.2" />
+          <xsd:element name="Incas08" type="n0:curr15.2" />
           <xsd:element name="VenCorInc" type="n0:curr15.2" />
           <xsd:element name="Waers" type="n0:cuky5" />
-          <xsd:element name="TpFact" type="n0:char4" />
-          <xsd:element name="TpAgre" type="n0:char4" />
-          <xsd:element name="TpIstoric" type="n0:char4" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ZsalFactMalus">
+        <xsd:sequence>
+          <xsd:element name="Mandt" type="n0:clnt3" />
+          <xsd:element name="Kunnr" type="n0:char10" />
+          <xsd:element name="Xblnr" type="n0:char16" />
+          <xsd:element name="Prctr" type="n0:char10" />
+          <xsd:element name="BudatInc" type="n0:date10" />
+          <xsd:element name="Luna" type="n0:char10" />
+          <xsd:element name="Zan" type="n0:numeric4" />
+          <xsd:element name="ValInc" type="n0:curr15.2" />
+          <xsd:element name="Pernr" type="n0:numeric8" />
+          <xsd:element name="Vkgrp" type="n0:char3" />
+          <xsd:element name="Spart" type="n0:char2" />
+          <xsd:element name="Name1" type="n0:char30" />
+          <xsd:element name="ValFact" type="n0:curr15.2" />
+          <xsd:element name="TpFact" type="n0:decimal10.0" />
+          <xsd:element name="TpAgreat" type="n0:decimal10.0" />
+          <xsd:element name="TpIst" type="n0:decimal10.0" />
+          <xsd:element name="BudatFac" type="n0:date10" />
+          <xsd:element name="TermGratie" type="n0:decimal10.0" />
+          <xsd:element name="ZileInt" type="n0:decimal10.0" />
+          <xsd:element name="CoefY" type="n0:curr15.2" />
+          <xsd:element name="Waers" type="n0:cuky5" />
+          <xsd:element name="Malus" type="n0:curr15.2" />
+          <xsd:element name="CodSd" type="n0:numeric8" />
         </xsd:sequence>
       </xsd:complexType>
       <xsd:complexType name="ZsalBazaMatkl">
@@ -401,15 +425,18 @@
           <xsd:element name="Waers" type="n0:cuky5" />
         </xsd:sequence>
       </xsd:complexType>
-      <xsd:complexType name="ZsalCorr08">
+      <xsd:complexType name="ZsalCorrMalus">
         <xsd:sequence>
           <xsd:element name="Pernr" type="n0:numeric8" />
           <xsd:element name="Kunnr" type="n0:char10" />
           <xsd:element name="Name1" type="n0:char30" />
           <xsd:element name="Kdgrp" type="n0:char2" />
-          <xsd:element name="Incas08" type="n0:curr15.2" />
+          <xsd:element name="Malus" type="n0:curr15.2" />
           <xsd:element name="VenCorInc" type="n0:curr15.2" />
           <xsd:element name="Waers" type="n0:cuky5" />
+          <xsd:element name="TpFact" type="n0:char4" />
+          <xsd:element name="TpAgre" type="n0:char4" />
+          <xsd:element name="TpIstoric" type="n0:char4" />
         </xsd:sequence>
       </xsd:complexType>
       <xsd:complexType name="ZsalCorrInc">
@@ -421,33 +448,6 @@
           <xsd:element name="Malus" type="n0:curr15.2" />
           <xsd:element name="VenCorInc" type="n0:curr15.2" />
           <xsd:element name="Waers" type="n0:cuky5" />
-          <xsd:element name="CodSd" type="n0:numeric8" />
-        </xsd:sequence>
-      </xsd:complexType>
-      <xsd:complexType name="ZsalFactMalus">
-        <xsd:sequence>
-          <xsd:element name="Mandt" type="n0:clnt3" />
-          <xsd:element name="Kunnr" type="n0:char10" />
-          <xsd:element name="Xblnr" type="n0:char16" />
-          <xsd:element name="Prctr" type="n0:char10" />
-          <xsd:element name="BudatInc" type="n0:date10" />
-          <xsd:element name="Luna" type="n0:char10" />
-          <xsd:element name="Zan" type="n0:numeric4" />
-          <xsd:element name="ValInc" type="n0:curr15.2" />
-          <xsd:element name="Pernr" type="n0:numeric8" />
-          <xsd:element name="Vkgrp" type="n0:char3" />
-          <xsd:element name="Spart" type="n0:char2" />
-          <xsd:element name="Name1" type="n0:char30" />
-          <xsd:element name="ValFact" type="n0:curr15.2" />
-          <xsd:element name="TpFact" type="n0:decimal10.0" />
-          <xsd:element name="TpAgreat" type="n0:decimal10.0" />
-          <xsd:element name="TpIst" type="n0:decimal10.0" />
-          <xsd:element name="BudatFac" type="n0:date10" />
-          <xsd:element name="TermGratie" type="n0:decimal10.0" />
-          <xsd:element name="ZileInt" type="n0:decimal10.0" />
-          <xsd:element name="CoefY" type="n0:curr15.2" />
-          <xsd:element name="Waers" type="n0:cuky5" />
-          <xsd:element name="Malus" type="n0:curr15.2" />
           <xsd:element name="CodSd" type="n0:numeric8" />
         </xsd:sequence>
       </xsd:complexType>
@@ -492,9 +492,14 @@
           <xsd:element name="Waers" type="n0:cuky5" />
         </xsd:sequence>
       </xsd:complexType>
-      <xsd:complexType name="TableOfZsalCorrMalus">
+      <xsd:complexType name="TableOfZsalCorr08">
         <xsd:sequence>
-          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:ZsalCorrMalus" />
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:ZsalCorr08" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="TableOfZsalFactMalus">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:ZsalFactMalus" />
         </xsd:sequence>
       </xsd:complexType>
       <xsd:complexType name="TableOfZsalBazaMatkl">
@@ -507,19 +512,14 @@
           <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:Zsalav19" />
         </xsd:sequence>
       </xsd:complexType>
-      <xsd:complexType name="TableOfZsalCorr08">
+      <xsd:complexType name="TableOfZsalCorrMalus">
         <xsd:sequence>
-          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:ZsalCorr08" />
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:ZsalCorrMalus" />
         </xsd:sequence>
       </xsd:complexType>
       <xsd:complexType name="TableOfZsalCorrInc">
         <xsd:sequence>
           <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:ZsalCorrInc" />
-        </xsd:sequence>
-      </xsd:complexType>
-      <xsd:complexType name="TableOfZsalFactMalus">
-        <xsd:sequence>
-          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:ZsalFactMalus" />
         </xsd:sequence>
       </xsd:complexType>
       <xsd:complexType name="TableOfZsalBazaMatklSd">
@@ -671,10 +671,10 @@
   </wsdl:binding>
   <wsdl:service name="ZWS_SAL_KA_2019">
     <wsdl:port name="ZWS_SAL_KA_2019" binding="tns:ZWS_SAL_KA_2019">
-      <soap:address location="http://sap-prd6a.arabesque.ro:8036/sap/bc/srt/rfc/sap/zws_sal_ka_2019/900/zws_sal_ka_2019/zws_sal_ka_2019" />
+      <soap:address location="http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/rfc/sap/zws_sal_ka_2019/900/zws_sal_ka_2019/zws_sal_ka_2019" />
     </wsdl:port>
     <wsdl:port name="ZWS_SAL_KA_2019_soap12" binding="tns:ZWS_SAL_KA_2019_soap12">
-      <wsoap12:address location="http://sap-prd6a.arabesque.ro:8036/sap/bc/srt/rfc/sap/zws_sal_ka_2019/900/zws_sal_ka_2019/zws_sal_ka_2019" />
+      <wsoap12:address location="http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/rfc/sap/zws_sal_ka_2019/900/zws_sal_ka_2019/zws_sal_ka_2019" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

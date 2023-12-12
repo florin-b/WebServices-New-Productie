@@ -326,13 +326,19 @@ namespace WebService1
             Dictionary<string, string> dictionarUmIso = new Dictionary<string, string>();
 
             string umArt = "";
-
+            string unitArt = "";
             foreach (DateArticolMathaus articol in listArticole)
             {
+
+                unitArt = articol.unit;
+
+                if (!articol.unit.Equals(articol.unit50))
+                    unitArt = articol.unit50;
+
                 if (umArt == "")
-                    umArt = "'" + articol.unit + "'";
+                    umArt = "'" + unitArt + "'";
                 else
-                    umArt += "," + "'" + articol.unit + "'";
+                    umArt += "," + "'" + unitArt + "'";
             }
 
             OracleConnection connection = new OracleConnection();
@@ -523,14 +529,62 @@ namespace WebService1
 
         }
 
+        public static bool isArticolPromo(OracleConnection connection, string codArticol)
+        {
+            bool isArtPromo = false;
 
+            
+            OracleDataReader oReader = null;
+            OracleCommand cmd = connection.CreateCommand();
+
+            try
+            {
+                cmd.CommandText = " select 1 from sapprd.zart_promo where mandt = '900' and matnr = :codArt and to_char(sysdate,'yyyymmdd') between datab and datbi ";
+
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add(":codArt", OracleType.VarChar, 54).Direction = ParameterDirection.Input;
+                cmd.Parameters[0].Value = codArticol;
+
+                oReader = cmd.ExecuteReader();
+
+                if (oReader.HasRows)
+                {
+                    isArtPromo = true;
+                }
+            }
+
+            catch (Exception ex)
+            {
+                ErrorHandling.sendErrorToMail(ex.ToString());
+            }
+            finally
+            {
+                DatabaseConnections.CloseConnections(oReader, cmd);
+            }
+
+            return isArtPromo;
+        }
 
         public static string getSinteticeFasonate()
         {
             return " ('437','438','439','440') ";
         }
 
+        public static string getTipZonaMathaus(string tipZona)
+        {
+            string zonaMathaus = "";
 
+            if (tipZona == null)
+                zonaMathaus = "";
+            else if (tipZona.ToUpper().Equals("ZM"))
+                zonaMathaus = "METRO";
+            else if (tipZona.ToUpper().Equals("ZMA") || tipZona.ToUpper().Equals("ZEMA"))
+                zonaMathaus = "EXTRA_A";
+            else if (tipZona.ToUpper().Equals("ZMB") || tipZona.ToUpper().Equals("ZEMB"))
+                zonaMathaus = "EXTRA_B";
+
+            return zonaMathaus;
+        }
 
     }
 }

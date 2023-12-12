@@ -58,10 +58,20 @@ namespace WebService1
         }
 
 
+   
+
         [WebMethod]
-        public bool isUserTest(string codUser)
+        public string testPoligoane(string coords)
         {
-            return Utils.isUserTest(codUser, Constants.USER_TEST_TOTI);
+
+            string testDB = "DB: ";
+            testDB += new OperatiiPoligoane().getDatePoligonLivrareDB(coords);
+
+
+            string testFis = "FIS: ";
+            testFis += new OperatiiPoligoane().getDatePoligonLivrare(coords);
+
+            return testDB + "\n\n\n" + testFis;
         }
 
         [WebMethod]
@@ -3002,9 +3012,9 @@ namespace WebService1
         }
 
         [WebMethod]
-        public string getStocMathaus(string filiala, string codArticol, string um, string tipCmd, string tipUserSap, string codUser)
+        public string getStocMathaus(string filiala, string codArticol, string um, string tipCmd, string tipUserSap, string codUser, string tipZona)
         {
-            return new OperatiiMathaus().getStocMathaus(filiala, codArticol, um,  tipCmd,  tipUserSap,  codUser);
+            return new OperatiiMathaus().getStocMathaus(filiala, codArticol, um,  tipCmd,  tipUserSap,  codUser, tipZona);
         }
 
         [WebMethod]
@@ -3021,12 +3031,9 @@ namespace WebService1
             if (antetComanda != null)
                 antetCmdMathaus = new JavaScriptSerializer().Deserialize<AntetCmdMathaus>(antetComanda);
 
-            if (antetCmdMathaus.codPers != null && Utils.isUserTest(antetCmdMathaus.codPers, Constants.USER_TEST_1))
-                return new OperatiiMathaus().getLivrariComandaCumulative(antetComanda, comandaMathaus, canal, datePoligon);
-            else  if (antetCmdMathaus.codPers != null && Utils.isUserTest(antetCmdMathaus.codPers, Constants.USER_TEST_0))
-                return new OperatiiMathaus().getLivrariComanda(antetComanda, comandaMathaus, canal, datePoligon);
-            else
-                return new OperatiiMathaus().getLivrariComanda(antetComanda, comandaMathaus, canal, datePoligon);
+            return new OperatiiMathaus().getLivrariComandaCumulative(antetComanda, comandaMathaus, canal, datePoligon);
+
+
         }
 
         [WebMethod]
@@ -3504,7 +3511,7 @@ namespace WebService1
                     dateLivrare.filialaPlata = oReader.GetString(oReader.GetOrdinal("fil_plata"));
                     dateLivrare.tonaj = OperatiiSuplimentare.getTonajComanda(connection, nrCmd);
 
-                    if ((dateLivrare.tipPersAgent.Equals("CV") || dateLivrare.tipPersAgent.Equals("SITE")) && Utils.isUserTest(oReader.GetString(oReader.GetOrdinal("cod_agent")),Constants.USER_TEST_TOTI))
+                    if ((dateLivrare.tipPersAgent.Equals("CV") || dateLivrare.tipPersAgent.Equals("SITE")))
                     {
 
                         if (oReader.GetString(18).Trim().Length > 0)
@@ -8413,15 +8420,15 @@ namespace WebService1
                 if (tipOp.Equals("0"))  //aprobare
                 {
 
-                   
-                  
+
+                    
 
                     //verificare filiala clp
                     OracleConnection connection = new OracleConnection();
                     OracleCommand cmd = new OracleCommand();
                     OracleDataReader oReader = null;
 
-                    string connectionString = GetConnectionString_android();
+                    string connectionString = DatabaseConnections.ConnectToProdEnvironment();
 
                     connection.ConnectionString = connectionString;
                     connection.Open();
@@ -9023,7 +9030,7 @@ namespace WebService1
                 inParam.GvSite = isConsVanzSite(codUser) ? "X" : " ";
                 inParam.TipPers = "CV";
                 inParam.Canal = "20";
-                inParam.CuRotunj = Utils.isUserTest(codUser, Constants.USER_TEST_1) ? "X" : " ";
+                inParam.CuRotunj = "X";
 
                 SAPWebServices.ZgetPriceResponse outParam = webService.ZgetPrice(inParam);
 
@@ -11945,39 +11952,8 @@ namespace WebService1
             }
 
 
-            retVal = verificaArticoleMAV_nou(comanda, alertSD, alertDV, cmdAngajament, tipUser, JSONArt, JSONComanda, JSONDateLivrare, localtipUserSap, "-1");
+            retVal = verificaArticoleMAV(comanda, alertSD, alertDV, cmdAngajament, tipUser, JSONArt, JSONComanda, JSONDateLivrare, localtipUserSap, "-1");
 
-
-            /*
-
-            if (tipUser.Equals("KA") && !Utils.isUserTest(dateLivrare.codAgent, Constants.USER_TEST_TOTI))
-            {
-                retVal = verificaArticoleMAV_Mathaus(comanda, alertSD, alertDV, cmdAngajament, tipUser, JSONArt, JSONComanda, JSONDateLivrare,"");
-            }
-            else
-            {
-                
-
-                if (Utils.isUserTest(dateLivrare.codAgent, Constants.USER_TEST_TOTI))
-                {
-                    retVal = verificaArticoleMAV_nou(comanda, alertSD, alertDV, cmdAngajament, tipUser, JSONArt, JSONComanda, JSONDateLivrare, localtipUserSap, "-1");
-                }
-                else if (tipUser.Equals("CV") || tipUser.Equals("KA3"))
-                {
-                    retVal = OperatiiComenzi.trateazaComenziGED(comanda, alertSD, alertDV, cmdAngajament, tipUser, JSONArt, JSONComanda, JSONDateLivrare, localtipUserSap);
-                }
-                else if (tipUser.Equals("SITE"))
-                {
-                    retVal = new ComenziSite().salveazaComanda(comanda, alertSD, alertDV, cmdAngajament, tipUser, JSONArt, JSONComanda, JSONDateLivrare);
-                }
-                else
-                {
-                    retVal = verificaArticoleMAV_Mathaus(comanda, alertSD, alertDV, cmdAngajament, tipUser, JSONArt, JSONComanda, JSONDateLivrare, localtipUserSap);
-                }
-
-            }
-
-            */
 
             return retVal;
         }
@@ -12276,7 +12252,7 @@ namespace WebService1
             return retVal;
         }
 
-        private string verificaArticoleMAV_nou(string comanda, bool alertSD, bool alertDV, bool cmdAngajament, string tipUser, string JSONArt, string JSONComanda, string JSONDateLivrare, string tipUserSap, string idCmdAmob)
+        private string verificaArticoleMAV(string comanda, bool alertSD, bool alertDV, bool cmdAngajament, string tipUser, string JSONArt, string JSONComanda, string JSONDateLivrare, string tipUserSap, string idCmdAmob)
         {
             string retVal = "-1";
 
@@ -12362,7 +12338,7 @@ namespace WebService1
                             {
                                 dateLivrareDistrib.totalComanda = totalComanda.ToString();
 
-                                
+                                dateLivrareDistrib.filialaCLP = " ";
                                 if (!HelperComenzi.isUlEquals(ulStoc, dateLivrareDistrib.unitLog) && !articol.filialaSite.Equals("BV90") && !ulStoc.Equals("BV90"))
                                     dateLivrareDistrib.filialaCLP = ulStoc;
 
@@ -12397,7 +12373,7 @@ namespace WebService1
 
                         dateLivrareDistrib.totalComanda = totalComanda.ToString();
 
-                        
+                        dateLivrareDistrib.filialaCLP = " ";
                         if (ulStoc != null && !HelperComenzi.isUlEquals(ulStoc, dateLivrareDistrib.unitLog) && !ulStoc.Equals("BV90"))
                              dateLivrareDistrib.filialaCLP = ulStoc;
 
@@ -12455,6 +12431,7 @@ namespace WebService1
                             {
                                 dateLivrareDistrib.totalComanda = totalComanda.ToString();
 
+                                dateLivrareDistrib.filialaCLP = " ";
                                 if (!HelperComenzi.isUlEquals(ulStoc, dateLivrareDistrib.unitLog) && !articol.filialaSite.Equals("BV90") && !ulStoc.Equals("BV90"))
                                     dateLivrareDistrib.filialaCLP = ulStoc;
 
@@ -12490,6 +12467,7 @@ namespace WebService1
 
                         dateLivrareDistrib.totalComanda = totalComanda.ToString();
 
+                        dateLivrareDistrib.filialaCLP = " ";
                         if (ulStoc != null && !HelperComenzi.isUlEquals(ulStoc, dateLivrareDistrib.unitLog) && !ulStoc.Equals("BV90"))
                             dateLivrareDistrib.filialaCLP = ulStoc;
 
@@ -12974,7 +12952,7 @@ namespace WebService1
                         orasLivrare = oAdrLivrare.oras;
                         stradaLivrare = oAdrLivrare.strada;
 
-                        if (Utils.isUserTest(dateLivrare.codAgent, Constants.USER_TEST_TOTI))
+                        
                         {
                             codJudetLivrareComanda = oAdrLivrare.codJudet;
                             orasLivrareComanda = oAdrLivrare.oras;
@@ -13064,22 +13042,13 @@ namespace WebService1
                 cmd.Parameters[9].Value = dateLivrare.persContact.Length == 0 ? " " : dateLivrare.persContact;
 
                 cmd.Parameters.Add(":tel", OracleType.VarChar, 15).Direction = ParameterDirection.Input;
-                cmd.Parameters[10].Value = dateLivrare.nrTel == null ? "." : dateLivrare.nrTel;
+                cmd.Parameters[10].Value = dateLivrare.nrTel == null || dateLivrare.nrTel == "" ? "." : dateLivrare.nrTel;
 
                 cmd.Parameters.Add(":adr", OracleType.VarChar, 150).Direction = ParameterDirection.Input;
                 cmd.Parameters[11].Value = stradaLivrareComanda;
 
                 cmd.Parameters.Add(":valoare", OracleType.Number, 15).Direction = ParameterDirection.Input;
-                string strValoareComanda = dateLivrare.totalComanda;
-
-                if (tipUser.Equals("CV") && !Utils.isUserTest(dateLivrare.codAgent, Constants.USER_TEST_TOTI))   //se adauga valoare transport
-                {
-                    string strValoareIncasare = comandaVanzare.valoareIncasare == null ? "0" : comandaVanzare.valoareIncasare;
-                    double valoareComanda = Double.Parse(dateLivrare.totalComanda, CultureInfo.InvariantCulture) + Double.Parse(strValoareIncasare, CultureInfo.InvariantCulture);
-
-                    strValoareComanda = valoareComanda.ToString();
-                }
-                cmd.Parameters[12].Value = strValoareComanda;
+                cmd.Parameters[12].Value = dateLivrare.totalComanda;
 
                 cmd.Parameters.Add(":transp", OracleType.VarChar, 24).Direction = ParameterDirection.Input;
                 cmd.Parameters[13].Value = dateLivrare.Transport;
@@ -13144,10 +13113,10 @@ namespace WebService1
                 cmd.Parameters[17].Value = factRed;
 
                 cmd.Parameters.Add(":city", OracleType.VarChar, 75).Direction = ParameterDirection.Input;
-                cmd.Parameters[18].Value = orasLivrareComanda;
+                cmd.Parameters[18].Value = orasLivrareComanda == "" ? " " : orasLivrareComanda;
 
                 cmd.Parameters.Add(":region", OracleType.VarChar, 9).Direction = ParameterDirection.Input;
-                cmd.Parameters[19].Value = codJudetLivrareComanda;
+                cmd.Parameters[19].Value = codJudetLivrareComanda == "" ? " " : codJudetLivrareComanda; ;
 
                 cmd.Parameters.Add(":termplt", OracleType.VarChar, 12).Direction = ParameterDirection.Input;
                 cmd.Parameters[20].Value = dateLivrare.termenPlata;
@@ -13384,14 +13353,13 @@ namespace WebService1
                     if (tipUser.Equals("CV"))
                     {
 
-                        if (Utils.isUserTest(dateLivrare.codAgent, Constants.USER_TEST_TOTI))
-                        {
-                            if (articolComanda[i].filialaSite != null || !articolComanda[i].filialaSite.Trim().Equals(String.Empty))
-                                ulStoc = articolComanda[i].filialaSite;
 
-                            if (dateLivrare.filialaCLP != null && dateLivrare.filialaCLP.Trim().Length > 0 && !ulStoc.Equals("BV90"))
-                                ulStoc = dateLivrare.filialaCLP;
-                        }
+                        if (articolComanda[i].filialaSite != null || !articolComanda[i].filialaSite.Trim().Equals(String.Empty))
+                            ulStoc = articolComanda[i].filialaSite;
+
+                        if (dateLivrare.filialaCLP != null && dateLivrare.filialaCLP.Trim().Length > 0 && !ulStoc.Equals("BV90"))
+                            ulStoc = dateLivrare.filialaCLP;
+
 
 
                         pretUnit = articolComanda[i].pretUnit;
@@ -13513,24 +13481,9 @@ namespace WebService1
 
                     //vanzare din GED cu transp. ARBSQ se calculeaza intai pretul
                     double pretTransp = 0;
-                    if (Utils.isUserTest(dateLivrare.codAgent, Constants.USER_TEST_TOTI))
-                    {
-                        paramCmd = "C";
-                    }
-                    else if ((uLog.Substring(2, 1).Equals("2") && comandaVanzare.canalDistrib.Equals("20") && (transp.Equals("TRAP") || transp.Equals("TERT")) && refSAP.Equals("-1")) || (isComandaWood(uLog) && refSAP.Equals("-1") && transp.Equals("TRAP")))
-                    {
-                        paramCmd = "S";
-                    }
-                    else
-                    {
-                        paramCmd = "C";
-                    }
+                    paramCmd = "C";
 
-                    string calcPretTransp = " ";
-
-                    if (comandaVanzare.canalDistrib.Equals("10") || Utils.isUserTest(dateLivrare.codAgent, Constants.USER_TEST_TOTI))
-                        calcPretTransp = "X";
-
+                    string calcPretTransp = "X";
                     webService = new ZTBL_WEBSERVICE();
 
                     SAPWebServices.ZcreazaComanda inParam = new SAPWebServices.ZcreazaComanda();
@@ -13546,22 +13499,8 @@ namespace WebService1
                                       
                     SAPWebServices.ZcreazaComandaResponse outParam = webService.ZcreazaComanda(inParam);
 
-                    if ((uLog.Substring(2, 1).Equals("2") && comandaVanzare.canalDistrib.Equals("20") && (transp.Equals("TRAP") || transp.Equals("TERT")) && refSAP.Equals("-1")) || (isComandaWood(uLog) && refSAP.Equals("-1") && transp.Equals("TRAP")))
-                    {
-                        pretTransp = Convert.ToDouble(outParam.VTrans);
-                        retVal = "100#" + pretTransp.ToString() + "#" + idCmd.Value.ToString();
-                    }
-                    else if (uLog.Substring(2, 1).Equals("2") && transp.Equals("TCLI") && cmdStatus.Equals("21"))    //cmd ged simulata fara rezervare de stoc cu transp. client
-                    {
-                        retVal = "0";
-                    }
-                    else
-                    {
-                        retVal = outParam.VOk.ToString();
-                    }
-
-                    if (Utils.isUserTest(dateLivrare.codAgent, Constants.USER_TEST_TOTI))
-                        retVal = outParam.VOk.ToString();
+                    
+                    retVal = outParam.VOk.ToString();
 
                     webService.Dispose();
 
@@ -14037,7 +13976,7 @@ namespace WebService1
         [WebMethod]
         public string getDatePoligonLivrare(string coords)
         {
-            return new OperatiiPoligoane().getDatePoligonLivrare(coords);
+            return new OperatiiPoligoane().getDatePoligonLivrareDB(coords);
         }
 
         [WebMethod]
@@ -14284,76 +14223,9 @@ namespace WebService1
 
 
         [WebMethod]
-        public string cautaFurnizorAndroid(string numeClient, string depart, string departAg, string unitLog)
+        public string cautaFurnizorAndroid(string numeClient, string depart, string departAg, string unitLog, string tipCautare)
         {
-
-
-
-            string serializedResult = "";
-            OracleConnection connection = new OracleConnection();
-            OracleCommand cmd = new OracleCommand();
-            OracleDataReader oReader = null;
-
-
-            try
-            {
-                string connectionString = GetConnectionString_android();
-
-                connection.ConnectionString = connectionString;
-                connection.Open();
-
-                cmd = connection.CreateCommand();
-
-                cmd.CommandText = "  select a.lifnr, a.name1 from sapprd.lfa1 a, sapprd.lfb1 b, sapprd.wyt3 v where a.mandt = '900' and upper(a.name1) like upper('" + numeClient.Replace("'", "") + "%') " +
-                                  "  and a.mandt = b.mandt and a.lifnr = b.lifnr and b.bukrs = '1000' and a.mandt = v.mandt and a.lifnr = v.lifnr and v.parvw = 'RS' and v.lifnr = v.lifn2 ";
-
-
-                cmd.CommandType = CommandType.Text;
-                cmd.Parameters.Clear();
-
-                oReader = cmd.ExecuteReader();
-
-                List<Furnizor> listaFurnizori = new List<Furnizor>();
-                Furnizor unFurnizor = null;
-
-                if (oReader.HasRows)
-                {
-
-                    while (oReader.Read())
-                    {
-
-                        unFurnizor = new Furnizor();
-                        unFurnizor.numeFurnizor = oReader.GetString(1);
-                        unFurnizor.codFurnizor = oReader.GetString(0);
-                        listaFurnizori.Add(unFurnizor);
-
-                    }
-
-                }
-
-                oReader.Close();
-                oReader.Dispose();
-
-                JavaScriptSerializer serializer = new JavaScriptSerializer();
-                serializedResult = serializer.Serialize(listaFurnizori);
-
-            }
-            catch (Exception ex)
-            {
-                sendErrorToMail(ex.ToString());
-
-            }
-            finally
-            {
-                cmd.Dispose();
-                connection.Close();
-                connection.Dispose();
-
-            }
-
-
-            return serializedResult;
-
+            return new OperatiiFurnizori().cautaFurnizorAndroid(numeClient, depart, departAg, unitLog, tipCautare);
         }
 
 
@@ -14585,7 +14457,10 @@ namespace WebService1
                 //rezolvat problema comenzilor fara articole la aprobare
                 filialaHome = "false";
 
-                retVal += "#" + filiale + "#" + tipAgent + "#" + getExtraFiliale(idAg.Value.ToString(), tipAcces.Value.ToString(), localComp) + "#" + filialaHome + "#" + FtpHelper.getLocalFtpIp(localComp) + "#" + initDivizie + "#" + MeniuTableta.stareMeniuTableta(connection, idAg.Value.ToString()) + "#";
+                retVal += "#" + filiale + "#" + tipAgent + "#" + getExtraFiliale(idAg.Value.ToString(), tipAcces.Value.ToString(), localComp) + "#" + filialaHome + "#"
+                    + FtpHelper.getLocalFtpIp(localComp) + "#" + initDivizie + "#" 
+                    + MeniuTableta.stareMeniuTableta(connection, idAg.Value.ToString()) + "#"
+                    + OperatiiSuplimentare.getPlafonNumerar(connection) + "#";
 
 
                 //if (deviceInfo != null && !deviceInfo.Trim().Equals(String.Empty))
@@ -15760,6 +15635,12 @@ namespace WebService1
         public string getOptiuniMasini(string filiala, string camionDescoperit, string macara, string zona, string greutateComanda, string comandaEnergofaga, string comandaExtralungi)
         {
             return new OperatiiComenzi().getOptiuniMasini(filiala, camionDescoperit, macara, zona, greutateComanda, comandaEnergofaga, comandaExtralungi);
+        }
+
+        [WebMethod]
+        public string getFilialeComenziTCLI()
+        {
+            return new OperatiiArticole().getFilialeTCLI();
         }
 
         [WebMethod]
