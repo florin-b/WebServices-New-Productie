@@ -1363,7 +1363,22 @@ namespace WebService1
             return response;
         }
 
+        public string saveListComenziRetur(string dateRetur, string tipRetur)
+        {
 
+            var serializer = new JavaScriptSerializer();
+            List<ComandaRetur> listaComenziRetur = serializer.Deserialize<List<ComandaRetur>>(dateRetur);
+
+            string retVal = "";
+
+            if (tipRetur != null && tipRetur.Equals("PAL"))
+            {
+                foreach (ComandaRetur comandaRetur in listaComenziRetur)
+                    retVal = saveReturPaleti(serializer.Serialize(comandaRetur));
+            }
+
+            return retVal;
+        }
 
         public string saveComandaRetur(string dateRetur, string tipRetur)
         {

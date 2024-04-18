@@ -319,6 +319,26 @@ namespace WebService1
 
         }
 
+        public static string getDepartIncrucisat(string departIncrucisat)
+        {
+
+            string[] departExtra = departIncrucisat.Split(':')[1].Split(';');
+
+            string strDeparts = "";
+
+            foreach (string dep in departExtra)
+            {
+                if (dep == "")
+                    continue;
+
+                if (strDeparts == "")
+                    strDeparts = "'" + dep + "'";
+                else
+                    strDeparts += ",'" + dep + "'";
+            }
+
+            return strDeparts;
+        }
 
         public static Dictionary<string, string> getDictionarUmIso(List<DateArticolMathaus> listArticole)
         {
@@ -463,9 +483,13 @@ namespace WebService1
             else
                 depExtra = "(" + depExtra + ",'" + divizie + "')";
 
+            if (divizie.ToLower().Contains("extra"))
+                depExtra = "(" + getDepartIncrucisat(divizie) + ")";
+
             return depExtra;
 
         }
+
 
         public static bool isComandaBV90(List<ArticolComanda> listArticole)
         {
@@ -563,6 +587,31 @@ namespace WebService1
             }
 
             return isArtPromo;
+        }
+
+        public static double getGreutateArticol(string codArticol, double cantitatePoz, ComandaMathaus comandaMathaus)
+        {
+
+            double greutateTotalArt = 0;
+            double cantitateTotalArt = 0;
+            double greutateArticol = 0;
+
+            foreach (DateArticolMathaus articolMathaus in comandaMathaus.deliveryEntryDataList)
+            {
+                if (articolMathaus.productCode.Equals(codArticol))
+                {
+                    cantitateTotalArt += articolMathaus.quantity;
+                    greutateTotalArt = Double.Parse(articolMathaus.greutate);
+                }
+            }
+
+            if (cantitateTotalArt > 0)
+                greutateArticol = (greutateTotalArt / cantitateTotalArt) * cantitatePoz;
+            else
+                greutateArticol = 0;
+
+            return Math.Round(greutateArticol, 2);
+
         }
 
         public static string getSinteticeFasonate()

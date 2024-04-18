@@ -12,7 +12,7 @@ namespace WebService1
     public class OperatiiMacara
     {
 
-        public String getCostMacara(string unitLog, string codAgent, string codClient, string codFurnizor, string listArt, string canal)
+        public String getCostMacara(string unitLog, string codAgent, string codClient, string codFurnizor, string listArt, string canal, string isCustodie)
         {
 
             JavaScriptSerializer serializer = new JavaScriptSerializer();
@@ -60,6 +60,8 @@ namespace WebService1
             inParam.IpPernr = codAgent;
             inParam.IpKunnr = codClient;
             inParam.IpLifnr = codFurnizor;
+            inParam.IpCust = isCustodie != null && isCustodie.ToLower().Equals("true") ? "X" : " ";
+
 
             SAPWebServices.ZNrPaletiResponse resp = webService.ZNrPaleti(inParam);
             SAPWebServices.ZstEtPaleti[] valPaleti = resp.EtValpal;
@@ -237,7 +239,7 @@ namespace WebService1
         }
 
 
-        public string getCostMacaraComenzi(string codAgent, string codClient, string codFurnizor, string listComenzi, string canal)
+        public string getCostMacaraComenzi(string codAgent, string codClient, string codFurnizor, string listComenzi, string canal, string isCustodie)
         {
             List<CostDescarcare> costDescarcare = new List<CostDescarcare>();
 
@@ -246,7 +248,7 @@ namespace WebService1
 
             foreach (ComandaCalculDescarcare comanda in listCom)
             {
-                string costDescComanda = getCostMacara(comanda.filiala, codAgent, codClient, codFurnizor, comanda.listArticole, canal);
+                string costDescComanda = getCostMacara(comanda.filiala, codAgent, codClient, codFurnizor, comanda.listArticole, canal, isCustodie);
                 costDescarcare.Add(serializer.Deserialize<CostDescarcare>(costDescComanda));
             }
 

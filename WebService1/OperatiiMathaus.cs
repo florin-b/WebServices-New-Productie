@@ -1008,53 +1008,59 @@ namespace WebService1
 
         private void setDetaliiArticol(ArticolMathaus articol)
         {
+            try {
+                string serviceUrl = "https://wse1-sap-hybris-prod.arabesque.ro/solr/master_erp_Product_default/select?q=code_string:" + articol.cod;
 
-            string serviceUrl = "https://wse1-sap-hybris-prod.arabesque.ro/solr/master_erp_Product_default/select?q=code_string:" + articol.cod;
+                System.Net.ServicePointManager.Expect100Continue = false;
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
-            System.Net.ServicePointManager.Expect100Continue = false;
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                System.Net.WebRequest request = System.Net.WebRequest.Create(serviceUrl);
 
-            System.Net.WebRequest request = System.Net.WebRequest.Create(serviceUrl);
+                CredentialCache credential = new CredentialCache();
+                credential.Add(new System.Uri(serviceUrl), "Basic", new System.Net.NetworkCredential("erpClient", "S3EjkNEm"));
+                request.Credentials = credential;
 
-            CredentialCache credential = new CredentialCache();
-            credential.Add(new System.Uri(serviceUrl), "Basic", new System.Net.NetworkCredential("erpClient", "S3EjkNEm"));
-            request.Credentials = credential;
+                System.Net.WebResponse response = request.GetResponse();
+                System.IO.StreamReader sr = new System.IO.StreamReader(response.GetResponseStream());
 
-            System.Net.WebResponse response = request.GetResponse();
-            System.IO.StreamReader sr = new System.IO.StreamReader(response.GetResponseStream());
+                string jsonResponse = sr.ReadToEnd().Trim();
 
-            string jsonResponse = sr.ReadToEnd().Trim();
+                int startResponse = jsonResponse.IndexOf("docs\":[") + 7;
 
-            int startResponse = jsonResponse.IndexOf("docs\":[") + 7;
+                jsonResponse = jsonResponse.Substring(startResponse, jsonResponse.Length - startResponse - 1);
 
-            jsonResponse = jsonResponse.Substring(startResponse, jsonResponse.Length - startResponse - 1);
+                string[] articole = Regex.Split(jsonResponse, "\"id\":");
 
-            string[] articole = Regex.Split(jsonResponse, "\"id\":");
-
-            foreach (string art in articole)
-            {
-
-                string[] artData = Regex.Split(art, "\",");
-
-                foreach (string data in artData)
+                foreach (string art in articole)
                 {
 
-                    if (data.Contains("image_m_string"))
-                    {
-                        articol.adresaImg = "https" + Regex.Split(data, "https")[1].Replace("\"", "");
-                    }
+                    string[] artData = Regex.Split(art, "\",");
 
-                    if (data.Contains("image_l_string"))
+                    foreach (string data in artData)
                     {
-                        articol.adresaImgMare = "https" + Regex.Split(data, "https")[1].Replace("\"", "");
-                    }
 
-                    if (data.Contains("description_text_ro"))
-                    {
-                        articol.descriere = Regex.Replace(Regex.Split(data.Trim(), "\":\"")[1].Replace("\"", "").Replace("\\n", " ").Replace("\\t", " ").Replace("&nbsp;", " "), "<.*?>", String.Empty);
-                    }
+                        if (data.Contains("image_m_string"))
+                        {
+                            if (data.Contains("https"))
+                                articol.adresaImg = "https" + Regex.Split(data, "https")[1].Replace("\"", "");
+                        }
 
+                        if (data.Contains("image_l_string"))
+                        {
+                            articol.adresaImgMare = "https" + Regex.Split(data, "https")[1].Replace("\"", "");
+                        }
+
+                        if (data.Contains("description_text_ro"))
+                        {
+                            articol.descriere = Regex.Replace(Regex.Split(data.Trim(), "\":\"")[1].Replace("\"", "").Replace("\\n", " ").Replace("\\t", " ").Replace("&nbsp;", " "), "<.*?>", String.Empty);
+                        }
+
+                    }
                 }
+            }
+            catch(Exception ex)
+            {
+                ErrorHandling.sendErrorToMail(ex.ToString());
             }
 
         }
@@ -1278,7 +1284,7 @@ namespace WebService1
                 ComandaMathaus comandaMathaus = serializer.Deserialize<ComandaMathaus>(strComanda);
                 List<DateArticolMathaus> articole = comandaMathaus.deliveryEntryDataList;
 
-                DatePoligon datePoligon = new DatePoligon("", "", "", "", "");
+                DatePoligon datePoligon = new DatePoligon("", "", "", "", "","");
 
                 if (strPoligon != null && strPoligon.Trim().Length > 0)
                 {
@@ -1382,6 +1388,7 @@ namespace WebService1
                             articolComanda.cantUmb = Math.Round(HelperComenzi.getCantitateUmb(articolComanda.productCode, articolComanda.quantity, articolComanda.unit), 2);
                             articolComanda.valPoz = Math.Round(((dateArticol.valPoz / dateArticol.quantity) * articolComanda.quantity), 2);
                             articolComanda.greutate = dateArticol.greutate;
+                            articolComanda.tipStoc = dateArticol.tipStoc;
 
                             listArticoleComanda.Add(articolComanda);
 
@@ -1411,6 +1418,7 @@ namespace WebService1
                         articolComanda.quantity = dateArticol.quantity;
                         articolComanda.valPoz = Math.Round(dateArticol.valPoz, 2);
                         articolComanda.greutate = dateArticol.greutate;
+                        articolComanda.tipStoc = dateArticol.tipStoc;
                         listArticoleComanda.Add(articolComanda);
                     }
 
@@ -1424,14 +1432,26 @@ namespace WebService1
                 if (antetCmdMathaus != null)
                     dateTransport = getTransportService(antetCmdMathaus, comandaMathaus, canal, datePoligon);
 
+                bool stocSap = false;
+
                 foreach (DateArticolMathaus articolMathaus in comandaMathaus.deliveryEntryDataList)
                 {
-                    foreach (DepozitArticolTransport depozitArticol in dateTransport.listDepozite)
+                    stocSap = articolMathaus.tipStoc != null && articolMathaus.tipStoc.ToLower().Equals("sap");
 
+                    foreach (DepozitArticolTransport depozitArticol in dateTransport.listDepozite)
                     {
-                        if (articolMathaus.productCode.TrimStart('0').Equals(depozitArticol.codArticol.TrimStart('0')) && articolMathaus.deliveryWarehouse.Equals(depozitArticol.filiala))
+                        bool conditieArticol = articolMathaus.productCode.TrimStart('0').Equals(depozitArticol.codArticol.TrimStart('0')) && articolMathaus.deliveryWarehouse.Equals(depozitArticol.filiala);
+
+                        if (stocSap)
+                            conditieArticol = articolMathaus.productCode.TrimStart('0').Equals(depozitArticol.codArticol.TrimStart('0'));
+
+                        if (conditieArticol)
                         {
                             articolMathaus.depozit = depozitArticol.depozit;
+
+                            if (stocSap)
+                                articolMathaus.deliveryWarehouse = depozitArticol.filiala;
+
                             break;
                         }
                     }
@@ -1470,7 +1490,7 @@ namespace WebService1
                 ComandaMathaus comandaMathaus = serializer.Deserialize<ComandaMathaus>(strComanda);
                 List<DateArticolMathaus> articole = comandaMathaus.deliveryEntryDataList;
 
-                DatePoligon datePoligon = new DatePoligon("", "", "", "", "");
+                DatePoligon datePoligon = new DatePoligon("", "", "", "", "","");
 
                 if (strPoligon != null && strPoligon.Trim().Length > 0)
                 {
@@ -1721,15 +1741,17 @@ namespace WebService1
 
                 string urlDeliveryService = "https://wse1-hybris-b2c-prod.arabesque.ro/arbsqintegration/optimiseDeliveryB2B";
 
+                urlDeliveryService = "https://wse1-sap-hybris-prod.arabesque.ro/arbsqintegration/optimiseDeliveryB2B";
+
 
                 if (canal.Equals("10"))
-                    urlDeliveryService = "https://wse1-hybris-b2c-prod.arabesque.ro/arbsqintegration/cumulativeOptimiseDeliveryB2B";
+                    urlDeliveryService = "https://wse1-sap-hybris-prod.arabesque.ro/arbsqintegration/cumulativeOptimiseDeliveryB2B";
                 else
                 {
                     if (tipPers.Equals("AV") || tipPers.Equals("SD"))
-                        urlDeliveryService = "https://wse1-hybris-b2c-prod.arabesque.ro/arbsqintegration/cumulativeOptimiseDeliveryB2B";
+                        urlDeliveryService = "https://wse1-sap-hybris-prod.arabesque.ro/arbsqintegration/cumulativeOptimiseDeliveryB2B";
                     else
-                        urlDeliveryService = "https://wse1-hybris-b2c-prod.arabesque.ro/arbsqintegration/cumulativeOptimiseDeliveryB2C";
+                        urlDeliveryService = "https://wse1-sap-hybris-prod.arabesque.ro/arbsqintegration/cumulativeOptimiseDeliveryB2C";
 
                 }
 
@@ -1861,6 +1883,8 @@ namespace WebService1
             string stockResponse = "";
             string urlStockService = "https://wse1-hybris-b2c-prod.arabesque.ro/arbsqintegration/getStocksB2B";
 
+            urlStockService = "https://wse1-sap-hybris-prod.arabesque.ro/arbsqintegration/getStocksB2B";
+
             try {
 
                 System.Net.ServicePointManager.Expect100Continue = false;
@@ -1869,14 +1893,15 @@ namespace WebService1
 
                 if (tipCmd != null && tipCmd.Equals("D"))
                 {
-                    urlStockService = "https://wse1-hybris-b2c-prod.arabesque.ro/arbsqintegration/getCumulativeStocksB2B";
+                    urlStockService = "https://wse1-sap-hybris-prod.arabesque.ro/arbsqintegration/getCumulativeStocksB2B";
+
                 }
                 else if (tipCmd != null && tipCmd.Equals("G"))
                 {
                     if (tipUserSap.Equals("AV") || tipUserSap.Equals("SD"))
-                        urlStockService = "https://wse1-hybris-b2c-prod.arabesque.ro/arbsqintegration/getCumulativeStocksB2B";
+                        urlStockService = "https://wse1-sap-hybris-prod.arabesque.ro/arbsqintegration/getCumulativeStocksB2B";
                     else
-                        urlStockService = "https://wse1-hybris-b2c-prod.arabesque.ro/arbsqintegration/getCumulativeStocksB2C";
+                        urlStockService = "https://wse1-sap-hybris-prod.arabesque.ro/arbsqintegration/getCumulativeStocksB2C";
                 }
 
 
@@ -2003,11 +2028,17 @@ namespace WebService1
                     
                     items[ii].Werks = dateArticol.deliveryWarehouse;
 
+                    if (dateArticol.tipStoc != null && dateArticol.tipStoc.ToLower().Equals("sap"))
+                        items[ii].Werks = "NN10";
+
                     if (dateArticol.depozit != null && dateArticol.depozit.Trim() != "")
                         items[ii].Lgort = dateArticol.depozit;
 
+                    if (antetCmd.isComandaDL != null && Boolean.Parse(antetCmd.isComandaDL))
+                        items[ii].Lgort = "DESC";
+
                     if (dateArticol.greutate != null && dateArticol.greutate.Trim() != "")
-                        items[ii].BrgewMatnr = Decimal.Parse(String.Format("{0:0.00}", Double.Parse(dateArticol.greutate)));
+                        items[ii].BrgewMatnr = (Decimal)HelperComenzi.getGreutateArticol(dateArticol.productCode, dateArticol.quantity, comandaMathaus);
                     else
                         items[ii].BrgewMatnr = 0;
 

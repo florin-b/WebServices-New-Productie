@@ -38,9 +38,13 @@ namespace WebService1.SAPWebServices {
         
         private System.Threading.SendOrPostCallback ZgetPriceOperationCompleted;
         
+        private System.Threading.SendOrPostCallback ZstocSfaOperationCompleted;
+        
         private System.Threading.SendOrPostCallback ZCalcStocOperationCompleted;
         
         private System.Threading.SendOrPostCallback ZactDiscMaximOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback ZcheckZileLivrareOperationCompleted;
         
         private System.Threading.SendOrPostCallback ZpalcantOperationCompleted;
         
@@ -127,10 +131,16 @@ namespace WebService1.SAPWebServices {
         public event ZgetPriceCompletedEventHandler ZgetPriceCompleted;
         
         /// <remarks/>
+        public event ZstocSfaCompletedEventHandler ZstocSfaCompleted;
+        
+        /// <remarks/>
         public event ZCalcStocCompletedEventHandler ZCalcStocCompleted;
         
         /// <remarks/>
         public event ZactDiscMaximCompletedEventHandler ZactDiscMaximCompleted;
+        
+        /// <remarks/>
+        public event ZcheckZileLivrareCompletedEventHandler ZcheckZileLivrareCompleted;
         
         /// <remarks/>
         public event ZpalcantCompletedEventHandler ZpalcantCompleted;
@@ -308,6 +318,36 @@ namespace WebService1.SAPWebServices {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:sap-com:document:sap:soap:functions:mc-style:ZTBL_WEBSERVICE:ZstocSfaRequest", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Bare)]
+        [return: System.Xml.Serialization.XmlElementAttribute("ZstocSfaResponse", Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+        public ZstocSfaResponse ZstocSfa([System.Xml.Serialization.XmlElementAttribute("ZstocSfa", Namespace="urn:sap-com:document:sap:soap:functions:mc-style")] ZstocSfa ZstocSfa1) {
+            object[] results = this.Invoke("ZstocSfa", new object[] {
+                        ZstocSfa1});
+            return ((ZstocSfaResponse)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ZstocSfaAsync(ZstocSfa ZstocSfa1) {
+            this.ZstocSfaAsync(ZstocSfa1, null);
+        }
+        
+        /// <remarks/>
+        public void ZstocSfaAsync(ZstocSfa ZstocSfa1, object userState) {
+            if ((this.ZstocSfaOperationCompleted == null)) {
+                this.ZstocSfaOperationCompleted = new System.Threading.SendOrPostCallback(this.OnZstocSfaOperationCompleted);
+            }
+            this.InvokeAsync("ZstocSfa", new object[] {
+                        ZstocSfa1}, this.ZstocSfaOperationCompleted, userState);
+        }
+        
+        private void OnZstocSfaOperationCompleted(object arg) {
+            if ((this.ZstocSfaCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ZstocSfaCompleted(this, new ZstocSfaCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:sap-com:document:sap:soap:functions:mc-style:ZTBL_WEBSERVICE:ZCalcStocRequest" +
             "", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Bare)]
         [return: System.Xml.Serialization.XmlElementAttribute("ZCalcStocResponse", Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
@@ -366,6 +406,37 @@ namespace WebService1.SAPWebServices {
             if ((this.ZactDiscMaximCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.ZactDiscMaximCompleted(this, new ZactDiscMaximCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:sap-com:document:sap:soap:functions:mc-style:ZTBL_WEBSERVICE:ZcheckZileLivrar" +
+            "eRequest", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Bare)]
+        [return: System.Xml.Serialization.XmlElementAttribute("ZcheckZileLivrareResponse", Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+        public ZcheckZileLivrareResponse ZcheckZileLivrare([System.Xml.Serialization.XmlElementAttribute("ZcheckZileLivrare", Namespace="urn:sap-com:document:sap:soap:functions:mc-style")] ZcheckZileLivrare ZcheckZileLivrare1) {
+            object[] results = this.Invoke("ZcheckZileLivrare", new object[] {
+                        ZcheckZileLivrare1});
+            return ((ZcheckZileLivrareResponse)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ZcheckZileLivrareAsync(ZcheckZileLivrare ZcheckZileLivrare1) {
+            this.ZcheckZileLivrareAsync(ZcheckZileLivrare1, null);
+        }
+        
+        /// <remarks/>
+        public void ZcheckZileLivrareAsync(ZcheckZileLivrare ZcheckZileLivrare1, object userState) {
+            if ((this.ZcheckZileLivrareOperationCompleted == null)) {
+                this.ZcheckZileLivrareOperationCompleted = new System.Threading.SendOrPostCallback(this.OnZcheckZileLivrareOperationCompleted);
+            }
+            this.InvokeAsync("ZcheckZileLivrare", new object[] {
+                        ZcheckZileLivrare1}, this.ZcheckZileLivrareOperationCompleted, userState);
+        }
+        
+        private void OnZcheckZileLivrareOperationCompleted(object arg) {
+            if ((this.ZcheckZileLivrareCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ZcheckZileLivrareCompleted(this, new ZcheckZileLivrareCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -7212,6 +7283,8 @@ namespace WebService1.SAPWebServices {
         
         private string reflogsysField;
         
+        private string vatRegNoField;
+        
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         public string PartnRole {
@@ -7616,6 +7689,17 @@ namespace WebService1.SAPWebServices {
             }
             set {
                 this.reflogsysField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string VatRegNo {
+            get {
+                return this.vatRegNoField;
+            }
+            set {
+                this.vatRegNoField = value;
             }
         }
     }
@@ -20363,6 +20447,8 @@ namespace WebService1.SAPWebServices {
         
         private decimal tonajField;
         
+        private string obssofField;
+        
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         public string ProgLivrare {
@@ -20393,6 +20479,17 @@ namespace WebService1.SAPWebServices {
             }
             set {
                 this.tonajField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Obssof {
+            get {
+                return this.obssofField;
+            }
+            set {
+                this.obssofField = value;
             }
         }
     }
@@ -26244,6 +26341,67 @@ namespace WebService1.SAPWebServices {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class ZileIncarc {
+        
+        private string dataField;
+        
+        private string i813Field;
+        
+        private string i1318Field;
+        
+        private string toataZiuaField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Data {
+            get {
+                return this.dataField;
+            }
+            set {
+                this.dataField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string I813 {
+            get {
+                return this.i813Field;
+            }
+            set {
+                this.i813Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string I1318 {
+            get {
+                return this.i1318Field;
+            }
+            set {
+                this.i1318Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ToataZiua {
+            get {
+                return this.toataZiuaField;
+            }
+            set {
+                this.toataZiuaField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
     public partial class ZsitemsComanda {
         
         private string matnrField;
@@ -27456,6 +27614,102 @@ namespace WebService1.SAPWebServices {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class ZstocSfa {
+        
+        private string ipMatnrField;
+        
+        private string ipPlantField;
+        
+        private string meinsField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string IpMatnr {
+            get {
+                return this.ipMatnrField;
+            }
+            set {
+                this.ipMatnrField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string IpPlant {
+            get {
+                return this.ipPlantField;
+            }
+            set {
+                this.ipPlantField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Meins {
+            get {
+                return this.meinsField;
+            }
+            set {
+                this.meinsField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class ZstocSfaResponse {
+        
+        private decimal epStocField;
+        
+        private string epStocDetField;
+        
+        private string meinsField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal EpStoc {
+            get {
+                return this.epStocField;
+            }
+            set {
+                this.epStocField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string EpStocDet {
+            get {
+                return this.epStocDetField;
+            }
+            set {
+                this.epStocDetField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Meins {
+            get {
+                return this.meinsField;
+            }
+            set {
+                this.meinsField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
     public partial class ZCalcStoc {
         
         private decimal ipIdField;
@@ -27534,6 +27788,182 @@ namespace WebService1.SAPWebServices {
             }
             set {
                 this.vOkField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class ZcheckZileLivrare {
+        
+        private string ipCityField;
+        
+        private string ipKunnrField;
+        
+        private string ipLifnrField;
+        
+        private string ipNoCheckField;
+        
+        private string ipPernrField;
+        
+        private string ipRegioField;
+        
+        private string ipVbelnField;
+        
+        private string ipVstelField;
+        
+        private string ipWerksField;
+        
+        private string ipZonaField;
+        
+        private ZileIncarc[] itZileField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string IpCity {
+            get {
+                return this.ipCityField;
+            }
+            set {
+                this.ipCityField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string IpKunnr {
+            get {
+                return this.ipKunnrField;
+            }
+            set {
+                this.ipKunnrField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string IpLifnr {
+            get {
+                return this.ipLifnrField;
+            }
+            set {
+                this.ipLifnrField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string IpNoCheck {
+            get {
+                return this.ipNoCheckField;
+            }
+            set {
+                this.ipNoCheckField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string IpPernr {
+            get {
+                return this.ipPernrField;
+            }
+            set {
+                this.ipPernrField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string IpRegio {
+            get {
+                return this.ipRegioField;
+            }
+            set {
+                this.ipRegioField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string IpVbeln {
+            get {
+                return this.ipVbelnField;
+            }
+            set {
+                this.ipVbelnField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string IpVstel {
+            get {
+                return this.ipVstelField;
+            }
+            set {
+                this.ipVstelField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string IpWerks {
+            get {
+                return this.ipWerksField;
+            }
+            set {
+                this.ipWerksField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string IpZona {
+            get {
+                return this.ipZonaField;
+            }
+            set {
+                this.ipZonaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
+        public ZileIncarc[] ItZile {
+            get {
+                return this.itZileField;
+            }
+            set {
+                this.itZileField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class ZcheckZileLivrareResponse {
+        
+        private ZileIncarc[] itZileField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
+        public ZileIncarc[] ItZile {
+            get {
+                return this.itZileField;
+            }
+            set {
+                this.itZileField = value;
             }
         }
     }
@@ -30150,6 +30580,8 @@ namespace WebService1.SAPWebServices {
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
     public partial class ZNrPaleti {
         
+        private string ipCustField;
+        
         private string ipKunnrField;
         
         private string ipLifnrField;
@@ -30161,6 +30593,17 @@ namespace WebService1.SAPWebServices {
         private string ipWerksField;
         
         private ZstNrPaleti[] itTableField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string IpCust {
+            get {
+                return this.ipCustField;
+            }
+            set {
+                this.ipCustField = value;
+            }
+        }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
@@ -30613,6 +31056,32 @@ namespace WebService1.SAPWebServices {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void ZstocSfaCompletedEventHandler(object sender, ZstocSfaCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ZstocSfaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ZstocSfaCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public ZstocSfaResponse Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((ZstocSfaResponse)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void ZCalcStocCompletedEventHandler(object sender, ZCalcStocCompletedEventArgs e);
     
     /// <remarks/>
@@ -30659,6 +31128,32 @@ namespace WebService1.SAPWebServices {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((ZactDiscMaximResponse)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void ZcheckZileLivrareCompletedEventHandler(object sender, ZcheckZileLivrareCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ZcheckZileLivrareCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ZcheckZileLivrareCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public ZcheckZileLivrareResponse Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((ZcheckZileLivrareResponse)(this.results[0]));
             }
         }
     }

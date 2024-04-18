@@ -810,9 +810,9 @@ namespace WebService1
 
 
                 query = " insert into sapprd.zcust_head(mandt, id, cod_client, cod_agent, ul, depart, status, datac,  pers_contact, telefon, adr_livrare, " +
-                        "  city, region, den_cl, ketdat, addrnumber, macara, descoperita, traty ) values " +
+                        "  city, region, den_cl, ketdat, addrnumber, macara, descoperita, traty, zlsch, pmnttrms ) values " +
                         " ('900', pk_key.nextval, :cod_client, :cod_agent, :ul, :depart, :status, :datac,  :pers_contact, :telefon, :adr_livrare, " +
-                        "  :city, :region, :den_cl, :ketdat, :addrnumber, :macara, :descoperita, :traty ) returning id into :id ";
+                        "  :city, :region, :den_cl, :ketdat, :addrnumber, :macara, :descoperita, :traty, :zlsch, :pmnttrms ) returning id into :id ";
 
 
                 cmd.CommandText = query;
@@ -870,6 +870,12 @@ namespace WebService1
                 cmd.Parameters.Add(":traty", OracleType.VarChar, 12).Direction = ParameterDirection.Input;
                 cmd.Parameters[16].Value = dateLivrare.Transport;
 
+                cmd.Parameters.Add(":zlsch", OracleType.VarChar, 12).Direction = ParameterDirection.Input;
+                cmd.Parameters[17].Value = dateLivrare.tipPlata != null ? dateLivrare.tipPlata : " ";
+
+                cmd.Parameters.Add(":pmnttrms", OracleType.VarChar, 12).Direction = ParameterDirection.Input;
+                cmd.Parameters[18].Value = dateLivrare.termenPlata != null && !dateLivrare.termenPlata.Equals("") ? dateLivrare.termenPlata : " ";
+
                 OracleParameter idCmd = new OracleParameter("id", OracleType.Number);
                 idCmd.Direction = ParameterDirection.Output;
                 cmd.Parameters.Add(idCmd);
@@ -889,8 +895,9 @@ namespace WebService1
                     if (codArt.Length == 8)
                         codArt = "0000000000" + codArt;
 
-                    query = " insert into sapprd.zcust_det(mandt, id, poz, status, cod, cantitate, um ) values " +
-                            " ('900', :id, :poz, :status, :cod, :cantitate, :um ) ";
+
+                    query = " insert into sapprd.zcust_det(mandt, id, poz, status, cod, cantitate, um, valoare ) values " +
+                            " ('900', :id, :poz, :status, :cod, :cantitate, :um, :valPoz ) ";
 
                     cmd.CommandText = query;
                     cmd.CommandType = CommandType.Text;
@@ -913,6 +920,9 @@ namespace WebService1
 
                     cmd.Parameters.Add(":um", OracleType.NVarChar, 9).Direction = ParameterDirection.Input;
                     cmd.Parameters[5].Value = articolComanda[i].um;
+
+                    cmd.Parameters.Add(":valPoz", OracleType.Double, 13).Direction = ParameterDirection.Input;
+                    cmd.Parameters[6].Value = articolComanda[i].pretUnit * articolComanda[i].cantitate;
 
                     cmd.ExecuteNonQuery();
 
@@ -945,7 +955,8 @@ namespace WebService1
             }
             catch (Exception ex)
             {
-                ErrorHandling.sendErrorToMail(ex.ToString());
+                ErrorHandling.sendErrorToMail(ex.ToString() + " \n\n " + JSONArt + "\n\n" + JSONComanda + "\n\n" 
+                    + JSONDateLivrare);
                 retVal = "-1";
             }
             finally

@@ -610,7 +610,11 @@ namespace WebService1
             string condLimit = " rownum < 300 ";
             string valStoc = "";
 
-            if (!departament.Equals("00") && !departament.Equals("12") && departament.Length > 0)
+            if (departament.ToLower().Contains("extra"))
+            {
+                condDepart = " and a.grup_vz in (" + HelperComenzi.getDepartIncrucisat(departament) + ") ";
+            }
+            else if (!departament.Equals("00") && !departament.Equals("12") && departament.Length > 0)
             {
                 if (Utils.isFilialaMicaDep04(filiala, departament) && modulCautare != null && modulCautare.Equals("CLP"))
                     condDepart = " and ( substr(a.grup_vz,0,2) like '" + departament.Substring(0, 2) + "%') ";
@@ -1759,6 +1763,10 @@ namespace WebService1
             double stocArt = 0;
             string umArt = "BUC";
             string stocResponse = "";
+            string pret = "0";
+            string greutate = "0";
+
+            ArticolProps articolProps = new ArticolProps();
 
             try
             {
@@ -1769,15 +1777,17 @@ namespace WebService1
 
                 cmd = connection.CreateCommand();
 
+
                 cmd.CommandText = " select sum(kulab), m.meins um_art from " +
                                   " (select k.matnr, k.kulab from sapprd.MSKU k " +
                                   " where k.mandt = '900' and k.kunnr = :codClient and sobkz = 'W' and kulab > 0 and matnr = :codArticol " +
+                                  " and (k.werks = :filiala or k.werks = :filiala2) " +
                                   " union all " +
                                   " select d.matnr, -1 * (d.lfimg)from sapprd.lips d, sapprd.vbup p, sapprd.likp l " +
                                   " where d.mandt = '900' and d.sobkz = 'W' and d.matnr = :codArticol and (d.werks = :filiala or d.werks = :filiala2) " +
                                   " and d.mandt = p.mandt and d.vbeln = p.vbeln and d.posnr = p.posnr and d.mandt = l.mandt and d.vbeln = l.vbeln " +
                                   " and l.kunnr =:codClient and p.WBSTA <> 'C') y, sapprd.mara m where m.mandt = '900' and y.matnr = m.matnr " +
-                                  " group by y.matnr, m.meins ";
+                                  " group by y.matnr, m.meins  ";
 
 
                 cmd.CommandType = CommandType.Text;
@@ -1801,6 +1811,7 @@ namespace WebService1
                 cmd.Parameters.Add(":codClient", OracleType.VarChar, 30).Direction = ParameterDirection.Input;
                 cmd.Parameters[5].Value = codClient;
 
+
                 oReader = cmd.ExecuteReader();
 
                 if (oReader.HasRows)
@@ -1810,10 +1821,12 @@ namespace WebService1
                     umArt = oReader.GetString(1);
                 }
 
+                articolProps = new OperatiiArticole().getPropsArticol(connection, codArticol);
+
             }
             catch (Exception ex)
             {
-                ErrorHandling.sendErrorToMail(ex.ToString() + " , " + codArticol + " , " + codClient + " , " + filiala );
+                ErrorHandling.sendErrorToMail(ex.ToString());
                 stocResponse = "-1";
             }
             finally
@@ -1821,7 +1834,7 @@ namespace WebService1
                 DatabaseConnections.CloseConnections(oReader, cmd, connection);
             }
 
-            stocResponse = stocArt.ToString() + "#" + umArt + "#1#";
+            stocResponse = stocArt.ToString() + "#" + umArt + "#1#" + pret + "#" + greutate + "#" + articolProps.lungime + "#" + articolProps.tipMarfa + "#";
 
             return stocResponse;
 
@@ -2155,7 +2168,7 @@ namespace WebService1
 
                 cmd = connection.CreateCommand();
 
-                cmd.CommandText = " SELECT sum(b.val_poz + b.val_poz * (k.kbetr/10)/100) cu_tva FROM sapprd.konp k, sapprd.zcomhead_tableta a, sapprd.zcomdet_tableta b WHERE " +
+                cmd.CommandText = " SELECT nvl(sum(b.val_poz + b.val_poz * (k.kbetr/10)/100),0) cu_tva FROM sapprd.konp k, sapprd.zcomhead_tableta a, sapprd.zcomdet_tableta b WHERE " +
                                   " a.mandt = '900' and b.mandt='900' and a.id = :idComanda and b.id = a.id  and k.mandt = '900' and k.knumh = " +
                                   " (SELECT knumh FROM sapprd.a002 WHERE mandt = '900' and kschl = 'MWST' AND aland = 'RO' " +
                                   " AND taxm1 = (select taklv from sapprd.mara where mandt = '900' and matnr = b.cod and rownum = 1) " +
@@ -2182,7 +2195,7 @@ namespace WebService1
             }
             catch (Exception ex)
             {
-                ErrorHandling.sendErrorToMail(ex.ToString());
+                ErrorHandling.sendErrorToMail(ex.ToString() + " , " + idComanda);
             }
             finally
             {

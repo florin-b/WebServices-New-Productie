@@ -37,6 +37,7 @@ namespace WebService1
         public bool clientBlocat;
         public string tipPlata;
         public string codClient;
+        public string divizii;
     }
 
     public class CreditClient

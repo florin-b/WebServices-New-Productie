@@ -135,6 +135,7 @@
     </Compile>
     <Compile Include="OperatiiRetur.cs" />
     <Compile Include="OperatiiSemiactivi.cs" />
+    <Compile Include="OperatiiStocuri.cs" />
     <Compile Include="OperatiiSuplimentare.cs" />
     <Compile Include="PierderiVanzari.cs" />
     <Compile Include="Preturi.cs" />
@@ -145,6 +146,7 @@
     </Compile>
     <Compile Include="Salarizare.cs" />
     <Compile Include="SalarizareAgenti2019.cs" />
+    <Compile Include="SalarizareConsilieri.cs" />
     <Compile Include="Service1.asmx.cs">
       <DependentUpon>Service1.asmx</DependentUpon>
       <SubType>Component</SubType>
@@ -167,6 +169,11 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
     <Compile Include="Web References\Salarizare2019\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\SalarizareCVA\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -256,6 +263,14 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <None Include="Web References\Salarizare2019\zws_salarizare_2019.wsdl" />
+    <Content Include="Web References\SalarizareCVA\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <Content Include="Web References\SalarizareCVA\ZGET_SALCVAResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <None Include="Web References\SalarizareCVA\zws_sal_cva.wsdl" />
     <None Include="Web References\SalarizareKA\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
@@ -283,6 +298,9 @@
     <None Include="Web References\SAPWebServices\ZcalcTrapSiteResponse.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
+    <Content Include="Web References\SAPWebServices\ZcheckZileLivrareResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
     <None Include="Web References\SAPWebServices\ZcreazaComandaResponse.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
@@ -338,6 +356,9 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <Content Include="Web References\SAPWebServices\ZstareCurentaReturResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SAPWebServices\ZstocSfaResponse.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <None Include="Web References\SAPWebServices\ztbl_webservice.wsdl" />
@@ -477,10 +498,10 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>WebService1_WebNecesar1_ZWBS_ZINTRARIMARFA</CachedSettingsPropName>
     </WebReferenceUrl>
-    <WebReferenceUrl Include="http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/wsdl/flv_10002A111AD1/bndg_url/sap/bc/srt/rfc/sap/ztbl_webservice/900/ztbl_webservice/ztbl_webservice%3fsap-client=900">
+    <WebReferenceUrl Include="http://sap-prd5a.arabesque.ro:8035/sap/bc/srt/wsdl/flv_10002A111AD1/bndg_url/sap/bc/srt/rfc/sap/ztbl_webservice/900/ztbl_webservice/ztbl_webservice%3fsap-client=900">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\SAPWebServices\</RelPath>
-      <UpdateFromURL>http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/wsdl/flv_10002A111AD1/bndg_url/sap/bc/srt/rfc/sap/ztbl_webservice/900/ztbl_webservice/ztbl_webservice%3fsap-client=900</UpdateFromURL>
+      <UpdateFromURL>http://sap-prd5a.arabesque.ro:8035/sap/bc/srt/wsdl/flv_10002A111AD1/bndg_url/sap/bc/srt/rfc/sap/ztbl_webservice/900/ztbl_webservice/ztbl_webservice%3fsap-client=900</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
@@ -531,6 +552,17 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>WebService1_ClientiSemiactivi_ZWBS_SEMIACTIVI</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/wsdl/flv_10002A111AD1/srvc_url/sap/bc/srt/rfc/sap/zws_sal_cva/900/zws_sal_cva/zws_sal_cva%3fsap-client=900">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\SalarizareCVA\</RelPath>
+      <UpdateFromURL>http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/wsdl/flv_10002A111AD1/srvc_url/sap/bc/srt/rfc/sap/zws_sal_cva/900/zws_sal_cva/zws_sal_cva%3fsap-client=900</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>WebService1_SalarizareCVA_ZWS_SAL_CVA</CachedSettingsPropName>
     </WebReferenceUrl>
     <WebReferenceUrl Include="https://www.bizpack.ro/wsi/service.php%3fwsdl">
       <UrlBehavior>Dynamic</UrlBehavior>

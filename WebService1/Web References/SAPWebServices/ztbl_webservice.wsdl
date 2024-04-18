@@ -154,6 +154,16 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="OP__ZgetPrice">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <saptrhnw05:required xmlns:saptrhnw05="http://www.sap.com/NW05/soap/features/transaction/">no</saptrhnw05:required>
+        <sapcomhnd:enableCommit xmlns:sapcomhnd="http://www.sap.com/NW05/soap/features/commit/">false</sapcomhnd:enableCommit>
+        <sapblock:enableBlocking xmlns:sapblock="http://www.sap.com/NW05/soap/features/blocking/">true</sapblock:enableBlocking>
+        <saprmnw05:enableWSRM xmlns:saprmnw05="http://www.sap.com/NW05/soap/features/wsrm/">false</saprmnw05:enableWSRM>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsp:Policy wsu:Id="OP__ZdetTransport">
     <wsp:ExactlyOne>
       <wsp:All>
@@ -174,7 +184,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="OP__ZgetPrice">
+  <wsp:Policy wsu:Id="OP__ZstocSfa">
     <wsp:ExactlyOne>
       <wsp:All>
         <saptrhnw05:required xmlns:saptrhnw05="http://www.sap.com/NW05/soap/features/transaction/">no</saptrhnw05:required>
@@ -195,6 +205,16 @@
     </wsp:ExactlyOne>
   </wsp:Policy>
   <wsp:Policy wsu:Id="OP__ZactDiscMaxim">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <saptrhnw05:required xmlns:saptrhnw05="http://www.sap.com/NW05/soap/features/transaction/">no</saptrhnw05:required>
+        <sapcomhnd:enableCommit xmlns:sapcomhnd="http://www.sap.com/NW05/soap/features/commit/">false</sapcomhnd:enableCommit>
+        <sapblock:enableBlocking xmlns:sapblock="http://www.sap.com/NW05/soap/features/blocking/">true</sapblock:enableBlocking>
+        <saprmnw05:enableWSRM xmlns:saprmnw05="http://www.sap.com/NW05/soap/features/wsrm/">false</saprmnw05:enableWSRM>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="OP__ZcheckZileLivrare">
     <wsp:ExactlyOne>
       <wsp:All>
         <saptrhnw05:required xmlns:saptrhnw05="http://www.sap.com/NW05/soap/features/transaction/">no</saptrhnw05:required>
@@ -375,7 +395,7 @@
     </wsp:ExactlyOne>
   </wsp:Policy>
   <wsdl:types>
-    <xsd:schema attributeFormDefault="qualified" targetNamespace="urn:sap-com:document:sap:rfc:functions">
+    <xsd:schema xmlns:tns="urn:sap-com:document:sap:rfc:functions" attributeFormDefault="qualified" targetNamespace="urn:sap-com:document:sap:rfc:functions">
       <xsd:simpleType name="byte16">
         <xsd:restriction base="xsd:base64Binary">
           <xsd:maxLength value="16" />
@@ -775,6 +795,11 @@
           <xsd:maxLength value="10" />
         </xsd:restriction>
       </xsd:simpleType>
+      <xsd:simpleType name="char100">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="100" />
+        </xsd:restriction>
+      </xsd:simpleType>
       <xsd:simpleType name="char12">
         <xsd:restriction base="xsd:string">
           <xsd:maxLength value="12" />
@@ -867,6 +892,14 @@
           <xsd:element name="Lgort" type="n0:char4" />
           <xsd:element name="Vstel" type="n0:char4" />
           <xsd:element name="Traty" type="n0:char4" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ZileIncarc">
+        <xsd:sequence>
+          <xsd:element name="Data" type="n0:date10" />
+          <xsd:element name="I813" type="n0:char1" />
+          <xsd:element name="I1318" type="n0:char1" />
+          <xsd:element name="ToataZiua" type="n0:char1" />
         </xsd:sequence>
       </xsd:complexType>
       <xsd:complexType name="Zmateriale">
@@ -1389,6 +1422,7 @@
           <xsd:element name="Refobjtype" type="n0:char10" />
           <xsd:element name="Refobjkey" type="n0:char70" />
           <xsd:element name="Reflogsys" type="n0:char10" />
+          <xsd:element name="VatRegNo" type="n0:char20" />
         </xsd:sequence>
       </xsd:complexType>
       <xsd:complexType name="Bapischdl">
@@ -2056,6 +2090,7 @@
           <xsd:element name="ProgLivrare" type="n0:char1" />
           <xsd:element name="LivrSambata" type="n0:char2" />
           <xsd:element name="Tonaj" type="tns:quantum13.3" />
+          <xsd:element name="Obssof" type="tns:char100" />
         </xsd:sequence>
       </xsd:complexType>
       <xsd:complexType name="Bapiccard">
@@ -2989,6 +3024,11 @@
           <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:ZsitemsComanda" />
         </xsd:sequence>
       </xsd:complexType>
+      <xsd:complexType name="TableOfZileIncarc">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:ZileIncarc" />
+        </xsd:sequence>
+      </xsd:complexType>
       <xsd:complexType name="TableOfZmateriale">
         <xsd:sequence>
           <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:Zmateriale" />
@@ -3322,6 +3362,24 @@
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
+      <xsd:element name="ZstocSfa">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="IpMatnr" type="n0:char18" />
+            <xsd:element name="IpPlant" type="n0:char4" />
+            <xsd:element minOccurs="0" name="Meins" type="n0:unit3" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ZstocSfaResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="EpStoc" type="n0:quantum13.3" />
+            <xsd:element name="EpStocDet" type="n0:string" />
+            <xsd:element minOccurs="0" name="Meins" type="n0:unit3" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
       <xsd:element name="ZCalcStoc">
         <xsd:complexType>
           <xsd:sequence>
@@ -3350,6 +3408,30 @@
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
+      <xsd:element name="ZcheckZileLivrare">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="IpCity" type="n0:char40" />
+            <xsd:element minOccurs="0" name="IpKunnr" type="n0:char10" />
+            <xsd:element minOccurs="0" name="IpLifnr" type="n0:char10" />
+            <xsd:element minOccurs="0" name="IpNoCheck" type="n0:char1" />
+            <xsd:element minOccurs="0" name="IpPernr" type="n0:numeric8" />
+            <xsd:element minOccurs="0" name="IpRegio" type="n0:char4" />
+            <xsd:element minOccurs="0" name="IpVbeln" type="n0:char10" />
+            <xsd:element minOccurs="0" name="IpVstel" type="n0:char4" />
+            <xsd:element name="IpWerks" type="n0:char4" />
+            <xsd:element minOccurs="0" name="IpZona" type="tns:char7" />
+            <xsd:element name="ItZile" type="tns:TableOfZileIncarc" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ZcheckZileLivrareResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="ItZile" type="tns:TableOfZileIncarc" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
       <xsd:element name="Zpalcant">
         <xsd:complexType>
           <xsd:sequence>
@@ -3371,7 +3453,7 @@
         <xsd:complexType>
           <xsd:sequence>
             <xsd:element minOccurs="0" name="ItMateriale" type="tns:TableOfZmaterialeRetur" />
-            <xsd:element minOccurs="0" name="TipPers" type="n0:char4" />
+            <xsd:element minOccurs="0" name="TipPers" type="tns:char12" />
             <xsd:element minOccurs="0" name="VAcelasiTransp" type="n0:char1" />
             <xsd:element minOccurs="0" name="VAddrnumber" type="n0:char12" />
             <xsd:element minOccurs="0" name="VAugru" type="n0:char3" />
@@ -3684,6 +3766,7 @@
       <xsd:element name="ZNrPaleti">
         <xsd:complexType>
           <xsd:sequence>
+            <xsd:element minOccurs="0" name="IpCust" type="n0:char1" />
             <xsd:element minOccurs="0" name="IpKunnr" type="n0:char10" />
             <xsd:element minOccurs="0" name="IpLifnr" type="n0:char10" />
             <xsd:element minOccurs="0" name="IpPernr" type="n0:numeric8" />
@@ -3777,6 +3860,12 @@
   <wsdl:message name="ZgetPriceResponse">
     <wsdl:part name="parameter" element="tns:ZgetPriceResponse" />
   </wsdl:message>
+  <wsdl:message name="ZstocSfa">
+    <wsdl:part name="parameters" element="tns:ZstocSfa" />
+  </wsdl:message>
+  <wsdl:message name="ZstocSfaResponse">
+    <wsdl:part name="parameter" element="tns:ZstocSfaResponse" />
+  </wsdl:message>
   <wsdl:message name="ZCalcStoc">
     <wsdl:part name="parameters" element="tns:ZCalcStoc" />
   </wsdl:message>
@@ -3788,6 +3877,12 @@
   </wsdl:message>
   <wsdl:message name="ZactDiscMaximResponse">
     <wsdl:part name="parameter" element="tns:ZactDiscMaximResponse" />
+  </wsdl:message>
+  <wsdl:message name="ZcheckZileLivrare">
+    <wsdl:part name="parameters" element="tns:ZcheckZileLivrare" />
+  </wsdl:message>
+  <wsdl:message name="ZcheckZileLivrareResponse">
+    <wsdl:part name="parameter" element="tns:ZcheckZileLivrareResponse" />
   </wsdl:message>
   <wsdl:message name="Zpalcant">
     <wsdl:part name="parameters" element="tns:Zpalcant" />
@@ -3923,6 +4018,13 @@
       <wsdl:input message="tns:ZgetPrice" />
       <wsdl:output message="tns:ZgetPriceResponse" />
     </wsdl:operation>
+    <wsdl:operation name="ZstocSfa">
+      <wsp:Policy>
+        <wsp:PolicyReference URI="#OP__ZstocSfa" />
+      </wsp:Policy>
+      <wsdl:input message="tns:ZstocSfa" />
+      <wsdl:output message="tns:ZstocSfaResponse" />
+    </wsdl:operation>
     <wsdl:operation name="ZCalcStoc">
       <wsp:Policy>
         <wsp:PolicyReference URI="#OP__ZCalcStoc" />
@@ -3936,6 +4038,13 @@
       </wsp:Policy>
       <wsdl:input message="tns:ZactDiscMaxim" />
       <wsdl:output message="tns:ZactDiscMaximResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="ZcheckZileLivrare">
+      <wsp:Policy>
+        <wsp:PolicyReference URI="#OP__ZcheckZileLivrare" />
+      </wsp:Policy>
+      <wsdl:input message="tns:ZcheckZileLivrare" />
+      <wsdl:output message="tns:ZcheckZileLivrareResponse" />
     </wsdl:operation>
     <wsdl:operation name="Zpalcant">
       <wsp:Policy>
@@ -4098,6 +4207,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ZstocSfa">
+      <soap:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZTBL_WEBSERVICE:ZstocSfaRequest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="ZCalcStoc">
       <soap:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZTBL_WEBSERVICE:ZCalcStocRequest" style="document" />
       <wsdl:input>
@@ -4109,6 +4227,15 @@
     </wsdl:operation>
     <wsdl:operation name="ZactDiscMaxim">
       <soap:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZTBL_WEBSERVICE:ZactDiscMaximRequest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZcheckZileLivrare">
+      <soap:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZTBL_WEBSERVICE:ZcheckZileLivrareRequest" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -4311,6 +4438,15 @@
         <wsoap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ZstocSfa">
+      <wsoap12:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZTBL_WEBSERVICE:ZstocSfaRequest" style="document" />
+      <wsdl:input>
+        <wsoap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsoap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="ZCalcStoc">
       <wsoap12:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZTBL_WEBSERVICE:ZCalcStocRequest" style="document" />
       <wsdl:input>
@@ -4322,6 +4458,15 @@
     </wsdl:operation>
     <wsdl:operation name="ZactDiscMaxim">
       <wsoap12:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZTBL_WEBSERVICE:ZactDiscMaximRequest" style="document" />
+      <wsdl:input>
+        <wsoap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsoap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZcheckZileLivrare">
+      <wsoap12:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZTBL_WEBSERVICE:ZcheckZileLivrareRequest" style="document" />
       <wsdl:input>
         <wsoap12:body use="literal" />
       </wsdl:input>
@@ -4485,10 +4630,10 @@
   </wsdl:binding>
   <wsdl:service name="ZTBL_WEBSERVICE">
     <wsdl:port name="ZTBL_WEBSERVICE" binding="tns:ZTBL_WEBSERVICE">
-      <soap:address location="http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/rfc/sap/ztbl_webservice/900/ztbl_webservice/ztbl_webservice" />
+      <soap:address location="http://sap-prd5a.arabesque.ro:8035/sap/bc/srt/rfc/sap/ztbl_webservice/900/ztbl_webservice/ztbl_webservice" />
     </wsdl:port>
     <wsdl:port name="ZTBL_WEBSERVICE_soap12" binding="tns:ZTBL_WEBSERVICE_soap12">
-      <wsoap12:address location="http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/rfc/sap/ztbl_webservice/900/ztbl_webservice/ztbl_webservice" />
+      <wsoap12:address location="http://sap-prd5a.arabesque.ro:8035/sap/bc/srt/rfc/sap/ztbl_webservice/900/ztbl_webservice/ztbl_webservice" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

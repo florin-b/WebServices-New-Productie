@@ -14,7 +14,8 @@ namespace WebService1
 
         public string getDatePoligonLivrareDB(string coords)
         {
-            DatePoligon datePoligon = new DatePoligon("", "", "", "", "");
+            DatePoligon datePoligon = new DatePoligon("", "", "", "", "", "");
+            datePoligon.isRestrictionat = Boolean.FalseString;
 
             try
             {
@@ -86,7 +87,7 @@ namespace WebService1
 
         public string getDatePoligonLivrare(string coords)
         {
-            DatePoligon datePoligon = new DatePoligon("", "", "", "", "");
+            DatePoligon datePoligon = new DatePoligon("", "", "", "", "","");
 
             try
             {
@@ -351,7 +352,7 @@ namespace WebService1
             string infoTonaj = "";
             if (filtruPoligon.Equals("PERMIS"))
             {
-                infoTonaj = " , name, lt ";
+                infoTonaj = " , name, lt, interzis ";
                 conditieFiliala = " and pct =:filiala ";
                 conditieTip = "tippoligon";
             }
@@ -382,11 +383,13 @@ namespace WebService1
                         poligon.tipPoligon = oReader.GetString(2);
                         poligon.tonaj = "";
                         poligon.nume = "";
+                        poligon.interzis = "";
 
                         if (filtruPoligon.Equals("PERMIS"))
                         {
                             poligon.nume = oReader.GetString(3);
                             poligon.tonaj = oReader.GetDouble(4).ToString();
+                            poligon.interzis = oReader.GetString(5);
                             poligon.tipPoligon = "LT";
                         }
 

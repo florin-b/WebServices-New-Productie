@@ -28,7 +28,7 @@ namespace WebService1
                 string jsonResponse = sr.ReadToEnd().Trim();
                
 
-                if (jsonResponse != null && !jsonResponse.ToLower().Contains("error"))
+                if (jsonResponse != null && !jsonResponse.ToLower().Contains("error") && !jsonResponse.ToLower().Contains("invalid"))
                 {
                     var serializer = new JavaScriptSerializer();
                     starePlatitor = serializer.Deserialize<StarePlatitorTva>(jsonResponse);
@@ -52,8 +52,39 @@ namespace WebService1
 
         }
 
+        public string isPlatitorTva_service(string cuiClient, string codAgent)
+        {
+            PlatitorTvaResponse platitorResponse = new PlatitorTvaResponse();
 
-        public string isPlatitorTva(string cuiClient)
+            StarePlatitorTva starePlatitor = verificaTVAService(cuiClient);
+            platitorResponse = getPlatitorStatus(starePlatitor);
+
+            OracleConnection connection = null;
+            try
+            {
+                if (codAgent != null)
+                {
+                    connection = DatabaseConnections.createPRODConnection();
+                    platitorResponse.diviziiClient = OperatiiClienti.getDiviziiClientCUI(connection, cuiClient, codAgent);
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorHandling.sendErrorToMail(ex.ToString());
+            }
+            finally
+            {
+                if (connection != null)
+                    connection.Close();
+            }
+
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            return serializer.Serialize(platitorResponse);
+
+        }
+
+
+        public string isPlatitorTva(string cuiClient, string codAgent)
         {
 
             OracleConnection connection = null;
@@ -70,7 +101,7 @@ namespace WebService1
                 connection = DatabaseConnections.createPRODConnection();
                 cmd = connection.CreateCommand();
 
-                cmd.CommandText = " select data_update, tva, numefirma, nr_inmatric, judet, localitate, adresa||' '||nr " +
+                cmd.CommandText = " select data_update, tva, numefirma, nr_inmatric, judet, localitate, adresa||' '||nr, radiat " +
                                   " from sapprd.zverifcui where mandt = '900' and (cui=:cui or cui=replace(:cui,'RO',''))  ";
 
                 cmd.CommandType = CommandType.Text;
@@ -92,6 +123,7 @@ namespace WebService1
                         platitorResponse.codJudet = oReader.GetString(4);
                         platitorResponse.localitate = oReader.GetString(5);
                         platitorResponse.strada = oReader.GetString(6);
+                        platitorResponse.stareInregistrare = oReader.GetString(7).Equals("X") ? "radiere" : " ";
 
                         if (oReader.GetString(1).Equals("0"))
                             platitorResponse.isPlatitor = false;
@@ -113,8 +145,9 @@ namespace WebService1
                     starePlatitor = verificaTVAService(cuiClient);
                     platitorResponse = getPlatitorStatus(starePlatitor);
                     insertTvaInfo(connection, starePlatitor);
-                    
                 }
+
+                platitorResponse.diviziiClient = OperatiiClienti.getDiviziiClientCUI(connection, cuiClient, codAgent);
 
 
             }
@@ -144,7 +177,7 @@ namespace WebService1
 
             cmd.CommandText = " update sapprd.zverifcui set nr_inmatric=:nrInmatric, judet=:judet, numejudet=:numeJudet, " +
                               " localitate=:localitate, tip_str=:tipStr, adresa=:adresa, nr=:nr, stare=:stare, tva=:tva, " +
-                              " tva_incs=:tvaIncs, data_tva=:dataTva, data_update=:dataUpdate where cui=:cui ";
+                              " tva_incs=:tvaIncs, data_tva=:dataTva, data_update=:dataUpdate, radiat=:radiere where cui=:cui ";
 
             cmd.CommandType = CommandType.Text;
             cmd.Parameters.Clear();
@@ -185,8 +218,11 @@ namespace WebService1
             cmd.Parameters.Add(":dataUpdate", OracleType.VarChar, 24).Direction = ParameterDirection.Input;
             cmd.Parameters[11].Value = AddressUtils.getCurrentDate_YYDDMM();
 
+            cmd.Parameters.Add(":radiere", OracleType.VarChar, 3).Direction = ParameterDirection.Input;
+            cmd.Parameters[12].Value = starePlatitor.StareInregistrare.ToLower().Contains("radiere") ? "X" : " ";
+
             cmd.Parameters.Add(":cui", OracleType.VarChar, 60).Direction = ParameterDirection.Input;
-            cmd.Parameters[12].Value = starePlatitor.CUI;
+            cmd.Parameters[13].Value = starePlatitor.CUI;
 
             cmd.ExecuteNonQuery();
 
@@ -206,9 +242,9 @@ namespace WebService1
             OracleCommand cmd = connection.CreateCommand();
 
             cmd.CommandText = " insert into sapprd.zverifcui (mandt, cui_sap, cui, numefirma, nr_inmatric, judet, numejudet, localitate, tip_str, adresa, " +
-                              " nr, stare, data_update, tva, tva_incs, data_tva, data_salv ) values  " +
+                              " nr, stare, data_update, tva, tva_incs, data_tva, data_salv, radiat ) values  " +
                               " ('900', :cui_sap, :cui, :numefirma, :nr_inmatric, :judet, :numejudet, :localitate, :tip_str, :adresa, " +
-                              " :nr, :stare, :data_update, :tva, :tva_incs, :data_tva, :data_salv )";
+                              " :nr, :stare, :data_update, :tva, :tva_incs, :data_tva, :data_salv, :radiat )";
 
             cmd.Parameters.Add(":cui_sap", OracleType.VarChar, 60).Direction = ParameterDirection.Input;
             cmd.Parameters[0].Value = starePlatitor.CUI;
@@ -258,6 +294,9 @@ namespace WebService1
             cmd.Parameters.Add(":data_salv", OracleType.VarChar, 24).Direction = ParameterDirection.Input;
             cmd.Parameters[15].Value = AddressUtils.getCurrentDate_YYMMDD();
 
+            cmd.Parameters.Add(":radiat", OracleType.VarChar, 3).Direction = ParameterDirection.Input;
+            cmd.Parameters[16].Value = starePlatitor.StareInregistrare.ToLower().Contains("radiere") ? "X" : " ";
+
             cmd.ExecuteNonQuery();
 
             cmd.Dispose();
@@ -272,12 +311,13 @@ namespace WebService1
 
             if (platitorTva.Raspuns != null && platitorTva.Raspuns.ToLower().Contains("valid"))
             {
-                tvaResponse.isPlatitor = platitorTva.TVA.Equals("0") ? false : true;
+                tvaResponse.isPlatitor = platitorTva.TVA.Equals("0") || platitorTva.TVA.ToLower().Equals("false") ? false : true;
                 tvaResponse.numeClient = platitorTva.Nume;
                 tvaResponse.nrInreg = platitorTva.NrInmatr;
                 tvaResponse.codJudet = getCodJudet(platitorTva.NrInmatr.Trim());
                 tvaResponse.localitate = platitorTva.Localitate;
                 tvaResponse.strada = platitorTva.Adresa + " " + platitorTva.Nr;
+                tvaResponse.stareInregistrare = platitorTva.StareInregistrare;
             }
             else
             {

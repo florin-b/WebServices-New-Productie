@@ -115,7 +115,7 @@ namespace WebService1
                     exceptieClient = " and p.kunn2 like 'BU%' ";
 
                 //pentru DV si SSCN nu trebuie restrictie pe filiala
-                if (unitLog.Equals("NN10") || (tipUserSap != null && tipUserSap.Equals("SSCM")))
+                if (unitLog.Equals("NN10") || (tipUserSap != null && (tipUserSap.Equals("SSCM") || tipUserSap.Equals("OIVPD"))))
                     exceptieClient = "";
 
 
@@ -189,9 +189,13 @@ namespace WebService1
                         {
                             unClient.agenti = getAgentiAlocati(connection, depart, unClient.codClient);
                         }
-                        else if (tipUserSap != null && (tipUserSap.Equals(Constants.tipInfoAv) || tipUserSap.Equals(Constants.tipSMR) || tipUserSap.Equals(Constants.tipCVR) || tipUserSap.Equals(Constants.tipSSCM) || tipUserSap.Equals(Constants.tipCGED) || tipUserSap.Equals(Constants.tipOIVPD)))
+                        else if (tipUserSap != null && (tipUserSap.Equals(Constants.tipInfoAv) || tipUserSap.Equals(Constants.tipSMR) || tipUserSap.Equals(Constants.tipCVR) || tipUserSap.Equals(Constants.tipCGED)))
                         {
                             unClient.agenti = getAgentiAlocati(connection, "00", unClient.codClient);
+                        }
+                        else if (tipUserSap != null && (tipUserSap.Equals(Constants.tipOIVPD) || tipUserSap.Equals(Constants.tipSSCM)))
+                        {
+                            unClient.agenti = getUltimAgentComanda(connection, "00", unClient.codClient);
                         }
                         else
                         {
@@ -203,6 +207,7 @@ namespace WebService1
                         unClient.termenPlata = getTermenPlataClient(connection, unClient.codClient);
 
                         unClient.clientBlocat = HelperClienti.isClientBlocat(connection, unClient.codClient);
+                        unClient.diviziiClient = getDiviziiClient(connection, unClient.codClient, codUser);
 
                         string tipPlataContract = getTipPlataContract(connection, unClient.codClient);
 
@@ -247,6 +252,60 @@ namespace WebService1
         }
 
 
+        private string getUltimAgentComanda(OracleConnection connection, string codDepart, string codClient)
+        {
+            string agenti = "";
+
+            OracleCommand cmd = new OracleCommand();
+            OracleDataReader oReader = null;
+
+            DateTime localDate = DateTime.Now.AddYears(-1);
+            string selectedDate = localDate.Year.ToString() + localDate.Month.ToString("00") + localDate.Day.ToString("00");
+
+            try
+            {
+
+                cmd = connection.CreateCommand();
+
+                cmd.CommandText = " select x.pernr, x.nume from ( " +
+                                  " select distinct pernr, nume, max(tb.datac) datacom from sapprd.knvp y, agenti ag, sapprd.zcomhead_tableta tb where y.mandt = '900' " +
+                                  " and y.kunnr = :codClient and y.parvw = 'VE'  and vtweg = '10' " +
+                                  " and tb.mandt = '900' and tb.cod_client = y.kunnr and tb.datac >= :dataCom and tb.cod_agent = pernr " +
+                                  " and ag.cod = pernr and ag.activ = 1 group by pernr, nume order by datacom desc) x where rownum = 1 ";
+
+                cmd.CommandType = CommandType.Text;
+                cmd.Parameters.Clear();
+
+                cmd.Parameters.Add(":codClient", OracleType.VarChar, 30).Direction = ParameterDirection.Input;
+                cmd.Parameters[0].Value = codClient;
+
+                cmd.Parameters.Add(":dataCom", OracleType.VarChar, 24).Direction = ParameterDirection.Input;
+                cmd.Parameters[1].Value = selectedDate;
+
+                oReader = cmd.ExecuteReader();
+
+                if (oReader.HasRows)
+                {
+                    oReader.Read();
+                    agenti = oReader.GetString(0) + "#" + oReader.GetString(1) + "@";
+                }
+                else
+                    agenti = getAgentiAlocati(connection, codDepart, codClient);
+
+            }
+            catch (Exception ex)
+            {
+                ErrorHandling.sendErrorToMail(ex.ToString());
+            }
+            finally
+            {
+                DatabaseConnections.CloseConnections(oReader, cmd);
+            }
+
+            return agenti;
+        }
+
+
         private string getAgentiAlocati(OracleConnection connection, string codDepart, string codClient)
         {
 
@@ -262,7 +321,8 @@ namespace WebService1
                     condDepart = "";
 
                 cmd = connection.CreateCommand();
-                cmd.CommandText = " select pernr||'#'||nume from sapprd.knvp y, agenti ag where y.mandt = '900' and y.kunnr = '" + codClient + "' and y.parvw = 'VE' " +
+
+                cmd.CommandText = " select distinct pernr, nume from sapprd.knvp y, agenti ag where y.mandt = '900' and y.kunnr = '" + codClient + "' and y.parvw = 'VE' " +
                                   " and vtweg = '10' " + condDepart + " and ag.cod = pernr and ag.activ = 1 order by nume ";
 
 
@@ -275,7 +335,7 @@ namespace WebService1
                 {
                     while (oReader.Read())
                     {
-                        agenti += oReader.GetString(0) + "@";
+                        agenti += oReader.GetString(0) + "#" + oReader.GetString(1) + "@";
                     }
                 }
             }
@@ -823,10 +883,86 @@ namespace WebService1
         }
 
 
+        public static string getDiviziiClientCUI(OracleConnection connection, string codCui, string codAgent)
+        {
+
+            string diviziiClient = "";
+
+            if (codAgent == null || codAgent.Trim().Equals(String.Empty))
+                return diviziiClient;
+
+            OracleDataReader oReader = null;
+
+            try
+            {
+                OracleCommand cmd = null;
+
+                cmd = connection.CreateCommand();
+
+                string tipUser = getTipUser(connection, codAgent);
+                string condAgent = " and p.pernr =:codAgent ";
+
+                if (tipUser.Equals("SD"))
+                    condAgent = " ";
+
+
+                cmd.CommandText = " select distinct spart from sapprd.knvp p where p.mandt = '900' and p.kunnr = " +
+                                  " (select k.cod from clienti k where k.tip2 in ('1000', 'OCAV', 'OCAZ') and k.tip_pers='PJ'  " +
+                                  " and k.cui = TRANSLATE(:codCui, '0' || TRANSLATE(:codCui, '.0123456789', '.'), '0') and rownum = 1 )" +
+                                    condAgent + " and p.vtweg = '10' and p.parvw in ('VE','ZC') order by spart ";
+
+                cmd.CommandType = CommandType.Text;
+                cmd.Parameters.Clear();
+
+                cmd.Parameters.Add(":codCui", OracleType.VarChar, 180).Direction = ParameterDirection.Input;
+                cmd.Parameters[0].Value = codCui;
+
+                if (!tipUser.Equals("SD"))
+                {
+                    cmd.Parameters.Add(":codAgent", OracleType.VarChar, 24).Direction = ParameterDirection.Input;
+                    cmd.Parameters[1].Value = codAgent;
+                }
+
+                oReader = cmd.ExecuteReader();
+                string divizie = "";
+
+                if (oReader.HasRows)
+                {
+                    while (oReader.Read())
+                    {
+                        divizie = oReader.GetString(0).ToString();
+
+                        if (divizie.Equals("04"))
+                            divizie = "040;041";
+
+                        diviziiClient += divizie + ";";
+                    }
+                }
+
+
+                oReader.Close();
+                oReader.Dispose();
+
+                cmd.Dispose();
+
+            }
+            catch (Exception ex)
+            {
+                ErrorHandling.sendErrorToMail(ex.ToString() + " , " + codCui + " , " + codAgent);
+            }
+
+            return diviziiClient;
+
+
+        }
+
         public static string getDiviziiClient(OracleConnection connection, string codClient, string codAgent)
         {
 
             string diviziiClient = "";
+
+            if (codAgent == null || codAgent.Trim().Equals(""))
+                return "";
 
             OracleDataReader oReader = null;
 
@@ -859,12 +995,18 @@ namespace WebService1
                 }
 
                 oReader = cmd.ExecuteReader();
+                string divizie = "";
 
                 if (oReader.HasRows)
                 {
                     while (oReader.Read())
                     {
-                        diviziiClient += oReader.GetString(0).ToString() + ";";
+                        divizie = oReader.GetString(0).ToString();
+
+                        if (divizie.Equals("04"))
+                            divizie = "040;041";
+
+                        diviziiClient += divizie + ";";
                     }
                 }
 
@@ -1035,7 +1177,7 @@ namespace WebService1
             return serializedResult;
         }
 
-        public string getDatePersonaleClient(string numeClient, string tipClient)
+        public string getDatePersonaleClient(string numeClient, string tipClient, string codAgent)
         {
             OracleConnection connection = new OracleConnection();
             OracleCommand cmd = new OracleCommand();
@@ -1079,6 +1221,7 @@ namespace WebService1
                         datePersonale.codjudet = oReader.GetString(2);
                         datePersonale.localitate = oReader.GetString(3);
                         datePersonale.strada = oReader.GetString(4);
+                        datePersonale.divizii = "";
 
                         if (tipClient.Equals("PF"))
                         {
@@ -1104,6 +1247,10 @@ namespace WebService1
                             {
                                 datePersonale.tipPlata = tipPlataContract;
                             }
+
+                            if (codAgent != null && datePersonale.codClient != null && !datePersonale.codClient.Equals("-1"))
+                                datePersonale.divizii = getDiviziiClient(connection, datePersonale.codClient, codAgent);
+
                         }
 
                         listDatePersonale.Add(datePersonale);
@@ -1280,6 +1427,9 @@ namespace WebService1
         public static string getTipUser(OracleConnection connection, string codAgent)
         {
             string tipAgent = "NN";
+
+            if (codAgent == null)
+                return "NN";
 
             OracleCommand cmd = new OracleCommand();
             OracleDataReader oReader = null;

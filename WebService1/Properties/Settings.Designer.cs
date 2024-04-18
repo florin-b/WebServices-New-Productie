@@ -26,7 +26,7 @@ namespace WebService1.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/rfc/sap/ztbl_webservice/900/ztbl_we" +
+        [global::System.Configuration.DefaultSettingValueAttribute("http://sap-prd5a.arabesque.ro:8035/sap/bc/srt/rfc/sap/ztbl_webservice/900/ztbl_we" +
             "bservice/ztbl_webservice")]
         public string WebService1_SAPWebServices_ZTBL_WEBSERVICEService {
             get {
@@ -151,6 +151,17 @@ namespace WebService1.Properties {
         public string WebService1_SapWsCabluri05_ZWMS_UL10_GET_STOCK_ARAB {
             get {
                 return ((string)(this["WebService1_SapWsCabluri05_ZWMS_UL10_GET_STOCK_ARAB"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/rfc/sap/zws_sal_cva/900/zws_sal_cva" +
+            "/zws_sal_cva")]
+        public string WebService1_SalarizareCVA_ZWS_SAL_CVA {
+            get {
+                return ((string)(this["WebService1_SalarizareCVA_ZWS_SAL_CVA"]));
             }
         }
     }

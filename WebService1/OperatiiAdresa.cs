@@ -319,7 +319,7 @@ namespace WebService1
 
 
                     if (adresaComanda.latitude != null && !adresaInLista(clientComanda.codAdresa, adreseClient))
-                        adaugaCodAdresa(connection, clientComanda, dateLivrare.coordonateGps);
+                        adaugaCodAdresa(connection, clientComanda, dateLivrare.coordonateGps, dateLivrare.codPostal);
                 }
 
 
@@ -444,7 +444,7 @@ namespace WebService1
         }
 
 
-        private static void adaugaCodAdresa(OracleConnection connection, ClientComanda clientComanda, String coordonate)
+        private static void adaugaCodAdresa(OracleConnection connection, ClientComanda clientComanda, String coordonate, string codPostal)
         {
 
             String[] coords = coordonate.Split('#');
@@ -483,7 +483,7 @@ namespace WebService1
 
 
 
-                cmd.CommandText = " insert into sapprd.zadreseclienti(mandt, codclient, codadresa, latitude, longitude ) values ('900', :codClient, :codAdresa, :latitude, :longitude) ";
+                cmd.CommandText = " insert into sapprd.zadreseclienti(mandt, codclient, codadresa, latitude, longitude, cod_postal ) values ('900', :codClient, :codAdresa, :latitude, :longitude, :codPostal) ";
 
                 cmd.CommandType = CommandType.Text;
                 cmd.Parameters.Clear();
@@ -499,6 +499,9 @@ namespace WebService1
 
                 cmd.Parameters.Add(":longitude", OracleType.VarChar, 30).Direction = ParameterDirection.Input;
                 cmd.Parameters[3].Value = coords[1];
+
+                cmd.Parameters.Add(":codPostal", OracleType.VarChar, 45).Direction = ParameterDirection.Input;
+                cmd.Parameters[4].Value = codPostal != null && codPostal.Trim() != "" ? codPostal : " ";
 
                 cmd.ExecuteNonQuery();
 
@@ -801,6 +804,127 @@ namespace WebService1
 
         }
 
+        public string getZileLivrare(string coords)
+        {
+            DatePoligon datePoligon = new JavaScriptSerializer().Deserialize<DatePoligon>(new OperatiiPoligoane().getDatePoligonLivrareDB(coords));
+            return getZileLivrare(datePoligon.filialaPrincipala, datePoligon.tipZona);
+        }
+
+
+        public string getZileLivrare(string filiala, string zona)
+        {
+            List<string> zileLivrare = new List<string>();
+
+
+            try
+            {
+
+                SAPWebServices.ZTBL_WEBSERVICE webService = new SAPWebServices.ZTBL_WEBSERVICE();
+                SAPWebServices.ZcheckZileLivrare inParam = new SAPWebServices.ZcheckZileLivrare();
+                System.Net.NetworkCredential nc = new System.Net.NetworkCredential(Auth.getUser(), Auth.getPass());
+                webService.Credentials = nc;
+                webService.Timeout = 300000;
+
+                inParam.IpWerks = filiala;
+                inParam.IpZona = HelperComenzi.getTipZonaMathaus(zona);
+
+                SAPWebServices.ZileIncarc[] zileInc = new SAPWebServices.ZileIncarc[1];
+                inParam.ItZile = zileInc;
+
+                SAPWebServices.ZcheckZileLivrareResponse resp = webService.ZcheckZileLivrare(inParam);
+
+                foreach (SAPWebServices.ZileIncarc itemZileInc in resp.ItZile)
+                {
+                    zileLivrare.Add(General.GeneralUtils.formatStrDateV1(itemZileInc.Data));
+                }
+
+            }
+            catch (Exception ex)
+            {
+                ErrorHandling.sendErrorToMail("getZileLivrare:" + ex.ToString());
+            }
+
+            return new JavaScriptSerializer().Serialize(zileLivrare);
+        }
+
+
+        public string getCoduriPostale(string codJudet, string localitate, string strada)
+        {
+
+            List<CodPostal> listCoduri = new List<CodPostal>();
+
+            OracleConnection connection = new OracleConnection();
+            OracleCommand cmd = new OracleCommand();
+            OracleDataReader oReader = null;
+
+            string localitateSql = localitate;
+            string sectorSql = "";
+            string nrSector = "";
+
+            if (localitate.ToLower().Contains("sector"))
+            {
+                localitateSql = "Bucuresti";
+                sectorSql = " and sector = :sector ";
+                nrSector = localitate.Split(' ')[1].Trim();
+            }
+
+            try
+            {
+                string connectionString = DatabaseConnections.ConnectToProdEnvironment();
+
+                connection.ConnectionString = connectionString;
+                connection.Open();
+
+                cmd = connection.CreateCommand();
+
+                cmd.CommandText = " select codpostal, localitate, strada, numar from SAPPRD.zcodpostal where mandt = '900' and " +
+                                  " bland = :codJudet and lower(localitate) = :localitate and lower(strada) like '%' || :strada || '%' " + sectorSql +
+                                  " order by strada, numar";
+
+                cmd.CommandType = CommandType.Text;
+                cmd.Parameters.Clear();
+
+                cmd.Parameters.Add(":codJudet", OracleType.VarChar, 9).Direction = ParameterDirection.Input;
+                cmd.Parameters[0].Value = codJudet;
+
+                cmd.Parameters.Add(":localitate", OracleType.VarChar, 120).Direction = ParameterDirection.Input;
+                cmd.Parameters[1].Value = localitate.Trim().ToLower();
+
+                cmd.Parameters.Add(":strada", OracleType.VarChar, 180).Direction = ParameterDirection.Input;
+                cmd.Parameters[2].Value = Utils.getCleanStrada(strada.Trim()).Trim();
+
+                if (!sectorSql.Equals(String.Empty))
+                {
+                    cmd.Parameters.Add(":sector", OracleType.VarChar, 3).Direction = ParameterDirection.Input;
+                    cmd.Parameters[3].Value = nrSector;
+                }
+
+                oReader = cmd.ExecuteReader();
+
+                if (oReader.HasRows)
+                {
+                    while (oReader.Read())
+                    {
+                        CodPostal codPostal = new CodPostal();
+                        codPostal.localitate = oReader.GetString(1);
+                        codPostal.strada = oReader.GetString(2);
+                        codPostal.nrStrada = oReader.GetString(3);
+                        codPostal.codPostal = oReader.GetString(0);
+                        listCoduri.Add(codPostal);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorHandling.sendErrorToMail(ex.ToString());
+            }
+            finally
+            {
+                DatabaseConnections.CloseConnections(oReader, cmd, connection);
+            }
+
+            return new JavaScriptSerializer().Serialize(listCoduri);
+        }
 
         private static string getNumeJudet(string codJudet)
         {

@@ -49,6 +49,7 @@ namespace WebService1
         public string tipCamion;
         public string greutateComanda;
         public string tipComandaCamion;
+        public string isComandaDL;
 
 
 
@@ -106,6 +107,7 @@ namespace WebService1
         public double quantity50;
         public string unit50;
         public double cantUmb;
+        public string tipStoc;
 
     }
 

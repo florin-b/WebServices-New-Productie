@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="WebService1_SAPWebServices_ZTBL_WEBSERVICEService" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/rfc/sap/ztbl_webservice/900/ztbl_webservice/ztbl_webservice</Value>
+      <Value Profile="(Default)">http://sap-prd5a.arabesque.ro:8035/sap/bc/srt/rfc/sap/ztbl_webservice/900/ztbl_webservice/ztbl_webservice</Value>
     </Setting>
     <Setting Name="WebService1_SapWsClp_ZCLP_WEBSERVICE" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/rfc/sap/zclp_webservice/900/zclp_webservice/zclp_webservice</Value>
@@ -37,6 +37,9 @@
     </Setting>
     <Setting Name="WebService1_SapWsCabluri05_ZWMS_UL10_GET_STOCK_ARAB" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/rfc/sap/zwms_ul10_get_stock_arab/900/zwms_ul10_get_stock_arab/zwms_ul10_get_stock_arab</Value>
+    </Setting>
+    <Setting Name="WebService1_SalarizareCVA_ZWS_SAL_CVA" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/rfc/sap/zws_sal_cva/900/zws_sal_cva/zws_sal_cva</Value>
     </Setting>
   </Settings>
 </SettingsFile>

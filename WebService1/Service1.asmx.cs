@@ -39,6 +39,8 @@ namespace WebService1
         public static string[] agentiExtra07 = { "83436", "83090", "83311", "83436", "83297", "83435", "83309", "83090", "83311" };
         public static string[] agentiExtra08 = { "83402" };
 
+        public const string LiteSFAVer = "ver:285";
+
         string globalParrentId = "0";
 
         Random randNum = new Random();
@@ -58,7 +60,7 @@ namespace WebService1
         }
 
 
-   
+
 
         [WebMethod]
         public string testPoligoane(string coords)
@@ -88,13 +90,6 @@ namespace WebService1
             DatePoligon datePoligon = ser.Deserialize<DatePoligon>(poligon);
 
             new OperatiiMathaus().getTransportService(antetComandaMathaus, comandaMathaus, canal, datePoligon);
-
-
-
-
-
-
-
 
         }
 
@@ -208,15 +203,15 @@ namespace WebService1
         }
 
         [WebMethod]
-        public string getCostMacara(string unitLog, string codAgent, string codClient, string codFurnizor, string listArt)
+        public string getCostMacara(string unitLog, string codAgent, string codClient, string codFurnizor, string listArt, string isCustodie)
         {
-            return new OperatiiMacara().getCostMacara(unitLog, codAgent, codClient, codFurnizor, listArt, "");
+            return new OperatiiMacara().getCostMacara(unitLog, codAgent, codClient, codFurnizor, listArt, "", isCustodie);
         }
 
         [WebMethod]
-        public string getCostMacaraComenzi(string codAgent, string codClient, string codFurnizor, string listComenzi, string canal)
+        public string getCostMacaraComenzi(string codAgent, string codClient, string codFurnizor, string listComenzi, string canal, string isCustodie)
         {
-            return new OperatiiMacara().getCostMacaraComenzi(codAgent, codClient, codFurnizor, listComenzi, canal);
+            return new OperatiiMacara().getCostMacaraComenzi(codAgent, codClient, codFurnizor, listComenzi, canal, isCustodie);
         }
 
 
@@ -251,6 +246,12 @@ namespace WebService1
         public string getSalarizareDepartament(string ul, string divizie, string an, string luna)
         {
             return new SalarizareAgenti2019().getSalarizareDepartament(ul, divizie, an, luna);
+        }
+
+        [WebMethod]
+        public string getSaralizareCVA(string codAgent, string unitLog, string an, string luna)
+        {
+            return new SalarizareConsilieri().getSalarizareConsilieri(codAgent, unitLog, an, luna);
         }
 
         [WebMethod]
@@ -1177,6 +1178,13 @@ namespace WebService1
         {
             OperatiiRetur opRetur = new OperatiiRetur();
             return opRetur.saveComandaRetur(dateRetur, tipRetur);
+        }
+
+        [WebMethod]
+        public string saveListComenziRetur(string dateRetur, string tipRetur)
+        {
+            OperatiiRetur opRetur = new OperatiiRetur();
+            return opRetur.saveListComenziRetur(dateRetur, tipRetur);
         }
 
         [WebMethod]
@@ -2320,13 +2328,6 @@ namespace WebService1
             string tabFiliala = "";
             string condFiliala = "";
 
-            /*
-            if (filiala != null && filiala.Length == 4)
-            {
-                tabFiliala = " , sapprd.zpdl_jud j ";
-                condFiliala = " and j.mandt='900' and j.werks =:filiala and j.zregio = a.region ";
-            }
-            */
 
             try
             {
@@ -2339,8 +2340,8 @@ namespace WebService1
 
                 cmd.CommandText = " select nvl(a.city1,' ') city1 , nvl(a.street,' ') street, " +
                                   " nvl(a.house_num1, ' ') house_num, nvl(region, ' '), a.addrnumber, nvl(trim(c.latitude),-1), nvl(trim(c.longitude),-1), nvl(t.greutate, 0), " +
-                                  " nvl(b1.oras, '-1') oras, nvl(b1.razakm, -1) raza, nvl(c1.latitudine, -1) lat, nvl(c1.longitudine, -1) lon " +
-                                  " from sapprd.adrc a, sapprd.zadreseclienti c, sapprd.ztonajclient t, " +
+                                  " nvl(b1.oras, '-1') oras, nvl(b1.razakm, -1) raza, nvl(c1.latitudine, -1) lat, nvl(c1.longitudine, -1) lon, " +
+                                  " c.cod_postal from sapprd.adrc a, sapprd.zadreseclienti c, sapprd.ztonajclient t, " +
                                   " sapprd.zlocalitati a1, sapprd.zoraseromania b1, sapprd.zcoordlocalitati c1 " + tabFiliala + 
                                   " where a.client = '900' and t.mandt(+) = '900' and t.kunnr(+) = c.codclient and t.adrnr(+) = c.codadresa " +
                                   " and c.codclient = :codClient and c.codadresa = a.addrnumber and " +
@@ -2390,7 +2391,8 @@ namespace WebService1
                         oAdresa.isOras = !oReader.GetString(8).Equals("-1");
                         oAdresa.razaKm = oReader.GetInt32(9);
                         oAdresa.coordsCentru = oReader.GetString(10) + "," + oReader.GetString(11);
-                        
+                        oAdresa.codPostal = oReader.GetString(12);
+
 
                         if (oAdresa.strada.Trim().Length > 0)
                             listaAdreseLivrare.Add(oAdresa);
@@ -2979,9 +2981,9 @@ namespace WebService1
         }
 
         [WebMethod]
-        public string getStareTVA(string cuiClient)
+        public string getStareTVA(string cuiClient, string codAgent)
         {
-            return new VerificaTva().isPlatitorTva(cuiClient).ToString();
+            return new VerificaTva().isPlatitorTva(cuiClient, codAgent).ToString();
         }
 
         [WebMethod]
@@ -3055,9 +3057,15 @@ namespace WebService1
         }
 
         [WebMethod]
-        public double getValoareComenziNumerar(string codClient, string dataLivrare, string tipClient)
+        public double getValoareComenziNumerar(string codClient, string dataLivrare, string tipClient, string idComanda)
         {
-            return new HelperClienti().getValoareComenziNumerar(codClient, dataLivrare, tipClient);
+            return new HelperClienti().getValoareComenziNumerar(codClient, dataLivrare, tipClient, idComanda);
+        }
+
+        [WebMethod]
+        public string getStocSapService(string codArt, string um, string filiala, string tipUser)
+        {
+            return new OperatiiStocuri().getStocSap(codArt, um, filiala, tipUser);
         }
 
         [WebMethod]
@@ -3414,8 +3422,8 @@ namespace WebService1
                                   " a.adr_livrare_d, a.city_d, a.region_d, a.macara, a.nume_client, a.stceg, a.id_obiectiv, a.adresa_obiectiv, " +
                                   " nvl((select latitude||','||longitude from sapprd.zcoordcomenzi where idcomanda = a.id),'0,0') coord, " +
                                   " 0 tonaj, nvl(client_raft,' '), a.meserias, a.fact_palet_separat, a.lifnr, a.lifnr_prod, a.descoperita,  nvl((trim(a.prog_livr)),'0'),  " +
-                                  " a.livr_sambata, a.bloc, a.cod_client, a.ref_client , a.docin, a.ac_zc, a.nrcmdsap, a.tip_pers tip_pers_av, fil_plata, a.cod_agent  " +
-                                  " from sapprd.zcomhead_tableta a, clienti b " +
+                                  " a.livr_sambata, a.bloc, a.cod_client, a.ref_client , nvl(a.docin,' '), a.ac_zc, a.nrcmdsap, a.tip_pers tip_pers_av, fil_plata, a.cod_agent,  " +
+                                  " a.cod_postal, a.custodie, a.val_incasata from sapprd.zcomhead_tableta a, clienti b " +
                                   " where a.id=:idcmd and a.cod_client = b.cod ";
 
                 cmd.Parameters.Clear();
@@ -3510,6 +3518,9 @@ namespace WebService1
 
                     dateLivrare.filialaPlata = oReader.GetString(oReader.GetOrdinal("fil_plata"));
                     dateLivrare.tonaj = OperatiiSuplimentare.getTonajComanda(connection, nrCmd);
+                    dateLivrare.codPostal = oReader.GetString(oReader.GetOrdinal("cod_postal"));
+                    dateLivrare.isComandaCustodie = oReader.GetString(oReader.GetOrdinal("custodie")).ToUpper().Equals("X") ? "true" : "false";
+                    dateLivrare.valoareIncasare = oReader.GetDouble(oReader.GetOrdinal("val_incasata")).ToString();
 
                     if ((dateLivrare.tipPersAgent.Equals("CV") || dateLivrare.tipPersAgent.Equals("SITE")))
                     {
@@ -4426,6 +4437,8 @@ namespace WebService1
 
 
                 }
+
+                retVal += "#" + LiteSFAVer;
 
 
 
@@ -6902,7 +6915,7 @@ namespace WebService1
 
                     if (codUser != "00000000")
                     {
-                        if (tipUserSap != null && (tipUserSap.Equals(Constants.tipSuperAv) || tipUserSap.Equals(Constants.tipInfoAv)))
+                        if (tipUserSap != null && (tipUserSap.Equals(Constants.tipSuperAv) || tipUserSap.Equals(Constants.tipInfoAv) || tipUserSap.Equals(Constants.tipOIVPD)))
                         {
                             condSuperAv = " and ((sav.mandt = '900' and sav.cod_sagent = :codag and sav.id_comanda = a.id) or a.cod_agent = :codag ) ";
                         }
@@ -7030,9 +7043,9 @@ namespace WebService1
                 if (tipCmd == "1") //doar comenzile pentru modificare
                 {
 
-                    if (tipUserSap != null && tipUserSap.Equals(Constants.tipSuperAv) || tipUserSap.Equals(Constants.tipOIVPD) || tipUserSap.Equals(Constants.tipCVR))
+                    if (tipUserSap != null && tipUserSap.Equals(Constants.tipSuperAv) || tipUserSap.Equals(Constants.tipOIVPD))
                     {
-                        tipComanda = " and a.cod_agent =:codag and sav.mandt(+) = '900' and sav.cod_sagent(+) = a.cod_agent and sav.id_comanda(+) = a.id and a.status_aprov in ('1','3','4','9','0','2') and a.status in ('2','9','10') ";
+                        tipComanda = " and ((sav.mandt = '900' and sav.cod_sagent = :codag and sav.id_comanda = a.id) ) and a.status_aprov in ('1','3','4','9','0','2') and a.status in ('2','9','10')";
                     }
                     else
                     {
@@ -8729,6 +8742,12 @@ namespace WebService1
         }
 
         [WebMethod]
+        public string getCoduriPostale(string codJudet, string localitate, string strada)
+        {
+            return new OperatiiAdresa().getCoduriPostale(codJudet, localitate, strada);
+        }
+
+        [WebMethod]
         public string getLocalitatiLivrareRapida()
         {
             return new OperatiiAdresa().getLocalitatiLivrareRapida();
@@ -9815,9 +9834,9 @@ namespace WebService1
   
 
         [WebMethod]
-        public string getDatePersonale(string numeClient, string tipClient)
+        public string getDatePersonale(string numeClient, string tipClient, string codAgent)
         {
-            return new OperatiiClienti().getDatePersonaleClient(numeClient, tipClient);
+            return new OperatiiClienti().getDatePersonaleClient(numeClient, tipClient, codAgent);
         }
 
         [WebMethod]
@@ -12339,7 +12358,7 @@ namespace WebService1
                                 dateLivrareDistrib.totalComanda = totalComanda.ToString();
 
                                 dateLivrareDistrib.filialaCLP = " ";
-                                if (!HelperComenzi.isUlEquals(ulStoc, dateLivrareDistrib.unitLog) && !articol.filialaSite.Equals("BV90") && !ulStoc.Equals("BV90"))
+                                if (!HelperComenzi.isUlEquals(ulStoc, dateLivrareDistrib.unitLog) && !ulStoc.Equals("BV90"))
                                     dateLivrareDistrib.filialaCLP = ulStoc;
 
 
@@ -12432,7 +12451,7 @@ namespace WebService1
                                 dateLivrareDistrib.totalComanda = totalComanda.ToString();
 
                                 dateLivrareDistrib.filialaCLP = " ";
-                                if (!HelperComenzi.isUlEquals(ulStoc, dateLivrareDistrib.unitLog) && !articol.filialaSite.Equals("BV90") && !ulStoc.Equals("BV90"))
+                                if (!HelperComenzi.isUlEquals(ulStoc, dateLivrareDistrib.unitLog) && !ulStoc.Equals("BV90"))
                                     dateLivrareDistrib.filialaCLP = ulStoc;
 
                                 if (tipTranspCmd != null && !tipTranspCmd.Equals(String.Empty))
@@ -12976,11 +12995,13 @@ namespace WebService1
                 query = " insert into sapprd.zcomhead_tableta(mandt,id,cod_client,ul,status,status_aprov ,datac,cantar,cod_agent,cod_init,tip_plata,pers_contact,telefon,adr_livrare, " +
                         " valoare,mt,com_referinta,accept1,accept2,fact_red, city, region, pmnttrms , obstra, timpc, ketdat, docin, adr_noua, depart, obsplata, addrnumber, nume_client, " +
                         " stceg, tip_pers, val_incasata, site, email, mod_av, cod_j, adr_livrare_d, city_d, region_d, aprob_cv_necesar, macara, val_min_tr, id_obiectiv, " +
-                        " adresa_obiectiv, parent_id, client_raft, meserias,fact_palet_separat, lifnr, lifnr_prod, descoperita, prog_livr, livr_sambata, bloc, ref_client, ac_zc, fil_plata) " +
+                        " adresa_obiectiv, parent_id, client_raft, meserias,fact_palet_separat, lifnr, lifnr_prod, descoperita, prog_livr, livr_sambata, bloc, ref_client, " +
+                        " ac_zc, fil_plata , cod_postal, custodie) " +
                         " values ('900',pk_key.nextval, :codCl,:ul,:status,:status_aprov, " +
                         " :datac,:cantar,:agent,:codinit,:plata,:perscont,:tel,:adr,:valoare,:transp,:comsap,:accept1,:accept2,:factred,:city,:region,:termplt,:obslivr,:timpc,:datalivrare, " +
                         " :tipDocIn, :adrNoua, :depart, :obsplata, :adrnumber, :numeClient, :cnpClient, :tipPers, :valIncasata, :cmdSite, :email, :mod_av, :codJ, :adr_livrare_d, :city_d, :region_d, " +
-                        " :necesarCVAprob, :macara, :val_min_tr, :idObiectiv, :adresaObiectiv, :parent_id, :client_raft, :meserias, :factPaletSeparat, :lifnr, :lifnr_prod, :descoperita, :progrLivr, :livrSambata, :bloc, :refClient, :aczc, :filPlata ) " +
+                        " :necesarCVAprob, :macara, :val_min_tr, :idObiectiv, :adresaObiectiv, :parent_id, :client_raft, :meserias, :factPaletSeparat, :lifnr, " +
+                        " :lifnr_prod, :descoperita, :progrLivr, :livrSambata, :bloc, :refClient, :aczc, :filPlata, :codPostal, :custodie ) " +
                         " returning id into :id ";
 
 
@@ -13282,6 +13303,12 @@ namespace WebService1
                 cmd.Parameters.Add(":filPlata", OracleType.VarChar, 12).Direction = ParameterDirection.Input;
                 cmd.Parameters[58].Value = dateLivrare.filialaPlata != null && dateLivrare.filialaPlata.Trim().Length > 0 ? dateLivrare.filialaPlata : " ";
 
+                cmd.Parameters.Add(":codPostal", OracleType.VarChar, 45).Direction = ParameterDirection.Input;
+                cmd.Parameters[59].Value = dateLivrare.codPostal != null && dateLivrare.codPostal.Trim().Length > 0 ? dateLivrare.codPostal : " ";
+
+                cmd.Parameters.Add(":custodie", OracleType.VarChar, 3).Direction = ParameterDirection.Input;
+                cmd.Parameters[60].Value = dateLivrare.isComandaCustodie != null && Boolean.Parse(dateLivrare.isComandaCustodie) ? "X" : " ";
+
                 OracleParameter idCmd = new OracleParameter("id", OracleType.Number);
                 idCmd.Direction = ParameterDirection.Output;
                 cmd.Parameters.Add(idCmd);
@@ -13554,7 +13581,7 @@ namespace WebService1
                     OperatiiSuplimentare.aprobaAutomatSD(connection, dateLivrare.codAgent, idCmd.Value.ToString());
                 }
 
-                if (dateLivrare.codSuperAgent != null && dateLivrare.codSuperAgent.Trim().Length > 0 && !dateLivrare.codSuperAgent.Equals(dateLivrare.codAgent))
+                if (tipUserSap.Equals("OIVPD") || (dateLivrare.codSuperAgent != null && dateLivrare.codSuperAgent.Trim().Length > 0 && !dateLivrare.codSuperAgent.Equals(dateLivrare.codAgent)))
                 {
                     OperatiiSuplimentare.saveComandaSuperAv(connection, dateLivrare.codSuperAgent, idCmd.Value.ToString());
                 }
@@ -13980,6 +14007,12 @@ namespace WebService1
         }
 
         [WebMethod]
+        public string getZileLivrareFiliala(string coords)
+        {
+            return new OperatiiAdresa().getZileLivrare(coords);
+        }
+
+        [WebMethod]
         public string getAgentClientInfo(string codClient, string filiala)
         {
             return new OperatiiComenzi().getAgentComandaInfo(codClient, filiala);
@@ -14236,13 +14269,9 @@ namespace WebService1
         {
 
 
-
-
             string retVal = "";
             OracleConnection connection = null;
             OracleCommand cmd = new OracleCommand();
-
-
 
             try
             {
@@ -14309,8 +14338,14 @@ namespace WebService1
                 //exceptie SDKA
                 string strTipAcces = tipAcces.Value.ToString();
 
- 
- 
+                if (strTipAcces == "45")
+                {
+                    strTipAcces = "14";
+                }
+
+                if (strTipAcces == "1066")
+                    strTipAcces = "17";
+
 
                 retVal = resp.Value.ToString() + "#" + depart.Value.ToString().Trim() + "#" + localComp + "#" + userName.Value.ToString().Trim() + "#" + idAg.Value.ToString().Trim() + "#" + strTipAcces;
 
@@ -14344,6 +14379,8 @@ namespace WebService1
 
                         if (tipAgent.Equals("SRM"))
                             tipAgent = "CVR";
+                        else if (tipAgent.Equals("EAP"))
+                            tipAgent = "CVIP";
 
                         consWood = oReader.GetString(1);
                         filialaHome = oReader.GetString(2).Equals("-1") ? "false" : "true";
@@ -14385,6 +14422,10 @@ namespace WebService1
 
                 if (localTipAgent.Equals("SMR"))
                     localTipAgent = "SM";
+
+                if (strTipAcces.Equals("45"))
+                    strTipAcces = "14";
+                
 
                 //citire procente discount consilieri si sm
                 string procenteCons = "-1!-1!-1!-1";
@@ -14451,6 +14492,9 @@ namespace WebService1
 
                 if (tipAgent.Equals("KA3") || tipAgent.Equals("KA1") || tipAgent.Equals("SDKA"))
                     tipAgent = "KA";
+
+                if (tipAgent.Equals("DDIPNC"))
+                    tipAgent = "DV";
 
 
 

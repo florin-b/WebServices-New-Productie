@@ -64,6 +64,7 @@ namespace WebService1
         public string codJudet;
         public string localitate;
         public string strada;
+        public string diviziiClient;
     }
 
     public class ClientIP : Client
@@ -137,6 +138,7 @@ namespace WebService1
         public bool isOras;
         public int razaKm;
         public string coordsCentru;
+        public string codPostal;
     }
 
 
@@ -325,6 +327,8 @@ namespace WebService1
         public bool isComandaACZC;
         public string tipPersAgent;
         public string filialaPlata;
+        public string codPostal;
+        public string isComandaCustodie;
     }
 
 

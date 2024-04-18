@@ -49,4 +49,12 @@ namespace WebService1
         public string coordonate;
     }
 
+    public class CodPostal
+    {
+        public string localitate;
+        public string strada;
+        public string nrStrada;
+        public string codPostal;
+    }
+
 }

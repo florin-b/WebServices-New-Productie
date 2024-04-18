@@ -118,5 +118,11 @@ namespace DistributieWebServices
             return nowTime;
         }
 
+        public static string getCleanStrada(string numeStrada)
+        {
+            return numeStrada.ToLower().Replace("piata", "").Replace("strada", "").Replace("str", "").Replace("str.", "").Replace("bulevardul", "")
+                .Replace("b-dul", "").Replace("blvd", "").Replace("calea", "").Replace("intrarea", "").Replace("aleea", "");
+        }
+
     }
 }

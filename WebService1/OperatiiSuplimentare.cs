@@ -61,7 +61,7 @@ namespace WebService1
             catch (Exception ex)
             {
 
-                ErrorHandling.sendErrorToMail(ex.ToString());
+                ErrorHandling.sendErrorToMail(ex.ToString() + " , tonaj = " + tonaj + " , codClient = " + codClient + " , codAdresa = " + codAdresa );
             }
             finally
             {

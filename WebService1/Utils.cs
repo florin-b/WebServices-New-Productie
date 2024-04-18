@@ -625,6 +625,13 @@ namespace WebService1
             return true;
         }
 
+        public static string getCleanStrada(string numeStrada)
+        {
+            return numeStrada.ToLower().Replace("piata", "").Replace("strada", "").Replace("str", "").Replace("str.", "").Replace("bulevardul", "")
+                .Replace("b-dul", "").Replace("blvd", "").Replace("calea", "").Replace("intrarea", "").Replace("aleea", "");
+        }
+
+
         public string getAdresaFiliala(string unitLog)
         {
 
@@ -737,6 +744,11 @@ namespace WebService1
                 case "SB20":
                 case "SB40":
                     retVal = "Soseaua Alba Iulia nr. 112#Sibiu#32#Sibiu#45.79036779008271#24.08786676824017";
+                    break;
+                case "BZ10":
+                case "BZ20":
+                case "BZ40":
+                    retVal = "Soseaua Nordului nr. 12A#Buzau#10#Buzau#45.172324160023365#26.81209892965143";
                     break;
             }
 
