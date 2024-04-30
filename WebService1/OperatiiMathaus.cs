@@ -1353,7 +1353,7 @@ namespace WebService1
 
                     DateArticolMathaus articolComanda = null;
 
-                    if (!dateArticol.productCode.StartsWith("0000000000"))
+                    if (!dateArticol.productCode.StartsWith("0000000000") && Char.IsDigit(dateArticol.productCode, 0))
                         dateArticol.productCode = "0000000000" + dateArticol.productCode;
 
                     artFound = false;
@@ -1448,6 +1448,10 @@ namespace WebService1
                         if (conditieArticol)
                         {
                             articolMathaus.depozit = depozitArticol.depozit;
+                            articolMathaus.cmpCorectat = depozitArticol.cmpCorectat;
+
+                            if (!articolMathaus.productCode.StartsWith("0000000000"))
+                                articolMathaus.productCode = "0000000000" + articolMathaus.productCode;
 
                             if (stocSap)
                                 articolMathaus.deliveryWarehouse = depozitArticol.filiala;
@@ -1609,122 +1613,6 @@ namespace WebService1
             return serializer.Serialize(livrareMathaus);
 
         }
-
-
-
-        public string getLivrariComanda_old(string antetComanda, string strComanda, string canal)
-        {
-
-            JavaScriptSerializer serializer = new JavaScriptSerializer();
-            LivrareMathaus livrareMathaus = new LivrareMathaus();
-
-            try
-            {
-
-                AntetCmdMathaus antetCmdMathaus = null;
-                if (antetComanda != null)
-                    antetCmdMathaus = serializer.Deserialize<AntetCmdMathaus>(antetComanda);
-
-                ComandaMathaus comandaMathaus = serializer.Deserialize<ComandaMathaus>(strComanda);
-                List<DateArticolMathaus> articole = comandaMathaus.deliveryEntryDataList;
-
-                ComandaMathaus comanda = new ComandaMathaus();
-                comanda.sellingPlant = comandaMathaus.sellingPlant;
-                List<DateArticolMathaus> deliveryEntryDataList = new List<DateArticolMathaus>();
-
-                foreach (DateArticolMathaus dateArticol in articole)
-                {
-                    if (!dateArticol.tip2.Equals("S"))
-                        continue;
-
-                    DateArticolMathaus articol = new DateArticolMathaus();
-                    articol.productCode = "0000000000" + dateArticol.productCode;
-                    articol.quantity = Math.Ceiling(dateArticol.quantity);
-                    articol.unit = dateArticol.unit;
-                    deliveryEntryDataList.Add(articol);
-
-                }
-
-                comanda.deliveryEntryDataList = deliveryEntryDataList;
-
-                ComandaMathaus comandaRezultat;
-                if (comanda.deliveryEntryDataList.Count > 0)
-                {
-                    string strComandaRezultat = callDeliveryService(serializer.Serialize(comanda),"","","");
-                    comandaRezultat = serializer.Deserialize<ComandaMathaus>(strComandaRezultat);
-                }
-                else
-                {
-                    ComandaMathaus cmdMathaus = new ComandaMathaus();
-                    cmdMathaus.sellingPlant = comandaMathaus.sellingPlant;
-                    cmdMathaus.deliveryEntryDataList = new List<DateArticolMathaus>();
-                    comandaRezultat = cmdMathaus;
-                }
-
-                bool artFound = false;
-                foreach (DateArticolMathaus dateArticol in articole)
-                {
-
-                    if (!dateArticol.productCode.StartsWith("0000000000"))
-                        dateArticol.productCode = "0000000000" + dateArticol.productCode;
-
-                    artFound = false;
-                    foreach (DateArticolMathaus dateArticolRez in comandaRezultat.deliveryEntryDataList)
-                    {
-                        if (dateArticolRez.productCode.Equals(dateArticol.productCode) && !dateArticolRez.deliveryWarehouse.Trim().Equals(String.Empty))
-                        {
-                            dateArticol.deliveryWarehouse = dateArticolRez.deliveryWarehouse;
-                            artFound = true;
-                            break;
-                        }
-
-                    }
-
-                    if (!artFound)
-                    {
-                        if (dateArticol.ulStoc != null && dateArticol.ulStoc.Equals("BV90"))
-                            dateArticol.deliveryWarehouse = "BV90";
-                        else
-                            dateArticol.deliveryWarehouse = dateArticol.productCode.StartsWith("0000000000111") ? getULGed(comanda.sellingPlant) : comanda.sellingPlant;
-                    }
-
-                }
-
-                DateTransportMathaus dateTransport = null;
-
-                if (antetCmdMathaus != null)
-                    dateTransport = getTransportService_old(antetCmdMathaus, comandaMathaus);
-
-                foreach (DateArticolMathaus articolMathaus in comandaMathaus.deliveryEntryDataList)
-                {
-                    foreach (DepozitArticolTransport depozitArticol in dateTransport.listDepozite)
-
-                    {
-                        if (articolMathaus.productCode.Equals(depozitArticol.codArticol) && articolMathaus.deliveryWarehouse.Equals(depozitArticol.filiala))
-                        {
-                            articolMathaus.depozit = depozitArticol.depozit;
-                            break;
-                        }
-                    }
-                }
-
-
-                livrareMathaus.comandaMathaus = comandaMathaus;
-                livrareMathaus.costTransport = dateTransport.listCostTransport;
-
-
-            }
-            catch (Exception ex)
-            {
-                ErrorHandling.sendErrorToMail("getLivrariComanda: " + ex.ToString() + " , " + antetComanda + " \n\n " + strComanda);
-            }
-
-            return serializer.Serialize(livrareMathaus);
-
-
-        }
-
-
 
 
 
@@ -2089,6 +1977,7 @@ namespace WebService1
                     depozitArticol.codArticol = itemCmd.Matnr;
                     depozitArticol.filiala = itemCmd.Werks;
                     depozitArticol.depozit = itemCmd.Lgort;
+                    depozitArticol.cmpCorectat = itemCmd.Cmpc.ToString();
                     listArticoleDepoz.Add(depozitArticol);
 
                 }

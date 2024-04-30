@@ -154,16 +154,6 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="OP__ZgetPrice">
-    <wsp:ExactlyOne>
-      <wsp:All>
-        <saptrhnw05:required xmlns:saptrhnw05="http://www.sap.com/NW05/soap/features/transaction/">no</saptrhnw05:required>
-        <sapcomhnd:enableCommit xmlns:sapcomhnd="http://www.sap.com/NW05/soap/features/commit/">false</sapcomhnd:enableCommit>
-        <sapblock:enableBlocking xmlns:sapblock="http://www.sap.com/NW05/soap/features/blocking/">true</sapblock:enableBlocking>
-        <saprmnw05:enableWSRM xmlns:saprmnw05="http://www.sap.com/NW05/soap/features/wsrm/">false</saprmnw05:enableWSRM>
-      </wsp:All>
-    </wsp:ExactlyOne>
-  </wsp:Policy>
   <wsp:Policy wsu:Id="OP__ZdetTransport">
     <wsp:ExactlyOne>
       <wsp:All>
@@ -175,6 +165,16 @@
     </wsp:ExactlyOne>
   </wsp:Policy>
   <wsp:Policy wsu:Id="OP__ZextindeClient">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <saptrhnw05:required xmlns:saptrhnw05="http://www.sap.com/NW05/soap/features/transaction/">no</saptrhnw05:required>
+        <sapcomhnd:enableCommit xmlns:sapcomhnd="http://www.sap.com/NW05/soap/features/commit/">false</sapcomhnd:enableCommit>
+        <sapblock:enableBlocking xmlns:sapblock="http://www.sap.com/NW05/soap/features/blocking/">true</sapblock:enableBlocking>
+        <saprmnw05:enableWSRM xmlns:saprmnw05="http://www.sap.com/NW05/soap/features/wsrm/">false</saprmnw05:enableWSRM>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="OP__ZgetPrice">
     <wsp:ExactlyOne>
       <wsp:All>
         <saptrhnw05:required xmlns:saptrhnw05="http://www.sap.com/NW05/soap/features/transaction/">no</saptrhnw05:required>
@@ -224,6 +224,16 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="OP__ZgetPrice20">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <saptrhnw05:required xmlns:saptrhnw05="http://www.sap.com/NW05/soap/features/transaction/">no</saptrhnw05:required>
+        <sapcomhnd:enableCommit xmlns:sapcomhnd="http://www.sap.com/NW05/soap/features/commit/">false</sapcomhnd:enableCommit>
+        <sapblock:enableBlocking xmlns:sapblock="http://www.sap.com/NW05/soap/features/blocking/">true</sapblock:enableBlocking>
+        <saprmnw05:enableWSRM xmlns:saprmnw05="http://www.sap.com/NW05/soap/features/wsrm/">false</saprmnw05:enableWSRM>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsp:Policy wsu:Id="OP__Zpalcant">
     <wsp:ExactlyOne>
       <wsp:All>
@@ -235,6 +245,16 @@
     </wsp:ExactlyOne>
   </wsp:Policy>
   <wsp:Policy wsu:Id="OP__ZretMarfa">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <saptrhnw05:required xmlns:saptrhnw05="http://www.sap.com/NW05/soap/features/transaction/">no</saptrhnw05:required>
+        <sapcomhnd:enableCommit xmlns:sapcomhnd="http://www.sap.com/NW05/soap/features/commit/">false</sapcomhnd:enableCommit>
+        <sapblock:enableBlocking xmlns:sapblock="http://www.sap.com/NW05/soap/features/blocking/">true</sapblock:enableBlocking>
+        <saprmnw05:enableWSRM xmlns:saprmnw05="http://www.sap.com/NW05/soap/features/wsrm/">false</saprmnw05:enableWSRM>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="OP__ZanuleazaDocumente2">
     <wsp:ExactlyOne>
       <wsp:All>
         <saptrhnw05:required xmlns:saptrhnw05="http://www.sap.com/NW05/soap/features/transaction/">no</saptrhnw05:required>
@@ -274,7 +294,37 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="OP__ZsdSalesdocumentChange">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <saptrhnw05:required xmlns:saptrhnw05="http://www.sap.com/NW05/soap/features/transaction/">no</saptrhnw05:required>
+        <sapcomhnd:enableCommit xmlns:sapcomhnd="http://www.sap.com/NW05/soap/features/commit/">false</sapcomhnd:enableCommit>
+        <sapblock:enableBlocking xmlns:sapblock="http://www.sap.com/NW05/soap/features/blocking/">true</sapblock:enableBlocking>
+        <saprmnw05:enableWSRM xmlns:saprmnw05="http://www.sap.com/NW05/soap/features/wsrm/">false</saprmnw05:enableWSRM>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsp:Policy wsu:Id="OP__ZsdSalesdocumentCreate">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <saptrhnw05:required xmlns:saptrhnw05="http://www.sap.com/NW05/soap/features/transaction/">no</saptrhnw05:required>
+        <sapcomhnd:enableCommit xmlns:sapcomhnd="http://www.sap.com/NW05/soap/features/commit/">false</sapcomhnd:enableCommit>
+        <sapblock:enableBlocking xmlns:sapblock="http://www.sap.com/NW05/soap/features/blocking/">true</sapblock:enableBlocking>
+        <saprmnw05:enableWSRM xmlns:saprmnw05="http://www.sap.com/NW05/soap/features/wsrm/">false</saprmnw05:enableWSRM>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="OP__ZChangeTonajPo">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <saptrhnw05:required xmlns:saptrhnw05="http://www.sap.com/NW05/soap/features/transaction/">no</saptrhnw05:required>
+        <sapcomhnd:enableCommit xmlns:sapcomhnd="http://www.sap.com/NW05/soap/features/commit/">false</sapcomhnd:enableCommit>
+        <sapblock:enableBlocking xmlns:sapblock="http://www.sap.com/NW05/soap/features/blocking/">true</sapblock:enableBlocking>
+        <saprmnw05:enableWSRM xmlns:saprmnw05="http://www.sap.com/NW05/soap/features/wsrm/">false</saprmnw05:enableWSRM>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="OP__ZlivrareClpZulr">
     <wsp:ExactlyOne>
       <wsp:All>
         <saptrhnw05:required xmlns:saptrhnw05="http://www.sap.com/NW05/soap/features/transaction/">no</saptrhnw05:required>
@@ -334,6 +384,26 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="OP__ZanuleazaDocumente">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <saptrhnw05:required xmlns:saptrhnw05="http://www.sap.com/NW05/soap/features/transaction/">no</saptrhnw05:required>
+        <sapcomhnd:enableCommit xmlns:sapcomhnd="http://www.sap.com/NW05/soap/features/commit/">false</sapcomhnd:enableCommit>
+        <sapblock:enableBlocking xmlns:sapblock="http://www.sap.com/NW05/soap/features/blocking/">true</sapblock:enableBlocking>
+        <saprmnw05:enableWSRM xmlns:saprmnw05="http://www.sap.com/NW05/soap/features/wsrm/">false</saprmnw05:enableWSRM>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="OP__ZbapiReservationChange">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <saptrhnw05:required xmlns:saptrhnw05="http://www.sap.com/NW05/soap/features/transaction/">no</saptrhnw05:required>
+        <sapcomhnd:enableCommit xmlns:sapcomhnd="http://www.sap.com/NW05/soap/features/commit/">false</sapcomhnd:enableCommit>
+        <sapblock:enableBlocking xmlns:sapblock="http://www.sap.com/NW05/soap/features/blocking/">true</sapblock:enableBlocking>
+        <saprmnw05:enableWSRM xmlns:saprmnw05="http://www.sap.com/NW05/soap/features/wsrm/">false</saprmnw05:enableWSRM>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsp:Policy wsu:Id="OP__ZcreazaComanda">
     <wsp:ExactlyOne>
       <wsp:All>
@@ -375,6 +445,16 @@
     </wsp:ExactlyOne>
   </wsp:Policy>
   <wsp:Policy wsu:Id="OP__ZmodificaLivrare">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <saptrhnw05:required xmlns:saptrhnw05="http://www.sap.com/NW05/soap/features/transaction/">no</saptrhnw05:required>
+        <sapcomhnd:enableCommit xmlns:sapcomhnd="http://www.sap.com/NW05/soap/features/commit/">false</sapcomhnd:enableCommit>
+        <sapblock:enableBlocking xmlns:sapblock="http://www.sap.com/NW05/soap/features/blocking/">true</sapblock:enableBlocking>
+        <saprmnw05:enableWSRM xmlns:saprmnw05="http://www.sap.com/NW05/soap/features/wsrm/">false</saprmnw05:enableWSRM>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="OP__ZgetColourFormula">
     <wsp:ExactlyOne>
       <wsp:All>
         <saptrhnw05:required xmlns:saptrhnw05="http://www.sap.com/NW05/soap/features/transaction/">no</saptrhnw05:required>
@@ -506,6 +586,11 @@
           <xsd:maxLength value="250" />
         </xsd:restriction>
       </xsd:simpleType>
+      <xsd:simpleType name="char255">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="255" />
+        </xsd:restriction>
+      </xsd:simpleType>
       <xsd:simpleType name="char26">
         <xsd:restriction base="xsd:string">
           <xsd:maxLength value="26" />
@@ -571,6 +656,11 @@
           <xsd:maxLength value="60" />
         </xsd:restriction>
       </xsd:simpleType>
+      <xsd:simpleType name="char7">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="7" />
+        </xsd:restriction>
+      </xsd:simpleType>
       <xsd:simpleType name="char70">
         <xsd:restriction base="xsd:string">
           <xsd:maxLength value="70" />
@@ -602,6 +692,12 @@
           <xsd:fractionDigits value="2" />
         </xsd:restriction>
       </xsd:simpleType>
+      <xsd:simpleType name="curr13.2">
+        <xsd:restriction base="xsd:decimal">
+          <xsd:totalDigits value="13" />
+          <xsd:fractionDigits value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
       <xsd:simpleType name="curr15.2">
         <xsd:restriction base="xsd:decimal">
           <xsd:totalDigits value="15" />
@@ -624,6 +720,12 @@
         <xsd:restriction base="xsd:decimal">
           <xsd:totalDigits value="11" />
           <xsd:fractionDigits value="0" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="decimal15.4">
+        <xsd:restriction base="xsd:decimal">
+          <xsd:totalDigits value="15" />
+          <xsd:fractionDigits value="4" />
         </xsd:restriction>
       </xsd:simpleType>
       <xsd:simpleType name="decimal16.3">
@@ -785,79 +887,6 @@
     </xsd:schema>
     <xsd:schema xmlns:n0="urn:sap-com:document:sap:rfc:functions" attributeFormDefault="qualified" targetNamespace="urn:sap-com:document:sap:soap:functions:mc-style">
       <xsd:import namespace="urn:sap-com:document:sap:rfc:functions" />
-      <xsd:simpleType name="char1">
-        <xsd:restriction base="xsd:string">
-          <xsd:maxLength value="1" />
-        </xsd:restriction>
-      </xsd:simpleType>
-      <xsd:simpleType name="char10">
-        <xsd:restriction base="xsd:string">
-          <xsd:maxLength value="10" />
-        </xsd:restriction>
-      </xsd:simpleType>
-      <xsd:simpleType name="char100">
-        <xsd:restriction base="xsd:string">
-          <xsd:maxLength value="100" />
-        </xsd:restriction>
-      </xsd:simpleType>
-      <xsd:simpleType name="char12">
-        <xsd:restriction base="xsd:string">
-          <xsd:maxLength value="12" />
-        </xsd:restriction>
-      </xsd:simpleType>
-      <xsd:simpleType name="char15">
-        <xsd:restriction base="xsd:string">
-          <xsd:maxLength value="15" />
-        </xsd:restriction>
-      </xsd:simpleType>
-      <xsd:simpleType name="char2">
-        <xsd:restriction base="xsd:string">
-          <xsd:maxLength value="2" />
-        </xsd:restriction>
-      </xsd:simpleType>
-      <xsd:simpleType name="char20">
-        <xsd:restriction base="xsd:string">
-          <xsd:maxLength value="20" />
-        </xsd:restriction>
-      </xsd:simpleType>
-      <xsd:simpleType name="char40">
-        <xsd:restriction base="xsd:string">
-          <xsd:maxLength value="40" />
-        </xsd:restriction>
-      </xsd:simpleType>
-      <xsd:simpleType name="char50">
-        <xsd:restriction base="xsd:string">
-          <xsd:maxLength value="50" />
-        </xsd:restriction>
-      </xsd:simpleType>
-      <xsd:simpleType name="char7">
-        <xsd:restriction base="xsd:string">
-          <xsd:maxLength value="7" />
-        </xsd:restriction>
-      </xsd:simpleType>
-      <xsd:simpleType name="date10">
-        <xsd:restriction base="xsd:string">
-          <xsd:maxLength value="10" />
-          <xsd:pattern value="\d\d\d\d-\d\d-\d\d" />
-        </xsd:restriction>
-      </xsd:simpleType>
-      <xsd:simpleType name="decimal11.0">
-        <xsd:restriction base="xsd:decimal">
-          <xsd:totalDigits value="11" />
-          <xsd:fractionDigits value="0" />
-        </xsd:restriction>
-      </xsd:simpleType>
-      <xsd:simpleType name="quantum13.3">
-        <xsd:restriction base="xsd:decimal">
-          <xsd:totalDigits value="13" />
-          <xsd:fractionDigits value="3" />
-        </xsd:restriction>
-      </xsd:simpleType>
-      <xsd:simpleType name="unit3">
-        <xsd:restriction base="xsd:string">
-          <xsd:maxLength value="3" />
-        </xsd:restriction>
-      </xsd:simpleType>
       <xsd:complexType name="ZsfilTransp">
         <xsd:sequence>
           <xsd:element name="Werks" type="n0:char4" />
@@ -870,21 +899,21 @@
       </xsd:complexType>
       <xsd:complexType name="ZstTaxeAcces">
         <xsd:sequence>
-          <xsd:element name="TipComanda" type="tns:char20" />
-          <xsd:element name="GreutMarfa" type="tns:quantum13.3" />
-          <xsd:element name="Zona" type="tns:char7" />
+          <xsd:element name="TipComanda" type="n0:char20" />
+          <xsd:element name="GreutMarfa" type="n0:quantum13.3" />
+          <xsd:element name="Zona" type="n0:char7" />
           <xsd:element name="MasinaDescoperita" type="n0:char1" />
           <xsd:element name="Macara" type="n0:char1" />
           <xsd:element name="CamionScurt" type="n0:char3" />
           <xsd:element name="CamionIveco" type="n0:char3" />
-          <xsd:element name="Poligon" type="tns:char50" />
-          <xsd:element name="LimitaTonaj" type="tns:quantum13.3" />
+          <xsd:element name="Poligon" type="n0:char50" />
+          <xsd:element name="LimitaTonaj" type="n0:quantum13.3" />
         </xsd:sequence>
       </xsd:complexType>
       <xsd:complexType name="ZsitemsComanda">
         <xsd:sequence>
           <xsd:element name="Matnr" type="n0:char18" />
-          <xsd:element name="BrgewMatnr" type="tns:quantum13.3" />
+          <xsd:element name="BrgewMatnr" type="n0:quantum13.3" />
           <xsd:element name="Kwmeng" type="n0:quantum15.3" />
           <xsd:element name="Vrkme" type="n0:unit3" />
           <xsd:element name="ValPoz" type="n0:curr15.2" />
@@ -892,6 +921,7 @@
           <xsd:element name="Lgort" type="n0:char4" />
           <xsd:element name="Vstel" type="n0:char4" />
           <xsd:element name="Traty" type="n0:char4" />
+          <xsd:element name="Cmpc" type="n0:curr11.2" />
         </xsd:sequence>
       </xsd:complexType>
       <xsd:complexType name="ZileIncarc">
@@ -911,17 +941,17 @@
         <xsd:sequence>
           <xsd:element name="Spart" type="n0:char2" />
           <xsd:element name="ProdPal" type="n0:char20" />
-          <xsd:element name="Coddecor" type="tns:char40" />
+          <xsd:element name="Coddecor" type="n0:char40" />
           <xsd:element name="MatnrPal" type="n0:char18" />
           <xsd:element name="DenPal" type="n0:char40" />
-          <xsd:element name="TipCant" type="tns:char15" />
-          <xsd:element name="CaractCant" type="tns:char20" />
+          <xsd:element name="TipCant" type="n0:char15" />
+          <xsd:element name="CaractCant" type="n0:char20" />
           <xsd:element name="MatnrCant" type="n0:char18" />
           <xsd:element name="DenCant" type="n0:char40" />
-          <xsd:element name="LatimeCant" type="tns:quantum13.3" />
-          <xsd:element name="GrosimeCant" type="tns:quantum13.3" />
-          <xsd:element name="Meabm" type="tns:unit3" />
-          <xsd:element name="Stoc" type="tns:quantum13.3" />
+          <xsd:element name="LatimeCant" type="n0:quantum13.3" />
+          <xsd:element name="GrosimeCant" type="n0:quantum13.3" />
+          <xsd:element name="Meabm" type="n0:unit3" />
+          <xsd:element name="Stoc" type="n0:quantum13.3" />
           <xsd:element name="UmBaza" type="n0:unit3" />
           <xsd:element name="Werks" type="n0:char4" />
           <xsd:element name="Lgort" type="n0:char4" />
@@ -932,7 +962,41 @@
           <xsd:element name="Matnr" type="n0:char18" />
           <xsd:element name="Cant" type="n0:quantum13.3" />
           <xsd:element name="Um" type="n0:unit3" />
-          <xsd:element name="Motiv" type="tns:char2" />
+          <xsd:element name="Motiv" type="n0:char2" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ZstZslbMatnr">
+        <xsd:sequence>
+          <xsd:element name="Matnr" type="n0:char18" />
+          <xsd:element name="Meins" type="n0:unit3" />
+          <xsd:element name="Det30" type="n0:quantum13.3" />
+          <xsd:element name="Det100" type="n0:quantum13.3" />
+          <xsd:element name="Lipsa" type="n0:quantum13.3" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="Solisti1">
+        <xsd:sequence>
+          <xsd:element name="Line" type="n0:char255" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ZslbLogMsg">
+        <xsd:sequence>
+          <xsd:element name="Mandt" type="n0:clnt3" />
+          <xsd:element name="Vbeln" type="n0:char10" />
+          <xsd:element name="Posnr" type="n0:numeric6" />
+          <xsd:element name="Erdat" type="n0:date10" />
+          <xsd:element name="Erzet" type="n0:time" />
+          <xsd:element name="Type" type="n0:char1" />
+          <xsd:element name="Id" type="n0:char20" />
+          <xsd:element name="Nr" type="n0:numeric3" />
+          <xsd:element name="Message" type="n0:char220" />
+          <xsd:element name="LogNo" type="n0:char20" />
+          <xsd:element name="LogMsgNo" type="n0:numeric6" />
+          <xsd:element name="MessageV1" type="n0:char50" />
+          <xsd:element name="MessageV2" type="n0:char50" />
+          <xsd:element name="MessageV3" type="n0:char50" />
+          <xsd:element name="MessageV4" type="n0:char50" />
+          <xsd:element name="VbelnVl" type="n0:char10" />
         </xsd:sequence>
       </xsd:complexType>
       <xsd:complexType name="ZtrapSite">
@@ -941,6 +1005,785 @@
           <xsd:element name="Netwr" type="n0:curr15.2" />
           <xsd:element name="Menge" type="n0:quantum13.3" />
           <xsd:element name="Meins" type="n0:unit3" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="Bapischdlx">
+        <xsd:sequence>
+          <xsd:element name="ItmNumber" type="n0:numeric6" />
+          <xsd:element name="SchedLine" type="n0:numeric4" />
+          <xsd:element name="Updateflag" type="n0:char1" />
+          <xsd:element name="ReqDate" type="n0:char1" />
+          <xsd:element name="DateType" type="n0:char1" />
+          <xsd:element name="ReqTime" type="n0:char1" />
+          <xsd:element name="ReqQty" type="n0:char1" />
+          <xsd:element name="ReqDlvBl" type="n0:char1" />
+          <xsd:element name="SchedType" type="n0:char1" />
+          <xsd:element name="TpDate" type="n0:char1" />
+          <xsd:element name="MsDate" type="n0:char1" />
+          <xsd:element name="LoadDate" type="n0:char1" />
+          <xsd:element name="GiDate" type="n0:char1" />
+          <xsd:element name="TpTime" type="n0:char1" />
+          <xsd:element name="MsTime" type="n0:char1" />
+          <xsd:element name="LoadTime" type="n0:char1" />
+          <xsd:element name="GiTime" type="n0:char1" />
+          <xsd:element name="Refobjtype" type="n0:char10" />
+          <xsd:element name="Refobjkey" type="n0:char70" />
+          <xsd:element name="DlvDate" type="n0:char1" />
+          <xsd:element name="DlvTime" type="n0:char1" />
+          <xsd:element name="RelType" type="n0:char1" />
+          <xsd:element name="PlanSchedType" type="n0:char1" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="Bapisditm">
+        <xsd:sequence>
+          <xsd:element name="ItmNumber" type="n0:numeric6" />
+          <xsd:element name="HgLvItem" type="n0:numeric6" />
+          <xsd:element name="PoItmNo" type="n0:char6" />
+          <xsd:element name="Material" type="n0:char18" />
+          <xsd:element name="AltToItm" type="n0:numeric6" />
+          <xsd:element name="CustMat22" type="n0:char22" />
+          <xsd:element name="Batch" type="n0:char10" />
+          <xsd:element name="DlvGroup" type="n0:numeric3" />
+          <xsd:element name="PartDlv" type="n0:char1" />
+          <xsd:element name="ReasonRej" type="n0:char2" />
+          <xsd:element name="BillBlock" type="n0:char2" />
+          <xsd:element name="BillDate" type="n0:date10" />
+          <xsd:element name="Plant" type="n0:char4" />
+          <xsd:element name="StoreLoc" type="n0:char4" />
+          <xsd:element name="TargetQty" type="n0:quantum13.3" />
+          <xsd:element name="TargetQu" type="n0:unit3" />
+          <xsd:element name="TUnitIso" type="n0:char3" />
+          <xsd:element name="ItemCateg" type="n0:char4" />
+          <xsd:element name="ShortText" type="n0:char40" />
+          <xsd:element name="PrcGroup1" type="n0:char3" />
+          <xsd:element name="PrcGroup2" type="n0:char3" />
+          <xsd:element name="PrcGroup3" type="n0:char3" />
+          <xsd:element name="PrcGroup4" type="n0:char3" />
+          <xsd:element name="PrcGroup5" type="n0:char3" />
+          <xsd:element name="ProdHiera" type="n0:char18" />
+          <xsd:element name="MatlGroup" type="n0:char9" />
+          <xsd:element name="PurchNoC" type="n0:char35" />
+          <xsd:element name="PurchDate" type="n0:date10" />
+          <xsd:element name="PoMethod" type="n0:char4" />
+          <xsd:element name="Ref1" type="n0:char12" />
+          <xsd:element name="PurchNoS" type="n0:char35" />
+          <xsd:element name="PoDatS" type="n0:date10" />
+          <xsd:element name="PoMethS" type="n0:char4" />
+          <xsd:element name="Ref1S" type="n0:char12" />
+          <xsd:element name="PoitmNoS" type="n0:char6" />
+          <xsd:element name="PriceGrp" type="n0:char2" />
+          <xsd:element name="CustGroup" type="n0:char2" />
+          <xsd:element name="SalesDist" type="n0:char6" />
+          <xsd:element name="PriceList" type="n0:char2" />
+          <xsd:element name="Incoterms1" type="n0:char3" />
+          <xsd:element name="Incoterms2" type="n0:char28" />
+          <xsd:element name="OrdcompIn" type="n0:char1" />
+          <xsd:element name="BillSched" type="n0:char2" />
+          <xsd:element name="InvoSched" type="n0:char2" />
+          <xsd:element name="MnInvoice" type="n0:char1" />
+          <xsd:element name="ExRateFi" type="n0:decimal9.5" />
+          <xsd:element name="AddValDy" type="n0:numeric2" />
+          <xsd:element name="FixValDy" type="n0:date10" />
+          <xsd:element name="Pmnttrms" type="n0:char4" />
+          <xsd:element name="PymtMeth" type="n0:char1" />
+          <xsd:element name="AccntAsgn" type="n0:char2" />
+          <xsd:element name="ExchgRate" type="n0:decimal9.5" />
+          <xsd:element name="PriceDate" type="n0:date10" />
+          <xsd:element name="ServDate" type="n0:date10" />
+          <xsd:element name="DunnKey" type="n0:char1" />
+          <xsd:element name="DunnBlock" type="n0:char1" />
+          <xsd:element name="Promotion" type="n0:char10" />
+          <xsd:element name="PmtgarPro" type="n0:char6" />
+          <xsd:element name="DocNumFi" type="n0:char10" />
+          <xsd:element name="DepartmNo" type="n0:char4" />
+          <xsd:element name="RecPoint" type="n0:char25" />
+          <xsd:element name="Cstcndgrp1" type="n0:char2" />
+          <xsd:element name="Cstcndgrp2" type="n0:char2" />
+          <xsd:element name="Cstcndgrp3" type="n0:char2" />
+          <xsd:element name="Cstcndgrp4" type="n0:char2" />
+          <xsd:element name="Cstcndgrp5" type="n0:char2" />
+          <xsd:element name="DlvTime" type="n0:char3" />
+          <xsd:element name="SalesUnit" type="n0:unit3" />
+          <xsd:element name="SUnitIso" type="n0:char3" />
+          <xsd:element name="TrgQtyNo" type="n0:decimal5.0" />
+          <xsd:element name="TrgqtyDen" type="n0:decimal5.0" />
+          <xsd:element name="RnddlvQty" type="n0:quantum13.3" />
+          <xsd:element name="Maxdevamnt" type="n0:quantum13.3" />
+          <xsd:element name="Maxdevper" type="n0:decimal3.0" />
+          <xsd:element name="MaxdevDay" type="n0:decimal3.0" />
+          <xsd:element name="UsageInd" type="n0:char3" />
+          <xsd:element name="FixedQuan" type="n0:char1" />
+          <xsd:element name="UnlmtDlv" type="n0:char1" />
+          <xsd:element name="Overdlvtol" type="n0:decimal3.1" />
+          <xsd:element name="UnddlvTol" type="n0:decimal3.1" />
+          <xsd:element name="Division" type="n0:char2" />
+          <xsd:element name="Salqtynum" type="n0:decimal5.0" />
+          <xsd:element name="Salqtyden" type="n0:decimal5.0" />
+          <xsd:element name="GrossWght" type="n0:quantum15.3" />
+          <xsd:element name="NetWeight" type="n0:quantum15.3" />
+          <xsd:element name="UntofWght" type="n0:unit3" />
+          <xsd:element name="UnofWtiso" type="n0:char3" />
+          <xsd:element name="Volume" type="n0:quantum15.3" />
+          <xsd:element name="Volunit" type="n0:unit3" />
+          <xsd:element name="Volunitiso" type="n0:char3" />
+          <xsd:element name="DlvPrio" type="n0:numeric2" />
+          <xsd:element name="ShipPoint" type="n0:char4" />
+          <xsd:element name="Route" type="n0:char6" />
+          <xsd:element name="CreatedBy" type="n0:char12" />
+          <xsd:element name="TaxClass1" type="n0:char1" />
+          <xsd:element name="TaxClass2" type="n0:char1" />
+          <xsd:element name="TaxClass3" type="n0:char1" />
+          <xsd:element name="TaxClass4" type="n0:char1" />
+          <xsd:element name="TaxClass5" type="n0:char1" />
+          <xsd:element name="TaxClass6" type="n0:char1" />
+          <xsd:element name="TaxClass7" type="n0:char1" />
+          <xsd:element name="TaxClass8" type="n0:char1" />
+          <xsd:element name="TaxClass9" type="n0:char1" />
+          <xsd:element name="MatPrGrp" type="n0:char2" />
+          <xsd:element name="ValType" type="n0:char10" />
+          <xsd:element name="FixdatQty" type="n0:char1" />
+          <xsd:element name="BomexplNo" type="n0:char8" />
+          <xsd:element name="Resanalkey" type="n0:char6" />
+          <xsd:element name="ReqmtsTyp" type="n0:char4" />
+          <xsd:element name="NoGrPost" type="n0:char1" />
+          <xsd:element name="BusTranst" type="n0:char2" />
+          <xsd:element name="OverhdKey" type="n0:char6" />
+          <xsd:element name="CstgSheet" type="n0:char6" />
+          <xsd:element name="Matfrgtgrp" type="n0:char8" />
+          <xsd:element name="Pldlvshdin" type="n0:char4" />
+          <xsd:element name="SeqNo" type="n0:char35" />
+          <xsd:element name="BilForm" type="n0:char2" />
+          <xsd:element name="DliProfil" type="n0:char8" />
+          <xsd:element name="RevType" type="n0:char1" />
+          <xsd:element name="BegdemPer" type="n0:char1" />
+          <xsd:element name="PrRefMat" type="n0:char18" />
+          <xsd:element name="Refobjtype" type="n0:char10" />
+          <xsd:element name="Refobjkey" type="n0:char70" />
+          <xsd:element name="Reflogsys" type="n0:char10" />
+          <xsd:element name="OrderProb" type="n0:numeric3" />
+          <xsd:element name="MaxPlDlv" type="n0:decimal1.0" />
+          <xsd:element name="CfopCode" type="n0:char5" />
+          <xsd:element name="Taxlawicms" type="n0:char3" />
+          <xsd:element name="Taxlawipi" type="n0:char3" />
+          <xsd:element name="SdTaxcode" type="n0:char2" />
+          <xsd:element name="AssortMod" type="n0:char18" />
+          <xsd:element name="CompQuant" type="n0:quantum13.3" />
+          <xsd:element name="TargetVal" type="n0:decimal28.9" />
+          <xsd:element name="Currency" type="n0:cuky5" />
+          <xsd:element name="CurrIso" type="n0:char3" />
+          <xsd:element name="ProfitCtr" type="n0:char10" />
+          <xsd:element name="Orderid" type="n0:char12" />
+          <xsd:element name="WbsElem" type="n0:char24" />
+          <xsd:element name="DeprecPer" type="n0:decimal5.2" />
+          <xsd:element name="RefDoc" type="n0:char10" />
+          <xsd:element name="RefDocIt" type="n0:numeric6" />
+          <xsd:element name="RefDocCa" type="n0:char1" />
+          <xsd:element name="CustMat35" type="n0:char35" />
+          <xsd:element name="ExchRateFiV" type="n0:decimal9.5" />
+          <xsd:element name="ExchgRateV" type="n0:decimal9.5" />
+          <xsd:element name="ItemguidAtp" type="n0:char22" />
+          <xsd:element name="ValContr" type="n0:char10" />
+          <xsd:element name="ValConI" type="n0:numeric6" />
+          <xsd:element name="ConfigId" type="n0:char6" />
+          <xsd:element name="InstId" type="n0:char8" />
+          <xsd:element name="MatExt" type="n0:char40" />
+          <xsd:element name="MatGuid" type="n0:char32" />
+          <xsd:element name="MatVers" type="n0:char10" />
+          <xsd:element name="PMatExt" type="n0:char40" />
+          <xsd:element name="PMatGuid" type="n0:char32" />
+          <xsd:element name="PMatVers" type="n0:char10" />
+          <xsd:element name="FuncArea" type="n0:char4" />
+          <xsd:element name="AlternBom" type="n0:char2" />
+          <xsd:element name="FkkConacct" type="n0:char12" />
+          <xsd:element name="EanUpc" type="n0:char18" />
+          <xsd:element name="Prodcat" type="n0:char10" />
+          <xsd:element name="ShipType" type="n0:char2" />
+          <xsd:element name="SProcInd" type="n0:char4" />
+          <xsd:element name="FuncAreaLong" type="n0:char16" />
+          <xsd:element name="BillRel" type="n0:char1" />
+          <xsd:element name="VwUepos" type="n0:char1" />
+          <xsd:element name="Campaign" type="n0:byte16" />
+          <xsd:element name="Dlvschduse" type="n0:char3" />
+          <xsd:element name="CfopLong" type="n0:char10" />
+          <xsd:element name="Selection" type="n0:char32" />
+          <xsd:element name="MatEntrd" type="n0:char18" />
+          <xsd:element name="LogSystemOwn" type="n0:char10" />
+          <xsd:element name="ItmTypeUsage" type="n0:char4" />
+          <xsd:element name="Taxlawiss" type="n0:char3" />
+          <xsd:element name="MatEntrdExternal" type="n0:char40" />
+          <xsd:element name="MatEntrdGuid" type="n0:char32" />
+          <xsd:element name="MatEntrdVersion" type="n0:char10" />
+          <xsd:element name="LocTaxcat" type="n0:char2" />
+          <xsd:element name="LocZerovat" type="n0:char1" />
+          <xsd:element name="LocActcode" type="n0:char2" />
+          <xsd:element name="LocDisttype" type="n0:char2" />
+          <xsd:element name="LocTxrelclas" type="n0:char10" />
+          <xsd:element name="CalcMotive" type="n0:char2" />
+          <xsd:element name="Compreas" type="n0:char4" />
+          <xsd:element name="Fund" type="n0:char10" />
+          <xsd:element name="FundsCtr" type="n0:char16" />
+          <xsd:element name="CmmtItem" type="n0:char24" />
+          <xsd:element name="GrantNbr" type="n0:char20" />
+          <xsd:element name="BudgetPeriod" type="n0:char10" />
+          <xsd:element name="Taxlawcofins" type="n0:char3" />
+          <xsd:element name="Taxlawpis" type="n0:char3" />
+          <xsd:element name="TreasuryAccSymbol" type="n0:char30" />
+          <xsd:element name="BusinessEventTcode" type="n0:char10" />
+          <xsd:element name="ModificationAllowed" type="n0:char1" />
+          <xsd:element name="CancellationAllowed" type="n0:char1" />
+          <xsd:element name="PaymentMethods" type="n0:char10" />
+          <xsd:element name="BusinessPartnerNo" type="n0:char6" />
+          <xsd:element name="ReportingFreq" type="n0:char3" />
+          <xsd:element name="SepaMandateId" type="n0:char35" />
+          <xsd:element name="ReqSegment" type="n0:char16" />
+          <xsd:element name="TpSublevl" type="n0:char2" />
+          <xsd:element name="TpAgencid" type="n0:char3" />
+          <xsd:element name="TpAltraid" type="n0:char3" />
+          <xsd:element name="TpBegper" type="n0:numeric4" />
+          <xsd:element name="TpEndper" type="n0:numeric4" />
+          <xsd:element name="TpAvtype" type="n0:char1" />
+          <xsd:element name="TpMainAcct" type="n0:char4" />
+          <xsd:element name="TpSubAcct" type="n0:char3" />
+          <xsd:element name="TpBetc" type="n0:char10" />
+          <xsd:element name="RevaccRefid" type="n0:char30" />
+          <xsd:element name="RevaccReftype" type="n0:char3" />
+          <xsd:element name="RefDocCaLong" type="n0:char4" />
+          <xsd:element name="Incotermsv" type="n0:char4" />
+          <xsd:element name="Incoterms2l" type="n0:char70" />
+          <xsd:element name="Incoterms3l" type="n0:char70" />
+          <xsd:element name="MaterialLong" type="n0:char40" />
+          <xsd:element name="PrRefMatLong" type="n0:char40" />
+          <xsd:element name="MatEntrdLong" type="n0:char40" />
+          <xsd:element name="PoQuan" type="n0:quantum13.3" />
+          <xsd:element name="PoUnit" type="n0:unit3" />
+          <xsd:element name="ReqSegLong" type="n0:char40" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="Bapischdl">
+        <xsd:sequence>
+          <xsd:element name="ItmNumber" type="n0:numeric6" />
+          <xsd:element name="SchedLine" type="n0:numeric4" />
+          <xsd:element name="ReqDate" type="n0:date10" />
+          <xsd:element name="DateType" type="n0:char1" />
+          <xsd:element name="ReqTime" type="n0:time" />
+          <xsd:element name="ReqQty" type="n0:quantum13.3" />
+          <xsd:element name="ReqDlvBl" type="n0:char2" />
+          <xsd:element name="SchedType" type="n0:char2" />
+          <xsd:element name="TpDate" type="n0:date10" />
+          <xsd:element name="MsDate" type="n0:date10" />
+          <xsd:element name="LoadDate" type="n0:date10" />
+          <xsd:element name="GiDate" type="n0:date10" />
+          <xsd:element name="TpTime" type="n0:time" />
+          <xsd:element name="MsTime" type="n0:time" />
+          <xsd:element name="LoadTime" type="n0:time" />
+          <xsd:element name="GiTime" type="n0:time" />
+          <xsd:element name="Refobjtype" type="n0:char10" />
+          <xsd:element name="Refobjkey" type="n0:char70" />
+          <xsd:element name="Reflogsys" type="n0:char10" />
+          <xsd:element name="DlvDate" type="n0:date10" />
+          <xsd:element name="DlvTime" type="n0:time" />
+          <xsd:element name="RelType" type="n0:char1" />
+          <xsd:element name="PlanSchedType" type="n0:char1" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="Bapiret2">
+        <xsd:sequence>
+          <xsd:element name="Type" type="n0:char1" />
+          <xsd:element name="Id" type="n0:char20" />
+          <xsd:element name="Number" type="n0:numeric3" />
+          <xsd:element name="Message" type="n0:char220" />
+          <xsd:element name="LogNo" type="n0:char20" />
+          <xsd:element name="LogMsgNo" type="n0:numeric6" />
+          <xsd:element name="MessageV1" type="n0:char50" />
+          <xsd:element name="MessageV2" type="n0:char50" />
+          <xsd:element name="MessageV3" type="n0:char50" />
+          <xsd:element name="MessageV4" type="n0:char50" />
+          <xsd:element name="Parameter" type="n0:char32" />
+          <xsd:element name="Row" type="xsd:int" />
+          <xsd:element name="Field" type="n0:char30" />
+          <xsd:element name="System" type="n0:char10" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="Bapisdhd1">
+        <xsd:sequence>
+          <xsd:element name="Refobjtype" type="n0:char10" />
+          <xsd:element name="Refobjkey" type="n0:char70" />
+          <xsd:element name="Refdoctype" type="n0:char10" />
+          <xsd:element name="DocType" type="n0:char4" />
+          <xsd:element name="CollectNo" type="n0:char10" />
+          <xsd:element name="SalesOrg" type="n0:char4" />
+          <xsd:element name="DistrChan" type="n0:char2" />
+          <xsd:element name="Division" type="n0:char2" />
+          <xsd:element name="SalesGrp" type="n0:char3" />
+          <xsd:element name="SalesOff" type="n0:char4" />
+          <xsd:element name="ReqDateH" type="n0:date10" />
+          <xsd:element name="DateType" type="n0:char1" />
+          <xsd:element name="PurchDate" type="n0:date10" />
+          <xsd:element name="PoMethod" type="n0:char4" />
+          <xsd:element name="PoSupplem" type="n0:char4" />
+          <xsd:element name="Ref1" type="n0:char12" />
+          <xsd:element name="Name" type="n0:char35" />
+          <xsd:element name="Telephone" type="n0:char16" />
+          <xsd:element name="PriceGrp" type="n0:char2" />
+          <xsd:element name="CustGroup" type="n0:char2" />
+          <xsd:element name="SalesDist" type="n0:char6" />
+          <xsd:element name="PriceList" type="n0:char2" />
+          <xsd:element name="Incoterms1" type="n0:char3" />
+          <xsd:element name="Incoterms2" type="n0:char28" />
+          <xsd:element name="Pmnttrms" type="n0:char4" />
+          <xsd:element name="DlvBlock" type="n0:char2" />
+          <xsd:element name="BillBlock" type="n0:char2" />
+          <xsd:element name="OrdReason" type="n0:char3" />
+          <xsd:element name="ComplDlv" type="n0:char1" />
+          <xsd:element name="PriceDate" type="n0:date10" />
+          <xsd:element name="QtValidF" type="n0:date10" />
+          <xsd:element name="QtValidT" type="n0:date10" />
+          <xsd:element name="CtValidF" type="n0:date10" />
+          <xsd:element name="CtValidT" type="n0:date10" />
+          <xsd:element name="CustGrp1" type="n0:char3" />
+          <xsd:element name="CustGrp2" type="n0:char3" />
+          <xsd:element name="CustGrp3" type="n0:char3" />
+          <xsd:element name="CustGrp4" type="n0:char3" />
+          <xsd:element name="CustGrp5" type="n0:char3" />
+          <xsd:element name="PurchNoC" type="n0:char35" />
+          <xsd:element name="PurchNoS" type="n0:char35" />
+          <xsd:element name="PoDatS" type="n0:date10" />
+          <xsd:element name="PoMethS" type="n0:char4" />
+          <xsd:element name="Ref1S" type="n0:char12" />
+          <xsd:element name="SdDocCat" type="n0:char1" />
+          <xsd:element name="DocDate" type="n0:date10" />
+          <xsd:element name="WarDate" type="n0:date10" />
+          <xsd:element name="ShipCond" type="n0:char2" />
+          <xsd:element name="PpSearch" type="n0:char40" />
+          <xsd:element name="DunCount" type="n0:decimal3.0" />
+          <xsd:element name="DunDate" type="n0:date10" />
+          <xsd:element name="Dlvschduse" type="n0:char3" />
+          <xsd:element name="Pldlvstyp" type="n0:char1" />
+          <xsd:element name="RefDoc" type="n0:char10" />
+          <xsd:element name="CompCdeB" type="n0:char4" />
+          <xsd:element name="AlttaxCls" type="n0:char1" />
+          <xsd:element name="TaxClass2" type="n0:char1" />
+          <xsd:element name="TaxClass3" type="n0:char1" />
+          <xsd:element name="TaxClass4" type="n0:char1" />
+          <xsd:element name="TaxClass5" type="n0:char1" />
+          <xsd:element name="TaxClass6" type="n0:char1" />
+          <xsd:element name="TaxClass7" type="n0:char1" />
+          <xsd:element name="TaxClass8" type="n0:char1" />
+          <xsd:element name="TaxClass9" type="n0:char1" />
+          <xsd:element name="RefDocL" type="n0:char16" />
+          <xsd:element name="AssNumber" type="n0:char18" />
+          <xsd:element name="RefdocCat" type="n0:char1" />
+          <xsd:element name="OrdcombIn" type="n0:char1" />
+          <xsd:element name="BillSched" type="n0:char2" />
+          <xsd:element name="InvoSched" type="n0:char2" />
+          <xsd:element name="MnInvoice" type="n0:char1" />
+          <xsd:element name="ExrateFi" type="n0:decimal9.5" />
+          <xsd:element name="AddValDy" type="n0:numeric2" />
+          <xsd:element name="FixValDy" type="n0:date10" />
+          <xsd:element name="PymtMeth" type="n0:char1" />
+          <xsd:element name="AccntAsgn" type="n0:char2" />
+          <xsd:element name="ExchgRate" type="n0:decimal9.5" />
+          <xsd:element name="BillDate" type="n0:date10" />
+          <xsd:element name="ServDate" type="n0:date10" />
+          <xsd:element name="DunnKey" type="n0:char1" />
+          <xsd:element name="DunnBlock" type="n0:char1" />
+          <xsd:element name="PmtgarPro" type="n0:char6" />
+          <xsd:element name="DepartmNo" type="n0:char4" />
+          <xsd:element name="RecPoint" type="n0:char25" />
+          <xsd:element name="DocNumFi" type="n0:char10" />
+          <xsd:element name="Cstcndgrp1" type="n0:char2" />
+          <xsd:element name="Cstcndgrp2" type="n0:char2" />
+          <xsd:element name="Cstcndgrp3" type="n0:char2" />
+          <xsd:element name="Cstcndgrp4" type="n0:char2" />
+          <xsd:element name="Cstcndgrp5" type="n0:char2" />
+          <xsd:element name="DlvTime" type="n0:char3" />
+          <xsd:element name="Currency" type="n0:cuky5" />
+          <xsd:element name="CurrIso" type="n0:char3" />
+          <xsd:element name="CreatedBy" type="n0:char12" />
+          <xsd:element name="TaxdepCty" type="n0:char3" />
+          <xsd:element name="TaxdstCty" type="n0:char3" />
+          <xsd:element name="EutriDeal" type="n0:char1" />
+          <xsd:element name="MastContr" type="n0:char10" />
+          <xsd:element name="RefProc" type="n0:char4" />
+          <xsd:element name="Chkprtauth" type="n0:char1" />
+          <xsd:element name="CmlqtyDat" type="n0:date10" />
+          <xsd:element name="Version" type="n0:char12" />
+          <xsd:element name="NotifNo" type="n0:char12" />
+          <xsd:element name="WbsElem" type="n0:char24" />
+          <xsd:element name="ExchRateFiV" type="n0:decimal9.5" />
+          <xsd:element name="ExchgRateV" type="n0:decimal9.5" />
+          <xsd:element name="FkkConacct" type="n0:char12" />
+          <xsd:element name="Campaign" type="n0:byte16" />
+          <xsd:element name="DocClass" type="n0:char9" />
+          <xsd:element name="HCurr" type="n0:cuky5" />
+          <xsd:element name="HCurrIso" type="n0:char3" />
+          <xsd:element name="ShipType" type="n0:char2" />
+          <xsd:element name="SProcInd" type="n0:char4" />
+          <xsd:element name="RefDocLLong" type="n0:char35" />
+          <xsd:element name="LineTime" type="n0:time" />
+          <xsd:element name="CalcMotive" type="n0:char2" />
+          <xsd:element name="PsmPstngDate" type="n0:date10" />
+          <xsd:element name="TreasuryAccSymbol" type="n0:char30" />
+          <xsd:element name="BusinessEventTcode" type="n0:char10" />
+          <xsd:element name="ModificationAllowed" type="n0:char1" />
+          <xsd:element name="CancellationAllowed" type="n0:char1" />
+          <xsd:element name="PaymentMethods" type="n0:char10" />
+          <xsd:element name="BusinessPartnerNo" type="n0:char6" />
+          <xsd:element name="ReportingFreq" type="n0:char3" />
+          <xsd:element name="SepaMandateId" type="n0:char35" />
+          <xsd:element name="SdDocCatLong" type="n0:char4" />
+          <xsd:element name="RefdocCatLong" type="n0:char4" />
+          <xsd:element name="Incotermsv" type="n0:char4" />
+          <xsd:element name="Incoterms2l" type="n0:char70" />
+          <xsd:element name="Incoterms3l" type="n0:char70" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="Bapisdhd1x">
+        <xsd:sequence>
+          <xsd:element name="Updateflag" type="n0:char1" />
+          <xsd:element name="DocType" type="n0:char1" />
+          <xsd:element name="CollectNo" type="n0:char1" />
+          <xsd:element name="SalesOrg" type="n0:char1" />
+          <xsd:element name="DistrChan" type="n0:char1" />
+          <xsd:element name="Division" type="n0:char1" />
+          <xsd:element name="SalesGrp" type="n0:char1" />
+          <xsd:element name="SalesOff" type="n0:char1" />
+          <xsd:element name="ReqDateH" type="n0:char1" />
+          <xsd:element name="DateType" type="n0:char1" />
+          <xsd:element name="PurchDate" type="n0:char1" />
+          <xsd:element name="PoMethod" type="n0:char1" />
+          <xsd:element name="PoSupplem" type="n0:char1" />
+          <xsd:element name="Ref1" type="n0:char1" />
+          <xsd:element name="Name" type="n0:char1" />
+          <xsd:element name="Telephone" type="n0:char1" />
+          <xsd:element name="PriceGrp" type="n0:char1" />
+          <xsd:element name="CustGroup" type="n0:char1" />
+          <xsd:element name="SalesDist" type="n0:char1" />
+          <xsd:element name="PriceList" type="n0:char1" />
+          <xsd:element name="Incoterms1" type="n0:char1" />
+          <xsd:element name="Incoterms2" type="n0:char1" />
+          <xsd:element name="Pmnttrms" type="n0:char1" />
+          <xsd:element name="DlvBlock" type="n0:char1" />
+          <xsd:element name="BillBlock" type="n0:char1" />
+          <xsd:element name="OrdReason" type="n0:char1" />
+          <xsd:element name="ComplDlv" type="n0:char1" />
+          <xsd:element name="PriceDate" type="n0:char1" />
+          <xsd:element name="QtValidF" type="n0:char1" />
+          <xsd:element name="QtValidT" type="n0:char1" />
+          <xsd:element name="CtValidF" type="n0:char1" />
+          <xsd:element name="CtValidT" type="n0:char1" />
+          <xsd:element name="CustGrp1" type="n0:char1" />
+          <xsd:element name="CustGrp2" type="n0:char1" />
+          <xsd:element name="CustGrp3" type="n0:char1" />
+          <xsd:element name="CustGrp4" type="n0:char1" />
+          <xsd:element name="CustGrp5" type="n0:char1" />
+          <xsd:element name="PurchNoC" type="n0:char1" />
+          <xsd:element name="PurchNoS" type="n0:char1" />
+          <xsd:element name="PoDatS" type="n0:char1" />
+          <xsd:element name="PoMethS" type="n0:char1" />
+          <xsd:element name="Ref1S" type="n0:char1" />
+          <xsd:element name="SdDocCat" type="n0:char1" />
+          <xsd:element name="DocDate" type="n0:char1" />
+          <xsd:element name="WarDate" type="n0:char1" />
+          <xsd:element name="ShipCond" type="n0:char1" />
+          <xsd:element name="PpSearch" type="n0:char1" />
+          <xsd:element name="DunCount" type="n0:char1" />
+          <xsd:element name="DunDate" type="n0:char1" />
+          <xsd:element name="Dlvschduse" type="n0:char1" />
+          <xsd:element name="Pldlvstyp" type="n0:char1" />
+          <xsd:element name="RefDoc" type="n0:char1" />
+          <xsd:element name="CompCdeB" type="n0:char1" />
+          <xsd:element name="AlttaxCls" type="n0:char1" />
+          <xsd:element name="TaxClass2" type="n0:char1" />
+          <xsd:element name="TaxClass3" type="n0:char1" />
+          <xsd:element name="TaxClass4" type="n0:char1" />
+          <xsd:element name="TaxClass5" type="n0:char1" />
+          <xsd:element name="TaxClass6" type="n0:char1" />
+          <xsd:element name="TaxClass7" type="n0:char1" />
+          <xsd:element name="TaxClass8" type="n0:char1" />
+          <xsd:element name="TaxClass9" type="n0:char1" />
+          <xsd:element name="RefDocL" type="n0:char1" />
+          <xsd:element name="AssNumber" type="n0:char1" />
+          <xsd:element name="RefdocCat" type="n0:char1" />
+          <xsd:element name="OrdcombIn" type="n0:char1" />
+          <xsd:element name="BillSched" type="n0:char1" />
+          <xsd:element name="InvoSched" type="n0:char1" />
+          <xsd:element name="MnInvoice" type="n0:char1" />
+          <xsd:element name="ExrateFi" type="n0:char1" />
+          <xsd:element name="AddValDy" type="n0:char1" />
+          <xsd:element name="FixValDy" type="n0:char1" />
+          <xsd:element name="PymtMeth" type="n0:char1" />
+          <xsd:element name="AccntAsgn" type="n0:char1" />
+          <xsd:element name="ExchgRate" type="n0:char1" />
+          <xsd:element name="BillDate" type="n0:char1" />
+          <xsd:element name="ServDate" type="n0:char1" />
+          <xsd:element name="DunnKey" type="n0:char1" />
+          <xsd:element name="DunnBlock" type="n0:char1" />
+          <xsd:element name="Promotion" type="n0:char1" />
+          <xsd:element name="PmtgarPro" type="n0:char1" />
+          <xsd:element name="DepartmNo" type="n0:char1" />
+          <xsd:element name="RecPoint" type="n0:char1" />
+          <xsd:element name="PoitmNoS" type="n0:char1" />
+          <xsd:element name="DocNumFi" type="n0:char1" />
+          <xsd:element name="Cstcndgrp1" type="n0:char1" />
+          <xsd:element name="Cstcndgrp2" type="n0:char1" />
+          <xsd:element name="Cstcndgrp3" type="n0:char1" />
+          <xsd:element name="Cstcndgrp4" type="n0:char1" />
+          <xsd:element name="Cstcndgrp5" type="n0:char1" />
+          <xsd:element name="DlvTime" type="n0:char1" />
+          <xsd:element name="Currency" type="n0:char1" />
+          <xsd:element name="TaxdepCty" type="n0:char1" />
+          <xsd:element name="TaxdstCty" type="n0:char1" />
+          <xsd:element name="EutriDeal" type="n0:char1" />
+          <xsd:element name="MastContr" type="n0:char1" />
+          <xsd:element name="RefProc" type="n0:char1" />
+          <xsd:element name="Chkprtauth" type="n0:char1" />
+          <xsd:element name="CmlqtyDat" type="n0:char1" />
+          <xsd:element name="Version" type="n0:char1" />
+          <xsd:element name="NotifNo" type="n0:char1" />
+          <xsd:element name="WbsElem" type="n0:char1" />
+          <xsd:element name="ExchRateFiV" type="n0:char1" />
+          <xsd:element name="ExchgRateV" type="n0:char1" />
+          <xsd:element name="FkkConacct" type="n0:char1" />
+          <xsd:element name="Campaign" type="n0:char1" />
+          <xsd:element name="DocClass" type="n0:char1" />
+          <xsd:element name="HCurr" type="n0:char1" />
+          <xsd:element name="ShipType" type="n0:char1" />
+          <xsd:element name="SProcInd" type="n0:char1" />
+          <xsd:element name="LineTime" type="n0:char1" />
+          <xsd:element name="CalcMotive" type="n0:char1" />
+          <xsd:element name="PsmPstngDate" type="n0:char1" />
+          <xsd:element name="TreasuryAccSymbol" type="n0:char1" />
+          <xsd:element name="BusinessEventTcode" type="n0:char1" />
+          <xsd:element name="ModificationAllowed" type="n0:char1" />
+          <xsd:element name="CancellationAllowed" type="n0:char1" />
+          <xsd:element name="PaymentMethods" type="n0:char1" />
+          <xsd:element name="BusinessPartnerNo" type="n0:char1" />
+          <xsd:element name="ReportingFreq" type="n0:char1" />
+          <xsd:element name="SepaMandateId" type="n0:char1" />
+          <xsd:element name="SdDocCatLong" type="n0:char1" />
+          <xsd:element name="RefdocCatLong" type="n0:char1" />
+          <xsd:element name="Incotermsv" type="n0:char1" />
+          <xsd:element name="Incoterms2l" type="n0:char1" />
+          <xsd:element name="Incoterms3l" type="n0:char1" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="Bapisditmx">
+        <xsd:sequence>
+          <xsd:element name="ItmNumber" type="n0:numeric6" />
+          <xsd:element name="Updateflag" type="n0:char1" />
+          <xsd:element name="HgLvItem" type="n0:char1" />
+          <xsd:element name="PoItmNo" type="n0:char1" />
+          <xsd:element name="Material" type="n0:char1" />
+          <xsd:element name="AltToItm" type="n0:char1" />
+          <xsd:element name="CustMat22" type="n0:char1" />
+          <xsd:element name="Batch" type="n0:char1" />
+          <xsd:element name="DlvGroup" type="n0:char1" />
+          <xsd:element name="PartDlv" type="n0:char1" />
+          <xsd:element name="ReasonRej" type="n0:char1" />
+          <xsd:element name="BillBlock" type="n0:char1" />
+          <xsd:element name="BillDate" type="n0:char1" />
+          <xsd:element name="Plant" type="n0:char1" />
+          <xsd:element name="StoreLoc" type="n0:char1" />
+          <xsd:element name="TargetQty" type="n0:char1" />
+          <xsd:element name="TargetQu" type="n0:char1" />
+          <xsd:element name="TUnitIso" type="n0:char1" />
+          <xsd:element name="ItemCateg" type="n0:char1" />
+          <xsd:element name="ShortText" type="n0:char1" />
+          <xsd:element name="PrcGroup1" type="n0:char1" />
+          <xsd:element name="PrcGroup2" type="n0:char1" />
+          <xsd:element name="PrcGroup3" type="n0:char1" />
+          <xsd:element name="PrcGroup4" type="n0:char1" />
+          <xsd:element name="PrcGroup5" type="n0:char1" />
+          <xsd:element name="ProdHiera" type="n0:char1" />
+          <xsd:element name="MatlGroup" type="n0:char1" />
+          <xsd:element name="PurchNoC" type="n0:char1" />
+          <xsd:element name="PurchDate" type="n0:char1" />
+          <xsd:element name="PoMethod" type="n0:char1" />
+          <xsd:element name="Ref1" type="n0:char1" />
+          <xsd:element name="PurchNoS" type="n0:char1" />
+          <xsd:element name="PoDatS" type="n0:char1" />
+          <xsd:element name="PoMethS" type="n0:char1" />
+          <xsd:element name="Ref1S" type="n0:char1" />
+          <xsd:element name="PoitmNoS" type="n0:char1" />
+          <xsd:element name="PriceGrp" type="n0:char1" />
+          <xsd:element name="CustGroup" type="n0:char1" />
+          <xsd:element name="SalesDist" type="n0:char1" />
+          <xsd:element name="PriceList" type="n0:char1" />
+          <xsd:element name="Incoterms1" type="n0:char1" />
+          <xsd:element name="Incoterms2" type="n0:char1" />
+          <xsd:element name="OrdcompIn" type="n0:char1" />
+          <xsd:element name="BillSched" type="n0:char1" />
+          <xsd:element name="InvoSched" type="n0:char1" />
+          <xsd:element name="MnInvoice" type="n0:char1" />
+          <xsd:element name="ExRateFi" type="n0:char1" />
+          <xsd:element name="AddValDy" type="n0:char1" />
+          <xsd:element name="FixValDy" type="n0:char1" />
+          <xsd:element name="Pmnttrms" type="n0:char1" />
+          <xsd:element name="PymtMeth" type="n0:char1" />
+          <xsd:element name="AccntAsgn" type="n0:char1" />
+          <xsd:element name="ExchgRate" type="n0:char1" />
+          <xsd:element name="PriceDate" type="n0:char1" />
+          <xsd:element name="ServDate" type="n0:char1" />
+          <xsd:element name="DunnKey" type="n0:char1" />
+          <xsd:element name="DunnBlock" type="n0:char1" />
+          <xsd:element name="Promotion" type="n0:char1" />
+          <xsd:element name="PmtgarPro" type="n0:char1" />
+          <xsd:element name="DocNumFi" type="n0:char1" />
+          <xsd:element name="DepartmNo" type="n0:char1" />
+          <xsd:element name="RecPoint" type="n0:char1" />
+          <xsd:element name="Cstcndgrp1" type="n0:char1" />
+          <xsd:element name="Cstcndgrp2" type="n0:char1" />
+          <xsd:element name="Cstcndgrp3" type="n0:char1" />
+          <xsd:element name="Cstcndgrp4" type="n0:char1" />
+          <xsd:element name="Cstcndgrp5" type="n0:char1" />
+          <xsd:element name="DlvTime" type="n0:char1" />
+          <xsd:element name="SalesUnit" type="n0:char1" />
+          <xsd:element name="TrgQtyNo" type="n0:char1" />
+          <xsd:element name="TrgqtyDen" type="n0:char1" />
+          <xsd:element name="RnddlvQty" type="n0:char1" />
+          <xsd:element name="Maxdevamnt" type="n0:char1" />
+          <xsd:element name="Maxdevper" type="n0:char1" />
+          <xsd:element name="MaxdevDay" type="n0:char1" />
+          <xsd:element name="UsageInd" type="n0:char1" />
+          <xsd:element name="FixedQuan" type="n0:char1" />
+          <xsd:element name="UnlmtDlv" type="n0:char1" />
+          <xsd:element name="Overdlvtol" type="n0:char1" />
+          <xsd:element name="UnddlvTol" type="n0:char1" />
+          <xsd:element name="Division" type="n0:char1" />
+          <xsd:element name="Salqtynum" type="n0:char1" />
+          <xsd:element name="Salqtyden" type="n0:char1" />
+          <xsd:element name="GrossWght" type="n0:char1" />
+          <xsd:element name="NetWeight" type="n0:char1" />
+          <xsd:element name="UntofWght" type="n0:char1" />
+          <xsd:element name="Volume" type="n0:char1" />
+          <xsd:element name="Volunit" type="n0:char1" />
+          <xsd:element name="DlvPrio" type="n0:char1" />
+          <xsd:element name="ShipPoint" type="n0:char1" />
+          <xsd:element name="Route" type="n0:char1" />
+          <xsd:element name="TaxClass1" type="n0:char1" />
+          <xsd:element name="TaxClass2" type="n0:char1" />
+          <xsd:element name="TaxClass3" type="n0:char1" />
+          <xsd:element name="TaxClass4" type="n0:char1" />
+          <xsd:element name="TaxClass5" type="n0:char1" />
+          <xsd:element name="TaxClass6" type="n0:char1" />
+          <xsd:element name="TaxClass7" type="n0:char1" />
+          <xsd:element name="TaxClass8" type="n0:char1" />
+          <xsd:element name="TaxClass9" type="n0:char1" />
+          <xsd:element name="MatPrGrp" type="n0:char1" />
+          <xsd:element name="ValType" type="n0:char1" />
+          <xsd:element name="FixdatQty" type="n0:char1" />
+          <xsd:element name="BomexplNo" type="n0:char1" />
+          <xsd:element name="Resanalkey" type="n0:char1" />
+          <xsd:element name="ReqmtsTyp" type="n0:char1" />
+          <xsd:element name="NoGrPost" type="n0:char1" />
+          <xsd:element name="BusTranst" type="n0:char1" />
+          <xsd:element name="OverhdKey" type="n0:char1" />
+          <xsd:element name="CstgSheet" type="n0:char1" />
+          <xsd:element name="Matfrgtgrp" type="n0:char1" />
+          <xsd:element name="Pldlvshdin" type="n0:char1" />
+          <xsd:element name="SeqNo" type="n0:char1" />
+          <xsd:element name="BilForm" type="n0:char1" />
+          <xsd:element name="DliProfil" type="n0:char1" />
+          <xsd:element name="RevType" type="n0:char1" />
+          <xsd:element name="BegdemPer" type="n0:char1" />
+          <xsd:element name="PrRefMat" type="n0:char1" />
+          <xsd:element name="Refobjtype" type="n0:char1" />
+          <xsd:element name="Refobjkey" type="n0:char1" />
+          <xsd:element name="Reflogsys" type="n0:char1" />
+          <xsd:element name="OrderProb" type="n0:char1" />
+          <xsd:element name="MaxPlDlv" type="n0:char1" />
+          <xsd:element name="CfopCode" type="n0:char1" />
+          <xsd:element name="Taxlawicms" type="n0:char1" />
+          <xsd:element name="Taxlawipi" type="n0:char1" />
+          <xsd:element name="SdTaxcode" type="n0:char1" />
+          <xsd:element name="AssortMod" type="n0:char1" />
+          <xsd:element name="CompQuant" type="n0:char1" />
+          <xsd:element name="TargetVal" type="n0:char1" />
+          <xsd:element name="ProfitCtr" type="n0:char1" />
+          <xsd:element name="Orderid" type="n0:char1" />
+          <xsd:element name="WbsElem" type="n0:char1" />
+          <xsd:element name="DeprecPer" type="n0:char1" />
+          <xsd:element name="RefDoc" type="n0:char1" />
+          <xsd:element name="RefDocIt" type="n0:char1" />
+          <xsd:element name="RefDocCa" type="n0:char1" />
+          <xsd:element name="CustMat35" type="n0:char1" />
+          <xsd:element name="ExchRateFiV" type="n0:char1" />
+          <xsd:element name="ExchgRateV" type="n0:char1" />
+          <xsd:element name="ItemguidAtp" type="n0:char1" />
+          <xsd:element name="ValContr" type="n0:char1" />
+          <xsd:element name="ValConI" type="n0:char1" />
+          <xsd:element name="ConfigId" type="n0:char1" />
+          <xsd:element name="InstId" type="n0:char1" />
+          <xsd:element name="MatExt" type="n0:char1" />
+          <xsd:element name="MatGuid" type="n0:char1" />
+          <xsd:element name="MatVers" type="n0:char1" />
+          <xsd:element name="PMatExt" type="n0:char1" />
+          <xsd:element name="PMatGuid" type="n0:char1" />
+          <xsd:element name="PMatVers" type="n0:char1" />
+          <xsd:element name="FuncArea" type="n0:char1" />
+          <xsd:element name="AlternBom" type="n0:char1" />
+          <xsd:element name="FkkConacct" type="n0:char1" />
+          <xsd:element name="EanUpc" type="n0:char1" />
+          <xsd:element name="Prodcat" type="n0:char1" />
+          <xsd:element name="ShipType" type="n0:char1" />
+          <xsd:element name="SProcInd" type="n0:char1" />
+          <xsd:element name="BillRel" type="n0:char1" />
+          <xsd:element name="VwUepos" type="n0:char1" />
+          <xsd:element name="Campaign" type="n0:char1" />
+          <xsd:element name="Dlvschduse" type="n0:char1" />
+          <xsd:element name="Selection" type="n0:char1" />
+          <xsd:element name="MatEntrd" type="n0:char1" />
+          <xsd:element name="LogSystemOwn" type="n0:char1" />
+          <xsd:element name="ItmTypeUsage" type="n0:char1" />
+          <xsd:element name="MatEntrdExternal" type="n0:char1" />
+          <xsd:element name="MatEntrdGuid" type="n0:char1" />
+          <xsd:element name="MatEntrdVersion" type="n0:char1" />
+          <xsd:element name="LocTaxcat" type="n0:char1" />
+          <xsd:element name="LocZerovat" type="n0:char1" />
+          <xsd:element name="LocActcode" type="n0:char1" />
+          <xsd:element name="LocDisttype" type="n0:char1" />
+          <xsd:element name="LocTxrelclas" type="n0:char1" />
+          <xsd:element name="CalcMotive" type="n0:char1" />
+          <xsd:element name="Fund" type="n0:char1" />
+          <xsd:element name="FundsCtr" type="n0:char1" />
+          <xsd:element name="CmmtItem" type="n0:char1" />
+          <xsd:element name="GrantNbr" type="n0:char1" />
+          <xsd:element name="BudgetPeriod" type="n0:char1" />
+          <xsd:element name="Taxlawiss" type="n0:char1" />
+          <xsd:element name="Taxlawcofins" type="n0:char1" />
+          <xsd:element name="Taxlawpis" type="n0:char1" />
+          <xsd:element name="TreasuryAccSymbol" type="n0:char1" />
+          <xsd:element name="BusinessEventTcode" type="n0:char1" />
+          <xsd:element name="ModificationAllowed" type="n0:char1" />
+          <xsd:element name="CancellationAllowed" type="n0:char1" />
+          <xsd:element name="PaymentMethods" type="n0:char1" />
+          <xsd:element name="BusinessPartnerNo" type="n0:char1" />
+          <xsd:element name="ReportingFreq" type="n0:char1" />
+          <xsd:element name="CfopLong" type="n0:char1" />
+          <xsd:element name="SepaMandateId" type="n0:char1" />
+          <xsd:element name="ReqSegment" type="n0:char1" />
+          <xsd:element name="TpSublevl" type="n0:char1" />
+          <xsd:element name="TpAgencid" type="n0:char1" />
+          <xsd:element name="TpAltraid" type="n0:char1" />
+          <xsd:element name="TpBegper" type="n0:char1" />
+          <xsd:element name="TpEndper" type="n0:char1" />
+          <xsd:element name="TpAvtype" type="n0:char1" />
+          <xsd:element name="TpMainAcct" type="n0:char1" />
+          <xsd:element name="TpSubAcct" type="n0:char1" />
+          <xsd:element name="TpBetc" type="n0:char1" />
+          <xsd:element name="RevaccRefid" type="n0:char1" />
+          <xsd:element name="RevaccReftype" type="n0:char1" />
+          <xsd:element name="RefDocCaLong" type="n0:char1" />
+          <xsd:element name="Incotermsv" type="n0:char1" />
+          <xsd:element name="Incoterms2l" type="n0:char1" />
+          <xsd:element name="Incoterms3l" type="n0:char1" />
+          <xsd:element name="MaterialLong" type="n0:char1" />
+          <xsd:element name="PrRefMatLong" type="n0:char1" />
+          <xsd:element name="MatEntrdLong" type="n0:char1" />
+          <xsd:element name="PoQuan" type="n0:char1" />
+          <xsd:element name="PoUnit" type="n0:char1" />
+          <xsd:element name="ReqSegLong" type="n0:char1" />
         </xsd:sequence>
       </xsd:complexType>
       <xsd:complexType name="Bapisdit">
@@ -1169,10 +2012,10 @@
           <xsd:element name="Taxlawpis" type="n0:char3" />
           <xsd:element name="DocCatSdLong" type="n0:char4" />
           <xsd:element name="MaterialLong" type="n0:char40" />
-          <xsd:element name="MatEntrdLong" type="tns:char40" />
-          <xsd:element name="PrRefMatLong" type="tns:char40" />
-          <xsd:element name="PlngMatlLong" type="tns:char40" />
-          <xsd:element name="PriceRefLong" type="tns:char40" />
+          <xsd:element name="MatEntrdLong" type="n0:char40" />
+          <xsd:element name="PrRefMatLong" type="n0:char40" />
+          <xsd:element name="PlngMatlLong" type="n0:char40" />
+          <xsd:element name="PriceRefLong" type="n0:char40" />
           <xsd:element name="PoQuan" type="n0:quantum13.3" />
           <xsd:element name="PoUnit" type="n0:unit3" />
         </xsd:sequence>
@@ -1341,7 +2184,7 @@
           <xsd:element name="Incotermsv" type="n0:char4" />
           <xsd:element name="Incoterms2l" type="n0:char70" />
           <xsd:element name="Incoterms3l" type="n0:char70" />
-          <xsd:element name="TransMatLong" type="tns:char40" />
+          <xsd:element name="TransMatLong" type="n0:char40" />
         </xsd:sequence>
       </xsd:complexType>
       <xsd:complexType name="Bapiparex">
@@ -1423,60 +2266,6 @@
           <xsd:element name="Refobjkey" type="n0:char70" />
           <xsd:element name="Reflogsys" type="n0:char10" />
           <xsd:element name="VatRegNo" type="n0:char20" />
-        </xsd:sequence>
-      </xsd:complexType>
-      <xsd:complexType name="Bapischdl">
-        <xsd:sequence>
-          <xsd:element name="ItmNumber" type="n0:numeric6" />
-          <xsd:element name="SchedLine" type="n0:numeric4" />
-          <xsd:element name="ReqDate" type="n0:date10" />
-          <xsd:element name="DateType" type="n0:char1" />
-          <xsd:element name="ReqTime" type="n0:time" />
-          <xsd:element name="ReqQty" type="n0:quantum13.3" />
-          <xsd:element name="ReqDlvBl" type="n0:char2" />
-          <xsd:element name="SchedType" type="n0:char2" />
-          <xsd:element name="TpDate" type="n0:date10" />
-          <xsd:element name="MsDate" type="n0:date10" />
-          <xsd:element name="LoadDate" type="n0:date10" />
-          <xsd:element name="GiDate" type="n0:date10" />
-          <xsd:element name="TpTime" type="n0:time" />
-          <xsd:element name="MsTime" type="n0:time" />
-          <xsd:element name="LoadTime" type="n0:time" />
-          <xsd:element name="GiTime" type="n0:time" />
-          <xsd:element name="Refobjtype" type="n0:char10" />
-          <xsd:element name="Refobjkey" type="n0:char70" />
-          <xsd:element name="Reflogsys" type="n0:char10" />
-          <xsd:element name="DlvDate" type="n0:date10" />
-          <xsd:element name="DlvTime" type="n0:time" />
-          <xsd:element name="RelType" type="n0:char1" />
-          <xsd:element name="PlanSchedType" type="n0:char1" />
-        </xsd:sequence>
-      </xsd:complexType>
-      <xsd:complexType name="Bapischdlx">
-        <xsd:sequence>
-          <xsd:element name="ItmNumber" type="n0:numeric6" />
-          <xsd:element name="SchedLine" type="n0:numeric4" />
-          <xsd:element name="Updateflag" type="n0:char1" />
-          <xsd:element name="ReqDate" type="n0:char1" />
-          <xsd:element name="DateType" type="n0:char1" />
-          <xsd:element name="ReqTime" type="n0:char1" />
-          <xsd:element name="ReqQty" type="n0:char1" />
-          <xsd:element name="ReqDlvBl" type="n0:char1" />
-          <xsd:element name="SchedType" type="n0:char1" />
-          <xsd:element name="TpDate" type="n0:char1" />
-          <xsd:element name="MsDate" type="n0:char1" />
-          <xsd:element name="LoadDate" type="n0:char1" />
-          <xsd:element name="GiDate" type="n0:char1" />
-          <xsd:element name="TpTime" type="n0:char1" />
-          <xsd:element name="MsTime" type="n0:char1" />
-          <xsd:element name="LoadTime" type="n0:char1" />
-          <xsd:element name="GiTime" type="n0:char1" />
-          <xsd:element name="Refobjtype" type="n0:char10" />
-          <xsd:element name="Refobjkey" type="n0:char70" />
-          <xsd:element name="DlvDate" type="n0:char1" />
-          <xsd:element name="DlvTime" type="n0:char1" />
-          <xsd:element name="RelType" type="n0:char1" />
-          <xsd:element name="PlanSchedType" type="n0:char1" />
         </xsd:sequence>
       </xsd:complexType>
       <xsd:complexType name="Bapitextli">
@@ -1569,7 +2358,7 @@
           <xsd:element name="County" type="n0:char40" />
           <xsd:element name="TownshipCode" type="n0:char8" />
           <xsd:element name="Township" type="n0:char40" />
-          <xsd:element name="Xpcpt" type="tns:char1" />
+          <xsd:element name="Xpcpt" type="n0:char1" />
         </xsd:sequence>
       </xsd:complexType>
       <xsd:complexType name="Bapisdpart">
@@ -1625,136 +2414,6 @@
           <xsd:element name="ActionDat" type="n0:date10" />
           <xsd:element name="ActDatrul" type="n0:char2" />
           <xsd:element name="ConEnRul" type="n0:char2" />
-        </xsd:sequence>
-      </xsd:complexType>
-      <xsd:complexType name="Bapisdhd1x">
-        <xsd:sequence>
-          <xsd:element name="Updateflag" type="n0:char1" />
-          <xsd:element name="DocType" type="n0:char1" />
-          <xsd:element name="CollectNo" type="n0:char1" />
-          <xsd:element name="SalesOrg" type="n0:char1" />
-          <xsd:element name="DistrChan" type="n0:char1" />
-          <xsd:element name="Division" type="n0:char1" />
-          <xsd:element name="SalesGrp" type="n0:char1" />
-          <xsd:element name="SalesOff" type="n0:char1" />
-          <xsd:element name="ReqDateH" type="n0:char1" />
-          <xsd:element name="DateType" type="n0:char1" />
-          <xsd:element name="PurchDate" type="n0:char1" />
-          <xsd:element name="PoMethod" type="n0:char1" />
-          <xsd:element name="PoSupplem" type="n0:char1" />
-          <xsd:element name="Ref1" type="n0:char1" />
-          <xsd:element name="Name" type="n0:char1" />
-          <xsd:element name="Telephone" type="n0:char1" />
-          <xsd:element name="PriceGrp" type="n0:char1" />
-          <xsd:element name="CustGroup" type="n0:char1" />
-          <xsd:element name="SalesDist" type="n0:char1" />
-          <xsd:element name="PriceList" type="n0:char1" />
-          <xsd:element name="Incoterms1" type="n0:char1" />
-          <xsd:element name="Incoterms2" type="n0:char1" />
-          <xsd:element name="Pmnttrms" type="n0:char1" />
-          <xsd:element name="DlvBlock" type="n0:char1" />
-          <xsd:element name="BillBlock" type="n0:char1" />
-          <xsd:element name="OrdReason" type="n0:char1" />
-          <xsd:element name="ComplDlv" type="n0:char1" />
-          <xsd:element name="PriceDate" type="n0:char1" />
-          <xsd:element name="QtValidF" type="n0:char1" />
-          <xsd:element name="QtValidT" type="n0:char1" />
-          <xsd:element name="CtValidF" type="n0:char1" />
-          <xsd:element name="CtValidT" type="n0:char1" />
-          <xsd:element name="CustGrp1" type="n0:char1" />
-          <xsd:element name="CustGrp2" type="n0:char1" />
-          <xsd:element name="CustGrp3" type="n0:char1" />
-          <xsd:element name="CustGrp4" type="n0:char1" />
-          <xsd:element name="CustGrp5" type="n0:char1" />
-          <xsd:element name="PurchNoC" type="n0:char1" />
-          <xsd:element name="PurchNoS" type="n0:char1" />
-          <xsd:element name="PoDatS" type="n0:char1" />
-          <xsd:element name="PoMethS" type="n0:char1" />
-          <xsd:element name="Ref1S" type="n0:char1" />
-          <xsd:element name="SdDocCat" type="n0:char1" />
-          <xsd:element name="DocDate" type="n0:char1" />
-          <xsd:element name="WarDate" type="n0:char1" />
-          <xsd:element name="ShipCond" type="n0:char1" />
-          <xsd:element name="PpSearch" type="n0:char1" />
-          <xsd:element name="DunCount" type="n0:char1" />
-          <xsd:element name="DunDate" type="n0:char1" />
-          <xsd:element name="Dlvschduse" type="n0:char1" />
-          <xsd:element name="Pldlvstyp" type="n0:char1" />
-          <xsd:element name="RefDoc" type="n0:char1" />
-          <xsd:element name="CompCdeB" type="n0:char1" />
-          <xsd:element name="AlttaxCls" type="n0:char1" />
-          <xsd:element name="TaxClass2" type="n0:char1" />
-          <xsd:element name="TaxClass3" type="n0:char1" />
-          <xsd:element name="TaxClass4" type="n0:char1" />
-          <xsd:element name="TaxClass5" type="n0:char1" />
-          <xsd:element name="TaxClass6" type="n0:char1" />
-          <xsd:element name="TaxClass7" type="n0:char1" />
-          <xsd:element name="TaxClass8" type="n0:char1" />
-          <xsd:element name="TaxClass9" type="n0:char1" />
-          <xsd:element name="RefDocL" type="n0:char1" />
-          <xsd:element name="AssNumber" type="n0:char1" />
-          <xsd:element name="RefdocCat" type="n0:char1" />
-          <xsd:element name="OrdcombIn" type="n0:char1" />
-          <xsd:element name="BillSched" type="n0:char1" />
-          <xsd:element name="InvoSched" type="n0:char1" />
-          <xsd:element name="MnInvoice" type="n0:char1" />
-          <xsd:element name="ExrateFi" type="n0:char1" />
-          <xsd:element name="AddValDy" type="n0:char1" />
-          <xsd:element name="FixValDy" type="n0:char1" />
-          <xsd:element name="PymtMeth" type="n0:char1" />
-          <xsd:element name="AccntAsgn" type="n0:char1" />
-          <xsd:element name="ExchgRate" type="n0:char1" />
-          <xsd:element name="BillDate" type="n0:char1" />
-          <xsd:element name="ServDate" type="n0:char1" />
-          <xsd:element name="DunnKey" type="n0:char1" />
-          <xsd:element name="DunnBlock" type="n0:char1" />
-          <xsd:element name="Promotion" type="n0:char1" />
-          <xsd:element name="PmtgarPro" type="n0:char1" />
-          <xsd:element name="DepartmNo" type="n0:char1" />
-          <xsd:element name="RecPoint" type="n0:char1" />
-          <xsd:element name="PoitmNoS" type="n0:char1" />
-          <xsd:element name="DocNumFi" type="n0:char1" />
-          <xsd:element name="Cstcndgrp1" type="n0:char1" />
-          <xsd:element name="Cstcndgrp2" type="n0:char1" />
-          <xsd:element name="Cstcndgrp3" type="n0:char1" />
-          <xsd:element name="Cstcndgrp4" type="n0:char1" />
-          <xsd:element name="Cstcndgrp5" type="n0:char1" />
-          <xsd:element name="DlvTime" type="n0:char1" />
-          <xsd:element name="Currency" type="n0:char1" />
-          <xsd:element name="TaxdepCty" type="n0:char1" />
-          <xsd:element name="TaxdstCty" type="n0:char1" />
-          <xsd:element name="EutriDeal" type="n0:char1" />
-          <xsd:element name="MastContr" type="n0:char1" />
-          <xsd:element name="RefProc" type="n0:char1" />
-          <xsd:element name="Chkprtauth" type="n0:char1" />
-          <xsd:element name="CmlqtyDat" type="n0:char1" />
-          <xsd:element name="Version" type="n0:char1" />
-          <xsd:element name="NotifNo" type="n0:char1" />
-          <xsd:element name="WbsElem" type="n0:char1" />
-          <xsd:element name="ExchRateFiV" type="n0:char1" />
-          <xsd:element name="ExchgRateV" type="n0:char1" />
-          <xsd:element name="FkkConacct" type="n0:char1" />
-          <xsd:element name="Campaign" type="n0:char1" />
-          <xsd:element name="DocClass" type="n0:char1" />
-          <xsd:element name="HCurr" type="n0:char1" />
-          <xsd:element name="ShipType" type="n0:char1" />
-          <xsd:element name="SProcInd" type="n0:char1" />
-          <xsd:element name="LineTime" type="n0:char1" />
-          <xsd:element name="CalcMotive" type="n0:char1" />
-          <xsd:element name="PsmPstngDate" type="n0:char1" />
-          <xsd:element name="TreasuryAccSymbol" type="n0:char1" />
-          <xsd:element name="BusinessEventTcode" type="n0:char1" />
-          <xsd:element name="ModificationAllowed" type="n0:char1" />
-          <xsd:element name="CancellationAllowed" type="n0:char1" />
-          <xsd:element name="PaymentMethods" type="n0:char1" />
-          <xsd:element name="BusinessPartnerNo" type="n0:char1" />
-          <xsd:element name="ReportingFreq" type="n0:char1" />
-          <xsd:element name="SepaMandateId" type="n0:char1" />
-          <xsd:element name="SdDocCatLong" type="n0:char1" />
-          <xsd:element name="RefdocCatLong" type="n0:char1" />
-          <xsd:element name="Incotermsv" type="n0:char1" />
-          <xsd:element name="Incoterms2l" type="n0:char1" />
-          <xsd:element name="Incoterms3l" type="n0:char1" />
         </xsd:sequence>
       </xsd:complexType>
       <xsd:complexType name="Bapischdl2">
@@ -1835,224 +2494,6 @@
           <xsd:element name="Condcoinhd" type="n0:numeric2" />
         </xsd:sequence>
       </xsd:complexType>
-      <xsd:complexType name="Bapisditmx">
-        <xsd:sequence>
-          <xsd:element name="ItmNumber" type="n0:numeric6" />
-          <xsd:element name="Updateflag" type="n0:char1" />
-          <xsd:element name="HgLvItem" type="n0:char1" />
-          <xsd:element name="PoItmNo" type="n0:char1" />
-          <xsd:element name="Material" type="n0:char1" />
-          <xsd:element name="AltToItm" type="n0:char1" />
-          <xsd:element name="CustMat22" type="n0:char1" />
-          <xsd:element name="Batch" type="n0:char1" />
-          <xsd:element name="DlvGroup" type="n0:char1" />
-          <xsd:element name="PartDlv" type="n0:char1" />
-          <xsd:element name="ReasonRej" type="n0:char1" />
-          <xsd:element name="BillBlock" type="n0:char1" />
-          <xsd:element name="BillDate" type="n0:char1" />
-          <xsd:element name="Plant" type="n0:char1" />
-          <xsd:element name="StoreLoc" type="n0:char1" />
-          <xsd:element name="TargetQty" type="n0:char1" />
-          <xsd:element name="TargetQu" type="n0:char1" />
-          <xsd:element name="TUnitIso" type="n0:char1" />
-          <xsd:element name="ItemCateg" type="n0:char1" />
-          <xsd:element name="ShortText" type="n0:char1" />
-          <xsd:element name="PrcGroup1" type="n0:char1" />
-          <xsd:element name="PrcGroup2" type="n0:char1" />
-          <xsd:element name="PrcGroup3" type="n0:char1" />
-          <xsd:element name="PrcGroup4" type="n0:char1" />
-          <xsd:element name="PrcGroup5" type="n0:char1" />
-          <xsd:element name="ProdHiera" type="n0:char1" />
-          <xsd:element name="MatlGroup" type="n0:char1" />
-          <xsd:element name="PurchNoC" type="n0:char1" />
-          <xsd:element name="PurchDate" type="n0:char1" />
-          <xsd:element name="PoMethod" type="n0:char1" />
-          <xsd:element name="Ref1" type="n0:char1" />
-          <xsd:element name="PurchNoS" type="n0:char1" />
-          <xsd:element name="PoDatS" type="n0:char1" />
-          <xsd:element name="PoMethS" type="n0:char1" />
-          <xsd:element name="Ref1S" type="n0:char1" />
-          <xsd:element name="PoitmNoS" type="n0:char1" />
-          <xsd:element name="PriceGrp" type="n0:char1" />
-          <xsd:element name="CustGroup" type="n0:char1" />
-          <xsd:element name="SalesDist" type="n0:char1" />
-          <xsd:element name="PriceList" type="n0:char1" />
-          <xsd:element name="Incoterms1" type="n0:char1" />
-          <xsd:element name="Incoterms2" type="n0:char1" />
-          <xsd:element name="OrdcompIn" type="n0:char1" />
-          <xsd:element name="BillSched" type="n0:char1" />
-          <xsd:element name="InvoSched" type="n0:char1" />
-          <xsd:element name="MnInvoice" type="n0:char1" />
-          <xsd:element name="ExRateFi" type="n0:char1" />
-          <xsd:element name="AddValDy" type="n0:char1" />
-          <xsd:element name="FixValDy" type="n0:char1" />
-          <xsd:element name="Pmnttrms" type="n0:char1" />
-          <xsd:element name="PymtMeth" type="n0:char1" />
-          <xsd:element name="AccntAsgn" type="n0:char1" />
-          <xsd:element name="ExchgRate" type="n0:char1" />
-          <xsd:element name="PriceDate" type="n0:char1" />
-          <xsd:element name="ServDate" type="n0:char1" />
-          <xsd:element name="DunnKey" type="n0:char1" />
-          <xsd:element name="DunnBlock" type="n0:char1" />
-          <xsd:element name="Promotion" type="n0:char1" />
-          <xsd:element name="PmtgarPro" type="n0:char1" />
-          <xsd:element name="DocNumFi" type="n0:char1" />
-          <xsd:element name="DepartmNo" type="n0:char1" />
-          <xsd:element name="RecPoint" type="n0:char1" />
-          <xsd:element name="Cstcndgrp1" type="n0:char1" />
-          <xsd:element name="Cstcndgrp2" type="n0:char1" />
-          <xsd:element name="Cstcndgrp3" type="n0:char1" />
-          <xsd:element name="Cstcndgrp4" type="n0:char1" />
-          <xsd:element name="Cstcndgrp5" type="n0:char1" />
-          <xsd:element name="DlvTime" type="n0:char1" />
-          <xsd:element name="SalesUnit" type="n0:char1" />
-          <xsd:element name="TrgQtyNo" type="n0:char1" />
-          <xsd:element name="TrgqtyDen" type="n0:char1" />
-          <xsd:element name="RnddlvQty" type="n0:char1" />
-          <xsd:element name="Maxdevamnt" type="n0:char1" />
-          <xsd:element name="Maxdevper" type="n0:char1" />
-          <xsd:element name="MaxdevDay" type="n0:char1" />
-          <xsd:element name="UsageInd" type="n0:char1" />
-          <xsd:element name="FixedQuan" type="n0:char1" />
-          <xsd:element name="UnlmtDlv" type="n0:char1" />
-          <xsd:element name="Overdlvtol" type="n0:char1" />
-          <xsd:element name="UnddlvTol" type="n0:char1" />
-          <xsd:element name="Division" type="n0:char1" />
-          <xsd:element name="Salqtynum" type="n0:char1" />
-          <xsd:element name="Salqtyden" type="n0:char1" />
-          <xsd:element name="GrossWght" type="n0:char1" />
-          <xsd:element name="NetWeight" type="n0:char1" />
-          <xsd:element name="UntofWght" type="n0:char1" />
-          <xsd:element name="Volume" type="n0:char1" />
-          <xsd:element name="Volunit" type="n0:char1" />
-          <xsd:element name="DlvPrio" type="n0:char1" />
-          <xsd:element name="ShipPoint" type="n0:char1" />
-          <xsd:element name="Route" type="n0:char1" />
-          <xsd:element name="TaxClass1" type="n0:char1" />
-          <xsd:element name="TaxClass2" type="n0:char1" />
-          <xsd:element name="TaxClass3" type="n0:char1" />
-          <xsd:element name="TaxClass4" type="n0:char1" />
-          <xsd:element name="TaxClass5" type="n0:char1" />
-          <xsd:element name="TaxClass6" type="n0:char1" />
-          <xsd:element name="TaxClass7" type="n0:char1" />
-          <xsd:element name="TaxClass8" type="n0:char1" />
-          <xsd:element name="TaxClass9" type="n0:char1" />
-          <xsd:element name="MatPrGrp" type="n0:char1" />
-          <xsd:element name="ValType" type="n0:char1" />
-          <xsd:element name="FixdatQty" type="n0:char1" />
-          <xsd:element name="BomexplNo" type="n0:char1" />
-          <xsd:element name="Resanalkey" type="n0:char1" />
-          <xsd:element name="ReqmtsTyp" type="n0:char1" />
-          <xsd:element name="NoGrPost" type="n0:char1" />
-          <xsd:element name="BusTranst" type="n0:char1" />
-          <xsd:element name="OverhdKey" type="n0:char1" />
-          <xsd:element name="CstgSheet" type="n0:char1" />
-          <xsd:element name="Matfrgtgrp" type="n0:char1" />
-          <xsd:element name="Pldlvshdin" type="n0:char1" />
-          <xsd:element name="SeqNo" type="n0:char1" />
-          <xsd:element name="BilForm" type="n0:char1" />
-          <xsd:element name="DliProfil" type="n0:char1" />
-          <xsd:element name="RevType" type="n0:char1" />
-          <xsd:element name="BegdemPer" type="n0:char1" />
-          <xsd:element name="PrRefMat" type="n0:char1" />
-          <xsd:element name="Refobjtype" type="n0:char1" />
-          <xsd:element name="Refobjkey" type="n0:char1" />
-          <xsd:element name="Reflogsys" type="n0:char1" />
-          <xsd:element name="OrderProb" type="n0:char1" />
-          <xsd:element name="MaxPlDlv" type="n0:char1" />
-          <xsd:element name="CfopCode" type="n0:char1" />
-          <xsd:element name="Taxlawicms" type="n0:char1" />
-          <xsd:element name="Taxlawipi" type="n0:char1" />
-          <xsd:element name="SdTaxcode" type="n0:char1" />
-          <xsd:element name="AssortMod" type="n0:char1" />
-          <xsd:element name="CompQuant" type="n0:char1" />
-          <xsd:element name="TargetVal" type="n0:char1" />
-          <xsd:element name="ProfitCtr" type="n0:char1" />
-          <xsd:element name="Orderid" type="n0:char1" />
-          <xsd:element name="WbsElem" type="n0:char1" />
-          <xsd:element name="DeprecPer" type="n0:char1" />
-          <xsd:element name="RefDoc" type="n0:char1" />
-          <xsd:element name="RefDocIt" type="n0:char1" />
-          <xsd:element name="RefDocCa" type="n0:char1" />
-          <xsd:element name="CustMat35" type="n0:char1" />
-          <xsd:element name="ExchRateFiV" type="n0:char1" />
-          <xsd:element name="ExchgRateV" type="n0:char1" />
-          <xsd:element name="ItemguidAtp" type="n0:char1" />
-          <xsd:element name="ValContr" type="n0:char1" />
-          <xsd:element name="ValConI" type="n0:char1" />
-          <xsd:element name="ConfigId" type="n0:char1" />
-          <xsd:element name="InstId" type="n0:char1" />
-          <xsd:element name="MatExt" type="n0:char1" />
-          <xsd:element name="MatGuid" type="n0:char1" />
-          <xsd:element name="MatVers" type="n0:char1" />
-          <xsd:element name="PMatExt" type="n0:char1" />
-          <xsd:element name="PMatGuid" type="n0:char1" />
-          <xsd:element name="PMatVers" type="n0:char1" />
-          <xsd:element name="FuncArea" type="n0:char1" />
-          <xsd:element name="AlternBom" type="n0:char1" />
-          <xsd:element name="FkkConacct" type="n0:char1" />
-          <xsd:element name="EanUpc" type="n0:char1" />
-          <xsd:element name="Prodcat" type="n0:char1" />
-          <xsd:element name="ShipType" type="n0:char1" />
-          <xsd:element name="SProcInd" type="n0:char1" />
-          <xsd:element name="BillRel" type="n0:char1" />
-          <xsd:element name="VwUepos" type="n0:char1" />
-          <xsd:element name="Campaign" type="n0:char1" />
-          <xsd:element name="Dlvschduse" type="n0:char1" />
-          <xsd:element name="Selection" type="n0:char1" />
-          <xsd:element name="MatEntrd" type="n0:char1" />
-          <xsd:element name="LogSystemOwn" type="n0:char1" />
-          <xsd:element name="ItmTypeUsage" type="n0:char1" />
-          <xsd:element name="MatEntrdExternal" type="n0:char1" />
-          <xsd:element name="MatEntrdGuid" type="n0:char1" />
-          <xsd:element name="MatEntrdVersion" type="n0:char1" />
-          <xsd:element name="LocTaxcat" type="n0:char1" />
-          <xsd:element name="LocZerovat" type="n0:char1" />
-          <xsd:element name="LocActcode" type="n0:char1" />
-          <xsd:element name="LocDisttype" type="n0:char1" />
-          <xsd:element name="LocTxrelclas" type="n0:char1" />
-          <xsd:element name="CalcMotive" type="n0:char1" />
-          <xsd:element name="Fund" type="n0:char1" />
-          <xsd:element name="FundsCtr" type="n0:char1" />
-          <xsd:element name="CmmtItem" type="n0:char1" />
-          <xsd:element name="GrantNbr" type="n0:char1" />
-          <xsd:element name="BudgetPeriod" type="n0:char1" />
-          <xsd:element name="Taxlawiss" type="n0:char1" />
-          <xsd:element name="Taxlawcofins" type="n0:char1" />
-          <xsd:element name="Taxlawpis" type="n0:char1" />
-          <xsd:element name="TreasuryAccSymbol" type="n0:char1" />
-          <xsd:element name="BusinessEventTcode" type="n0:char1" />
-          <xsd:element name="ModificationAllowed" type="n0:char1" />
-          <xsd:element name="CancellationAllowed" type="n0:char1" />
-          <xsd:element name="PaymentMethods" type="n0:char1" />
-          <xsd:element name="BusinessPartnerNo" type="n0:char1" />
-          <xsd:element name="ReportingFreq" type="n0:char1" />
-          <xsd:element name="CfopLong" type="n0:char1" />
-          <xsd:element name="SepaMandateId" type="n0:char1" />
-          <xsd:element name="ReqSegment" type="n0:char1" />
-          <xsd:element name="TpSublevl" type="n0:char1" />
-          <xsd:element name="TpAgencid" type="n0:char1" />
-          <xsd:element name="TpAltraid" type="n0:char1" />
-          <xsd:element name="TpBegper" type="n0:char1" />
-          <xsd:element name="TpEndper" type="n0:char1" />
-          <xsd:element name="TpAvtype" type="n0:char1" />
-          <xsd:element name="TpMainAcct" type="n0:char1" />
-          <xsd:element name="TpSubAcct" type="n0:char1" />
-          <xsd:element name="TpBetc" type="n0:char1" />
-          <xsd:element name="RevaccRefid" type="n0:char1" />
-          <xsd:element name="RevaccReftype" type="n0:char1" />
-          <xsd:element name="RefDocCaLong" type="n0:char1" />
-          <xsd:element name="Incotermsv" type="n0:char1" />
-          <xsd:element name="Incoterms2l" type="n0:char1" />
-          <xsd:element name="Incoterms3l" type="n0:char1" />
-          <xsd:element name="MaterialLong" type="n0:char1" />
-          <xsd:element name="PrRefMatLong" type="n0:char1" />
-          <xsd:element name="MatEntrdLong" type="n0:char1" />
-          <xsd:element name="PoQuan" type="n0:char1" />
-          <xsd:element name="PoUnit" type="n0:char1" />
-          <xsd:element name="ReqSegLong" type="n0:char1" />
-        </xsd:sequence>
-      </xsd:complexType>
       <xsd:complexType name="Bapibtsel">
         <xsd:sequence>
           <xsd:element name="Selection" type="n0:char32" />
@@ -2089,8 +2530,8 @@
         <xsd:sequence>
           <xsd:element name="ProgLivrare" type="n0:char1" />
           <xsd:element name="LivrSambata" type="n0:char2" />
-          <xsd:element name="Tonaj" type="tns:quantum13.3" />
-          <xsd:element name="Obssof" type="tns:char100" />
+          <xsd:element name="Tonaj" type="n0:quantum13.3" />
+          <xsd:element name="Obssof" type="n0:char100" />
         </xsd:sequence>
       </xsd:complexType>
       <xsd:complexType name="Bapiccard">
@@ -2143,249 +2584,6 @@
           <xsd:element name="Valcode" type="n0:char1" />
         </xsd:sequence>
       </xsd:complexType>
-      <xsd:complexType name="Bapisditm">
-        <xsd:sequence>
-          <xsd:element name="ItmNumber" type="n0:numeric6" />
-          <xsd:element name="HgLvItem" type="n0:numeric6" />
-          <xsd:element name="PoItmNo" type="n0:char6" />
-          <xsd:element name="Material" type="n0:char18" />
-          <xsd:element name="AltToItm" type="n0:numeric6" />
-          <xsd:element name="CustMat22" type="n0:char22" />
-          <xsd:element name="Batch" type="n0:char10" />
-          <xsd:element name="DlvGroup" type="n0:numeric3" />
-          <xsd:element name="PartDlv" type="n0:char1" />
-          <xsd:element name="ReasonRej" type="n0:char2" />
-          <xsd:element name="BillBlock" type="n0:char2" />
-          <xsd:element name="BillDate" type="n0:date10" />
-          <xsd:element name="Plant" type="n0:char4" />
-          <xsd:element name="StoreLoc" type="n0:char4" />
-          <xsd:element name="TargetQty" type="n0:quantum13.3" />
-          <xsd:element name="TargetQu" type="n0:unit3" />
-          <xsd:element name="TUnitIso" type="n0:char3" />
-          <xsd:element name="ItemCateg" type="n0:char4" />
-          <xsd:element name="ShortText" type="n0:char40" />
-          <xsd:element name="PrcGroup1" type="n0:char3" />
-          <xsd:element name="PrcGroup2" type="n0:char3" />
-          <xsd:element name="PrcGroup3" type="n0:char3" />
-          <xsd:element name="PrcGroup4" type="n0:char3" />
-          <xsd:element name="PrcGroup5" type="n0:char3" />
-          <xsd:element name="ProdHiera" type="n0:char18" />
-          <xsd:element name="MatlGroup" type="n0:char9" />
-          <xsd:element name="PurchNoC" type="n0:char35" />
-          <xsd:element name="PurchDate" type="n0:date10" />
-          <xsd:element name="PoMethod" type="n0:char4" />
-          <xsd:element name="Ref1" type="n0:char12" />
-          <xsd:element name="PurchNoS" type="n0:char35" />
-          <xsd:element name="PoDatS" type="n0:date10" />
-          <xsd:element name="PoMethS" type="n0:char4" />
-          <xsd:element name="Ref1S" type="n0:char12" />
-          <xsd:element name="PoitmNoS" type="n0:char6" />
-          <xsd:element name="PriceGrp" type="n0:char2" />
-          <xsd:element name="CustGroup" type="n0:char2" />
-          <xsd:element name="SalesDist" type="n0:char6" />
-          <xsd:element name="PriceList" type="n0:char2" />
-          <xsd:element name="Incoterms1" type="n0:char3" />
-          <xsd:element name="Incoterms2" type="n0:char28" />
-          <xsd:element name="OrdcompIn" type="n0:char1" />
-          <xsd:element name="BillSched" type="n0:char2" />
-          <xsd:element name="InvoSched" type="n0:char2" />
-          <xsd:element name="MnInvoice" type="n0:char1" />
-          <xsd:element name="ExRateFi" type="n0:decimal9.5" />
-          <xsd:element name="AddValDy" type="n0:numeric2" />
-          <xsd:element name="FixValDy" type="n0:date10" />
-          <xsd:element name="Pmnttrms" type="n0:char4" />
-          <xsd:element name="PymtMeth" type="n0:char1" />
-          <xsd:element name="AccntAsgn" type="n0:char2" />
-          <xsd:element name="ExchgRate" type="n0:decimal9.5" />
-          <xsd:element name="PriceDate" type="n0:date10" />
-          <xsd:element name="ServDate" type="n0:date10" />
-          <xsd:element name="DunnKey" type="n0:char1" />
-          <xsd:element name="DunnBlock" type="n0:char1" />
-          <xsd:element name="Promotion" type="n0:char10" />
-          <xsd:element name="PmtgarPro" type="n0:char6" />
-          <xsd:element name="DocNumFi" type="n0:char10" />
-          <xsd:element name="DepartmNo" type="n0:char4" />
-          <xsd:element name="RecPoint" type="n0:char25" />
-          <xsd:element name="Cstcndgrp1" type="n0:char2" />
-          <xsd:element name="Cstcndgrp2" type="n0:char2" />
-          <xsd:element name="Cstcndgrp3" type="n0:char2" />
-          <xsd:element name="Cstcndgrp4" type="n0:char2" />
-          <xsd:element name="Cstcndgrp5" type="n0:char2" />
-          <xsd:element name="DlvTime" type="n0:char3" />
-          <xsd:element name="SalesUnit" type="n0:unit3" />
-          <xsd:element name="SUnitIso" type="n0:char3" />
-          <xsd:element name="TrgQtyNo" type="n0:decimal5.0" />
-          <xsd:element name="TrgqtyDen" type="n0:decimal5.0" />
-          <xsd:element name="RnddlvQty" type="n0:quantum13.3" />
-          <xsd:element name="Maxdevamnt" type="n0:quantum13.3" />
-          <xsd:element name="Maxdevper" type="n0:decimal3.0" />
-          <xsd:element name="MaxdevDay" type="n0:decimal3.0" />
-          <xsd:element name="UsageInd" type="n0:char3" />
-          <xsd:element name="FixedQuan" type="n0:char1" />
-          <xsd:element name="UnlmtDlv" type="n0:char1" />
-          <xsd:element name="Overdlvtol" type="n0:decimal3.1" />
-          <xsd:element name="UnddlvTol" type="n0:decimal3.1" />
-          <xsd:element name="Division" type="n0:char2" />
-          <xsd:element name="Salqtynum" type="n0:decimal5.0" />
-          <xsd:element name="Salqtyden" type="n0:decimal5.0" />
-          <xsd:element name="GrossWght" type="n0:quantum15.3" />
-          <xsd:element name="NetWeight" type="n0:quantum15.3" />
-          <xsd:element name="UntofWght" type="n0:unit3" />
-          <xsd:element name="UnofWtiso" type="n0:char3" />
-          <xsd:element name="Volume" type="n0:quantum15.3" />
-          <xsd:element name="Volunit" type="n0:unit3" />
-          <xsd:element name="Volunitiso" type="n0:char3" />
-          <xsd:element name="DlvPrio" type="n0:numeric2" />
-          <xsd:element name="ShipPoint" type="n0:char4" />
-          <xsd:element name="Route" type="n0:char6" />
-          <xsd:element name="CreatedBy" type="n0:char12" />
-          <xsd:element name="TaxClass1" type="n0:char1" />
-          <xsd:element name="TaxClass2" type="n0:char1" />
-          <xsd:element name="TaxClass3" type="n0:char1" />
-          <xsd:element name="TaxClass4" type="n0:char1" />
-          <xsd:element name="TaxClass5" type="n0:char1" />
-          <xsd:element name="TaxClass6" type="n0:char1" />
-          <xsd:element name="TaxClass7" type="n0:char1" />
-          <xsd:element name="TaxClass8" type="n0:char1" />
-          <xsd:element name="TaxClass9" type="n0:char1" />
-          <xsd:element name="MatPrGrp" type="n0:char2" />
-          <xsd:element name="ValType" type="n0:char10" />
-          <xsd:element name="FixdatQty" type="n0:char1" />
-          <xsd:element name="BomexplNo" type="n0:char8" />
-          <xsd:element name="Resanalkey" type="n0:char6" />
-          <xsd:element name="ReqmtsTyp" type="n0:char4" />
-          <xsd:element name="NoGrPost" type="n0:char1" />
-          <xsd:element name="BusTranst" type="n0:char2" />
-          <xsd:element name="OverhdKey" type="n0:char6" />
-          <xsd:element name="CstgSheet" type="n0:char6" />
-          <xsd:element name="Matfrgtgrp" type="n0:char8" />
-          <xsd:element name="Pldlvshdin" type="n0:char4" />
-          <xsd:element name="SeqNo" type="n0:char35" />
-          <xsd:element name="BilForm" type="n0:char2" />
-          <xsd:element name="DliProfil" type="n0:char8" />
-          <xsd:element name="RevType" type="n0:char1" />
-          <xsd:element name="BegdemPer" type="n0:char1" />
-          <xsd:element name="PrRefMat" type="n0:char18" />
-          <xsd:element name="Refobjtype" type="n0:char10" />
-          <xsd:element name="Refobjkey" type="n0:char70" />
-          <xsd:element name="Reflogsys" type="n0:char10" />
-          <xsd:element name="OrderProb" type="n0:numeric3" />
-          <xsd:element name="MaxPlDlv" type="n0:decimal1.0" />
-          <xsd:element name="CfopCode" type="n0:char5" />
-          <xsd:element name="Taxlawicms" type="n0:char3" />
-          <xsd:element name="Taxlawipi" type="n0:char3" />
-          <xsd:element name="SdTaxcode" type="n0:char2" />
-          <xsd:element name="AssortMod" type="n0:char18" />
-          <xsd:element name="CompQuant" type="n0:quantum13.3" />
-          <xsd:element name="TargetVal" type="n0:decimal28.9" />
-          <xsd:element name="Currency" type="n0:cuky5" />
-          <xsd:element name="CurrIso" type="n0:char3" />
-          <xsd:element name="ProfitCtr" type="n0:char10" />
-          <xsd:element name="Orderid" type="n0:char12" />
-          <xsd:element name="WbsElem" type="n0:char24" />
-          <xsd:element name="DeprecPer" type="n0:decimal5.2" />
-          <xsd:element name="RefDoc" type="n0:char10" />
-          <xsd:element name="RefDocIt" type="n0:numeric6" />
-          <xsd:element name="RefDocCa" type="n0:char1" />
-          <xsd:element name="CustMat35" type="n0:char35" />
-          <xsd:element name="ExchRateFiV" type="n0:decimal9.5" />
-          <xsd:element name="ExchgRateV" type="n0:decimal9.5" />
-          <xsd:element name="ItemguidAtp" type="n0:char22" />
-          <xsd:element name="ValContr" type="n0:char10" />
-          <xsd:element name="ValConI" type="n0:numeric6" />
-          <xsd:element name="ConfigId" type="n0:char6" />
-          <xsd:element name="InstId" type="n0:char8" />
-          <xsd:element name="MatExt" type="n0:char40" />
-          <xsd:element name="MatGuid" type="n0:char32" />
-          <xsd:element name="MatVers" type="n0:char10" />
-          <xsd:element name="PMatExt" type="n0:char40" />
-          <xsd:element name="PMatGuid" type="n0:char32" />
-          <xsd:element name="PMatVers" type="n0:char10" />
-          <xsd:element name="FuncArea" type="n0:char4" />
-          <xsd:element name="AlternBom" type="n0:char2" />
-          <xsd:element name="FkkConacct" type="n0:char12" />
-          <xsd:element name="EanUpc" type="n0:char18" />
-          <xsd:element name="Prodcat" type="n0:char10" />
-          <xsd:element name="ShipType" type="n0:char2" />
-          <xsd:element name="SProcInd" type="n0:char4" />
-          <xsd:element name="FuncAreaLong" type="n0:char16" />
-          <xsd:element name="BillRel" type="n0:char1" />
-          <xsd:element name="VwUepos" type="n0:char1" />
-          <xsd:element name="Campaign" type="n0:byte16" />
-          <xsd:element name="Dlvschduse" type="n0:char3" />
-          <xsd:element name="CfopLong" type="n0:char10" />
-          <xsd:element name="Selection" type="n0:char32" />
-          <xsd:element name="MatEntrd" type="n0:char18" />
-          <xsd:element name="LogSystemOwn" type="n0:char10" />
-          <xsd:element name="ItmTypeUsage" type="n0:char4" />
-          <xsd:element name="Taxlawiss" type="n0:char3" />
-          <xsd:element name="MatEntrdExternal" type="n0:char40" />
-          <xsd:element name="MatEntrdGuid" type="n0:char32" />
-          <xsd:element name="MatEntrdVersion" type="n0:char10" />
-          <xsd:element name="LocTaxcat" type="n0:char2" />
-          <xsd:element name="LocZerovat" type="n0:char1" />
-          <xsd:element name="LocActcode" type="n0:char2" />
-          <xsd:element name="LocDisttype" type="n0:char2" />
-          <xsd:element name="LocTxrelclas" type="n0:char10" />
-          <xsd:element name="CalcMotive" type="n0:char2" />
-          <xsd:element name="Compreas" type="n0:char4" />
-          <xsd:element name="Fund" type="n0:char10" />
-          <xsd:element name="FundsCtr" type="n0:char16" />
-          <xsd:element name="CmmtItem" type="n0:char24" />
-          <xsd:element name="GrantNbr" type="n0:char20" />
-          <xsd:element name="BudgetPeriod" type="n0:char10" />
-          <xsd:element name="Taxlawcofins" type="n0:char3" />
-          <xsd:element name="Taxlawpis" type="n0:char3" />
-          <xsd:element name="TreasuryAccSymbol" type="n0:char30" />
-          <xsd:element name="BusinessEventTcode" type="n0:char10" />
-          <xsd:element name="ModificationAllowed" type="n0:char1" />
-          <xsd:element name="CancellationAllowed" type="n0:char1" />
-          <xsd:element name="PaymentMethods" type="n0:char10" />
-          <xsd:element name="BusinessPartnerNo" type="n0:char6" />
-          <xsd:element name="ReportingFreq" type="n0:char3" />
-          <xsd:element name="SepaMandateId" type="n0:char35" />
-          <xsd:element name="ReqSegment" type="n0:char16" />
-          <xsd:element name="TpSublevl" type="n0:char2" />
-          <xsd:element name="TpAgencid" type="n0:char3" />
-          <xsd:element name="TpAltraid" type="n0:char3" />
-          <xsd:element name="TpBegper" type="n0:numeric4" />
-          <xsd:element name="TpEndper" type="n0:numeric4" />
-          <xsd:element name="TpAvtype" type="n0:char1" />
-          <xsd:element name="TpMainAcct" type="n0:char4" />
-          <xsd:element name="TpSubAcct" type="n0:char3" />
-          <xsd:element name="TpBetc" type="n0:char10" />
-          <xsd:element name="RevaccRefid" type="n0:char30" />
-          <xsd:element name="RevaccReftype" type="n0:char3" />
-          <xsd:element name="RefDocCaLong" type="n0:char4" />
-          <xsd:element name="Incotermsv" type="n0:char4" />
-          <xsd:element name="Incoterms2l" type="n0:char70" />
-          <xsd:element name="Incoterms3l" type="n0:char70" />
-          <xsd:element name="MaterialLong" type="tns:char40" />
-          <xsd:element name="PrRefMatLong" type="tns:char40" />
-          <xsd:element name="MatEntrdLong" type="tns:char40" />
-          <xsd:element name="PoQuan" type="n0:quantum13.3" />
-          <xsd:element name="PoUnit" type="n0:unit3" />
-          <xsd:element name="ReqSegLong" type="tns:char40" />
-        </xsd:sequence>
-      </xsd:complexType>
-      <xsd:complexType name="Bapiret2">
-        <xsd:sequence>
-          <xsd:element name="Type" type="n0:char1" />
-          <xsd:element name="Id" type="n0:char20" />
-          <xsd:element name="Number" type="n0:numeric3" />
-          <xsd:element name="Message" type="n0:char220" />
-          <xsd:element name="LogNo" type="n0:char20" />
-          <xsd:element name="LogMsgNo" type="n0:numeric6" />
-          <xsd:element name="MessageV1" type="n0:char50" />
-          <xsd:element name="MessageV2" type="n0:char50" />
-          <xsd:element name="MessageV3" type="n0:char50" />
-          <xsd:element name="MessageV4" type="n0:char50" />
-          <xsd:element name="Parameter" type="n0:char32" />
-          <xsd:element name="Row" type="xsd:int" />
-          <xsd:element name="Field" type="n0:char30" />
-          <xsd:element name="System" type="n0:char10" />
-        </xsd:sequence>
-      </xsd:complexType>
       <xsd:complexType name="Bapicucfg">
         <xsd:sequence>
           <xsd:element name="Posex" type="n0:char6" />
@@ -2436,140 +2634,6 @@
           <xsd:element name="ActionDat" type="n0:char1" />
           <xsd:element name="ActDatrul" type="n0:char1" />
           <xsd:element name="ConEnRul" type="n0:char1" />
-        </xsd:sequence>
-      </xsd:complexType>
-      <xsd:complexType name="Bapisdhd1">
-        <xsd:sequence>
-          <xsd:element name="Refobjtype" type="n0:char10" />
-          <xsd:element name="Refobjkey" type="n0:char70" />
-          <xsd:element name="Refdoctype" type="n0:char10" />
-          <xsd:element name="DocType" type="n0:char4" />
-          <xsd:element name="CollectNo" type="n0:char10" />
-          <xsd:element name="SalesOrg" type="n0:char4" />
-          <xsd:element name="DistrChan" type="n0:char2" />
-          <xsd:element name="Division" type="n0:char2" />
-          <xsd:element name="SalesGrp" type="n0:char3" />
-          <xsd:element name="SalesOff" type="n0:char4" />
-          <xsd:element name="ReqDateH" type="n0:date10" />
-          <xsd:element name="DateType" type="n0:char1" />
-          <xsd:element name="PurchDate" type="n0:date10" />
-          <xsd:element name="PoMethod" type="n0:char4" />
-          <xsd:element name="PoSupplem" type="n0:char4" />
-          <xsd:element name="Ref1" type="n0:char12" />
-          <xsd:element name="Name" type="n0:char35" />
-          <xsd:element name="Telephone" type="n0:char16" />
-          <xsd:element name="PriceGrp" type="n0:char2" />
-          <xsd:element name="CustGroup" type="n0:char2" />
-          <xsd:element name="SalesDist" type="n0:char6" />
-          <xsd:element name="PriceList" type="n0:char2" />
-          <xsd:element name="Incoterms1" type="n0:char3" />
-          <xsd:element name="Incoterms2" type="n0:char28" />
-          <xsd:element name="Pmnttrms" type="n0:char4" />
-          <xsd:element name="DlvBlock" type="n0:char2" />
-          <xsd:element name="BillBlock" type="n0:char2" />
-          <xsd:element name="OrdReason" type="n0:char3" />
-          <xsd:element name="ComplDlv" type="n0:char1" />
-          <xsd:element name="PriceDate" type="n0:date10" />
-          <xsd:element name="QtValidF" type="n0:date10" />
-          <xsd:element name="QtValidT" type="n0:date10" />
-          <xsd:element name="CtValidF" type="n0:date10" />
-          <xsd:element name="CtValidT" type="n0:date10" />
-          <xsd:element name="CustGrp1" type="n0:char3" />
-          <xsd:element name="CustGrp2" type="n0:char3" />
-          <xsd:element name="CustGrp3" type="n0:char3" />
-          <xsd:element name="CustGrp4" type="n0:char3" />
-          <xsd:element name="CustGrp5" type="n0:char3" />
-          <xsd:element name="PurchNoC" type="n0:char35" />
-          <xsd:element name="PurchNoS" type="n0:char35" />
-          <xsd:element name="PoDatS" type="n0:date10" />
-          <xsd:element name="PoMethS" type="n0:char4" />
-          <xsd:element name="Ref1S" type="n0:char12" />
-          <xsd:element name="SdDocCat" type="n0:char1" />
-          <xsd:element name="DocDate" type="n0:date10" />
-          <xsd:element name="WarDate" type="n0:date10" />
-          <xsd:element name="ShipCond" type="n0:char2" />
-          <xsd:element name="PpSearch" type="n0:char40" />
-          <xsd:element name="DunCount" type="n0:decimal3.0" />
-          <xsd:element name="DunDate" type="n0:date10" />
-          <xsd:element name="Dlvschduse" type="n0:char3" />
-          <xsd:element name="Pldlvstyp" type="n0:char1" />
-          <xsd:element name="RefDoc" type="n0:char10" />
-          <xsd:element name="CompCdeB" type="n0:char4" />
-          <xsd:element name="AlttaxCls" type="n0:char1" />
-          <xsd:element name="TaxClass2" type="n0:char1" />
-          <xsd:element name="TaxClass3" type="n0:char1" />
-          <xsd:element name="TaxClass4" type="n0:char1" />
-          <xsd:element name="TaxClass5" type="n0:char1" />
-          <xsd:element name="TaxClass6" type="n0:char1" />
-          <xsd:element name="TaxClass7" type="n0:char1" />
-          <xsd:element name="TaxClass8" type="n0:char1" />
-          <xsd:element name="TaxClass9" type="n0:char1" />
-          <xsd:element name="RefDocL" type="n0:char16" />
-          <xsd:element name="AssNumber" type="n0:char18" />
-          <xsd:element name="RefdocCat" type="n0:char1" />
-          <xsd:element name="OrdcombIn" type="n0:char1" />
-          <xsd:element name="BillSched" type="n0:char2" />
-          <xsd:element name="InvoSched" type="n0:char2" />
-          <xsd:element name="MnInvoice" type="n0:char1" />
-          <xsd:element name="ExrateFi" type="n0:decimal9.5" />
-          <xsd:element name="AddValDy" type="n0:numeric2" />
-          <xsd:element name="FixValDy" type="n0:date10" />
-          <xsd:element name="PymtMeth" type="n0:char1" />
-          <xsd:element name="AccntAsgn" type="n0:char2" />
-          <xsd:element name="ExchgRate" type="n0:decimal9.5" />
-          <xsd:element name="BillDate" type="n0:date10" />
-          <xsd:element name="ServDate" type="n0:date10" />
-          <xsd:element name="DunnKey" type="n0:char1" />
-          <xsd:element name="DunnBlock" type="n0:char1" />
-          <xsd:element name="PmtgarPro" type="n0:char6" />
-          <xsd:element name="DepartmNo" type="n0:char4" />
-          <xsd:element name="RecPoint" type="n0:char25" />
-          <xsd:element name="DocNumFi" type="n0:char10" />
-          <xsd:element name="Cstcndgrp1" type="n0:char2" />
-          <xsd:element name="Cstcndgrp2" type="n0:char2" />
-          <xsd:element name="Cstcndgrp3" type="n0:char2" />
-          <xsd:element name="Cstcndgrp4" type="n0:char2" />
-          <xsd:element name="Cstcndgrp5" type="n0:char2" />
-          <xsd:element name="DlvTime" type="n0:char3" />
-          <xsd:element name="Currency" type="n0:cuky5" />
-          <xsd:element name="CurrIso" type="n0:char3" />
-          <xsd:element name="CreatedBy" type="n0:char12" />
-          <xsd:element name="TaxdepCty" type="n0:char3" />
-          <xsd:element name="TaxdstCty" type="n0:char3" />
-          <xsd:element name="EutriDeal" type="n0:char1" />
-          <xsd:element name="MastContr" type="n0:char10" />
-          <xsd:element name="RefProc" type="n0:char4" />
-          <xsd:element name="Chkprtauth" type="n0:char1" />
-          <xsd:element name="CmlqtyDat" type="n0:date10" />
-          <xsd:element name="Version" type="n0:char12" />
-          <xsd:element name="NotifNo" type="n0:char12" />
-          <xsd:element name="WbsElem" type="n0:char24" />
-          <xsd:element name="ExchRateFiV" type="n0:decimal9.5" />
-          <xsd:element name="ExchgRateV" type="n0:decimal9.5" />
-          <xsd:element name="FkkConacct" type="n0:char12" />
-          <xsd:element name="Campaign" type="n0:byte16" />
-          <xsd:element name="DocClass" type="n0:char9" />
-          <xsd:element name="HCurr" type="n0:cuky5" />
-          <xsd:element name="HCurrIso" type="n0:char3" />
-          <xsd:element name="ShipType" type="n0:char2" />
-          <xsd:element name="SProcInd" type="n0:char4" />
-          <xsd:element name="RefDocLLong" type="n0:char35" />
-          <xsd:element name="LineTime" type="n0:time" />
-          <xsd:element name="CalcMotive" type="n0:char2" />
-          <xsd:element name="PsmPstngDate" type="n0:date10" />
-          <xsd:element name="TreasuryAccSymbol" type="n0:char30" />
-          <xsd:element name="BusinessEventTcode" type="n0:char10" />
-          <xsd:element name="ModificationAllowed" type="n0:char1" />
-          <xsd:element name="CancellationAllowed" type="n0:char1" />
-          <xsd:element name="PaymentMethods" type="n0:char10" />
-          <xsd:element name="BusinessPartnerNo" type="n0:char6" />
-          <xsd:element name="ReportingFreq" type="n0:char3" />
-          <xsd:element name="SepaMandateId" type="n0:char35" />
-          <xsd:element name="SdDocCatLong" type="n0:char4" />
-          <xsd:element name="RefdocCatLong" type="n0:char4" />
-          <xsd:element name="Incotermsv" type="n0:char4" />
-          <xsd:element name="Incoterms2l" type="n0:char70" />
-          <xsd:element name="Incoterms3l" type="n0:char70" />
         </xsd:sequence>
       </xsd:complexType>
       <xsd:complexType name="Bapisdtehd">
@@ -2890,6 +2954,11 @@
           <xsd:element name="DocCatSdLong" type="n0:char4" />
         </xsd:sequence>
       </xsd:complexType>
+      <xsd:complexType name="ZstEbeln">
+        <xsd:sequence>
+          <xsd:element name="Ebeln" type="n0:char10" />
+        </xsd:sequence>
+      </xsd:complexType>
       <xsd:complexType name="ZsdRuBPattobj">
         <xsd:sequence>
           <xsd:element name="Mandt" type="n0:clnt3" />
@@ -2946,6 +3015,133 @@
           <xsd:element name="StatusLong" type="n0:char100" />
         </xsd:sequence>
       </xsd:complexType>
+      <xsd:complexType name="ZcomheadTableta">
+        <xsd:sequence>
+          <xsd:element name="Mandt" type="n0:clnt3" />
+          <xsd:element name="Id" type="n0:decimal11.0" />
+          <xsd:element name="CodClient" type="n0:char10" />
+          <xsd:element name="CodAgent" type="n0:numeric8" />
+          <xsd:element name="Ul" type="n0:char4" />
+          <xsd:element name="Depart" type="n0:char2" />
+          <xsd:element name="Status" type="n0:char4" />
+          <xsd:element name="Datac" type="n0:date10" />
+          <xsd:element name="Cantar" type="n0:char4" />
+          <xsd:element name="Nrcmdsap" type="n0:char10" />
+          <xsd:element name="CodInit" type="n0:numeric8" />
+          <xsd:element name="Valoare" type="n0:curr13.2" />
+          <xsd:element name="Valoaresap" type="n0:curr13.2" />
+          <xsd:element name="TipPlata" type="n0:char4" />
+          <xsd:element name="PersContact" type="n0:char50" />
+          <xsd:element name="Telefon" type="n0:char50" />
+          <xsd:element name="AdrLivrare" type="n0:char50" />
+          <xsd:element name="Mt" type="n0:char4" />
+          <xsd:element name="Accept1" type="n0:date10" />
+          <xsd:element name="OraAccept1" type="n0:time" />
+          <xsd:element name="Accept2" type="n0:date10" />
+          <xsd:element name="OraAccept2" type="n0:time" />
+          <xsd:element name="Waers" type="n0:cuky5" />
+          <xsd:element name="StatusAprov" type="n0:char4" />
+          <xsd:element name="FactRed" type="n0:char1" />
+          <xsd:element name="PattId" type="n0:char14" />
+          <xsd:element name="ComReferinta" type="n0:char10" />
+          <xsd:element name="City" type="n0:char25" />
+          <xsd:element name="Region" type="n0:char3" />
+          <xsd:element name="DenCl" type="n0:char30" />
+          <xsd:element name="NrTva" type="n0:char20" />
+          <xsd:element name="Pmnttrms" type="n0:char4" />
+          <xsd:element name="Obstra" type="n0:char100" />
+          <xsd:element name="Timpc" type="n0:time" />
+          <xsd:element name="PernrMod" type="n0:numeric8" />
+          <xsd:element name="Ketdat" type="n0:char10" />
+          <xsd:element name="Abgru" type="n0:char2" />
+          <xsd:element name="Docin" type="n0:char1" />
+          <xsd:element name="AdrNoua" type="n0:char1" />
+          <xsd:element name="ParentId" type="n0:decimal11.0" />
+          <xsd:element name="Obsplata" type="n0:char100" />
+          <xsd:element name="Addrnumber" type="n0:char10" />
+          <xsd:element name="Awb" type="n0:char30" />
+          <xsd:element name="NumeClient" type="n0:char40" />
+          <xsd:element name="Stceg" type="n0:char20" />
+          <xsd:element name="TipPers" type="n0:char2" />
+          <xsd:element name="ValIncasata" type="n0:curr15.2" />
+          <xsd:element name="Site" type="n0:char1" />
+          <xsd:element name="ModAv" type="n0:char1" />
+          <xsd:element name="Email" type="n0:char50" />
+          <xsd:element name="CodJ" type="n0:char18" />
+          <xsd:element name="AdrLivrareD" type="n0:char50" />
+          <xsd:element name="CityD" type="n0:char25" />
+          <xsd:element name="RegionD" type="n0:char3" />
+          <xsd:element name="AprobCvNecesar" type="n0:char30" />
+          <xsd:element name="AprobCvRealiz" type="n0:char60" />
+          <xsd:element name="CondCv" type="n0:char30" />
+          <xsd:element name="Mutat" type="n0:char1" />
+          <xsd:element name="Macara" type="n0:char1" />
+          <xsd:element name="ValMinTr" type="n0:curr15.2" />
+          <xsd:element name="Auart" type="n0:char4" />
+          <xsd:element name="IdObiectiv" type="n0:decimal11.0" />
+          <xsd:element name="AdresaObiectiv" type="n0:char1" />
+          <xsd:element name="FactPrim" type="n0:char1" />
+          <xsd:element name="ClientRaft" type="n0:char1" />
+          <xsd:element name="MailBv90" type="n0:char1" />
+          <xsd:element name="Meserias" type="n0:char10" />
+          <xsd:element name="FactPaletSeparat" type="n0:char1" />
+          <xsd:element name="Descoperita" type="n0:char1" />
+          <xsd:element name="Lifnr" type="n0:char10" />
+          <xsd:element name="LifnrProd" type="n0:char10" />
+          <xsd:element name="ProgLivr" type="n0:char1" />
+          <xsd:element name="LivrSambata" type="n0:char1" />
+          <xsd:element name="Bloc" type="n0:char20" />
+          <xsd:element name="RefClient" type="n0:char35" />
+          <xsd:element name="AcZc" type="n0:char1" />
+          <xsd:element name="FilPlata" type="n0:char4" />
+          <xsd:element name="Custodie" type="n0:char1" />
+          <xsd:element name="CodPostal" type="n0:char15" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="Bapi2093ResItemChange">
+        <xsd:sequence>
+          <xsd:element name="ResItem" type="n0:numeric4" />
+          <xsd:element name="StgeLoc" type="n0:char4" />
+          <xsd:element name="Batch" type="n0:char10" />
+          <xsd:element name="EntryQnt" type="n0:quantum13.3" />
+          <xsd:element name="ReqDate" type="n0:date10" />
+          <xsd:element name="ItemText" type="n0:char50" />
+          <xsd:element name="GrRcpt" type="n0:char12" />
+          <xsd:element name="UnloadPt" type="n0:char25" />
+          <xsd:element name="FixedQuan" type="n0:char1" />
+          <xsd:element name="Movement" type="n0:char1" />
+          <xsd:element name="DeleteInd" type="n0:char1" />
+          <xsd:element name="Withdrawn" type="n0:char1" />
+          <xsd:element name="PrioUrgency" type="n0:numeric2" />
+          <xsd:element name="PrioRequirement" type="n0:numeric3" />
+          <xsd:element name="StkSegment" type="n0:char16" />
+          <xsd:element name="ReqSegment" type="n0:char16" />
+          <xsd:element name="StkSegLong" type="n0:char40" />
+          <xsd:element name="ReqSegLong" type="n0:char40" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="Bapi2093ResItemChangex">
+        <xsd:sequence>
+          <xsd:element name="ResItem" type="n0:numeric4" />
+          <xsd:element name="StgeLoc" type="n0:char1" />
+          <xsd:element name="Batch" type="n0:char1" />
+          <xsd:element name="EntryQnt" type="n0:char1" />
+          <xsd:element name="ReqDate" type="n0:char1" />
+          <xsd:element name="ItemText" type="n0:char1" />
+          <xsd:element name="GrRcpt" type="n0:char1" />
+          <xsd:element name="UnloadPt" type="n0:char1" />
+          <xsd:element name="FixedQuan" type="n0:char1" />
+          <xsd:element name="Movement" type="n0:char1" />
+          <xsd:element name="DeleteInd" type="n0:char1" />
+          <xsd:element name="Withdrawn" type="n0:char1" />
+          <xsd:element name="PrioUrgency" type="n0:char1" />
+          <xsd:element name="PrioRequirement" type="n0:char1" />
+          <xsd:element name="StkSegment" type="n0:char1" />
+          <xsd:element name="ReqSegment" type="n0:char1" />
+          <xsd:element name="StkSegLong" type="n0:char1" />
+          <xsd:element name="ReqSegLong" type="n0:char1" />
+        </xsd:sequence>
+      </xsd:complexType>
       <xsd:complexType name="ZstNrPaleti">
         <xsd:sequence>
           <xsd:element name="Matnr" type="n0:char18" />
@@ -2992,6 +3188,30 @@
           <xsd:element name="T1TotProc" type="n0:curr15.2" />
           <xsd:element name="T0Tot" type="n0:curr15.2" />
           <xsd:element name="T0TotProc" type="n0:curr15.2" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ZcolformulaResult">
+        <xsd:sequence>
+          <xsd:element name="ColorId" type="n0:char8" />
+          <xsd:element name="FormulaName" type="n0:char30" />
+          <xsd:element name="FormulaDate" type="n0:date10" />
+          <xsd:element name="ColCollection" type="n0:char30" />
+          <xsd:element name="FormulaQty" type="n0:quantum13.3" />
+          <xsd:element name="FormulaUm" type="n0:unit3" />
+          <xsd:element name="ProductCode" type="n0:char4" />
+          <xsd:element name="ProductName" type="n0:char30" />
+          <xsd:element name="BaseCant" type="n0:quantum13.3" />
+          <xsd:element name="BaseUm" type="n0:unit3" />
+          <xsd:element name="BaseCod" type="n0:char4" />
+          <xsd:element name="BaseArticol" type="n0:char18" />
+          <xsd:element name="ColCode" type="n0:char3" />
+          <xsd:element name="ColName" type="n0:char30" />
+          <xsd:element name="ColQuantity" type="n0:decimal15.4" />
+          <xsd:element name="ColDensity" type="n0:decimal15.4" />
+          <xsd:element name="RgbRedval" type="xsd:unsignedByte" />
+          <xsd:element name="RgbGreenval" type="xsd:unsignedByte" />
+          <xsd:element name="RgbBlueval" type="xsd:unsignedByte" />
+          <xsd:element name="CodArticol" type="n0:char18" />
         </xsd:sequence>
       </xsd:complexType>
       <xsd:complexType name="ZdetInfocv">
@@ -3044,9 +3264,49 @@
           <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:ZmaterialeRetur" />
         </xsd:sequence>
       </xsd:complexType>
+      <xsd:complexType name="ZttZslbMatnr">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:ZstZslbMatnr" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ZttSolisti1">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:Solisti1" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ZttZslbLogMsg">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:ZslbLogMsg" />
+        </xsd:sequence>
+      </xsd:complexType>
       <xsd:complexType name="TableOfZtrapSite">
         <xsd:sequence>
           <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:ZtrapSite" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="TableOfBapischdlx">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:Bapischdlx" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="TableOfBapisditm">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:Bapisditm" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="TableOfBapischdl">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:Bapischdl" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="TableOfBapiret2">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:Bapiret2" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="TableOfBapisditmx">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:Bapisditmx" />
         </xsd:sequence>
       </xsd:complexType>
       <xsd:complexType name="TableOfBapisdit">
@@ -3104,16 +3364,6 @@
           <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:Bapiparnr" />
         </xsd:sequence>
       </xsd:complexType>
-      <xsd:complexType name="TableOfBapischdl">
-        <xsd:sequence>
-          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:Bapischdl" />
-        </xsd:sequence>
-      </xsd:complexType>
-      <xsd:complexType name="TableOfBapischdlx">
-        <xsd:sequence>
-          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:Bapischdlx" />
-        </xsd:sequence>
-      </xsd:complexType>
       <xsd:complexType name="TableOfBapitextli">
         <xsd:sequence>
           <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:Bapitextli" />
@@ -3144,11 +3394,6 @@
           <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:Bapicond" />
         </xsd:sequence>
       </xsd:complexType>
-      <xsd:complexType name="TableOfBapisditmx">
-        <xsd:sequence>
-          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:Bapisditmx" />
-        </xsd:sequence>
-      </xsd:complexType>
       <xsd:complexType name="TableOfBapibtsel">
         <xsd:sequence>
           <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:Bapibtsel" />
@@ -3167,16 +3412,6 @@
       <xsd:complexType name="TableOfBapicuval">
         <xsd:sequence>
           <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:Bapicuval" />
-        </xsd:sequence>
-      </xsd:complexType>
-      <xsd:complexType name="TableOfBapisditm">
-        <xsd:sequence>
-          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:Bapisditm" />
-        </xsd:sequence>
-      </xsd:complexType>
-      <xsd:complexType name="TableOfBapiret2">
-        <xsd:sequence>
-          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:Bapiret2" />
         </xsd:sequence>
       </xsd:complexType>
       <xsd:complexType name="TableOfBapicucfg">
@@ -3209,6 +3444,11 @@
           <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:Bapisdhedu" />
         </xsd:sequence>
       </xsd:complexType>
+      <xsd:complexType name="ZttEbeln">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:ZstEbeln" />
+        </xsd:sequence>
+      </xsd:complexType>
       <xsd:complexType name="TableOfZsdRuBPattobj">
         <xsd:sequence>
           <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:ZsdRuBPattobj" />
@@ -3222,6 +3462,16 @@
       <xsd:complexType name="ZttStareCurenta">
         <xsd:sequence>
           <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:ZstStareCurenta" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="TableOfBapi2093ResItemChange">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:Bapi2093ResItemChange" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="TableOfBapi2093ResItemChangex">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:Bapi2093ResItemChangex" />
         </xsd:sequence>
       </xsd:complexType>
       <xsd:complexType name="ZttNrPaleti">
@@ -3242,6 +3492,11 @@
       <xsd:complexType name="TableOfZheadInfocv">
         <xsd:sequence>
           <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:ZheadInfocv" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ZtcolResult">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:ZcolformulaResult" />
         </xsd:sequence>
       </xsd:complexType>
       <xsd:complexType name="TableOfZdetInfocv">
@@ -3274,7 +3529,7 @@
             <xsd:element minOccurs="0" name="IpKunnr" type="n0:char10" />
             <xsd:element minOccurs="0" name="IpPernr" type="n0:numeric8" />
             <xsd:element minOccurs="0" name="IpRegio" type="n0:char3" />
-            <xsd:element minOccurs="0" name="IpTippers" type="tns:char12" />
+            <xsd:element minOccurs="0" name="IpTippers" type="n0:char12" />
             <xsd:element minOccurs="0" name="IpTraty" type="n0:char4" />
             <xsd:element minOccurs="0" name="IpVkgrp" type="n0:char3" />
             <xsd:element minOccurs="0" name="IpWerks" type="n0:char4" />
@@ -3325,7 +3580,7 @@
             <xsd:element name="GvWerks" type="n0:char4" />
             <xsd:element minOccurs="0" name="Mp" type="n0:char4" />
             <xsd:element minOccurs="0" name="Regio" type="n0:char3" />
-            <xsd:element minOccurs="0" name="TipPers" type="n0:char3" />
+            <xsd:element minOccurs="0" name="TipPers" type="n0:char12" />
             <xsd:element minOccurs="0" name="Traty" type="n0:char4" />
             <xsd:element minOccurs="0" name="UlStoc" type="n0:char4" />
           </xsd:sequence>
@@ -3335,13 +3590,13 @@
         <xsd:complexType>
           <xsd:sequence>
             <xsd:element name="ErrorCode" type="xsd:unsignedByte" />
-            <xsd:element name="GvBrgew" type="tns:quantum13.3" />
-            <xsd:element name="GvBrgewMatnr" type="tns:quantum13.3" />
+            <xsd:element name="GvBrgew" type="n0:quantum13.3" />
+            <xsd:element name="GvBrgewMatnr" type="n0:quantum13.3" />
             <xsd:element minOccurs="0" name="GvCant" type="n0:quantum13.3" />
             <xsd:element name="GvCantFree" type="n0:quantum13.3" />
             <xsd:element name="GvCond" type="n0:char200" />
             <xsd:element name="GvCurrency" type="n0:cuky5" />
-            <xsd:element name="GvDatbi" type="tns:date10" />
+            <xsd:element name="GvDatbi" type="n0:date10" />
             <xsd:element name="GvMatnrFree" type="n0:char18" />
             <xsd:element name="GvNetwr" type="n0:curr15.2" />
             <xsd:element name="GvNetwrFree" type="n0:curr15.2" />
@@ -3420,7 +3675,7 @@
             <xsd:element minOccurs="0" name="IpVbeln" type="n0:char10" />
             <xsd:element minOccurs="0" name="IpVstel" type="n0:char4" />
             <xsd:element name="IpWerks" type="n0:char4" />
-            <xsd:element minOccurs="0" name="IpZona" type="tns:char7" />
+            <xsd:element minOccurs="0" name="IpZona" type="n0:char7" />
             <xsd:element name="ItZile" type="tns:TableOfZileIncarc" />
           </xsd:sequence>
         </xsd:complexType>
@@ -3429,6 +3684,60 @@
         <xsd:complexType>
           <xsd:sequence>
             <xsd:element name="ItZile" type="tns:TableOfZileIncarc" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ZgetPrice20">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="Canal" type="n0:char2" />
+            <xsd:element minOccurs="0" name="City" type="n0:char25" />
+            <xsd:element minOccurs="0" name="CuRotunj" type="n0:char1" />
+            <xsd:element minOccurs="0" name="Dzterm" type="n0:char4" />
+            <xsd:element minOccurs="0" name="GvCant" type="n0:quantum13.3" />
+            <xsd:element name="GvKunnr" type="n0:char10" />
+            <xsd:element name="GvLgort" type="n0:char4" />
+            <xsd:element name="GvMatnr" type="n0:char18" />
+            <xsd:element minOccurs="0" name="GvSite" type="n0:char1" />
+            <xsd:element name="GvSpart" type="n0:char2" />
+            <xsd:element minOccurs="0" name="GvVrkme" type="n0:unit3" />
+            <xsd:element name="GvWerks" type="n0:char4" />
+            <xsd:element minOccurs="0" name="Mp" type="n0:char4" />
+            <xsd:element minOccurs="0" name="Regio" type="n0:char3" />
+            <xsd:element minOccurs="0" name="TipPers" type="n0:char12" />
+            <xsd:element minOccurs="0" name="Traty" type="n0:char4" />
+            <xsd:element minOccurs="0" name="UlStoc" type="n0:char4" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ZgetPrice20Response">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="ErrorCode" type="xsd:unsignedByte" />
+            <xsd:element name="GvBrgew" type="n0:quantum13.3" />
+            <xsd:element name="GvBrgewMatnr" type="n0:quantum13.3" />
+            <xsd:element minOccurs="0" name="GvCant" type="n0:quantum13.3" />
+            <xsd:element name="GvCantFree" type="n0:quantum13.3" />
+            <xsd:element name="GvCond" type="n0:char200" />
+            <xsd:element name="GvCurrency" type="n0:cuky5" />
+            <xsd:element name="GvDatbi" type="n0:date10" />
+            <xsd:element name="GvMatnrFree" type="n0:char18" />
+            <xsd:element name="GvNetwr" type="n0:curr15.2" />
+            <xsd:element name="GvNetwrFree" type="n0:curr15.2" />
+            <xsd:element name="GvNetwrFtva" type="n0:curr15.2" />
+            <xsd:element name="GvNetwrList" type="n0:curr15.2" />
+            <xsd:element name="GvNetwrMin" type="n0:curr15.2" />
+            <xsd:element name="GvNoDisc" type="n0:char1" />
+            <xsd:element name="GvPromo" type="n0:char4" />
+            <xsd:element name="GvQty50" type="n0:quantum13.3" />
+            <xsd:element name="GvUm50" type="n0:unit3" />
+            <xsd:element minOccurs="0" name="GvVrkme" type="n0:unit3" />
+            <xsd:element name="GvVrkmeFree" type="n0:unit3" />
+            <xsd:element name="Impachet" type="n0:string" />
+            <xsd:element name="Multiplu" type="n0:quantum13.3" />
+            <xsd:element name="OutCantUmb" type="n0:quantum13.3" />
+            <xsd:element name="OutUmb" type="n0:unit3" />
+            <xsd:element name="VMess" type="n0:char100" />
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
@@ -3453,13 +3762,13 @@
         <xsd:complexType>
           <xsd:sequence>
             <xsd:element minOccurs="0" name="ItMateriale" type="tns:TableOfZmaterialeRetur" />
-            <xsd:element minOccurs="0" name="TipPers" type="tns:char12" />
+            <xsd:element minOccurs="0" name="TipPers" type="n0:char12" />
             <xsd:element minOccurs="0" name="VAcelasiTransp" type="n0:char1" />
             <xsd:element minOccurs="0" name="VAddrnumber" type="n0:char12" />
             <xsd:element minOccurs="0" name="VAugru" type="n0:char3" />
             <xsd:element minOccurs="0" name="VCity" type="n0:char25" />
             <xsd:element minOccurs="0" name="VData" type="n0:char10" />
-            <xsd:element minOccurs="0" name="VId" type="tns:decimal11.0" />
+            <xsd:element minOccurs="0" name="VId" type="n0:decimal11.0" />
             <xsd:element minOccurs="0" name="VInlocuire" type="n0:char1" />
             <xsd:element minOccurs="0" name="VObserv" type="n0:char100" />
             <xsd:element minOccurs="0" name="VPernr" type="n0:numeric8" />
@@ -3479,6 +3788,28 @@
             <xsd:element name="VMessage" type="n0:char50" />
             <xsd:element name="VOk" type="n0:char2" />
             <xsd:element name="VRetur" type="n0:char10" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ZanuleazaDocumente2">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="IpIdmotiv" type="n0:char2" />
+            <xsd:element minOccurs="0" name="IpLfdat" type="n0:date10" />
+            <xsd:element minOccurs="0" name="IpMotivS" type="n0:char10" />
+            <xsd:element minOccurs="0" name="IpNeconforme" type="n0:char1" />
+            <xsd:element minOccurs="0" name="ItMatnr" type="tns:ZttZslbMatnr" />
+            <xsd:element name="PEvent" type="n0:char2" />
+            <xsd:element name="PVbeln" type="n0:char10" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ZanuleazaDocumente2Response">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="EtErrReturn" type="tns:ZttZslbLogMsg" />
+            <xsd:element name="EtSolisti1" type="tns:ZttSolisti1" />
+            <xsd:element name="LvErr" type="n0:char50" />
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
@@ -3532,6 +3863,35 @@
         <xsd:complexType>
           <xsd:sequence>
             <xsd:element name="EpKunnr" type="n0:char10" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ZsdSalesdocumentChange">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="IpDoZulr" type="n0:char1" />
+            <xsd:element name="IpOrderHeaderIn" type="tns:Bapisdhd1" />
+            <xsd:element name="IpOrderHeaderInx" type="tns:Bapisdhd1x" />
+            <xsd:element minOccurs="0" name="IpRfcOp" type="n0:char1" />
+            <xsd:element name="IpSalesdocument" type="n0:char10" />
+            <xsd:element minOccurs="0" name="IpZb2c" type="n0:char1" />
+            <xsd:element minOccurs="0" name="IpZslb" type="n0:char1" />
+            <xsd:element minOccurs="0" name="ItItemIn" type="tns:TableOfBapisditm" />
+            <xsd:element minOccurs="0" name="ItItemInx" type="tns:TableOfBapisditmx" />
+            <xsd:element minOccurs="0" name="ItReturn" type="tns:TableOfBapiret2" />
+            <xsd:element minOccurs="0" name="ItScheduleIn" type="tns:TableOfBapischdl" />
+            <xsd:element minOccurs="0" name="ItScheduleInx" type="tns:TableOfBapischdlx" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ZsdSalesdocumentChangeResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="ItItemIn" type="tns:TableOfBapisditm" />
+            <xsd:element minOccurs="0" name="ItItemInx" type="tns:TableOfBapisditmx" />
+            <xsd:element minOccurs="0" name="ItReturn" type="tns:TableOfBapiret2" />
+            <xsd:element minOccurs="0" name="ItScheduleIn" type="tns:TableOfBapischdl" />
+            <xsd:element minOccurs="0" name="ItScheduleInx" type="tns:TableOfBapischdlx" />
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
@@ -3640,6 +4000,37 @@
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
+      <xsd:element name="ZChangeTonajPo">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="IpAdrnr" type="n0:char10" />
+            <xsd:element name="IpBsart" type="n0:char4" />
+            <xsd:element name="IpEbeln" type="n0:char10" />
+            <xsd:element name="IpTonaj" type="n0:quantum13.3" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ZChangeTonajPoResponse">
+        <xsd:complexType>
+          <xsd:sequence />
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ZlivrareClpZulr">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="IpVbeln" type="n0:char10" />
+            <xsd:element minOccurs="0" name="IpWerks" type="n0:char4" />
+            <xsd:element name="ItEbeln" type="tns:ZttEbeln" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ZlivrareClpZulrResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="EpError" type="n0:char1" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
       <xsd:element name="ZlivrareCustodie">
         <xsd:complexType>
           <xsd:sequence>
@@ -3714,14 +4105,51 @@
           <xsd:sequence>
             <xsd:element name="IpMatnr" type="n0:char18" />
             <xsd:element name="IpUm" type="n0:unit3" />
-            <xsd:element name="IpVbelnVf" type="tns:char10" />
+            <xsd:element name="IpVbelnVf" type="n0:char10" />
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
       <xsd:element name="ZstocReturAvansatResponse">
         <xsd:complexType>
           <xsd:sequence>
-            <xsd:element name="EpStocDisp" type="tns:quantum13.3" />
+            <xsd:element name="EpStocDisp" type="n0:quantum13.3" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ZanuleazaDocumente">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="ItMatnr" type="tns:ZttZslbMatnr" />
+            <xsd:element name="PEvent" type="n0:char2" />
+            <xsd:element name="PVbeln" type="n0:char10" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ZanuleazaDocumenteResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="EtErrReturn" type="tns:ZttZslbLogMsg" />
+            <xsd:element name="LvErr" type="n0:char50" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ZbapiReservationChange">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="IsComenzi" type="tns:ZcomheadTableta" />
+            <xsd:element minOccurs="0" name="Reservation" type="n0:numeric10" />
+            <xsd:element name="ReservationitemsChanged" type="tns:TableOfBapi2093ResItemChange" />
+            <xsd:element name="ReservationitemsChangedx" type="tns:TableOfBapi2093ResItemChangex" />
+            <xsd:element name="Return" type="tns:TableOfBapiret2" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ZbapiReservationChangeResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="ReservationitemsChanged" type="tns:TableOfBapi2093ResItemChange" />
+            <xsd:element name="ReservationitemsChangedx" type="tns:TableOfBapi2093ResItemChangex" />
+            <xsd:element name="Return" type="tns:TableOfBapiret2" />
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
@@ -3818,6 +4246,24 @@
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
+      <xsd:element name="ZgetColourFormula">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="GtColResult" type="tns:ZtcolResult" />
+            <xsd:element name="GvBaseArticol" type="n0:char18" />
+            <xsd:element minOccurs="0" name="GvBaseQty" type="n0:quantum13.3" />
+            <xsd:element minOccurs="0" name="GvColorId" type="n0:char8" />
+            <xsd:element minOccurs="0" name="GvMarja" type="n0:quantum13.3" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ZgetColourFormulaResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="GtColResult" type="tns:ZtcolResult" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
       <xsd:element name="ZgetInfocv">
         <xsd:complexType>
           <xsd:sequence>
@@ -3884,6 +4330,12 @@
   <wsdl:message name="ZcheckZileLivrareResponse">
     <wsdl:part name="parameter" element="tns:ZcheckZileLivrareResponse" />
   </wsdl:message>
+  <wsdl:message name="ZgetPrice20">
+    <wsdl:part name="parameters" element="tns:ZgetPrice20" />
+  </wsdl:message>
+  <wsdl:message name="ZgetPrice20Response">
+    <wsdl:part name="parameter" element="tns:ZgetPrice20Response" />
+  </wsdl:message>
   <wsdl:message name="Zpalcant">
     <wsdl:part name="parameters" element="tns:Zpalcant" />
   </wsdl:message>
@@ -3895,6 +4347,12 @@
   </wsdl:message>
   <wsdl:message name="ZretMarfaResponse">
     <wsdl:part name="parameter" element="tns:ZretMarfaResponse" />
+  </wsdl:message>
+  <wsdl:message name="ZanuleazaDocumente2">
+    <wsdl:part name="parameters" element="tns:ZanuleazaDocumente2" />
+  </wsdl:message>
+  <wsdl:message name="ZanuleazaDocumente2Response">
+    <wsdl:part name="parameter" element="tns:ZanuleazaDocumente2Response" />
   </wsdl:message>
   <wsdl:message name="ZcalcTrapSite">
     <wsdl:part name="parameters" element="tns:ZcalcTrapSite" />
@@ -3914,11 +4372,29 @@
   <wsdl:message name="ZgetKunnrResponse">
     <wsdl:part name="parameter" element="tns:ZgetKunnrResponse" />
   </wsdl:message>
+  <wsdl:message name="ZsdSalesdocumentChange">
+    <wsdl:part name="parameters" element="tns:ZsdSalesdocumentChange" />
+  </wsdl:message>
+  <wsdl:message name="ZsdSalesdocumentChangeResponse">
+    <wsdl:part name="parameter" element="tns:ZsdSalesdocumentChangeResponse" />
+  </wsdl:message>
   <wsdl:message name="ZsdSalesdocumentCreate">
     <wsdl:part name="parameters" element="tns:ZsdSalesdocumentCreate" />
   </wsdl:message>
   <wsdl:message name="ZsdSalesdocumentCreateResponse">
     <wsdl:part name="parameter" element="tns:ZsdSalesdocumentCreateResponse" />
+  </wsdl:message>
+  <wsdl:message name="ZChangeTonajPo">
+    <wsdl:part name="parameters" element="tns:ZChangeTonajPo" />
+  </wsdl:message>
+  <wsdl:message name="ZChangeTonajPoResponse">
+    <wsdl:part name="parameter" element="tns:ZChangeTonajPoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ZlivrareClpZulr">
+    <wsdl:part name="parameters" element="tns:ZlivrareClpZulr" />
+  </wsdl:message>
+  <wsdl:message name="ZlivrareClpZulrResponse">
+    <wsdl:part name="parameter" element="tns:ZlivrareClpZulrResponse" />
   </wsdl:message>
   <wsdl:message name="ZlivrareCustodie">
     <wsdl:part name="parameters" element="tns:ZlivrareCustodie" />
@@ -3950,6 +4426,18 @@
   <wsdl:message name="ZstocReturAvansatResponse">
     <wsdl:part name="parameter" element="tns:ZstocReturAvansatResponse" />
   </wsdl:message>
+  <wsdl:message name="ZanuleazaDocumente">
+    <wsdl:part name="parameters" element="tns:ZanuleazaDocumente" />
+  </wsdl:message>
+  <wsdl:message name="ZanuleazaDocumenteResponse">
+    <wsdl:part name="parameter" element="tns:ZanuleazaDocumenteResponse" />
+  </wsdl:message>
+  <wsdl:message name="ZbapiReservationChange">
+    <wsdl:part name="parameters" element="tns:ZbapiReservationChange" />
+  </wsdl:message>
+  <wsdl:message name="ZbapiReservationChangeResponse">
+    <wsdl:part name="parameter" element="tns:ZbapiReservationChangeResponse" />
+  </wsdl:message>
   <wsdl:message name="ZcreazaComanda">
     <wsdl:part name="parameters" element="tns:ZcreazaComanda" />
   </wsdl:message>
@@ -3979,6 +4467,12 @@
   </wsdl:message>
   <wsdl:message name="ZmodificaLivrareResponse">
     <wsdl:part name="parameter" element="tns:ZmodificaLivrareResponse" />
+  </wsdl:message>
+  <wsdl:message name="ZgetColourFormula">
+    <wsdl:part name="parameters" element="tns:ZgetColourFormula" />
+  </wsdl:message>
+  <wsdl:message name="ZgetColourFormulaResponse">
+    <wsdl:part name="parameter" element="tns:ZgetColourFormulaResponse" />
   </wsdl:message>
   <wsdl:message name="ZgetInfocv">
     <wsdl:part name="parameters" element="tns:ZgetInfocv" />
@@ -4046,6 +4540,13 @@
       <wsdl:input message="tns:ZcheckZileLivrare" />
       <wsdl:output message="tns:ZcheckZileLivrareResponse" />
     </wsdl:operation>
+    <wsdl:operation name="ZgetPrice20">
+      <wsp:Policy>
+        <wsp:PolicyReference URI="#OP__ZgetPrice20" />
+      </wsp:Policy>
+      <wsdl:input message="tns:ZgetPrice20" />
+      <wsdl:output message="tns:ZgetPrice20Response" />
+    </wsdl:operation>
     <wsdl:operation name="Zpalcant">
       <wsp:Policy>
         <wsp:PolicyReference URI="#OP__Zpalcant" />
@@ -4059,6 +4560,13 @@
       </wsp:Policy>
       <wsdl:input message="tns:ZretMarfa" />
       <wsdl:output message="tns:ZretMarfaResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="ZanuleazaDocumente2">
+      <wsp:Policy>
+        <wsp:PolicyReference URI="#OP__ZanuleazaDocumente2" />
+      </wsp:Policy>
+      <wsdl:input message="tns:ZanuleazaDocumente2" />
+      <wsdl:output message="tns:ZanuleazaDocumente2Response" />
     </wsdl:operation>
     <wsdl:operation name="ZcalcTrapSite">
       <wsp:Policy>
@@ -4081,12 +4589,33 @@
       <wsdl:input message="tns:ZgetKunnr" />
       <wsdl:output message="tns:ZgetKunnrResponse" />
     </wsdl:operation>
+    <wsdl:operation name="ZsdSalesdocumentChange">
+      <wsp:Policy>
+        <wsp:PolicyReference URI="#OP__ZsdSalesdocumentChange" />
+      </wsp:Policy>
+      <wsdl:input message="tns:ZsdSalesdocumentChange" />
+      <wsdl:output message="tns:ZsdSalesdocumentChangeResponse" />
+    </wsdl:operation>
     <wsdl:operation name="ZsdSalesdocumentCreate">
       <wsp:Policy>
         <wsp:PolicyReference URI="#OP__ZsdSalesdocumentCreate" />
       </wsp:Policy>
       <wsdl:input message="tns:ZsdSalesdocumentCreate" />
       <wsdl:output message="tns:ZsdSalesdocumentCreateResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="ZChangeTonajPo">
+      <wsp:Policy>
+        <wsp:PolicyReference URI="#OP__ZChangeTonajPo" />
+      </wsp:Policy>
+      <wsdl:input message="tns:ZChangeTonajPo" />
+      <wsdl:output message="tns:ZChangeTonajPoResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="ZlivrareClpZulr">
+      <wsp:Policy>
+        <wsp:PolicyReference URI="#OP__ZlivrareClpZulr" />
+      </wsp:Policy>
+      <wsdl:input message="tns:ZlivrareClpZulr" />
+      <wsdl:output message="tns:ZlivrareClpZulrResponse" />
     </wsdl:operation>
     <wsdl:operation name="ZlivrareCustodie">
       <wsp:Policy>
@@ -4123,6 +4652,20 @@
       <wsdl:input message="tns:ZstocReturAvansat" />
       <wsdl:output message="tns:ZstocReturAvansatResponse" />
     </wsdl:operation>
+    <wsdl:operation name="ZanuleazaDocumente">
+      <wsp:Policy>
+        <wsp:PolicyReference URI="#OP__ZanuleazaDocumente" />
+      </wsp:Policy>
+      <wsdl:input message="tns:ZanuleazaDocumente" />
+      <wsdl:output message="tns:ZanuleazaDocumenteResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="ZbapiReservationChange">
+      <wsp:Policy>
+        <wsp:PolicyReference URI="#OP__ZbapiReservationChange" />
+      </wsp:Policy>
+      <wsdl:input message="tns:ZbapiReservationChange" />
+      <wsdl:output message="tns:ZbapiReservationChangeResponse" />
+    </wsdl:operation>
     <wsdl:operation name="ZcreazaComanda">
       <wsp:Policy>
         <wsp:PolicyReference URI="#OP__ZcreazaComanda" />
@@ -4157,6 +4700,13 @@
       </wsp:Policy>
       <wsdl:input message="tns:ZmodificaLivrare" />
       <wsdl:output message="tns:ZmodificaLivrareResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="ZgetColourFormula">
+      <wsp:Policy>
+        <wsp:PolicyReference URI="#OP__ZgetColourFormula" />
+      </wsp:Policy>
+      <wsdl:input message="tns:ZgetColourFormula" />
+      <wsdl:output message="tns:ZgetColourFormulaResponse" />
     </wsdl:operation>
     <wsdl:operation name="ZgetInfocv">
       <wsp:Policy>
@@ -4243,6 +4793,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ZgetPrice20">
+      <soap:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZTBL_WEBSERVICE:ZgetPrice20Request" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="Zpalcant">
       <soap:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZTBL_WEBSERVICE:ZpalcantRequest" style="document" />
       <wsdl:input>
@@ -4254,6 +4813,15 @@
     </wsdl:operation>
     <wsdl:operation name="ZretMarfa">
       <soap:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZTBL_WEBSERVICE:ZretMarfaRequest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZanuleazaDocumente2">
+      <soap:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZTBL_WEBSERVICE:ZanuleazaDocumente2Request" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -4288,8 +4856,35 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ZsdSalesdocumentChange">
+      <soap:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZTBL_WEBSERVICE:ZsdSalesdocumentChangeRequest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="ZsdSalesdocumentCreate">
       <soap:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZTBL_WEBSERVICE:ZsdSalesdocumentCreateRequest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZChangeTonajPo">
+      <soap:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZTBL_WEBSERVICE:ZChangeTonajPoRequest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZlivrareClpZulr">
+      <soap:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZTBL_WEBSERVICE:ZlivrareClpZulrRequest" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -4342,6 +4937,24 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ZanuleazaDocumente">
+      <soap:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZTBL_WEBSERVICE:ZanuleazaDocumenteRequest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZbapiReservationChange">
+      <soap:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZTBL_WEBSERVICE:ZbapiReservationChangeRequest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="ZcreazaComanda">
       <soap:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZTBL_WEBSERVICE:ZcreazaComandaRequest" style="document" />
       <wsdl:input>
@@ -4380,6 +4993,15 @@
     </wsdl:operation>
     <wsdl:operation name="ZmodificaLivrare">
       <soap:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZTBL_WEBSERVICE:ZmodificaLivrareRequest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZgetColourFormula">
+      <soap:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZTBL_WEBSERVICE:ZgetColourFormulaRequest" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -4474,6 +5096,15 @@
         <wsoap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ZgetPrice20">
+      <wsoap12:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZTBL_WEBSERVICE:ZgetPrice20Request" style="document" />
+      <wsdl:input>
+        <wsoap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsoap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="Zpalcant">
       <wsoap12:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZTBL_WEBSERVICE:ZpalcantRequest" style="document" />
       <wsdl:input>
@@ -4485,6 +5116,15 @@
     </wsdl:operation>
     <wsdl:operation name="ZretMarfa">
       <wsoap12:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZTBL_WEBSERVICE:ZretMarfaRequest" style="document" />
+      <wsdl:input>
+        <wsoap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsoap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZanuleazaDocumente2">
+      <wsoap12:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZTBL_WEBSERVICE:ZanuleazaDocumente2Request" style="document" />
       <wsdl:input>
         <wsoap12:body use="literal" />
       </wsdl:input>
@@ -4519,8 +5159,35 @@
         <wsoap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ZsdSalesdocumentChange">
+      <wsoap12:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZTBL_WEBSERVICE:ZsdSalesdocumentChangeRequest" style="document" />
+      <wsdl:input>
+        <wsoap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsoap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="ZsdSalesdocumentCreate">
       <wsoap12:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZTBL_WEBSERVICE:ZsdSalesdocumentCreateRequest" style="document" />
+      <wsdl:input>
+        <wsoap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsoap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZChangeTonajPo">
+      <wsoap12:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZTBL_WEBSERVICE:ZChangeTonajPoRequest" style="document" />
+      <wsdl:input>
+        <wsoap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsoap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZlivrareClpZulr">
+      <wsoap12:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZTBL_WEBSERVICE:ZlivrareClpZulrRequest" style="document" />
       <wsdl:input>
         <wsoap12:body use="literal" />
       </wsdl:input>
@@ -4573,6 +5240,24 @@
         <wsoap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ZanuleazaDocumente">
+      <wsoap12:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZTBL_WEBSERVICE:ZanuleazaDocumenteRequest" style="document" />
+      <wsdl:input>
+        <wsoap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsoap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZbapiReservationChange">
+      <wsoap12:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZTBL_WEBSERVICE:ZbapiReservationChangeRequest" style="document" />
+      <wsdl:input>
+        <wsoap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsoap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="ZcreazaComanda">
       <wsoap12:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZTBL_WEBSERVICE:ZcreazaComandaRequest" style="document" />
       <wsdl:input>
@@ -4611,6 +5296,15 @@
     </wsdl:operation>
     <wsdl:operation name="ZmodificaLivrare">
       <wsoap12:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZTBL_WEBSERVICE:ZmodificaLivrareRequest" style="document" />
+      <wsdl:input>
+        <wsoap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsoap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZgetColourFormula">
+      <wsoap12:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZTBL_WEBSERVICE:ZgetColourFormulaRequest" style="document" />
       <wsdl:input>
         <wsoap12:body use="literal" />
       </wsdl:input>

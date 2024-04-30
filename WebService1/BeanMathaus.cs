@@ -77,6 +77,7 @@ namespace WebService1
         public string codArticol;
         public string filiala;
         public string depozit;
+        public string cmpCorectat;
     }
 
     public class ComandaMathaus
@@ -108,6 +109,7 @@ namespace WebService1
         public string unit50;
         public double cantUmb;
         public string tipStoc;
+        public string cmpCorectat;
 
     }
 

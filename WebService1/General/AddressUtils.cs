@@ -75,6 +75,9 @@ namespace WebService1.General
                 case "BZ10":
                     retVal = "Soseaua Nordului, nr. 12A, Buzau#0238 710 007#0238 710 020#UNICREDIT BANK#RO35 BACX 0000 0045 6892 5212";
                     break;
+                case "SV10":
+                    retVal = "Strada Traian Vuia, Nr. 17, Suceava#0759034110#0759034110# #";
+                    break;
             }
 
 

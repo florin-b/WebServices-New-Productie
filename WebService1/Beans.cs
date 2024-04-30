@@ -196,6 +196,8 @@ namespace WebService1
         public string cantitateInit;
         public double cantitate50;
         public string um50;
+        public double cmpCorectat;
+        public double pretMinim;
 
         public override string ToString()
         {
@@ -272,6 +274,12 @@ namespace WebService1
 
     }
 
+    public class TaxaComanda
+    {
+        public string filiala;
+        public double valoare;
+    }
+
     public class DateLivrare
     {
 
@@ -329,6 +337,7 @@ namespace WebService1
         public string filialaPlata;
         public string codPostal;
         public string isComandaCustodie;
+        public string taxeComanda;
     }
 
 
@@ -817,6 +826,8 @@ namespace WebService1
         public string lungime;
         public string um50;
         public string cantitate50;
+        public string pretMinim;
+        public string promo;
 
 
     }

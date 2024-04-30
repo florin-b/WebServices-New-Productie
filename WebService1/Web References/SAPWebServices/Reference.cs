@@ -46,9 +46,13 @@ namespace WebService1.SAPWebServices {
         
         private System.Threading.SendOrPostCallback ZcheckZileLivrareOperationCompleted;
         
+        private System.Threading.SendOrPostCallback ZgetPrice20OperationCompleted;
+        
         private System.Threading.SendOrPostCallback ZpalcantOperationCompleted;
         
         private System.Threading.SendOrPostCallback ZretMarfaOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback ZanuleazaDocumente2OperationCompleted;
         
         private System.Threading.SendOrPostCallback ZcalcTrapSiteOperationCompleted;
         
@@ -56,7 +60,13 @@ namespace WebService1.SAPWebServices {
         
         private System.Threading.SendOrPostCallback ZgetKunnrOperationCompleted;
         
+        private System.Threading.SendOrPostCallback ZsdSalesdocumentChangeOperationCompleted;
+        
         private System.Threading.SendOrPostCallback ZsdSalesdocumentCreateOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback ZChangeTonajPoOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback ZlivrareClpZulrOperationCompleted;
         
         private System.Threading.SendOrPostCallback ZlivrareCustodieOperationCompleted;
         
@@ -68,6 +78,10 @@ namespace WebService1.SAPWebServices {
         
         private System.Threading.SendOrPostCallback ZstocReturAvansatOperationCompleted;
         
+        private System.Threading.SendOrPostCallback ZanuleazaDocumenteOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback ZbapiReservationChangeOperationCompleted;
+        
         private System.Threading.SendOrPostCallback ZcreazaComandaOperationCompleted;
         
         private System.Threading.SendOrPostCallback ZstareComandaOperationCompleted;
@@ -77,6 +91,8 @@ namespace WebService1.SAPWebServices {
         private System.Threading.SendOrPostCallback ZgetInfoheadcvOperationCompleted;
         
         private System.Threading.SendOrPostCallback ZmodificaLivrareOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback ZgetColourFormulaOperationCompleted;
         
         private System.Threading.SendOrPostCallback ZgetInfocvOperationCompleted;
         
@@ -143,10 +159,16 @@ namespace WebService1.SAPWebServices {
         public event ZcheckZileLivrareCompletedEventHandler ZcheckZileLivrareCompleted;
         
         /// <remarks/>
+        public event ZgetPrice20CompletedEventHandler ZgetPrice20Completed;
+        
+        /// <remarks/>
         public event ZpalcantCompletedEventHandler ZpalcantCompleted;
         
         /// <remarks/>
         public event ZretMarfaCompletedEventHandler ZretMarfaCompleted;
+        
+        /// <remarks/>
+        public event ZanuleazaDocumente2CompletedEventHandler ZanuleazaDocumente2Completed;
         
         /// <remarks/>
         public event ZcalcTrapSiteCompletedEventHandler ZcalcTrapSiteCompleted;
@@ -158,7 +180,16 @@ namespace WebService1.SAPWebServices {
         public event ZgetKunnrCompletedEventHandler ZgetKunnrCompleted;
         
         /// <remarks/>
+        public event ZsdSalesdocumentChangeCompletedEventHandler ZsdSalesdocumentChangeCompleted;
+        
+        /// <remarks/>
         public event ZsdSalesdocumentCreateCompletedEventHandler ZsdSalesdocumentCreateCompleted;
+        
+        /// <remarks/>
+        public event ZChangeTonajPoCompletedEventHandler ZChangeTonajPoCompleted;
+        
+        /// <remarks/>
+        public event ZlivrareClpZulrCompletedEventHandler ZlivrareClpZulrCompleted;
         
         /// <remarks/>
         public event ZlivrareCustodieCompletedEventHandler ZlivrareCustodieCompleted;
@@ -176,6 +207,12 @@ namespace WebService1.SAPWebServices {
         public event ZstocReturAvansatCompletedEventHandler ZstocReturAvansatCompleted;
         
         /// <remarks/>
+        public event ZanuleazaDocumenteCompletedEventHandler ZanuleazaDocumenteCompleted;
+        
+        /// <remarks/>
+        public event ZbapiReservationChangeCompletedEventHandler ZbapiReservationChangeCompleted;
+        
+        /// <remarks/>
         public event ZcreazaComandaCompletedEventHandler ZcreazaComandaCompleted;
         
         /// <remarks/>
@@ -189,6 +226,9 @@ namespace WebService1.SAPWebServices {
         
         /// <remarks/>
         public event ZmodificaLivrareCompletedEventHandler ZmodificaLivrareCompleted;
+        
+        /// <remarks/>
+        public event ZgetColourFormulaCompletedEventHandler ZgetColourFormulaCompleted;
         
         /// <remarks/>
         public event ZgetInfocvCompletedEventHandler ZgetInfocvCompleted;
@@ -441,6 +481,37 @@ namespace WebService1.SAPWebServices {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:sap-com:document:sap:soap:functions:mc-style:ZTBL_WEBSERVICE:ZgetPrice20Reque" +
+            "st", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Bare)]
+        [return: System.Xml.Serialization.XmlElementAttribute("ZgetPrice20Response", Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+        public ZgetPrice20Response ZgetPrice20([System.Xml.Serialization.XmlElementAttribute("ZgetPrice20", Namespace="urn:sap-com:document:sap:soap:functions:mc-style")] ZgetPrice20 ZgetPrice201) {
+            object[] results = this.Invoke("ZgetPrice20", new object[] {
+                        ZgetPrice201});
+            return ((ZgetPrice20Response)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ZgetPrice20Async(ZgetPrice20 ZgetPrice201) {
+            this.ZgetPrice20Async(ZgetPrice201, null);
+        }
+        
+        /// <remarks/>
+        public void ZgetPrice20Async(ZgetPrice20 ZgetPrice201, object userState) {
+            if ((this.ZgetPrice20OperationCompleted == null)) {
+                this.ZgetPrice20OperationCompleted = new System.Threading.SendOrPostCallback(this.OnZgetPrice20OperationCompleted);
+            }
+            this.InvokeAsync("ZgetPrice20", new object[] {
+                        ZgetPrice201}, this.ZgetPrice20OperationCompleted, userState);
+        }
+        
+        private void OnZgetPrice20OperationCompleted(object arg) {
+            if ((this.ZgetPrice20Completed != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ZgetPrice20Completed(this, new ZgetPrice20CompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:sap-com:document:sap:soap:functions:mc-style:ZTBL_WEBSERVICE:ZpalcantRequest", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Bare)]
         [return: System.Xml.Serialization.XmlElementAttribute("ZpalcantResponse", Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
         public ZpalcantResponse Zpalcant([System.Xml.Serialization.XmlElementAttribute("Zpalcant", Namespace="urn:sap-com:document:sap:soap:functions:mc-style")] Zpalcant Zpalcant1) {
@@ -498,6 +569,37 @@ namespace WebService1.SAPWebServices {
             if ((this.ZretMarfaCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.ZretMarfaCompleted(this, new ZretMarfaCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:sap-com:document:sap:soap:functions:mc-style:ZTBL_WEBSERVICE:ZanuleazaDocumen" +
+            "te2Request", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Bare)]
+        [return: System.Xml.Serialization.XmlElementAttribute("ZanuleazaDocumente2Response", Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+        public ZanuleazaDocumente2Response ZanuleazaDocumente2([System.Xml.Serialization.XmlElementAttribute("ZanuleazaDocumente2", Namespace="urn:sap-com:document:sap:soap:functions:mc-style")] ZanuleazaDocumente2 ZanuleazaDocumente21) {
+            object[] results = this.Invoke("ZanuleazaDocumente2", new object[] {
+                        ZanuleazaDocumente21});
+            return ((ZanuleazaDocumente2Response)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ZanuleazaDocumente2Async(ZanuleazaDocumente2 ZanuleazaDocumente21) {
+            this.ZanuleazaDocumente2Async(ZanuleazaDocumente21, null);
+        }
+        
+        /// <remarks/>
+        public void ZanuleazaDocumente2Async(ZanuleazaDocumente2 ZanuleazaDocumente21, object userState) {
+            if ((this.ZanuleazaDocumente2OperationCompleted == null)) {
+                this.ZanuleazaDocumente2OperationCompleted = new System.Threading.SendOrPostCallback(this.OnZanuleazaDocumente2OperationCompleted);
+            }
+            this.InvokeAsync("ZanuleazaDocumente2", new object[] {
+                        ZanuleazaDocumente21}, this.ZanuleazaDocumente2OperationCompleted, userState);
+        }
+        
+        private void OnZanuleazaDocumente2OperationCompleted(object arg) {
+            if ((this.ZanuleazaDocumente2Completed != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ZanuleazaDocumente2Completed(this, new ZanuleazaDocumente2CompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -596,6 +698,37 @@ namespace WebService1.SAPWebServices {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:sap-com:document:sap:soap:functions:mc-style:ZTBL_WEBSERVICE:ZsdSalesdocument" +
+            "ChangeRequest", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Bare)]
+        [return: System.Xml.Serialization.XmlElementAttribute("ZsdSalesdocumentChangeResponse", Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+        public ZsdSalesdocumentChangeResponse ZsdSalesdocumentChange([System.Xml.Serialization.XmlElementAttribute("ZsdSalesdocumentChange", Namespace="urn:sap-com:document:sap:soap:functions:mc-style")] ZsdSalesdocumentChange ZsdSalesdocumentChange1) {
+            object[] results = this.Invoke("ZsdSalesdocumentChange", new object[] {
+                        ZsdSalesdocumentChange1});
+            return ((ZsdSalesdocumentChangeResponse)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ZsdSalesdocumentChangeAsync(ZsdSalesdocumentChange ZsdSalesdocumentChange1) {
+            this.ZsdSalesdocumentChangeAsync(ZsdSalesdocumentChange1, null);
+        }
+        
+        /// <remarks/>
+        public void ZsdSalesdocumentChangeAsync(ZsdSalesdocumentChange ZsdSalesdocumentChange1, object userState) {
+            if ((this.ZsdSalesdocumentChangeOperationCompleted == null)) {
+                this.ZsdSalesdocumentChangeOperationCompleted = new System.Threading.SendOrPostCallback(this.OnZsdSalesdocumentChangeOperationCompleted);
+            }
+            this.InvokeAsync("ZsdSalesdocumentChange", new object[] {
+                        ZsdSalesdocumentChange1}, this.ZsdSalesdocumentChangeOperationCompleted, userState);
+        }
+        
+        private void OnZsdSalesdocumentChangeOperationCompleted(object arg) {
+            if ((this.ZsdSalesdocumentChangeCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ZsdSalesdocumentChangeCompleted(this, new ZsdSalesdocumentChangeCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:sap-com:document:sap:soap:functions:mc-style:ZTBL_WEBSERVICE:ZsdSalesdocument" +
             "CreateRequest", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Bare)]
         [return: System.Xml.Serialization.XmlElementAttribute("ZsdSalesdocumentCreateResponse", Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
         public ZsdSalesdocumentCreateResponse ZsdSalesdocumentCreate([System.Xml.Serialization.XmlElementAttribute("ZsdSalesdocumentCreate", Namespace="urn:sap-com:document:sap:soap:functions:mc-style")] ZsdSalesdocumentCreate ZsdSalesdocumentCreate1) {
@@ -622,6 +755,68 @@ namespace WebService1.SAPWebServices {
             if ((this.ZsdSalesdocumentCreateCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.ZsdSalesdocumentCreateCompleted(this, new ZsdSalesdocumentCreateCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:sap-com:document:sap:soap:functions:mc-style:ZTBL_WEBSERVICE:ZChangeTonajPoRe" +
+            "quest", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Bare)]
+        [return: System.Xml.Serialization.XmlElementAttribute("ZChangeTonajPoResponse", Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+        public ZChangeTonajPoResponse ZChangeTonajPo([System.Xml.Serialization.XmlElementAttribute("ZChangeTonajPo", Namespace="urn:sap-com:document:sap:soap:functions:mc-style")] ZChangeTonajPo ZChangeTonajPo1) {
+            object[] results = this.Invoke("ZChangeTonajPo", new object[] {
+                        ZChangeTonajPo1});
+            return ((ZChangeTonajPoResponse)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ZChangeTonajPoAsync(ZChangeTonajPo ZChangeTonajPo1) {
+            this.ZChangeTonajPoAsync(ZChangeTonajPo1, null);
+        }
+        
+        /// <remarks/>
+        public void ZChangeTonajPoAsync(ZChangeTonajPo ZChangeTonajPo1, object userState) {
+            if ((this.ZChangeTonajPoOperationCompleted == null)) {
+                this.ZChangeTonajPoOperationCompleted = new System.Threading.SendOrPostCallback(this.OnZChangeTonajPoOperationCompleted);
+            }
+            this.InvokeAsync("ZChangeTonajPo", new object[] {
+                        ZChangeTonajPo1}, this.ZChangeTonajPoOperationCompleted, userState);
+        }
+        
+        private void OnZChangeTonajPoOperationCompleted(object arg) {
+            if ((this.ZChangeTonajPoCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ZChangeTonajPoCompleted(this, new ZChangeTonajPoCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:sap-com:document:sap:soap:functions:mc-style:ZTBL_WEBSERVICE:ZlivrareClpZulrR" +
+            "equest", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Bare)]
+        [return: System.Xml.Serialization.XmlElementAttribute("ZlivrareClpZulrResponse", Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+        public ZlivrareClpZulrResponse ZlivrareClpZulr([System.Xml.Serialization.XmlElementAttribute("ZlivrareClpZulr", Namespace="urn:sap-com:document:sap:soap:functions:mc-style")] ZlivrareClpZulr ZlivrareClpZulr1) {
+            object[] results = this.Invoke("ZlivrareClpZulr", new object[] {
+                        ZlivrareClpZulr1});
+            return ((ZlivrareClpZulrResponse)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ZlivrareClpZulrAsync(ZlivrareClpZulr ZlivrareClpZulr1) {
+            this.ZlivrareClpZulrAsync(ZlivrareClpZulr1, null);
+        }
+        
+        /// <remarks/>
+        public void ZlivrareClpZulrAsync(ZlivrareClpZulr ZlivrareClpZulr1, object userState) {
+            if ((this.ZlivrareClpZulrOperationCompleted == null)) {
+                this.ZlivrareClpZulrOperationCompleted = new System.Threading.SendOrPostCallback(this.OnZlivrareClpZulrOperationCompleted);
+            }
+            this.InvokeAsync("ZlivrareClpZulr", new object[] {
+                        ZlivrareClpZulr1}, this.ZlivrareClpZulrOperationCompleted, userState);
+        }
+        
+        private void OnZlivrareClpZulrOperationCompleted(object arg) {
+            if ((this.ZlivrareClpZulrCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ZlivrareClpZulrCompleted(this, new ZlivrareClpZulrCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -781,6 +976,68 @@ namespace WebService1.SAPWebServices {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:sap-com:document:sap:soap:functions:mc-style:ZTBL_WEBSERVICE:ZanuleazaDocumen" +
+            "teRequest", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Bare)]
+        [return: System.Xml.Serialization.XmlElementAttribute("ZanuleazaDocumenteResponse", Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+        public ZanuleazaDocumenteResponse ZanuleazaDocumente([System.Xml.Serialization.XmlElementAttribute("ZanuleazaDocumente", Namespace="urn:sap-com:document:sap:soap:functions:mc-style")] ZanuleazaDocumente ZanuleazaDocumente1) {
+            object[] results = this.Invoke("ZanuleazaDocumente", new object[] {
+                        ZanuleazaDocumente1});
+            return ((ZanuleazaDocumenteResponse)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ZanuleazaDocumenteAsync(ZanuleazaDocumente ZanuleazaDocumente1) {
+            this.ZanuleazaDocumenteAsync(ZanuleazaDocumente1, null);
+        }
+        
+        /// <remarks/>
+        public void ZanuleazaDocumenteAsync(ZanuleazaDocumente ZanuleazaDocumente1, object userState) {
+            if ((this.ZanuleazaDocumenteOperationCompleted == null)) {
+                this.ZanuleazaDocumenteOperationCompleted = new System.Threading.SendOrPostCallback(this.OnZanuleazaDocumenteOperationCompleted);
+            }
+            this.InvokeAsync("ZanuleazaDocumente", new object[] {
+                        ZanuleazaDocumente1}, this.ZanuleazaDocumenteOperationCompleted, userState);
+        }
+        
+        private void OnZanuleazaDocumenteOperationCompleted(object arg) {
+            if ((this.ZanuleazaDocumenteCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ZanuleazaDocumenteCompleted(this, new ZanuleazaDocumenteCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:sap-com:document:sap:soap:functions:mc-style:ZTBL_WEBSERVICE:ZbapiReservation" +
+            "ChangeRequest", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Bare)]
+        [return: System.Xml.Serialization.XmlElementAttribute("ZbapiReservationChangeResponse", Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+        public ZbapiReservationChangeResponse ZbapiReservationChange([System.Xml.Serialization.XmlElementAttribute("ZbapiReservationChange", Namespace="urn:sap-com:document:sap:soap:functions:mc-style")] ZbapiReservationChange ZbapiReservationChange1) {
+            object[] results = this.Invoke("ZbapiReservationChange", new object[] {
+                        ZbapiReservationChange1});
+            return ((ZbapiReservationChangeResponse)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ZbapiReservationChangeAsync(ZbapiReservationChange ZbapiReservationChange1) {
+            this.ZbapiReservationChangeAsync(ZbapiReservationChange1, null);
+        }
+        
+        /// <remarks/>
+        public void ZbapiReservationChangeAsync(ZbapiReservationChange ZbapiReservationChange1, object userState) {
+            if ((this.ZbapiReservationChangeOperationCompleted == null)) {
+                this.ZbapiReservationChangeOperationCompleted = new System.Threading.SendOrPostCallback(this.OnZbapiReservationChangeOperationCompleted);
+            }
+            this.InvokeAsync("ZbapiReservationChange", new object[] {
+                        ZbapiReservationChange1}, this.ZbapiReservationChangeOperationCompleted, userState);
+        }
+        
+        private void OnZbapiReservationChangeOperationCompleted(object arg) {
+            if ((this.ZbapiReservationChangeCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ZbapiReservationChangeCompleted(this, new ZbapiReservationChangeCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:sap-com:document:sap:soap:functions:mc-style:ZTBL_WEBSERVICE:ZcreazaComandaRe" +
             "quest", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Bare)]
         [return: System.Xml.Serialization.XmlElementAttribute("ZcreazaComandaResponse", Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
@@ -932,6 +1189,37 @@ namespace WebService1.SAPWebServices {
             if ((this.ZmodificaLivrareCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.ZmodificaLivrareCompleted(this, new ZmodificaLivrareCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:sap-com:document:sap:soap:functions:mc-style:ZTBL_WEBSERVICE:ZgetColourFormul" +
+            "aRequest", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Bare)]
+        [return: System.Xml.Serialization.XmlElementAttribute("ZgetColourFormulaResponse", Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+        public ZgetColourFormulaResponse ZgetColourFormula([System.Xml.Serialization.XmlElementAttribute("ZgetColourFormula", Namespace="urn:sap-com:document:sap:soap:functions:mc-style")] ZgetColourFormula ZgetColourFormula1) {
+            object[] results = this.Invoke("ZgetColourFormula", new object[] {
+                        ZgetColourFormula1});
+            return ((ZgetColourFormulaResponse)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ZgetColourFormulaAsync(ZgetColourFormula ZgetColourFormula1) {
+            this.ZgetColourFormulaAsync(ZgetColourFormula1, null);
+        }
+        
+        /// <remarks/>
+        public void ZgetColourFormulaAsync(ZgetColourFormula ZgetColourFormula1, object userState) {
+            if ((this.ZgetColourFormulaOperationCompleted == null)) {
+                this.ZgetColourFormulaOperationCompleted = new System.Threading.SendOrPostCallback(this.OnZgetColourFormulaOperationCompleted);
+            }
+            this.InvokeAsync("ZgetColourFormula", new object[] {
+                        ZgetColourFormula1}, this.ZgetColourFormulaOperationCompleted, userState);
+        }
+        
+        private void OnZgetColourFormulaOperationCompleted(object arg) {
+            if ((this.ZgetColourFormulaCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ZgetColourFormulaCompleted(this, new ZgetColourFormulaCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -1285,6 +1573,275 @@ namespace WebService1.SAPWebServices {
             }
             set {
                 this.t1ProcField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class ZcolformulaResult {
+        
+        private string colorIdField;
+        
+        private string formulaNameField;
+        
+        private string formulaDateField;
+        
+        private string colCollectionField;
+        
+        private decimal formulaQtyField;
+        
+        private string formulaUmField;
+        
+        private string productCodeField;
+        
+        private string productNameField;
+        
+        private decimal baseCantField;
+        
+        private string baseUmField;
+        
+        private string baseCodField;
+        
+        private string baseArticolField;
+        
+        private string colCodeField;
+        
+        private string colNameField;
+        
+        private decimal colQuantityField;
+        
+        private decimal colDensityField;
+        
+        private byte rgbRedvalField;
+        
+        private byte rgbGreenvalField;
+        
+        private byte rgbBluevalField;
+        
+        private string codArticolField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ColorId {
+            get {
+                return this.colorIdField;
+            }
+            set {
+                this.colorIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string FormulaName {
+            get {
+                return this.formulaNameField;
+            }
+            set {
+                this.formulaNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string FormulaDate {
+            get {
+                return this.formulaDateField;
+            }
+            set {
+                this.formulaDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ColCollection {
+            get {
+                return this.colCollectionField;
+            }
+            set {
+                this.colCollectionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal FormulaQty {
+            get {
+                return this.formulaQtyField;
+            }
+            set {
+                this.formulaQtyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string FormulaUm {
+            get {
+                return this.formulaUmField;
+            }
+            set {
+                this.formulaUmField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ProductCode {
+            get {
+                return this.productCodeField;
+            }
+            set {
+                this.productCodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ProductName {
+            get {
+                return this.productNameField;
+            }
+            set {
+                this.productNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal BaseCant {
+            get {
+                return this.baseCantField;
+            }
+            set {
+                this.baseCantField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string BaseUm {
+            get {
+                return this.baseUmField;
+            }
+            set {
+                this.baseUmField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string BaseCod {
+            get {
+                return this.baseCodField;
+            }
+            set {
+                this.baseCodField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string BaseArticol {
+            get {
+                return this.baseArticolField;
+            }
+            set {
+                this.baseArticolField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ColCode {
+            get {
+                return this.colCodeField;
+            }
+            set {
+                this.colCodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ColName {
+            get {
+                return this.colNameField;
+            }
+            set {
+                this.colNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal ColQuantity {
+            get {
+                return this.colQuantityField;
+            }
+            set {
+                this.colQuantityField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal ColDensity {
+            get {
+                return this.colDensityField;
+            }
+            set {
+                this.colDensityField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public byte RgbRedval {
+            get {
+                return this.rgbRedvalField;
+            }
+            set {
+                this.rgbRedvalField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public byte RgbGreenval {
+            get {
+                return this.rgbGreenvalField;
+            }
+            set {
+                this.rgbGreenvalField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public byte RgbBlueval {
+            get {
+                return this.rgbBluevalField;
+            }
+            set {
+                this.rgbBluevalField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CodArticol {
+            get {
+                return this.codArticolField;
+            }
+            set {
+                this.codArticolField = value;
             }
         }
     }
@@ -1737,6 +2294,1528 @@ namespace WebService1.SAPWebServices {
             }
             set {
                 this.lgortField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class Bapi2093ResItemChangex {
+        
+        private string resItemField;
+        
+        private string stgeLocField;
+        
+        private string batchField;
+        
+        private string entryQntField;
+        
+        private string reqDateField;
+        
+        private string itemTextField;
+        
+        private string grRcptField;
+        
+        private string unloadPtField;
+        
+        private string fixedQuanField;
+        
+        private string movementField;
+        
+        private string deleteIndField;
+        
+        private string withdrawnField;
+        
+        private string prioUrgencyField;
+        
+        private string prioRequirementField;
+        
+        private string stkSegmentField;
+        
+        private string reqSegmentField;
+        
+        private string stkSegLongField;
+        
+        private string reqSegLongField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ResItem {
+            get {
+                return this.resItemField;
+            }
+            set {
+                this.resItemField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string StgeLoc {
+            get {
+                return this.stgeLocField;
+            }
+            set {
+                this.stgeLocField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Batch {
+            get {
+                return this.batchField;
+            }
+            set {
+                this.batchField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string EntryQnt {
+            get {
+                return this.entryQntField;
+            }
+            set {
+                this.entryQntField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ReqDate {
+            get {
+                return this.reqDateField;
+            }
+            set {
+                this.reqDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ItemText {
+            get {
+                return this.itemTextField;
+            }
+            set {
+                this.itemTextField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string GrRcpt {
+            get {
+                return this.grRcptField;
+            }
+            set {
+                this.grRcptField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string UnloadPt {
+            get {
+                return this.unloadPtField;
+            }
+            set {
+                this.unloadPtField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string FixedQuan {
+            get {
+                return this.fixedQuanField;
+            }
+            set {
+                this.fixedQuanField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Movement {
+            get {
+                return this.movementField;
+            }
+            set {
+                this.movementField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string DeleteInd {
+            get {
+                return this.deleteIndField;
+            }
+            set {
+                this.deleteIndField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Withdrawn {
+            get {
+                return this.withdrawnField;
+            }
+            set {
+                this.withdrawnField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PrioUrgency {
+            get {
+                return this.prioUrgencyField;
+            }
+            set {
+                this.prioUrgencyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PrioRequirement {
+            get {
+                return this.prioRequirementField;
+            }
+            set {
+                this.prioRequirementField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string StkSegment {
+            get {
+                return this.stkSegmentField;
+            }
+            set {
+                this.stkSegmentField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ReqSegment {
+            get {
+                return this.reqSegmentField;
+            }
+            set {
+                this.reqSegmentField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string StkSegLong {
+            get {
+                return this.stkSegLongField;
+            }
+            set {
+                this.stkSegLongField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ReqSegLong {
+            get {
+                return this.reqSegLongField;
+            }
+            set {
+                this.reqSegLongField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class Bapi2093ResItemChange {
+        
+        private string resItemField;
+        
+        private string stgeLocField;
+        
+        private string batchField;
+        
+        private decimal entryQntField;
+        
+        private string reqDateField;
+        
+        private string itemTextField;
+        
+        private string grRcptField;
+        
+        private string unloadPtField;
+        
+        private string fixedQuanField;
+        
+        private string movementField;
+        
+        private string deleteIndField;
+        
+        private string withdrawnField;
+        
+        private string prioUrgencyField;
+        
+        private string prioRequirementField;
+        
+        private string stkSegmentField;
+        
+        private string reqSegmentField;
+        
+        private string stkSegLongField;
+        
+        private string reqSegLongField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ResItem {
+            get {
+                return this.resItemField;
+            }
+            set {
+                this.resItemField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string StgeLoc {
+            get {
+                return this.stgeLocField;
+            }
+            set {
+                this.stgeLocField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Batch {
+            get {
+                return this.batchField;
+            }
+            set {
+                this.batchField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal EntryQnt {
+            get {
+                return this.entryQntField;
+            }
+            set {
+                this.entryQntField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ReqDate {
+            get {
+                return this.reqDateField;
+            }
+            set {
+                this.reqDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ItemText {
+            get {
+                return this.itemTextField;
+            }
+            set {
+                this.itemTextField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string GrRcpt {
+            get {
+                return this.grRcptField;
+            }
+            set {
+                this.grRcptField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string UnloadPt {
+            get {
+                return this.unloadPtField;
+            }
+            set {
+                this.unloadPtField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string FixedQuan {
+            get {
+                return this.fixedQuanField;
+            }
+            set {
+                this.fixedQuanField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Movement {
+            get {
+                return this.movementField;
+            }
+            set {
+                this.movementField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string DeleteInd {
+            get {
+                return this.deleteIndField;
+            }
+            set {
+                this.deleteIndField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Withdrawn {
+            get {
+                return this.withdrawnField;
+            }
+            set {
+                this.withdrawnField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PrioUrgency {
+            get {
+                return this.prioUrgencyField;
+            }
+            set {
+                this.prioUrgencyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PrioRequirement {
+            get {
+                return this.prioRequirementField;
+            }
+            set {
+                this.prioRequirementField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string StkSegment {
+            get {
+                return this.stkSegmentField;
+            }
+            set {
+                this.stkSegmentField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ReqSegment {
+            get {
+                return this.reqSegmentField;
+            }
+            set {
+                this.reqSegmentField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string StkSegLong {
+            get {
+                return this.stkSegLongField;
+            }
+            set {
+                this.stkSegLongField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ReqSegLong {
+            get {
+                return this.reqSegLongField;
+            }
+            set {
+                this.reqSegLongField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class ZcomheadTableta {
+        
+        private string mandtField;
+        
+        private decimal idField;
+        
+        private string codClientField;
+        
+        private string codAgentField;
+        
+        private string ulField;
+        
+        private string departField;
+        
+        private string statusField;
+        
+        private string datacField;
+        
+        private string cantarField;
+        
+        private string nrcmdsapField;
+        
+        private string codInitField;
+        
+        private decimal valoareField;
+        
+        private decimal valoaresapField;
+        
+        private string tipPlataField;
+        
+        private string persContactField;
+        
+        private string telefonField;
+        
+        private string adrLivrareField;
+        
+        private string mtField;
+        
+        private string accept1Field;
+        
+        private System.DateTime oraAccept1Field;
+        
+        private string accept2Field;
+        
+        private System.DateTime oraAccept2Field;
+        
+        private string waersField;
+        
+        private string statusAprovField;
+        
+        private string factRedField;
+        
+        private string pattIdField;
+        
+        private string comReferintaField;
+        
+        private string cityField;
+        
+        private string regionField;
+        
+        private string denClField;
+        
+        private string nrTvaField;
+        
+        private string pmnttrmsField;
+        
+        private string obstraField;
+        
+        private System.DateTime timpcField;
+        
+        private string pernrModField;
+        
+        private string ketdatField;
+        
+        private string abgruField;
+        
+        private string docinField;
+        
+        private string adrNouaField;
+        
+        private decimal parentIdField;
+        
+        private string obsplataField;
+        
+        private string addrnumberField;
+        
+        private string awbField;
+        
+        private string numeClientField;
+        
+        private string stcegField;
+        
+        private string tipPersField;
+        
+        private decimal valIncasataField;
+        
+        private string siteField;
+        
+        private string modAvField;
+        
+        private string emailField;
+        
+        private string codJField;
+        
+        private string adrLivrareDField;
+        
+        private string cityDField;
+        
+        private string regionDField;
+        
+        private string aprobCvNecesarField;
+        
+        private string aprobCvRealizField;
+        
+        private string condCvField;
+        
+        private string mutatField;
+        
+        private string macaraField;
+        
+        private decimal valMinTrField;
+        
+        private string auartField;
+        
+        private decimal idObiectivField;
+        
+        private string adresaObiectivField;
+        
+        private string factPrimField;
+        
+        private string clientRaftField;
+        
+        private string mailBv90Field;
+        
+        private string meseriasField;
+        
+        private string factPaletSeparatField;
+        
+        private string descoperitaField;
+        
+        private string lifnrField;
+        
+        private string lifnrProdField;
+        
+        private string progLivrField;
+        
+        private string livrSambataField;
+        
+        private string blocField;
+        
+        private string refClientField;
+        
+        private string acZcField;
+        
+        private string filPlataField;
+        
+        private string custodieField;
+        
+        private string codPostalField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Mandt {
+            get {
+                return this.mandtField;
+            }
+            set {
+                this.mandtField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal Id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CodClient {
+            get {
+                return this.codClientField;
+            }
+            set {
+                this.codClientField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CodAgent {
+            get {
+                return this.codAgentField;
+            }
+            set {
+                this.codAgentField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Ul {
+            get {
+                return this.ulField;
+            }
+            set {
+                this.ulField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Depart {
+            get {
+                return this.departField;
+            }
+            set {
+                this.departField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Status {
+            get {
+                return this.statusField;
+            }
+            set {
+                this.statusField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Datac {
+            get {
+                return this.datacField;
+            }
+            set {
+                this.datacField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Cantar {
+            get {
+                return this.cantarField;
+            }
+            set {
+                this.cantarField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Nrcmdsap {
+            get {
+                return this.nrcmdsapField;
+            }
+            set {
+                this.nrcmdsapField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CodInit {
+            get {
+                return this.codInitField;
+            }
+            set {
+                this.codInitField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal Valoare {
+            get {
+                return this.valoareField;
+            }
+            set {
+                this.valoareField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal Valoaresap {
+            get {
+                return this.valoaresapField;
+            }
+            set {
+                this.valoaresapField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string TipPlata {
+            get {
+                return this.tipPlataField;
+            }
+            set {
+                this.tipPlataField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PersContact {
+            get {
+                return this.persContactField;
+            }
+            set {
+                this.persContactField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Telefon {
+            get {
+                return this.telefonField;
+            }
+            set {
+                this.telefonField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string AdrLivrare {
+            get {
+                return this.adrLivrareField;
+            }
+            set {
+                this.adrLivrareField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Mt {
+            get {
+                return this.mtField;
+            }
+            set {
+                this.mtField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Accept1 {
+            get {
+                return this.accept1Field;
+            }
+            set {
+                this.accept1Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="time")]
+        public System.DateTime OraAccept1 {
+            get {
+                return this.oraAccept1Field;
+            }
+            set {
+                this.oraAccept1Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Accept2 {
+            get {
+                return this.accept2Field;
+            }
+            set {
+                this.accept2Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="time")]
+        public System.DateTime OraAccept2 {
+            get {
+                return this.oraAccept2Field;
+            }
+            set {
+                this.oraAccept2Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Waers {
+            get {
+                return this.waersField;
+            }
+            set {
+                this.waersField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string StatusAprov {
+            get {
+                return this.statusAprovField;
+            }
+            set {
+                this.statusAprovField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string FactRed {
+            get {
+                return this.factRedField;
+            }
+            set {
+                this.factRedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PattId {
+            get {
+                return this.pattIdField;
+            }
+            set {
+                this.pattIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ComReferinta {
+            get {
+                return this.comReferintaField;
+            }
+            set {
+                this.comReferintaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string City {
+            get {
+                return this.cityField;
+            }
+            set {
+                this.cityField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Region {
+            get {
+                return this.regionField;
+            }
+            set {
+                this.regionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string DenCl {
+            get {
+                return this.denClField;
+            }
+            set {
+                this.denClField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string NrTva {
+            get {
+                return this.nrTvaField;
+            }
+            set {
+                this.nrTvaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Pmnttrms {
+            get {
+                return this.pmnttrmsField;
+            }
+            set {
+                this.pmnttrmsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Obstra {
+            get {
+                return this.obstraField;
+            }
+            set {
+                this.obstraField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="time")]
+        public System.DateTime Timpc {
+            get {
+                return this.timpcField;
+            }
+            set {
+                this.timpcField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PernrMod {
+            get {
+                return this.pernrModField;
+            }
+            set {
+                this.pernrModField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Ketdat {
+            get {
+                return this.ketdatField;
+            }
+            set {
+                this.ketdatField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Abgru {
+            get {
+                return this.abgruField;
+            }
+            set {
+                this.abgruField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Docin {
+            get {
+                return this.docinField;
+            }
+            set {
+                this.docinField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string AdrNoua {
+            get {
+                return this.adrNouaField;
+            }
+            set {
+                this.adrNouaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal ParentId {
+            get {
+                return this.parentIdField;
+            }
+            set {
+                this.parentIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Obsplata {
+            get {
+                return this.obsplataField;
+            }
+            set {
+                this.obsplataField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Addrnumber {
+            get {
+                return this.addrnumberField;
+            }
+            set {
+                this.addrnumberField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Awb {
+            get {
+                return this.awbField;
+            }
+            set {
+                this.awbField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string NumeClient {
+            get {
+                return this.numeClientField;
+            }
+            set {
+                this.numeClientField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Stceg {
+            get {
+                return this.stcegField;
+            }
+            set {
+                this.stcegField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string TipPers {
+            get {
+                return this.tipPersField;
+            }
+            set {
+                this.tipPersField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal ValIncasata {
+            get {
+                return this.valIncasataField;
+            }
+            set {
+                this.valIncasataField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Site {
+            get {
+                return this.siteField;
+            }
+            set {
+                this.siteField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ModAv {
+            get {
+                return this.modAvField;
+            }
+            set {
+                this.modAvField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Email {
+            get {
+                return this.emailField;
+            }
+            set {
+                this.emailField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CodJ {
+            get {
+                return this.codJField;
+            }
+            set {
+                this.codJField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string AdrLivrareD {
+            get {
+                return this.adrLivrareDField;
+            }
+            set {
+                this.adrLivrareDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CityD {
+            get {
+                return this.cityDField;
+            }
+            set {
+                this.cityDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string RegionD {
+            get {
+                return this.regionDField;
+            }
+            set {
+                this.regionDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string AprobCvNecesar {
+            get {
+                return this.aprobCvNecesarField;
+            }
+            set {
+                this.aprobCvNecesarField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string AprobCvRealiz {
+            get {
+                return this.aprobCvRealizField;
+            }
+            set {
+                this.aprobCvRealizField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CondCv {
+            get {
+                return this.condCvField;
+            }
+            set {
+                this.condCvField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Mutat {
+            get {
+                return this.mutatField;
+            }
+            set {
+                this.mutatField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Macara {
+            get {
+                return this.macaraField;
+            }
+            set {
+                this.macaraField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal ValMinTr {
+            get {
+                return this.valMinTrField;
+            }
+            set {
+                this.valMinTrField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Auart {
+            get {
+                return this.auartField;
+            }
+            set {
+                this.auartField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal IdObiectiv {
+            get {
+                return this.idObiectivField;
+            }
+            set {
+                this.idObiectivField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string AdresaObiectiv {
+            get {
+                return this.adresaObiectivField;
+            }
+            set {
+                this.adresaObiectivField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string FactPrim {
+            get {
+                return this.factPrimField;
+            }
+            set {
+                this.factPrimField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ClientRaft {
+            get {
+                return this.clientRaftField;
+            }
+            set {
+                this.clientRaftField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string MailBv90 {
+            get {
+                return this.mailBv90Field;
+            }
+            set {
+                this.mailBv90Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Meserias {
+            get {
+                return this.meseriasField;
+            }
+            set {
+                this.meseriasField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string FactPaletSeparat {
+            get {
+                return this.factPaletSeparatField;
+            }
+            set {
+                this.factPaletSeparatField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Descoperita {
+            get {
+                return this.descoperitaField;
+            }
+            set {
+                this.descoperitaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Lifnr {
+            get {
+                return this.lifnrField;
+            }
+            set {
+                this.lifnrField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string LifnrProd {
+            get {
+                return this.lifnrProdField;
+            }
+            set {
+                this.lifnrProdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ProgLivr {
+            get {
+                return this.progLivrField;
+            }
+            set {
+                this.progLivrField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string LivrSambata {
+            get {
+                return this.livrSambataField;
+            }
+            set {
+                this.livrSambataField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Bloc {
+            get {
+                return this.blocField;
+            }
+            set {
+                this.blocField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string RefClient {
+            get {
+                return this.refClientField;
+            }
+            set {
+                this.refClientField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string AcZc {
+            get {
+                return this.acZcField;
+            }
+            set {
+                this.acZcField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string FilPlata {
+            get {
+                return this.filPlataField;
+            }
+            set {
+                this.filPlataField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Custodie {
+            get {
+                return this.custodieField;
+            }
+            set {
+                this.custodieField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CodPostal {
+            get {
+                return this.codPostalField;
+            }
+            set {
+                this.codPostalField = value;
             }
         }
     }
@@ -2336,6 +4415,28 @@ namespace WebService1.SAPWebServices {
             }
             set {
                 this.discMaxField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class ZstEbeln {
+        
+        private string ebelnField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Ebeln {
+            get {
+                return this.ebelnField;
+            }
+            set {
+                this.ebelnField = value;
             }
         }
     }
@@ -6400,622 +8501,6 @@ namespace WebService1.SAPWebServices {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
-    public partial class Bapischdlx {
-        
-        private string itmNumberField;
-        
-        private string schedLineField;
-        
-        private string updateflagField;
-        
-        private string reqDateField;
-        
-        private string dateTypeField;
-        
-        private string reqTimeField;
-        
-        private string reqQtyField;
-        
-        private string reqDlvBlField;
-        
-        private string schedTypeField;
-        
-        private string tpDateField;
-        
-        private string msDateField;
-        
-        private string loadDateField;
-        
-        private string giDateField;
-        
-        private string tpTimeField;
-        
-        private string msTimeField;
-        
-        private string loadTimeField;
-        
-        private string giTimeField;
-        
-        private string refobjtypeField;
-        
-        private string refobjkeyField;
-        
-        private string dlvDateField;
-        
-        private string dlvTimeField;
-        
-        private string relTypeField;
-        
-        private string planSchedTypeField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ItmNumber {
-            get {
-                return this.itmNumberField;
-            }
-            set {
-                this.itmNumberField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string SchedLine {
-            get {
-                return this.schedLineField;
-            }
-            set {
-                this.schedLineField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Updateflag {
-            get {
-                return this.updateflagField;
-            }
-            set {
-                this.updateflagField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ReqDate {
-            get {
-                return this.reqDateField;
-            }
-            set {
-                this.reqDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string DateType {
-            get {
-                return this.dateTypeField;
-            }
-            set {
-                this.dateTypeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ReqTime {
-            get {
-                return this.reqTimeField;
-            }
-            set {
-                this.reqTimeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ReqQty {
-            get {
-                return this.reqQtyField;
-            }
-            set {
-                this.reqQtyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ReqDlvBl {
-            get {
-                return this.reqDlvBlField;
-            }
-            set {
-                this.reqDlvBlField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string SchedType {
-            get {
-                return this.schedTypeField;
-            }
-            set {
-                this.schedTypeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string TpDate {
-            get {
-                return this.tpDateField;
-            }
-            set {
-                this.tpDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string MsDate {
-            get {
-                return this.msDateField;
-            }
-            set {
-                this.msDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string LoadDate {
-            get {
-                return this.loadDateField;
-            }
-            set {
-                this.loadDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string GiDate {
-            get {
-                return this.giDateField;
-            }
-            set {
-                this.giDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string TpTime {
-            get {
-                return this.tpTimeField;
-            }
-            set {
-                this.tpTimeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string MsTime {
-            get {
-                return this.msTimeField;
-            }
-            set {
-                this.msTimeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string LoadTime {
-            get {
-                return this.loadTimeField;
-            }
-            set {
-                this.loadTimeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string GiTime {
-            get {
-                return this.giTimeField;
-            }
-            set {
-                this.giTimeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Refobjtype {
-            get {
-                return this.refobjtypeField;
-            }
-            set {
-                this.refobjtypeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Refobjkey {
-            get {
-                return this.refobjkeyField;
-            }
-            set {
-                this.refobjkeyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string DlvDate {
-            get {
-                return this.dlvDateField;
-            }
-            set {
-                this.dlvDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string DlvTime {
-            get {
-                return this.dlvTimeField;
-            }
-            set {
-                this.dlvTimeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string RelType {
-            get {
-                return this.relTypeField;
-            }
-            set {
-                this.relTypeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string PlanSchedType {
-            get {
-                return this.planSchedTypeField;
-            }
-            set {
-                this.planSchedTypeField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
-    public partial class Bapischdl {
-        
-        private string itmNumberField;
-        
-        private string schedLineField;
-        
-        private string reqDateField;
-        
-        private string dateTypeField;
-        
-        private System.DateTime reqTimeField;
-        
-        private decimal reqQtyField;
-        
-        private string reqDlvBlField;
-        
-        private string schedTypeField;
-        
-        private string tpDateField;
-        
-        private string msDateField;
-        
-        private string loadDateField;
-        
-        private string giDateField;
-        
-        private System.DateTime tpTimeField;
-        
-        private System.DateTime msTimeField;
-        
-        private System.DateTime loadTimeField;
-        
-        private System.DateTime giTimeField;
-        
-        private string refobjtypeField;
-        
-        private string refobjkeyField;
-        
-        private string reflogsysField;
-        
-        private string dlvDateField;
-        
-        private System.DateTime dlvTimeField;
-        
-        private string relTypeField;
-        
-        private string planSchedTypeField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ItmNumber {
-            get {
-                return this.itmNumberField;
-            }
-            set {
-                this.itmNumberField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string SchedLine {
-            get {
-                return this.schedLineField;
-            }
-            set {
-                this.schedLineField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ReqDate {
-            get {
-                return this.reqDateField;
-            }
-            set {
-                this.reqDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string DateType {
-            get {
-                return this.dateTypeField;
-            }
-            set {
-                this.dateTypeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="time")]
-        public System.DateTime ReqTime {
-            get {
-                return this.reqTimeField;
-            }
-            set {
-                this.reqTimeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal ReqQty {
-            get {
-                return this.reqQtyField;
-            }
-            set {
-                this.reqQtyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ReqDlvBl {
-            get {
-                return this.reqDlvBlField;
-            }
-            set {
-                this.reqDlvBlField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string SchedType {
-            get {
-                return this.schedTypeField;
-            }
-            set {
-                this.schedTypeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string TpDate {
-            get {
-                return this.tpDateField;
-            }
-            set {
-                this.tpDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string MsDate {
-            get {
-                return this.msDateField;
-            }
-            set {
-                this.msDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string LoadDate {
-            get {
-                return this.loadDateField;
-            }
-            set {
-                this.loadDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string GiDate {
-            get {
-                return this.giDateField;
-            }
-            set {
-                this.giDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="time")]
-        public System.DateTime TpTime {
-            get {
-                return this.tpTimeField;
-            }
-            set {
-                this.tpTimeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="time")]
-        public System.DateTime MsTime {
-            get {
-                return this.msTimeField;
-            }
-            set {
-                this.msTimeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="time")]
-        public System.DateTime LoadTime {
-            get {
-                return this.loadTimeField;
-            }
-            set {
-                this.loadTimeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="time")]
-        public System.DateTime GiTime {
-            get {
-                return this.giTimeField;
-            }
-            set {
-                this.giTimeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Refobjtype {
-            get {
-                return this.refobjtypeField;
-            }
-            set {
-                this.refobjtypeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Refobjkey {
-            get {
-                return this.refobjkeyField;
-            }
-            set {
-                this.refobjkeyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Reflogsys {
-            get {
-                return this.reflogsysField;
-            }
-            set {
-                this.reflogsysField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string DlvDate {
-            get {
-                return this.dlvDateField;
-            }
-            set {
-                this.dlvDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="time")]
-        public System.DateTime DlvTime {
-            get {
-                return this.dlvTimeField;
-            }
-            set {
-                this.dlvTimeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string RelType {
-            get {
-                return this.relTypeField;
-            }
-            set {
-                this.relTypeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string PlanSchedType {
-            get {
-                return this.planSchedTypeField;
-            }
-            set {
-                this.planSchedTypeField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
     public partial class Bapischdl2 {
         
         private string itmNumberField;
@@ -7930,6 +9415,9643 @@ namespace WebService1.SAPWebServices {
             }
             set {
                 this.abartField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class Bapictrx {
+        
+        private string itmNumberField;
+        
+        private string updateflagField;
+        
+        private string valPerField;
+        
+        private string valPerUnField;
+        
+        private string valPerCaField;
+        
+        private string instDateField;
+        
+        private string acceptDatField;
+        
+        private string conStDatField;
+        
+        private string conSiDatField;
+        
+        private string cancProcField;
+        
+        private string conEnActField;
+        
+        private string cancRDatField;
+        
+        private string rCancDatField;
+        
+        private string cancPartyField;
+        
+        private string cancreasonField;
+        
+        private string conEnDatField;
+        
+        private string cancDocField;
+        
+        private string cancdocdatField;
+        
+        private string conStRulField;
+        
+        private string dismDateField;
+        
+        private string actionDatField;
+        
+        private string actDatrulField;
+        
+        private string conEnRulField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ItmNumber {
+            get {
+                return this.itmNumberField;
+            }
+            set {
+                this.itmNumberField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Updateflag {
+            get {
+                return this.updateflagField;
+            }
+            set {
+                this.updateflagField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ValPer {
+            get {
+                return this.valPerField;
+            }
+            set {
+                this.valPerField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ValPerUn {
+            get {
+                return this.valPerUnField;
+            }
+            set {
+                this.valPerUnField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ValPerCa {
+            get {
+                return this.valPerCaField;
+            }
+            set {
+                this.valPerCaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string InstDate {
+            get {
+                return this.instDateField;
+            }
+            set {
+                this.instDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string AcceptDat {
+            get {
+                return this.acceptDatField;
+            }
+            set {
+                this.acceptDatField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ConStDat {
+            get {
+                return this.conStDatField;
+            }
+            set {
+                this.conStDatField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ConSiDat {
+            get {
+                return this.conSiDatField;
+            }
+            set {
+                this.conSiDatField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CancProc {
+            get {
+                return this.cancProcField;
+            }
+            set {
+                this.cancProcField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ConEnAct {
+            get {
+                return this.conEnActField;
+            }
+            set {
+                this.conEnActField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CancRDat {
+            get {
+                return this.cancRDatField;
+            }
+            set {
+                this.cancRDatField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string RCancDat {
+            get {
+                return this.rCancDatField;
+            }
+            set {
+                this.rCancDatField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CancParty {
+            get {
+                return this.cancPartyField;
+            }
+            set {
+                this.cancPartyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Cancreason {
+            get {
+                return this.cancreasonField;
+            }
+            set {
+                this.cancreasonField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ConEnDat {
+            get {
+                return this.conEnDatField;
+            }
+            set {
+                this.conEnDatField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CancDoc {
+            get {
+                return this.cancDocField;
+            }
+            set {
+                this.cancDocField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Cancdocdat {
+            get {
+                return this.cancdocdatField;
+            }
+            set {
+                this.cancdocdatField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ConStRul {
+            get {
+                return this.conStRulField;
+            }
+            set {
+                this.conStRulField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string DismDate {
+            get {
+                return this.dismDateField;
+            }
+            set {
+                this.dismDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ActionDat {
+            get {
+                return this.actionDatField;
+            }
+            set {
+                this.actionDatField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ActDatrul {
+            get {
+                return this.actDatrulField;
+            }
+            set {
+                this.actDatrulField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ConEnRul {
+            get {
+                return this.conEnRulField;
+            }
+            set {
+                this.conEnRulField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class Bapictr {
+        
+        private string itmNumberField;
+        
+        private string valPerField;
+        
+        private string valPerUnField;
+        
+        private string valPerCaField;
+        
+        private string instDateField;
+        
+        private string acceptDatField;
+        
+        private string conStDatField;
+        
+        private string conSiDatField;
+        
+        private string cancProcField;
+        
+        private string conEnActField;
+        
+        private string cancRDatField;
+        
+        private string rCancDatField;
+        
+        private string cancPartyField;
+        
+        private string cancreasonField;
+        
+        private string conEnDatField;
+        
+        private string cancDocField;
+        
+        private string cancdocdatField;
+        
+        private string conStRulField;
+        
+        private string dismDateField;
+        
+        private string actionDatField;
+        
+        private string actDatrulField;
+        
+        private string conEnRulField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ItmNumber {
+            get {
+                return this.itmNumberField;
+            }
+            set {
+                this.itmNumberField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ValPer {
+            get {
+                return this.valPerField;
+            }
+            set {
+                this.valPerField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ValPerUn {
+            get {
+                return this.valPerUnField;
+            }
+            set {
+                this.valPerUnField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ValPerCa {
+            get {
+                return this.valPerCaField;
+            }
+            set {
+                this.valPerCaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string InstDate {
+            get {
+                return this.instDateField;
+            }
+            set {
+                this.instDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string AcceptDat {
+            get {
+                return this.acceptDatField;
+            }
+            set {
+                this.acceptDatField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ConStDat {
+            get {
+                return this.conStDatField;
+            }
+            set {
+                this.conStDatField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ConSiDat {
+            get {
+                return this.conSiDatField;
+            }
+            set {
+                this.conSiDatField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CancProc {
+            get {
+                return this.cancProcField;
+            }
+            set {
+                this.cancProcField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ConEnAct {
+            get {
+                return this.conEnActField;
+            }
+            set {
+                this.conEnActField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CancRDat {
+            get {
+                return this.cancRDatField;
+            }
+            set {
+                this.cancRDatField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string RCancDat {
+            get {
+                return this.rCancDatField;
+            }
+            set {
+                this.rCancDatField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CancParty {
+            get {
+                return this.cancPartyField;
+            }
+            set {
+                this.cancPartyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Cancreason {
+            get {
+                return this.cancreasonField;
+            }
+            set {
+                this.cancreasonField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ConEnDat {
+            get {
+                return this.conEnDatField;
+            }
+            set {
+                this.conEnDatField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CancDoc {
+            get {
+                return this.cancDocField;
+            }
+            set {
+                this.cancDocField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Cancdocdat {
+            get {
+                return this.cancdocdatField;
+            }
+            set {
+                this.cancdocdatField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ConStRul {
+            get {
+                return this.conStRulField;
+            }
+            set {
+                this.conStRulField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string DismDate {
+            get {
+                return this.dismDateField;
+            }
+            set {
+                this.dismDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ActionDat {
+            get {
+                return this.actionDatField;
+            }
+            set {
+                this.actionDatField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ActDatrul {
+            get {
+                return this.actDatrulField;
+            }
+            set {
+                this.actDatrulField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ConEnRul {
+            get {
+                return this.conEnRulField;
+            }
+            set {
+                this.conEnRulField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class Bapicondx {
+        
+        private string itmNumberField;
+        
+        private string condStNoField;
+        
+        private string condCountField;
+        
+        private string condTypeField;
+        
+        private string updateflagField;
+        
+        private string condValueField;
+        
+        private string currencyField;
+        
+        private string condUnitField;
+        
+        private string condPUntField;
+        
+        private string varcondField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ItmNumber {
+            get {
+                return this.itmNumberField;
+            }
+            set {
+                this.itmNumberField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CondStNo {
+            get {
+                return this.condStNoField;
+            }
+            set {
+                this.condStNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CondCount {
+            get {
+                return this.condCountField;
+            }
+            set {
+                this.condCountField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CondType {
+            get {
+                return this.condTypeField;
+            }
+            set {
+                this.condTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Updateflag {
+            get {
+                return this.updateflagField;
+            }
+            set {
+                this.updateflagField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CondValue {
+            get {
+                return this.condValueField;
+            }
+            set {
+                this.condValueField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Currency {
+            get {
+                return this.currencyField;
+            }
+            set {
+                this.currencyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CondUnit {
+            get {
+                return this.condUnitField;
+            }
+            set {
+                this.condUnitField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CondPUnt {
+            get {
+                return this.condPUntField;
+            }
+            set {
+                this.condPUntField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Varcond {
+            get {
+                return this.varcondField;
+            }
+            set {
+                this.varcondField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class Bapicuvk {
+        
+        private string configIdField;
+        
+        private string instIdField;
+        
+        private string vkeyField;
+        
+        private string factorField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ConfigId {
+            get {
+                return this.configIdField;
+            }
+            set {
+                this.configIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string InstId {
+            get {
+                return this.instIdField;
+            }
+            set {
+                this.instIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Vkey {
+            get {
+                return this.vkeyField;
+            }
+            set {
+                this.vkeyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Factor {
+            get {
+                return this.factorField;
+            }
+            set {
+                this.factorField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class Bapicuval {
+        
+        private string configIdField;
+        
+        private string instIdField;
+        
+        private string charcField;
+        
+        private string charcTxtField;
+        
+        private string valueField;
+        
+        private string valueTxtField;
+        
+        private string authorField;
+        
+        private string valueToField;
+        
+        private string valcodeField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ConfigId {
+            get {
+                return this.configIdField;
+            }
+            set {
+                this.configIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string InstId {
+            get {
+                return this.instIdField;
+            }
+            set {
+                this.instIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Charc {
+            get {
+                return this.charcField;
+            }
+            set {
+                this.charcField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CharcTxt {
+            get {
+                return this.charcTxtField;
+            }
+            set {
+                this.charcTxtField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Value {
+            get {
+                return this.valueField;
+            }
+            set {
+                this.valueField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ValueTxt {
+            get {
+                return this.valueTxtField;
+            }
+            set {
+                this.valueTxtField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Author {
+            get {
+                return this.authorField;
+            }
+            set {
+                this.authorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ValueTo {
+            get {
+                return this.valueToField;
+            }
+            set {
+                this.valueToField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Valcode {
+            get {
+                return this.valcodeField;
+            }
+            set {
+                this.valcodeField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class Bapicuref {
+        
+        private string posexField;
+        
+        private string configIdField;
+        
+        private string instIdField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Posex {
+            get {
+                return this.posexField;
+            }
+            set {
+                this.posexField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ConfigId {
+            get {
+                return this.configIdField;
+            }
+            set {
+                this.configIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string InstId {
+            get {
+                return this.instIdField;
+            }
+            set {
+                this.instIdField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class Bapicucfg {
+        
+        private string posexField;
+        
+        private string configIdField;
+        
+        private string rootIdField;
+        
+        private string sceField;
+        
+        private string kbnameField;
+        
+        private string kbversionField;
+        
+        private string completeField;
+        
+        private string consistentField;
+        
+        private string cfginfoField;
+        
+        private string kbprofileField;
+        
+        private string kblanguageField;
+        
+        private string cbaseIdField;
+        
+        private string cbaseIdTypeField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Posex {
+            get {
+                return this.posexField;
+            }
+            set {
+                this.posexField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ConfigId {
+            get {
+                return this.configIdField;
+            }
+            set {
+                this.configIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string RootId {
+            get {
+                return this.rootIdField;
+            }
+            set {
+                this.rootIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Sce {
+            get {
+                return this.sceField;
+            }
+            set {
+                this.sceField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Kbname {
+            get {
+                return this.kbnameField;
+            }
+            set {
+                this.kbnameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Kbversion {
+            get {
+                return this.kbversionField;
+            }
+            set {
+                this.kbversionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Complete {
+            get {
+                return this.completeField;
+            }
+            set {
+                this.completeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Consistent {
+            get {
+                return this.consistentField;
+            }
+            set {
+                this.consistentField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Cfginfo {
+            get {
+                return this.cfginfoField;
+            }
+            set {
+                this.cfginfoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Kbprofile {
+            get {
+                return this.kbprofileField;
+            }
+            set {
+                this.kbprofileField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Kblanguage {
+            get {
+                return this.kblanguageField;
+            }
+            set {
+                this.kblanguageField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CbaseId {
+            get {
+                return this.cbaseIdField;
+            }
+            set {
+                this.cbaseIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CbaseIdType {
+            get {
+                return this.cbaseIdTypeField;
+            }
+            set {
+                this.cbaseIdTypeField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class Bapicuprt {
+        
+        private string configIdField;
+        
+        private string parentIdField;
+        
+        private string instIdField;
+        
+        private string partOfNoField;
+        
+        private string objTypeField;
+        
+        private string classTypeField;
+        
+        private string objKeyField;
+        
+        private string authorField;
+        
+        private string salesRelevantField;
+        
+        private string partOfGuidField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ConfigId {
+            get {
+                return this.configIdField;
+            }
+            set {
+                this.configIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ParentId {
+            get {
+                return this.parentIdField;
+            }
+            set {
+                this.parentIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string InstId {
+            get {
+                return this.instIdField;
+            }
+            set {
+                this.instIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PartOfNo {
+            get {
+                return this.partOfNoField;
+            }
+            set {
+                this.partOfNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ObjType {
+            get {
+                return this.objTypeField;
+            }
+            set {
+                this.objTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ClassType {
+            get {
+                return this.classTypeField;
+            }
+            set {
+                this.classTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ObjKey {
+            get {
+                return this.objKeyField;
+            }
+            set {
+                this.objKeyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Author {
+            get {
+                return this.authorField;
+            }
+            set {
+                this.authorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string SalesRelevant {
+            get {
+                return this.salesRelevantField;
+            }
+            set {
+                this.salesRelevantField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PartOfGuid {
+            get {
+                return this.partOfGuidField;
+            }
+            set {
+                this.partOfGuidField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class Bapicuins {
+        
+        private string configIdField;
+        
+        private string instIdField;
+        
+        private string objTypeField;
+        
+        private string classTypeField;
+        
+        private string objKeyField;
+        
+        private string objTxtField;
+        
+        private string quantityField;
+        
+        private string authorField;
+        
+        private string quantityUnitField;
+        
+        private string completeField;
+        
+        private string consistentField;
+        
+        private string objectGuidField;
+        
+        private string persistIdField;
+        
+        private string persistIdTypeField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ConfigId {
+            get {
+                return this.configIdField;
+            }
+            set {
+                this.configIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string InstId {
+            get {
+                return this.instIdField;
+            }
+            set {
+                this.instIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ObjType {
+            get {
+                return this.objTypeField;
+            }
+            set {
+                this.objTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ClassType {
+            get {
+                return this.classTypeField;
+            }
+            set {
+                this.classTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ObjKey {
+            get {
+                return this.objKeyField;
+            }
+            set {
+                this.objKeyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ObjTxt {
+            get {
+                return this.objTxtField;
+            }
+            set {
+                this.objTxtField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Quantity {
+            get {
+                return this.quantityField;
+            }
+            set {
+                this.quantityField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Author {
+            get {
+                return this.authorField;
+            }
+            set {
+                this.authorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string QuantityUnit {
+            get {
+                return this.quantityUnitField;
+            }
+            set {
+                this.quantityUnitField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Complete {
+            get {
+                return this.completeField;
+            }
+            set {
+                this.completeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Consistent {
+            get {
+                return this.consistentField;
+            }
+            set {
+                this.consistentField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ObjectGuid {
+            get {
+                return this.objectGuidField;
+            }
+            set {
+                this.objectGuidField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PersistId {
+            get {
+                return this.persistIdField;
+            }
+            set {
+                this.persistIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PersistIdType {
+            get {
+                return this.persistIdTypeField;
+            }
+            set {
+                this.persistIdTypeField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class Bapicublb {
+        
+        private string configIdField;
+        
+        private string contextField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ConfigId {
+            get {
+                return this.configIdField;
+            }
+            set {
+                this.configIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Context {
+            get {
+                return this.contextField;
+            }
+            set {
+                this.contextField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class Bapiccard {
+        
+        private string ccTypeField;
+        
+        private string ccNumberField;
+        
+        private string ccValidTField;
+        
+        private string ccNameField;
+        
+        private decimal billamountField;
+        
+        private string authFlagField;
+        
+        private decimal authamountField;
+        
+        private string currencyField;
+        
+        private string currIsoField;
+        
+        private string authDateField;
+        
+        private System.DateTime authTimeField;
+        
+        private string authCcNoField;
+        
+        private string authRefnoField;
+        
+        private string ccReactField;
+        
+        private decimal ccReAmountField;
+        
+        private string glAccountField;
+        
+        private string ccStatExField;
+        
+        private string ccReactTField;
+        
+        private string virtCardField;
+        
+        private string merchidclField;
+        
+        private string preAuthField;
+        
+        private string ccSeqNoField;
+        
+        private string amountchanField;
+        
+        private string authortypeField;
+        
+        private string dataoriginField;
+        
+        private string radrcheck1Field;
+        
+        private string radrcheck2Field;
+        
+        private string radrcheck3Field;
+        
+        private string rcardcheckField;
+        
+        private string ccLimitedField;
+        
+        private string ccVerifValueField;
+        
+        private string ccCtrlFieldField;
+        
+        private string ccInUseStField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CcType {
+            get {
+                return this.ccTypeField;
+            }
+            set {
+                this.ccTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CcNumber {
+            get {
+                return this.ccNumberField;
+            }
+            set {
+                this.ccNumberField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CcValidT {
+            get {
+                return this.ccValidTField;
+            }
+            set {
+                this.ccValidTField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CcName {
+            get {
+                return this.ccNameField;
+            }
+            set {
+                this.ccNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal Billamount {
+            get {
+                return this.billamountField;
+            }
+            set {
+                this.billamountField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string AuthFlag {
+            get {
+                return this.authFlagField;
+            }
+            set {
+                this.authFlagField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal Authamount {
+            get {
+                return this.authamountField;
+            }
+            set {
+                this.authamountField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Currency {
+            get {
+                return this.currencyField;
+            }
+            set {
+                this.currencyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CurrIso {
+            get {
+                return this.currIsoField;
+            }
+            set {
+                this.currIsoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string AuthDate {
+            get {
+                return this.authDateField;
+            }
+            set {
+                this.authDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="time")]
+        public System.DateTime AuthTime {
+            get {
+                return this.authTimeField;
+            }
+            set {
+                this.authTimeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string AuthCcNo {
+            get {
+                return this.authCcNoField;
+            }
+            set {
+                this.authCcNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string AuthRefno {
+            get {
+                return this.authRefnoField;
+            }
+            set {
+                this.authRefnoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CcReact {
+            get {
+                return this.ccReactField;
+            }
+            set {
+                this.ccReactField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal CcReAmount {
+            get {
+                return this.ccReAmountField;
+            }
+            set {
+                this.ccReAmountField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string GlAccount {
+            get {
+                return this.glAccountField;
+            }
+            set {
+                this.glAccountField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CcStatEx {
+            get {
+                return this.ccStatExField;
+            }
+            set {
+                this.ccStatExField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CcReactT {
+            get {
+                return this.ccReactTField;
+            }
+            set {
+                this.ccReactTField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string VirtCard {
+            get {
+                return this.virtCardField;
+            }
+            set {
+                this.virtCardField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Merchidcl {
+            get {
+                return this.merchidclField;
+            }
+            set {
+                this.merchidclField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PreAuth {
+            get {
+                return this.preAuthField;
+            }
+            set {
+                this.preAuthField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CcSeqNo {
+            get {
+                return this.ccSeqNoField;
+            }
+            set {
+                this.ccSeqNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Amountchan {
+            get {
+                return this.amountchanField;
+            }
+            set {
+                this.amountchanField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Authortype {
+            get {
+                return this.authortypeField;
+            }
+            set {
+                this.authortypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Dataorigin {
+            get {
+                return this.dataoriginField;
+            }
+            set {
+                this.dataoriginField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Radrcheck1 {
+            get {
+                return this.radrcheck1Field;
+            }
+            set {
+                this.radrcheck1Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Radrcheck2 {
+            get {
+                return this.radrcheck2Field;
+            }
+            set {
+                this.radrcheck2Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Radrcheck3 {
+            get {
+                return this.radrcheck3Field;
+            }
+            set {
+                this.radrcheck3Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Rcardcheck {
+            get {
+                return this.rcardcheckField;
+            }
+            set {
+                this.rcardcheckField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CcLimited {
+            get {
+                return this.ccLimitedField;
+            }
+            set {
+                this.ccLimitedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CcVerifValue {
+            get {
+                return this.ccVerifValueField;
+            }
+            set {
+                this.ccVerifValueField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CcCtrlField {
+            get {
+                return this.ccCtrlFieldField;
+            }
+            set {
+                this.ccCtrlFieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CcInUseSt {
+            get {
+                return this.ccInUseStField;
+            }
+            set {
+                this.ccInUseStField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class Bapisdpart {
+        
+        private string operationField;
+        
+        private string sdDocField;
+        
+        private string itmNumberField;
+        
+        private string partnRoleField;
+        
+        private string customerField;
+        
+        private string vendorNoField;
+        
+        private string personNoField;
+        
+        private string contactField;
+        
+        private string addressField;
+        
+        private string unloadPtField;
+        
+        private string countryField;
+        
+        private string countryisoField;
+        
+        private string addreIndiField;
+        
+        private string acc1TimeField;
+        
+        private string custhitypField;
+        
+        private string pricRelField;
+        
+        private string rebateRelField;
+        
+        private string levelNrField;
+        
+        private string descPartnField;
+        
+        private string transpzoneField;
+        
+        private string assignHiField;
+        
+        private string vatRegNoField;
+        
+        private string furtherparField;
+        
+        private string persNoField;
+        
+        private string calendUpdField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Operation {
+            get {
+                return this.operationField;
+            }
+            set {
+                this.operationField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string SdDoc {
+            get {
+                return this.sdDocField;
+            }
+            set {
+                this.sdDocField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ItmNumber {
+            get {
+                return this.itmNumberField;
+            }
+            set {
+                this.itmNumberField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PartnRole {
+            get {
+                return this.partnRoleField;
+            }
+            set {
+                this.partnRoleField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Customer {
+            get {
+                return this.customerField;
+            }
+            set {
+                this.customerField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string VendorNo {
+            get {
+                return this.vendorNoField;
+            }
+            set {
+                this.vendorNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PersonNo {
+            get {
+                return this.personNoField;
+            }
+            set {
+                this.personNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Contact {
+            get {
+                return this.contactField;
+            }
+            set {
+                this.contactField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Address {
+            get {
+                return this.addressField;
+            }
+            set {
+                this.addressField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string UnloadPt {
+            get {
+                return this.unloadPtField;
+            }
+            set {
+                this.unloadPtField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Country {
+            get {
+                return this.countryField;
+            }
+            set {
+                this.countryField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Countryiso {
+            get {
+                return this.countryisoField;
+            }
+            set {
+                this.countryisoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string AddreIndi {
+            get {
+                return this.addreIndiField;
+            }
+            set {
+                this.addreIndiField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Acc1Time {
+            get {
+                return this.acc1TimeField;
+            }
+            set {
+                this.acc1TimeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Custhityp {
+            get {
+                return this.custhitypField;
+            }
+            set {
+                this.custhitypField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PricRel {
+            get {
+                return this.pricRelField;
+            }
+            set {
+                this.pricRelField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string RebateRel {
+            get {
+                return this.rebateRelField;
+            }
+            set {
+                this.rebateRelField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string LevelNr {
+            get {
+                return this.levelNrField;
+            }
+            set {
+                this.levelNrField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string DescPartn {
+            get {
+                return this.descPartnField;
+            }
+            set {
+                this.descPartnField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Transpzone {
+            get {
+                return this.transpzoneField;
+            }
+            set {
+                this.transpzoneField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string AssignHi {
+            get {
+                return this.assignHiField;
+            }
+            set {
+                this.assignHiField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string VatRegNo {
+            get {
+                return this.vatRegNoField;
+            }
+            set {
+                this.vatRegNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Furtherpar {
+            get {
+                return this.furtherparField;
+            }
+            set {
+                this.furtherparField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PersNo {
+            get {
+                return this.persNoField;
+            }
+            set {
+                this.persNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CalendUpd {
+            get {
+                return this.calendUpdField;
+            }
+            set {
+                this.calendUpdField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class Bapiaddr1 {
+        
+        private string addrNoField;
+        
+        private string formofaddrField;
+        
+        private string nameField;
+        
+        private string name2Field;
+        
+        private string name3Field;
+        
+        private string name4Field;
+        
+        private string cONameField;
+        
+        private string cityField;
+        
+        private string districtField;
+        
+        private string cityNoField;
+        
+        private string postlCod1Field;
+        
+        private string postlCod2Field;
+        
+        private string postlCod3Field;
+        
+        private string poBoxField;
+        
+        private string poBoxCitField;
+        
+        private string delivDisField;
+        
+        private string streetField;
+        
+        private string streetNoField;
+        
+        private string strAbbrField;
+        
+        private string houseNoField;
+        
+        private string strSuppl1Field;
+        
+        private string strSuppl2Field;
+        
+        private string locationField;
+        
+        private string buildingField;
+        
+        private string floorField;
+        
+        private string roomNoField;
+        
+        private string countryField;
+        
+        private string languField;
+        
+        private string regionField;
+        
+        private string sort1Field;
+        
+        private string sort2Field;
+        
+        private string timeZoneField;
+        
+        private string taxjurcodeField;
+        
+        private string adrNotesField;
+        
+        private string commTypeField;
+        
+        private string tel1NumbrField;
+        
+        private string tel1ExtField;
+        
+        private string faxNumberField;
+        
+        private string faxExtensField;
+        
+        private string streetLngField;
+        
+        private string distrctNoField;
+        
+        private string chckstatusField;
+        
+        private string pboxcitNoField;
+        
+        private string transpzoneField;
+        
+        private string houseNo2Field;
+        
+        private string eMailField;
+        
+        private string strSuppl3Field;
+        
+        private string titleField;
+        
+        private string countryisoField;
+        
+        private string languIsoField;
+        
+        private string buildLongField;
+        
+        private string regiogroupField;
+        
+        private string homeCityField;
+        
+        private string homecitynoField;
+        
+        private string pcode1ExtField;
+        
+        private string pcode2ExtField;
+        
+        private string pcode3ExtField;
+        
+        private string poWONoField;
+        
+        private string poBoxRegField;
+        
+        private string poboxCtryField;
+        
+        private string poCtryisoField;
+        
+        private string homepageField;
+        
+        private string dontUseSField;
+        
+        private string dontUsePField;
+        
+        private string houseNo3Field;
+        
+        private string languCrField;
+        
+        private string langucrisoField;
+        
+        private string poBoxLobbyField;
+        
+        private string deliServTypeField;
+        
+        private string deliServNumberField;
+        
+        private string uriTypeField;
+        
+        private string countyCodeField;
+        
+        private string countyField;
+        
+        private string townshipCodeField;
+        
+        private string townshipField;
+        
+        private string xpcptField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string AddrNo {
+            get {
+                return this.addrNoField;
+            }
+            set {
+                this.addrNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Formofaddr {
+            get {
+                return this.formofaddrField;
+            }
+            set {
+                this.formofaddrField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Name2 {
+            get {
+                return this.name2Field;
+            }
+            set {
+                this.name2Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Name3 {
+            get {
+                return this.name3Field;
+            }
+            set {
+                this.name3Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Name4 {
+            get {
+                return this.name4Field;
+            }
+            set {
+                this.name4Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string COName {
+            get {
+                return this.cONameField;
+            }
+            set {
+                this.cONameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string City {
+            get {
+                return this.cityField;
+            }
+            set {
+                this.cityField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string District {
+            get {
+                return this.districtField;
+            }
+            set {
+                this.districtField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CityNo {
+            get {
+                return this.cityNoField;
+            }
+            set {
+                this.cityNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PostlCod1 {
+            get {
+                return this.postlCod1Field;
+            }
+            set {
+                this.postlCod1Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PostlCod2 {
+            get {
+                return this.postlCod2Field;
+            }
+            set {
+                this.postlCod2Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PostlCod3 {
+            get {
+                return this.postlCod3Field;
+            }
+            set {
+                this.postlCod3Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PoBox {
+            get {
+                return this.poBoxField;
+            }
+            set {
+                this.poBoxField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PoBoxCit {
+            get {
+                return this.poBoxCitField;
+            }
+            set {
+                this.poBoxCitField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string DelivDis {
+            get {
+                return this.delivDisField;
+            }
+            set {
+                this.delivDisField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Street {
+            get {
+                return this.streetField;
+            }
+            set {
+                this.streetField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string StreetNo {
+            get {
+                return this.streetNoField;
+            }
+            set {
+                this.streetNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string StrAbbr {
+            get {
+                return this.strAbbrField;
+            }
+            set {
+                this.strAbbrField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string HouseNo {
+            get {
+                return this.houseNoField;
+            }
+            set {
+                this.houseNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string StrSuppl1 {
+            get {
+                return this.strSuppl1Field;
+            }
+            set {
+                this.strSuppl1Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string StrSuppl2 {
+            get {
+                return this.strSuppl2Field;
+            }
+            set {
+                this.strSuppl2Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Location {
+            get {
+                return this.locationField;
+            }
+            set {
+                this.locationField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Building {
+            get {
+                return this.buildingField;
+            }
+            set {
+                this.buildingField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Floor {
+            get {
+                return this.floorField;
+            }
+            set {
+                this.floorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string RoomNo {
+            get {
+                return this.roomNoField;
+            }
+            set {
+                this.roomNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Country {
+            get {
+                return this.countryField;
+            }
+            set {
+                this.countryField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Langu {
+            get {
+                return this.languField;
+            }
+            set {
+                this.languField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Region {
+            get {
+                return this.regionField;
+            }
+            set {
+                this.regionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Sort1 {
+            get {
+                return this.sort1Field;
+            }
+            set {
+                this.sort1Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Sort2 {
+            get {
+                return this.sort2Field;
+            }
+            set {
+                this.sort2Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string TimeZone {
+            get {
+                return this.timeZoneField;
+            }
+            set {
+                this.timeZoneField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Taxjurcode {
+            get {
+                return this.taxjurcodeField;
+            }
+            set {
+                this.taxjurcodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string AdrNotes {
+            get {
+                return this.adrNotesField;
+            }
+            set {
+                this.adrNotesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CommType {
+            get {
+                return this.commTypeField;
+            }
+            set {
+                this.commTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Tel1Numbr {
+            get {
+                return this.tel1NumbrField;
+            }
+            set {
+                this.tel1NumbrField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Tel1Ext {
+            get {
+                return this.tel1ExtField;
+            }
+            set {
+                this.tel1ExtField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string FaxNumber {
+            get {
+                return this.faxNumberField;
+            }
+            set {
+                this.faxNumberField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string FaxExtens {
+            get {
+                return this.faxExtensField;
+            }
+            set {
+                this.faxExtensField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string StreetLng {
+            get {
+                return this.streetLngField;
+            }
+            set {
+                this.streetLngField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string DistrctNo {
+            get {
+                return this.distrctNoField;
+            }
+            set {
+                this.distrctNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Chckstatus {
+            get {
+                return this.chckstatusField;
+            }
+            set {
+                this.chckstatusField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PboxcitNo {
+            get {
+                return this.pboxcitNoField;
+            }
+            set {
+                this.pboxcitNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Transpzone {
+            get {
+                return this.transpzoneField;
+            }
+            set {
+                this.transpzoneField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string HouseNo2 {
+            get {
+                return this.houseNo2Field;
+            }
+            set {
+                this.houseNo2Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string EMail {
+            get {
+                return this.eMailField;
+            }
+            set {
+                this.eMailField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string StrSuppl3 {
+            get {
+                return this.strSuppl3Field;
+            }
+            set {
+                this.strSuppl3Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Title {
+            get {
+                return this.titleField;
+            }
+            set {
+                this.titleField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Countryiso {
+            get {
+                return this.countryisoField;
+            }
+            set {
+                this.countryisoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string LanguIso {
+            get {
+                return this.languIsoField;
+            }
+            set {
+                this.languIsoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string BuildLong {
+            get {
+                return this.buildLongField;
+            }
+            set {
+                this.buildLongField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Regiogroup {
+            get {
+                return this.regiogroupField;
+            }
+            set {
+                this.regiogroupField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string HomeCity {
+            get {
+                return this.homeCityField;
+            }
+            set {
+                this.homeCityField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Homecityno {
+            get {
+                return this.homecitynoField;
+            }
+            set {
+                this.homecitynoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Pcode1Ext {
+            get {
+                return this.pcode1ExtField;
+            }
+            set {
+                this.pcode1ExtField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Pcode2Ext {
+            get {
+                return this.pcode2ExtField;
+            }
+            set {
+                this.pcode2ExtField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Pcode3Ext {
+            get {
+                return this.pcode3ExtField;
+            }
+            set {
+                this.pcode3ExtField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PoWONo {
+            get {
+                return this.poWONoField;
+            }
+            set {
+                this.poWONoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PoBoxReg {
+            get {
+                return this.poBoxRegField;
+            }
+            set {
+                this.poBoxRegField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PoboxCtry {
+            get {
+                return this.poboxCtryField;
+            }
+            set {
+                this.poboxCtryField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PoCtryiso {
+            get {
+                return this.poCtryisoField;
+            }
+            set {
+                this.poCtryisoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Homepage {
+            get {
+                return this.homepageField;
+            }
+            set {
+                this.homepageField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string DontUseS {
+            get {
+                return this.dontUseSField;
+            }
+            set {
+                this.dontUseSField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string DontUseP {
+            get {
+                return this.dontUsePField;
+            }
+            set {
+                this.dontUsePField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string HouseNo3 {
+            get {
+                return this.houseNo3Field;
+            }
+            set {
+                this.houseNo3Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string LanguCr {
+            get {
+                return this.languCrField;
+            }
+            set {
+                this.languCrField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Langucriso {
+            get {
+                return this.langucrisoField;
+            }
+            set {
+                this.langucrisoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PoBoxLobby {
+            get {
+                return this.poBoxLobbyField;
+            }
+            set {
+                this.poBoxLobbyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string DeliServType {
+            get {
+                return this.deliServTypeField;
+            }
+            set {
+                this.deliServTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string DeliServNumber {
+            get {
+                return this.deliServNumberField;
+            }
+            set {
+                this.deliServNumberField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string UriType {
+            get {
+                return this.uriTypeField;
+            }
+            set {
+                this.uriTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CountyCode {
+            get {
+                return this.countyCodeField;
+            }
+            set {
+                this.countyCodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string County {
+            get {
+                return this.countyField;
+            }
+            set {
+                this.countyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string TownshipCode {
+            get {
+                return this.townshipCodeField;
+            }
+            set {
+                this.townshipCodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Township {
+            get {
+                return this.townshipField;
+            }
+            set {
+                this.townshipField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Xpcpt {
+            get {
+                return this.xpcptField;
+            }
+            set {
+                this.xpcptField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class ZsfaExtra {
+        
+        private string progLivrareField;
+        
+        private string livrSambataField;
+        
+        private decimal tonajField;
+        
+        private string obssofField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ProgLivrare {
+            get {
+                return this.progLivrareField;
+            }
+            set {
+                this.progLivrareField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string LivrSambata {
+            get {
+                return this.livrSambataField;
+            }
+            set {
+                this.livrSambataField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal Tonaj {
+            get {
+                return this.tonajField;
+            }
+            set {
+                this.tonajField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Obssof {
+            get {
+                return this.obssofField;
+            }
+            set {
+                this.obssofField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class Bapisdls {
+        
+        private string pricingField;
+        
+        private string atpWrkmodField;
+        
+        private string schedulingField;
+        
+        private string nostructureField;
+        
+        private string condHandlField;
+        
+        private string addrCheckField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Pricing {
+            get {
+                return this.pricingField;
+            }
+            set {
+                this.pricingField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string AtpWrkmod {
+            get {
+                return this.atpWrkmodField;
+            }
+            set {
+                this.atpWrkmodField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Scheduling {
+            get {
+                return this.schedulingField;
+            }
+            set {
+                this.schedulingField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Nostructure {
+            get {
+                return this.nostructureField;
+            }
+            set {
+                this.nostructureField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CondHandl {
+            get {
+                return this.condHandlField;
+            }
+            set {
+                this.condHandlField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string AddrCheck {
+            get {
+                return this.addrCheckField;
+            }
+            set {
+                this.addrCheckField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class Bapisdit {
+        
+        private string operationField;
+        
+        private string docNumberField;
+        
+        private string itmNumberField;
+        
+        private string materialField;
+        
+        private string matEntrdField;
+        
+        private string prRefMatField;
+        
+        private string batchField;
+        
+        private string matlGroupField;
+        
+        private string shortTextField;
+        
+        private string itemCategField;
+        
+        private string itemTypeField;
+        
+        private string relForDeField;
+        
+        private string relForBiField;
+        
+        private string hgLvItemField;
+        
+        private string alternItmField;
+        
+        private string reaForReField;
+        
+        private string prodHierField;
+        
+        private decimal outAgrTaField;
+        
+        private decimal targetQtyField;
+        
+        private string targetQuField;
+        
+        private string tUnitIsoField;
+        
+        private decimal targQtyNField;
+        
+        private decimal targQtyDField;
+        
+        private string baseUomField;
+        
+        private string tBasUnitField;
+        
+        private decimal scaleQuanField;
+        
+        private decimal roundDlvField;
+        
+        private string reconDateField;
+        
+        private decimal maxDeviatField;
+        
+        private string poItmNoField;
+        
+        private string custMat22Field;
+        
+        private decimal maxDevPeField;
+        
+        private decimal maxDevDaField;
+        
+        private string repairProField;
+        
+        private string dlvschedusField;
+        
+        private string dlvGroupField;
+        
+        private string fixedQuanField;
+        
+        private string deliUnlimField;
+        
+        private decimal overDlvTField;
+        
+        private decimal underDlvField;
+        
+        private string billBlockField;
+        
+        private string replacePtField;
+        
+        private string methBillField;
+        
+        private string divisionField;
+        
+        private string busAreaField;
+        
+        private decimal netValueField;
+        
+        private string currencyField;
+        
+        private string currenIsoField;
+        
+        private decimal maxPlDlvField;
+        
+        private string partDlvField;
+        
+        private string btchSplitField;
+        
+        private decimal reqQtyField;
+        
+        private decimal cumReqDeField;
+        
+        private decimal cumCfQtyField;
+        
+        private decimal cumConQuField;
+        
+        private string salesUnitField;
+        
+        private string isocodunitField;
+        
+        private decimal salesQty1Field;
+        
+        private decimal salesQty2Field;
+        
+        private decimal grossWeigField;
+        
+        private decimal netWeightField;
+        
+        private string unitOfWtField;
+        
+        private string unitWtisoField;
+        
+        private decimal volumeField;
+        
+        private string volumeunitField;
+        
+        private string volunitisoField;
+        
+        private string cauVbelnField;
+        
+        private string cauPosnrField;
+        
+        private string refDocField;
+        
+        private string posnrVorField;
+        
+        private string objCopyField;
+        
+        private string updatFlagField;
+        
+        private string endRuleField;
+        
+        private string dlvPrioField;
+        
+        private string plantField;
+        
+        private string stgeLocField;
+        
+        private string shipPointField;
+        
+        private string routeField;
+        
+        private string keyStField;
+        
+        private string dateStField;
+        
+        private string nbrStField;
+        
+        private decimal stposVbapField;
+        
+        private string orderProbField;
+        
+        private string creatDateField;
+        
+        private string createdByField;
+        
+        private System.DateTime recTimeField;
+        
+        private string taxClass1Field;
+        
+        private string taxClass2Field;
+        
+        private string taxClass3Field;
+        
+        private string taxClass4Field;
+        
+        private string taxClass5Field;
+        
+        private string taxClass6Field;
+        
+        private string taxClass7Field;
+        
+        private string taxClass8Field;
+        
+        private string taxClass9Field;
+        
+        private decimal fixSpDayField;
+        
+        private decimal varSpDayField;
+        
+        private string precDocField;
+        
+        private decimal netPriceField;
+        
+        private decimal condPUntField;
+        
+        private string condUnitField;
+        
+        private string conisounitField;
+        
+        private string retoureField;
+        
+        private string cashDiscField;
+        
+        private string availcheckField;
+        
+        private string sumRequirField;
+        
+        private string matPrGrpField;
+        
+        private string acctAssgtField;
+        
+        private string rebateGrpField;
+        
+        private string commGroupField;
+        
+        private string eurArtNrField;
+        
+        private string priceOkField;
+        
+        private string valTypeField;
+        
+        private string sepValuatField;
+        
+        private string batchMgmtField;
+        
+        private string indBtchField;
+        
+        private decimal minDelyField;
+        
+        private string updateGrpField;
+        
+        private decimal costDocCField;
+        
+        private decimal subtotPp1Field;
+        
+        private decimal subtotPp2Field;
+        
+        private decimal subtotPp3Field;
+        
+        private decimal subtotPp4Field;
+        
+        private decimal subtotPp5Field;
+        
+        private decimal subtotPp6Field;
+        
+        private decimal exchRateField;
+        
+        private string chOnField;
+        
+        private string eanUpcField;
+        
+        private string fixDateField;
+        
+        private string profitCtrField;
+        
+        private string prcGroup1Field;
+        
+        private string prcGroup2Field;
+        
+        private string prcGroup3Field;
+        
+        private string prcGroup4Field;
+        
+        private string prcGroup5Field;
+        
+        private decimal componQtyField;
+        
+        private string substreasoField;
+        
+        private string specStockField;
+        
+        private string allocIndiField;
+        
+        private string profitSegField;
+        
+        private string wbsElemField;
+        
+        private string orderidField;
+        
+        private string plngMatlField;
+        
+        private string plngPlantField;
+        
+        private string baseUnitField;
+        
+        private string isobasunitField;
+        
+        private float convFactField;
+        
+        private string acctasscatField;
+        
+        private string consumptField;
+        
+        private string bomexplnoField;
+        
+        private string objNrItField;
+        
+        private string resAnalField;
+        
+        private string reqmtstypField;
+        
+        private decimal credpricitField;
+        
+        private string partrelidField;
+        
+        private string actcredidField;
+        
+        private decimal crExchratField;
+        
+        private string configField;
+        
+        private string chclassInField;
+        
+        private string statPriceField;
+        
+        private string condUpdatField;
+        
+        private string sernoProfField;
+        
+        private int noOfSeriField;
+        
+        private string nogrpostedField;
+        
+        private string matGrpSmField;
+        
+        private string manPrChField;
+        
+        private string docCatSdField;
+        
+        private string matdeteridField;
+        
+        private string itusageidField;
+        
+        private string costestnrField;
+        
+        private string cstgVrntField;
+        
+        private string bomitemnrField;
+        
+        private string statValField;
+        
+        private string statDateField;
+        
+        private string busTranstField;
+        
+        private string prefIndicField;
+        
+        private string nrcondrecField;
+        
+        private string intclassnrField;
+        
+        private string batchExitField;
+        
+        private string bomCategoField;
+        
+        private string bomItNrField;
+        
+        private string counterField;
+        
+        private string inconsconfField;
+        
+        private string overhKeyField;
+        
+        private string cstgSheetField;
+        
+        private string cstgVrnt1Field;
+        
+        private string prodAllocField;
+        
+        private string priceRefField;
+        
+        private string matpricgrpField;
+        
+        private string matfrgtgrpField;
+        
+        private string plandlvschField;
+        
+        private string sequencenoField;
+        
+        private float credpricField;
+        
+        private string payGuaranField;
+        
+        private float guranteedField;
+        
+        private string cfopCodeField;
+        
+        private string taxlawicmsField;
+        
+        private string taxlawipiField;
+        
+        private string sdTaxcodeField;
+        
+        private string valcontrnrField;
+        
+        private string valcontritField;
+        
+        private string assortModField;
+        
+        private string valspecstoField;
+        
+        private string matgrhie1Field;
+        
+        private string matgrhie2Field;
+        
+        private string promotionField;
+        
+        private string salesDealField;
+        
+        private string flgleaduniField;
+        
+        private string freeGoodsField;
+        
+        private string validObjField;
+        
+        private decimal taxAmountField;
+        
+        private string mrpAreaField;
+        
+        private string custMat35Field;
+        
+        private decimal crExchratVField;
+        
+        private decimal exchratestVField;
+        
+        private string itmTypeUsageField;
+        
+        private string cfopLongField;
+        
+        private decimal grossValField;
+        
+        private string logSystemOwnField;
+        
+        private string taxlawissField;
+        
+        private string taxlawcofinsField;
+        
+        private string taxlawpisField;
+        
+        private string docCatSdLongField;
+        
+        private string materialLongField;
+        
+        private string matEntrdLongField;
+        
+        private string prRefMatLongField;
+        
+        private string plngMatlLongField;
+        
+        private string priceRefLongField;
+        
+        private decimal poQuanField;
+        
+        private string poUnitField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Operation {
+            get {
+                return this.operationField;
+            }
+            set {
+                this.operationField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string DocNumber {
+            get {
+                return this.docNumberField;
+            }
+            set {
+                this.docNumberField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ItmNumber {
+            get {
+                return this.itmNumberField;
+            }
+            set {
+                this.itmNumberField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Material {
+            get {
+                return this.materialField;
+            }
+            set {
+                this.materialField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string MatEntrd {
+            get {
+                return this.matEntrdField;
+            }
+            set {
+                this.matEntrdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PrRefMat {
+            get {
+                return this.prRefMatField;
+            }
+            set {
+                this.prRefMatField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Batch {
+            get {
+                return this.batchField;
+            }
+            set {
+                this.batchField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string MatlGroup {
+            get {
+                return this.matlGroupField;
+            }
+            set {
+                this.matlGroupField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ShortText {
+            get {
+                return this.shortTextField;
+            }
+            set {
+                this.shortTextField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ItemCateg {
+            get {
+                return this.itemCategField;
+            }
+            set {
+                this.itemCategField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ItemType {
+            get {
+                return this.itemTypeField;
+            }
+            set {
+                this.itemTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string RelForDe {
+            get {
+                return this.relForDeField;
+            }
+            set {
+                this.relForDeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string RelForBi {
+            get {
+                return this.relForBiField;
+            }
+            set {
+                this.relForBiField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string HgLvItem {
+            get {
+                return this.hgLvItemField;
+            }
+            set {
+                this.hgLvItemField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string AlternItm {
+            get {
+                return this.alternItmField;
+            }
+            set {
+                this.alternItmField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ReaForRe {
+            get {
+                return this.reaForReField;
+            }
+            set {
+                this.reaForReField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ProdHier {
+            get {
+                return this.prodHierField;
+            }
+            set {
+                this.prodHierField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal OutAgrTa {
+            get {
+                return this.outAgrTaField;
+            }
+            set {
+                this.outAgrTaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal TargetQty {
+            get {
+                return this.targetQtyField;
+            }
+            set {
+                this.targetQtyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string TargetQu {
+            get {
+                return this.targetQuField;
+            }
+            set {
+                this.targetQuField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string TUnitIso {
+            get {
+                return this.tUnitIsoField;
+            }
+            set {
+                this.tUnitIsoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal TargQtyN {
+            get {
+                return this.targQtyNField;
+            }
+            set {
+                this.targQtyNField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal TargQtyD {
+            get {
+                return this.targQtyDField;
+            }
+            set {
+                this.targQtyDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string BaseUom {
+            get {
+                return this.baseUomField;
+            }
+            set {
+                this.baseUomField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string TBasUnit {
+            get {
+                return this.tBasUnitField;
+            }
+            set {
+                this.tBasUnitField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal ScaleQuan {
+            get {
+                return this.scaleQuanField;
+            }
+            set {
+                this.scaleQuanField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal RoundDlv {
+            get {
+                return this.roundDlvField;
+            }
+            set {
+                this.roundDlvField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ReconDate {
+            get {
+                return this.reconDateField;
+            }
+            set {
+                this.reconDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal MaxDeviat {
+            get {
+                return this.maxDeviatField;
+            }
+            set {
+                this.maxDeviatField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PoItmNo {
+            get {
+                return this.poItmNoField;
+            }
+            set {
+                this.poItmNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CustMat22 {
+            get {
+                return this.custMat22Field;
+            }
+            set {
+                this.custMat22Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal MaxDevPe {
+            get {
+                return this.maxDevPeField;
+            }
+            set {
+                this.maxDevPeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal MaxDevDa {
+            get {
+                return this.maxDevDaField;
+            }
+            set {
+                this.maxDevDaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string RepairPro {
+            get {
+                return this.repairProField;
+            }
+            set {
+                this.repairProField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Dlvschedus {
+            get {
+                return this.dlvschedusField;
+            }
+            set {
+                this.dlvschedusField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string DlvGroup {
+            get {
+                return this.dlvGroupField;
+            }
+            set {
+                this.dlvGroupField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string FixedQuan {
+            get {
+                return this.fixedQuanField;
+            }
+            set {
+                this.fixedQuanField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string DeliUnlim {
+            get {
+                return this.deliUnlimField;
+            }
+            set {
+                this.deliUnlimField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal OverDlvT {
+            get {
+                return this.overDlvTField;
+            }
+            set {
+                this.overDlvTField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal UnderDlv {
+            get {
+                return this.underDlvField;
+            }
+            set {
+                this.underDlvField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string BillBlock {
+            get {
+                return this.billBlockField;
+            }
+            set {
+                this.billBlockField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ReplacePt {
+            get {
+                return this.replacePtField;
+            }
+            set {
+                this.replacePtField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string MethBill {
+            get {
+                return this.methBillField;
+            }
+            set {
+                this.methBillField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Division {
+            get {
+                return this.divisionField;
+            }
+            set {
+                this.divisionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string BusArea {
+            get {
+                return this.busAreaField;
+            }
+            set {
+                this.busAreaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal NetValue {
+            get {
+                return this.netValueField;
+            }
+            set {
+                this.netValueField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Currency {
+            get {
+                return this.currencyField;
+            }
+            set {
+                this.currencyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CurrenIso {
+            get {
+                return this.currenIsoField;
+            }
+            set {
+                this.currenIsoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal MaxPlDlv {
+            get {
+                return this.maxPlDlvField;
+            }
+            set {
+                this.maxPlDlvField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PartDlv {
+            get {
+                return this.partDlvField;
+            }
+            set {
+                this.partDlvField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string BtchSplit {
+            get {
+                return this.btchSplitField;
+            }
+            set {
+                this.btchSplitField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal ReqQty {
+            get {
+                return this.reqQtyField;
+            }
+            set {
+                this.reqQtyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal CumReqDe {
+            get {
+                return this.cumReqDeField;
+            }
+            set {
+                this.cumReqDeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal CumCfQty {
+            get {
+                return this.cumCfQtyField;
+            }
+            set {
+                this.cumCfQtyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal CumConQu {
+            get {
+                return this.cumConQuField;
+            }
+            set {
+                this.cumConQuField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string SalesUnit {
+            get {
+                return this.salesUnitField;
+            }
+            set {
+                this.salesUnitField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Isocodunit {
+            get {
+                return this.isocodunitField;
+            }
+            set {
+                this.isocodunitField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal SalesQty1 {
+            get {
+                return this.salesQty1Field;
+            }
+            set {
+                this.salesQty1Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal SalesQty2 {
+            get {
+                return this.salesQty2Field;
+            }
+            set {
+                this.salesQty2Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal GrossWeig {
+            get {
+                return this.grossWeigField;
+            }
+            set {
+                this.grossWeigField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal NetWeight {
+            get {
+                return this.netWeightField;
+            }
+            set {
+                this.netWeightField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string UnitOfWt {
+            get {
+                return this.unitOfWtField;
+            }
+            set {
+                this.unitOfWtField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string UnitWtiso {
+            get {
+                return this.unitWtisoField;
+            }
+            set {
+                this.unitWtisoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal Volume {
+            get {
+                return this.volumeField;
+            }
+            set {
+                this.volumeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Volumeunit {
+            get {
+                return this.volumeunitField;
+            }
+            set {
+                this.volumeunitField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Volunitiso {
+            get {
+                return this.volunitisoField;
+            }
+            set {
+                this.volunitisoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CauVbeln {
+            get {
+                return this.cauVbelnField;
+            }
+            set {
+                this.cauVbelnField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CauPosnr {
+            get {
+                return this.cauPosnrField;
+            }
+            set {
+                this.cauPosnrField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string RefDoc {
+            get {
+                return this.refDocField;
+            }
+            set {
+                this.refDocField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PosnrVor {
+            get {
+                return this.posnrVorField;
+            }
+            set {
+                this.posnrVorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ObjCopy {
+            get {
+                return this.objCopyField;
+            }
+            set {
+                this.objCopyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string UpdatFlag {
+            get {
+                return this.updatFlagField;
+            }
+            set {
+                this.updatFlagField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string EndRule {
+            get {
+                return this.endRuleField;
+            }
+            set {
+                this.endRuleField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string DlvPrio {
+            get {
+                return this.dlvPrioField;
+            }
+            set {
+                this.dlvPrioField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Plant {
+            get {
+                return this.plantField;
+            }
+            set {
+                this.plantField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string StgeLoc {
+            get {
+                return this.stgeLocField;
+            }
+            set {
+                this.stgeLocField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ShipPoint {
+            get {
+                return this.shipPointField;
+            }
+            set {
+                this.shipPointField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Route {
+            get {
+                return this.routeField;
+            }
+            set {
+                this.routeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string KeySt {
+            get {
+                return this.keyStField;
+            }
+            set {
+                this.keyStField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string DateSt {
+            get {
+                return this.dateStField;
+            }
+            set {
+                this.dateStField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string NbrSt {
+            get {
+                return this.nbrStField;
+            }
+            set {
+                this.nbrStField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal StposVbap {
+            get {
+                return this.stposVbapField;
+            }
+            set {
+                this.stposVbapField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string OrderProb {
+            get {
+                return this.orderProbField;
+            }
+            set {
+                this.orderProbField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CreatDate {
+            get {
+                return this.creatDateField;
+            }
+            set {
+                this.creatDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CreatedBy {
+            get {
+                return this.createdByField;
+            }
+            set {
+                this.createdByField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="time")]
+        public System.DateTime RecTime {
+            get {
+                return this.recTimeField;
+            }
+            set {
+                this.recTimeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string TaxClass1 {
+            get {
+                return this.taxClass1Field;
+            }
+            set {
+                this.taxClass1Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string TaxClass2 {
+            get {
+                return this.taxClass2Field;
+            }
+            set {
+                this.taxClass2Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string TaxClass3 {
+            get {
+                return this.taxClass3Field;
+            }
+            set {
+                this.taxClass3Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string TaxClass4 {
+            get {
+                return this.taxClass4Field;
+            }
+            set {
+                this.taxClass4Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string TaxClass5 {
+            get {
+                return this.taxClass5Field;
+            }
+            set {
+                this.taxClass5Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string TaxClass6 {
+            get {
+                return this.taxClass6Field;
+            }
+            set {
+                this.taxClass6Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string TaxClass7 {
+            get {
+                return this.taxClass7Field;
+            }
+            set {
+                this.taxClass7Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string TaxClass8 {
+            get {
+                return this.taxClass8Field;
+            }
+            set {
+                this.taxClass8Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string TaxClass9 {
+            get {
+                return this.taxClass9Field;
+            }
+            set {
+                this.taxClass9Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal FixSpDay {
+            get {
+                return this.fixSpDayField;
+            }
+            set {
+                this.fixSpDayField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal VarSpDay {
+            get {
+                return this.varSpDayField;
+            }
+            set {
+                this.varSpDayField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PrecDoc {
+            get {
+                return this.precDocField;
+            }
+            set {
+                this.precDocField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal NetPrice {
+            get {
+                return this.netPriceField;
+            }
+            set {
+                this.netPriceField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal CondPUnt {
+            get {
+                return this.condPUntField;
+            }
+            set {
+                this.condPUntField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CondUnit {
+            get {
+                return this.condUnitField;
+            }
+            set {
+                this.condUnitField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Conisounit {
+            get {
+                return this.conisounitField;
+            }
+            set {
+                this.conisounitField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Retoure {
+            get {
+                return this.retoureField;
+            }
+            set {
+                this.retoureField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CashDisc {
+            get {
+                return this.cashDiscField;
+            }
+            set {
+                this.cashDiscField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Availcheck {
+            get {
+                return this.availcheckField;
+            }
+            set {
+                this.availcheckField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string SumRequir {
+            get {
+                return this.sumRequirField;
+            }
+            set {
+                this.sumRequirField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string MatPrGrp {
+            get {
+                return this.matPrGrpField;
+            }
+            set {
+                this.matPrGrpField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string AcctAssgt {
+            get {
+                return this.acctAssgtField;
+            }
+            set {
+                this.acctAssgtField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string RebateGrp {
+            get {
+                return this.rebateGrpField;
+            }
+            set {
+                this.rebateGrpField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CommGroup {
+            get {
+                return this.commGroupField;
+            }
+            set {
+                this.commGroupField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string EurArtNr {
+            get {
+                return this.eurArtNrField;
+            }
+            set {
+                this.eurArtNrField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PriceOk {
+            get {
+                return this.priceOkField;
+            }
+            set {
+                this.priceOkField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ValType {
+            get {
+                return this.valTypeField;
+            }
+            set {
+                this.valTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string SepValuat {
+            get {
+                return this.sepValuatField;
+            }
+            set {
+                this.sepValuatField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string BatchMgmt {
+            get {
+                return this.batchMgmtField;
+            }
+            set {
+                this.batchMgmtField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string IndBtch {
+            get {
+                return this.indBtchField;
+            }
+            set {
+                this.indBtchField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal MinDely {
+            get {
+                return this.minDelyField;
+            }
+            set {
+                this.minDelyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string UpdateGrp {
+            get {
+                return this.updateGrpField;
+            }
+            set {
+                this.updateGrpField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal CostDocC {
+            get {
+                return this.costDocCField;
+            }
+            set {
+                this.costDocCField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal SubtotPp1 {
+            get {
+                return this.subtotPp1Field;
+            }
+            set {
+                this.subtotPp1Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal SubtotPp2 {
+            get {
+                return this.subtotPp2Field;
+            }
+            set {
+                this.subtotPp2Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal SubtotPp3 {
+            get {
+                return this.subtotPp3Field;
+            }
+            set {
+                this.subtotPp3Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal SubtotPp4 {
+            get {
+                return this.subtotPp4Field;
+            }
+            set {
+                this.subtotPp4Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal SubtotPp5 {
+            get {
+                return this.subtotPp5Field;
+            }
+            set {
+                this.subtotPp5Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal SubtotPp6 {
+            get {
+                return this.subtotPp6Field;
+            }
+            set {
+                this.subtotPp6Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal ExchRate {
+            get {
+                return this.exchRateField;
+            }
+            set {
+                this.exchRateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ChOn {
+            get {
+                return this.chOnField;
+            }
+            set {
+                this.chOnField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string EanUpc {
+            get {
+                return this.eanUpcField;
+            }
+            set {
+                this.eanUpcField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string FixDate {
+            get {
+                return this.fixDateField;
+            }
+            set {
+                this.fixDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ProfitCtr {
+            get {
+                return this.profitCtrField;
+            }
+            set {
+                this.profitCtrField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PrcGroup1 {
+            get {
+                return this.prcGroup1Field;
+            }
+            set {
+                this.prcGroup1Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PrcGroup2 {
+            get {
+                return this.prcGroup2Field;
+            }
+            set {
+                this.prcGroup2Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PrcGroup3 {
+            get {
+                return this.prcGroup3Field;
+            }
+            set {
+                this.prcGroup3Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PrcGroup4 {
+            get {
+                return this.prcGroup4Field;
+            }
+            set {
+                this.prcGroup4Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PrcGroup5 {
+            get {
+                return this.prcGroup5Field;
+            }
+            set {
+                this.prcGroup5Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal ComponQty {
+            get {
+                return this.componQtyField;
+            }
+            set {
+                this.componQtyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Substreaso {
+            get {
+                return this.substreasoField;
+            }
+            set {
+                this.substreasoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string SpecStock {
+            get {
+                return this.specStockField;
+            }
+            set {
+                this.specStockField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string AllocIndi {
+            get {
+                return this.allocIndiField;
+            }
+            set {
+                this.allocIndiField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ProfitSeg {
+            get {
+                return this.profitSegField;
+            }
+            set {
+                this.profitSegField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string WbsElem {
+            get {
+                return this.wbsElemField;
+            }
+            set {
+                this.wbsElemField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Orderid {
+            get {
+                return this.orderidField;
+            }
+            set {
+                this.orderidField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PlngMatl {
+            get {
+                return this.plngMatlField;
+            }
+            set {
+                this.plngMatlField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PlngPlant {
+            get {
+                return this.plngPlantField;
+            }
+            set {
+                this.plngPlantField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string BaseUnit {
+            get {
+                return this.baseUnitField;
+            }
+            set {
+                this.baseUnitField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Isobasunit {
+            get {
+                return this.isobasunitField;
+            }
+            set {
+                this.isobasunitField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public float ConvFact {
+            get {
+                return this.convFactField;
+            }
+            set {
+                this.convFactField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Acctasscat {
+            get {
+                return this.acctasscatField;
+            }
+            set {
+                this.acctasscatField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Consumpt {
+            get {
+                return this.consumptField;
+            }
+            set {
+                this.consumptField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Bomexplno {
+            get {
+                return this.bomexplnoField;
+            }
+            set {
+                this.bomexplnoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ObjNrIt {
+            get {
+                return this.objNrItField;
+            }
+            set {
+                this.objNrItField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ResAnal {
+            get {
+                return this.resAnalField;
+            }
+            set {
+                this.resAnalField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Reqmtstyp {
+            get {
+                return this.reqmtstypField;
+            }
+            set {
+                this.reqmtstypField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal Credpricit {
+            get {
+                return this.credpricitField;
+            }
+            set {
+                this.credpricitField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Partrelid {
+            get {
+                return this.partrelidField;
+            }
+            set {
+                this.partrelidField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Actcredid {
+            get {
+                return this.actcredidField;
+            }
+            set {
+                this.actcredidField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal CrExchrat {
+            get {
+                return this.crExchratField;
+            }
+            set {
+                this.crExchratField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Config {
+            get {
+                return this.configField;
+            }
+            set {
+                this.configField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ChclassIn {
+            get {
+                return this.chclassInField;
+            }
+            set {
+                this.chclassInField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string StatPrice {
+            get {
+                return this.statPriceField;
+            }
+            set {
+                this.statPriceField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CondUpdat {
+            get {
+                return this.condUpdatField;
+            }
+            set {
+                this.condUpdatField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string SernoProf {
+            get {
+                return this.sernoProfField;
+            }
+            set {
+                this.sernoProfField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public int NoOfSeri {
+            get {
+                return this.noOfSeriField;
+            }
+            set {
+                this.noOfSeriField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Nogrposted {
+            get {
+                return this.nogrpostedField;
+            }
+            set {
+                this.nogrpostedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string MatGrpSm {
+            get {
+                return this.matGrpSmField;
+            }
+            set {
+                this.matGrpSmField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ManPrCh {
+            get {
+                return this.manPrChField;
+            }
+            set {
+                this.manPrChField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string DocCatSd {
+            get {
+                return this.docCatSdField;
+            }
+            set {
+                this.docCatSdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Matdeterid {
+            get {
+                return this.matdeteridField;
+            }
+            set {
+                this.matdeteridField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Itusageid {
+            get {
+                return this.itusageidField;
+            }
+            set {
+                this.itusageidField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Costestnr {
+            get {
+                return this.costestnrField;
+            }
+            set {
+                this.costestnrField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CstgVrnt {
+            get {
+                return this.cstgVrntField;
+            }
+            set {
+                this.cstgVrntField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Bomitemnr {
+            get {
+                return this.bomitemnrField;
+            }
+            set {
+                this.bomitemnrField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string StatVal {
+            get {
+                return this.statValField;
+            }
+            set {
+                this.statValField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string StatDate {
+            get {
+                return this.statDateField;
+            }
+            set {
+                this.statDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string BusTranst {
+            get {
+                return this.busTranstField;
+            }
+            set {
+                this.busTranstField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PrefIndic {
+            get {
+                return this.prefIndicField;
+            }
+            set {
+                this.prefIndicField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Nrcondrec {
+            get {
+                return this.nrcondrecField;
+            }
+            set {
+                this.nrcondrecField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Intclassnr {
+            get {
+                return this.intclassnrField;
+            }
+            set {
+                this.intclassnrField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string BatchExit {
+            get {
+                return this.batchExitField;
+            }
+            set {
+                this.batchExitField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string BomCatego {
+            get {
+                return this.bomCategoField;
+            }
+            set {
+                this.bomCategoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string BomItNr {
+            get {
+                return this.bomItNrField;
+            }
+            set {
+                this.bomItNrField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Counter {
+            get {
+                return this.counterField;
+            }
+            set {
+                this.counterField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Inconsconf {
+            get {
+                return this.inconsconfField;
+            }
+            set {
+                this.inconsconfField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string OverhKey {
+            get {
+                return this.overhKeyField;
+            }
+            set {
+                this.overhKeyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CstgSheet {
+            get {
+                return this.cstgSheetField;
+            }
+            set {
+                this.cstgSheetField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CstgVrnt1 {
+            get {
+                return this.cstgVrnt1Field;
+            }
+            set {
+                this.cstgVrnt1Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ProdAlloc {
+            get {
+                return this.prodAllocField;
+            }
+            set {
+                this.prodAllocField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PriceRef {
+            get {
+                return this.priceRefField;
+            }
+            set {
+                this.priceRefField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Matpricgrp {
+            get {
+                return this.matpricgrpField;
+            }
+            set {
+                this.matpricgrpField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Matfrgtgrp {
+            get {
+                return this.matfrgtgrpField;
+            }
+            set {
+                this.matfrgtgrpField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Plandlvsch {
+            get {
+                return this.plandlvschField;
+            }
+            set {
+                this.plandlvschField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Sequenceno {
+            get {
+                return this.sequencenoField;
+            }
+            set {
+                this.sequencenoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public float Credpric {
+            get {
+                return this.credpricField;
+            }
+            set {
+                this.credpricField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PayGuaran {
+            get {
+                return this.payGuaranField;
+            }
+            set {
+                this.payGuaranField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public float Guranteed {
+            get {
+                return this.guranteedField;
+            }
+            set {
+                this.guranteedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CfopCode {
+            get {
+                return this.cfopCodeField;
+            }
+            set {
+                this.cfopCodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Taxlawicms {
+            get {
+                return this.taxlawicmsField;
+            }
+            set {
+                this.taxlawicmsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Taxlawipi {
+            get {
+                return this.taxlawipiField;
+            }
+            set {
+                this.taxlawipiField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string SdTaxcode {
+            get {
+                return this.sdTaxcodeField;
+            }
+            set {
+                this.sdTaxcodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Valcontrnr {
+            get {
+                return this.valcontrnrField;
+            }
+            set {
+                this.valcontrnrField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Valcontrit {
+            get {
+                return this.valcontritField;
+            }
+            set {
+                this.valcontritField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string AssortMod {
+            get {
+                return this.assortModField;
+            }
+            set {
+                this.assortModField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Valspecsto {
+            get {
+                return this.valspecstoField;
+            }
+            set {
+                this.valspecstoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Matgrhie1 {
+            get {
+                return this.matgrhie1Field;
+            }
+            set {
+                this.matgrhie1Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Matgrhie2 {
+            get {
+                return this.matgrhie2Field;
+            }
+            set {
+                this.matgrhie2Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Promotion {
+            get {
+                return this.promotionField;
+            }
+            set {
+                this.promotionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string SalesDeal {
+            get {
+                return this.salesDealField;
+            }
+            set {
+                this.salesDealField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Flgleaduni {
+            get {
+                return this.flgleaduniField;
+            }
+            set {
+                this.flgleaduniField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string FreeGoods {
+            get {
+                return this.freeGoodsField;
+            }
+            set {
+                this.freeGoodsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ValidObj {
+            get {
+                return this.validObjField;
+            }
+            set {
+                this.validObjField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal TaxAmount {
+            get {
+                return this.taxAmountField;
+            }
+            set {
+                this.taxAmountField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string MrpArea {
+            get {
+                return this.mrpAreaField;
+            }
+            set {
+                this.mrpAreaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CustMat35 {
+            get {
+                return this.custMat35Field;
+            }
+            set {
+                this.custMat35Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal CrExchratV {
+            get {
+                return this.crExchratVField;
+            }
+            set {
+                this.crExchratVField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal ExchratestV {
+            get {
+                return this.exchratestVField;
+            }
+            set {
+                this.exchratestVField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ItmTypeUsage {
+            get {
+                return this.itmTypeUsageField;
+            }
+            set {
+                this.itmTypeUsageField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CfopLong {
+            get {
+                return this.cfopLongField;
+            }
+            set {
+                this.cfopLongField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal GrossVal {
+            get {
+                return this.grossValField;
+            }
+            set {
+                this.grossValField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string LogSystemOwn {
+            get {
+                return this.logSystemOwnField;
+            }
+            set {
+                this.logSystemOwnField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Taxlawiss {
+            get {
+                return this.taxlawissField;
+            }
+            set {
+                this.taxlawissField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Taxlawcofins {
+            get {
+                return this.taxlawcofinsField;
+            }
+            set {
+                this.taxlawcofinsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Taxlawpis {
+            get {
+                return this.taxlawpisField;
+            }
+            set {
+                this.taxlawpisField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string DocCatSdLong {
+            get {
+                return this.docCatSdLongField;
+            }
+            set {
+                this.docCatSdLongField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string MaterialLong {
+            get {
+                return this.materialLongField;
+            }
+            set {
+                this.materialLongField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string MatEntrdLong {
+            get {
+                return this.matEntrdLongField;
+            }
+            set {
+                this.matEntrdLongField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PrRefMatLong {
+            get {
+                return this.prRefMatLongField;
+            }
+            set {
+                this.prRefMatLongField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PlngMatlLong {
+            get {
+                return this.plngMatlLongField;
+            }
+            set {
+                this.plngMatlLongField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PriceRefLong {
+            get {
+                return this.priceRefLongField;
+            }
+            set {
+                this.priceRefLongField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal PoQuan {
+            get {
+                return this.poQuanField;
+            }
+            set {
+                this.poQuanField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PoUnit {
+            get {
+                return this.poUnitField;
+            }
+            set {
+                this.poUnitField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class Bapiincomp {
+        
+        private string docNumberField;
+        
+        private string itmNumberField;
+        
+        private string schedLineField;
+        
+        private string partnRoleField;
+        
+        private string tableNameField;
+        
+        private string fieldNameField;
+        
+        private string fieldTextField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string DocNumber {
+            get {
+                return this.docNumberField;
+            }
+            set {
+                this.docNumberField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ItmNumber {
+            get {
+                return this.itmNumberField;
+            }
+            set {
+                this.itmNumberField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string SchedLine {
+            get {
+                return this.schedLineField;
+            }
+            set {
+                this.schedLineField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PartnRole {
+            get {
+                return this.partnRoleField;
+            }
+            set {
+                this.partnRoleField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string TableName {
+            get {
+                return this.tableNameField;
+            }
+            set {
+                this.tableNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string FieldName {
+            get {
+                return this.fieldNameField;
+            }
+            set {
+                this.fieldNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string FieldText {
+            get {
+                return this.fieldTextField;
+            }
+            set {
+                this.fieldTextField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class Bapiparex {
+        
+        private string structureField;
+        
+        private string valuepart1Field;
+        
+        private string valuepart2Field;
+        
+        private string valuepart3Field;
+        
+        private string valuepart4Field;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Structure {
+            get {
+                return this.structureField;
+            }
+            set {
+                this.structureField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Valuepart1 {
+            get {
+                return this.valuepart1Field;
+            }
+            set {
+                this.valuepart1Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Valuepart2 {
+            get {
+                return this.valuepart2Field;
+            }
+            set {
+                this.valuepart2Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Valuepart3 {
+            get {
+                return this.valuepart3Field;
+            }
+            set {
+                this.valuepart3Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Valuepart4 {
+            get {
+                return this.valuepart4Field;
+            }
+            set {
+                this.valuepart4Field = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class Bapicond {
+        
+        private string itmNumberField;
+        
+        private string condStNoField;
+        
+        private string condCountField;
+        
+        private string condTypeField;
+        
+        private decimal condValueField;
+        
+        private string currencyField;
+        
+        private string condUnitField;
+        
+        private decimal condPUntField;
+        
+        private string currIsoField;
+        
+        private string cdUntIsoField;
+        
+        private string refobjtypeField;
+        
+        private string refobjkeyField;
+        
+        private string reflogsysField;
+        
+        private string applicatioField;
+        
+        private string conpricdatField;
+        
+        private string calctypconField;
+        
+        private decimal conbasevalField;
+        
+        private decimal conexchratField;
+        
+        private decimal numconvertField;
+        
+        private decimal denominatoField;
+        
+        private string condtypeField;
+        
+        private string statConField;
+        
+        private string scaletypeField;
+        
+        private string accrualsField;
+        
+        private string coninvolstField;
+        
+        private string condoriginField;
+        
+        private string groupcondField;
+        
+        private string condUpdatField;
+        
+        private string accessSeqField;
+        
+        private string condcountField;
+        
+        private decimal roundoffdiField;
+        
+        private decimal condvalueField;
+        
+        private string currency2Field;
+        
+        private string currIso2Field;
+        
+        private string condcntrlField;
+        
+        private string condisactiField;
+        
+        private string condclassField;
+        
+        private float factbasvalField;
+        
+        private string scalebasinField;
+        
+        private decimal scalbasvalField;
+        
+        private string unitmeasurField;
+        
+        private string isoUnitField;
+        
+        private string currenckeyField;
+        
+        private string currenisoField;
+        
+        private string condincompField;
+        
+        private string condconfigField;
+        
+        private string condchamanField;
+        
+        private string condNoField;
+        
+        private string taxCodeField;
+        
+        private string varcondField;
+        
+        private string accountkeyField;
+        
+        private string accountKeField;
+        
+        private string wtWithcdField;
+        
+        private string structcondField;
+        
+        private float factconbasField;
+        
+        private string condcoinhdField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ItmNumber {
+            get {
+                return this.itmNumberField;
+            }
+            set {
+                this.itmNumberField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CondStNo {
+            get {
+                return this.condStNoField;
+            }
+            set {
+                this.condStNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CondCount {
+            get {
+                return this.condCountField;
+            }
+            set {
+                this.condCountField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CondType {
+            get {
+                return this.condTypeField;
+            }
+            set {
+                this.condTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal CondValue {
+            get {
+                return this.condValueField;
+            }
+            set {
+                this.condValueField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Currency {
+            get {
+                return this.currencyField;
+            }
+            set {
+                this.currencyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CondUnit {
+            get {
+                return this.condUnitField;
+            }
+            set {
+                this.condUnitField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal CondPUnt {
+            get {
+                return this.condPUntField;
+            }
+            set {
+                this.condPUntField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CurrIso {
+            get {
+                return this.currIsoField;
+            }
+            set {
+                this.currIsoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CdUntIso {
+            get {
+                return this.cdUntIsoField;
+            }
+            set {
+                this.cdUntIsoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Refobjtype {
+            get {
+                return this.refobjtypeField;
+            }
+            set {
+                this.refobjtypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Refobjkey {
+            get {
+                return this.refobjkeyField;
+            }
+            set {
+                this.refobjkeyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Reflogsys {
+            get {
+                return this.reflogsysField;
+            }
+            set {
+                this.reflogsysField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Applicatio {
+            get {
+                return this.applicatioField;
+            }
+            set {
+                this.applicatioField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Conpricdat {
+            get {
+                return this.conpricdatField;
+            }
+            set {
+                this.conpricdatField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Calctypcon {
+            get {
+                return this.calctypconField;
+            }
+            set {
+                this.calctypconField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal Conbaseval {
+            get {
+                return this.conbasevalField;
+            }
+            set {
+                this.conbasevalField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal Conexchrat {
+            get {
+                return this.conexchratField;
+            }
+            set {
+                this.conexchratField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal Numconvert {
+            get {
+                return this.numconvertField;
+            }
+            set {
+                this.numconvertField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal Denominato {
+            get {
+                return this.denominatoField;
+            }
+            set {
+                this.denominatoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Condtype {
+            get {
+                return this.condtypeField;
+            }
+            set {
+                this.condtypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string StatCon {
+            get {
+                return this.statConField;
+            }
+            set {
+                this.statConField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Scaletype {
+            get {
+                return this.scaletypeField;
+            }
+            set {
+                this.scaletypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Accruals {
+            get {
+                return this.accrualsField;
+            }
+            set {
+                this.accrualsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Coninvolst {
+            get {
+                return this.coninvolstField;
+            }
+            set {
+                this.coninvolstField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Condorigin {
+            get {
+                return this.condoriginField;
+            }
+            set {
+                this.condoriginField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Groupcond {
+            get {
+                return this.groupcondField;
+            }
+            set {
+                this.groupcondField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CondUpdat {
+            get {
+                return this.condUpdatField;
+            }
+            set {
+                this.condUpdatField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string AccessSeq {
+            get {
+                return this.accessSeqField;
+            }
+            set {
+                this.accessSeqField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Condcount {
+            get {
+                return this.condcountField;
+            }
+            set {
+                this.condcountField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal Roundoffdi {
+            get {
+                return this.roundoffdiField;
+            }
+            set {
+                this.roundoffdiField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal Condvalue {
+            get {
+                return this.condvalueField;
+            }
+            set {
+                this.condvalueField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Currency2 {
+            get {
+                return this.currency2Field;
+            }
+            set {
+                this.currency2Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CurrIso2 {
+            get {
+                return this.currIso2Field;
+            }
+            set {
+                this.currIso2Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Condcntrl {
+            get {
+                return this.condcntrlField;
+            }
+            set {
+                this.condcntrlField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Condisacti {
+            get {
+                return this.condisactiField;
+            }
+            set {
+                this.condisactiField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Condclass {
+            get {
+                return this.condclassField;
+            }
+            set {
+                this.condclassField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public float Factbasval {
+            get {
+                return this.factbasvalField;
+            }
+            set {
+                this.factbasvalField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Scalebasin {
+            get {
+                return this.scalebasinField;
+            }
+            set {
+                this.scalebasinField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal Scalbasval {
+            get {
+                return this.scalbasvalField;
+            }
+            set {
+                this.scalbasvalField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Unitmeasur {
+            get {
+                return this.unitmeasurField;
+            }
+            set {
+                this.unitmeasurField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string IsoUnit {
+            get {
+                return this.isoUnitField;
+            }
+            set {
+                this.isoUnitField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Currenckey {
+            get {
+                return this.currenckeyField;
+            }
+            set {
+                this.currenckeyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Curreniso {
+            get {
+                return this.currenisoField;
+            }
+            set {
+                this.currenisoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Condincomp {
+            get {
+                return this.condincompField;
+            }
+            set {
+                this.condincompField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Condconfig {
+            get {
+                return this.condconfigField;
+            }
+            set {
+                this.condconfigField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Condchaman {
+            get {
+                return this.condchamanField;
+            }
+            set {
+                this.condchamanField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CondNo {
+            get {
+                return this.condNoField;
+            }
+            set {
+                this.condNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string TaxCode {
+            get {
+                return this.taxCodeField;
+            }
+            set {
+                this.taxCodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Varcond {
+            get {
+                return this.varcondField;
+            }
+            set {
+                this.varcondField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Accountkey {
+            get {
+                return this.accountkeyField;
+            }
+            set {
+                this.accountkeyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string AccountKe {
+            get {
+                return this.accountKeField;
+            }
+            set {
+                this.accountKeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string WtWithcd {
+            get {
+                return this.wtWithcdField;
+            }
+            set {
+                this.wtWithcdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Structcond {
+            get {
+                return this.structcondField;
+            }
+            set {
+                this.structcondField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public float Factconbas {
+            get {
+                return this.factconbasField;
+            }
+            set {
+                this.factconbasField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Condcoinhd {
+            get {
+                return this.condcoinhdField;
+            }
+            set {
+                this.condcoinhdField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class Bapisdca {
+        
+        private string operationField;
+        
+        private string docNumberField;
+        
+        private string itmNumberField;
+        
+        private byte[] campaignField;
+        
+        private string seqnoField;
+        
+        private string assignTypeField;
+        
+        private string invalidField;
+        
+        private string secondaryField;
+        
+        private string condNoField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Operation {
+            get {
+                return this.operationField;
+            }
+            set {
+                this.operationField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string DocNumber {
+            get {
+                return this.docNumberField;
+            }
+            set {
+                this.docNumberField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ItmNumber {
+            get {
+                return this.itmNumberField;
+            }
+            set {
+                this.itmNumberField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="base64Binary")]
+        public byte[] Campaign {
+            get {
+                return this.campaignField;
+            }
+            set {
+                this.campaignField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Seqno {
+            get {
+                return this.seqnoField;
+            }
+            set {
+                this.seqnoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string AssignType {
+            get {
+                return this.assignTypeField;
+            }
+            set {
+                this.assignTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Invalid {
+            get {
+                return this.invalidField;
+            }
+            set {
+                this.invalidField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Secondary {
+            get {
+                return this.secondaryField;
+            }
+            set {
+                this.secondaryField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CondNo {
+            get {
+                return this.condNoField;
+            }
+            set {
+                this.condNoField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class Bapisdbusi {
+        
+        private string operationField;
+        
+        private string sdDocField;
+        
+        private string itmNumberField;
+        
+        private string priceGrpField;
+        
+        private string custGroupField;
+        
+        private string salesDistField;
+        
+        private string priceListField;
+        
+        private string incoterms1Field;
+        
+        private string incoterms2Field;
+        
+        private string ordcombindField;
+        
+        private string billSchedField;
+        
+        private string invoSchedField;
+        
+        private string mnInvoiceField;
+        
+        private decimal exchratefiField;
+        
+        private string addValDyField;
+        
+        private string fixValDyField;
+        
+        private string pmnttrmsField;
+        
+        private string paymethodeField;
+        
+        private string accntAsgnField;
+        
+        private decimal exchgRateField;
+        
+        private string priceDateField;
+        
+        private string billDateField;
+        
+        private string servDateField;
+        
+        private string fiscYearField;
+        
+        private string postperiodField;
+        
+        private decimal exchratestField;
+        
+        private string dunnKeyField;
+        
+        private string dunnBlockField;
+        
+        private string billPlanField;
+        
+        private string promotionField;
+        
+        private string payGuaranField;
+        
+        private string findocprocField;
+        
+        private string j1afitpDField;
+        
+        private string reas0VatField;
+        
+        private string regionField;
+        
+        private string activicodeField;
+        
+        private string distribtypField;
+        
+        private string taxClassField;
+        
+        private string departNoField;
+        
+        private string recPointField;
+        
+        private string purchNoCField;
+        
+        private string purchDateField;
+        
+        private string poMethodField;
+        
+        private string ref1Field;
+        
+        private string purchNoSField;
+        
+        private string poDatSField;
+        
+        private string poMethSField;
+        
+        private string ref1SField;
+        
+        private string poitmnosField;
+        
+        private string transDateField;
+        
+        private string transdateField;
+        
+        private string custcongr1Field;
+        
+        private string custcongr2Field;
+        
+        private string custcongr3Field;
+        
+        private string custcongr4Field;
+        
+        private string custcongr5Field;
+        
+        private string valcontcurField;
+        
+        private string isovalcontField;
+        
+        private decimal exchratecoField;
+        
+        private string currenckeyField;
+        
+        private string isocurrkeyField;
+        
+        private decimal exchratelcField;
+        
+        private decimal ceprpercenField;
+        
+        private string inflatIdxField;
+        
+        private string basdateidxField;
+        
+        private string custPoNoField;
+        
+        private string dlvTimeField;
+        
+        private string dliProfilField;
+        
+        private string calcMotiveField;
+        
+        private string billFormField;
+        
+        private string revenuetypField;
+        
+        private string begdemaperField;
+        
+        private decimal exchratelcVField;
+        
+        private decimal exchRateFiVField;
+        
+        private decimal exchgRateVField;
+        
+        private decimal exchratestVField;
+        
+        private decimal exchratecoVField;
+        
+        private string delivTypeField;
+        
+        private string transCatField;
+        
+        private string transMatField;
+        
+        private string specProcField;
+        
+        private string prodcatField;
+        
+        private string funcAreaField;
+        
+        private string podProcField;
+        
+        private byte[] campaignField;
+        
+        private string fkkConacctField;
+        
+        private string funcAreaLongField;
+        
+        private byte[] fkkConacctGuidField;
+        
+        private string transMatExternalField;
+        
+        private string transMatGuidField;
+        
+        private string transMatVersionField;
+        
+        private string sepaMandateIdField;
+        
+        private string incotermsvField;
+        
+        private string incoterms2lField;
+        
+        private string incoterms3lField;
+        
+        private string transMatLongField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Operation {
+            get {
+                return this.operationField;
+            }
+            set {
+                this.operationField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string SdDoc {
+            get {
+                return this.sdDocField;
+            }
+            set {
+                this.sdDocField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ItmNumber {
+            get {
+                return this.itmNumberField;
+            }
+            set {
+                this.itmNumberField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PriceGrp {
+            get {
+                return this.priceGrpField;
+            }
+            set {
+                this.priceGrpField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CustGroup {
+            get {
+                return this.custGroupField;
+            }
+            set {
+                this.custGroupField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string SalesDist {
+            get {
+                return this.salesDistField;
+            }
+            set {
+                this.salesDistField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PriceList {
+            get {
+                return this.priceListField;
+            }
+            set {
+                this.priceListField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Incoterms1 {
+            get {
+                return this.incoterms1Field;
+            }
+            set {
+                this.incoterms1Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Incoterms2 {
+            get {
+                return this.incoterms2Field;
+            }
+            set {
+                this.incoterms2Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Ordcombind {
+            get {
+                return this.ordcombindField;
+            }
+            set {
+                this.ordcombindField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string BillSched {
+            get {
+                return this.billSchedField;
+            }
+            set {
+                this.billSchedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string InvoSched {
+            get {
+                return this.invoSchedField;
+            }
+            set {
+                this.invoSchedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string MnInvoice {
+            get {
+                return this.mnInvoiceField;
+            }
+            set {
+                this.mnInvoiceField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal Exchratefi {
+            get {
+                return this.exchratefiField;
+            }
+            set {
+                this.exchratefiField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string AddValDy {
+            get {
+                return this.addValDyField;
+            }
+            set {
+                this.addValDyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string FixValDy {
+            get {
+                return this.fixValDyField;
+            }
+            set {
+                this.fixValDyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Pmnttrms {
+            get {
+                return this.pmnttrmsField;
+            }
+            set {
+                this.pmnttrmsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Paymethode {
+            get {
+                return this.paymethodeField;
+            }
+            set {
+                this.paymethodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string AccntAsgn {
+            get {
+                return this.accntAsgnField;
+            }
+            set {
+                this.accntAsgnField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal ExchgRate {
+            get {
+                return this.exchgRateField;
+            }
+            set {
+                this.exchgRateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PriceDate {
+            get {
+                return this.priceDateField;
+            }
+            set {
+                this.priceDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string BillDate {
+            get {
+                return this.billDateField;
+            }
+            set {
+                this.billDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ServDate {
+            get {
+                return this.servDateField;
+            }
+            set {
+                this.servDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string FiscYear {
+            get {
+                return this.fiscYearField;
+            }
+            set {
+                this.fiscYearField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Postperiod {
+            get {
+                return this.postperiodField;
+            }
+            set {
+                this.postperiodField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal Exchratest {
+            get {
+                return this.exchratestField;
+            }
+            set {
+                this.exchratestField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string DunnKey {
+            get {
+                return this.dunnKeyField;
+            }
+            set {
+                this.dunnKeyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string DunnBlock {
+            get {
+                return this.dunnBlockField;
+            }
+            set {
+                this.dunnBlockField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string BillPlan {
+            get {
+                return this.billPlanField;
+            }
+            set {
+                this.billPlanField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Promotion {
+            get {
+                return this.promotionField;
+            }
+            set {
+                this.promotionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PayGuaran {
+            get {
+                return this.payGuaranField;
+            }
+            set {
+                this.payGuaranField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Findocproc {
+            get {
+                return this.findocprocField;
+            }
+            set {
+                this.findocprocField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string J1afitpD {
+            get {
+                return this.j1afitpDField;
+            }
+            set {
+                this.j1afitpDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Reas0Vat {
+            get {
+                return this.reas0VatField;
+            }
+            set {
+                this.reas0VatField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Region {
+            get {
+                return this.regionField;
+            }
+            set {
+                this.regionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Activicode {
+            get {
+                return this.activicodeField;
+            }
+            set {
+                this.activicodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Distribtyp {
+            get {
+                return this.distribtypField;
+            }
+            set {
+                this.distribtypField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string TaxClass {
+            get {
+                return this.taxClassField;
+            }
+            set {
+                this.taxClassField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string DepartNo {
+            get {
+                return this.departNoField;
+            }
+            set {
+                this.departNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string RecPoint {
+            get {
+                return this.recPointField;
+            }
+            set {
+                this.recPointField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PurchNoC {
+            get {
+                return this.purchNoCField;
+            }
+            set {
+                this.purchNoCField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PurchDate {
+            get {
+                return this.purchDateField;
+            }
+            set {
+                this.purchDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PoMethod {
+            get {
+                return this.poMethodField;
+            }
+            set {
+                this.poMethodField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Ref1 {
+            get {
+                return this.ref1Field;
+            }
+            set {
+                this.ref1Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PurchNoS {
+            get {
+                return this.purchNoSField;
+            }
+            set {
+                this.purchNoSField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PoDatS {
+            get {
+                return this.poDatSField;
+            }
+            set {
+                this.poDatSField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PoMethS {
+            get {
+                return this.poMethSField;
+            }
+            set {
+                this.poMethSField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Ref1S {
+            get {
+                return this.ref1SField;
+            }
+            set {
+                this.ref1SField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Poitmnos {
+            get {
+                return this.poitmnosField;
+            }
+            set {
+                this.poitmnosField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string TransDate {
+            get {
+                return this.transDateField;
+            }
+            set {
+                this.transDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Transdate {
+            get {
+                return this.transdateField;
+            }
+            set {
+                this.transdateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Custcongr1 {
+            get {
+                return this.custcongr1Field;
+            }
+            set {
+                this.custcongr1Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Custcongr2 {
+            get {
+                return this.custcongr2Field;
+            }
+            set {
+                this.custcongr2Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Custcongr3 {
+            get {
+                return this.custcongr3Field;
+            }
+            set {
+                this.custcongr3Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Custcongr4 {
+            get {
+                return this.custcongr4Field;
+            }
+            set {
+                this.custcongr4Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Custcongr5 {
+            get {
+                return this.custcongr5Field;
+            }
+            set {
+                this.custcongr5Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Valcontcur {
+            get {
+                return this.valcontcurField;
+            }
+            set {
+                this.valcontcurField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Isovalcont {
+            get {
+                return this.isovalcontField;
+            }
+            set {
+                this.isovalcontField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal Exchrateco {
+            get {
+                return this.exchratecoField;
+            }
+            set {
+                this.exchratecoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Currenckey {
+            get {
+                return this.currenckeyField;
+            }
+            set {
+                this.currenckeyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Isocurrkey {
+            get {
+                return this.isocurrkeyField;
+            }
+            set {
+                this.isocurrkeyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal Exchratelc {
+            get {
+                return this.exchratelcField;
+            }
+            set {
+                this.exchratelcField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal Ceprpercen {
+            get {
+                return this.ceprpercenField;
+            }
+            set {
+                this.ceprpercenField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string InflatIdx {
+            get {
+                return this.inflatIdxField;
+            }
+            set {
+                this.inflatIdxField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Basdateidx {
+            get {
+                return this.basdateidxField;
+            }
+            set {
+                this.basdateidxField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CustPoNo {
+            get {
+                return this.custPoNoField;
+            }
+            set {
+                this.custPoNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string DlvTime {
+            get {
+                return this.dlvTimeField;
+            }
+            set {
+                this.dlvTimeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string DliProfil {
+            get {
+                return this.dliProfilField;
+            }
+            set {
+                this.dliProfilField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CalcMotive {
+            get {
+                return this.calcMotiveField;
+            }
+            set {
+                this.calcMotiveField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string BillForm {
+            get {
+                return this.billFormField;
+            }
+            set {
+                this.billFormField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Revenuetyp {
+            get {
+                return this.revenuetypField;
+            }
+            set {
+                this.revenuetypField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Begdemaper {
+            get {
+                return this.begdemaperField;
+            }
+            set {
+                this.begdemaperField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal ExchratelcV {
+            get {
+                return this.exchratelcVField;
+            }
+            set {
+                this.exchratelcVField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal ExchRateFiV {
+            get {
+                return this.exchRateFiVField;
+            }
+            set {
+                this.exchRateFiVField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal ExchgRateV {
+            get {
+                return this.exchgRateVField;
+            }
+            set {
+                this.exchgRateVField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal ExchratestV {
+            get {
+                return this.exchratestVField;
+            }
+            set {
+                this.exchratestVField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal ExchratecoV {
+            get {
+                return this.exchratecoVField;
+            }
+            set {
+                this.exchratecoVField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string DelivType {
+            get {
+                return this.delivTypeField;
+            }
+            set {
+                this.delivTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string TransCat {
+            get {
+                return this.transCatField;
+            }
+            set {
+                this.transCatField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string TransMat {
+            get {
+                return this.transMatField;
+            }
+            set {
+                this.transMatField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string SpecProc {
+            get {
+                return this.specProcField;
+            }
+            set {
+                this.specProcField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Prodcat {
+            get {
+                return this.prodcatField;
+            }
+            set {
+                this.prodcatField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string FuncArea {
+            get {
+                return this.funcAreaField;
+            }
+            set {
+                this.funcAreaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PodProc {
+            get {
+                return this.podProcField;
+            }
+            set {
+                this.podProcField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="base64Binary")]
+        public byte[] Campaign {
+            get {
+                return this.campaignField;
+            }
+            set {
+                this.campaignField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string FkkConacct {
+            get {
+                return this.fkkConacctField;
+            }
+            set {
+                this.fkkConacctField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string FuncAreaLong {
+            get {
+                return this.funcAreaLongField;
+            }
+            set {
+                this.funcAreaLongField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="base64Binary")]
+        public byte[] FkkConacctGuid {
+            get {
+                return this.fkkConacctGuidField;
+            }
+            set {
+                this.fkkConacctGuidField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string TransMatExternal {
+            get {
+                return this.transMatExternalField;
+            }
+            set {
+                this.transMatExternalField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string TransMatGuid {
+            get {
+                return this.transMatGuidField;
+            }
+            set {
+                this.transMatGuidField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string TransMatVersion {
+            get {
+                return this.transMatVersionField;
+            }
+            set {
+                this.transMatVersionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string SepaMandateId {
+            get {
+                return this.sepaMandateIdField;
+            }
+            set {
+                this.sepaMandateIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Incotermsv {
+            get {
+                return this.incotermsvField;
+            }
+            set {
+                this.incotermsvField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Incoterms2l {
+            get {
+                return this.incoterms2lField;
+            }
+            set {
+                this.incoterms2lField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Incoterms3l {
+            get {
+                return this.incoterms3lField;
+            }
+            set {
+                this.incoterms3lField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string TransMatLong {
+            get {
+                return this.transMatLongField;
+            }
+            set {
+                this.transMatLongField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class Bapibtsel {
+        
+        private string selectionField;
+        
+        private string charcNameField;
+        
+        private string charcTxtField;
+        
+        private string valueField;
+        
+        private string valueTxtField;
+        
+        private string valueToField;
+        
+        private string valueCodeField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Selection {
+            get {
+                return this.selectionField;
+            }
+            set {
+                this.selectionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CharcName {
+            get {
+                return this.charcNameField;
+            }
+            set {
+                this.charcNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CharcTxt {
+            get {
+                return this.charcTxtField;
+            }
+            set {
+                this.charcTxtField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Value {
+            get {
+                return this.valueField;
+            }
+            set {
+                this.valueField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ValueTxt {
+            get {
+                return this.valueTxtField;
+            }
+            set {
+                this.valueTxtField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ValueTo {
+            get {
+                return this.valueToField;
+            }
+            set {
+                this.valueToField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ValueCode {
+            get {
+                return this.valueCodeField;
+            }
+            set {
+                this.valueCodeField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class Bapischdlx {
+        
+        private string itmNumberField;
+        
+        private string schedLineField;
+        
+        private string updateflagField;
+        
+        private string reqDateField;
+        
+        private string dateTypeField;
+        
+        private string reqTimeField;
+        
+        private string reqQtyField;
+        
+        private string reqDlvBlField;
+        
+        private string schedTypeField;
+        
+        private string tpDateField;
+        
+        private string msDateField;
+        
+        private string loadDateField;
+        
+        private string giDateField;
+        
+        private string tpTimeField;
+        
+        private string msTimeField;
+        
+        private string loadTimeField;
+        
+        private string giTimeField;
+        
+        private string refobjtypeField;
+        
+        private string refobjkeyField;
+        
+        private string dlvDateField;
+        
+        private string dlvTimeField;
+        
+        private string relTypeField;
+        
+        private string planSchedTypeField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ItmNumber {
+            get {
+                return this.itmNumberField;
+            }
+            set {
+                this.itmNumberField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string SchedLine {
+            get {
+                return this.schedLineField;
+            }
+            set {
+                this.schedLineField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Updateflag {
+            get {
+                return this.updateflagField;
+            }
+            set {
+                this.updateflagField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ReqDate {
+            get {
+                return this.reqDateField;
+            }
+            set {
+                this.reqDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string DateType {
+            get {
+                return this.dateTypeField;
+            }
+            set {
+                this.dateTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ReqTime {
+            get {
+                return this.reqTimeField;
+            }
+            set {
+                this.reqTimeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ReqQty {
+            get {
+                return this.reqQtyField;
+            }
+            set {
+                this.reqQtyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ReqDlvBl {
+            get {
+                return this.reqDlvBlField;
+            }
+            set {
+                this.reqDlvBlField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string SchedType {
+            get {
+                return this.schedTypeField;
+            }
+            set {
+                this.schedTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string TpDate {
+            get {
+                return this.tpDateField;
+            }
+            set {
+                this.tpDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string MsDate {
+            get {
+                return this.msDateField;
+            }
+            set {
+                this.msDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string LoadDate {
+            get {
+                return this.loadDateField;
+            }
+            set {
+                this.loadDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string GiDate {
+            get {
+                return this.giDateField;
+            }
+            set {
+                this.giDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string TpTime {
+            get {
+                return this.tpTimeField;
+            }
+            set {
+                this.tpTimeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string MsTime {
+            get {
+                return this.msTimeField;
+            }
+            set {
+                this.msTimeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string LoadTime {
+            get {
+                return this.loadTimeField;
+            }
+            set {
+                this.loadTimeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string GiTime {
+            get {
+                return this.giTimeField;
+            }
+            set {
+                this.giTimeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Refobjtype {
+            get {
+                return this.refobjtypeField;
+            }
+            set {
+                this.refobjtypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Refobjkey {
+            get {
+                return this.refobjkeyField;
+            }
+            set {
+                this.refobjkeyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string DlvDate {
+            get {
+                return this.dlvDateField;
+            }
+            set {
+                this.dlvDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string DlvTime {
+            get {
+                return this.dlvTimeField;
+            }
+            set {
+                this.dlvTimeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string RelType {
+            get {
+                return this.relTypeField;
+            }
+            set {
+                this.relTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PlanSchedType {
+            get {
+                return this.planSchedTypeField;
+            }
+            set {
+                this.planSchedTypeField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class Bapischdl {
+        
+        private string itmNumberField;
+        
+        private string schedLineField;
+        
+        private string reqDateField;
+        
+        private string dateTypeField;
+        
+        private System.DateTime reqTimeField;
+        
+        private decimal reqQtyField;
+        
+        private string reqDlvBlField;
+        
+        private string schedTypeField;
+        
+        private string tpDateField;
+        
+        private string msDateField;
+        
+        private string loadDateField;
+        
+        private string giDateField;
+        
+        private System.DateTime tpTimeField;
+        
+        private System.DateTime msTimeField;
+        
+        private System.DateTime loadTimeField;
+        
+        private System.DateTime giTimeField;
+        
+        private string refobjtypeField;
+        
+        private string refobjkeyField;
+        
+        private string reflogsysField;
+        
+        private string dlvDateField;
+        
+        private System.DateTime dlvTimeField;
+        
+        private string relTypeField;
+        
+        private string planSchedTypeField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ItmNumber {
+            get {
+                return this.itmNumberField;
+            }
+            set {
+                this.itmNumberField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string SchedLine {
+            get {
+                return this.schedLineField;
+            }
+            set {
+                this.schedLineField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ReqDate {
+            get {
+                return this.reqDateField;
+            }
+            set {
+                this.reqDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string DateType {
+            get {
+                return this.dateTypeField;
+            }
+            set {
+                this.dateTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="time")]
+        public System.DateTime ReqTime {
+            get {
+                return this.reqTimeField;
+            }
+            set {
+                this.reqTimeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal ReqQty {
+            get {
+                return this.reqQtyField;
+            }
+            set {
+                this.reqQtyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ReqDlvBl {
+            get {
+                return this.reqDlvBlField;
+            }
+            set {
+                this.reqDlvBlField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string SchedType {
+            get {
+                return this.schedTypeField;
+            }
+            set {
+                this.schedTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string TpDate {
+            get {
+                return this.tpDateField;
+            }
+            set {
+                this.tpDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string MsDate {
+            get {
+                return this.msDateField;
+            }
+            set {
+                this.msDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string LoadDate {
+            get {
+                return this.loadDateField;
+            }
+            set {
+                this.loadDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string GiDate {
+            get {
+                return this.giDateField;
+            }
+            set {
+                this.giDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="time")]
+        public System.DateTime TpTime {
+            get {
+                return this.tpTimeField;
+            }
+            set {
+                this.tpTimeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="time")]
+        public System.DateTime MsTime {
+            get {
+                return this.msTimeField;
+            }
+            set {
+                this.msTimeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="time")]
+        public System.DateTime LoadTime {
+            get {
+                return this.loadTimeField;
+            }
+            set {
+                this.loadTimeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="time")]
+        public System.DateTime GiTime {
+            get {
+                return this.giTimeField;
+            }
+            set {
+                this.giTimeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Refobjtype {
+            get {
+                return this.refobjtypeField;
+            }
+            set {
+                this.refobjtypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Refobjkey {
+            get {
+                return this.refobjkeyField;
+            }
+            set {
+                this.refobjkeyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Reflogsys {
+            get {
+                return this.reflogsysField;
+            }
+            set {
+                this.reflogsysField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string DlvDate {
+            get {
+                return this.dlvDateField;
+            }
+            set {
+                this.dlvDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="time")]
+        public System.DateTime DlvTime {
+            get {
+                return this.dlvTimeField;
+            }
+            set {
+                this.dlvTimeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string RelType {
+            get {
+                return this.relTypeField;
+            }
+            set {
+                this.relTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PlanSchedType {
+            get {
+                return this.planSchedTypeField;
+            }
+            set {
+                this.planSchedTypeField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class Bapiret2 {
+        
+        private string typeField;
+        
+        private string idField;
+        
+        private string numberField;
+        
+        private string messageField;
+        
+        private string logNoField;
+        
+        private string logMsgNoField;
+        
+        private string messageV1Field;
+        
+        private string messageV2Field;
+        
+        private string messageV3Field;
+        
+        private string messageV4Field;
+        
+        private string parameterField;
+        
+        private int rowField;
+        
+        private string fieldField;
+        
+        private string systemField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=global::System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Type {
+            get {
+                return this.typeField;
+            }
+            set {
+                this.typeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form= global::System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form= global::System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Number {
+            get {
+                return this.numberField;
+            }
+            set {
+                this.numberField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form= global::System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Message {
+            get {
+                return this.messageField;
+            }
+            set {
+                this.messageField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form= global::System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string LogNo {
+            get {
+                return this.logNoField;
+            }
+            set {
+                this.logNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form= global::System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string LogMsgNo {
+            get {
+                return this.logMsgNoField;
+            }
+            set {
+                this.logMsgNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form= global::System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string MessageV1 {
+            get {
+                return this.messageV1Field;
+            }
+            set {
+                this.messageV1Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form= global::System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string MessageV2 {
+            get {
+                return this.messageV2Field;
+            }
+            set {
+                this.messageV2Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form= global::System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string MessageV3 {
+            get {
+                return this.messageV3Field;
+            }
+            set {
+                this.messageV3Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form= global::System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string MessageV4 {
+            get {
+                return this.messageV4Field;
+            }
+            set {
+                this.messageV4Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form= global::System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Parameter {
+            get {
+                return this.parameterField;
+            }
+            set {
+                this.parameterField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form= global::System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public int Row {
+            get {
+                return this.rowField;
+            }
+            set {
+                this.rowField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form= global::System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Field {
+            get {
+                return this.fieldField;
+            }
+            set {
+                this.fieldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form= global::System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string System {
+            get {
+                return this.systemField;
+            }
+            set {
+                this.systemField = value;
             }
         }
     }
@@ -16959,9027 +28081,6 @@ namespace WebService1.SAPWebServices {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
-    public partial class Bapictrx {
-        
-        private string itmNumberField;
-        
-        private string updateflagField;
-        
-        private string valPerField;
-        
-        private string valPerUnField;
-        
-        private string valPerCaField;
-        
-        private string instDateField;
-        
-        private string acceptDatField;
-        
-        private string conStDatField;
-        
-        private string conSiDatField;
-        
-        private string cancProcField;
-        
-        private string conEnActField;
-        
-        private string cancRDatField;
-        
-        private string rCancDatField;
-        
-        private string cancPartyField;
-        
-        private string cancreasonField;
-        
-        private string conEnDatField;
-        
-        private string cancDocField;
-        
-        private string cancdocdatField;
-        
-        private string conStRulField;
-        
-        private string dismDateField;
-        
-        private string actionDatField;
-        
-        private string actDatrulField;
-        
-        private string conEnRulField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ItmNumber {
-            get {
-                return this.itmNumberField;
-            }
-            set {
-                this.itmNumberField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Updateflag {
-            get {
-                return this.updateflagField;
-            }
-            set {
-                this.updateflagField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ValPer {
-            get {
-                return this.valPerField;
-            }
-            set {
-                this.valPerField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ValPerUn {
-            get {
-                return this.valPerUnField;
-            }
-            set {
-                this.valPerUnField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ValPerCa {
-            get {
-                return this.valPerCaField;
-            }
-            set {
-                this.valPerCaField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string InstDate {
-            get {
-                return this.instDateField;
-            }
-            set {
-                this.instDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string AcceptDat {
-            get {
-                return this.acceptDatField;
-            }
-            set {
-                this.acceptDatField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ConStDat {
-            get {
-                return this.conStDatField;
-            }
-            set {
-                this.conStDatField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ConSiDat {
-            get {
-                return this.conSiDatField;
-            }
-            set {
-                this.conSiDatField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CancProc {
-            get {
-                return this.cancProcField;
-            }
-            set {
-                this.cancProcField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ConEnAct {
-            get {
-                return this.conEnActField;
-            }
-            set {
-                this.conEnActField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CancRDat {
-            get {
-                return this.cancRDatField;
-            }
-            set {
-                this.cancRDatField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string RCancDat {
-            get {
-                return this.rCancDatField;
-            }
-            set {
-                this.rCancDatField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CancParty {
-            get {
-                return this.cancPartyField;
-            }
-            set {
-                this.cancPartyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Cancreason {
-            get {
-                return this.cancreasonField;
-            }
-            set {
-                this.cancreasonField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ConEnDat {
-            get {
-                return this.conEnDatField;
-            }
-            set {
-                this.conEnDatField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CancDoc {
-            get {
-                return this.cancDocField;
-            }
-            set {
-                this.cancDocField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Cancdocdat {
-            get {
-                return this.cancdocdatField;
-            }
-            set {
-                this.cancdocdatField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ConStRul {
-            get {
-                return this.conStRulField;
-            }
-            set {
-                this.conStRulField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string DismDate {
-            get {
-                return this.dismDateField;
-            }
-            set {
-                this.dismDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ActionDat {
-            get {
-                return this.actionDatField;
-            }
-            set {
-                this.actionDatField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ActDatrul {
-            get {
-                return this.actDatrulField;
-            }
-            set {
-                this.actDatrulField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ConEnRul {
-            get {
-                return this.conEnRulField;
-            }
-            set {
-                this.conEnRulField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
-    public partial class Bapictr {
-        
-        private string itmNumberField;
-        
-        private string valPerField;
-        
-        private string valPerUnField;
-        
-        private string valPerCaField;
-        
-        private string instDateField;
-        
-        private string acceptDatField;
-        
-        private string conStDatField;
-        
-        private string conSiDatField;
-        
-        private string cancProcField;
-        
-        private string conEnActField;
-        
-        private string cancRDatField;
-        
-        private string rCancDatField;
-        
-        private string cancPartyField;
-        
-        private string cancreasonField;
-        
-        private string conEnDatField;
-        
-        private string cancDocField;
-        
-        private string cancdocdatField;
-        
-        private string conStRulField;
-        
-        private string dismDateField;
-        
-        private string actionDatField;
-        
-        private string actDatrulField;
-        
-        private string conEnRulField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ItmNumber {
-            get {
-                return this.itmNumberField;
-            }
-            set {
-                this.itmNumberField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ValPer {
-            get {
-                return this.valPerField;
-            }
-            set {
-                this.valPerField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ValPerUn {
-            get {
-                return this.valPerUnField;
-            }
-            set {
-                this.valPerUnField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ValPerCa {
-            get {
-                return this.valPerCaField;
-            }
-            set {
-                this.valPerCaField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string InstDate {
-            get {
-                return this.instDateField;
-            }
-            set {
-                this.instDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string AcceptDat {
-            get {
-                return this.acceptDatField;
-            }
-            set {
-                this.acceptDatField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ConStDat {
-            get {
-                return this.conStDatField;
-            }
-            set {
-                this.conStDatField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ConSiDat {
-            get {
-                return this.conSiDatField;
-            }
-            set {
-                this.conSiDatField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CancProc {
-            get {
-                return this.cancProcField;
-            }
-            set {
-                this.cancProcField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ConEnAct {
-            get {
-                return this.conEnActField;
-            }
-            set {
-                this.conEnActField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CancRDat {
-            get {
-                return this.cancRDatField;
-            }
-            set {
-                this.cancRDatField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string RCancDat {
-            get {
-                return this.rCancDatField;
-            }
-            set {
-                this.rCancDatField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CancParty {
-            get {
-                return this.cancPartyField;
-            }
-            set {
-                this.cancPartyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Cancreason {
-            get {
-                return this.cancreasonField;
-            }
-            set {
-                this.cancreasonField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ConEnDat {
-            get {
-                return this.conEnDatField;
-            }
-            set {
-                this.conEnDatField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CancDoc {
-            get {
-                return this.cancDocField;
-            }
-            set {
-                this.cancDocField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Cancdocdat {
-            get {
-                return this.cancdocdatField;
-            }
-            set {
-                this.cancdocdatField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ConStRul {
-            get {
-                return this.conStRulField;
-            }
-            set {
-                this.conStRulField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string DismDate {
-            get {
-                return this.dismDateField;
-            }
-            set {
-                this.dismDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ActionDat {
-            get {
-                return this.actionDatField;
-            }
-            set {
-                this.actionDatField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ActDatrul {
-            get {
-                return this.actDatrulField;
-            }
-            set {
-                this.actDatrulField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ConEnRul {
-            get {
-                return this.conEnRulField;
-            }
-            set {
-                this.conEnRulField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
-    public partial class Bapicondx {
-        
-        private string itmNumberField;
-        
-        private string condStNoField;
-        
-        private string condCountField;
-        
-        private string condTypeField;
-        
-        private string updateflagField;
-        
-        private string condValueField;
-        
-        private string currencyField;
-        
-        private string condUnitField;
-        
-        private string condPUntField;
-        
-        private string varcondField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ItmNumber {
-            get {
-                return this.itmNumberField;
-            }
-            set {
-                this.itmNumberField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CondStNo {
-            get {
-                return this.condStNoField;
-            }
-            set {
-                this.condStNoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CondCount {
-            get {
-                return this.condCountField;
-            }
-            set {
-                this.condCountField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CondType {
-            get {
-                return this.condTypeField;
-            }
-            set {
-                this.condTypeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Updateflag {
-            get {
-                return this.updateflagField;
-            }
-            set {
-                this.updateflagField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CondValue {
-            get {
-                return this.condValueField;
-            }
-            set {
-                this.condValueField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Currency {
-            get {
-                return this.currencyField;
-            }
-            set {
-                this.currencyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CondUnit {
-            get {
-                return this.condUnitField;
-            }
-            set {
-                this.condUnitField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CondPUnt {
-            get {
-                return this.condPUntField;
-            }
-            set {
-                this.condPUntField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Varcond {
-            get {
-                return this.varcondField;
-            }
-            set {
-                this.varcondField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
-    public partial class Bapicuvk {
-        
-        private string configIdField;
-        
-        private string instIdField;
-        
-        private string vkeyField;
-        
-        private string factorField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ConfigId {
-            get {
-                return this.configIdField;
-            }
-            set {
-                this.configIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string InstId {
-            get {
-                return this.instIdField;
-            }
-            set {
-                this.instIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Vkey {
-            get {
-                return this.vkeyField;
-            }
-            set {
-                this.vkeyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Factor {
-            get {
-                return this.factorField;
-            }
-            set {
-                this.factorField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
-    public partial class Bapicuval {
-        
-        private string configIdField;
-        
-        private string instIdField;
-        
-        private string charcField;
-        
-        private string charcTxtField;
-        
-        private string valueField;
-        
-        private string valueTxtField;
-        
-        private string authorField;
-        
-        private string valueToField;
-        
-        private string valcodeField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ConfigId {
-            get {
-                return this.configIdField;
-            }
-            set {
-                this.configIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string InstId {
-            get {
-                return this.instIdField;
-            }
-            set {
-                this.instIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Charc {
-            get {
-                return this.charcField;
-            }
-            set {
-                this.charcField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CharcTxt {
-            get {
-                return this.charcTxtField;
-            }
-            set {
-                this.charcTxtField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Value {
-            get {
-                return this.valueField;
-            }
-            set {
-                this.valueField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ValueTxt {
-            get {
-                return this.valueTxtField;
-            }
-            set {
-                this.valueTxtField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Author {
-            get {
-                return this.authorField;
-            }
-            set {
-                this.authorField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ValueTo {
-            get {
-                return this.valueToField;
-            }
-            set {
-                this.valueToField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Valcode {
-            get {
-                return this.valcodeField;
-            }
-            set {
-                this.valcodeField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
-    public partial class Bapicuref {
-        
-        private string posexField;
-        
-        private string configIdField;
-        
-        private string instIdField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Posex {
-            get {
-                return this.posexField;
-            }
-            set {
-                this.posexField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ConfigId {
-            get {
-                return this.configIdField;
-            }
-            set {
-                this.configIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string InstId {
-            get {
-                return this.instIdField;
-            }
-            set {
-                this.instIdField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
-    public partial class Bapicucfg {
-        
-        private string posexField;
-        
-        private string configIdField;
-        
-        private string rootIdField;
-        
-        private string sceField;
-        
-        private string kbnameField;
-        
-        private string kbversionField;
-        
-        private string completeField;
-        
-        private string consistentField;
-        
-        private string cfginfoField;
-        
-        private string kbprofileField;
-        
-        private string kblanguageField;
-        
-        private string cbaseIdField;
-        
-        private string cbaseIdTypeField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Posex {
-            get {
-                return this.posexField;
-            }
-            set {
-                this.posexField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ConfigId {
-            get {
-                return this.configIdField;
-            }
-            set {
-                this.configIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string RootId {
-            get {
-                return this.rootIdField;
-            }
-            set {
-                this.rootIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Sce {
-            get {
-                return this.sceField;
-            }
-            set {
-                this.sceField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Kbname {
-            get {
-                return this.kbnameField;
-            }
-            set {
-                this.kbnameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Kbversion {
-            get {
-                return this.kbversionField;
-            }
-            set {
-                this.kbversionField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Complete {
-            get {
-                return this.completeField;
-            }
-            set {
-                this.completeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Consistent {
-            get {
-                return this.consistentField;
-            }
-            set {
-                this.consistentField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Cfginfo {
-            get {
-                return this.cfginfoField;
-            }
-            set {
-                this.cfginfoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Kbprofile {
-            get {
-                return this.kbprofileField;
-            }
-            set {
-                this.kbprofileField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Kblanguage {
-            get {
-                return this.kblanguageField;
-            }
-            set {
-                this.kblanguageField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CbaseId {
-            get {
-                return this.cbaseIdField;
-            }
-            set {
-                this.cbaseIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CbaseIdType {
-            get {
-                return this.cbaseIdTypeField;
-            }
-            set {
-                this.cbaseIdTypeField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
-    public partial class Bapicuprt {
-        
-        private string configIdField;
-        
-        private string parentIdField;
-        
-        private string instIdField;
-        
-        private string partOfNoField;
-        
-        private string objTypeField;
-        
-        private string classTypeField;
-        
-        private string objKeyField;
-        
-        private string authorField;
-        
-        private string salesRelevantField;
-        
-        private string partOfGuidField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ConfigId {
-            get {
-                return this.configIdField;
-            }
-            set {
-                this.configIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ParentId {
-            get {
-                return this.parentIdField;
-            }
-            set {
-                this.parentIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string InstId {
-            get {
-                return this.instIdField;
-            }
-            set {
-                this.instIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string PartOfNo {
-            get {
-                return this.partOfNoField;
-            }
-            set {
-                this.partOfNoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ObjType {
-            get {
-                return this.objTypeField;
-            }
-            set {
-                this.objTypeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ClassType {
-            get {
-                return this.classTypeField;
-            }
-            set {
-                this.classTypeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ObjKey {
-            get {
-                return this.objKeyField;
-            }
-            set {
-                this.objKeyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Author {
-            get {
-                return this.authorField;
-            }
-            set {
-                this.authorField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string SalesRelevant {
-            get {
-                return this.salesRelevantField;
-            }
-            set {
-                this.salesRelevantField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string PartOfGuid {
-            get {
-                return this.partOfGuidField;
-            }
-            set {
-                this.partOfGuidField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
-    public partial class Bapicuins {
-        
-        private string configIdField;
-        
-        private string instIdField;
-        
-        private string objTypeField;
-        
-        private string classTypeField;
-        
-        private string objKeyField;
-        
-        private string objTxtField;
-        
-        private string quantityField;
-        
-        private string authorField;
-        
-        private string quantityUnitField;
-        
-        private string completeField;
-        
-        private string consistentField;
-        
-        private string objectGuidField;
-        
-        private string persistIdField;
-        
-        private string persistIdTypeField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ConfigId {
-            get {
-                return this.configIdField;
-            }
-            set {
-                this.configIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string InstId {
-            get {
-                return this.instIdField;
-            }
-            set {
-                this.instIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ObjType {
-            get {
-                return this.objTypeField;
-            }
-            set {
-                this.objTypeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ClassType {
-            get {
-                return this.classTypeField;
-            }
-            set {
-                this.classTypeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ObjKey {
-            get {
-                return this.objKeyField;
-            }
-            set {
-                this.objKeyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ObjTxt {
-            get {
-                return this.objTxtField;
-            }
-            set {
-                this.objTxtField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Quantity {
-            get {
-                return this.quantityField;
-            }
-            set {
-                this.quantityField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Author {
-            get {
-                return this.authorField;
-            }
-            set {
-                this.authorField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string QuantityUnit {
-            get {
-                return this.quantityUnitField;
-            }
-            set {
-                this.quantityUnitField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Complete {
-            get {
-                return this.completeField;
-            }
-            set {
-                this.completeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Consistent {
-            get {
-                return this.consistentField;
-            }
-            set {
-                this.consistentField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ObjectGuid {
-            get {
-                return this.objectGuidField;
-            }
-            set {
-                this.objectGuidField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string PersistId {
-            get {
-                return this.persistIdField;
-            }
-            set {
-                this.persistIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string PersistIdType {
-            get {
-                return this.persistIdTypeField;
-            }
-            set {
-                this.persistIdTypeField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
-    public partial class Bapicublb {
-        
-        private string configIdField;
-        
-        private string contextField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ConfigId {
-            get {
-                return this.configIdField;
-            }
-            set {
-                this.configIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Context {
-            get {
-                return this.contextField;
-            }
-            set {
-                this.contextField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
-    public partial class Bapiccard {
-        
-        private string ccTypeField;
-        
-        private string ccNumberField;
-        
-        private string ccValidTField;
-        
-        private string ccNameField;
-        
-        private decimal billamountField;
-        
-        private string authFlagField;
-        
-        private decimal authamountField;
-        
-        private string currencyField;
-        
-        private string currIsoField;
-        
-        private string authDateField;
-        
-        private System.DateTime authTimeField;
-        
-        private string authCcNoField;
-        
-        private string authRefnoField;
-        
-        private string ccReactField;
-        
-        private decimal ccReAmountField;
-        
-        private string glAccountField;
-        
-        private string ccStatExField;
-        
-        private string ccReactTField;
-        
-        private string virtCardField;
-        
-        private string merchidclField;
-        
-        private string preAuthField;
-        
-        private string ccSeqNoField;
-        
-        private string amountchanField;
-        
-        private string authortypeField;
-        
-        private string dataoriginField;
-        
-        private string radrcheck1Field;
-        
-        private string radrcheck2Field;
-        
-        private string radrcheck3Field;
-        
-        private string rcardcheckField;
-        
-        private string ccLimitedField;
-        
-        private string ccVerifValueField;
-        
-        private string ccCtrlFieldField;
-        
-        private string ccInUseStField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CcType {
-            get {
-                return this.ccTypeField;
-            }
-            set {
-                this.ccTypeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CcNumber {
-            get {
-                return this.ccNumberField;
-            }
-            set {
-                this.ccNumberField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CcValidT {
-            get {
-                return this.ccValidTField;
-            }
-            set {
-                this.ccValidTField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CcName {
-            get {
-                return this.ccNameField;
-            }
-            set {
-                this.ccNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal Billamount {
-            get {
-                return this.billamountField;
-            }
-            set {
-                this.billamountField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string AuthFlag {
-            get {
-                return this.authFlagField;
-            }
-            set {
-                this.authFlagField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal Authamount {
-            get {
-                return this.authamountField;
-            }
-            set {
-                this.authamountField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Currency {
-            get {
-                return this.currencyField;
-            }
-            set {
-                this.currencyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CurrIso {
-            get {
-                return this.currIsoField;
-            }
-            set {
-                this.currIsoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string AuthDate {
-            get {
-                return this.authDateField;
-            }
-            set {
-                this.authDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="time")]
-        public System.DateTime AuthTime {
-            get {
-                return this.authTimeField;
-            }
-            set {
-                this.authTimeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string AuthCcNo {
-            get {
-                return this.authCcNoField;
-            }
-            set {
-                this.authCcNoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string AuthRefno {
-            get {
-                return this.authRefnoField;
-            }
-            set {
-                this.authRefnoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CcReact {
-            get {
-                return this.ccReactField;
-            }
-            set {
-                this.ccReactField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal CcReAmount {
-            get {
-                return this.ccReAmountField;
-            }
-            set {
-                this.ccReAmountField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string GlAccount {
-            get {
-                return this.glAccountField;
-            }
-            set {
-                this.glAccountField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CcStatEx {
-            get {
-                return this.ccStatExField;
-            }
-            set {
-                this.ccStatExField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CcReactT {
-            get {
-                return this.ccReactTField;
-            }
-            set {
-                this.ccReactTField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string VirtCard {
-            get {
-                return this.virtCardField;
-            }
-            set {
-                this.virtCardField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Merchidcl {
-            get {
-                return this.merchidclField;
-            }
-            set {
-                this.merchidclField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string PreAuth {
-            get {
-                return this.preAuthField;
-            }
-            set {
-                this.preAuthField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CcSeqNo {
-            get {
-                return this.ccSeqNoField;
-            }
-            set {
-                this.ccSeqNoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Amountchan {
-            get {
-                return this.amountchanField;
-            }
-            set {
-                this.amountchanField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Authortype {
-            get {
-                return this.authortypeField;
-            }
-            set {
-                this.authortypeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Dataorigin {
-            get {
-                return this.dataoriginField;
-            }
-            set {
-                this.dataoriginField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Radrcheck1 {
-            get {
-                return this.radrcheck1Field;
-            }
-            set {
-                this.radrcheck1Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Radrcheck2 {
-            get {
-                return this.radrcheck2Field;
-            }
-            set {
-                this.radrcheck2Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Radrcheck3 {
-            get {
-                return this.radrcheck3Field;
-            }
-            set {
-                this.radrcheck3Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Rcardcheck {
-            get {
-                return this.rcardcheckField;
-            }
-            set {
-                this.rcardcheckField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CcLimited {
-            get {
-                return this.ccLimitedField;
-            }
-            set {
-                this.ccLimitedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CcVerifValue {
-            get {
-                return this.ccVerifValueField;
-            }
-            set {
-                this.ccVerifValueField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CcCtrlField {
-            get {
-                return this.ccCtrlFieldField;
-            }
-            set {
-                this.ccCtrlFieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CcInUseSt {
-            get {
-                return this.ccInUseStField;
-            }
-            set {
-                this.ccInUseStField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
-    public partial class Bapiret2 {
-        
-        private string typeField;
-        
-        private string idField;
-        
-        private string numberField;
-        
-        private string messageField;
-        
-        private string logNoField;
-        
-        private string logMsgNoField;
-        
-        private string messageV1Field;
-        
-        private string messageV2Field;
-        
-        private string messageV3Field;
-        
-        private string messageV4Field;
-        
-        private string parameterField;
-        
-        private int rowField;
-        
-        private string fieldField;
-        
-        private string systemField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=global::System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Type {
-            get {
-                return this.typeField;
-            }
-            set {
-                this.typeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form= global::System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Id {
-            get {
-                return this.idField;
-            }
-            set {
-                this.idField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form= global::System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Number {
-            get {
-                return this.numberField;
-            }
-            set {
-                this.numberField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form= global::System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Message {
-            get {
-                return this.messageField;
-            }
-            set {
-                this.messageField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form= global::System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string LogNo {
-            get {
-                return this.logNoField;
-            }
-            set {
-                this.logNoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form= global::System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string LogMsgNo {
-            get {
-                return this.logMsgNoField;
-            }
-            set {
-                this.logMsgNoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form= global::System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string MessageV1 {
-            get {
-                return this.messageV1Field;
-            }
-            set {
-                this.messageV1Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form= global::System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string MessageV2 {
-            get {
-                return this.messageV2Field;
-            }
-            set {
-                this.messageV2Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form= global::System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string MessageV3 {
-            get {
-                return this.messageV3Field;
-            }
-            set {
-                this.messageV3Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form= global::System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string MessageV4 {
-            get {
-                return this.messageV4Field;
-            }
-            set {
-                this.messageV4Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form= global::System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Parameter {
-            get {
-                return this.parameterField;
-            }
-            set {
-                this.parameterField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form= global::System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public int Row {
-            get {
-                return this.rowField;
-            }
-            set {
-                this.rowField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form= global::System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Field {
-            get {
-                return this.fieldField;
-            }
-            set {
-                this.fieldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form= global::System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string System {
-            get {
-                return this.systemField;
-            }
-            set {
-                this.systemField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
-    public partial class Bapisdpart {
-        
-        private string operationField;
-        
-        private string sdDocField;
-        
-        private string itmNumberField;
-        
-        private string partnRoleField;
-        
-        private string customerField;
-        
-        private string vendorNoField;
-        
-        private string personNoField;
-        
-        private string contactField;
-        
-        private string addressField;
-        
-        private string unloadPtField;
-        
-        private string countryField;
-        
-        private string countryisoField;
-        
-        private string addreIndiField;
-        
-        private string acc1TimeField;
-        
-        private string custhitypField;
-        
-        private string pricRelField;
-        
-        private string rebateRelField;
-        
-        private string levelNrField;
-        
-        private string descPartnField;
-        
-        private string transpzoneField;
-        
-        private string assignHiField;
-        
-        private string vatRegNoField;
-        
-        private string furtherparField;
-        
-        private string persNoField;
-        
-        private string calendUpdField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Operation {
-            get {
-                return this.operationField;
-            }
-            set {
-                this.operationField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string SdDoc {
-            get {
-                return this.sdDocField;
-            }
-            set {
-                this.sdDocField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ItmNumber {
-            get {
-                return this.itmNumberField;
-            }
-            set {
-                this.itmNumberField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string PartnRole {
-            get {
-                return this.partnRoleField;
-            }
-            set {
-                this.partnRoleField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Customer {
-            get {
-                return this.customerField;
-            }
-            set {
-                this.customerField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string VendorNo {
-            get {
-                return this.vendorNoField;
-            }
-            set {
-                this.vendorNoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string PersonNo {
-            get {
-                return this.personNoField;
-            }
-            set {
-                this.personNoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Contact {
-            get {
-                return this.contactField;
-            }
-            set {
-                this.contactField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Address {
-            get {
-                return this.addressField;
-            }
-            set {
-                this.addressField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string UnloadPt {
-            get {
-                return this.unloadPtField;
-            }
-            set {
-                this.unloadPtField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Country {
-            get {
-                return this.countryField;
-            }
-            set {
-                this.countryField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Countryiso {
-            get {
-                return this.countryisoField;
-            }
-            set {
-                this.countryisoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string AddreIndi {
-            get {
-                return this.addreIndiField;
-            }
-            set {
-                this.addreIndiField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Acc1Time {
-            get {
-                return this.acc1TimeField;
-            }
-            set {
-                this.acc1TimeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Custhityp {
-            get {
-                return this.custhitypField;
-            }
-            set {
-                this.custhitypField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string PricRel {
-            get {
-                return this.pricRelField;
-            }
-            set {
-                this.pricRelField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string RebateRel {
-            get {
-                return this.rebateRelField;
-            }
-            set {
-                this.rebateRelField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string LevelNr {
-            get {
-                return this.levelNrField;
-            }
-            set {
-                this.levelNrField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string DescPartn {
-            get {
-                return this.descPartnField;
-            }
-            set {
-                this.descPartnField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Transpzone {
-            get {
-                return this.transpzoneField;
-            }
-            set {
-                this.transpzoneField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string AssignHi {
-            get {
-                return this.assignHiField;
-            }
-            set {
-                this.assignHiField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string VatRegNo {
-            get {
-                return this.vatRegNoField;
-            }
-            set {
-                this.vatRegNoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Furtherpar {
-            get {
-                return this.furtherparField;
-            }
-            set {
-                this.furtherparField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string PersNo {
-            get {
-                return this.persNoField;
-            }
-            set {
-                this.persNoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CalendUpd {
-            get {
-                return this.calendUpdField;
-            }
-            set {
-                this.calendUpdField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
-    public partial class Bapiaddr1 {
-        
-        private string addrNoField;
-        
-        private string formofaddrField;
-        
-        private string nameField;
-        
-        private string name2Field;
-        
-        private string name3Field;
-        
-        private string name4Field;
-        
-        private string cONameField;
-        
-        private string cityField;
-        
-        private string districtField;
-        
-        private string cityNoField;
-        
-        private string postlCod1Field;
-        
-        private string postlCod2Field;
-        
-        private string postlCod3Field;
-        
-        private string poBoxField;
-        
-        private string poBoxCitField;
-        
-        private string delivDisField;
-        
-        private string streetField;
-        
-        private string streetNoField;
-        
-        private string strAbbrField;
-        
-        private string houseNoField;
-        
-        private string strSuppl1Field;
-        
-        private string strSuppl2Field;
-        
-        private string locationField;
-        
-        private string buildingField;
-        
-        private string floorField;
-        
-        private string roomNoField;
-        
-        private string countryField;
-        
-        private string languField;
-        
-        private string regionField;
-        
-        private string sort1Field;
-        
-        private string sort2Field;
-        
-        private string timeZoneField;
-        
-        private string taxjurcodeField;
-        
-        private string adrNotesField;
-        
-        private string commTypeField;
-        
-        private string tel1NumbrField;
-        
-        private string tel1ExtField;
-        
-        private string faxNumberField;
-        
-        private string faxExtensField;
-        
-        private string streetLngField;
-        
-        private string distrctNoField;
-        
-        private string chckstatusField;
-        
-        private string pboxcitNoField;
-        
-        private string transpzoneField;
-        
-        private string houseNo2Field;
-        
-        private string eMailField;
-        
-        private string strSuppl3Field;
-        
-        private string titleField;
-        
-        private string countryisoField;
-        
-        private string languIsoField;
-        
-        private string buildLongField;
-        
-        private string regiogroupField;
-        
-        private string homeCityField;
-        
-        private string homecitynoField;
-        
-        private string pcode1ExtField;
-        
-        private string pcode2ExtField;
-        
-        private string pcode3ExtField;
-        
-        private string poWONoField;
-        
-        private string poBoxRegField;
-        
-        private string poboxCtryField;
-        
-        private string poCtryisoField;
-        
-        private string homepageField;
-        
-        private string dontUseSField;
-        
-        private string dontUsePField;
-        
-        private string houseNo3Field;
-        
-        private string languCrField;
-        
-        private string langucrisoField;
-        
-        private string poBoxLobbyField;
-        
-        private string deliServTypeField;
-        
-        private string deliServNumberField;
-        
-        private string uriTypeField;
-        
-        private string countyCodeField;
-        
-        private string countyField;
-        
-        private string townshipCodeField;
-        
-        private string townshipField;
-        
-        private string xpcptField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string AddrNo {
-            get {
-                return this.addrNoField;
-            }
-            set {
-                this.addrNoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Formofaddr {
-            get {
-                return this.formofaddrField;
-            }
-            set {
-                this.formofaddrField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Name {
-            get {
-                return this.nameField;
-            }
-            set {
-                this.nameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Name2 {
-            get {
-                return this.name2Field;
-            }
-            set {
-                this.name2Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Name3 {
-            get {
-                return this.name3Field;
-            }
-            set {
-                this.name3Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Name4 {
-            get {
-                return this.name4Field;
-            }
-            set {
-                this.name4Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string COName {
-            get {
-                return this.cONameField;
-            }
-            set {
-                this.cONameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string City {
-            get {
-                return this.cityField;
-            }
-            set {
-                this.cityField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string District {
-            get {
-                return this.districtField;
-            }
-            set {
-                this.districtField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CityNo {
-            get {
-                return this.cityNoField;
-            }
-            set {
-                this.cityNoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string PostlCod1 {
-            get {
-                return this.postlCod1Field;
-            }
-            set {
-                this.postlCod1Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string PostlCod2 {
-            get {
-                return this.postlCod2Field;
-            }
-            set {
-                this.postlCod2Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string PostlCod3 {
-            get {
-                return this.postlCod3Field;
-            }
-            set {
-                this.postlCod3Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string PoBox {
-            get {
-                return this.poBoxField;
-            }
-            set {
-                this.poBoxField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string PoBoxCit {
-            get {
-                return this.poBoxCitField;
-            }
-            set {
-                this.poBoxCitField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string DelivDis {
-            get {
-                return this.delivDisField;
-            }
-            set {
-                this.delivDisField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Street {
-            get {
-                return this.streetField;
-            }
-            set {
-                this.streetField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string StreetNo {
-            get {
-                return this.streetNoField;
-            }
-            set {
-                this.streetNoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string StrAbbr {
-            get {
-                return this.strAbbrField;
-            }
-            set {
-                this.strAbbrField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string HouseNo {
-            get {
-                return this.houseNoField;
-            }
-            set {
-                this.houseNoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string StrSuppl1 {
-            get {
-                return this.strSuppl1Field;
-            }
-            set {
-                this.strSuppl1Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string StrSuppl2 {
-            get {
-                return this.strSuppl2Field;
-            }
-            set {
-                this.strSuppl2Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Location {
-            get {
-                return this.locationField;
-            }
-            set {
-                this.locationField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Building {
-            get {
-                return this.buildingField;
-            }
-            set {
-                this.buildingField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Floor {
-            get {
-                return this.floorField;
-            }
-            set {
-                this.floorField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string RoomNo {
-            get {
-                return this.roomNoField;
-            }
-            set {
-                this.roomNoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Country {
-            get {
-                return this.countryField;
-            }
-            set {
-                this.countryField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Langu {
-            get {
-                return this.languField;
-            }
-            set {
-                this.languField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Region {
-            get {
-                return this.regionField;
-            }
-            set {
-                this.regionField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Sort1 {
-            get {
-                return this.sort1Field;
-            }
-            set {
-                this.sort1Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Sort2 {
-            get {
-                return this.sort2Field;
-            }
-            set {
-                this.sort2Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string TimeZone {
-            get {
-                return this.timeZoneField;
-            }
-            set {
-                this.timeZoneField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Taxjurcode {
-            get {
-                return this.taxjurcodeField;
-            }
-            set {
-                this.taxjurcodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string AdrNotes {
-            get {
-                return this.adrNotesField;
-            }
-            set {
-                this.adrNotesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CommType {
-            get {
-                return this.commTypeField;
-            }
-            set {
-                this.commTypeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Tel1Numbr {
-            get {
-                return this.tel1NumbrField;
-            }
-            set {
-                this.tel1NumbrField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Tel1Ext {
-            get {
-                return this.tel1ExtField;
-            }
-            set {
-                this.tel1ExtField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string FaxNumber {
-            get {
-                return this.faxNumberField;
-            }
-            set {
-                this.faxNumberField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string FaxExtens {
-            get {
-                return this.faxExtensField;
-            }
-            set {
-                this.faxExtensField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string StreetLng {
-            get {
-                return this.streetLngField;
-            }
-            set {
-                this.streetLngField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string DistrctNo {
-            get {
-                return this.distrctNoField;
-            }
-            set {
-                this.distrctNoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Chckstatus {
-            get {
-                return this.chckstatusField;
-            }
-            set {
-                this.chckstatusField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string PboxcitNo {
-            get {
-                return this.pboxcitNoField;
-            }
-            set {
-                this.pboxcitNoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Transpzone {
-            get {
-                return this.transpzoneField;
-            }
-            set {
-                this.transpzoneField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string HouseNo2 {
-            get {
-                return this.houseNo2Field;
-            }
-            set {
-                this.houseNo2Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string EMail {
-            get {
-                return this.eMailField;
-            }
-            set {
-                this.eMailField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string StrSuppl3 {
-            get {
-                return this.strSuppl3Field;
-            }
-            set {
-                this.strSuppl3Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Title {
-            get {
-                return this.titleField;
-            }
-            set {
-                this.titleField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Countryiso {
-            get {
-                return this.countryisoField;
-            }
-            set {
-                this.countryisoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string LanguIso {
-            get {
-                return this.languIsoField;
-            }
-            set {
-                this.languIsoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string BuildLong {
-            get {
-                return this.buildLongField;
-            }
-            set {
-                this.buildLongField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Regiogroup {
-            get {
-                return this.regiogroupField;
-            }
-            set {
-                this.regiogroupField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string HomeCity {
-            get {
-                return this.homeCityField;
-            }
-            set {
-                this.homeCityField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Homecityno {
-            get {
-                return this.homecitynoField;
-            }
-            set {
-                this.homecitynoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Pcode1Ext {
-            get {
-                return this.pcode1ExtField;
-            }
-            set {
-                this.pcode1ExtField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Pcode2Ext {
-            get {
-                return this.pcode2ExtField;
-            }
-            set {
-                this.pcode2ExtField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Pcode3Ext {
-            get {
-                return this.pcode3ExtField;
-            }
-            set {
-                this.pcode3ExtField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string PoWONo {
-            get {
-                return this.poWONoField;
-            }
-            set {
-                this.poWONoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string PoBoxReg {
-            get {
-                return this.poBoxRegField;
-            }
-            set {
-                this.poBoxRegField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string PoboxCtry {
-            get {
-                return this.poboxCtryField;
-            }
-            set {
-                this.poboxCtryField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string PoCtryiso {
-            get {
-                return this.poCtryisoField;
-            }
-            set {
-                this.poCtryisoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Homepage {
-            get {
-                return this.homepageField;
-            }
-            set {
-                this.homepageField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string DontUseS {
-            get {
-                return this.dontUseSField;
-            }
-            set {
-                this.dontUseSField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string DontUseP {
-            get {
-                return this.dontUsePField;
-            }
-            set {
-                this.dontUsePField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string HouseNo3 {
-            get {
-                return this.houseNo3Field;
-            }
-            set {
-                this.houseNo3Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string LanguCr {
-            get {
-                return this.languCrField;
-            }
-            set {
-                this.languCrField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Langucriso {
-            get {
-                return this.langucrisoField;
-            }
-            set {
-                this.langucrisoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string PoBoxLobby {
-            get {
-                return this.poBoxLobbyField;
-            }
-            set {
-                this.poBoxLobbyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string DeliServType {
-            get {
-                return this.deliServTypeField;
-            }
-            set {
-                this.deliServTypeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string DeliServNumber {
-            get {
-                return this.deliServNumberField;
-            }
-            set {
-                this.deliServNumberField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string UriType {
-            get {
-                return this.uriTypeField;
-            }
-            set {
-                this.uriTypeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CountyCode {
-            get {
-                return this.countyCodeField;
-            }
-            set {
-                this.countyCodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string County {
-            get {
-                return this.countyField;
-            }
-            set {
-                this.countyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string TownshipCode {
-            get {
-                return this.townshipCodeField;
-            }
-            set {
-                this.townshipCodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Township {
-            get {
-                return this.townshipField;
-            }
-            set {
-                this.townshipField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Xpcpt {
-            get {
-                return this.xpcptField;
-            }
-            set {
-                this.xpcptField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
-    public partial class ZsfaExtra {
-        
-        private string progLivrareField;
-        
-        private string livrSambataField;
-        
-        private decimal tonajField;
-        
-        private string obssofField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ProgLivrare {
-            get {
-                return this.progLivrareField;
-            }
-            set {
-                this.progLivrareField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string LivrSambata {
-            get {
-                return this.livrSambataField;
-            }
-            set {
-                this.livrSambataField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal Tonaj {
-            get {
-                return this.tonajField;
-            }
-            set {
-                this.tonajField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Obssof {
-            get {
-                return this.obssofField;
-            }
-            set {
-                this.obssofField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
-    public partial class Bapisdls {
-        
-        private string pricingField;
-        
-        private string atpWrkmodField;
-        
-        private string schedulingField;
-        
-        private string nostructureField;
-        
-        private string condHandlField;
-        
-        private string addrCheckField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Pricing {
-            get {
-                return this.pricingField;
-            }
-            set {
-                this.pricingField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string AtpWrkmod {
-            get {
-                return this.atpWrkmodField;
-            }
-            set {
-                this.atpWrkmodField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Scheduling {
-            get {
-                return this.schedulingField;
-            }
-            set {
-                this.schedulingField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Nostructure {
-            get {
-                return this.nostructureField;
-            }
-            set {
-                this.nostructureField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CondHandl {
-            get {
-                return this.condHandlField;
-            }
-            set {
-                this.condHandlField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string AddrCheck {
-            get {
-                return this.addrCheckField;
-            }
-            set {
-                this.addrCheckField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
-    public partial class Bapisdit {
-        
-        private string operationField;
-        
-        private string docNumberField;
-        
-        private string itmNumberField;
-        
-        private string materialField;
-        
-        private string matEntrdField;
-        
-        private string prRefMatField;
-        
-        private string batchField;
-        
-        private string matlGroupField;
-        
-        private string shortTextField;
-        
-        private string itemCategField;
-        
-        private string itemTypeField;
-        
-        private string relForDeField;
-        
-        private string relForBiField;
-        
-        private string hgLvItemField;
-        
-        private string alternItmField;
-        
-        private string reaForReField;
-        
-        private string prodHierField;
-        
-        private decimal outAgrTaField;
-        
-        private decimal targetQtyField;
-        
-        private string targetQuField;
-        
-        private string tUnitIsoField;
-        
-        private decimal targQtyNField;
-        
-        private decimal targQtyDField;
-        
-        private string baseUomField;
-        
-        private string tBasUnitField;
-        
-        private decimal scaleQuanField;
-        
-        private decimal roundDlvField;
-        
-        private string reconDateField;
-        
-        private decimal maxDeviatField;
-        
-        private string poItmNoField;
-        
-        private string custMat22Field;
-        
-        private decimal maxDevPeField;
-        
-        private decimal maxDevDaField;
-        
-        private string repairProField;
-        
-        private string dlvschedusField;
-        
-        private string dlvGroupField;
-        
-        private string fixedQuanField;
-        
-        private string deliUnlimField;
-        
-        private decimal overDlvTField;
-        
-        private decimal underDlvField;
-        
-        private string billBlockField;
-        
-        private string replacePtField;
-        
-        private string methBillField;
-        
-        private string divisionField;
-        
-        private string busAreaField;
-        
-        private decimal netValueField;
-        
-        private string currencyField;
-        
-        private string currenIsoField;
-        
-        private decimal maxPlDlvField;
-        
-        private string partDlvField;
-        
-        private string btchSplitField;
-        
-        private decimal reqQtyField;
-        
-        private decimal cumReqDeField;
-        
-        private decimal cumCfQtyField;
-        
-        private decimal cumConQuField;
-        
-        private string salesUnitField;
-        
-        private string isocodunitField;
-        
-        private decimal salesQty1Field;
-        
-        private decimal salesQty2Field;
-        
-        private decimal grossWeigField;
-        
-        private decimal netWeightField;
-        
-        private string unitOfWtField;
-        
-        private string unitWtisoField;
-        
-        private decimal volumeField;
-        
-        private string volumeunitField;
-        
-        private string volunitisoField;
-        
-        private string cauVbelnField;
-        
-        private string cauPosnrField;
-        
-        private string refDocField;
-        
-        private string posnrVorField;
-        
-        private string objCopyField;
-        
-        private string updatFlagField;
-        
-        private string endRuleField;
-        
-        private string dlvPrioField;
-        
-        private string plantField;
-        
-        private string stgeLocField;
-        
-        private string shipPointField;
-        
-        private string routeField;
-        
-        private string keyStField;
-        
-        private string dateStField;
-        
-        private string nbrStField;
-        
-        private decimal stposVbapField;
-        
-        private string orderProbField;
-        
-        private string creatDateField;
-        
-        private string createdByField;
-        
-        private System.DateTime recTimeField;
-        
-        private string taxClass1Field;
-        
-        private string taxClass2Field;
-        
-        private string taxClass3Field;
-        
-        private string taxClass4Field;
-        
-        private string taxClass5Field;
-        
-        private string taxClass6Field;
-        
-        private string taxClass7Field;
-        
-        private string taxClass8Field;
-        
-        private string taxClass9Field;
-        
-        private decimal fixSpDayField;
-        
-        private decimal varSpDayField;
-        
-        private string precDocField;
-        
-        private decimal netPriceField;
-        
-        private decimal condPUntField;
-        
-        private string condUnitField;
-        
-        private string conisounitField;
-        
-        private string retoureField;
-        
-        private string cashDiscField;
-        
-        private string availcheckField;
-        
-        private string sumRequirField;
-        
-        private string matPrGrpField;
-        
-        private string acctAssgtField;
-        
-        private string rebateGrpField;
-        
-        private string commGroupField;
-        
-        private string eurArtNrField;
-        
-        private string priceOkField;
-        
-        private string valTypeField;
-        
-        private string sepValuatField;
-        
-        private string batchMgmtField;
-        
-        private string indBtchField;
-        
-        private decimal minDelyField;
-        
-        private string updateGrpField;
-        
-        private decimal costDocCField;
-        
-        private decimal subtotPp1Field;
-        
-        private decimal subtotPp2Field;
-        
-        private decimal subtotPp3Field;
-        
-        private decimal subtotPp4Field;
-        
-        private decimal subtotPp5Field;
-        
-        private decimal subtotPp6Field;
-        
-        private decimal exchRateField;
-        
-        private string chOnField;
-        
-        private string eanUpcField;
-        
-        private string fixDateField;
-        
-        private string profitCtrField;
-        
-        private string prcGroup1Field;
-        
-        private string prcGroup2Field;
-        
-        private string prcGroup3Field;
-        
-        private string prcGroup4Field;
-        
-        private string prcGroup5Field;
-        
-        private decimal componQtyField;
-        
-        private string substreasoField;
-        
-        private string specStockField;
-        
-        private string allocIndiField;
-        
-        private string profitSegField;
-        
-        private string wbsElemField;
-        
-        private string orderidField;
-        
-        private string plngMatlField;
-        
-        private string plngPlantField;
-        
-        private string baseUnitField;
-        
-        private string isobasunitField;
-        
-        private float convFactField;
-        
-        private string acctasscatField;
-        
-        private string consumptField;
-        
-        private string bomexplnoField;
-        
-        private string objNrItField;
-        
-        private string resAnalField;
-        
-        private string reqmtstypField;
-        
-        private decimal credpricitField;
-        
-        private string partrelidField;
-        
-        private string actcredidField;
-        
-        private decimal crExchratField;
-        
-        private string configField;
-        
-        private string chclassInField;
-        
-        private string statPriceField;
-        
-        private string condUpdatField;
-        
-        private string sernoProfField;
-        
-        private int noOfSeriField;
-        
-        private string nogrpostedField;
-        
-        private string matGrpSmField;
-        
-        private string manPrChField;
-        
-        private string docCatSdField;
-        
-        private string matdeteridField;
-        
-        private string itusageidField;
-        
-        private string costestnrField;
-        
-        private string cstgVrntField;
-        
-        private string bomitemnrField;
-        
-        private string statValField;
-        
-        private string statDateField;
-        
-        private string busTranstField;
-        
-        private string prefIndicField;
-        
-        private string nrcondrecField;
-        
-        private string intclassnrField;
-        
-        private string batchExitField;
-        
-        private string bomCategoField;
-        
-        private string bomItNrField;
-        
-        private string counterField;
-        
-        private string inconsconfField;
-        
-        private string overhKeyField;
-        
-        private string cstgSheetField;
-        
-        private string cstgVrnt1Field;
-        
-        private string prodAllocField;
-        
-        private string priceRefField;
-        
-        private string matpricgrpField;
-        
-        private string matfrgtgrpField;
-        
-        private string plandlvschField;
-        
-        private string sequencenoField;
-        
-        private float credpricField;
-        
-        private string payGuaranField;
-        
-        private float guranteedField;
-        
-        private string cfopCodeField;
-        
-        private string taxlawicmsField;
-        
-        private string taxlawipiField;
-        
-        private string sdTaxcodeField;
-        
-        private string valcontrnrField;
-        
-        private string valcontritField;
-        
-        private string assortModField;
-        
-        private string valspecstoField;
-        
-        private string matgrhie1Field;
-        
-        private string matgrhie2Field;
-        
-        private string promotionField;
-        
-        private string salesDealField;
-        
-        private string flgleaduniField;
-        
-        private string freeGoodsField;
-        
-        private string validObjField;
-        
-        private decimal taxAmountField;
-        
-        private string mrpAreaField;
-        
-        private string custMat35Field;
-        
-        private decimal crExchratVField;
-        
-        private decimal exchratestVField;
-        
-        private string itmTypeUsageField;
-        
-        private string cfopLongField;
-        
-        private decimal grossValField;
-        
-        private string logSystemOwnField;
-        
-        private string taxlawissField;
-        
-        private string taxlawcofinsField;
-        
-        private string taxlawpisField;
-        
-        private string docCatSdLongField;
-        
-        private string materialLongField;
-        
-        private string matEntrdLongField;
-        
-        private string prRefMatLongField;
-        
-        private string plngMatlLongField;
-        
-        private string priceRefLongField;
-        
-        private decimal poQuanField;
-        
-        private string poUnitField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Operation {
-            get {
-                return this.operationField;
-            }
-            set {
-                this.operationField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string DocNumber {
-            get {
-                return this.docNumberField;
-            }
-            set {
-                this.docNumberField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ItmNumber {
-            get {
-                return this.itmNumberField;
-            }
-            set {
-                this.itmNumberField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Material {
-            get {
-                return this.materialField;
-            }
-            set {
-                this.materialField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string MatEntrd {
-            get {
-                return this.matEntrdField;
-            }
-            set {
-                this.matEntrdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string PrRefMat {
-            get {
-                return this.prRefMatField;
-            }
-            set {
-                this.prRefMatField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Batch {
-            get {
-                return this.batchField;
-            }
-            set {
-                this.batchField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string MatlGroup {
-            get {
-                return this.matlGroupField;
-            }
-            set {
-                this.matlGroupField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ShortText {
-            get {
-                return this.shortTextField;
-            }
-            set {
-                this.shortTextField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ItemCateg {
-            get {
-                return this.itemCategField;
-            }
-            set {
-                this.itemCategField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ItemType {
-            get {
-                return this.itemTypeField;
-            }
-            set {
-                this.itemTypeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string RelForDe {
-            get {
-                return this.relForDeField;
-            }
-            set {
-                this.relForDeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string RelForBi {
-            get {
-                return this.relForBiField;
-            }
-            set {
-                this.relForBiField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string HgLvItem {
-            get {
-                return this.hgLvItemField;
-            }
-            set {
-                this.hgLvItemField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string AlternItm {
-            get {
-                return this.alternItmField;
-            }
-            set {
-                this.alternItmField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ReaForRe {
-            get {
-                return this.reaForReField;
-            }
-            set {
-                this.reaForReField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ProdHier {
-            get {
-                return this.prodHierField;
-            }
-            set {
-                this.prodHierField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal OutAgrTa {
-            get {
-                return this.outAgrTaField;
-            }
-            set {
-                this.outAgrTaField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal TargetQty {
-            get {
-                return this.targetQtyField;
-            }
-            set {
-                this.targetQtyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string TargetQu {
-            get {
-                return this.targetQuField;
-            }
-            set {
-                this.targetQuField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string TUnitIso {
-            get {
-                return this.tUnitIsoField;
-            }
-            set {
-                this.tUnitIsoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal TargQtyN {
-            get {
-                return this.targQtyNField;
-            }
-            set {
-                this.targQtyNField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal TargQtyD {
-            get {
-                return this.targQtyDField;
-            }
-            set {
-                this.targQtyDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string BaseUom {
-            get {
-                return this.baseUomField;
-            }
-            set {
-                this.baseUomField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string TBasUnit {
-            get {
-                return this.tBasUnitField;
-            }
-            set {
-                this.tBasUnitField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal ScaleQuan {
-            get {
-                return this.scaleQuanField;
-            }
-            set {
-                this.scaleQuanField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal RoundDlv {
-            get {
-                return this.roundDlvField;
-            }
-            set {
-                this.roundDlvField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ReconDate {
-            get {
-                return this.reconDateField;
-            }
-            set {
-                this.reconDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal MaxDeviat {
-            get {
-                return this.maxDeviatField;
-            }
-            set {
-                this.maxDeviatField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string PoItmNo {
-            get {
-                return this.poItmNoField;
-            }
-            set {
-                this.poItmNoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CustMat22 {
-            get {
-                return this.custMat22Field;
-            }
-            set {
-                this.custMat22Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal MaxDevPe {
-            get {
-                return this.maxDevPeField;
-            }
-            set {
-                this.maxDevPeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal MaxDevDa {
-            get {
-                return this.maxDevDaField;
-            }
-            set {
-                this.maxDevDaField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string RepairPro {
-            get {
-                return this.repairProField;
-            }
-            set {
-                this.repairProField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Dlvschedus {
-            get {
-                return this.dlvschedusField;
-            }
-            set {
-                this.dlvschedusField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string DlvGroup {
-            get {
-                return this.dlvGroupField;
-            }
-            set {
-                this.dlvGroupField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string FixedQuan {
-            get {
-                return this.fixedQuanField;
-            }
-            set {
-                this.fixedQuanField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string DeliUnlim {
-            get {
-                return this.deliUnlimField;
-            }
-            set {
-                this.deliUnlimField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal OverDlvT {
-            get {
-                return this.overDlvTField;
-            }
-            set {
-                this.overDlvTField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal UnderDlv {
-            get {
-                return this.underDlvField;
-            }
-            set {
-                this.underDlvField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string BillBlock {
-            get {
-                return this.billBlockField;
-            }
-            set {
-                this.billBlockField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ReplacePt {
-            get {
-                return this.replacePtField;
-            }
-            set {
-                this.replacePtField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string MethBill {
-            get {
-                return this.methBillField;
-            }
-            set {
-                this.methBillField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Division {
-            get {
-                return this.divisionField;
-            }
-            set {
-                this.divisionField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string BusArea {
-            get {
-                return this.busAreaField;
-            }
-            set {
-                this.busAreaField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal NetValue {
-            get {
-                return this.netValueField;
-            }
-            set {
-                this.netValueField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Currency {
-            get {
-                return this.currencyField;
-            }
-            set {
-                this.currencyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CurrenIso {
-            get {
-                return this.currenIsoField;
-            }
-            set {
-                this.currenIsoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal MaxPlDlv {
-            get {
-                return this.maxPlDlvField;
-            }
-            set {
-                this.maxPlDlvField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string PartDlv {
-            get {
-                return this.partDlvField;
-            }
-            set {
-                this.partDlvField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string BtchSplit {
-            get {
-                return this.btchSplitField;
-            }
-            set {
-                this.btchSplitField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal ReqQty {
-            get {
-                return this.reqQtyField;
-            }
-            set {
-                this.reqQtyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal CumReqDe {
-            get {
-                return this.cumReqDeField;
-            }
-            set {
-                this.cumReqDeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal CumCfQty {
-            get {
-                return this.cumCfQtyField;
-            }
-            set {
-                this.cumCfQtyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal CumConQu {
-            get {
-                return this.cumConQuField;
-            }
-            set {
-                this.cumConQuField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string SalesUnit {
-            get {
-                return this.salesUnitField;
-            }
-            set {
-                this.salesUnitField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Isocodunit {
-            get {
-                return this.isocodunitField;
-            }
-            set {
-                this.isocodunitField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal SalesQty1 {
-            get {
-                return this.salesQty1Field;
-            }
-            set {
-                this.salesQty1Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal SalesQty2 {
-            get {
-                return this.salesQty2Field;
-            }
-            set {
-                this.salesQty2Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal GrossWeig {
-            get {
-                return this.grossWeigField;
-            }
-            set {
-                this.grossWeigField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal NetWeight {
-            get {
-                return this.netWeightField;
-            }
-            set {
-                this.netWeightField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string UnitOfWt {
-            get {
-                return this.unitOfWtField;
-            }
-            set {
-                this.unitOfWtField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string UnitWtiso {
-            get {
-                return this.unitWtisoField;
-            }
-            set {
-                this.unitWtisoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal Volume {
-            get {
-                return this.volumeField;
-            }
-            set {
-                this.volumeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Volumeunit {
-            get {
-                return this.volumeunitField;
-            }
-            set {
-                this.volumeunitField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Volunitiso {
-            get {
-                return this.volunitisoField;
-            }
-            set {
-                this.volunitisoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CauVbeln {
-            get {
-                return this.cauVbelnField;
-            }
-            set {
-                this.cauVbelnField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CauPosnr {
-            get {
-                return this.cauPosnrField;
-            }
-            set {
-                this.cauPosnrField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string RefDoc {
-            get {
-                return this.refDocField;
-            }
-            set {
-                this.refDocField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string PosnrVor {
-            get {
-                return this.posnrVorField;
-            }
-            set {
-                this.posnrVorField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ObjCopy {
-            get {
-                return this.objCopyField;
-            }
-            set {
-                this.objCopyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string UpdatFlag {
-            get {
-                return this.updatFlagField;
-            }
-            set {
-                this.updatFlagField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string EndRule {
-            get {
-                return this.endRuleField;
-            }
-            set {
-                this.endRuleField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string DlvPrio {
-            get {
-                return this.dlvPrioField;
-            }
-            set {
-                this.dlvPrioField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Plant {
-            get {
-                return this.plantField;
-            }
-            set {
-                this.plantField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string StgeLoc {
-            get {
-                return this.stgeLocField;
-            }
-            set {
-                this.stgeLocField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ShipPoint {
-            get {
-                return this.shipPointField;
-            }
-            set {
-                this.shipPointField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Route {
-            get {
-                return this.routeField;
-            }
-            set {
-                this.routeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string KeySt {
-            get {
-                return this.keyStField;
-            }
-            set {
-                this.keyStField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string DateSt {
-            get {
-                return this.dateStField;
-            }
-            set {
-                this.dateStField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string NbrSt {
-            get {
-                return this.nbrStField;
-            }
-            set {
-                this.nbrStField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal StposVbap {
-            get {
-                return this.stposVbapField;
-            }
-            set {
-                this.stposVbapField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string OrderProb {
-            get {
-                return this.orderProbField;
-            }
-            set {
-                this.orderProbField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CreatDate {
-            get {
-                return this.creatDateField;
-            }
-            set {
-                this.creatDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CreatedBy {
-            get {
-                return this.createdByField;
-            }
-            set {
-                this.createdByField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="time")]
-        public System.DateTime RecTime {
-            get {
-                return this.recTimeField;
-            }
-            set {
-                this.recTimeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string TaxClass1 {
-            get {
-                return this.taxClass1Field;
-            }
-            set {
-                this.taxClass1Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string TaxClass2 {
-            get {
-                return this.taxClass2Field;
-            }
-            set {
-                this.taxClass2Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string TaxClass3 {
-            get {
-                return this.taxClass3Field;
-            }
-            set {
-                this.taxClass3Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string TaxClass4 {
-            get {
-                return this.taxClass4Field;
-            }
-            set {
-                this.taxClass4Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string TaxClass5 {
-            get {
-                return this.taxClass5Field;
-            }
-            set {
-                this.taxClass5Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string TaxClass6 {
-            get {
-                return this.taxClass6Field;
-            }
-            set {
-                this.taxClass6Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string TaxClass7 {
-            get {
-                return this.taxClass7Field;
-            }
-            set {
-                this.taxClass7Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string TaxClass8 {
-            get {
-                return this.taxClass8Field;
-            }
-            set {
-                this.taxClass8Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string TaxClass9 {
-            get {
-                return this.taxClass9Field;
-            }
-            set {
-                this.taxClass9Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal FixSpDay {
-            get {
-                return this.fixSpDayField;
-            }
-            set {
-                this.fixSpDayField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal VarSpDay {
-            get {
-                return this.varSpDayField;
-            }
-            set {
-                this.varSpDayField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string PrecDoc {
-            get {
-                return this.precDocField;
-            }
-            set {
-                this.precDocField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal NetPrice {
-            get {
-                return this.netPriceField;
-            }
-            set {
-                this.netPriceField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal CondPUnt {
-            get {
-                return this.condPUntField;
-            }
-            set {
-                this.condPUntField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CondUnit {
-            get {
-                return this.condUnitField;
-            }
-            set {
-                this.condUnitField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Conisounit {
-            get {
-                return this.conisounitField;
-            }
-            set {
-                this.conisounitField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Retoure {
-            get {
-                return this.retoureField;
-            }
-            set {
-                this.retoureField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CashDisc {
-            get {
-                return this.cashDiscField;
-            }
-            set {
-                this.cashDiscField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Availcheck {
-            get {
-                return this.availcheckField;
-            }
-            set {
-                this.availcheckField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string SumRequir {
-            get {
-                return this.sumRequirField;
-            }
-            set {
-                this.sumRequirField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string MatPrGrp {
-            get {
-                return this.matPrGrpField;
-            }
-            set {
-                this.matPrGrpField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string AcctAssgt {
-            get {
-                return this.acctAssgtField;
-            }
-            set {
-                this.acctAssgtField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string RebateGrp {
-            get {
-                return this.rebateGrpField;
-            }
-            set {
-                this.rebateGrpField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CommGroup {
-            get {
-                return this.commGroupField;
-            }
-            set {
-                this.commGroupField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string EurArtNr {
-            get {
-                return this.eurArtNrField;
-            }
-            set {
-                this.eurArtNrField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string PriceOk {
-            get {
-                return this.priceOkField;
-            }
-            set {
-                this.priceOkField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ValType {
-            get {
-                return this.valTypeField;
-            }
-            set {
-                this.valTypeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string SepValuat {
-            get {
-                return this.sepValuatField;
-            }
-            set {
-                this.sepValuatField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string BatchMgmt {
-            get {
-                return this.batchMgmtField;
-            }
-            set {
-                this.batchMgmtField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string IndBtch {
-            get {
-                return this.indBtchField;
-            }
-            set {
-                this.indBtchField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal MinDely {
-            get {
-                return this.minDelyField;
-            }
-            set {
-                this.minDelyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string UpdateGrp {
-            get {
-                return this.updateGrpField;
-            }
-            set {
-                this.updateGrpField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal CostDocC {
-            get {
-                return this.costDocCField;
-            }
-            set {
-                this.costDocCField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal SubtotPp1 {
-            get {
-                return this.subtotPp1Field;
-            }
-            set {
-                this.subtotPp1Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal SubtotPp2 {
-            get {
-                return this.subtotPp2Field;
-            }
-            set {
-                this.subtotPp2Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal SubtotPp3 {
-            get {
-                return this.subtotPp3Field;
-            }
-            set {
-                this.subtotPp3Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal SubtotPp4 {
-            get {
-                return this.subtotPp4Field;
-            }
-            set {
-                this.subtotPp4Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal SubtotPp5 {
-            get {
-                return this.subtotPp5Field;
-            }
-            set {
-                this.subtotPp5Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal SubtotPp6 {
-            get {
-                return this.subtotPp6Field;
-            }
-            set {
-                this.subtotPp6Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal ExchRate {
-            get {
-                return this.exchRateField;
-            }
-            set {
-                this.exchRateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ChOn {
-            get {
-                return this.chOnField;
-            }
-            set {
-                this.chOnField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string EanUpc {
-            get {
-                return this.eanUpcField;
-            }
-            set {
-                this.eanUpcField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string FixDate {
-            get {
-                return this.fixDateField;
-            }
-            set {
-                this.fixDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ProfitCtr {
-            get {
-                return this.profitCtrField;
-            }
-            set {
-                this.profitCtrField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string PrcGroup1 {
-            get {
-                return this.prcGroup1Field;
-            }
-            set {
-                this.prcGroup1Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string PrcGroup2 {
-            get {
-                return this.prcGroup2Field;
-            }
-            set {
-                this.prcGroup2Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string PrcGroup3 {
-            get {
-                return this.prcGroup3Field;
-            }
-            set {
-                this.prcGroup3Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string PrcGroup4 {
-            get {
-                return this.prcGroup4Field;
-            }
-            set {
-                this.prcGroup4Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string PrcGroup5 {
-            get {
-                return this.prcGroup5Field;
-            }
-            set {
-                this.prcGroup5Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal ComponQty {
-            get {
-                return this.componQtyField;
-            }
-            set {
-                this.componQtyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Substreaso {
-            get {
-                return this.substreasoField;
-            }
-            set {
-                this.substreasoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string SpecStock {
-            get {
-                return this.specStockField;
-            }
-            set {
-                this.specStockField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string AllocIndi {
-            get {
-                return this.allocIndiField;
-            }
-            set {
-                this.allocIndiField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ProfitSeg {
-            get {
-                return this.profitSegField;
-            }
-            set {
-                this.profitSegField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string WbsElem {
-            get {
-                return this.wbsElemField;
-            }
-            set {
-                this.wbsElemField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Orderid {
-            get {
-                return this.orderidField;
-            }
-            set {
-                this.orderidField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string PlngMatl {
-            get {
-                return this.plngMatlField;
-            }
-            set {
-                this.plngMatlField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string PlngPlant {
-            get {
-                return this.plngPlantField;
-            }
-            set {
-                this.plngPlantField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string BaseUnit {
-            get {
-                return this.baseUnitField;
-            }
-            set {
-                this.baseUnitField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Isobasunit {
-            get {
-                return this.isobasunitField;
-            }
-            set {
-                this.isobasunitField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public float ConvFact {
-            get {
-                return this.convFactField;
-            }
-            set {
-                this.convFactField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Acctasscat {
-            get {
-                return this.acctasscatField;
-            }
-            set {
-                this.acctasscatField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Consumpt {
-            get {
-                return this.consumptField;
-            }
-            set {
-                this.consumptField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Bomexplno {
-            get {
-                return this.bomexplnoField;
-            }
-            set {
-                this.bomexplnoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ObjNrIt {
-            get {
-                return this.objNrItField;
-            }
-            set {
-                this.objNrItField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ResAnal {
-            get {
-                return this.resAnalField;
-            }
-            set {
-                this.resAnalField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Reqmtstyp {
-            get {
-                return this.reqmtstypField;
-            }
-            set {
-                this.reqmtstypField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal Credpricit {
-            get {
-                return this.credpricitField;
-            }
-            set {
-                this.credpricitField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Partrelid {
-            get {
-                return this.partrelidField;
-            }
-            set {
-                this.partrelidField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Actcredid {
-            get {
-                return this.actcredidField;
-            }
-            set {
-                this.actcredidField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal CrExchrat {
-            get {
-                return this.crExchratField;
-            }
-            set {
-                this.crExchratField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Config {
-            get {
-                return this.configField;
-            }
-            set {
-                this.configField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ChclassIn {
-            get {
-                return this.chclassInField;
-            }
-            set {
-                this.chclassInField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string StatPrice {
-            get {
-                return this.statPriceField;
-            }
-            set {
-                this.statPriceField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CondUpdat {
-            get {
-                return this.condUpdatField;
-            }
-            set {
-                this.condUpdatField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string SernoProf {
-            get {
-                return this.sernoProfField;
-            }
-            set {
-                this.sernoProfField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public int NoOfSeri {
-            get {
-                return this.noOfSeriField;
-            }
-            set {
-                this.noOfSeriField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Nogrposted {
-            get {
-                return this.nogrpostedField;
-            }
-            set {
-                this.nogrpostedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string MatGrpSm {
-            get {
-                return this.matGrpSmField;
-            }
-            set {
-                this.matGrpSmField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ManPrCh {
-            get {
-                return this.manPrChField;
-            }
-            set {
-                this.manPrChField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string DocCatSd {
-            get {
-                return this.docCatSdField;
-            }
-            set {
-                this.docCatSdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Matdeterid {
-            get {
-                return this.matdeteridField;
-            }
-            set {
-                this.matdeteridField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Itusageid {
-            get {
-                return this.itusageidField;
-            }
-            set {
-                this.itusageidField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Costestnr {
-            get {
-                return this.costestnrField;
-            }
-            set {
-                this.costestnrField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CstgVrnt {
-            get {
-                return this.cstgVrntField;
-            }
-            set {
-                this.cstgVrntField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Bomitemnr {
-            get {
-                return this.bomitemnrField;
-            }
-            set {
-                this.bomitemnrField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string StatVal {
-            get {
-                return this.statValField;
-            }
-            set {
-                this.statValField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string StatDate {
-            get {
-                return this.statDateField;
-            }
-            set {
-                this.statDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string BusTranst {
-            get {
-                return this.busTranstField;
-            }
-            set {
-                this.busTranstField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string PrefIndic {
-            get {
-                return this.prefIndicField;
-            }
-            set {
-                this.prefIndicField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Nrcondrec {
-            get {
-                return this.nrcondrecField;
-            }
-            set {
-                this.nrcondrecField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Intclassnr {
-            get {
-                return this.intclassnrField;
-            }
-            set {
-                this.intclassnrField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string BatchExit {
-            get {
-                return this.batchExitField;
-            }
-            set {
-                this.batchExitField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string BomCatego {
-            get {
-                return this.bomCategoField;
-            }
-            set {
-                this.bomCategoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string BomItNr {
-            get {
-                return this.bomItNrField;
-            }
-            set {
-                this.bomItNrField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Counter {
-            get {
-                return this.counterField;
-            }
-            set {
-                this.counterField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Inconsconf {
-            get {
-                return this.inconsconfField;
-            }
-            set {
-                this.inconsconfField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string OverhKey {
-            get {
-                return this.overhKeyField;
-            }
-            set {
-                this.overhKeyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CstgSheet {
-            get {
-                return this.cstgSheetField;
-            }
-            set {
-                this.cstgSheetField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CstgVrnt1 {
-            get {
-                return this.cstgVrnt1Field;
-            }
-            set {
-                this.cstgVrnt1Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ProdAlloc {
-            get {
-                return this.prodAllocField;
-            }
-            set {
-                this.prodAllocField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string PriceRef {
-            get {
-                return this.priceRefField;
-            }
-            set {
-                this.priceRefField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Matpricgrp {
-            get {
-                return this.matpricgrpField;
-            }
-            set {
-                this.matpricgrpField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Matfrgtgrp {
-            get {
-                return this.matfrgtgrpField;
-            }
-            set {
-                this.matfrgtgrpField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Plandlvsch {
-            get {
-                return this.plandlvschField;
-            }
-            set {
-                this.plandlvschField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Sequenceno {
-            get {
-                return this.sequencenoField;
-            }
-            set {
-                this.sequencenoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public float Credpric {
-            get {
-                return this.credpricField;
-            }
-            set {
-                this.credpricField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string PayGuaran {
-            get {
-                return this.payGuaranField;
-            }
-            set {
-                this.payGuaranField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public float Guranteed {
-            get {
-                return this.guranteedField;
-            }
-            set {
-                this.guranteedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CfopCode {
-            get {
-                return this.cfopCodeField;
-            }
-            set {
-                this.cfopCodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Taxlawicms {
-            get {
-                return this.taxlawicmsField;
-            }
-            set {
-                this.taxlawicmsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Taxlawipi {
-            get {
-                return this.taxlawipiField;
-            }
-            set {
-                this.taxlawipiField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string SdTaxcode {
-            get {
-                return this.sdTaxcodeField;
-            }
-            set {
-                this.sdTaxcodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Valcontrnr {
-            get {
-                return this.valcontrnrField;
-            }
-            set {
-                this.valcontrnrField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Valcontrit {
-            get {
-                return this.valcontritField;
-            }
-            set {
-                this.valcontritField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string AssortMod {
-            get {
-                return this.assortModField;
-            }
-            set {
-                this.assortModField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Valspecsto {
-            get {
-                return this.valspecstoField;
-            }
-            set {
-                this.valspecstoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Matgrhie1 {
-            get {
-                return this.matgrhie1Field;
-            }
-            set {
-                this.matgrhie1Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Matgrhie2 {
-            get {
-                return this.matgrhie2Field;
-            }
-            set {
-                this.matgrhie2Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Promotion {
-            get {
-                return this.promotionField;
-            }
-            set {
-                this.promotionField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string SalesDeal {
-            get {
-                return this.salesDealField;
-            }
-            set {
-                this.salesDealField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Flgleaduni {
-            get {
-                return this.flgleaduniField;
-            }
-            set {
-                this.flgleaduniField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string FreeGoods {
-            get {
-                return this.freeGoodsField;
-            }
-            set {
-                this.freeGoodsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ValidObj {
-            get {
-                return this.validObjField;
-            }
-            set {
-                this.validObjField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal TaxAmount {
-            get {
-                return this.taxAmountField;
-            }
-            set {
-                this.taxAmountField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string MrpArea {
-            get {
-                return this.mrpAreaField;
-            }
-            set {
-                this.mrpAreaField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CustMat35 {
-            get {
-                return this.custMat35Field;
-            }
-            set {
-                this.custMat35Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal CrExchratV {
-            get {
-                return this.crExchratVField;
-            }
-            set {
-                this.crExchratVField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal ExchratestV {
-            get {
-                return this.exchratestVField;
-            }
-            set {
-                this.exchratestVField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ItmTypeUsage {
-            get {
-                return this.itmTypeUsageField;
-            }
-            set {
-                this.itmTypeUsageField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CfopLong {
-            get {
-                return this.cfopLongField;
-            }
-            set {
-                this.cfopLongField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal GrossVal {
-            get {
-                return this.grossValField;
-            }
-            set {
-                this.grossValField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string LogSystemOwn {
-            get {
-                return this.logSystemOwnField;
-            }
-            set {
-                this.logSystemOwnField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Taxlawiss {
-            get {
-                return this.taxlawissField;
-            }
-            set {
-                this.taxlawissField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Taxlawcofins {
-            get {
-                return this.taxlawcofinsField;
-            }
-            set {
-                this.taxlawcofinsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Taxlawpis {
-            get {
-                return this.taxlawpisField;
-            }
-            set {
-                this.taxlawpisField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string DocCatSdLong {
-            get {
-                return this.docCatSdLongField;
-            }
-            set {
-                this.docCatSdLongField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string MaterialLong {
-            get {
-                return this.materialLongField;
-            }
-            set {
-                this.materialLongField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string MatEntrdLong {
-            get {
-                return this.matEntrdLongField;
-            }
-            set {
-                this.matEntrdLongField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string PrRefMatLong {
-            get {
-                return this.prRefMatLongField;
-            }
-            set {
-                this.prRefMatLongField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string PlngMatlLong {
-            get {
-                return this.plngMatlLongField;
-            }
-            set {
-                this.plngMatlLongField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string PriceRefLong {
-            get {
-                return this.priceRefLongField;
-            }
-            set {
-                this.priceRefLongField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal PoQuan {
-            get {
-                return this.poQuanField;
-            }
-            set {
-                this.poQuanField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string PoUnit {
-            get {
-                return this.poUnitField;
-            }
-            set {
-                this.poUnitField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
-    public partial class Bapiincomp {
-        
-        private string docNumberField;
-        
-        private string itmNumberField;
-        
-        private string schedLineField;
-        
-        private string partnRoleField;
-        
-        private string tableNameField;
-        
-        private string fieldNameField;
-        
-        private string fieldTextField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string DocNumber {
-            get {
-                return this.docNumberField;
-            }
-            set {
-                this.docNumberField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ItmNumber {
-            get {
-                return this.itmNumberField;
-            }
-            set {
-                this.itmNumberField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string SchedLine {
-            get {
-                return this.schedLineField;
-            }
-            set {
-                this.schedLineField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string PartnRole {
-            get {
-                return this.partnRoleField;
-            }
-            set {
-                this.partnRoleField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string TableName {
-            get {
-                return this.tableNameField;
-            }
-            set {
-                this.tableNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string FieldName {
-            get {
-                return this.fieldNameField;
-            }
-            set {
-                this.fieldNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string FieldText {
-            get {
-                return this.fieldTextField;
-            }
-            set {
-                this.fieldTextField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
-    public partial class Bapiparex {
-        
-        private string structureField;
-        
-        private string valuepart1Field;
-        
-        private string valuepart2Field;
-        
-        private string valuepart3Field;
-        
-        private string valuepart4Field;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Structure {
-            get {
-                return this.structureField;
-            }
-            set {
-                this.structureField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Valuepart1 {
-            get {
-                return this.valuepart1Field;
-            }
-            set {
-                this.valuepart1Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Valuepart2 {
-            get {
-                return this.valuepart2Field;
-            }
-            set {
-                this.valuepart2Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Valuepart3 {
-            get {
-                return this.valuepart3Field;
-            }
-            set {
-                this.valuepart3Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Valuepart4 {
-            get {
-                return this.valuepart4Field;
-            }
-            set {
-                this.valuepart4Field = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
-    public partial class Bapicond {
-        
-        private string itmNumberField;
-        
-        private string condStNoField;
-        
-        private string condCountField;
-        
-        private string condTypeField;
-        
-        private decimal condValueField;
-        
-        private string currencyField;
-        
-        private string condUnitField;
-        
-        private decimal condPUntField;
-        
-        private string currIsoField;
-        
-        private string cdUntIsoField;
-        
-        private string refobjtypeField;
-        
-        private string refobjkeyField;
-        
-        private string reflogsysField;
-        
-        private string applicatioField;
-        
-        private string conpricdatField;
-        
-        private string calctypconField;
-        
-        private decimal conbasevalField;
-        
-        private decimal conexchratField;
-        
-        private decimal numconvertField;
-        
-        private decimal denominatoField;
-        
-        private string condtypeField;
-        
-        private string statConField;
-        
-        private string scaletypeField;
-        
-        private string accrualsField;
-        
-        private string coninvolstField;
-        
-        private string condoriginField;
-        
-        private string groupcondField;
-        
-        private string condUpdatField;
-        
-        private string accessSeqField;
-        
-        private string condcountField;
-        
-        private decimal roundoffdiField;
-        
-        private decimal condvalueField;
-        
-        private string currency2Field;
-        
-        private string currIso2Field;
-        
-        private string condcntrlField;
-        
-        private string condisactiField;
-        
-        private string condclassField;
-        
-        private float factbasvalField;
-        
-        private string scalebasinField;
-        
-        private decimal scalbasvalField;
-        
-        private string unitmeasurField;
-        
-        private string isoUnitField;
-        
-        private string currenckeyField;
-        
-        private string currenisoField;
-        
-        private string condincompField;
-        
-        private string condconfigField;
-        
-        private string condchamanField;
-        
-        private string condNoField;
-        
-        private string taxCodeField;
-        
-        private string varcondField;
-        
-        private string accountkeyField;
-        
-        private string accountKeField;
-        
-        private string wtWithcdField;
-        
-        private string structcondField;
-        
-        private float factconbasField;
-        
-        private string condcoinhdField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ItmNumber {
-            get {
-                return this.itmNumberField;
-            }
-            set {
-                this.itmNumberField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CondStNo {
-            get {
-                return this.condStNoField;
-            }
-            set {
-                this.condStNoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CondCount {
-            get {
-                return this.condCountField;
-            }
-            set {
-                this.condCountField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CondType {
-            get {
-                return this.condTypeField;
-            }
-            set {
-                this.condTypeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal CondValue {
-            get {
-                return this.condValueField;
-            }
-            set {
-                this.condValueField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Currency {
-            get {
-                return this.currencyField;
-            }
-            set {
-                this.currencyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CondUnit {
-            get {
-                return this.condUnitField;
-            }
-            set {
-                this.condUnitField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal CondPUnt {
-            get {
-                return this.condPUntField;
-            }
-            set {
-                this.condPUntField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CurrIso {
-            get {
-                return this.currIsoField;
-            }
-            set {
-                this.currIsoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CdUntIso {
-            get {
-                return this.cdUntIsoField;
-            }
-            set {
-                this.cdUntIsoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Refobjtype {
-            get {
-                return this.refobjtypeField;
-            }
-            set {
-                this.refobjtypeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Refobjkey {
-            get {
-                return this.refobjkeyField;
-            }
-            set {
-                this.refobjkeyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Reflogsys {
-            get {
-                return this.reflogsysField;
-            }
-            set {
-                this.reflogsysField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Applicatio {
-            get {
-                return this.applicatioField;
-            }
-            set {
-                this.applicatioField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Conpricdat {
-            get {
-                return this.conpricdatField;
-            }
-            set {
-                this.conpricdatField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Calctypcon {
-            get {
-                return this.calctypconField;
-            }
-            set {
-                this.calctypconField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal Conbaseval {
-            get {
-                return this.conbasevalField;
-            }
-            set {
-                this.conbasevalField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal Conexchrat {
-            get {
-                return this.conexchratField;
-            }
-            set {
-                this.conexchratField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal Numconvert {
-            get {
-                return this.numconvertField;
-            }
-            set {
-                this.numconvertField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal Denominato {
-            get {
-                return this.denominatoField;
-            }
-            set {
-                this.denominatoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Condtype {
-            get {
-                return this.condtypeField;
-            }
-            set {
-                this.condtypeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string StatCon {
-            get {
-                return this.statConField;
-            }
-            set {
-                this.statConField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Scaletype {
-            get {
-                return this.scaletypeField;
-            }
-            set {
-                this.scaletypeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Accruals {
-            get {
-                return this.accrualsField;
-            }
-            set {
-                this.accrualsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Coninvolst {
-            get {
-                return this.coninvolstField;
-            }
-            set {
-                this.coninvolstField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Condorigin {
-            get {
-                return this.condoriginField;
-            }
-            set {
-                this.condoriginField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Groupcond {
-            get {
-                return this.groupcondField;
-            }
-            set {
-                this.groupcondField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CondUpdat {
-            get {
-                return this.condUpdatField;
-            }
-            set {
-                this.condUpdatField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string AccessSeq {
-            get {
-                return this.accessSeqField;
-            }
-            set {
-                this.accessSeqField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Condcount {
-            get {
-                return this.condcountField;
-            }
-            set {
-                this.condcountField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal Roundoffdi {
-            get {
-                return this.roundoffdiField;
-            }
-            set {
-                this.roundoffdiField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal Condvalue {
-            get {
-                return this.condvalueField;
-            }
-            set {
-                this.condvalueField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Currency2 {
-            get {
-                return this.currency2Field;
-            }
-            set {
-                this.currency2Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CurrIso2 {
-            get {
-                return this.currIso2Field;
-            }
-            set {
-                this.currIso2Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Condcntrl {
-            get {
-                return this.condcntrlField;
-            }
-            set {
-                this.condcntrlField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Condisacti {
-            get {
-                return this.condisactiField;
-            }
-            set {
-                this.condisactiField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Condclass {
-            get {
-                return this.condclassField;
-            }
-            set {
-                this.condclassField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public float Factbasval {
-            get {
-                return this.factbasvalField;
-            }
-            set {
-                this.factbasvalField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Scalebasin {
-            get {
-                return this.scalebasinField;
-            }
-            set {
-                this.scalebasinField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal Scalbasval {
-            get {
-                return this.scalbasvalField;
-            }
-            set {
-                this.scalbasvalField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Unitmeasur {
-            get {
-                return this.unitmeasurField;
-            }
-            set {
-                this.unitmeasurField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string IsoUnit {
-            get {
-                return this.isoUnitField;
-            }
-            set {
-                this.isoUnitField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Currenckey {
-            get {
-                return this.currenckeyField;
-            }
-            set {
-                this.currenckeyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Curreniso {
-            get {
-                return this.currenisoField;
-            }
-            set {
-                this.currenisoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Condincomp {
-            get {
-                return this.condincompField;
-            }
-            set {
-                this.condincompField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Condconfig {
-            get {
-                return this.condconfigField;
-            }
-            set {
-                this.condconfigField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Condchaman {
-            get {
-                return this.condchamanField;
-            }
-            set {
-                this.condchamanField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CondNo {
-            get {
-                return this.condNoField;
-            }
-            set {
-                this.condNoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string TaxCode {
-            get {
-                return this.taxCodeField;
-            }
-            set {
-                this.taxCodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Varcond {
-            get {
-                return this.varcondField;
-            }
-            set {
-                this.varcondField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Accountkey {
-            get {
-                return this.accountkeyField;
-            }
-            set {
-                this.accountkeyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string AccountKe {
-            get {
-                return this.accountKeField;
-            }
-            set {
-                this.accountKeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string WtWithcd {
-            get {
-                return this.wtWithcdField;
-            }
-            set {
-                this.wtWithcdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Structcond {
-            get {
-                return this.structcondField;
-            }
-            set {
-                this.structcondField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public float Factconbas {
-            get {
-                return this.factconbasField;
-            }
-            set {
-                this.factconbasField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Condcoinhd {
-            get {
-                return this.condcoinhdField;
-            }
-            set {
-                this.condcoinhdField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
-    public partial class Bapisdca {
-        
-        private string operationField;
-        
-        private string docNumberField;
-        
-        private string itmNumberField;
-        
-        private byte[] campaignField;
-        
-        private string seqnoField;
-        
-        private string assignTypeField;
-        
-        private string invalidField;
-        
-        private string secondaryField;
-        
-        private string condNoField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Operation {
-            get {
-                return this.operationField;
-            }
-            set {
-                this.operationField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string DocNumber {
-            get {
-                return this.docNumberField;
-            }
-            set {
-                this.docNumberField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ItmNumber {
-            get {
-                return this.itmNumberField;
-            }
-            set {
-                this.itmNumberField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="base64Binary")]
-        public byte[] Campaign {
-            get {
-                return this.campaignField;
-            }
-            set {
-                this.campaignField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Seqno {
-            get {
-                return this.seqnoField;
-            }
-            set {
-                this.seqnoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string AssignType {
-            get {
-                return this.assignTypeField;
-            }
-            set {
-                this.assignTypeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Invalid {
-            get {
-                return this.invalidField;
-            }
-            set {
-                this.invalidField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Secondary {
-            get {
-                return this.secondaryField;
-            }
-            set {
-                this.secondaryField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CondNo {
-            get {
-                return this.condNoField;
-            }
-            set {
-                this.condNoField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
-    public partial class Bapisdbusi {
-        
-        private string operationField;
-        
-        private string sdDocField;
-        
-        private string itmNumberField;
-        
-        private string priceGrpField;
-        
-        private string custGroupField;
-        
-        private string salesDistField;
-        
-        private string priceListField;
-        
-        private string incoterms1Field;
-        
-        private string incoterms2Field;
-        
-        private string ordcombindField;
-        
-        private string billSchedField;
-        
-        private string invoSchedField;
-        
-        private string mnInvoiceField;
-        
-        private decimal exchratefiField;
-        
-        private string addValDyField;
-        
-        private string fixValDyField;
-        
-        private string pmnttrmsField;
-        
-        private string paymethodeField;
-        
-        private string accntAsgnField;
-        
-        private decimal exchgRateField;
-        
-        private string priceDateField;
-        
-        private string billDateField;
-        
-        private string servDateField;
-        
-        private string fiscYearField;
-        
-        private string postperiodField;
-        
-        private decimal exchratestField;
-        
-        private string dunnKeyField;
-        
-        private string dunnBlockField;
-        
-        private string billPlanField;
-        
-        private string promotionField;
-        
-        private string payGuaranField;
-        
-        private string findocprocField;
-        
-        private string j1afitpDField;
-        
-        private string reas0VatField;
-        
-        private string regionField;
-        
-        private string activicodeField;
-        
-        private string distribtypField;
-        
-        private string taxClassField;
-        
-        private string departNoField;
-        
-        private string recPointField;
-        
-        private string purchNoCField;
-        
-        private string purchDateField;
-        
-        private string poMethodField;
-        
-        private string ref1Field;
-        
-        private string purchNoSField;
-        
-        private string poDatSField;
-        
-        private string poMethSField;
-        
-        private string ref1SField;
-        
-        private string poitmnosField;
-        
-        private string transDateField;
-        
-        private string transdateField;
-        
-        private string custcongr1Field;
-        
-        private string custcongr2Field;
-        
-        private string custcongr3Field;
-        
-        private string custcongr4Field;
-        
-        private string custcongr5Field;
-        
-        private string valcontcurField;
-        
-        private string isovalcontField;
-        
-        private decimal exchratecoField;
-        
-        private string currenckeyField;
-        
-        private string isocurrkeyField;
-        
-        private decimal exchratelcField;
-        
-        private decimal ceprpercenField;
-        
-        private string inflatIdxField;
-        
-        private string basdateidxField;
-        
-        private string custPoNoField;
-        
-        private string dlvTimeField;
-        
-        private string dliProfilField;
-        
-        private string calcMotiveField;
-        
-        private string billFormField;
-        
-        private string revenuetypField;
-        
-        private string begdemaperField;
-        
-        private decimal exchratelcVField;
-        
-        private decimal exchRateFiVField;
-        
-        private decimal exchgRateVField;
-        
-        private decimal exchratestVField;
-        
-        private decimal exchratecoVField;
-        
-        private string delivTypeField;
-        
-        private string transCatField;
-        
-        private string transMatField;
-        
-        private string specProcField;
-        
-        private string prodcatField;
-        
-        private string funcAreaField;
-        
-        private string podProcField;
-        
-        private byte[] campaignField;
-        
-        private string fkkConacctField;
-        
-        private string funcAreaLongField;
-        
-        private byte[] fkkConacctGuidField;
-        
-        private string transMatExternalField;
-        
-        private string transMatGuidField;
-        
-        private string transMatVersionField;
-        
-        private string sepaMandateIdField;
-        
-        private string incotermsvField;
-        
-        private string incoterms2lField;
-        
-        private string incoterms3lField;
-        
-        private string transMatLongField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Operation {
-            get {
-                return this.operationField;
-            }
-            set {
-                this.operationField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string SdDoc {
-            get {
-                return this.sdDocField;
-            }
-            set {
-                this.sdDocField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ItmNumber {
-            get {
-                return this.itmNumberField;
-            }
-            set {
-                this.itmNumberField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string PriceGrp {
-            get {
-                return this.priceGrpField;
-            }
-            set {
-                this.priceGrpField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CustGroup {
-            get {
-                return this.custGroupField;
-            }
-            set {
-                this.custGroupField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string SalesDist {
-            get {
-                return this.salesDistField;
-            }
-            set {
-                this.salesDistField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string PriceList {
-            get {
-                return this.priceListField;
-            }
-            set {
-                this.priceListField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Incoterms1 {
-            get {
-                return this.incoterms1Field;
-            }
-            set {
-                this.incoterms1Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Incoterms2 {
-            get {
-                return this.incoterms2Field;
-            }
-            set {
-                this.incoterms2Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Ordcombind {
-            get {
-                return this.ordcombindField;
-            }
-            set {
-                this.ordcombindField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string BillSched {
-            get {
-                return this.billSchedField;
-            }
-            set {
-                this.billSchedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string InvoSched {
-            get {
-                return this.invoSchedField;
-            }
-            set {
-                this.invoSchedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string MnInvoice {
-            get {
-                return this.mnInvoiceField;
-            }
-            set {
-                this.mnInvoiceField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal Exchratefi {
-            get {
-                return this.exchratefiField;
-            }
-            set {
-                this.exchratefiField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string AddValDy {
-            get {
-                return this.addValDyField;
-            }
-            set {
-                this.addValDyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string FixValDy {
-            get {
-                return this.fixValDyField;
-            }
-            set {
-                this.fixValDyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Pmnttrms {
-            get {
-                return this.pmnttrmsField;
-            }
-            set {
-                this.pmnttrmsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Paymethode {
-            get {
-                return this.paymethodeField;
-            }
-            set {
-                this.paymethodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string AccntAsgn {
-            get {
-                return this.accntAsgnField;
-            }
-            set {
-                this.accntAsgnField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal ExchgRate {
-            get {
-                return this.exchgRateField;
-            }
-            set {
-                this.exchgRateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string PriceDate {
-            get {
-                return this.priceDateField;
-            }
-            set {
-                this.priceDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string BillDate {
-            get {
-                return this.billDateField;
-            }
-            set {
-                this.billDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ServDate {
-            get {
-                return this.servDateField;
-            }
-            set {
-                this.servDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string FiscYear {
-            get {
-                return this.fiscYearField;
-            }
-            set {
-                this.fiscYearField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Postperiod {
-            get {
-                return this.postperiodField;
-            }
-            set {
-                this.postperiodField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal Exchratest {
-            get {
-                return this.exchratestField;
-            }
-            set {
-                this.exchratestField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string DunnKey {
-            get {
-                return this.dunnKeyField;
-            }
-            set {
-                this.dunnKeyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string DunnBlock {
-            get {
-                return this.dunnBlockField;
-            }
-            set {
-                this.dunnBlockField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string BillPlan {
-            get {
-                return this.billPlanField;
-            }
-            set {
-                this.billPlanField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Promotion {
-            get {
-                return this.promotionField;
-            }
-            set {
-                this.promotionField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string PayGuaran {
-            get {
-                return this.payGuaranField;
-            }
-            set {
-                this.payGuaranField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Findocproc {
-            get {
-                return this.findocprocField;
-            }
-            set {
-                this.findocprocField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string J1afitpD {
-            get {
-                return this.j1afitpDField;
-            }
-            set {
-                this.j1afitpDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Reas0Vat {
-            get {
-                return this.reas0VatField;
-            }
-            set {
-                this.reas0VatField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Region {
-            get {
-                return this.regionField;
-            }
-            set {
-                this.regionField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Activicode {
-            get {
-                return this.activicodeField;
-            }
-            set {
-                this.activicodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Distribtyp {
-            get {
-                return this.distribtypField;
-            }
-            set {
-                this.distribtypField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string TaxClass {
-            get {
-                return this.taxClassField;
-            }
-            set {
-                this.taxClassField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string DepartNo {
-            get {
-                return this.departNoField;
-            }
-            set {
-                this.departNoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string RecPoint {
-            get {
-                return this.recPointField;
-            }
-            set {
-                this.recPointField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string PurchNoC {
-            get {
-                return this.purchNoCField;
-            }
-            set {
-                this.purchNoCField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string PurchDate {
-            get {
-                return this.purchDateField;
-            }
-            set {
-                this.purchDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string PoMethod {
-            get {
-                return this.poMethodField;
-            }
-            set {
-                this.poMethodField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Ref1 {
-            get {
-                return this.ref1Field;
-            }
-            set {
-                this.ref1Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string PurchNoS {
-            get {
-                return this.purchNoSField;
-            }
-            set {
-                this.purchNoSField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string PoDatS {
-            get {
-                return this.poDatSField;
-            }
-            set {
-                this.poDatSField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string PoMethS {
-            get {
-                return this.poMethSField;
-            }
-            set {
-                this.poMethSField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Ref1S {
-            get {
-                return this.ref1SField;
-            }
-            set {
-                this.ref1SField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Poitmnos {
-            get {
-                return this.poitmnosField;
-            }
-            set {
-                this.poitmnosField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string TransDate {
-            get {
-                return this.transDateField;
-            }
-            set {
-                this.transDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Transdate {
-            get {
-                return this.transdateField;
-            }
-            set {
-                this.transdateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Custcongr1 {
-            get {
-                return this.custcongr1Field;
-            }
-            set {
-                this.custcongr1Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Custcongr2 {
-            get {
-                return this.custcongr2Field;
-            }
-            set {
-                this.custcongr2Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Custcongr3 {
-            get {
-                return this.custcongr3Field;
-            }
-            set {
-                this.custcongr3Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Custcongr4 {
-            get {
-                return this.custcongr4Field;
-            }
-            set {
-                this.custcongr4Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Custcongr5 {
-            get {
-                return this.custcongr5Field;
-            }
-            set {
-                this.custcongr5Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Valcontcur {
-            get {
-                return this.valcontcurField;
-            }
-            set {
-                this.valcontcurField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Isovalcont {
-            get {
-                return this.isovalcontField;
-            }
-            set {
-                this.isovalcontField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal Exchrateco {
-            get {
-                return this.exchratecoField;
-            }
-            set {
-                this.exchratecoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Currenckey {
-            get {
-                return this.currenckeyField;
-            }
-            set {
-                this.currenckeyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Isocurrkey {
-            get {
-                return this.isocurrkeyField;
-            }
-            set {
-                this.isocurrkeyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal Exchratelc {
-            get {
-                return this.exchratelcField;
-            }
-            set {
-                this.exchratelcField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal Ceprpercen {
-            get {
-                return this.ceprpercenField;
-            }
-            set {
-                this.ceprpercenField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string InflatIdx {
-            get {
-                return this.inflatIdxField;
-            }
-            set {
-                this.inflatIdxField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Basdateidx {
-            get {
-                return this.basdateidxField;
-            }
-            set {
-                this.basdateidxField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CustPoNo {
-            get {
-                return this.custPoNoField;
-            }
-            set {
-                this.custPoNoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string DlvTime {
-            get {
-                return this.dlvTimeField;
-            }
-            set {
-                this.dlvTimeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string DliProfil {
-            get {
-                return this.dliProfilField;
-            }
-            set {
-                this.dliProfilField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CalcMotive {
-            get {
-                return this.calcMotiveField;
-            }
-            set {
-                this.calcMotiveField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string BillForm {
-            get {
-                return this.billFormField;
-            }
-            set {
-                this.billFormField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Revenuetyp {
-            get {
-                return this.revenuetypField;
-            }
-            set {
-                this.revenuetypField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Begdemaper {
-            get {
-                return this.begdemaperField;
-            }
-            set {
-                this.begdemaperField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal ExchratelcV {
-            get {
-                return this.exchratelcVField;
-            }
-            set {
-                this.exchratelcVField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal ExchRateFiV {
-            get {
-                return this.exchRateFiVField;
-            }
-            set {
-                this.exchRateFiVField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal ExchgRateV {
-            get {
-                return this.exchgRateVField;
-            }
-            set {
-                this.exchgRateVField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal ExchratestV {
-            get {
-                return this.exchratestVField;
-            }
-            set {
-                this.exchratestVField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public decimal ExchratecoV {
-            get {
-                return this.exchratecoVField;
-            }
-            set {
-                this.exchratecoVField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string DelivType {
-            get {
-                return this.delivTypeField;
-            }
-            set {
-                this.delivTypeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string TransCat {
-            get {
-                return this.transCatField;
-            }
-            set {
-                this.transCatField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string TransMat {
-            get {
-                return this.transMatField;
-            }
-            set {
-                this.transMatField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string SpecProc {
-            get {
-                return this.specProcField;
-            }
-            set {
-                this.specProcField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Prodcat {
-            get {
-                return this.prodcatField;
-            }
-            set {
-                this.prodcatField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string FuncArea {
-            get {
-                return this.funcAreaField;
-            }
-            set {
-                this.funcAreaField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string PodProc {
-            get {
-                return this.podProcField;
-            }
-            set {
-                this.podProcField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="base64Binary")]
-        public byte[] Campaign {
-            get {
-                return this.campaignField;
-            }
-            set {
-                this.campaignField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string FkkConacct {
-            get {
-                return this.fkkConacctField;
-            }
-            set {
-                this.fkkConacctField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string FuncAreaLong {
-            get {
-                return this.funcAreaLongField;
-            }
-            set {
-                this.funcAreaLongField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="base64Binary")]
-        public byte[] FkkConacctGuid {
-            get {
-                return this.fkkConacctGuidField;
-            }
-            set {
-                this.fkkConacctGuidField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string TransMatExternal {
-            get {
-                return this.transMatExternalField;
-            }
-            set {
-                this.transMatExternalField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string TransMatGuid {
-            get {
-                return this.transMatGuidField;
-            }
-            set {
-                this.transMatGuidField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string TransMatVersion {
-            get {
-                return this.transMatVersionField;
-            }
-            set {
-                this.transMatVersionField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string SepaMandateId {
-            get {
-                return this.sepaMandateIdField;
-            }
-            set {
-                this.sepaMandateIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Incotermsv {
-            get {
-                return this.incotermsvField;
-            }
-            set {
-                this.incotermsvField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Incoterms2l {
-            get {
-                return this.incoterms2lField;
-            }
-            set {
-                this.incoterms2lField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Incoterms3l {
-            get {
-                return this.incoterms3lField;
-            }
-            set {
-                this.incoterms3lField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string TransMatLong {
-            get {
-                return this.transMatLongField;
-            }
-            set {
-                this.transMatLongField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
-    public partial class Bapibtsel {
-        
-        private string selectionField;
-        
-        private string charcNameField;
-        
-        private string charcTxtField;
-        
-        private string valueField;
-        
-        private string valueTxtField;
-        
-        private string valueToField;
-        
-        private string valueCodeField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Selection {
-            get {
-                return this.selectionField;
-            }
-            set {
-                this.selectionField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CharcName {
-            get {
-                return this.charcNameField;
-            }
-            set {
-                this.charcNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string CharcTxt {
-            get {
-                return this.charcTxtField;
-            }
-            set {
-                this.charcTxtField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string Value {
-            get {
-                return this.valueField;
-            }
-            set {
-                this.valueField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ValueTxt {
-            get {
-                return this.valueTxtField;
-            }
-            set {
-                this.valueTxtField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ValueTo {
-            get {
-                return this.valueToField;
-            }
-            set {
-                this.valueToField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ValueCode {
-            get {
-                return this.valueCodeField;
-            }
-            set {
-                this.valueCodeField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
     public partial class ZtrapSite {
         
         private string matnrField;
@@ -26031,6 +28132,319 @@ namespace WebService1.SAPWebServices {
             }
             set {
                 this.meinsField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class Solisti1 {
+        
+        private string lineField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Line {
+            get {
+                return this.lineField;
+            }
+            set {
+                this.lineField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class ZslbLogMsg {
+        
+        private string mandtField;
+        
+        private string vbelnField;
+        
+        private string posnrField;
+        
+        private string erdatField;
+        
+        private System.DateTime erzetField;
+        
+        private string typeField;
+        
+        private string idField;
+        
+        private string nrField;
+        
+        private string messageField;
+        
+        private string logNoField;
+        
+        private string logMsgNoField;
+        
+        private string messageV1Field;
+        
+        private string messageV2Field;
+        
+        private string messageV3Field;
+        
+        private string messageV4Field;
+        
+        private string vbelnVlField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Mandt {
+            get {
+                return this.mandtField;
+            }
+            set {
+                this.mandtField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Vbeln {
+            get {
+                return this.vbelnField;
+            }
+            set {
+                this.vbelnField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Posnr {
+            get {
+                return this.posnrField;
+            }
+            set {
+                this.posnrField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Erdat {
+            get {
+                return this.erdatField;
+            }
+            set {
+                this.erdatField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="time")]
+        public System.DateTime Erzet {
+            get {
+                return this.erzetField;
+            }
+            set {
+                this.erzetField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Type {
+            get {
+                return this.typeField;
+            }
+            set {
+                this.typeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Nr {
+            get {
+                return this.nrField;
+            }
+            set {
+                this.nrField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Message {
+            get {
+                return this.messageField;
+            }
+            set {
+                this.messageField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string LogNo {
+            get {
+                return this.logNoField;
+            }
+            set {
+                this.logNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string LogMsgNo {
+            get {
+                return this.logMsgNoField;
+            }
+            set {
+                this.logMsgNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string MessageV1 {
+            get {
+                return this.messageV1Field;
+            }
+            set {
+                this.messageV1Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string MessageV2 {
+            get {
+                return this.messageV2Field;
+            }
+            set {
+                this.messageV2Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string MessageV3 {
+            get {
+                return this.messageV3Field;
+            }
+            set {
+                this.messageV3Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string MessageV4 {
+            get {
+                return this.messageV4Field;
+            }
+            set {
+                this.messageV4Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string VbelnVl {
+            get {
+                return this.vbelnVlField;
+            }
+            set {
+                this.vbelnVlField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class ZstZslbMatnr {
+        
+        private string matnrField;
+        
+        private string meinsField;
+        
+        private decimal det30Field;
+        
+        private decimal det100Field;
+        
+        private decimal lipsaField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Matnr {
+            get {
+                return this.matnrField;
+            }
+            set {
+                this.matnrField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Meins {
+            get {
+                return this.meinsField;
+            }
+            set {
+                this.meinsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal Det30 {
+            get {
+                return this.det30Field;
+            }
+            set {
+                this.det30Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal Det100 {
+            get {
+                return this.det100Field;
+            }
+            set {
+                this.det100Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal Lipsa {
+            get {
+                return this.lipsaField;
+            }
+            set {
+                this.lipsaField = value;
             }
         }
     }
@@ -26422,6 +28836,8 @@ namespace WebService1.SAPWebServices {
         
         private string tratyField;
         
+        private decimal cmpcField;
+        
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         public string Matnr {
@@ -26518,6 +28934,17 @@ namespace WebService1.SAPWebServices {
             }
             set {
                 this.tratyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal Cmpc {
+            get {
+                return this.cmpcField;
+            }
+            set {
+                this.cmpcField = value;
             }
         }
     }
@@ -27974,6 +30401,596 @@ namespace WebService1.SAPWebServices {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class ZgetPrice20 {
+        
+        private string canalField;
+        
+        private string cityField;
+        
+        private string cuRotunjField;
+        
+        private string dztermField;
+        
+        private decimal gvCantField;
+        
+        private bool gvCantFieldSpecified;
+        
+        private string gvKunnrField;
+        
+        private string gvLgortField;
+        
+        private string gvMatnrField;
+        
+        private string gvSiteField;
+        
+        private string gvSpartField;
+        
+        private string gvVrkmeField;
+        
+        private string gvWerksField;
+        
+        private string mpField;
+        
+        private string regioField;
+        
+        private string tipPersField;
+        
+        private string tratyField;
+        
+        private string ulStocField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Canal {
+            get {
+                return this.canalField;
+            }
+            set {
+                this.canalField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string City {
+            get {
+                return this.cityField;
+            }
+            set {
+                this.cityField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CuRotunj {
+            get {
+                return this.cuRotunjField;
+            }
+            set {
+                this.cuRotunjField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Dzterm {
+            get {
+                return this.dztermField;
+            }
+            set {
+                this.dztermField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal GvCant {
+            get {
+                return this.gvCantField;
+            }
+            set {
+                this.gvCantField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool GvCantSpecified {
+            get {
+                return this.gvCantFieldSpecified;
+            }
+            set {
+                this.gvCantFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string GvKunnr {
+            get {
+                return this.gvKunnrField;
+            }
+            set {
+                this.gvKunnrField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string GvLgort {
+            get {
+                return this.gvLgortField;
+            }
+            set {
+                this.gvLgortField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string GvMatnr {
+            get {
+                return this.gvMatnrField;
+            }
+            set {
+                this.gvMatnrField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string GvSite {
+            get {
+                return this.gvSiteField;
+            }
+            set {
+                this.gvSiteField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string GvSpart {
+            get {
+                return this.gvSpartField;
+            }
+            set {
+                this.gvSpartField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string GvVrkme {
+            get {
+                return this.gvVrkmeField;
+            }
+            set {
+                this.gvVrkmeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string GvWerks {
+            get {
+                return this.gvWerksField;
+            }
+            set {
+                this.gvWerksField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Mp {
+            get {
+                return this.mpField;
+            }
+            set {
+                this.mpField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Regio {
+            get {
+                return this.regioField;
+            }
+            set {
+                this.regioField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string TipPers {
+            get {
+                return this.tipPersField;
+            }
+            set {
+                this.tipPersField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Traty {
+            get {
+                return this.tratyField;
+            }
+            set {
+                this.tratyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string UlStoc {
+            get {
+                return this.ulStocField;
+            }
+            set {
+                this.ulStocField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class ZgetPrice20Response {
+        
+        private byte errorCodeField;
+        
+        private decimal gvBrgewField;
+        
+        private decimal gvBrgewMatnrField;
+        
+        private decimal gvCantField;
+        
+        private bool gvCantFieldSpecified;
+        
+        private decimal gvCantFreeField;
+        
+        private string gvCondField;
+        
+        private string gvCurrencyField;
+        
+        private string gvDatbiField;
+        
+        private string gvMatnrFreeField;
+        
+        private decimal gvNetwrField;
+        
+        private decimal gvNetwrFreeField;
+        
+        private decimal gvNetwrFtvaField;
+        
+        private decimal gvNetwrListField;
+        
+        private decimal gvNetwrMinField;
+        
+        private string gvNoDiscField;
+        
+        private string gvPromoField;
+        
+        private decimal gvQty50Field;
+        
+        private string gvUm50Field;
+        
+        private string gvVrkmeField;
+        
+        private string gvVrkmeFreeField;
+        
+        private string impachetField;
+        
+        private decimal multipluField;
+        
+        private decimal outCantUmbField;
+        
+        private string outUmbField;
+        
+        private string vMessField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public byte ErrorCode {
+            get {
+                return this.errorCodeField;
+            }
+            set {
+                this.errorCodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal GvBrgew {
+            get {
+                return this.gvBrgewField;
+            }
+            set {
+                this.gvBrgewField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal GvBrgewMatnr {
+            get {
+                return this.gvBrgewMatnrField;
+            }
+            set {
+                this.gvBrgewMatnrField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal GvCant {
+            get {
+                return this.gvCantField;
+            }
+            set {
+                this.gvCantField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool GvCantSpecified {
+            get {
+                return this.gvCantFieldSpecified;
+            }
+            set {
+                this.gvCantFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal GvCantFree {
+            get {
+                return this.gvCantFreeField;
+            }
+            set {
+                this.gvCantFreeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string GvCond {
+            get {
+                return this.gvCondField;
+            }
+            set {
+                this.gvCondField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string GvCurrency {
+            get {
+                return this.gvCurrencyField;
+            }
+            set {
+                this.gvCurrencyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string GvDatbi {
+            get {
+                return this.gvDatbiField;
+            }
+            set {
+                this.gvDatbiField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string GvMatnrFree {
+            get {
+                return this.gvMatnrFreeField;
+            }
+            set {
+                this.gvMatnrFreeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal GvNetwr {
+            get {
+                return this.gvNetwrField;
+            }
+            set {
+                this.gvNetwrField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal GvNetwrFree {
+            get {
+                return this.gvNetwrFreeField;
+            }
+            set {
+                this.gvNetwrFreeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal GvNetwrFtva {
+            get {
+                return this.gvNetwrFtvaField;
+            }
+            set {
+                this.gvNetwrFtvaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal GvNetwrList {
+            get {
+                return this.gvNetwrListField;
+            }
+            set {
+                this.gvNetwrListField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal GvNetwrMin {
+            get {
+                return this.gvNetwrMinField;
+            }
+            set {
+                this.gvNetwrMinField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string GvNoDisc {
+            get {
+                return this.gvNoDiscField;
+            }
+            set {
+                this.gvNoDiscField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string GvPromo {
+            get {
+                return this.gvPromoField;
+            }
+            set {
+                this.gvPromoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal GvQty50 {
+            get {
+                return this.gvQty50Field;
+            }
+            set {
+                this.gvQty50Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string GvUm50 {
+            get {
+                return this.gvUm50Field;
+            }
+            set {
+                this.gvUm50Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string GvVrkme {
+            get {
+                return this.gvVrkmeField;
+            }
+            set {
+                this.gvVrkmeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string GvVrkmeFree {
+            get {
+                return this.gvVrkmeFreeField;
+            }
+            set {
+                this.gvVrkmeFreeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Impachet {
+            get {
+                return this.impachetField;
+            }
+            set {
+                this.impachetField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal Multiplu {
+            get {
+                return this.multipluField;
+            }
+            set {
+                this.multipluField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal OutCantUmb {
+            get {
+                return this.outCantUmbField;
+            }
+            set {
+                this.outCantUmbField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string OutUmb {
+            get {
+                return this.outUmbField;
+            }
+            set {
+                this.outUmbField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string VMess {
+            get {
+                return this.vMessField;
+            }
+            set {
+                this.vMessField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
     public partial class Zpalcant {
         
         private Zmateriale[] gtMaterialeField;
@@ -28367,6 +31384,157 @@ namespace WebService1.SAPWebServices {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class ZanuleazaDocumente2 {
+        
+        private string ipIdmotivField;
+        
+        private string ipLfdatField;
+        
+        private string ipMotivSField;
+        
+        private string ipNeconformeField;
+        
+        private ZstZslbMatnr[] itMatnrField;
+        
+        private string pEventField;
+        
+        private string pVbelnField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string IpIdmotiv {
+            get {
+                return this.ipIdmotivField;
+            }
+            set {
+                this.ipIdmotivField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string IpLfdat {
+            get {
+                return this.ipLfdatField;
+            }
+            set {
+                this.ipLfdatField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string IpMotivS {
+            get {
+                return this.ipMotivSField;
+            }
+            set {
+                this.ipMotivSField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string IpNeconforme {
+            get {
+                return this.ipNeconformeField;
+            }
+            set {
+                this.ipNeconformeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
+        public ZstZslbMatnr[] ItMatnr {
+            get {
+                return this.itMatnrField;
+            }
+            set {
+                this.itMatnrField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PEvent {
+            get {
+                return this.pEventField;
+            }
+            set {
+                this.pEventField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PVbeln {
+            get {
+                return this.pVbelnField;
+            }
+            set {
+                this.pVbelnField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class ZanuleazaDocumente2Response {
+        
+        private ZslbLogMsg[] etErrReturnField;
+        
+        private Solisti1[] etSolisti1Field;
+        
+        private string lvErrField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
+        public ZslbLogMsg[] EtErrReturn {
+            get {
+                return this.etErrReturnField;
+            }
+            set {
+                this.etErrReturnField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
+        public Solisti1[] EtSolisti1 {
+            get {
+                return this.etSolisti1Field;
+            }
+            set {
+                this.etSolisti1Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string LvErr {
+            get {
+                return this.lvErrField;
+            }
+            set {
+                this.lvErrField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
     public partial class ZcalcTrapSite {
         
         private string gvKunnrField;
@@ -28634,6 +31802,255 @@ namespace WebService1.SAPWebServices {
             }
             set {
                 this.epKunnrField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class ZsdSalesdocumentChange {
+        
+        private string ipDoZulrField;
+        
+        private Bapisdhd1 ipOrderHeaderInField;
+        
+        private Bapisdhd1x ipOrderHeaderInxField;
+        
+        private string ipRfcOpField;
+        
+        private string ipSalesdocumentField;
+        
+        private string ipZb2cField;
+        
+        private string ipZslbField;
+        
+        private Bapisditm[] itItemInField;
+        
+        private Bapisditmx[] itItemInxField;
+        
+        private Bapiret2[] itReturnField;
+        
+        private Bapischdl[] itScheduleInField;
+        
+        private Bapischdlx[] itScheduleInxField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string IpDoZulr {
+            get {
+                return this.ipDoZulrField;
+            }
+            set {
+                this.ipDoZulrField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public Bapisdhd1 IpOrderHeaderIn {
+            get {
+                return this.ipOrderHeaderInField;
+            }
+            set {
+                this.ipOrderHeaderInField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public Bapisdhd1x IpOrderHeaderInx {
+            get {
+                return this.ipOrderHeaderInxField;
+            }
+            set {
+                this.ipOrderHeaderInxField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string IpRfcOp {
+            get {
+                return this.ipRfcOpField;
+            }
+            set {
+                this.ipRfcOpField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string IpSalesdocument {
+            get {
+                return this.ipSalesdocumentField;
+            }
+            set {
+                this.ipSalesdocumentField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string IpZb2c {
+            get {
+                return this.ipZb2cField;
+            }
+            set {
+                this.ipZb2cField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string IpZslb {
+            get {
+                return this.ipZslbField;
+            }
+            set {
+                this.ipZslbField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
+        public Bapisditm[] ItItemIn {
+            get {
+                return this.itItemInField;
+            }
+            set {
+                this.itItemInField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
+        public Bapisditmx[] ItItemInx {
+            get {
+                return this.itItemInxField;
+            }
+            set {
+                this.itItemInxField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
+        public Bapiret2[] ItReturn {
+            get {
+                return this.itReturnField;
+            }
+            set {
+                this.itReturnField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
+        public Bapischdl[] ItScheduleIn {
+            get {
+                return this.itScheduleInField;
+            }
+            set {
+                this.itScheduleInField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
+        public Bapischdlx[] ItScheduleInx {
+            get {
+                return this.itScheduleInxField;
+            }
+            set {
+                this.itScheduleInxField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class ZsdSalesdocumentChangeResponse {
+        
+        private Bapisditm[] itItemInField;
+        
+        private Bapisditmx[] itItemInxField;
+        
+        private Bapiret2[] itReturnField;
+        
+        private Bapischdl[] itScheduleInField;
+        
+        private Bapischdlx[] itScheduleInxField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
+        public Bapisditm[] ItItemIn {
+            get {
+                return this.itItemInField;
+            }
+            set {
+                this.itItemInField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
+        public Bapisditmx[] ItItemInx {
+            get {
+                return this.itItemInxField;
+            }
+            set {
+                this.itItemInxField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
+        public Bapiret2[] ItReturn {
+            get {
+                return this.itReturnField;
+            }
+            set {
+                this.itReturnField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
+        public Bapischdl[] ItScheduleIn {
+            get {
+                return this.itScheduleInField;
+            }
+            set {
+                this.itScheduleInField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
+        public Bapischdlx[] ItScheduleInx {
+            get {
+                return this.itScheduleInxField;
+            }
+            set {
+                this.itScheduleInxField = value;
             }
         }
     }
@@ -29939,6 +33356,147 @@ namespace WebService1.SAPWebServices {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class ZChangeTonajPo {
+        
+        private string ipAdrnrField;
+        
+        private string ipBsartField;
+        
+        private string ipEbelnField;
+        
+        private decimal ipTonajField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string IpAdrnr {
+            get {
+                return this.ipAdrnrField;
+            }
+            set {
+                this.ipAdrnrField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string IpBsart {
+            get {
+                return this.ipBsartField;
+            }
+            set {
+                this.ipBsartField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string IpEbeln {
+            get {
+                return this.ipEbelnField;
+            }
+            set {
+                this.ipEbelnField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal IpTonaj {
+            get {
+                return this.ipTonajField;
+            }
+            set {
+                this.ipTonajField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class ZChangeTonajPoResponse {
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class ZlivrareClpZulr {
+        
+        private string ipVbelnField;
+        
+        private string ipWerksField;
+        
+        private ZstEbeln[] itEbelnField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string IpVbeln {
+            get {
+                return this.ipVbelnField;
+            }
+            set {
+                this.ipVbelnField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string IpWerks {
+            get {
+                return this.ipWerksField;
+            }
+            set {
+                this.ipWerksField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
+        public ZstEbeln[] ItEbeln {
+            get {
+                return this.itEbelnField;
+            }
+            set {
+                this.itEbelnField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class ZlivrareClpZulrResponse {
+        
+        private string epErrorField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string EpError {
+            get {
+                return this.epErrorField;
+            }
+            set {
+                this.epErrorField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
     public partial class ZlivrareCustodie {
         
         private string ipIdField;
@@ -30350,6 +33908,219 @@ namespace WebService1.SAPWebServices {
             }
             set {
                 this.epStocDispField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class ZanuleazaDocumente {
+        
+        private ZstZslbMatnr[] itMatnrField;
+        
+        private string pEventField;
+        
+        private string pVbelnField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
+        public ZstZslbMatnr[] ItMatnr {
+            get {
+                return this.itMatnrField;
+            }
+            set {
+                this.itMatnrField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PEvent {
+            get {
+                return this.pEventField;
+            }
+            set {
+                this.pEventField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string PVbeln {
+            get {
+                return this.pVbelnField;
+            }
+            set {
+                this.pVbelnField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class ZanuleazaDocumenteResponse {
+        
+        private ZslbLogMsg[] etErrReturnField;
+        
+        private string lvErrField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
+        public ZslbLogMsg[] EtErrReturn {
+            get {
+                return this.etErrReturnField;
+            }
+            set {
+                this.etErrReturnField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string LvErr {
+            get {
+                return this.lvErrField;
+            }
+            set {
+                this.lvErrField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class ZbapiReservationChange {
+        
+        private ZcomheadTableta isComenziField;
+        
+        private string reservationField;
+        
+        private Bapi2093ResItemChange[] reservationitemsChangedField;
+        
+        private Bapi2093ResItemChangex[] reservationitemsChangedxField;
+        
+        private Bapiret2[] returnField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public ZcomheadTableta IsComenzi {
+            get {
+                return this.isComenziField;
+            }
+            set {
+                this.isComenziField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Reservation {
+            get {
+                return this.reservationField;
+            }
+            set {
+                this.reservationField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
+        public Bapi2093ResItemChange[] ReservationitemsChanged {
+            get {
+                return this.reservationitemsChangedField;
+            }
+            set {
+                this.reservationitemsChangedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
+        public Bapi2093ResItemChangex[] ReservationitemsChangedx {
+            get {
+                return this.reservationitemsChangedxField;
+            }
+            set {
+                this.reservationitemsChangedxField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
+        public Bapiret2[] Return {
+            get {
+                return this.returnField;
+            }
+            set {
+                this.returnField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class ZbapiReservationChangeResponse {
+        
+        private Bapi2093ResItemChange[] reservationitemsChangedField;
+        
+        private Bapi2093ResItemChangex[] reservationitemsChangedxField;
+        
+        private Bapiret2[] returnField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
+        public Bapi2093ResItemChange[] ReservationitemsChanged {
+            get {
+                return this.reservationitemsChangedField;
+            }
+            set {
+                this.reservationitemsChangedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
+        public Bapi2093ResItemChangex[] ReservationitemsChangedx {
+            get {
+                return this.reservationitemsChangedxField;
+            }
+            set {
+                this.reservationitemsChangedxField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
+        public Bapiret2[] Return {
+            get {
+                return this.returnField;
+            }
+            set {
+                this.returnField = value;
             }
         }
     }
@@ -30884,6 +34655,130 @@ namespace WebService1.SAPWebServices {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class ZgetColourFormula {
+        
+        private ZcolformulaResult[] gtColResultField;
+        
+        private string gvBaseArticolField;
+        
+        private decimal gvBaseQtyField;
+        
+        private bool gvBaseQtyFieldSpecified;
+        
+        private string gvColorIdField;
+        
+        private decimal gvMarjaField;
+        
+        private bool gvMarjaFieldSpecified;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
+        public ZcolformulaResult[] GtColResult {
+            get {
+                return this.gtColResultField;
+            }
+            set {
+                this.gtColResultField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string GvBaseArticol {
+            get {
+                return this.gvBaseArticolField;
+            }
+            set {
+                this.gvBaseArticolField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal GvBaseQty {
+            get {
+                return this.gvBaseQtyField;
+            }
+            set {
+                this.gvBaseQtyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool GvBaseQtySpecified {
+            get {
+                return this.gvBaseQtyFieldSpecified;
+            }
+            set {
+                this.gvBaseQtyFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string GvColorId {
+            get {
+                return this.gvColorIdField;
+            }
+            set {
+                this.gvColorIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal GvMarja {
+            get {
+                return this.gvMarjaField;
+            }
+            set {
+                this.gvMarjaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool GvMarjaSpecified {
+            get {
+                return this.gvMarjaFieldSpecified;
+            }
+            set {
+                this.gvMarjaFieldSpecified = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class ZgetColourFormulaResponse {
+        
+        private ZcolformulaResult[] gtColResultField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("item", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
+        public ZcolformulaResult[] GtColResult {
+            get {
+                return this.gtColResultField;
+            }
+            set {
+                this.gtColResultField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
     public partial class ZgetInfocv {
         
         private string ipSapdocField;
@@ -31160,6 +35055,32 @@ namespace WebService1.SAPWebServices {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void ZgetPrice20CompletedEventHandler(object sender, ZgetPrice20CompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ZgetPrice20CompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ZgetPrice20CompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public ZgetPrice20Response Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((ZgetPrice20Response)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void ZpalcantCompletedEventHandler(object sender, ZpalcantCompletedEventArgs e);
     
     /// <remarks/>
@@ -31206,6 +35127,32 @@ namespace WebService1.SAPWebServices {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((ZretMarfaResponse)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void ZanuleazaDocumente2CompletedEventHandler(object sender, ZanuleazaDocumente2CompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ZanuleazaDocumente2CompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ZanuleazaDocumente2CompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public ZanuleazaDocumente2Response Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((ZanuleazaDocumente2Response)(this.results[0]));
             }
         }
     }
@@ -31290,6 +35237,32 @@ namespace WebService1.SAPWebServices {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void ZsdSalesdocumentChangeCompletedEventHandler(object sender, ZsdSalesdocumentChangeCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ZsdSalesdocumentChangeCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ZsdSalesdocumentChangeCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public ZsdSalesdocumentChangeResponse Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((ZsdSalesdocumentChangeResponse)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void ZsdSalesdocumentCreateCompletedEventHandler(object sender, ZsdSalesdocumentCreateCompletedEventArgs e);
     
     /// <remarks/>
@@ -31310,6 +35283,58 @@ namespace WebService1.SAPWebServices {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((ZsdSalesdocumentCreateResponse)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void ZChangeTonajPoCompletedEventHandler(object sender, ZChangeTonajPoCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ZChangeTonajPoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ZChangeTonajPoCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public ZChangeTonajPoResponse Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((ZChangeTonajPoResponse)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void ZlivrareClpZulrCompletedEventHandler(object sender, ZlivrareClpZulrCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ZlivrareClpZulrCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ZlivrareClpZulrCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public ZlivrareClpZulrResponse Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((ZlivrareClpZulrResponse)(this.results[0]));
             }
         }
     }
@@ -31446,6 +35471,58 @@ namespace WebService1.SAPWebServices {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void ZanuleazaDocumenteCompletedEventHandler(object sender, ZanuleazaDocumenteCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ZanuleazaDocumenteCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ZanuleazaDocumenteCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public ZanuleazaDocumenteResponse Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((ZanuleazaDocumenteResponse)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void ZbapiReservationChangeCompletedEventHandler(object sender, ZbapiReservationChangeCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ZbapiReservationChangeCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ZbapiReservationChangeCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public ZbapiReservationChangeResponse Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((ZbapiReservationChangeResponse)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void ZcreazaComandaCompletedEventHandler(object sender, ZcreazaComandaCompletedEventArgs e);
     
     /// <remarks/>
@@ -31570,6 +35647,32 @@ namespace WebService1.SAPWebServices {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((ZmodificaLivrareResponse)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void ZgetColourFormulaCompletedEventHandler(object sender, ZgetColourFormulaCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ZgetColourFormulaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ZgetColourFormulaCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public ZgetColourFormulaResponse Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((ZgetColourFormulaResponse)(this.results[0]));
             }
         }
     }

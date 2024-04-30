@@ -145,7 +145,7 @@ namespace WebService1
                     "</td></tr>" +
                     "<tr><td><table class='customText2'><tr><td>Sediu</td><td>" + adresaUnitLog + "</td>" +
                     "</tr><tr><td>Telefon</td><td>" + telUnitLog + "</td></tr>" +
-                    "<tr><td>Fax</td><td>" + faxUnitLog + "</td></tr><tr><td>Contul</td><td>" + contUnitLog + "</td></tr><tr><td>" +
+                    "<tr><td>Contul</td><td>" + contUnitLog + "</td></tr><tr><td>" +
                     "Banca</td><td>" + bancaUnitLog + "</td></tr><tr><td>Cota TVA</td><td>19%</td></tr>" +
                     " </table>" +
                     " </td> " +

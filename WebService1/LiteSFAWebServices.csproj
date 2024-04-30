@@ -105,6 +105,7 @@
     <Compile Include="General\DatabaseConnections.cs" />
     <Compile Include="General\ErrorHandling.cs" />
     <Compile Include="General\GeneralUtils.cs" />
+    <Compile Include="HelperAprobari.cs" />
     <Compile Include="HelperClienti.cs" />
     <Compile Include="HelperClientiFacturati.cs" />
     <Compile Include="HelperComenzi.cs" />
@@ -133,6 +134,7 @@
     <Compile Include="OperatiiPoligoane.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="OperatiiPreturi.cs" />
     <Compile Include="OperatiiRetur.cs" />
     <Compile Include="OperatiiSemiactivi.cs" />
     <Compile Include="OperatiiStocuri.cs" />
@@ -292,6 +294,15 @@
     <Content Include="Web References\SAPWebServices\ZCalcStocResponse.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
+    <Content Include="Web References\SAPWebServices\ZanuleazaDocumente2Response.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SAPWebServices\ZanuleazaDocumenteResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SAPWebServices\ZbapiReservationChangeResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
     <None Include="Web References\SAPWebServices\ZcalcTrapResponse.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
@@ -299,6 +310,9 @@
       <DependentUpon>Reference.map</DependentUpon>
     </None>
     <Content Include="Web References\SAPWebServices\ZcheckZileLivrareResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SAPWebServices\ZChangeTonajPoResponse.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <None Include="Web References\SAPWebServices\ZcreazaComandaResponse.datasource">
@@ -322,6 +336,12 @@
     <Content Include="Web References\SAPWebServices\ZgetKunnrResponse.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
+    <Content Include="Web References\SAPWebServices\ZgetColourFormulaResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SAPWebServices\ZgetPrice20Response.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
     <None Include="Web References\SAPWebServices\ZgetPriceResponse.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
@@ -337,12 +357,18 @@
     <Content Include="Web References\SAPWebServices\ZpalcantResponse.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
+    <Content Include="Web References\SAPWebServices\ZlivrareClpZulrResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
     <None Include="Web References\SAPWebServices\ZretMarfaResponse.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="Web References\SAPWebServices\ZsablonReducereResponse.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
+    <Content Include="Web References\SAPWebServices\ZsdSalesdocumentChangeResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
     <None Include="Web References\SAPWebServices\ZsdSalesdocumentCreateResponse.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
