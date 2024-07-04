@@ -771,6 +771,10 @@ namespace WebService1
         public static bool isUserTestDB(string codUser)
         {
 
+            return true;
+
+            /*
+
             if (codUser == null || codUser.Trim().Length == 0)
                 return false;
 
@@ -823,6 +827,9 @@ namespace WebService1
             }
 
             return isUsrTest;
+
+        */
+
         }
 
 

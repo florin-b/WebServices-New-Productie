@@ -105,13 +105,9 @@ namespace WebService1
                 pretArticolGed.promo = outParam.GvPromo;
 
 
-
                 OracleConnection connection = new OracleConnection();
                 OracleCommand cmd = new OracleCommand();
                 OracleDataReader oReader = null;
-
-                string filialaCmp = paramPret.filialaAlternativa;
-
 
                 string strFilialaCmp = paramPret.ul;
 
@@ -138,7 +134,7 @@ namespace WebService1
                 cmd.Parameters[0].Value = paramPret.articol;
 
                 cmd.Parameters.Add(":unitLog", OracleType.VarChar, 12).Direction = ParameterDirection.Input;
-                cmd.Parameters[1].Value = filialaCmp;   //ul. ged
+                cmd.Parameters[1].Value = strFilialaCmp;   
 
 
 
@@ -316,8 +312,9 @@ namespace WebService1
 
 
                 string istoricPret = " ";
-                if (paramPret.codClientParavan != null && paramPret.codClientParavan.Trim().Length > 0)
-                    istoricPret = new Preturi().getIstoricPret(connection, paramPret.articol, paramPret.codClientParavan);
+
+                if (paramPret.canalDistrib.Equals("10"))
+                    istoricPret = new Preturi().getIstoricPret(connection, paramPret.articol, paramPret.client);
 
                 pretArticolGed.articoleRecomandate = new OperatiiArticole().getArticoleRecomandate(connection, paramPret.articol, "11");
                 ArticolProps articolProps = new OperatiiArticole().getPropsArticol(connection, paramPret.articol);
@@ -334,6 +331,17 @@ namespace WebService1
                 pretArticolGed.lungime = articolProps.lungime;
 
                 webService.Dispose();
+
+                if (Double.Parse(pretArticolGed.pretMinim) == 0)
+                {
+
+                    if (pretArticolGed.errMsg.Trim().Length == 0)
+                        pretArticolGed.errMsg = "Eroare determinare pret.";
+
+                    return "-1";
+
+                }
+
 
             }
             catch (Exception ex)

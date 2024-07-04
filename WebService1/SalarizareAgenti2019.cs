@@ -274,14 +274,7 @@ namespace WebService1
                 for (int i = 0; i < respGtCvss.Length; i++)
                 {
                     DetaliiCVS detaliiCvs = new DetaliiCVS();
-                    detaliiCvs.agent = respGtCvss[i].Sname;
-                    detaliiCvs.pondere = Double.Parse(respGtCvss[i].Pondere.ToString());
-                    detaliiCvs.targetValoric = Double.Parse(respGtCvss[i].Targetvalr.ToString());
-                    detaliiCvs.valoareP6V = Double.Parse(respGtCvss[i].P6v.ToString());
-                    detaliiCvs.venitBaza = Double.Parse(respGtCvss[i].Baza.ToString());
-                    detaliiCvs.venitCvs = Double.Parse(respGtCvss[i].Venitcvs.ToString());
-                    detaliiCvs.valoareFTVA = Double.Parse(respGtCvss[i].Venitwtva.ToString());
-                    detaliiCvs.cvs = Double.Parse(respGtCvss[i].Cvs.ToString());
+                    
                     listDetaliiCvs.Add(detaliiCvs);
 
                 }

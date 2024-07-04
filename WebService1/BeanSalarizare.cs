@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using WebService1.SapWsSalarizare;
 
 namespace WebService1
 {
@@ -69,6 +70,8 @@ namespace WebService1
         public DetaliiCorectie detaliiCorectie;
         public List<DetaliiIncasari08> detaliiIncasari08;
         public List<DetaliiMalus1> detaliiMalus;
+        public List<ZSUM_VANZ_VS> detaliiVanzariVS;
+        public List<ZclIncrAlocat> detaliiIncrAlocat;
     }
 
 
@@ -84,6 +87,8 @@ namespace WebService1
         public double corectieIncasare;
         public double venitFinal;
         public double venitCVS;
+        public double venitStocNociv;
+        public double venitIncrucisate;
     }
 
 
@@ -132,11 +137,10 @@ namespace WebService1
         public string agent;
         public double venitBaza;
         public double venitCvs;
-        public double valoareP6V;
-        public double pondere;
-        public double targetValoric;
-        public double valoareFTVA;
-        public double cvs;
+        public double valTotal;
+        public double valNociv;
+        public double prag;
+        public double procent;
 
 
     }

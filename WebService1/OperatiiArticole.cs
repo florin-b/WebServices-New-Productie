@@ -589,7 +589,7 @@ namespace WebService1
             return DateTime.Now.AddMonths(-6).ToString("yyyyMMdd");
         }
 
-        public string getListArticoleDistributie(string searchString, string tipArticol, string tipCautare, string filiala, string departament, string afisStoc, string codUser, string modulCautare, string tipComanda)
+        public string getListArticoleDistributie(string searchString, string tipArticol, string tipCautare, string filiala, string departament, string afisStoc, string codUser, string modulCautare, string tipComanda, string transpTert)
         {
 
             string condExtraDepart = " ";
@@ -602,6 +602,11 @@ namespace WebService1
                 if (departUser.Equals("01") && departExtra.Equals("02"))
                     condExtraDepart = " and x.sintetic in ('204', '204_01', '205', '236', '237', '229', '238', '240') ";
             }
+
+            string condTranspTert = "";
+
+            if (transpTert != null && Boolean.Parse(transpTert))
+                condTranspTert = " and upper(a.transp_tert) = 'Y' ";
 
             string serializedResult = "";
             string condCautare = "";
@@ -690,7 +695,8 @@ namespace WebService1
                                    " (select 1 from sapprd.mara m where m.mandt = '900' and m.matnr = a.cod and m.categ_mat in ('PA','AM')),-1) palet from dual) palet " +
                                    valStoc + ", categ_mat, lungime " +
                                    " from articole a, " +
-                                   " sintetice b " + condTabCodBare + " where a.sintetic = b.cod and a.cod != 'MAT GENERIC PROD' and a.blocat <> '01' and " + condCautare + condDepart +
+                                   " sintetice b " + condTabCodBare + " where a.sintetic = b.cod and a.cod != 'MAT GENERIC PROD' and a.blocat <> '01' and " + 
+                                   condCautare + condDepart + condTranspTert + 
                                    " ) x  where  " + condLimit + " order by x.nume ";
                 }
                 else
@@ -714,8 +720,9 @@ namespace WebService1
                                    valStoc + ", categ_mat, lungime " +
                                    " from articole a, " +
                                    " sintetice b, sapprd.marc c " + condTabCodBare + " where c.mandt = '900' and c.matnr = a.cod and c.werks = '" + condFil + "' and c.mmsta <> '01' " +
-                                   " and a.sintetic = b.cod and a.cod != 'MAT GENERIC PROD' and a.blocat <> '01' and " + condCautare + condDepart +
-                                   " ) x  where  " + condLimit + condExtraDepart + conditiiFasonate + " order by x.nume ";
+                                   " and a.sintetic = b.cod and a.cod != 'MAT GENERIC PROD' and a.blocat <> '01' and " + condCautare + condDepart + condTranspTert +
+                                   " ) x  where  " + condLimit + condExtraDepart + conditiiFasonate +  
+                                   " order by x.nume ";
                 }
                 else// consilieri
                 {
@@ -735,7 +742,8 @@ namespace WebService1
                                      valStoc + ", categ_mat, lungime " +
                                      " from articole a, " +
                                      " sintetice b, sapprd.marc c " + condTabCodBare + " where c.mandt = '900' and c.matnr = a.cod and c.werks = '" + filGed + "' and c.mmsta <> '01'" +
-                                     " and a.sintetic = b.cod and a.cod != 'MAT GENERIC PROD' and a.blocat <> '01' and " + condCautare + condDepart + conditiiFasonate +
+                                     " and a.sintetic = b.cod and a.cod != 'MAT GENERIC PROD' and a.blocat <> '01' and " + 
+                                     condCautare + condDepart + conditiiFasonate + condTranspTert + 
                                      " and " + condLimit + "  order by a.nume ";
 
                 }
@@ -1855,6 +1863,10 @@ namespace WebService1
 
             if (depart != null && (depart.Equals("040") || depart.Equals("041")))
                 depart = "04";
+
+            string codTempArt = codArt.TrimStart('0');
+            if (!Char.IsDigit(codTempArt, 0))
+                codArt = codArt.TrimStart('0');
 
             try
             {

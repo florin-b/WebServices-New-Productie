@@ -149,6 +149,7 @@
     <Compile Include="Salarizare.cs" />
     <Compile Include="SalarizareAgenti2019.cs" />
     <Compile Include="SalarizareConsilieri.cs" />
+    <Compile Include="SalarizareVanzari.cs" />
     <Compile Include="Service1.asmx.cs">
       <DependentUpon>Service1.asmx</DependentUpon>
       <SubType>Component</SubType>
@@ -206,6 +207,11 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
     <Compile Include="Web References\SapWSPierderiVanzari\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\SapWsSalarizare\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -435,6 +441,29 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <None Include="Web References\SapWSPierderiVanzari\zws_cl_fact_avsd.wsdl" />
+    <None Include="Web References\SapWsSalarizare\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Web References\SapWsSalarizare\ZgetSalav24Response.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SapWsSalarizare\ZgetSalcva24Response.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SapWsSalarizare\ZgetSalcvip24Response.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SapWsSalarizare\ZgetSalka24Response.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SapWsSalarizare\ZgetSalsd24Response.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SapWsSalarizare\ZgetSalsdka24Response.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <None Include="Web References\SapWsSalarizare\zws_salarizare_24.wsdl" />
     <None Include="Web References\SMSService\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
@@ -589,6 +618,17 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>WebService1_SalarizareCVA_ZWS_SAL_CVA</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://sap-prd6a.arabesque.ro:8036/sap/bc/srt/wsdl/flv_10002A111AD1/bndg_url/sap/bc/srt/rfc/sap/zws_salarizare_24/900/zws_salarizare_24/zws_salarizare_24%3fsap-client=900">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\SapWsSalarizare\</RelPath>
+      <UpdateFromURL>http://sap-prd6a.arabesque.ro:8036/sap/bc/srt/wsdl/flv_10002A111AD1/bndg_url/sap/bc/srt/rfc/sap/zws_salarizare_24/900/zws_salarizare_24/zws_salarizare_24%3fsap-client=900</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>WebService1_SapWsSalarizare_ZWS_SALARIZARE_24</CachedSettingsPropName>
     </WebReferenceUrl>
     <WebReferenceUrl Include="https://www.bizpack.ro/wsi/service.php%3fwsdl">
       <UrlBehavior>Dynamic</UrlBehavior>

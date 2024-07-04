@@ -242,6 +242,20 @@ namespace WebService1
 
         }
 
+        public static bool isComandaCuPretMinim(List<ArticolComanda> listArticole)
+        {
+
+            bool isPretMinimZero = false;
+            foreach(ArticolComanda articolComanda in listArticole)
+            {
+                if (articolComanda.pretMinim > 0)
+                    return true;
+
+            }
+
+            return isPretMinimZero;
+        }
+
         public static string getNrCmdClp(OracleConnection connection, string nrCmd)
         {
             string nrCmdClp = "";
@@ -633,6 +647,14 @@ namespace WebService1
                 zonaMathaus = "EXTRA_B";
 
             return zonaMathaus;
+        }
+
+        public static bool isComandaSimulata(string statusComanda)
+        {
+            if (statusComanda == null)
+                return false;
+
+            return statusComanda.Equals("20") || statusComanda.Equals("21");
         }
 
     }

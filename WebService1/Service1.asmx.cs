@@ -39,7 +39,8 @@ namespace WebService1
         public static string[] agentiExtra07 = { "83436", "83090", "83311", "83436", "83297", "83435", "83309", "83090", "83311" };
         public static string[] agentiExtra08 = { "83402" };
 
-        public const string LiteSFAVer = "ver:285";
+        public const string LiteSFAVer = "ver:288";
+        public const int minAndroidSDK = 23;
 
         string globalParrentId = "0";
 
@@ -237,43 +238,63 @@ namespace WebService1
         [WebMethod]
         public string getSalarizareAgent(string codAgent, string ul, string divizie, string an, string luna)
         {
-            return new SalarizareAgenti2019().getSalarizareAgent(codAgent, ul, divizie, an, luna);
+            return new SalarizareVanzari().getSalarizareAgent(codAgent, ul, divizie, an, luna);
         }
 
         [WebMethod]
         public string getSalarizareSd(string codAgent, string ul, string divizie, string an, string luna)
         {
-            return new SalarizareAgenti2019().getSalarizareSD(codAgent, ul, divizie, an, luna);
+            return new SalarizareVanzari().getSalarizareSD(codAgent, ul, divizie, an, luna);
         }
 
         [WebMethod]
         public string getSalarizareDepartament(string ul, string divizie, string an, string luna)
         {
-            return new SalarizareAgenti2019().getSalarizareDepartament(ul, divizie, an, luna);
+            return new SalarizareVanzari().getSalarizareDepartament(ul, divizie, an, luna);
+        }
+
+
+        [WebMethod]
+        public string getSalarizareCVA(string codAgent, string unitLog, string an, string luna)
+        {
+            return new SalarizareVanzari().getSalarizareCVA(codAgent, unitLog, an, luna);
         }
 
         [WebMethod]
-        public string getSaralizareCVA(string codAgent, string unitLog, string an, string luna)
+        public string getSalarizareDepartCVA(string unitLog, string an, string luna)
         {
-            return new SalarizareConsilieri().getSalarizareConsilieri(codAgent, unitLog, an, luna);
+            return new SalarizareVanzari().getSalarizareDepartCVA(unitLog, an, luna);
+        }
+
+        [WebMethod]
+        public string getSalarizareDepartCVIP(string unitLog, string an, string luna)
+        {
+            return new SalarizareVanzari().getSalarizareDepartCVIP(unitLog, an, luna);
         }
 
         [WebMethod]
         public string getSalarizareKA(string codAgent, string ul, string an, string luna)
         {
-            return new SalarizareAgenti2019().getSalarizareKA(codAgent, ul, an, luna);
+            return new SalarizareVanzari().getSalarizareKA(codAgent, ul, an, luna);
         }
 
         [WebMethod]
         public string getSalarizareSDKA(string codAgent, string ul, string an, string luna)
         {
-            return new SalarizareAgenti2019().getSalarizareSDKA(codAgent, ul, an, luna);
+            return new SalarizareVanzari().getSalarizareSDKA(codAgent, ul, an, luna);
         }
 
         [WebMethod]
         public string getSalarizareDepartamentKA(string ul, string an, string luna)
         {
-            return new SalarizareAgenti2019().getSalarizareDepartamentKA(ul, an, luna);
+            return new SalarizareVanzari().getSalarizareDepartKA(ul, an, luna);
+        }
+
+
+        [WebMethod]
+        public string getSalarizareCVIP(string codAgent, string unitLog, string an, string luna)
+        {
+            return new SalarizareVanzari().getSalarizareCVIP(codAgent, unitLog, an, luna);
         }
 
 
@@ -1405,11 +1426,11 @@ namespace WebService1
 
 
         [WebMethod]
-        public string getArticoleDistributie(string searchString, string tipArticol, string tipCautare, string filiala, string departament, string afisStoc, string codUser, string modulCautare, string tipComanda)
+        public string getArticoleDistributie(string searchString, string tipArticol, string tipCautare, string filiala, string departament, string afisStoc, string codUser, string modulCautare, string tipComanda, string transpTert)
         {
 
             OperatiiArticole articole = new OperatiiArticole();
-            return articole.getListArticoleDistributie(searchString, tipArticol, tipCautare, filiala, departament, afisStoc, codUser,  modulCautare, tipComanda);
+            return articole.getListArticoleDistributie(searchString, tipArticol, tipCautare, filiala, departament, afisStoc, codUser,  modulCautare, tipComanda, transpTert);
 
         }
 
@@ -3588,7 +3609,7 @@ namespace WebService1
                                   " nvl((select distinct discount from sapprd.zdisc_pers_sint where  functie='DV' and spart =substr(c.COD_NIVEL1,2,2) " +
                                   " and werks ='" + unitLog1 + "' and inactiv <> 'X' and matkl = c.cod),0) dv, nvl(a.procent_aprob,0) procent_aprob, " +
                                   " decode(s.matkl,'','0','1') permitsubcmp, nvl(a.multiplu,1) multiplu, nvl(a.val_poz,0) " + infoPret +
-                                  " ,nvl(a.cant_umb,0) cant_umb , nvl(a.umb,' ') umb, a.ul_stoc, z.depart, nvl(b.tip_mat,' '), nvl(a.ponderat,'-1'), nvl(b.spart,' '), " +
+                                  " ,nvl(a.cant_umb,0) cant_umb , nvl(a.umb,' ') umb, a.ul_stoc, z.depart, nvl(b.tip_mat,' '), nvl(a.ponderat,'-1'), nvl(b.grup_vz,' '), " +
                                   " decode(trim(b.dep_aprobare),'','00', b.dep_aprobare)  dep_aprobare " + condBlocAprov + istoricPret + vechime + infoPretTransp + sinteticArt +
                                   lungimeArt +
                                   " , (select nvl((select 1 from sapprd.mara m where m.mandt = '900' and m.matnr = a.cod and m.categ_mat in ('PA','AM')),-1) palet from dual) palet, nvl(a.brgew,0) greutate, " +
@@ -3662,7 +3683,7 @@ namespace WebService1
                         articol.cantUmb = oReader1.GetDouble(20).ToString();
                         articol.Umb = oReader1.GetString(21);
                         articol.unitLogAlt = unitLogAlt;
-                        articol.depart = depart;
+                        articol.depart = oReader1.GetString(26);
                         articol.tipArt = tipMat;
                         articol.ponderare = Int32.Parse(oReader1.GetString(25).Trim().Equals("") ? "1" : oReader1.GetString(25));
                         articol.departSintetic = oReader1.GetString(26);
@@ -4093,7 +4114,7 @@ namespace WebService1
 
 
                         //Cristi Matei
-                        if (agCode.Equals("00010281") || agCode.Equals("00018768"))
+                        if (agCode.Equals("00010281") || agCode.Equals("00018768") || agCode.Equals("00086469") || agCode.Equals("00059733"))
                         {
                             localDepart = "11";
                             condHome = " and h.filiala = a.ul  ";
@@ -6239,8 +6260,6 @@ namespace WebService1
                 response = ex.ToString();
             }
 
-
-
             return response;
 
         }
@@ -7104,7 +7123,7 @@ namespace WebService1
 
                         string localDepart = depart;
                         //CMATEI
-                        if (codUser == "00010281" || codUser == "00018768")
+                        if (codUser == "00010281" || codUser == "00018768" || codUser == "00086469" || codUser == "00059733")
                         {
                             localDepart = "11";
                             condHome = " and a.aprob_cv_necesar like '%11%' and a.aprob_cv_realiz not like '%11%' ";
@@ -7507,7 +7526,7 @@ namespace WebService1
                     string condSuplGed = " or (v.spart = substr(ag.divizie, 0, 2)) ";
 
                     //CMATEI
-                    if (codUser == "00010281" || codUser == "00018768")
+                    if (codUser == "00010281" || codUser == "00018768" || codUser == "00086469" || codUser == "00059733")
                     {
                         localDepart = "11";
                         condSuplGed = "";
@@ -9010,8 +9029,10 @@ namespace WebService1
         [WebMethod]
         public string getPretGedJson(string parametruPret)
         {
-            OperatiiArticole opArticole = new OperatiiArticole();
-            return opArticole.getPretGed(parametruPret);
+            //OperatiiArticole opArticole = new OperatiiArticole();
+            //return opArticole.getPretGed(parametruPret);
+
+            return "-1";
         }
 
         [WebMethod]
@@ -9836,8 +9857,10 @@ namespace WebService1
         [WebMethod]
         public string getPret(string client, string articol, string cantitate, string depart, string um, string ul, string tipUser, string depoz, string codUser, string canalDistrib, string filialaAlternativa, string filialaClp, string tipTransport)
         {
-            Preturi preturi = new Preturi();
-            return preturi.getPret(client, articol, cantitate, depart, um, ul, tipUser, depoz, codUser, canalDistrib, filialaAlternativa, filialaClp, tipTransport);
+            //Preturi preturi = new Preturi();
+            //return preturi.getPret(client, articol, cantitate, depart, um, ul, tipUser, depoz, codUser, canalDistrib, filialaAlternativa, filialaClp, tipTransport);
+
+            return "-1";
 
         }
 
@@ -11968,7 +11991,7 @@ namespace WebService1
 
             string retVal = "-1";
 
-            string localtipUserSap = "";
+            string localtipUserSap = tipUserSap;
 
             DateLivrare dateLivrare = new JavaScriptSerializer().Deserialize<DateLivrare>(JSONDateLivrare);
 
@@ -13002,6 +13025,25 @@ namespace WebService1
 
                 //sf. adresa livrare
 
+                string lclCodAgent = dateLivrare.codAgent;
+                if (tipUserSap != null && (tipUserSap.Equals(Constants.tipInfoAv) || tipUserSap.Equals(Constants.tipSMR) || tipUserSap.Equals(Constants.tipCVR) || tipUserSap.Equals(Constants.tipSSCM) || tipUserSap.Equals(Constants.tipCGED) || tipUserSap.Equals(Constants.tipOIVPD)))
+                    lclCodAgent = OperatiiClienti.getAgentAlocat(connection, transaction, depart, codClient, dateLivrare.codAgent);
+
+
+                string aprobareSD = " ";
+                string aprobareDV = " ";
+
+                if (Utils.isUserTestDB(lclCodAgent))
+                {
+                    aprobareDV = HelperAprobari.isAprobareDV(articolComanda, tipUserSap, taxeComanda, dateLivrare, comandaVanzare) ? "X" : " ";
+
+                    if (!HelperComenzi.isComandaSimulata(cmdStatus))
+                        cmdStatus = "0";
+
+                    if (aprobareDV.Equals("X") && !HelperComenzi.isComandaSimulata(cmdStatus))
+                        cmdStatus = "1";
+                }
+
 
 
                 transaction = connection.BeginTransaction();
@@ -13012,12 +13054,12 @@ namespace WebService1
                         " valoare,mt,com_referinta,accept1,accept2,fact_red, city, region, pmnttrms , obstra, timpc, ketdat, docin, adr_noua, depart, obsplata, addrnumber, nume_client, " +
                         " stceg, tip_pers, val_incasata, site, email, mod_av, cod_j, adr_livrare_d, city_d, region_d, aprob_cv_necesar, macara, val_min_tr, id_obiectiv, " +
                         " adresa_obiectiv, parent_id, client_raft, meserias,fact_palet_separat, lifnr, lifnr_prod, descoperita, prog_livr, livr_sambata, bloc, ref_client, " +
-                        " ac_zc, fil_plata , cod_postal, custodie) " +
+                        " ac_zc, fil_plata , cod_postal, custodie, zona) " +
                         " values ('900',pk_key.nextval, :codCl,:ul,:status,:status_aprov, " +
                         " :datac,:cantar,:agent,:codinit,:plata,:perscont,:tel,:adr,:valoare,:transp,:comsap,:accept1,:accept2,:factred,:city,:region,:termplt,:obslivr,:timpc,:datalivrare, " +
                         " :tipDocIn, :adrNoua, :depart, :obsplata, :adrnumber, :numeClient, :cnpClient, :tipPers, :valIncasata, :cmdSite, :email, :mod_av, :codJ, :adr_livrare_d, :city_d, :region_d, " +
                         " :necesarCVAprob, :macara, :val_min_tr, :idObiectiv, :adresaObiectiv, :parent_id, :client_raft, :meserias, :factPaletSeparat, :lifnr, " +
-                        " :lifnr_prod, :descoperita, :progrLivr, :livrSambata, :bloc, :refClient, :aczc, :filPlata, :codPostal, :custodie ) " +
+                        " :lifnr_prod, :descoperita, :progrLivr, :livrSambata, :bloc, :refClient, :aczc, :filPlata, :codPostal, :custodie, :zona ) " +
                         " returning id into :id ";
 
 
@@ -13056,10 +13098,6 @@ namespace WebService1
                 if (dateLivrare.Cantar.Equals("DA"))
                     cnt = "1";
                 cmd.Parameters[5].Value = cnt;
-
-                string lclCodAgent = dateLivrare.codAgent;
-                if (tipUserSap != null && (tipUserSap.Equals(Constants.tipInfoAv) || tipUserSap.Equals(Constants.tipSMR) || tipUserSap.Equals(Constants.tipCVR) || tipUserSap.Equals(Constants.tipSSCM) || tipUserSap.Equals(Constants.tipCGED) || tipUserSap.Equals(Constants.tipOIVPD)))
-                    lclCodAgent = OperatiiClienti.getAgentAlocat(connection, transaction, depart, codClient, dateLivrare.codAgent);
 
                 cmd.Parameters.Add(":agent", OracleType.VarChar, 24).Direction = ParameterDirection.Input;
                 cmd.Parameters[6].Value = lclCodAgent;
@@ -13125,7 +13163,7 @@ namespace WebService1
                 }
 
                 if (Utils.isUserTestDB(lclCodAgent))
-                    valSD = " ";
+                    valSD = aprobareSD;
 
                 cmd.Parameters[15].Value = valSD;
 
@@ -13138,7 +13176,7 @@ namespace WebService1
 
                 if (Utils.isUserTestDB(lclCodAgent))
                 {
-                    valDV = HelperAprobari.isAprobareDV(articolComanda, tipUserSap, taxeComanda, dateLivrare, comandaVanzare) ? "X" : " ";
+                    valDV = aprobareDV;
                 }
 
                 cmd.Parameters[16].Value = valDV;
@@ -13334,6 +13372,13 @@ namespace WebService1
                 cmd.Parameters.Add(":custodie", OracleType.VarChar, 3).Direction = ParameterDirection.Input;
                 cmd.Parameters[60].Value = dateLivrare.isComandaCustodie != null && Boolean.Parse(dateLivrare.isComandaCustodie) ? "X" : " ";
 
+                string numeZona = " ";
+                if (dateLivrare.zona != null && dateLivrare.Transport.Equals("TRAP"))
+                    numeZona = dateLivrare.zona;
+
+                cmd.Parameters.Add(":zona", OracleType.VarChar, 30).Direction = ParameterDirection.Input;
+                cmd.Parameters[61].Value = numeZona;
+
                 OracleParameter idCmd = new OracleParameter("id", OracleType.Number);
                 idCmd.Direction = ParameterDirection.Output;
                 cmd.Parameters.Add(idCmd);
@@ -13511,6 +13556,8 @@ namespace WebService1
                 OperatiiAdresa.insereazaCoordonateAdresa(connection, idCmd.Value.ToString(), dateLivrare.coordonateGps, dateLivrare.codJudet, dateLivrare.Oras);
                 OperatiiSuplimentare.saveTonajComanda(connection, idCmd.Value.ToString(), dateLivrare.tonaj);
 
+                if (!HelperComenzi.isComandaCuPretMinim(articolComanda))
+                    ErrorHandling.sendErrorToMail("Comanda cu pret minim zero: \n\n" + JSONArt + "\n\n" + JSONComanda + "\n\n" + JSONDateLivrare);
 
                 //comenzile angajament nu se creaza in SAP
                 if (!cmdAngajament)
@@ -14373,6 +14420,29 @@ namespace WebService1
                     strTipAcces = "17";
 
 
+                if (deviceInfo == null)
+                    strTipAcces = "100";
+
+                
+                if (deviceInfo != null && !deviceInfo.Trim().Equals(String.Empty))
+                {
+
+                    DeviceInfo infoTableta = new JavaScriptSerializer().Deserialize<DeviceInfo>(deviceInfo);
+
+                    OperatiiSuplimentare.saveDeviceInfo(connection, string.Format("{0:d8}", Int32.Parse(idAg.Value.ToString())), deviceInfo);
+                    int tabletaSDK = Int16.Parse(infoTableta.sdkVer);
+                    int tabletaAppVer = Int16.Parse(infoTableta.appVer);
+                    int minAppVer = Int16.Parse(LiteSFAVer.Split(':')[1]);
+
+                    if (tabletaSDK > minAndroidSDK && tabletaAppVer < minAppVer)
+                    {
+                        strTipAcces = "100";
+                        ErrorHandling.sendErrorToMail("Aplicatie veche: \n\n " + userId + "\n\n" + userPass + "\n\n" + deviceInfo);
+                    }
+
+                }
+                
+
                 retVal = resp.Value.ToString() + "#" + depart.Value.ToString().Trim() + "#" + localComp + "#" + userName.Value.ToString().Trim() + "#" + idAg.Value.ToString().Trim() + "#" + strTipAcces;
 
 
@@ -14533,8 +14603,7 @@ namespace WebService1
                     + OperatiiSuplimentare.getPlafonNumerar(connection) + "#";
 
 
-                //if (deviceInfo != null && !deviceInfo.Trim().Equals(String.Empty))
-                //    OperatiiSuplimentare.saveDeviceInfo(connection, string.Format("{0:d8}", Int32.Parse(idAg.Value.ToString())), deviceInfo);
+               
 
 
             }

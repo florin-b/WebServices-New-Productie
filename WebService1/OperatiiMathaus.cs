@@ -174,6 +174,8 @@ namespace WebService1
 
             List<ArticolMathaus> listArticole = new List<ArticolMathaus>();
 
+            depart = depart.Replace("040", "04").Replace("041", "04");
+
             rezultat.nrTotalArticole = getNrArticoleCategorie(codCategorie, filiala, depart, tipComanda).ToString();
 
             OracleConnection connection = new OracleConnection();
@@ -205,17 +207,14 @@ namespace WebService1
                                   " and ar.cod = c.matnr and c.werks = decode(ar.spart, '11', :filialaGed, :filiala)), " +
                                   " 'AR',1,'ZM',2,'AC',3,'ND',4,'ZM',5,'VM',6,7) cod_planif, " +
                                    " (select e.versg from sapprd.mvke e where e.mandt = '900' and " +
-                                  " e.matnr = s.matnr and e.vtweg = '20') par_s, " +
-                                  " nvl((select z.labst from sapprd.zhybris_zhstock z, sapprd.zhybris_artmas a, articole ar where " +
-                                  " a.mandt = z.mandt and a.matnr = z.matnr and a.valid = 'X' and ar.cod = z.matnr " +
-                                  " and z.matnr = s.matnr and z.b2b <> 'X' and z.werks = decode(ar.spart, '11', :filialaGed, :filiala)),0) stoc_art " +
+                                  " e.matnr = s.matnr and e.vtweg = '20') par_s " +
                                   " from sapprd.zpath_hybris s, sapprd.marc c, websap.articole ar, sapprd.mvke e " +
                                   " where (s.nivel_0 = :codCateg or s.nivel_1 = :codCateg or s.nivel_2 = :codCateg or " +
                                   " s.nivel_3 = :codCateg or s.nivel_4 = :codCateg or s.nivel_5 = :codCateg or s.nivel_6 = :codCateg) " +
                                   condDepart + condFasonate + 
                                   " and ar.cod = s.matnr and s.mandt = c.mandt and s.matnr = c.matnr " +
                                   " and e.mandt = '900' and e.matnr = s.matnr and e.vtweg = '20' " +
-                                  " order by cod_planif, stoc_art desc, s.matnr OFFSET :paginaCrt ROWS FETCH NEXT 10 ROWS ONLY ";
+                                  " order by cod_planif, s.matnr OFFSET :paginaCrt ROWS FETCH NEXT 10 ROWS ONLY ";
 
                 cmd.CommandType = CommandType.Text;
                 cmd.Parameters.Clear();
@@ -792,15 +791,12 @@ namespace WebService1
                                   " and ar.cod = c.matnr and c.werks = decode(ar.spart, '11', :filialaGed, :filiala)), " +
                                   " 'AR',1,'ZM',2,'AC',3,'ND',4,'ZM',5,'VM',6,7) cod_planif, " +
                                   " (select e.versg from sapprd.mvke e where e.mandt = '900' and " +
-                                  " e.matnr = a.cod and e.vtweg = '20') par_s, " +
-                                  " nvl((select z.labst from sapprd.zhybris_zhstock z, sapprd.zhybris_artmas a, articole ar where " +
-                                  " a.mandt = z.mandt and a.matnr = z.matnr and a.valid = 'X' and ar.cod = z.matnr " +
-                                  " and z.matnr = a.cod and z.b2b <> 'X' and z.werks = decode(ar.spart, '11', :filialaGed, :filiala)),0) stoc_art " +
+                                  " e.matnr = a.cod and e.vtweg = '20') par_s " +
                                   " from articole a, sintetice b, sapprd.marc c " +
                                   " where c.mandt = '900'  and c.matnr = a.cod and c.werks = :filiala and c.mmsta <> '01' " +
                                   " and a.sintetic = b.cod and a.cod != 'MAT GENERIC PROD'  and a.blocat <> '01' " +
                                     cautare + condDepart + condFasonate + 
-                                  " order by cod_planif, stoc_art desc, a.nume  OFFSET :paginaCrt ROWS FETCH NEXT 10 ROWS ONLY ";
+                                  " order by cod_planif, a.nume  OFFSET :paginaCrt ROWS FETCH NEXT 10 ROWS ONLY ";
 
 
                 cmd.CommandType = CommandType.Text;

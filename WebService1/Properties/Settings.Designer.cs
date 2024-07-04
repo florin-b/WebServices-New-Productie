@@ -164,5 +164,16 @@ namespace WebService1.Properties {
                 return ((string)(this["WebService1_SalarizareCVA_ZWS_SAL_CVA"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://sap-prd6a.arabesque.ro:8036/sap/bc/srt/rfc/sap/zws_salarizare_24/900/zws_s" +
+            "alarizare_24/zws_salarizare_24")]
+        public string WebService1_SapWsSalarizare_ZWS_SALARIZARE_24 {
+            get {
+                return ((string)(this["WebService1_SapWsSalarizare_ZWS_SALARIZARE_24"]));
+            }
+        }
     }
 }

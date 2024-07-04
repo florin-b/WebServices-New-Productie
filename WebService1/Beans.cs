@@ -109,6 +109,7 @@ namespace WebService1
         public string divizii;
         public string tipPlata;
         public string email;
+        public string errMsg;
     }
 
 
@@ -338,6 +339,7 @@ namespace WebService1
         public string codPostal;
         public string isComandaCustodie;
         public string taxeComanda;
+        public string zona;
     }
 
 
