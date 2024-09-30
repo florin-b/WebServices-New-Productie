@@ -75,7 +75,7 @@ namespace WebService1
                 }
 
                 string conditieDepart = " ";
-                if (!codDepart.Equals("00") && !codDepart.Trim().Equals(""))
+                if (!codDepart.Equals("00") && !codDepart.Trim().Equals("") && !codDepart.Equals("11"))
                     conditieDepart = " b.grup_vz =:depart and ";
 
                 if (codDepart.StartsWith("04"))
@@ -372,6 +372,9 @@ namespace WebService1
             OracleCommand cmd = connection.CreateCommand();
 
             string condDepart = "";
+
+            if (departament.Equals(""))
+                departament = "00";
 
             if (!departament.Equals("00"))
                 condDepart = " and substr(m.spart,0,2) =:depart ";

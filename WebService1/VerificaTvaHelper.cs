@@ -36,6 +36,18 @@ namespace WebService1
     }
 
 
+    public class DateClientAnaf
+    {
+        public StarePlatitorTva starePlatitorTva;
+        public List<TipClient> listTipClient;
+    }
+
+    public class TipClient
+    {
+        public string codTip;
+        public string numeTip;
+    }
+
     public class PlatitorTvaResponse
     {
         public bool isPlatitor;
@@ -47,6 +59,7 @@ namespace WebService1
         public string strada;
         public string stareInregistrare;
         public string diviziiClient;
+        public string codClientNominal;
 
 
         public override string ToString()

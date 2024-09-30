@@ -16,7 +16,7 @@ namespace WebService1
         public string getPret(string client, string articol, string cantitate, string depart, string um, string ul, string tipUser, string depoz, string codUser, string canalDistrib, string filialaAlternativa, string filialaClp, string tipTransport)
         {
             string retVal = "";
-            SAPWebServices.ZTBL_WEBSERVICE webService = null;
+            SAPWebServices.ZTBL_WEBSERVICE webService = null; 
 
             DateTime cDate = DateTime.Now;
             string year = cDate.Year.ToString();
@@ -398,6 +398,65 @@ namespace WebService1
             return istoric;
         }
 
+        public string getIstoricPretWood(OracleConnection connection, String codArticol, String codClient)
+        {
+
+            OracleCommand cmd = null;
+            OracleDataReader oReader = null;
+            string istoric = " ";
+
+            try
+            {
+                cmd = connection.CreateCommand();
+
+                cmd.CommandText = " select distinct x.valoare, x.multiplu, x.um, x.data, x.cantitate " +
+                                  " from (select b.valoare, ' ' multiplu, b.um, to_char(to_date(a.datac,'yyyymmdd')) data, b.cantitate " +
+                                  " from sapprd.zcomhead_tableta a, sapprd.zcomdet_tableta b where " +
+                                  " a.cod_client =:codClient and a.status_aprov in (0,2,15) and a.datac >=:dataStart " +
+                                  " and b.id = a.id and b.cod =:codArticol order by datac desc) x where x.valoare > 0 and rownum<3 ";
+
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add(":codClient", OracleType.VarChar, 30).Direction = ParameterDirection.Input;
+                cmd.Parameters[0].Value = codClient;
+
+                cmd.Parameters.Add(":dataStart", OracleType.VarChar, 24).Direction = ParameterDirection.Input;
+                cmd.Parameters[1].Value = AddressUtils.getDaysDate(-15);
+
+                cmd.Parameters.Add(":codArticol", OracleType.VarChar, 54).Direction = ParameterDirection.Input;
+                cmd.Parameters[2].Value = codArticol;
+
+                oReader = cmd.ExecuteReader();
+
+                int nrRec = 0;
+                double valPret = 0;
+
+
+                if (oReader.HasRows)
+                {
+
+                    while (oReader.Read())
+                    {
+                        valPret += oReader.GetDouble(0);
+                        nrRec++;
+
+                        istoric = (valPret / nrRec).ToString("#.###") + "@ @1 " + oReader.GetString(2).ToString() + "@" + oReader.GetString(3) + ":";
+                    }
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                ErrorHandling.sendErrorToMail(ex.ToString());
+            }
+            finally
+            {
+                DatabaseConnections.CloseConnections(oReader, cmd);
+            }
+
+
+            return istoric;
+        }
 
         private static string getFilialaCmpBV90(OracleConnection conn, string codArticol, string filialaAgent)
         {

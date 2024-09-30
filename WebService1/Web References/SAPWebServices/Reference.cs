@@ -82,6 +82,8 @@ namespace WebService1.SAPWebServices {
         
         private System.Threading.SendOrPostCallback ZbapiReservationChangeOperationCompleted;
         
+        private System.Threading.SendOrPostCallback ZcreateClientMinReqOperationCompleted;
+        
         private System.Threading.SendOrPostCallback ZcreazaComandaOperationCompleted;
         
         private System.Threading.SendOrPostCallback ZstareComandaOperationCompleted;
@@ -211,6 +213,9 @@ namespace WebService1.SAPWebServices {
         
         /// <remarks/>
         public event ZbapiReservationChangeCompletedEventHandler ZbapiReservationChangeCompleted;
+        
+        /// <remarks/>
+        public event ZcreateClientMinReqCompletedEventHandler ZcreateClientMinReqCompleted;
         
         /// <remarks/>
         public event ZcreazaComandaCompletedEventHandler ZcreazaComandaCompleted;
@@ -1034,6 +1039,37 @@ namespace WebService1.SAPWebServices {
             if ((this.ZbapiReservationChangeCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.ZbapiReservationChangeCompleted(this, new ZbapiReservationChangeCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:sap-com:document:sap:soap:functions:mc-style:ZTBL_WEBSERVICE:ZcreateClientMin" +
+            "ReqRequest", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Bare)]
+        [return: System.Xml.Serialization.XmlElementAttribute("ZcreateClientMinReqResponse", Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+        public ZcreateClientMinReqResponse ZcreateClientMinReq([System.Xml.Serialization.XmlElementAttribute("ZcreateClientMinReq", Namespace="urn:sap-com:document:sap:soap:functions:mc-style")] ZcreateClientMinReq ZcreateClientMinReq1) {
+            object[] results = this.Invoke("ZcreateClientMinReq", new object[] {
+                        ZcreateClientMinReq1});
+            return ((ZcreateClientMinReqResponse)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ZcreateClientMinReqAsync(ZcreateClientMinReq ZcreateClientMinReq1) {
+            this.ZcreateClientMinReqAsync(ZcreateClientMinReq1, null);
+        }
+        
+        /// <remarks/>
+        public void ZcreateClientMinReqAsync(ZcreateClientMinReq ZcreateClientMinReq1, object userState) {
+            if ((this.ZcreateClientMinReqOperationCompleted == null)) {
+                this.ZcreateClientMinReqOperationCompleted = new System.Threading.SendOrPostCallback(this.OnZcreateClientMinReqOperationCompleted);
+            }
+            this.InvokeAsync("ZcreateClientMinReq", new object[] {
+                        ZcreateClientMinReq1}, this.ZcreateClientMinReqOperationCompleted, userState);
+        }
+        
+        private void OnZcreateClientMinReqOperationCompleted(object arg) {
+            if ((this.ZcreateClientMinReqCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ZcreateClientMinReqCompleted(this, new ZcreateClientMinReqCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -2304,6 +2340,197 @@ namespace WebService1.SAPWebServices {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class ZclientMin {
+        
+        private string fiscalcodeField;
+        
+        private string companynameField;
+        
+        private string companyemailField;
+        
+        private string companystreetField;
+        
+        private string companynumberField;
+        
+        private string companycityField;
+        
+        private string companycountyField;
+        
+        private string firstnameField;
+        
+        private string lastnameField;
+        
+        private string phonenumberField;
+        
+        private string comregnumberField;
+        
+        private string vatpayerField;
+        
+        private string prctrField;
+        
+        private string tipB2bField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Fiscalcode {
+            get {
+                return this.fiscalcodeField;
+            }
+            set {
+                this.fiscalcodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Companyname {
+            get {
+                return this.companynameField;
+            }
+            set {
+                this.companynameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Companyemail {
+            get {
+                return this.companyemailField;
+            }
+            set {
+                this.companyemailField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Companystreet {
+            get {
+                return this.companystreetField;
+            }
+            set {
+                this.companystreetField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Companynumber {
+            get {
+                return this.companynumberField;
+            }
+            set {
+                this.companynumberField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Companycity {
+            get {
+                return this.companycityField;
+            }
+            set {
+                this.companycityField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Companycounty {
+            get {
+                return this.companycountyField;
+            }
+            set {
+                this.companycountyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Firstname {
+            get {
+                return this.firstnameField;
+            }
+            set {
+                this.firstnameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Lastname {
+            get {
+                return this.lastnameField;
+            }
+            set {
+                this.lastnameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Phonenumber {
+            get {
+                return this.phonenumberField;
+            }
+            set {
+                this.phonenumberField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Comregnumber {
+            get {
+                return this.comregnumberField;
+            }
+            set {
+                this.comregnumberField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Vatpayer {
+            get {
+                return this.vatpayerField;
+            }
+            set {
+                this.vatpayerField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Prctr {
+            get {
+                return this.prctrField;
+            }
+            set {
+                this.prctrField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string TipB2b {
+            get {
+                return this.tipB2bField;
+            }
+            set {
+                this.tipB2bField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
     public partial class Bapi2093ResItemChangex {
         
         private string resItemField;
@@ -2949,6 +3176,8 @@ namespace WebService1.SAPWebServices {
         private string custodieField;
         
         private string codPostalField;
+        
+        private string zonaField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
@@ -3816,6 +4045,17 @@ namespace WebService1.SAPWebServices {
             }
             set {
                 this.codPostalField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Zona {
+            get {
+                return this.zonaField;
+            }
+            set {
+                this.zonaField = value;
             }
         }
     }
@@ -29383,11 +29623,24 @@ namespace WebService1.SAPWebServices {
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
     public partial class ZextindeClient {
         
+        private string vKdgrpField;
+        
         private string vKunnrField;
         
         private string vSpartField;
         
         private string vVtwegField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string VKdgrp {
+            get {
+                return this.vKdgrpField;
+            }
+            set {
+                this.vKdgrpField = value;
+            }
+        }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
@@ -34131,6 +34384,89 @@ namespace WebService1.SAPWebServices {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class ZcreateClientMinReq {
+        
+        private string codAvField;
+        
+        private ZclientMin ipClientField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string CodAv {
+            get {
+                return this.codAvField;
+            }
+            set {
+                this.codAvField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public ZclientMin IpClient {
+            get {
+                return this.ipClientField;
+            }
+            set {
+                this.ipClientField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
+    public partial class ZcreateClientMinReqResponse {
+        
+        private string epKunnrField;
+        
+        private string epMessField;
+        
+        private byte epReturncodeField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string EpKunnr {
+            get {
+                return this.epKunnrField;
+            }
+            set {
+                this.epKunnrField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string EpMess {
+            get {
+                return this.epMessField;
+            }
+            set {
+                this.epMessField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public byte EpReturncode {
+            get {
+                return this.epReturncodeField;
+            }
+            set {
+                this.epReturncodeField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
     public partial class ZcreazaComanda {
         
         private string canalField;
@@ -35517,6 +35853,32 @@ namespace WebService1.SAPWebServices {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((ZbapiReservationChangeResponse)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void ZcreateClientMinReqCompletedEventHandler(object sender, ZcreateClientMinReqCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ZcreateClientMinReqCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ZcreateClientMinReqCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public ZcreateClientMinReqResponse Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((ZcreateClientMinReqResponse)(this.results[0]));
             }
         }
     }

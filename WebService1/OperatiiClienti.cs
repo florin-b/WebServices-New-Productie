@@ -158,6 +158,18 @@ namespace WebService1
                         
                         if (tipUser != "SD" && !tipUserSap.Contains("KA") && tipUserSap != null && !tipUserSap.Equals(Constants.tipSuperAv) && !tipUserSap.Equals(Constants.tipInfoAv) && !tipUserSap.Equals(Constants.tipSMR) && !tipUserSap.Equals(Constants.tipCVR) && !tipUserSap.Equals(Constants.tipSSCM) && !tipUserSap.Equals(Constants.tipCGED) && !tipUserSap.Equals(Constants.tipOIVPD))
                                 condClient += condExtraClient;
+
+                        if (tipUser.Equals("SD"))
+                            condClient = " and exists(select 1 from sapprd.knvp p where p.mandt = '900' and p.kunnr = c.cod and p.vtweg = '10' and p.parvw in ('VE', 'ZC') and p.pernr in " +
+                                         " (select cod from websap.agenti where activ = 1 and filiala = '" + unitLog + "' and divizie = '" + departAg + "')) " +
+                                         " union " +
+                                         " select c.nume, c.cod, c.tip_pers, a.city1, a.street, a.house_num1, a.region from websap.clienti c, " +
+                                         " sapprd.adrc a where upper(c.nume) like upper('" + numeClient.Replace("'", "") + "%') and a.client = '900' and a.addrnumber = " +
+                                         " (select k.adrnr from sapprd.kna1 k where k.mandt = '900' and k.kunnr = c.cod) " +
+                                         " and exists (select 1 from websap.clie_tip t where t.canal = '10' and t.cod_cli = c.cod and t.depart <> '" + departAg + "' and t.tip = '01') " +
+                                         " and exists (select 1 from sapprd.knvp p where p.mandt = '900' and p.kunnr = c.cod and p.vtweg = '10' and p.spart = '" + departAg + "' " +
+                                         " and p.parvw in ('ZA', 'ZS') " + exceptieClient + " )";
+
                     }
 
                 }
@@ -364,6 +376,136 @@ namespace WebService1
         }
 
 
+        public string getListClientiCUI(string cuiClient, string codAgent)
+        {
+            List<BeanDatePersonale> listClientiCUI = new List<BeanDatePersonale>();
+
+            OracleConnection connection = new OracleConnection();
+            OracleCommand cmd = new OracleCommand();
+            OracleDataReader oReader = null;
+
+            try
+            {
+
+                string connectionString = DatabaseConnections.ConnectToProdEnvironment();
+
+                connection.ConnectionString = connectionString;
+                connection.Open();
+
+                cmd = connection.CreateCommand();
+
+                cmd.CommandText = " select name1, kunnr, regio, ort01, stras from sapprd.kna1 where mandt = '900' and " +
+                                  " TRANSLATE(stceg, '0' || TRANSLATE(stceg, '.0123456789', '.'), '0') = " +
+                                  " TRANSLATE(:cui, '0' || TRANSLATE(:cui, '.0123456789', '.'), '0') order by name1, regio, ort01 ";
+
+                cmd.CommandType = CommandType.Text;
+                cmd.Parameters.Clear();
+
+                cmd.Parameters.Add(":cui", OracleType.VarChar, 30).Direction = ParameterDirection.Input;
+                cmd.Parameters[0].Value = cuiClient;
+
+                oReader = cmd.ExecuteReader();
+
+                if (oReader.HasRows)
+                {
+
+                    while (oReader.Read())
+                    {
+                        BeanDatePersonale datePersonale = new BeanDatePersonale();
+                        datePersonale.nume = oReader.GetString(0);
+                        datePersonale.cnp = cuiClient;
+                        datePersonale.codjudet = oReader.GetString(2);
+                        datePersonale.localitate = oReader.GetString(3);
+                        datePersonale.strada = oReader.GetString(4);
+
+                        datePersonale.termenPlata = getTermenPlataClient(connection, datePersonale.cnp);
+                        datePersonale.clientBlocat = HelperClienti.isClientBlocat(connection, datePersonale.cnp);
+                        datePersonale.codClient = oReader.GetString(oReader.GetOrdinal("kunnr"));
+
+                        string tipPlataContract = getTipPlataContract(connection, datePersonale.cnp);
+
+                        if (tipPlataContract.Trim().Equals(String.Empty))
+                        {
+                            datePersonale.tipPlata = " ";
+                            datePersonale.termenPlata = new List<string>() { "C000" };
+                        }
+                        else
+                        {
+                            datePersonale.tipPlata = tipPlataContract;
+                        }
+
+                        if (codAgent != null && datePersonale.codClient != null && !datePersonale.codClient.Equals("-1"))
+                            datePersonale.divizii = getDiviziiClient(connection, datePersonale.codClient, codAgent);
+
+                        listClientiCUI.Add(datePersonale);
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                ErrorHandling.sendErrorToMail(ex.ToString());
+            }
+            finally
+            {
+                DatabaseConnections.CloseConnections(oReader, cmd, connection);
+            }
+
+            return new JavaScriptSerializer().Serialize(listClientiCUI);
+        }
+
+        public string getDateClientAnaf(string cui)
+        {
+            DateClientAnaf dateClientAnaf = new DateClientAnaf();
+            dateClientAnaf.starePlatitorTva = new VerificaTva().verificaTVAService(cui);
+            dateClientAnaf.listTipClient = getListTipClientPJ();
+
+            return new JavaScriptSerializer().Serialize(dateClientAnaf);
+        }
+
+        private List<TipClient> getListTipClientPJ()
+        {
+            List<TipClient> listTipClient = new List<TipClient>();
+
+            OracleConnection connection = new OracleConnection();
+            OracleCommand cmd = null;
+            OracleDataReader oReader = null;
+
+            try
+            {
+                string connectionString = DatabaseConnections.ConnectToProdEnvironment();
+
+                connection.ConnectionString = connectionString;
+                connection.Open();
+
+                cmd = connection.CreateCommand();
+
+                cmd.CommandText = " select distinct trim(tip_b2b), upper(trim(txt_tip)) from SAPPRD.zb2b_tipclient order by 1 ";
+
+                oReader = cmd.ExecuteReader();
+
+                if (oReader.HasRows)
+                {
+                    while (oReader.Read())
+                    {
+                        TipClient tipClient = new TipClient();
+                        tipClient.codTip = oReader.GetString(0);
+                        tipClient.numeTip = oReader.GetString(1);
+                        listTipClient.Add(tipClient);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorHandling.sendErrorToMail(ex.ToString());
+            }
+            finally
+            {
+                DatabaseConnections.CloseConnections(oReader, cmd, connection);
+            }
+
+            return listTipClient;
+        }
 
 
         public string getListMeseriasi(string numeClient, string unitLog)
@@ -1034,10 +1176,44 @@ namespace WebService1
                     }
                 }
 
+
+                //divizii clienti finali
+
+                cmd.CommandText = " select distinct spart from sapprd.knvv where mandt = '900' and kdgrp = '01' and vtweg = '10' and kunnr = :codClient order by spart ";
+
+                cmd.CommandType = CommandType.Text;
+                cmd.Parameters.Clear();
+
+
+                cmd.Parameters.Add(":codClient", OracleType.VarChar, 30).Direction = ParameterDirection.Input;
+                cmd.Parameters[0].Value = codClient;
+
+                oReader = cmd.ExecuteReader();
+                divizie = "";
+
+                if (oReader.HasRows)
+                {
+                    while (oReader.Read())
+                    {
+                        divizie = oReader.GetString(0).ToString();
+
+                        if (divizie.Equals("04"))
+                            divizie = "040;041";
+
+                        if (!diviziiClient.Contains(divizie))
+                            diviziiClient += divizie + ";";
+                    }
+                }
+
+                //
+
                 oReader.Close();
                 oReader.Dispose();
 
                 cmd.Dispose();
+
+                if (!diviziiClient.Contains("11"))
+                    diviziiClient += "11;";
 
             }
             catch (Exception ex)
@@ -1228,7 +1404,7 @@ namespace WebService1
                                 " nvl((select k.cod from clienti k where k.tip2 in ('1000', 'OCAV', 'OCAZ') and k.tip_pers='PJ' " +
                                 " and k.cui = TRANSLATE(z.cui, '0' || TRANSLATE(z.cui, '.0123456789', '.'), '0')),'-1') codclient " +
                                 " from sapprd.zverifcui z where z.mandt='900' and " +
-                                " lower(z.numefirma) like lower('" + numeClient.Trim() + "%') and rownum <= 30 order by z.numefirma ";
+                                " lower(z.numefirma) like lower('" + numeClient.Trim() + "%') and length(trim(z.judet)) = 2 and rownum <= 30 order by z.numefirma ";
 
                 cmd.CommandText = sqlString;
 
@@ -2059,6 +2235,69 @@ namespace WebService1
 
             return new JavaScriptSerializer().Serialize(creditClient);
 
+        }
+
+
+        public string creeazaClientPJ(string dateClientPJ)
+        {
+
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            RaspunsClientSap raspunsClient = new RaspunsClientSap();
+
+            DateClientSap dateClientSap = serializer.Deserialize<DateClientSap>(dateClientPJ);
+
+
+            DatePoligon datePoligon = serializer.Deserialize<DatePoligon>(new OperatiiPoligoane().getDatePoligonLivrareDB(dateClientSap.coordonateAdresa));
+            dateClientSap.filialaAsociata = datePoligon.filialaPrincipala;
+
+            try
+            {
+
+                SAPWebServices.ZTBL_WEBSERVICE webService = new SAPWebServices.ZTBL_WEBSERVICE();
+                SAPWebServices.ZcreateClientMinReq inParam = new SAPWebServices.ZcreateClientMinReq();
+
+                webService.Credentials = new System.Net.NetworkCredential(Service1.getUser(), Service1.getPass());
+                webService.Timeout = 300000;
+
+                inParam.IpClient = new SAPWebServices.ZclientMin();
+
+                inParam.CodAv = dateClientSap.codAgent;
+                inParam.IpClient.Fiscalcode = dateClientSap.cui;
+                inParam.IpClient.Companyname = dateClientSap.numeCompanie;
+                inParam.IpClient.Companyemail = dateClientSap.emailCompanie;
+                inParam.IpClient.Companystreet = dateClientSap.strada;
+                inParam.IpClient.Companynumber = dateClientSap.numarStrada;
+                inParam.IpClient.Companycity = dateClientSap.localitate;
+                inParam.IpClient.Companycounty = dateClientSap.judet;
+                inParam.IpClient.Firstname = dateClientSap.prenumePersContact;
+                inParam.IpClient.Lastname = dateClientSap.numePersContact;
+                inParam.IpClient.Phonenumber = dateClientSap.telPersContact;
+                inParam.IpClient.Comregnumber = dateClientSap.codJ;
+                inParam.IpClient.Vatpayer = dateClientSap.platitorTVA;
+                inParam.IpClient.Prctr = dateClientSap.filialaAsociata;
+                inParam.IpClient.TipB2b = dateClientSap.tipClient;
+
+
+                SAPWebServices.ZcreateClientMinReqResponse outParam = webService.ZcreateClientMinReq(inParam);
+
+                if (outParam.EpReturncode.Equals("0"))
+                {
+                    raspunsClient.codClient = outParam.EpKunnr;
+                    raspunsClient.msg = "";
+                }
+                else
+                {
+                    raspunsClient.codClient = "";
+                    raspunsClient.msg = outParam.EpMess;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                ErrorHandling.sendErrorToMail(ex.ToString());
+            }
+
+            return serializer.Serialize(raspunsClient);
         }
 
 

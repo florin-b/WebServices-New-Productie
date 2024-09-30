@@ -340,6 +340,7 @@ namespace WebService1
         public string isComandaCustodie;
         public string taxeComanda;
         public string zona;
+        public string codJ;
     }
 
 
@@ -368,6 +369,8 @@ namespace WebService1
         public double procMarjaBruta = 0;
         public double marjaBrutaTot = 0;
         public double procMarjaBrutaTot = 0;
+        public string aprobariNecesare;
+        public string aprobariPrimite;
 
     }
 

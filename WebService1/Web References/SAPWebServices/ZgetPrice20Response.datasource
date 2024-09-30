@@ -6,5 +6,5 @@
     cause the file to be unrecognizable by the program.
 -->
 <GenericObjectDataSource DisplayName="ZgetPrice20Response" Version="1.0" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
-   <TypeInfo>WebService1.SAPWebServices.ZgetPrice20Response</TypeInfo>
+   <TypeInfo>WebService1.SAPWebServices.ZgetPrice20Response, WebService1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</TypeInfo>
 </GenericObjectDataSource>

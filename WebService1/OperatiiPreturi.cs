@@ -112,10 +112,13 @@ namespace WebService1
                 string strFilialaCmp = paramPret.ul;
 
                 if (paramPret.filialaClp != null && paramPret.filialaClp.Trim() != "")
-                    strFilialaCmp = paramPret.filialaClp.Substring(0, 2) + "2" + paramPret.filialaClp.Substring(3, 1);
+                    strFilialaCmp = paramPret.filialaClp;
 
                 if (!paramPret.depart.Equals("11"))
                     strFilialaCmp = strFilialaCmp.Substring(0, 2) + "1" + strFilialaCmp.Substring(3, 1);
+
+                if (paramPret.canalDistrib.Equals("20"))
+                    strFilialaCmp = strFilialaCmp.Substring(0, 2) + "2" + strFilialaCmp.Substring(3, 1);
 
                 string connectionString = DatabaseConnections.ConnectToProdEnvironment();
 
@@ -315,6 +318,9 @@ namespace WebService1
 
                 if (paramPret.canalDistrib.Equals("10"))
                     istoricPret = new Preturi().getIstoricPret(connection, paramPret.articol, paramPret.client);
+
+                if (paramPret.tipUser.Equals("WOOD"))
+                    istoricPret = new Preturi().getIstoricPretWood(connection, paramPret.articol, paramPret.client);
 
                 pretArticolGed.articoleRecomandate = new OperatiiArticole().getArticoleRecomandate(connection, paramPret.articol, "11");
                 ArticolProps articolProps = new OperatiiArticole().getPropsArticol(connection, paramPret.articol);

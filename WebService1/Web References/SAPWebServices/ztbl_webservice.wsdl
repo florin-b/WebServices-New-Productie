@@ -404,6 +404,16 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="OP__ZcreateClientMinReq">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <saptrhnw05:required xmlns:saptrhnw05="http://www.sap.com/NW05/soap/features/transaction/">no</saptrhnw05:required>
+        <sapcomhnd:enableCommit xmlns:sapcomhnd="http://www.sap.com/NW05/soap/features/commit/">false</sapcomhnd:enableCommit>
+        <sapblock:enableBlocking xmlns:sapblock="http://www.sap.com/NW05/soap/features/blocking/">true</sapblock:enableBlocking>
+        <saprmnw05:enableWSRM xmlns:saprmnw05="http://www.sap.com/NW05/soap/features/wsrm/">false</saprmnw05:enableWSRM>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsp:Policy wsu:Id="OP__ZcreazaComanda">
     <wsp:ExactlyOne>
       <wsp:All>
@@ -3096,6 +3106,7 @@
           <xsd:element name="FilPlata" type="n0:char4" />
           <xsd:element name="Custodie" type="n0:char1" />
           <xsd:element name="CodPostal" type="n0:char15" />
+          <xsd:element name="Zona" type="n0:char10" />
         </xsd:sequence>
       </xsd:complexType>
       <xsd:complexType name="Bapi2093ResItemChange">
@@ -3140,6 +3151,24 @@
           <xsd:element name="ReqSegment" type="n0:char1" />
           <xsd:element name="StkSegLong" type="n0:char1" />
           <xsd:element name="ReqSegLong" type="n0:char1" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ZclientMin">
+        <xsd:sequence>
+          <xsd:element name="Fiscalcode" type="n0:char20" />
+          <xsd:element name="Companyname" type="n0:char35" />
+          <xsd:element name="Companyemail" type="n0:char241" />
+          <xsd:element name="Companystreet" type="n0:char60" />
+          <xsd:element name="Companynumber" type="n0:char10" />
+          <xsd:element name="Companycity" type="n0:char40" />
+          <xsd:element name="Companycounty" type="n0:char20" />
+          <xsd:element name="Firstname" type="n0:char30" />
+          <xsd:element name="Lastname" type="n0:char30" />
+          <xsd:element name="Phonenumber" type="n0:char16" />
+          <xsd:element name="Comregnumber" type="n0:char18" />
+          <xsd:element name="Vatpayer" type="n0:char1" />
+          <xsd:element name="Prctr" type="n0:char4" />
+          <xsd:element name="TipB2b" type="n0:char2" />
         </xsd:sequence>
       </xsd:complexType>
       <xsd:complexType name="ZstNrPaleti">
@@ -3550,6 +3579,7 @@
       <xsd:element name="ZextindeClient">
         <xsd:complexType>
           <xsd:sequence>
+            <xsd:element minOccurs="0" name="VKdgrp" type="n0:char2" />
             <xsd:element minOccurs="0" name="VKunnr" type="n0:char10" />
             <xsd:element minOccurs="0" name="VSpart" type="n0:char2" />
             <xsd:element minOccurs="0" name="VVtweg" type="n0:char2" />
@@ -4153,6 +4183,23 @@
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
+      <xsd:element name="ZcreateClientMinReq">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="CodAv" type="n0:numeric8" />
+            <xsd:element name="IpClient" type="tns:ZclientMin" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ZcreateClientMinReqResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="EpKunnr" type="n0:char10" />
+            <xsd:element name="EpMess" type="n0:char100" />
+            <xsd:element name="EpReturncode" type="xsd:unsignedByte" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
       <xsd:element name="ZcreazaComanda">
         <xsd:complexType>
           <xsd:sequence>
@@ -4438,6 +4485,12 @@
   <wsdl:message name="ZbapiReservationChangeResponse">
     <wsdl:part name="parameter" element="tns:ZbapiReservationChangeResponse" />
   </wsdl:message>
+  <wsdl:message name="ZcreateClientMinReq">
+    <wsdl:part name="parameters" element="tns:ZcreateClientMinReq" />
+  </wsdl:message>
+  <wsdl:message name="ZcreateClientMinReqResponse">
+    <wsdl:part name="parameter" element="tns:ZcreateClientMinReqResponse" />
+  </wsdl:message>
   <wsdl:message name="ZcreazaComanda">
     <wsdl:part name="parameters" element="tns:ZcreazaComanda" />
   </wsdl:message>
@@ -4665,6 +4718,13 @@
       </wsp:Policy>
       <wsdl:input message="tns:ZbapiReservationChange" />
       <wsdl:output message="tns:ZbapiReservationChangeResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="ZcreateClientMinReq">
+      <wsp:Policy>
+        <wsp:PolicyReference URI="#OP__ZcreateClientMinReq" />
+      </wsp:Policy>
+      <wsdl:input message="tns:ZcreateClientMinReq" />
+      <wsdl:output message="tns:ZcreateClientMinReqResponse" />
     </wsdl:operation>
     <wsdl:operation name="ZcreazaComanda">
       <wsp:Policy>
@@ -4948,6 +5008,15 @@
     </wsdl:operation>
     <wsdl:operation name="ZbapiReservationChange">
       <soap:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZTBL_WEBSERVICE:ZbapiReservationChangeRequest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZcreateClientMinReq">
+      <soap:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZTBL_WEBSERVICE:ZcreateClientMinReqRequest" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -5251,6 +5320,15 @@
     </wsdl:operation>
     <wsdl:operation name="ZbapiReservationChange">
       <wsoap12:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZTBL_WEBSERVICE:ZbapiReservationChangeRequest" style="document" />
+      <wsdl:input>
+        <wsoap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsoap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZcreateClientMinReq">
+      <wsoap12:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZTBL_WEBSERVICE:ZcreateClientMinReqRequest" style="document" />
       <wsdl:input>
         <wsoap12:body use="literal" />
       </wsdl:input>

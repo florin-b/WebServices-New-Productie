@@ -22,13 +22,20 @@ namespace WebService1
 
             bool isAprobare = false;
             HashSet<string> setAprobari = new HashSet<string>();
+            double pretMinimUnitar = 0;
 
             foreach (ArticolComanda articol in listArticole)
             {
                 if (articol.pretMinim == 0)
                     continue;
 
-                if (articol.pretUnit < articol.pretMinim)
+
+                pretMinimUnitar = articol.pretMinim;
+
+                if (tipUser.Equals("CVA") || tipUser.Equals("SDCVA") || Utils.isUnitLogGed(dateLivrare.unitLog))
+                    pretMinimUnitar = articol.pretMinim / articol.multiplu;
+
+                if (articol.pretUnit < pretMinimUnitar)
                 {
                     isAprobare = true;
                     setAprobari.Add(articol.depart.Substring(0, 2));
@@ -68,7 +75,8 @@ namespace WebService1
                 if (articol.pretMinim == 0 || articol.cmpCorectat == 0)
                     continue;
 
-                adaosArticol = (articol.pretUnit / articol.multiplu - articol.pretMinim / articol.multiplu) * articol.cantitate;
+                adaosArticol = (articol.pretUnit - articol.pretMinim / articol.multiplu) * articol.cantitate;
+
 
                 if (adaosArticol < 0)
                 {
@@ -80,7 +88,7 @@ namespace WebService1
 
                 totalAdaos += adaosArticol;
 
-                cmpCorectatUnit = (articol.cmpCorectat / articol.cantitate) * articol.multiplu;
+                cmpCorectatUnit = (articol.cmpCorectat / Double.Parse(articol.cantUmb));
 
                 if (articol.pretUnit < cmpCorectatUnit)
                 {
@@ -112,14 +120,14 @@ namespace WebService1
             return !marjaCmdPozitiva || articolSubCmp;
         }
 
-        private static bool isUserAprobari_11(string tipUser)
-        {
-            return tipUser.Contains("IP") || tipUser.Equals("SMR");
-        }
-
         private static bool isUserAprobariCV(string tipUser)
         {
             return tipUser.Contains("VR") || tipUser.Contains("VO") || tipUser.Contains("W") || tipUser.Contains("VS");
+        }
+
+        private static bool isUserAprobari_11(string tipUser)
+        {
+            return tipUser.Contains("IP") || tipUser.Equals("SMR") || tipUser.Equals("SSCM");
         }
 
 
