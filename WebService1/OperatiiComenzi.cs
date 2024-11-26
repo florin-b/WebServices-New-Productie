@@ -1125,7 +1125,7 @@ namespace WebService1
                 cmd.CommandText = " select a.pers_contact, a.telefon, a.adr_livrare, a.traty,    a.city, a.region, a.ul, " +
                                   " b.tip_pers,   a.ketdat,  a.macara, " +
                                   " nvl((select latitude || ',' || longitude from sapprd.zcoordcomenzi where idcomanda = a.id),'0,0') coord,  " +
-                                  " a.descoperita, nvl(a.addrnumber,'-1') from sapprd.zcust_head a, clienti b " +
+                                  " a.descoperita, nvl(a.addrnumber,'-1'), zlsch from sapprd.zcust_head a, clienti b " +
                                   " where a.id = :idcmd and a.cod_client = b.cod ";
 
 
@@ -1176,7 +1176,7 @@ namespace WebService1
                     dateLivrare.diviziiClient = " ";
                     dateLivrare.filialaCLP = " ";
                     dateLivrare.nrCmdClp = " ";
-                    dateLivrare.tipPlata = " ";
+                    dateLivrare.tipPlata = GeneralUtils.getTipPlata(oReader.GetString(oReader.GetOrdinal("zlsch"))); ;
 
 
 

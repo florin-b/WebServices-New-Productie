@@ -283,6 +283,9 @@ namespace WebService1
                 if (comandaVanzare.cnpClient.Length == 0)
                     return;
 
+                if (dateLivrare.codJudet.Length == 0)
+                    return;
+
                 if (existaDatePersonale(connection, dateLivrare, comandaVanzare))
                 {
                     return;
@@ -310,7 +313,7 @@ namespace WebService1
                 cmd.Parameters[2].Value = dateLivrare.Strada;
 
                 cmd.Parameters.Add(":city1", OracleType.NVarChar, 120).Direction = ParameterDirection.Input;
-                cmd.Parameters[3].Value = dateLivrare.Oras;
+                cmd.Parameters[3].Value = dateLivrare.Oras.Length > 1 ? dateLivrare.Oras : " ";
 
                 cmd.Parameters.Add(":regio", OracleType.NVarChar, 9).Direction = ParameterDirection.Input;
                 cmd.Parameters[4].Value = dateLivrare.codJudet;

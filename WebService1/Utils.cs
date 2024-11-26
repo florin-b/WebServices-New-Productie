@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.OracleClient;
+using System.Globalization;
 using System.Linq;
+using System.Text;
 using System.Web;
 
 namespace WebService1
@@ -106,6 +108,23 @@ namespace WebService1
                 return getCurrentMonth();
 
             return strDate.Substring(4, 2);
+        }
+
+        public static string removeDiacritics(string text)
+        {
+            string normalizedString = text.Normalize(NormalizationForm.FormD);
+
+            var stringBuilder = new StringBuilder(normalizedString.Length);
+
+            foreach (char c in normalizedString)
+            {
+                if (CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark)
+                {
+                    stringBuilder.Append(c);
+                }
+            }
+
+            return stringBuilder.ToString();
         }
 
 

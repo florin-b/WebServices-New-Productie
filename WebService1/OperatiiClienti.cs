@@ -159,17 +159,6 @@ namespace WebService1
                         if (tipUser != "SD" && !tipUserSap.Contains("KA") && tipUserSap != null && !tipUserSap.Equals(Constants.tipSuperAv) && !tipUserSap.Equals(Constants.tipInfoAv) && !tipUserSap.Equals(Constants.tipSMR) && !tipUserSap.Equals(Constants.tipCVR) && !tipUserSap.Equals(Constants.tipSSCM) && !tipUserSap.Equals(Constants.tipCGED) && !tipUserSap.Equals(Constants.tipOIVPD))
                                 condClient += condExtraClient;
 
-                        if (tipUser.Equals("SD"))
-                            condClient = " and exists(select 1 from sapprd.knvp p where p.mandt = '900' and p.kunnr = c.cod and p.vtweg = '10' and p.parvw in ('VE', 'ZC') and p.pernr in " +
-                                         " (select cod from websap.agenti where activ = 1 and filiala = '" + unitLog + "' and divizie = '" + departAg + "')) " +
-                                         " union " +
-                                         " select c.nume, c.cod, c.tip_pers, a.city1, a.street, a.house_num1, a.region from websap.clienti c, " +
-                                         " sapprd.adrc a where upper(c.nume) like upper('" + numeClient.Replace("'", "") + "%') and a.client = '900' and a.addrnumber = " +
-                                         " (select k.adrnr from sapprd.kna1 k where k.mandt = '900' and k.kunnr = c.cod) " +
-                                         " and exists (select 1 from websap.clie_tip t where t.canal = '10' and t.cod_cli = c.cod and t.depart <> '" + departAg + "' and t.tip = '01') " +
-                                         " and exists (select 1 from sapprd.knvp p where p.mandt = '900' and p.kunnr = c.cod and p.vtweg = '10' and p.spart = '" + departAg + "' " +
-                                         " and p.parvw in ('ZA', 'ZS') " + exceptieClient + " )";
-
                     }
 
                 }
@@ -200,7 +189,7 @@ namespace WebService1
                     {
 
                         unClient = new Client();
-                        unClient.numeClient = oReader.GetString(0);
+                        unClient.numeClient = oReader.GetString(0).Trim();
                         unClient.codClient = oReader.GetString(1);
                         unClient.tipClient = oReader.GetString(2);
                         unClient.localitate = oReader.GetString(3);
@@ -1120,6 +1109,55 @@ namespace WebService1
             return diviziiClient;
 
 
+        }
+
+        public static string getCodClientNominal(OracleConnection connection, string codCui)
+        {
+            string codClientNominal = "";
+
+            List<BeanDatePersonale> dateClienti = new List<BeanDatePersonale>();
+
+            if (codCui == null || codCui.Trim().Equals(String.Empty))
+                return codClientNominal;
+
+            OracleDataReader oReader = null;
+
+            try
+            {
+
+                OracleCommand cmd = connection.CreateCommand();
+
+                cmd.CommandText = " select kunnr from sapprd.kna1 where mandt = '900' and TRANSLATE(stceg, '0' || TRANSLATE(stceg, '.0123456789', '.'), '0') =" +
+                    " TRANSLATE(:codCui, '0' || TRANSLATE(:codCui, '.0123456789', '.'), '0') ";
+
+                cmd.CommandType = CommandType.Text;
+
+                cmd.Parameters.Add(":codCui", OracleType.VarChar, 180).Direction = ParameterDirection.Input;
+                cmd.Parameters[0].Value = codCui.ToUpper().Replace("RO", "");
+
+                oReader = cmd.ExecuteReader();
+
+                if (oReader.HasRows)
+                {
+                    while (oReader.Read())
+                    {
+
+                        codClientNominal = oReader.GetString(0);
+                    }
+                }
+
+                oReader.Close();
+                oReader.Dispose();
+
+                cmd.Dispose();
+
+            }
+            catch (Exception ex)
+            {
+                ErrorHandling.sendErrorToMail(ex.ToString());
+            }
+
+            return codClientNominal;
         }
 
         public static string getDiviziiClient(OracleConnection connection, string codClient, string codAgent)

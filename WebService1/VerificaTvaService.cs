@@ -148,6 +148,7 @@ namespace WebService1
                 }
 
                 platitorResponse.diviziiClient = OperatiiClienti.getDiviziiClientCUI(connection, cuiClient, codAgent);
+                platitorResponse.codClientNominal = OperatiiClienti.getCodClientNominal(connection, cuiClient);
 
 
             }
@@ -186,7 +187,7 @@ namespace WebService1
             cmd.Parameters[0].Value = starePlatitor.NrInmatr;
 
             cmd.Parameters.Add(":judet", OracleType.VarChar, 9).Direction = ParameterDirection.Input;
-            cmd.Parameters[1].Value = getCodJudet(starePlatitor.NrInmatr.Trim());
+            cmd.Parameters[1].Value = getCodJudet(starePlatitor.NrInmatr.Trim(), starePlatitor.Judet);
 
             cmd.Parameters.Add(":numeJudet", OracleType.VarChar, 60).Direction = ParameterDirection.Input;
             cmd.Parameters[2].Value = starePlatitor.Judet;
@@ -253,13 +254,13 @@ namespace WebService1
             cmd.Parameters[1].Value = starePlatitor.CUI;
 
             cmd.Parameters.Add(":numefirma", OracleType.VarChar, 105).Direction = ParameterDirection.Input;
-            cmd.Parameters[2].Value = starePlatitor.Nume;
+            cmd.Parameters[2].Value = Utils.removeDiacritics(starePlatitor.Nume);
 
             cmd.Parameters.Add(":nr_inmatric", OracleType.VarChar, 54).Direction = ParameterDirection.Input;
             cmd.Parameters[3].Value = starePlatitor.NrInmatr;
 
             cmd.Parameters.Add(":judet", OracleType.VarChar, 9).Direction = ParameterDirection.Input;
-            cmd.Parameters[4].Value = getCodJudet(starePlatitor.NrInmatr.Trim());
+            cmd.Parameters[4].Value = getCodJudet(starePlatitor.NrInmatr.Trim(), starePlatitor.Judet);
 
             cmd.Parameters.Add(":numeJudet", OracleType.VarChar, 60).Direction = ParameterDirection.Input;
             cmd.Parameters[5].Value = starePlatitor.Judet;
@@ -314,7 +315,7 @@ namespace WebService1
                 tvaResponse.isPlatitor = platitorTva.TVA.Equals("0") || platitorTva.TVA.ToLower().Equals("false") ? false : true;
                 tvaResponse.numeClient = platitorTva.Nume;
                 tvaResponse.nrInreg = platitorTva.NrInmatr;
-                tvaResponse.codJudet = getCodJudet(platitorTva.NrInmatr.Trim());
+                tvaResponse.codJudet = getCodJudet(platitorTva.NrInmatr.Trim(), platitorTva.Judet);
                 tvaResponse.localitate = platitorTva.Localitate;
                 tvaResponse.strada = platitorTva.Adresa + " " + platitorTva.Nr;
                 tvaResponse.stareInregistrare = platitorTva.StareInregistrare;
@@ -329,12 +330,108 @@ namespace WebService1
 
         }
 
-        private string getCodJudet(string nrInmatr)
+        private string getCodJudet(string nrInmatr, string numeJudet)
         {
             string codJudet = "00";
 
             if (nrInmatr != null && nrInmatr.Length > 3)
                 codJudet = nrInmatr.Substring(1, 2);
+
+            if (codJudet.Equals("00") || codJudet.Equals("/-"))
+                codJudet = getCodJudetDenumire(numeJudet);
+
+            return codJudet;
+        }
+
+        private string getCodJudetDenumire(string numeJudet)
+        {
+
+            string codJudet = "00";
+
+            if (numeJudet.ToUpper().Contains("ALBA"))
+                codJudet = "01";
+            else if (numeJudet.ToUpper().Contains("ARAD"))
+                codJudet = "02";
+            else if (numeJudet.ToUpper().Contains("ARGES"))
+                codJudet = "03";
+            else if (numeJudet.ToUpper().Contains("BACAU"))
+                codJudet = "04";
+            else if (numeJudet.ToUpper().Contains("BIHOR"))
+                codJudet = "05";
+            else if (numeJudet.ToUpper().Contains("BISTRITA"))
+                codJudet = "06";
+            else if (numeJudet.ToUpper().Contains("BOTOSANI"))
+                codJudet = "07";
+            else if (numeJudet.ToUpper().Contains("BRAILA"))
+                codJudet = "09";
+            else if (numeJudet.ToUpper().Contains("BRASOV"))
+                codJudet = "08";
+            else if (numeJudet.ToUpper().Contains("BUCURESTI"))
+                codJudet = "40";
+            else if (numeJudet.ToUpper().Contains("BUZAU"))
+                codJudet = "10";
+            else if (numeJudet.ToUpper().Contains("CALARASI"))
+                codJudet = "51";
+            else if (numeJudet.ToUpper().Contains("SEVERIN"))
+                codJudet = "11";
+            else if (numeJudet.ToUpper().Contains("CLUJ"))
+                codJudet = "12";
+            else if (numeJudet.ToUpper().Contains("CONSTANTA"))
+                codJudet = "13";
+            else if (numeJudet.ToUpper().Contains("COVASNA"))
+                codJudet = "14";
+            else if (numeJudet.ToUpper().Contains("DAMBOVITA"))
+                codJudet = "15";
+            else if (numeJudet.ToUpper().Contains("DOLJ"))
+                codJudet = "16";
+            else if (numeJudet.ToUpper().Contains("GALATI"))
+                codJudet = "17";
+            else if (numeJudet.ToUpper().Contains("GIURGIU"))
+                codJudet = "52";
+            else if (numeJudet.ToUpper().Contains("GORJ"))
+                codJudet = "18";
+            else if (numeJudet.ToUpper().Contains("HARGHITA"))
+                codJudet = "19";
+            else if (numeJudet.ToUpper().Contains("HUNEDOARA"))
+                codJudet = "20";
+            else if (numeJudet.ToUpper().Contains("IALOMITA"))
+                codJudet = "21";
+            else if (numeJudet.ToUpper().Contains("IASI"))
+                codJudet = "22";
+            else if (numeJudet.ToUpper().Contains("ILFOV"))
+                codJudet = "23";
+            else if (numeJudet.ToUpper().Contains("MARAMURES"))
+                codJudet = "24";
+            else if (numeJudet.ToUpper().Contains("MEHEDINTI"))
+                codJudet = "25";
+            else if (numeJudet.ToUpper().Contains("MURES"))
+                codJudet = "26";
+            else if (numeJudet.ToUpper().Contains("NEAMT"))
+                codJudet = "27";
+            else if (numeJudet.ToUpper().Contains("OLT"))
+                codJudet = "28";
+            else if (numeJudet.ToUpper().Contains("PRAHOVA"))
+                codJudet = "29";
+            else if (numeJudet.ToUpper().Contains("SALAJ"))
+                codJudet = "31";
+            else if (numeJudet.ToUpper().Contains("SATU"))
+                codJudet = "30";
+            else if (numeJudet.ToUpper().Contains("SIBIU"))
+                codJudet = "32";
+            else if (numeJudet.ToUpper().Contains("SUCEAVA"))
+                codJudet = "33";
+            else if (numeJudet.ToUpper().Contains("TELEORMAN"))
+                codJudet = "34";
+            else if (numeJudet.ToUpper().Contains("TIMIS"))
+                codJudet = "35";
+            else if (numeJudet.ToUpper().Contains("TULCEA"))
+                codJudet = "36";
+            else if (numeJudet.ToUpper().Contains("VALCEA"))
+                codJudet = "38";
+            else if (numeJudet.ToUpper().Contains("VASLUI"))
+                codJudet = "37";
+            else if (numeJudet.ToUpper().Contains("VRANCEA"))
+                codJudet = "39";
 
             return codJudet;
         }

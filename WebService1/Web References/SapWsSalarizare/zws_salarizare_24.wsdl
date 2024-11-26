@@ -1077,10 +1077,10 @@
   </wsdl:binding>
   <wsdl:service name="ZWS_SALARIZARE_24">
     <wsdl:port name="ZWS_SALARIZARE_24" binding="tns:ZWS_SALARIZARE_24">
-      <soap:address location="http://sap-prd6a.arabesque.ro:8036/sap/bc/srt/rfc/sap/zws_salarizare_24/900/zws_salarizare_24/zws_salarizare_24" />
+      <soap:address location="http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/rfc/sap/zws_salarizare_24/900/zws_salarizare_24/zws_salarizare_24" />
     </wsdl:port>
     <wsdl:port name="ZWS_SALARIZARE_24_soap12" binding="tns:ZWS_SALARIZARE_24_soap12">
-      <wsoap12:address location="http://sap-prd6a.arabesque.ro:8036/sap/bc/srt/rfc/sap/zws_salarizare_24/900/zws_salarizare_24/zws_salarizare_24" />
+      <wsoap12:address location="http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/rfc/sap/zws_salarizare_24/900/zws_salarizare_24/zws_salarizare_24" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

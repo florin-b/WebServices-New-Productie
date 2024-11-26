@@ -98,21 +98,30 @@ namespace WebService1
 
                     listDetaliiBaza = listDetaliiBaza.OrderBy(o => o.numeClient).ThenBy(o => o.numeSintetic).ToList();
 
-                    ZsalNtcf respDetaliiNtcf = response.GtTcf[0];
+                    if (response.GtTcf != null && response.GtTcf.Length > 0)
+                    {
 
-                    detaliiTCF.venitBaza = Double.Parse(respDetaliiNtcf.VenitBaza.ToString());
-                    detaliiTCF.clientiAnterior = Int32.Parse(respDetaliiNtcf.NrclAnterior).ToString();
-                    detaliiTCF.target = Int32.Parse(respDetaliiNtcf.Target).ToString();
-                    detaliiTCF.clientiCurent = Int32.Parse(respDetaliiNtcf.NrclCurent).ToString();
-                    detaliiTCF.coeficient = Double.Parse(respDetaliiNtcf.Coef.ToString());
-                    detaliiTCF.venitTcf = Double.Parse(respDetaliiNtcf.Venittcf.ToString());
+                        ZsalNtcf respDetaliiNtcf = response.GtTcf[0];
 
-                    ZsalCorrInc respDetaliiCor = response.GtCorrInc[0];
+                        detaliiTCF.venitBaza = Double.Parse(respDetaliiNtcf.VenitBaza.ToString());
+                        detaliiTCF.clientiAnterior = Int32.Parse(respDetaliiNtcf.NrclAnterior).ToString();
+                        detaliiTCF.target = Int32.Parse(respDetaliiNtcf.Target).ToString();
+                        detaliiTCF.clientiCurent = Int32.Parse(respDetaliiNtcf.NrclCurent).ToString();
+                        detaliiTCF.coeficient = Double.Parse(respDetaliiNtcf.Coef.ToString());
+                        detaliiTCF.venitTcf = Double.Parse(respDetaliiNtcf.Venittcf.ToString());
+                    }
 
-                    detaliiCorectie.venitBaza = Double.Parse(respDetaliiCor.Baza.ToString());
-                    detaliiCorectie.incasari08 = Double.Parse(respDetaliiCor.Incas08.ToString());
-                    detaliiCorectie.malus = Double.Parse(respDetaliiCor.Malus.ToString());
-                    detaliiCorectie.venitCorectat = Double.Parse(respDetaliiCor.VenCorInc.ToString());
+                    if (response.GtCorrInc != null && response.GtCorrInc.Length > 0)
+                    {
+
+                        ZsalCorrInc respDetaliiCor = response.GtCorrInc[0];
+
+                        detaliiCorectie.venitBaza = Double.Parse(respDetaliiCor.Baza.ToString());
+                        detaliiCorectie.incasari08 = Double.Parse(respDetaliiCor.Incas08.ToString());
+                        detaliiCorectie.malus = Double.Parse(respDetaliiCor.Malus.ToString());
+                        detaliiCorectie.venitCorectat = Double.Parse(respDetaliiCor.VenCorInc.ToString());
+
+                    }
 
                     ZsalCorr08[] respDetaliiCorectie08 = response.GtInc08Ex;
 
@@ -516,22 +525,28 @@ namespace WebService1
 
                     listDetaliiBaza = listDetaliiBaza.OrderBy(o => o.numeClient).ThenBy(o => o.numeSintetic).ToList();
 
-                    ZsalNtcf respDetaliiNtcf = response.GtTcf[0];
+                    if (response.GtTcf != null && response.GtTcf.Length > 0)
+                    {
 
-                    detaliiTCF.venitBaza = Double.Parse(respDetaliiNtcf.VenitBaza.ToString());
-                    detaliiTCF.clientiAnterior = Int32.Parse(respDetaliiNtcf.NrclAnterior).ToString();
-                    detaliiTCF.target = Int32.Parse(respDetaliiNtcf.Target).ToString();
-                    detaliiTCF.clientiCurent = Int32.Parse(respDetaliiNtcf.NrclCurent).ToString();
-                    detaliiTCF.coeficient = Double.Parse(respDetaliiNtcf.Coef.ToString());
-                    detaliiTCF.venitTcf = Double.Parse(respDetaliiNtcf.Venittcf.ToString());
+                        ZsalNtcf respDetaliiNtcf = response.GtTcf[0];
 
+                        detaliiTCF.venitBaza = Double.Parse(respDetaliiNtcf.VenitBaza.ToString());
+                        detaliiTCF.clientiAnterior = Int32.Parse(respDetaliiNtcf.NrclAnterior).ToString();
+                        detaliiTCF.target = Int32.Parse(respDetaliiNtcf.Target).ToString();
+                        detaliiTCF.clientiCurent = Int32.Parse(respDetaliiNtcf.NrclCurent).ToString();
+                        detaliiTCF.coeficient = Double.Parse(respDetaliiNtcf.Coef.ToString());
+                        detaliiTCF.venitTcf = Double.Parse(respDetaliiNtcf.Venittcf.ToString());
+                    }
 
-                    ZsalCorrInc respDetaliiCor = response.GtCorrInc[0];
+                    if (response.GtCorrInc != null && response.GtCorrInc.Length > 0)
+                    {
+                        ZsalCorrInc respDetaliiCor = response.GtCorrInc[0];
 
-                    detaliiCorectie.venitBaza = Double.Parse(respDetaliiCor.Baza.ToString());
-                    detaliiCorectie.incasari08 = Double.Parse(respDetaliiCor.Incas08.ToString());
-                    detaliiCorectie.malus = Double.Parse(respDetaliiCor.Malus.ToString());
-                    detaliiCorectie.venitCorectat = Double.Parse(respDetaliiCor.VenCorInc.ToString());
+                        detaliiCorectie.venitBaza = Double.Parse(respDetaliiCor.Baza.ToString());
+                        detaliiCorectie.incasari08 = Double.Parse(respDetaliiCor.Incas08.ToString());
+                        detaliiCorectie.malus = Double.Parse(respDetaliiCor.Malus.ToString());
+                        detaliiCorectie.venitCorectat = Double.Parse(respDetaliiCor.VenCorInc.ToString());
+                    }
 
                     ZsalCorr08[] respDetaliiCorectie08 = response.GtInc08Ex;
 
@@ -697,12 +712,16 @@ namespace WebService1
 
                     listDetaliiBaza = listDetaliiBaza.OrderBy(o => o.numeClient).ThenBy(o => o.numeSintetic).ToList();
 
-                    ZsalCorrInc respDetaliiCor = response.GtCorrInc[0];
+                    if (response.GtCorrInc != null && response.GtCorrInc.Length > 0)
+                    {
+                        ZsalCorrInc respDetaliiCor = response.GtCorrInc[0];
 
-                    detaliiCorectie.venitBaza = Double.Parse(respDetaliiCor.Baza.ToString());
-                    detaliiCorectie.incasari08 = Double.Parse(respDetaliiCor.Incas08.ToString());
-                    detaliiCorectie.malus = Double.Parse(respDetaliiCor.Malus.ToString());
-                    detaliiCorectie.venitCorectat = Double.Parse(respDetaliiCor.VenCorInc.ToString());
+                        detaliiCorectie.venitBaza = Double.Parse(respDetaliiCor.Baza.ToString());
+                        detaliiCorectie.incasari08 = Double.Parse(respDetaliiCor.Incas08.ToString());
+                        detaliiCorectie.malus = Double.Parse(respDetaliiCor.Malus.ToString());
+                        detaliiCorectie.venitCorectat = Double.Parse(respDetaliiCor.VenCorInc.ToString());
+                    }
+
 
 
                     ZsalCorr08[] respDetaliiCorectie08 = response.GtInc08Ex;

@@ -3107,6 +3107,7 @@
           <xsd:element name="Custodie" type="n0:char1" />
           <xsd:element name="CodPostal" type="n0:char15" />
           <xsd:element name="Zona" type="n0:char10" />
+          <xsd:element name="Canal" type="n0:char2" />
         </xsd:sequence>
       </xsd:complexType>
       <xsd:complexType name="Bapi2093ResItemChange">
@@ -3195,7 +3196,7 @@
       </xsd:complexType>
       <xsd:complexType name="ZstEtPaleti">
         <xsd:sequence>
-          <xsd:element name="Spart" type="n0:char3" />
+          <xsd:element name="Spart" type="n0:char2" />
           <xsd:element name="Matnr" type="n0:char18" />
           <xsd:element name="Valpal" type="n0:char8" />
           <xsd:element name="Valmin" type="n0:char8" />
@@ -3554,6 +3555,7 @@
       <xsd:element name="ZdetTransport">
         <xsd:complexType>
           <xsd:sequence>
+            <xsd:element minOccurs="0" name="IpCanal" type="n0:char2" />
             <xsd:element minOccurs="0" name="IpCity" type="n0:char25" />
             <xsd:element minOccurs="0" name="IpKunnr" type="n0:char10" />
             <xsd:element minOccurs="0" name="IpPernr" type="n0:numeric8" />
@@ -5402,10 +5404,10 @@
   </wsdl:binding>
   <wsdl:service name="ZTBL_WEBSERVICE">
     <wsdl:port name="ZTBL_WEBSERVICE" binding="tns:ZTBL_WEBSERVICE">
-      <soap:address location="http://sap-prd5a.arabesque.ro:8035/sap/bc/srt/rfc/sap/ztbl_webservice/900/ztbl_webservice/ztbl_webservice" />
+      <soap:address location="http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/rfc/sap/ztbl_webservice/900/ztbl_webservice/ztbl_webservice" />
     </wsdl:port>
     <wsdl:port name="ZTBL_WEBSERVICE_soap12" binding="tns:ZTBL_WEBSERVICE_soap12">
-      <wsoap12:address location="http://sap-prd5a.arabesque.ro:8035/sap/bc/srt/rfc/sap/ztbl_webservice/900/ztbl_webservice/ztbl_webservice" />
+      <wsoap12:address location="http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/rfc/sap/ztbl_webservice/900/ztbl_webservice/ztbl_webservice" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

@@ -290,14 +290,11 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <None Include="Web References\SalarizareKA\zws_sal_ka_2019.wsdl" />
-    <None Include="Web References\SAPWebServices\Reference.map">
+    <Content Include="Web References\SAPWebServices\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Web References\SAPWebServices\ZactDiscMaximResponse.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <Content Include="Web References\SAPWebServices\ZCalcStocResponse.datasource">
+    </Content>
+    <Content Include="Web References\SAPWebServices\ZactDiscMaximResponse.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <Content Include="Web References\SAPWebServices\ZanuleazaDocumente2Response.datasource">
@@ -309,33 +306,39 @@
     <Content Include="Web References\SAPWebServices\ZbapiReservationChangeResponse.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
-    <None Include="Web References\SAPWebServices\ZcalcTrapResponse.datasource">
+    <Content Include="Web References\SAPWebServices\ZCalcStocResponse.datasource">
       <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\SAPWebServices\ZcalcTrapSiteResponse.datasource">
+    </Content>
+    <Content Include="Web References\SAPWebServices\ZcalcTrapResponse.datasource">
       <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <Content Include="Web References\SAPWebServices\ZcheckZileLivrareResponse.datasource">
+    </Content>
+    <Content Include="Web References\SAPWebServices\ZcalcTrapSiteResponse.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <Content Include="Web References\SAPWebServices\ZChangeTonajPoResponse.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
+    <Content Include="Web References\SAPWebServices\ZcheckZileLivrareResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
     <Content Include="Web References\SAPWebServices\ZcreateClientMinReqResponse.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
-    <None Include="Web References\SAPWebServices\ZcreazaComandaResponse.datasource">
+    <Content Include="Web References\SAPWebServices\ZcreazaComandaResponse.datasource">
       <DependentUpon>Reference.map</DependentUpon>
-    </None>
+    </Content>
     <Content Include="Web References\SAPWebServices\ZcustChLivrareResponse.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <Content Include="Web References\SAPWebServices\ZdetTransportResponse.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
-    <None Include="Web References\SAPWebServices\ZextindeClientResponse.datasource">
+    <Content Include="Web References\SAPWebServices\ZextindeClientResponse.datasource">
       <DependentUpon>Reference.map</DependentUpon>
-    </None>
+    </Content>
+    <Content Include="Web References\SAPWebServices\ZgetColourFormulaResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
     <Content Include="Web References\SAPWebServices\ZgetInfocvResponse.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
@@ -345,16 +348,13 @@
     <Content Include="Web References\SAPWebServices\ZgetKunnrResponse.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
-    <Content Include="Web References\SAPWebServices\ZgetColourFormulaResponse.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </Content>
     <Content Include="Web References\SAPWebServices\ZgetPrice20Response.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
-    <None Include="Web References\SAPWebServices\ZgetPriceResponse.datasource">
+    <Content Include="Web References\SAPWebServices\ZgetPriceResponse.datasource">
       <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <Content Include="Web References\SAPWebServices\ZNrPaletiResponse.datasource">
+    </Content>
+    <Content Include="Web References\SAPWebServices\ZlivrareClpZulrResponse.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <Content Include="Web References\SAPWebServices\ZlivrareCustodieResponse.datasource">
@@ -363,34 +363,34 @@
     <Content Include="Web References\SAPWebServices\ZmodificaLivrareResponse.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
+    <Content Include="Web References\SAPWebServices\ZNrPaletiResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
     <Content Include="Web References\SAPWebServices\ZpalcantResponse.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
-    <Content Include="Web References\SAPWebServices\ZlivrareClpZulrResponse.datasource">
+    <Content Include="Web References\SAPWebServices\ZretMarfaResponse.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
-    <None Include="Web References\SAPWebServices\ZretMarfaResponse.datasource">
+    <Content Include="Web References\SAPWebServices\ZsablonReducereResponse.datasource">
       <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\SAPWebServices\ZsablonReducereResponse.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
+    </Content>
     <Content Include="Web References\SAPWebServices\ZsdSalesdocumentChangeResponse.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
-    <None Include="Web References\SAPWebServices\ZsdSalesdocumentCreateResponse.datasource">
+    <Content Include="Web References\SAPWebServices\ZsdSalesdocumentCreateResponse.datasource">
       <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\SAPWebServices\ZstareComandaResponse.datasource">
+    </Content>
+    <Content Include="Web References\SAPWebServices\ZstareComandaResponse.datasource">
       <DependentUpon>Reference.map</DependentUpon>
-    </None>
+    </Content>
     <Content Include="Web References\SAPWebServices\ZstareCurentaResponse.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
-    <Content Include="Web References\SAPWebServices\ZstocReturAvansatResponse.datasource">
+    <Content Include="Web References\SAPWebServices\ZstareCurentaReturResponse.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
-    <Content Include="Web References\SAPWebServices\ZstareCurentaReturResponse.datasource">
+    <Content Include="Web References\SAPWebServices\ZstocReturAvansatResponse.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <Content Include="Web References\SAPWebServices\ZstocSfaResponse.datasource">
@@ -490,6 +490,17 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <WebReferenceUrl Include="http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/wsdl/flv_10002A111AD1/bndg_url/sap/bc/srt/rfc/sap/ztbl_webservice/900/ztbl_webservice/ztbl_webservice%3fsap-client=900">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\SAPWebServices\</RelPath>
+      <UpdateFromURL>http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/wsdl/flv_10002A111AD1/bndg_url/sap/bc/srt/rfc/sap/ztbl_webservice/900/ztbl_webservice/ztbl_webservice%3fsap-client=900</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>WebService1_SAPWebServices_ZTBL_WEBSERVICE</CachedSettingsPropName>
+    </WebReferenceUrl>
     <WebReferenceUrl Include="http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/wsdl/flv_10002A111AD1/bndg_url/sap/bc/srt/rfc/sap/zwms_ul10_get_stock_arab/900/zwms_ul10_get_stock_arab/zwms_ul10_get_stock_arab%3fsap-client=900">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\SapWsCabluri05\</RelPath>
@@ -556,17 +567,6 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>WebService1_WebNecesar1_ZWBS_ZINTRARIMARFA</CachedSettingsPropName>
     </WebReferenceUrl>
-    <WebReferenceUrl Include="http://sap-prd5a.arabesque.ro:8035/sap/bc/srt/wsdl/flv_10002A111AD1/bndg_url/sap/bc/srt/rfc/sap/ztbl_webservice/900/ztbl_webservice/ztbl_webservice%3fsap-client=900">
-      <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\SAPWebServices\</RelPath>
-      <UpdateFromURL>http://sap-prd5a.arabesque.ro:8035/sap/bc/srt/wsdl/flv_10002A111AD1/bndg_url/sap/bc/srt/rfc/sap/ztbl_webservice/900/ztbl_webservice/ztbl_webservice%3fsap-client=900</UpdateFromURL>
-      <ServiceLocationURL>
-      </ServiceLocationURL>
-      <CachedDynamicPropName>
-      </CachedDynamicPropName>
-      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
-      <CachedSettingsPropName>WebService1_SAPWebServices_ZTBL_WEBSERVICEService</CachedSettingsPropName>
-    </WebReferenceUrl>
     <WebReferenceUrl Include="http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/wsdl/flv_10002A111AD1/bndg_url/sap/bc/srt/rfc/sap/zws_sal_ka_2019/900/zws_sal_ka_2019/zws_sal_ka_2019%3fsap-client=900">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\SalarizareKA\</RelPath>
@@ -622,10 +622,10 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>WebService1_SalarizareCVA_ZWS_SAL_CVA</CachedSettingsPropName>
     </WebReferenceUrl>
-    <WebReferenceUrl Include="http://sap-prd6a.arabesque.ro:8036/sap/bc/srt/wsdl/flv_10002A111AD1/bndg_url/sap/bc/srt/rfc/sap/zws_salarizare_24/900/zws_salarizare_24/zws_salarizare_24%3fsap-client=900">
+    <WebReferenceUrl Include="http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/wsdl/flv_10002A111AD1/bndg_url/sap/bc/srt/rfc/sap/zws_salarizare_24/900/zws_salarizare_24/zws_salarizare_24%3fsap-client=900">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\SapWsSalarizare\</RelPath>
-      <UpdateFromURL>http://sap-prd6a.arabesque.ro:8036/sap/bc/srt/wsdl/flv_10002A111AD1/bndg_url/sap/bc/srt/rfc/sap/zws_salarizare_24/900/zws_salarizare_24/zws_salarizare_24%3fsap-client=900</UpdateFromURL>
+      <UpdateFromURL>http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/wsdl/flv_10002A111AD1/bndg_url/sap/bc/srt/rfc/sap/zws_salarizare_24/900/zws_salarizare_24/zws_salarizare_24%3fsap-client=900</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>

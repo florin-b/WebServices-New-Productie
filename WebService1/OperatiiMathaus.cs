@@ -1867,6 +1867,7 @@ namespace WebService1
                 inParam.IpVkgrp = departCmd;
                 inParam.IpPernr = antetCmd.codPers;
                 inParam.IpTraty = antetCmd.tipTransp;
+                
 
                 SAPWebServices.ZstTaxeAcces taxeAcces = new SAPWebServices.ZstTaxeAcces();
 

@@ -109,29 +109,7 @@ namespace WebService1
                     }
 
                 }
-                else
-                {
-                    //exceptie sintetice
-                    if (filiala == "BV90")
-                    {
-                        if (depart == "02")
-                        {
-                            if (Service1.isArtPermited(sinteticArt))
-                            {
-                                showStocVal_ = "1";
-                            }
-                            else  //nu este permisa vanzarea altor articole, se afiseaza fara stoc
-                            {
-                                cant = 0;
-                                umArt = " ";
-                                depArt = " ";
-                                showStocVal_ = "1";
-
-                                retVal = cant.ToString() + "#" + umArt + "#" + depArt + "@@";
-                            }
-                        }
-                    }
-                }
+                
 
                 retVal += "!" + cmpVal + "!" + showStocVal_ + "!" + getStocImbatranit(connection, codArt, filiala) + "!" + getStocBlocat(connection, codArt, filiala); ;
 

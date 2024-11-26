@@ -39,7 +39,7 @@ namespace WebService1
         public static string[] agentiExtra07 = { "83436", "83090", "83311", "83436", "83297", "83435", "83309", "83090", "83311" };
         public static string[] agentiExtra08 = { "83402" };
 
-        public const string LiteSFAVer = "ver:288";
+        public const string LiteSFAVer = "ver:289";
         public const int minAndroidSDK = 23;
 
         string globalParrentId = "0";
@@ -3582,6 +3582,8 @@ namespace WebService1
                             dateLivrare.codJudetD = oReader.GetString(8);
                         }
                     }
+
+                    dateLivrare.prelucrare = HelperComenzi.getTipPrelucrare(connection, nrCmd);
 
 
 
@@ -7278,14 +7280,11 @@ namespace WebService1
                                 " a.ul, a.accept1, a.accept2, '0' tip , ag.nume, decode(a.pmnttrms,'',' ',a.pmnttrms) pmnttrms, a.datac, nvl(a.docin,-1), " +
                                 " nvl(a.adr_noua,-1), a.city ||', '|| a.adr_livrare, '11' divizie,'-1' nume_client, a.depart, " +
                                 " a.aprob_cv_necesar, a.aprob_cv_realiz, a.cod_client cod_client_generic_ged, cond_cv conditii, nvl(ag.nrtel,'-1') telAgent, a.client_raft " +
-                                sqlAvans + " , a.lifnr, cl.nume nume_cl, a.ora_accept1, a.ora_accept2, a.ac_zc " +
+                                sqlAvans + " , a.lifnr, cl.nume nume_cl, a.ora_accept1, a.ora_accept2, a.ac_zc, a.canal " +
                                 "  from sapprd.zcomhead_tableta a, " +
                                 " agenti ag, sapprd.zcomsuperav sav, clienti cl " +
                                 " where ag.cod = a.cod_agent and cl.cod = a.cod_client " + tipComanda + condData + condClient + condRestr +
                                 " order by id desc ) ";
-
-
-
 
 
 
@@ -7305,7 +7304,7 @@ namespace WebService1
                                 " , ag.nume, decode(a.pmnttrms,'',' ',a.pmnttrms) pmnttrms, a.datac, nvl(a.docin,-1) docin1, " +
                                 " nvl(a.adr_noua,-1) adr_noua1, a.city ||', '|| a.adr_livrare adr_livrare1, ag.divizie, a.nume_client, a.depart, " +
                                 " a.aprob_cv_necesar , a.aprob_cv_realiz, ' ' cod_client_generic_ged, ' ' conditii, nvl(ag.nrtel,'-1') telAgent,a.client_raft " +
-                                 sqlAvans + " , a.lifnr, ' ' nume_cl, a.ora_accept1, a.ora_accept2, a.ac_zc " +
+                                 sqlAvans + " , a.lifnr, ' ' nume_cl, a.ora_accept1, a.ora_accept2, a.ac_zc, a.canal " +
                                 " from sapprd.zcomhead_tableta a, " +
                                 " clienti b, agenti ag, clie_tip cl, sapprd.zcomsuperav sav " + tabelaComenziEmise + tabelaHome + tabDV +
                                 " where a.cod_client=b.cod and ag.cod = a.cod_agent " + tipComanda + condDV + condData + condRestr + condClient + condDepart + condHome +
@@ -7318,7 +7317,7 @@ namespace WebService1
                     if (tipCmd.Equals("2") && !depart.StartsWith("04"))
                     {
                         sqlString = " select x.id, x.nume1, to_char(to_date(x.datac,'yyyymmdd')), x.valoare, x.status, x.cod_client, x.cmdsap, x.status_aprov, x.fact_red, x.ul, x.accept1, x.accept2, x.tip, x.nume, x.pmnttrms, x.datac, x.docin1, " +
-                                    " x.adr_noua1, x.adr_livrare1, x.divizie, x.nume_client, x.depart, x.aprob_cv_necesar, x.aprob_cv_realiz,x.cod_client_generic_ged,x.conditii, x.telAgent,x.client_raft, x.avans, x.lifnr, x.nume_cl, x.ora_accept1, x.ora_accept2, x.ac_zc " +
+                                    " x.adr_noua1, x.adr_livrare1, x.divizie, x.nume_client, x.depart, x.aprob_cv_necesar, x.aprob_cv_realiz,x.cod_client_generic_ged,x.conditii, x.telAgent,x.client_raft, x.avans, x.lifnr, x.nume_cl, x.ora_accept1, x.ora_accept2, x.ac_zc, x.canal " +
                                     " from ( " + sqlString + " ) x where rownum<=15 ";
                     }
 
@@ -7413,6 +7412,9 @@ namespace WebService1
                             comandaCuTva = new OperatiiArticole().getValoareCuTVAComanda(connection, comanda.idComanda);
                             canalDistrib = "10";
                         }
+
+                        if (oReader.GetString(oReader.GetOrdinal("canal")).Length == 2)
+                            canalDistrib = oReader.GetString(oReader.GetOrdinal("canal"));
 
                         comanda.sumaTVA = comandaCuTva.ToString();
                         comanda.canalDistrib = canalDistrib;
@@ -12634,6 +12636,12 @@ namespace WebService1
                     }
                 }
 
+
+                if (codJudetLivrare.Equals("/-") || codJudetLivrareComanda.Equals("/-"))
+                {
+                    ErrorHandling.sendErrorToMail("Cod judet eronat: \n\n" + JSONComanda + "\n\n" + JSONDateLivrare + "\n\n" + JSONArt);
+                }
+
                 //sf. adresa livrare
 
                 string lclCodAgent = dateLivrare.codAgent;
@@ -12665,12 +12673,12 @@ namespace WebService1
                         " valoare,mt,com_referinta,accept1,accept2,fact_red, city, region, pmnttrms , obstra, timpc, ketdat, docin, adr_noua, depart, obsplata, addrnumber, nume_client, " +
                         " stceg, tip_pers, val_incasata, site, email, mod_av, cod_j, adr_livrare_d, city_d, region_d, aprob_cv_necesar, macara, val_min_tr, id_obiectiv, " +
                         " adresa_obiectiv, parent_id, client_raft, meserias,fact_palet_separat, lifnr, lifnr_prod, descoperita, prog_livr, livr_sambata, bloc, ref_client, " +
-                        " ac_zc, fil_plata , cod_postal, custodie, zona) " +
+                        " ac_zc, fil_plata , cod_postal, custodie, zona, canal ) " +
                         " values ('900',pk_key.nextval, :codCl,:ul,:status,:status_aprov, " +
                         " :datac,:cantar,:agent,:codinit,:plata,:perscont,:tel,:adr,:valoare,:transp,:comsap,:accept1,:accept2,:factred,:city,:region,:termplt,:obslivr,:timpc,:datalivrare, " +
                         " :tipDocIn, :adrNoua, :depart, :obsplata, :adrnumber, :numeClient, :cnpClient, :tipPers, :valIncasata, :cmdSite, :email, :mod_av, :codJ, :adr_livrare_d, :city_d, :region_d, " +
                         " :necesarCVAprob, :macara, :val_min_tr, :idObiectiv, :adresaObiectiv, :parent_id, :client_raft, :meserias, :factPaletSeparat, :lifnr, " +
-                        " :lifnr_prod, :descoperita, :progrLivr, :livrSambata, :bloc, :refClient, :aczc, :filPlata, :codPostal, :custodie, :zona ) " +
+                        " :lifnr_prod, :descoperita, :progrLivr, :livrSambata, :bloc, :refClient, :aczc, :filPlata, :codPostal, :custodie, :zona, :canal ) " +
                         " returning id into :id ";
 
 
@@ -12893,10 +12901,10 @@ namespace WebService1
                 cmd.Parameters[37].Value = stradaLivrare + " ";
 
                 cmd.Parameters.Add(":city_d", OracleType.VarChar, 75).Direction = ParameterDirection.Input;
-                cmd.Parameters[38].Value = orasLivrare;
+                cmd.Parameters[38].Value = orasLivrare.Length > 1 ? orasLivrare : " ";
 
                 cmd.Parameters.Add(":region_d", OracleType.VarChar, 9).Direction = ParameterDirection.Input;
-                cmd.Parameters[39].Value = codJudetLivrare;
+                cmd.Parameters[39].Value = codJudetLivrare.Length > 1 ? codJudetLivrare : " ";
 
                 cmd.Parameters.Add(":necesarCVAprob", OracleType.VarChar, 90).Direction = ParameterDirection.Input;
 
@@ -12989,6 +12997,9 @@ namespace WebService1
 
                 cmd.Parameters.Add(":zona", OracleType.VarChar, 30).Direction = ParameterDirection.Input;
                 cmd.Parameters[61].Value = numeZona;
+
+                cmd.Parameters.Add(":canal", OracleType.VarChar, 6).Direction = ParameterDirection.Input;
+                cmd.Parameters[62].Value = comandaVanzare.canalDistrib;
 
                 OracleParameter idCmd = new OracleParameter("id", OracleType.Number);
                 idCmd.Direction = ParameterDirection.Output;

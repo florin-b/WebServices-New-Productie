@@ -26,17 +26,6 @@ namespace WebService1.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://sap-prd5a.arabesque.ro:8035/sap/bc/srt/rfc/sap/ztbl_webservice/900/ztbl_we" +
-            "bservice/ztbl_webservice")]
-        public string WebService1_SAPWebServices_ZTBL_WEBSERVICEService {
-            get {
-                return ((string)(this["WebService1_SAPWebServices_ZTBL_WEBSERVICEService"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
         [global::System.Configuration.DefaultSettingValueAttribute("http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/rfc/sap/zclp_webservice/900/zclp_we" +
             "bservice/zclp_webservice")]
         public string WebService1_SapWsClp_ZCLP_WEBSERVICE {
@@ -168,11 +157,22 @@ namespace WebService1.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://sap-prd6a.arabesque.ro:8036/sap/bc/srt/rfc/sap/zws_salarizare_24/900/zws_s" +
+        [global::System.Configuration.DefaultSettingValueAttribute("http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/rfc/sap/zws_salarizare_24/900/zws_s" +
             "alarizare_24/zws_salarizare_24")]
         public string WebService1_SapWsSalarizare_ZWS_SALARIZARE_24 {
             get {
                 return ((string)(this["WebService1_SapWsSalarizare_ZWS_SALARIZARE_24"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/rfc/sap/ztbl_webservice/900/ztbl_we" +
+            "bservice/ztbl_webservice")]
+        public string WebService1_SAPWebServices_ZTBL_WEBSERVICEService {
+            get {
+                return ((string)(this["WebService1_SAPWebServices_ZTBL_WEBSERVICEService"]));
             }
         }
     }

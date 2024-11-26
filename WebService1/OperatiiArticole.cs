@@ -120,7 +120,7 @@ namespace WebService1
                     nrParam++;
                 }
 
-                if (!codDepart.Equals("00") && !codDepart.Trim().Equals(""))
+                if (!codDepart.Equals("00") && !codDepart.Trim().Equals("") && !codDepart.Equals("11"))
                 {
                     cmd.Parameters.Add(":depart", OracleType.VarChar, 9).Direction = ParameterDirection.Input;
                     cmd.Parameters[nrParam].Value = codDepart;
@@ -186,7 +186,7 @@ namespace WebService1
             }
             catch (Exception ex)
             {
-                ErrorHandling.sendErrorToMail(ex.ToString() + " detalii: " +  codArticol + " , "  + tip1 + " , " +  tip2 + " , " +  furnizor + " , " + codDepart);
+                ErrorHandling.sendErrorToMail(ex.ToString() + " detalii: " +  codArticol + " , "  + tip1 + " , " +  tip2 + " , " +  furnizor + " , " + codDepart + " , " + filiala + " , " + aczc);
             }
             finally
             {
@@ -437,7 +437,7 @@ namespace WebService1
                         articol.umVanz10 = oReader.GetString(4);
                         articol.umVanz = oReader.GetString(8).Substring(0, 2).Equals("11") ? oReader.GetString(5) : oReader.GetString(4);
                         articol.tipAB = oReader.GetString(6);
-                        articol.depart = oReader.GetString(8).Substring(0, 2);
+                        articol.depart = oReader.GetString(8);
                         articol.departAprob = oReader.GetString(9);
                         articol.umPalet = oReader.GetInt32(10).ToString();
                         articol.stoc = oReader.GetDouble(11).ToString();

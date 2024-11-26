@@ -3179,6 +3179,8 @@ namespace WebService1.SAPWebServices {
         
         private string zonaField;
         
+        private string canalField;
+        
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         public string Mandt {
@@ -4056,6 +4058,17 @@ namespace WebService1.SAPWebServices {
             }
             set {
                 this.zonaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Canal {
+            get {
+                return this.canalField;
+            }
+            set {
+                this.canalField = value;
             }
         }
     }
@@ -29432,6 +29445,8 @@ namespace WebService1.SAPWebServices {
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:sap-com:document:sap:soap:functions:mc-style")]
     public partial class ZdetTransport {
         
+        private string ipCanalField;
+        
         private string ipCityField;
         
         private string ipKunnrField;
@@ -29453,6 +29468,17 @@ namespace WebService1.SAPWebServices {
         private ZsfilTransp[] itFilCostField;
         
         private ZsitemsComanda[] itItemsField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string IpCanal {
+            get {
+                return this.ipCanalField;
+            }
+            set {
+                this.ipCanalField = value;
+            }
+        }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]

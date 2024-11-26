@@ -256,6 +256,46 @@ namespace WebService1
             return isPretMinimZero;
         }
 
+        public static string getTipPrelucrare(OracleConnection connection, string nrCmd)
+        {
+            string tipPrelucrare = "";
+
+            OracleCommand cmd = new OracleCommand();
+            OracleDataReader oReader = null;
+
+            try
+            {
+                cmd = connection.CreateCommand();
+
+                cmd.CommandText = " select prelucrare from SAPPRD.zprelucrare04 where mandt = '900' and idComanda = :nrCmd ";
+                cmd.CommandType = CommandType.Text;
+
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add(":nrCmd", OracleType.Int32, 20).Direction = ParameterDirection.Input;
+                cmd.Parameters[0].Value = Int32.Parse(nrCmd); ;
+
+                oReader = cmd.ExecuteReader();
+
+                if (oReader.HasRows)
+                {
+                    oReader.Read();
+                    tipPrelucrare = oReader.GetString(0);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                ErrorHandling.sendErrorToMail(ex.ToString() + " , " + nrCmd);
+            }
+            finally
+            {
+                DatabaseConnections.CloseConnections(oReader, cmd);
+            }
+
+            return tipPrelucrare;
+        }
+
+
         public static string getNrCmdClp(OracleConnection connection, string nrCmd)
         {
             string nrCmdClp = "";
