@@ -2129,7 +2129,7 @@ namespace WebService1
 
                 cmd = conn.CreateCommand();
 
-                cmd.CommandText = " select tip_marfa, nvl(lungime_trans,' ') from articole where cod =:codArticol ";
+                cmd.CommandText = " select tip_marfa, nvl(lungime_trans,' '), transp_tert from articole where cod =:codArticol ";
 
                 cmd.CommandType = CommandType.Text;
                 cmd.Parameters.Clear();
@@ -2149,6 +2149,7 @@ namespace WebService1
                     oReader.Read();
                     articolProps.tipMarfa = oReader.GetString(0).Trim();
                     articolProps.lungime = oReader.GetString(1).ToLower();
+                    articolProps.transpTert = oReader.GetString(2).ToLower();
 
                 }
 

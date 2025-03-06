@@ -175,5 +175,16 @@ namespace WebService1.Properties {
                 return ((string)(this["WebService1_SAPWebServices_ZTBL_WEBSERVICEService"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/rfc/sap/ztbl_webservice/900/ztbl_we" +
+            "bservice/ztbl_webservice")]
+        public string WebService1_SAPWebServices_ZTBL_WEBSERVICE {
+            get {
+                return ((string)(this["WebService1_SAPWebServices_ZTBL_WEBSERVICE"]));
+            }
+        }
     }
 }

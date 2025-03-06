@@ -451,6 +451,21 @@ namespace WebService1
 
         }
 
+        public static double getValoareTaxeComanda(List<TaxaComanda> taxeComanda)
+        {
+            double valoareTaxe = 0;
+
+            if (taxeComanda == null)
+                return 0;
+
+            foreach (TaxaComanda taxa in taxeComanda)
+            {
+                valoareTaxe += taxa.valoare;
+            }
+
+            return valoareTaxe;
+        }
+
         public static void convertUmFromIso(Dictionary<string, string> dictionarUmIso, List<DateArticolMathaus> listArticole)
         {
             foreach (DateArticolMathaus articol in listArticole)

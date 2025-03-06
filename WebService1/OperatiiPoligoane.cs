@@ -70,6 +70,7 @@ namespace WebService1
                 {
                     if (punctInPoligonTonajDB(addressPoint, poligon, datePoligon))
                     {
+                        datePoligon.isRestrictionat = poligon.interzis.Equals("X") ? Boolean.TrueString : Boolean.FalseString;
                         break;
                     }
                 }

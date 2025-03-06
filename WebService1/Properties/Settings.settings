@@ -44,5 +44,8 @@
     <Setting Name="WebService1_SAPWebServices_ZTBL_WEBSERVICEService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/rfc/sap/ztbl_webservice/900/ztbl_webservice/ztbl_webservice</Value>
     </Setting>
+    <Setting Name="WebService1_SAPWebServices_ZTBL_WEBSERVICE" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://sap-prd4a.arabesque.ro:8034/sap/bc/srt/rfc/sap/ztbl_webservice/900/ztbl_webservice/ztbl_webservice</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

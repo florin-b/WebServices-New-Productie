@@ -127,7 +127,7 @@ namespace WebService1
 
                 cmd = connection.CreateCommand();
 
-                cmd.CommandText = " select nvl(to_char(decode(y.lbkum,0,y.verpr,y.salk3/y.lbkum),'99999.9999'),0) from sapprd.mbew y where " +
+                cmd.CommandText = " select nvl(to_char(decode(y.lbkum,0,y.verpr,y.salk3/y.lbkum),'999999.9999'),0) from sapprd.mbew y where " +
                                   " y.mandt='900' and y.matnr=:matnr  and y.bwkey = :unitLog  ";
 
                 cmd.CommandType = System.Data.CommandType.Text;
@@ -335,6 +335,7 @@ namespace WebService1
                 pretArticolGed.tipMarfa = articolProps.tipMarfa;
                 pretArticolGed.greutateBruta = greutateBruta;
                 pretArticolGed.lungime = articolProps.lungime;
+                pretArticolGed.tipTransport = articolProps.transpTert.ToLower().Equals("y") ? "TERT" : "TRAP";
 
                 webService.Dispose();
 
@@ -343,6 +344,8 @@ namespace WebService1
 
                     if (pretArticolGed.errMsg.Trim().Length == 0)
                         pretArticolGed.errMsg = "Eroare determinare pret.";
+
+                   
 
                     return "-1";
 

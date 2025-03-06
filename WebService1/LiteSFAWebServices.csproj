@@ -51,6 +51,7 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.OracleClient" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -236,6 +237,7 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="packages.config" />
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -290,10 +292,10 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <None Include="Web References\SalarizareKA\zws_sal_ka_2019.wsdl" />
-    <Content Include="Web References\SAPWebServices\Reference.map">
+    <None Include="Web References\SAPWebServices\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
-    </Content>
+    </None>
     <Content Include="Web References\SAPWebServices\ZactDiscMaximResponse.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
@@ -394,6 +396,12 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <Content Include="Web References\SAPWebServices\ZstocSfaResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SAPWebServices\ZdetTransportSfaResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SAPWebServices\ZgetPoPriceResponse.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <None Include="Web References\SAPWebServices\ztbl_webservice.wsdl" />

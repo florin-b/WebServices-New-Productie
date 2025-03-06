@@ -129,6 +129,8 @@ namespace WebService1
         }
 
 
+
+
         public String getCostMacara_old(string unitLog, string codAgent, string codClient, string codFurnizor, string listArt)
         {
 
@@ -309,7 +311,7 @@ namespace WebService1
             return cantPalet;
         }
 
-        private static string getNumeArticol(OracleConnection connection, string codArticol)
+        public static string getNumeArticol(OracleConnection connection, string codArticol)
         {
             string numeArticol = "Nedefinit";
 

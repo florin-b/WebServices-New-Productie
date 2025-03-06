@@ -682,7 +682,7 @@ namespace WebService1
             if (tipDocument == null || (tipDocument != null && tipDocument.Equals("PAL")))
             {
                 if (codDepartament.Equals("11"))
-                    condPaleti = " and p.matkl in ('433', '433_1', '716', '626', '929_2', '515', '302') ";
+                    condPaleti = " and m.categ_mat='PA' ";
                 else
                     condPaleti = " and m.categ_mat in ('PA','AM') ";
 
@@ -706,10 +706,10 @@ namespace WebService1
 
                  
 
-                    string tipDocuRetur = " ('ZFM','ZFMC','ZFS','ZFSC','ZFPA','ZFVS') ";
+                    string tipDocuRetur = " ('ZFM','ZFMC','ZFS','ZFSC','ZFPA','ZFVS','ZDLD','ZDLG') ";
 
                     if (tipUserSap != null && (tipUserSap.Equals("CVO") || tipUserSap.Equals("SVO")))
-                        tipDocuRetur = " ('ZFHC','ZF2H','ZFVS','ZFCS','ZFVS') ";
+                        tipDocuRetur = " ('ZFHC','ZF2H','ZFVS','ZFCS','ZFVS','ZDLD','ZDLG') ";
 
                     critFiliala = " and p.prctr =:unitLog ";
                     if (tipUserSap != null && (tipUserSap.Contains("VO") || tipUserSap.Contains("IP")))
@@ -719,9 +719,10 @@ namespace WebService1
                                       " nvl((select traty from sapprd.ekko e, sapprd.vbfa f where e.mandt = '900' and e.mandt = f.mandt and " +
                                       " e.ebeln = f.vbeln and f.vbelv = p.aubel and f.vbtyp_v = 'C' and f.vbtyp_n = 'V' and rownum = 1),k.traty) traty, " +
                                       " nvl((select t.ac_zc from sapprd.zcomhead_Tableta t where t.mandt = '900' and t.nrcmdsap = p.aubel ),' ') ac_zc " +
-                                      " from sapprd.vbrk k, sapprd.vbrp p, sapprd.vbpa a, sapprd.adrc c where k.mandt = p.mandt " +
+                                      " from sapprd.vbrk k, sapprd.vbrp p, sapprd.vbpa a, sapprd.adrc c, articole m where k.mandt = p.mandt " +
                                       " and k.vbeln = p.vbeln  and k.mandt = '900'  and k.fkart in " + tipDocuRetur +
                                       " and k.fksto <> 'X'  and k.fkdat >= to_char(sysdate - " + nrZileIstoric + ",'yyyymmdd') " +
+                                      " and p.matnr = m.cod " +
                                       condPaleti +
                                       " and k.mandt = a.mandt  and k.vbeln = a.vbeln  and a.parvw = 'WE' and c.name1 =  :numeClient " +
                                       critFiliala + " and a.mandt = c.client and a.adrnr = c.addrnumber " +
@@ -740,7 +741,7 @@ namespace WebService1
                                       " from sapprd.vbrk k, " +
                                       " sapprd.vbrp p, sapprd.mara m where k.mandt = p.mandt and k.vbeln = p.vbeln " + condDepart +
                                       " and k.mandt = '900' and k.fkdat >= to_char(sysdate - " + nrZileIstoric + ", 'yyyymmdd') " +
-                                      " and k.fkart = 'ZFI' and k.fksto <> 'X' and k.kunag = :codClient " + condData +
+                                      " and k.fkart in ('ZFI','ZDLD') and k.fksto <> 'X' and k.kunag = :codClient " + condData +
                                       " and p.mandt = m.mandt and p.matnr = m.matnr " + condPaleti +
                                       " order by to_date(k.fkdat, 'yyyymmdd') ";
 

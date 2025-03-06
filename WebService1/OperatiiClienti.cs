@@ -115,7 +115,7 @@ namespace WebService1
                     exceptieClient = " and p.kunn2 like 'BU%' ";
 
                 //pentru DV si SSCN nu trebuie restrictie pe filiala
-                if (unitLog.Equals("NN10") || (tipUserSap != null && (tipUserSap.Equals("SSCM") || tipUserSap.Equals("OIVPD"))))
+                if (unitLog.Equals("NN10") || (tipUserSap != null && (tipUserSap.Equals("SSCM") || tipUserSap.Equals("OIVPD") || tipUserSap.Equals("ASDL") || tipUserSap.Equals("CGED"))))
                     exceptieClient = "";
 
 
@@ -385,7 +385,8 @@ namespace WebService1
 
                 cmd.CommandText = " select name1, kunnr, regio, ort01, stras from sapprd.kna1 where mandt = '900' and " +
                                   " TRANSLATE(stceg, '0' || TRANSLATE(stceg, '.0123456789', '.'), '0') = " +
-                                  " TRANSLATE(:cui, '0' || TRANSLATE(:cui, '.0123456789', '.'), '0') order by name1, regio, ort01 ";
+                                  " TRANSLATE(:cui, '0' || TRANSLATE(:cui, '.0123456789', '.'), '0') " +
+                                  " and ktokd in ('1000','1020','1030', 'OCAV', 'OCAZ') and sperr <> 'X' order by name1, regio, ort01 ";
 
                 cmd.CommandType = CommandType.Text;
                 cmd.Parameters.Clear();
@@ -1128,7 +1129,7 @@ namespace WebService1
                 OracleCommand cmd = connection.CreateCommand();
 
                 cmd.CommandText = " select kunnr from sapprd.kna1 where mandt = '900' and TRANSLATE(stceg, '0' || TRANSLATE(stceg, '.0123456789', '.'), '0') =" +
-                    " TRANSLATE(:codCui, '0' || TRANSLATE(:codCui, '.0123456789', '.'), '0') ";
+                    " TRANSLATE(:codCui, '0' || TRANSLATE(:codCui, '.0123456789', '.'), '0') and ktokd in ('1000', 'OCAV', 'OCAZ') ";
 
                 cmd.CommandType = CommandType.Text;
 
@@ -2273,6 +2274,147 @@ namespace WebService1
 
             return new JavaScriptSerializer().Serialize(creditClient);
 
+        }
+
+        public string cautaClientPF(string strClient, string criteriu)
+        {
+
+            OracleConnection connection = new OracleConnection();
+            OracleCommand cmd = new OracleCommand();
+            OracleDataReader oReader = null;
+
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+
+            List<BeanDatePersonale> listDatePersonale = new List<BeanDatePersonale>();
+
+            if (strClient == null || strClient.Trim().Equals(String.Empty))
+                return serializer.Serialize(listDatePersonale);
+
+            if (criteriu == null || criteriu.Trim().Equals(String.Empty))
+                return serializer.Serialize(listDatePersonale);
+
+            try
+            {
+                string connectionString = DatabaseConnections.ConnectToProdEnvironment();
+
+                connection.ConnectionString = connectionString;
+                connection.Open();
+
+                cmd = connection.CreateCommand();
+
+                string sqlString;
+
+                if (criteriu.ToLower().Equals("nume"))
+                    sqlString = " select k.name1, k.sortl, k.regio, k.ort01, k.stras, k.kunnr from sapprd.kna1 k where k.mandt = '900' and " +
+                                " upper(k.name1) like upper('" + strClient.Trim() + "%') ";
+                else
+                    sqlString = " select k.name1, k.sortl, k.regio, k.ort01, k.stras, k.kunnr from sapprd.kna1 k where k.mandt = '900' and " +
+                                " k.sortl = :telefon ";
+
+                cmd.CommandText = sqlString;
+
+                if (!criteriu.ToLower().Equals("nume"))
+                {
+                    cmd.Parameters.Add(":telefon", OracleType.VarChar, 30).Direction = ParameterDirection.Input;
+                    cmd.Parameters[0].Value = strClient;
+                }
+
+                oReader = cmd.ExecuteReader();
+
+                if (oReader.HasRows)
+                {
+                    while (oReader.Read())
+                    {
+
+                        BeanDatePersonale datePersonale = new BeanDatePersonale();
+                        datePersonale.nume = oReader.GetString(0);
+                        datePersonale.cnp = oReader.GetString(1);
+                        datePersonale.codjudet = oReader.GetString(2);
+                        datePersonale.localitate = oReader.GetString(3);
+                        datePersonale.strada = oReader.GetString(4);
+                        datePersonale.divizii = "";
+                        datePersonale.clientBlocat = false;
+                        datePersonale.tipPlata = " ";
+                        datePersonale.termenPlata = new List<string>() { "C000" };
+                        datePersonale.codClient = oReader.GetString(5);
+                        listDatePersonale.Add(datePersonale);
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorHandling.sendErrorToMail(ex.ToString());
+            }
+            finally
+            {
+                DatabaseConnections.CloseConnections(oReader, cmd, connection);
+            }
+
+            return serializer.Serialize(listDatePersonale);
+
+        }
+
+        public string creeazaClientPF(string dateClientPF)
+        {
+
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            RaspunsClientSap raspunsClient = new RaspunsClientSap();
+
+            DateClientSap dateClientSap = serializer.Deserialize<DateClientSap>(dateClientPF);
+
+
+            DatePoligon datePoligon = serializer.Deserialize<DatePoligon>(new OperatiiPoligoane().getDatePoligonLivrareDB(dateClientSap.coordonateAdresa));
+            dateClientSap.filialaAsociata = datePoligon.filialaPrincipala;
+
+            try
+            {
+
+                SAPWebServices.ZTBL_WEBSERVICE webService = new SAPWebServices.ZTBL_WEBSERVICE();
+                SAPWebServices.ZcreateClientMinReq inParam = new SAPWebServices.ZcreateClientMinReq();
+
+                webService.Credentials = new System.Net.NetworkCredential(Service1.getUser(), Service1.getPass());
+                webService.Timeout = 300000;
+
+                inParam.IpClient = new SAPWebServices.ZclientMin();
+
+                inParam.CodAv = dateClientSap.codAgent;
+                inParam.IpClient.Fiscalcode = " ";
+                inParam.IpClient.Companyname = dateClientSap.numeCompanie;
+                inParam.IpClient.Companyemail = dateClientSap.emailCompanie;
+                inParam.IpClient.Companystreet = dateClientSap.strada;
+                inParam.IpClient.Companynumber = " ";
+                inParam.IpClient.Companycity = dateClientSap.localitate;
+                inParam.IpClient.Companycounty = dateClientSap.judet;
+                inParam.IpClient.Firstname = " ";
+                inParam.IpClient.Lastname = dateClientSap.numeCompanie;
+                inParam.IpClient.Phonenumber = dateClientSap.telPersContact;
+                inParam.IpClient.Comregnumber = " ";
+                inParam.IpClient.Vatpayer = " ";
+                inParam.IpClient.Prctr = dateClientSap.filialaAsociata;
+                inParam.IpClient.TipB2b = "PF";
+
+
+                SAPWebServices.ZcreateClientMinReqResponse outParam = webService.ZcreateClientMinReq(inParam);
+
+                if (outParam.EpReturncode.ToString().Equals("0"))
+                {
+                    raspunsClient.codClient = outParam.EpKunnr;
+                    raspunsClient.msg = "";
+                }
+                else
+                {
+                    raspunsClient.codClient = "";
+                    raspunsClient.msg = outParam.EpMess;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                ErrorHandling.sendErrorToMail(ex.ToString());
+            }
+
+            return serializer.Serialize(raspunsClient);
         }
 
 

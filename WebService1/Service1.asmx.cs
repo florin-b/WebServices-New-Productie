@@ -39,7 +39,7 @@ namespace WebService1
         public static string[] agentiExtra07 = { "83436", "83090", "83311", "83436", "83297", "83435", "83309", "83090", "83311" };
         public static string[] agentiExtra08 = { "83402" };
 
-        public const string LiteSFAVer = "ver:289";
+        public const string LiteSFAVer = "ver:290";
         public const int minAndroidSDK = 23;
 
         string globalParrentId = "0";
@@ -7687,7 +7687,8 @@ namespace WebService1
                 }
 
 
-                if (tipCmd == "0" && (tipUserSap.Equals("AV") || tipUserSap.Equals("SD") || tipUserSap.Equals("DV") || tipUserSap.StartsWith("KA")))
+                if (tipCmd == "0" && (tipUserSap.Equals("AV") || tipUserSap.Equals("SD") || tipUserSap.Equals("CVA") || tipUserSap.Equals("SDCVA") 
+                    || tipUserSap.Equals("DV") || tipUserSap.StartsWith("KA")))
                 {
                     if (listComenzi.Count > 0)
                         InfoComenziSap.getDateHeader(listComenzi);
@@ -9896,6 +9897,17 @@ namespace WebService1
         public string getDatePersonale(string numeClient, string tipClient, string codAgent)
         {
             return new OperatiiClienti().getDatePersonaleClient(numeClient, tipClient, codAgent);
+        }
+
+        [WebMethod]
+        public string cautaClientPF(string strClient, string criteriu)
+        {
+            return new OperatiiClienti().cautaClientPF(strClient, criteriu);
+        }
+
+        public string creeazaClientPF(string dateClient)
+        {
+            return new OperatiiClienti().creeazaClientPF(dateClient);
         }
 
         [WebMethod]
@@ -12433,9 +12445,13 @@ namespace WebService1
             List<ArticolComanda> articolComanda = serializer.Deserialize<List<ArticolComanda>>(JSONArt);
 
             List<TaxaComanda> taxeComanda = new List<TaxaComanda>();
+            double valoareTaxeComanda = 0;
 
             if (dateLivrare.taxeComanda != null && dateLivrare.taxeComanda.Trim() != "")
+            {
                 taxeComanda = serializer.Deserialize<List<TaxaComanda>>(dateLivrare.taxeComanda);
+                valoareTaxeComanda = HelperComenzi.getValoareTaxeComanda(taxeComanda);
+            }
 
             if (tipUser.Equals("SITE"))
                 HelperComenzi.tansformaCLPinCV(articolComanda, dateLivrare);
@@ -12673,12 +12689,12 @@ namespace WebService1
                         " valoare,mt,com_referinta,accept1,accept2,fact_red, city, region, pmnttrms , obstra, timpc, ketdat, docin, adr_noua, depart, obsplata, addrnumber, nume_client, " +
                         " stceg, tip_pers, val_incasata, site, email, mod_av, cod_j, adr_livrare_d, city_d, region_d, aprob_cv_necesar, macara, val_min_tr, id_obiectiv, " +
                         " adresa_obiectiv, parent_id, client_raft, meserias,fact_palet_separat, lifnr, lifnr_prod, descoperita, prog_livr, livr_sambata, bloc, ref_client, " +
-                        " ac_zc, fil_plata , cod_postal, custodie, zona, canal ) " +
+                        " ac_zc, fil_plata , cod_postal, custodie, zona, canal, val_tr ) " +
                         " values ('900',pk_key.nextval, :codCl,:ul,:status,:status_aprov, " +
                         " :datac,:cantar,:agent,:codinit,:plata,:perscont,:tel,:adr,:valoare,:transp,:comsap,:accept1,:accept2,:factred,:city,:region,:termplt,:obslivr,:timpc,:datalivrare, " +
                         " :tipDocIn, :adrNoua, :depart, :obsplata, :adrnumber, :numeClient, :cnpClient, :tipPers, :valIncasata, :cmdSite, :email, :mod_av, :codJ, :adr_livrare_d, :city_d, :region_d, " +
                         " :necesarCVAprob, :macara, :val_min_tr, :idObiectiv, :adresaObiectiv, :parent_id, :client_raft, :meserias, :factPaletSeparat, :lifnr, " +
-                        " :lifnr_prod, :descoperita, :progrLivr, :livrSambata, :bloc, :refClient, :aczc, :filPlata, :codPostal, :custodie, :zona, :canal ) " +
+                        " :lifnr_prod, :descoperita, :progrLivr, :livrSambata, :bloc, :refClient, :aczc, :filPlata, :codPostal, :custodie, :zona, :canal, :valTr ) " +
                         " returning id into :id ";
 
 
@@ -13001,6 +13017,9 @@ namespace WebService1
                 cmd.Parameters.Add(":canal", OracleType.VarChar, 6).Direction = ParameterDirection.Input;
                 cmd.Parameters[62].Value = comandaVanzare.canalDistrib;
 
+                cmd.Parameters.Add(":valTr", OracleType.Number, 15).Direction = ParameterDirection.Input;
+                cmd.Parameters[63].Value = valoareTaxeComanda;
+
                 OracleParameter idCmd = new OracleParameter("id", OracleType.Number);
                 idCmd.Direction = ParameterDirection.Output;
                 cmd.Parameters.Add(idCmd);
@@ -13276,7 +13295,7 @@ namespace WebService1
                     OperatiiSuplimentare.aprobaAutomatSD(connection, dateLivrare.codAgent, idCmd.Value.ToString());
                 }
 
-                if (tipUserSap.Equals("OIVPD") || (dateLivrare.codSuperAgent != null && dateLivrare.codSuperAgent.Trim().Length > 0 && !dateLivrare.codSuperAgent.Equals(dateLivrare.codAgent)))
+                if (tipUserSap.Equals("OIVPD") || tipUserSap.Equals("ASDL") || (dateLivrare.codSuperAgent != null && dateLivrare.codSuperAgent.Trim().Length > 0 && !dateLivrare.codSuperAgent.Equals(dateLivrare.codAgent)))
                 {
                     OperatiiSuplimentare.saveComandaSuperAv(connection, dateLivrare.codSuperAgent, idCmd.Value.ToString());
                 }
