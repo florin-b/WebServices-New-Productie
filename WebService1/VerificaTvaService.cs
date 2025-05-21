@@ -84,7 +84,7 @@ namespace WebService1
         }
 
 
-        public string isPlatitorTva(string cuiClient, string codAgent)
+        public string isPlatitorTva(string cuiClient, string codAgent, string depart)
         {
 
             OracleConnection connection = null;
@@ -148,6 +148,10 @@ namespace WebService1
                 }
 
                 platitorResponse.diviziiClient = OperatiiClienti.getDiviziiClientCUI(connection, cuiClient, codAgent);
+
+                if (depart != null && depart.Equals("16"))
+                    platitorResponse.diviziiClient = HelperClienti.getDiviziiClientDep16(platitorResponse.diviziiClient);
+
                 platitorResponse.codClientNominal = OperatiiClienti.getCodClientNominal(connection, cuiClient);
 
 

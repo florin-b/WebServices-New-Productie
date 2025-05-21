@@ -77,6 +77,27 @@ namespace WebService1
 
         }
 
+        public static string eliminaCodDepart(string numeArticol)
+        {
+
+
+            if (numeArticol == null || numeArticol.Trim().Length == 0)
+                return " ";
+
+            if (!numeArticol.ToLower().Contains("div."))
+                return numeArticol;
+
+
+            int posDiv = numeArticol.ToLower().IndexOf("div.");
+
+            if (numeArticol.ToLower().Contains("-div."))
+                posDiv = numeArticol.ToLower().IndexOf("-div.");
+
+
+            return numeArticol.Substring(0, posDiv);
+
+        }
+
 
         public static string getArtExcCherestea(OracleConnection connection, OracleTransaction transaction, List<ArticolComanda> listArticole, string codArticol)
         {
@@ -710,6 +731,20 @@ namespace WebService1
                 return false;
 
             return statusComanda.Equals("20") || statusComanda.Equals("21");
+        }
+
+
+        public static bool isComandaCLP(DateLivrare dateLivrare)
+        {
+
+            if (dateLivrare.furnizorMarfa != null && dateLivrare.furnizorMarfa.Trim().Length == 10)
+                return false;
+
+            if (dateLivrare.filialaCLP == null)
+                return false;
+
+            return dateLivrare.filialaCLP.Trim().Length == 4;
+
         }
 
     }

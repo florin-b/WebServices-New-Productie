@@ -600,6 +600,7 @@ namespace WebService1
                         artRetur.cantitate = oReader.GetDouble(2).ToString();
                         artRetur.cantitateRetur = oReader.GetDouble(2).ToString();
                         artRetur.um = oReader.GetString(3);
+                        artRetur.taxaUzura = "0";
                         listArticole.Add(artRetur);
                     }
                 }
@@ -692,8 +693,11 @@ namespace WebService1
             if (interval != null && interval.Length > 1)
                 condData = " and substr(k.fkdat,0,6) = '" + interval + "' ";
 
-            if (!codDepartament.Equals("00") && !codDepartament.Equals("11"))
+            if (!codDepartament.Equals("00") && !codDepartament.Equals("11") && !codDepartament.Equals("16"))
                 condDepart = " and p.spart = substr(:depart,0,2) ";
+
+            if (codDepartament.Equals("16"))
+                condDepart = " and p.spart in ('03','06','09') ";
 
 
             string critFiliala = "";
@@ -708,8 +712,8 @@ namespace WebService1
 
                     string tipDocuRetur = " ('ZFM','ZFMC','ZFS','ZFSC','ZFPA','ZFVS','ZDLD','ZDLG') ";
 
-                    if (tipUserSap != null && (tipUserSap.Equals("CVO") || tipUserSap.Equals("SVO")))
-                        tipDocuRetur = " ('ZFHC','ZF2H','ZFVS','ZFCS','ZFVS','ZDLD','ZDLG') ";
+                    if (tipUserSap != null && (tipUserSap.Equals("CVO") || tipUserSap.Equals("SVO") || tipUserSap.Equals("CVOB")))
+                        tipDocuRetur = " ('ZFHC','ZF2H','ZFVS','ZFCS','ZFVS','ZDLD','ZDLG', 'ZB2B') ";
 
                     critFiliala = " and p.prctr =:unitLog ";
                     if (tipUserSap != null && (tipUserSap.Contains("VO") || tipUserSap.Contains("IP")))
@@ -766,7 +770,7 @@ namespace WebService1
                     cmd.Parameters.Add(":codClient", OracleType.VarChar, 30).Direction = ParameterDirection.Input;
                     cmd.Parameters[0].Value = codClient;
 
-                    if (!codDepartament.Equals("00"))
+                    if (!codDepartament.Equals("00") && !codDepartament.Equals("16"))
                     {
                         cmd.Parameters.Add(":depart", OracleType.VarChar, 6).Direction = ParameterDirection.Input;
                         cmd.Parameters[1].Value = codDepartament;
@@ -1685,10 +1689,10 @@ namespace WebService1
             if (tipUserSap != null && (tipUserSap.Equals("CVIP") || tipUserSap.Equals("SDIP") || tipUserSap.Contains("VO")))
                 critFiliala = "";
 
-            string tipDocuRetur = " ('ZFM','ZFMC','ZFS','ZFSC','ZFPA', 'ZFVS','ZFCS') ";
+            string tipDocuRetur = " ('ZFM','ZFMC','ZFS','ZFSC','ZFPA', 'ZFVS','ZFCS','ZDLG') ";
 
-            if (tipUserSap != null && (tipUserSap.Equals("CVO") || tipUserSap.Equals("SVO")))
-                tipDocuRetur = " ('ZFM','ZFMC','ZFS','ZFSC','ZFPA', 'ZFVS','ZFCS', 'ZFHC', 'ZF2H') ";
+            if (tipUserSap != null && (tipUserSap.Equals("CVO") || tipUserSap.Equals("SVO") || tipUserSap.Equals("CVOB")))
+                tipDocuRetur = " ('ZFM','ZFMC','ZFS','ZFSC','ZFPA', 'ZFVS','ZFCS', 'ZFHC', 'ZF2H', 'ZB2B') ";
 
             try
             {

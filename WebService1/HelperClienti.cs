@@ -309,6 +309,33 @@ namespace WebService1
 
         }
 
+        public static string getDiviziiClientDep16(string diviziiClient)
+        {
+
+            string divizii16 = "";
+
+            if (diviziiClient == null)
+                return divizii16;
+
+            if (diviziiClient.Contains("03"))
+                divizii16 = "03;";
+
+            if (diviziiClient.Contains("040"))
+                divizii16 += "040;";
+
+            if (diviziiClient.Contains("041"))
+                divizii16 += "041;";
+
+            if (diviziiClient.Contains("09"))
+                divizii16 += "09;";
+
+            divizii16 += "11;";
+
+            return divizii16;
+
+
+        }
+
         private static string formatDataSap(string dataRaw)
         {
             string[] dataArray = dataRaw.Split('.');

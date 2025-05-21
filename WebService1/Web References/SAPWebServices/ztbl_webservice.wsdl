@@ -923,6 +923,16 @@
     </xsd:schema>
     <xsd:schema xmlns:n0="urn:sap-com:document:sap:rfc:functions" attributeFormDefault="qualified" targetNamespace="urn:sap-com:document:sap:soap:functions:mc-style">
       <xsd:import namespace="urn:sap-com:document:sap:rfc:functions" />
+      <xsd:simpleType name="char200">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="200" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char80">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="80" />
+        </xsd:restriction>
+      </xsd:simpleType>
       <xsd:complexType name="ZsfilTransp">
         <xsd:sequence>
           <xsd:element name="Werks" type="n0:char4" />
@@ -971,17 +981,22 @@
           <xsd:element name="CamionScurt" type="n0:char1" />
           <xsd:element name="CamionOricare" type="n0:char1" />
           <xsd:element name="MatnrMacara" type="n0:char18" />
+          <xsd:element name="NrPaleti" type="n0:quantum13.3" />
           <xsd:element name="TaxaMacara" type="n0:curr15.2" />
           <xsd:element name="MatnrZona" type="n0:char18" />
           <xsd:element name="MaktxZona" type="n0:char40" />
           <xsd:element name="TaxaZona" type="n0:decimal15.2" />
           <xsd:element name="MatnrAcces" type="n0:char18" />
           <xsd:element name="TaxaAcces" type="n0:curr15.2" />
+          <xsd:element name="MaktxAcces" type="n0:char40" />
           <xsd:element name="MatnrTransport" type="n0:char18" />
           <xsd:element name="MaktxTransport" type="n0:char40" />
           <xsd:element name="TaxaTransport" type="n0:curr15.2" />
           <xsd:element name="Spart" type="n0:char3" />
           <xsd:element name="Traty" type="n0:char4" />
+          <xsd:element name="MatnrVuosor" type="n0:char18" />
+          <xsd:element name="MaktxVuosor" type="n0:char40" />
+          <xsd:element name="TaxaVuosor" type="n0:decimal15.2" />
         </xsd:sequence>
       </xsd:complexType>
       <xsd:complexType name="ZstTaxeAcces2">
@@ -3181,6 +3196,7 @@
           <xsd:element name="CodPostal" type="n0:char15" />
           <xsd:element name="Zona" type="n0:char10" />
           <xsd:element name="Canal" type="n0:char2" />
+          <xsd:element name="ValTr" type="n0:curr15.2" />
         </xsd:sequence>
       </xsd:complexType>
       <xsd:complexType name="Bapi2093ResItemChange">
@@ -3230,7 +3246,7 @@
       <xsd:complexType name="ZclientMin">
         <xsd:sequence>
           <xsd:element name="Fiscalcode" type="n0:char20" />
-          <xsd:element name="Companyname" type="n0:char35" />
+          <xsd:element name="Companyname" type="tns:char80" />
           <xsd:element name="Companyemail" type="n0:char241" />
           <xsd:element name="Companystreet" type="n0:char60" />
           <xsd:element name="Companynumber" type="n0:char10" />
@@ -3650,10 +3666,11 @@
       <xsd:element name="ZdetTransportSfa">
         <xsd:complexType>
           <xsd:sequence>
-            <xsd:element minOccurs="0" name="IpAdresa" type="n0:char30" />
+            <xsd:element minOccurs="0" name="IpAdresa" type="n0:char60" />
             <xsd:element minOccurs="0" name="IpCanal" type="n0:char2" />
             <xsd:element minOccurs="0" name="IpCity" type="n0:char25" />
             <xsd:element minOccurs="0" name="IpKunnr" type="n0:char10" />
+            <xsd:element minOccurs="0" name="IpLifnr" type="n0:char10" />
             <xsd:element minOccurs="0" name="IpPernr" type="n0:numeric8" />
             <xsd:element minOccurs="0" name="IpRegio" type="n0:char3" />
             <xsd:element minOccurs="0" name="IpTippers" type="n0:char12" />
@@ -4292,6 +4309,7 @@
           <xsd:sequence>
             <xsd:element name="CodAv" type="n0:numeric8" />
             <xsd:element name="IpClient" type="tns:ZclientMin" />
+            <xsd:element minOccurs="0" name="IpSimRfc" type="n0:char1" />
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
@@ -4299,7 +4317,7 @@
         <xsd:complexType>
           <xsd:sequence>
             <xsd:element name="EpKunnr" type="n0:char10" />
-            <xsd:element name="EpMess" type="n0:char100" />
+            <xsd:element name="EpMess" type="tns:char200" />
             <xsd:element name="EpReturncode" type="xsd:unsignedByte" />
           </xsd:sequence>
         </xsd:complexType>

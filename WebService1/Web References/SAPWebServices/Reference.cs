@@ -3114,6 +3114,8 @@ namespace WebService1.SAPWebServices {
         
         private string canalField;
         
+        private decimal valTrField;
+        
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         public string Mandt {
@@ -4002,6 +4004,17 @@ namespace WebService1.SAPWebServices {
             }
             set {
                 this.canalField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal ValTr {
+            get {
+                return this.valTrField;
+            }
+            set {
+                this.valTrField = value;
             }
         }
     }
@@ -29020,6 +29033,8 @@ namespace WebService1.SAPWebServices {
         
         private string matnrMacaraField;
         
+        private decimal nrPaletiField;
+        
         private decimal taxaMacaraField;
         
         private string matnrZonaField;
@@ -29032,6 +29047,8 @@ namespace WebService1.SAPWebServices {
         
         private decimal taxaAccesField;
         
+        private string maktxAccesField;
+        
         private string matnrTransportField;
         
         private string maktxTransportField;
@@ -29041,6 +29058,12 @@ namespace WebService1.SAPWebServices {
         private string spartField;
         
         private string tratyField;
+        
+        private string matnrVuosorField;
+        
+        private string maktxVuosorField;
+        
+        private decimal taxaVuosorField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
@@ -29132,6 +29155,17 @@ namespace WebService1.SAPWebServices {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal NrPaleti {
+            get {
+                return this.nrPaletiField;
+            }
+            set {
+                this.nrPaletiField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         public decimal TaxaMacara {
             get {
                 return this.taxaMacaraField;
@@ -29198,6 +29232,17 @@ namespace WebService1.SAPWebServices {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string MaktxAcces {
+            get {
+                return this.maktxAccesField;
+            }
+            set {
+                this.maktxAccesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         public string MatnrTransport {
             get {
                 return this.matnrTransportField;
@@ -29248,6 +29293,39 @@ namespace WebService1.SAPWebServices {
             }
             set {
                 this.tratyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string MatnrVuosor {
+            get {
+                return this.matnrVuosorField;
+            }
+            set {
+                this.matnrVuosorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string MaktxVuosor {
+            get {
+                return this.maktxVuosorField;
+            }
+            set {
+                this.maktxVuosorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public decimal TaxaVuosor {
+            get {
+                return this.taxaVuosorField;
+            }
+            set {
+                this.taxaVuosorField = value;
             }
         }
     }
@@ -30072,6 +30150,8 @@ namespace WebService1.SAPWebServices {
         
         private string ipKunnrField;
         
+        private string ipLifnrField;
+        
         private string ipPernrField;
         
         private string ipRegioField;
@@ -30137,6 +30217,17 @@ namespace WebService1.SAPWebServices {
             }
             set {
                 this.ipKunnrField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string IpLifnr {
+            get {
+                return this.ipLifnrField;
+            }
+            set {
+                this.ipLifnrField = value;
             }
         }
         
@@ -35130,6 +35221,8 @@ namespace WebService1.SAPWebServices {
         
         private ZclientMin ipClientField;
         
+        private string ipSimRfcField;
+        
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         public string CodAv {
@@ -35149,6 +35242,17 @@ namespace WebService1.SAPWebServices {
             }
             set {
                 this.ipClientField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string IpSimRfc {
+            get {
+                return this.ipSimRfcField;
+            }
+            set {
+                this.ipSimRfcField = value;
             }
         }
     }

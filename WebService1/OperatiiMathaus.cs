@@ -1005,7 +1005,7 @@ namespace WebService1
         private void setDetaliiArticol(ArticolMathaus articol)
         {
             try {
-                string serviceUrl = "https://wse1-sap-hybris-prod.arabesque.ro/solr/master_erp_Product_default/select?q=code_string:" + articol.cod;
+                string serviceUrl = "https://wse1-dmz-prod.arabesque.ro/solr/master_erp_Product_default/select?q=code_string:" + articol.cod;
 
                 System.Net.ServicePointManager.Expect100Continue = false;
                 ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
@@ -1426,7 +1426,12 @@ namespace WebService1
                 comandaMathaus.deliveryEntryDataList = listArticoleComanda;
 
                 if (antetCmdMathaus != null)
-                    dateTransport = getTransportService(antetCmdMathaus, comandaMathaus, canal, datePoligon);
+                {
+                    if (Utils.isUserTestDB(antetCmdMathaus.codPers))
+                        dateTransport = getTransportService_new(antetCmdMathaus, comandaMathaus, canal, datePoligon);
+                    else
+                        dateTransport = getTransportService(antetCmdMathaus, comandaMathaus, canal, datePoligon);
+                }
 
                 bool stocSap = false;
 
@@ -1625,19 +1630,19 @@ namespace WebService1
                 System.Net.ServicePointManager.Expect100Continue = false;
                 ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
-                string urlDeliveryService = "https://wse1-hybris-b2c-prod.arabesque.ro/arbsqintegration/optimiseDeliveryB2B";
+                string urlDeliveryService = "https://wse1-dmz-prod.arabesque.ro/arbsqintegration/optimiseDeliveryB2B";
 
-                urlDeliveryService = "https://wse1-sap-hybris-prod.arabesque.ro/arbsqintegration/optimiseDeliveryB2B";
+                urlDeliveryService = "https://wse1-dmz-prod.arabesque.ro/arbsqintegration/optimiseDeliveryB2B";
 
 
                 if (canal.Equals("10"))
-                    urlDeliveryService = "https://wse1-sap-hybris-prod.arabesque.ro/arbsqintegration/cumulativeOptimiseDeliveryB2B";
+                    urlDeliveryService = "https://wse1-dmz-prod.arabesque.ro/arbsqintegration/cumulativeOptimiseDeliveryB2B";
                 else
                 {
                     if (tipPers.Equals("AV") || tipPers.Equals("SD"))
-                        urlDeliveryService = "https://wse1-sap-hybris-prod.arabesque.ro/arbsqintegration/cumulativeOptimiseDeliveryB2B";
+                        urlDeliveryService = "https://wse1-dmz-prod.arabesque.ro/arbsqintegration/cumulativeOptimiseDeliveryB2B";
                     else
-                        urlDeliveryService = "https://wse1-sap-hybris-prod.arabesque.ro/arbsqintegration/cumulativeOptimiseDeliveryB2C";
+                        urlDeliveryService = "https://wse1-dmz-prod.arabesque.ro/arbsqintegration/cumulativeOptimiseDeliveryB2C";
 
                 }
 
@@ -1767,9 +1772,9 @@ namespace WebService1
         {
 
             string stockResponse = "";
-            string urlStockService = "https://wse1-hybris-b2c-prod.arabesque.ro/arbsqintegration/getStocksB2B";
+            string urlStockService = "https://wse1-dmz-prod.arabesque.ro/arbsqintegration/getStocksB2B";
 
-            urlStockService = "https://wse1-sap-hybris-prod.arabesque.ro/arbsqintegration/getStocksB2B";
+            urlStockService = "https://wse1-dmz-prod.arabesque.ro/arbsqintegration/getStocksB2B";
 
             try {
 
@@ -1779,15 +1784,15 @@ namespace WebService1
 
                 if (tipCmd != null && tipCmd.Equals("D"))
                 {
-                    urlStockService = "https://wse1-sap-hybris-prod.arabesque.ro/arbsqintegration/getCumulativeStocksB2B";
+                    urlStockService = "https://wse1-dmz-prod.arabesque.ro/arbsqintegration/getCumulativeStocksB2B";
 
                 }
                 else if (tipCmd != null && tipCmd.Equals("G"))
                 {
                     if (tipUserSap.Equals("AV") || tipUserSap.Equals("SD"))
-                        urlStockService = "https://wse1-sap-hybris-prod.arabesque.ro/arbsqintegration/getCumulativeStocksB2B";
+                        urlStockService = "https://wse1-dmz-prod.arabesque.ro/arbsqintegration/getCumulativeStocksB2B";
                     else
-                        urlStockService = "https://wse1-sap-hybris-prod.arabesque.ro/arbsqintegration/getCumulativeStocksB2C";
+                        urlStockService = "https://wse1-dmz-prod.arabesque.ro/arbsqintegration/getCumulativeStocksB2C";
                 }
 
 
@@ -1829,7 +1834,7 @@ namespace WebService1
         }
 
 
-        public DateTransportMathaus getTransportService_old(AntetCmdMathaus antetCmd, ComandaMathaus comandaMathaus, string canal, DatePoligon datePoligon)
+        public DateTransportMathaus getTransportService(AntetCmdMathaus antetCmd, ComandaMathaus comandaMathaus, string canal, DatePoligon datePoligon)
         {
             DateTransportMathaus dateTransport = new DateTransportMathaus();
             List<CostTransportMathaus> listCostTransp = new List<CostTransportMathaus>();
@@ -2028,7 +2033,7 @@ namespace WebService1
         }
 
 
-        public DateTransportMathaus getTransportService(AntetCmdMathaus antetCmd, ComandaMathaus comandaMathaus, string canal, DatePoligon datePoligon)
+        public DateTransportMathaus getTransportService_new(AntetCmdMathaus antetCmd, ComandaMathaus comandaMathaus, string canal, DatePoligon datePoligon)
         {
 
 
@@ -2078,6 +2083,7 @@ namespace WebService1
                 inParam.IpCanal = canal;
                 inParam.IpVbeln = antetCmd.nrCmdSap == null ? " " : antetCmd.nrCmdSap;
                 inParam.IpAdresa = antetCmd.strada == null ? " " : antetCmd.strada;
+                inParam.IpLifnr = antetCmd.codFurnizor == null ? "" : antetCmd.codFurnizor; 
 
 
                 SAPWebServices.ZstTaxeAcces2 taxeAcces = new SAPWebServices.ZstTaxeAcces2();
@@ -2220,15 +2226,20 @@ namespace WebService1
                     taxaMasina.taxaMacara = itemTaxeMasini.TaxaMacara.ToString();
                     taxaMasina.matnrMacara = itemTaxeMasini.MatnrMacara;
                     taxaMasina.maktxMacara = "PREST.SERV.DESCARCARE PALET";
+                    taxaMasina.nrPaleti = ((int)itemTaxeMasini.NrPaleti).ToString();
+
+                    taxaMasina.matnrUsor = itemTaxeMasini.MatnrVuosor;
+                    taxaMasina.maktxUsor = HelperComenzi.eliminaCodDepart(itemTaxeMasini.MaktxVuosor);
+                    taxaMasina.taxaUsor = itemTaxeMasini.TaxaVuosor.ToString();
 
                     taxaMasina.matnrZona = itemTaxeMasini.MatnrZona;
-                    taxaMasina.maktxZona = itemTaxeMasini.MaktxZona;
+                    taxaMasina.maktxZona = HelperComenzi.eliminaCodDepart(itemTaxeMasini.MaktxZona);
                     taxaMasina.taxaZona = itemTaxeMasini.TaxaZona.ToString();
                     taxaMasina.taxaAcces = itemTaxeMasini.TaxaAcces.ToString();
                     taxaMasina.matnrAcces = itemTaxeMasini.MatnrAcces;
-                    taxaMasina.maktxAcces = "Taxa extra metro";
+                    taxaMasina.maktxAcces = HelperComenzi.eliminaCodDepart(itemTaxeMasini.MaktxAcces);
                     taxaMasina.matnrTransport = itemTaxeMasini.MatnrTransport;
-                    taxaMasina.maktxTransport = itemTaxeMasini.MaktxTransport;
+                    taxaMasina.maktxTransport = HelperComenzi.eliminaCodDepart(itemTaxeMasini.MaktxTransport);
                     taxaMasina.taxaTransport = itemTaxeMasini.TaxaTransport.ToString();
                     taxaMasina.spart = itemTaxeMasini.Spart;
                     taxaMasina.traty = itemTaxeMasini.Traty.Equals("TERA") ? "TERT" : itemTaxeMasini.Traty;
@@ -2264,6 +2275,9 @@ namespace WebService1
 
                 connection.Close();
 
+                ErrorHandling.sendErrorToMail("getTransportService: " +"\n\n" + new JavaScriptSerializer().Serialize(inParam)
+                    + "\n\n" + new JavaScriptSerializer().Serialize(resp));
+
 
             }
             catch (Exception ex)
@@ -2278,10 +2292,275 @@ namespace WebService1
                 dateTransport.listCostTransport = listTaxeTransp;
 
             dateTransport.listDepozite = listArticoleDepoz;
-            dateTransport.taxeMasini = listTaxeMasini;
-            dateTransport.listPaleti = listPaleti;
+            dateTransport.taxeMasini = setTaxeTransport(listTaxeMasini);
+            dateTransport.listPaleti = OperatiiMacara.getPaletiDistincti(listPaleti); 
+            
 
             return dateTransport;
+
+        }
+
+
+        private List<TaxaMasina> setTaxeTransport(List<TaxaMasina> listTaxeMasini)
+        {
+
+            List<TaxaMasina> tempListTaxe = new List<TaxaMasina>();
+
+
+            foreach (TaxaMasina oTaxa in listTaxeMasini)
+            {
+
+                if (tempListTaxe.Count == 0)
+                {
+                    adaugaTaxa(tempListTaxe, oTaxa);
+                }
+                else
+                {
+
+                    if (transpFaraMacara(oTaxa))
+                    {
+                        if (oTaxa.camionIveco.Equals("X"))
+                        {
+                            List<TaxaMasina> taxaExist = tempListTaxe.Where(x => x.werks == oTaxa.werks && x.camionIveco.Equals("X") && !x.macara.Equals("X") && !x.lift.Equals("X")).ToList();
+                            trateazaTaxe(taxaExist, oTaxa, tempListTaxe);
+                        }
+
+                        if (oTaxa.camionScurt.Equals("X"))
+                        {
+                            List<TaxaMasina> taxaExist = tempListTaxe.Where(x => x.werks == oTaxa.werks && x.camionScurt.Equals("X") && !x.macara.Equals("X") && !x.lift.Equals("X")).ToList();
+                            trateazaTaxe(taxaExist, oTaxa, tempListTaxe);
+
+                        }
+
+                        if (oTaxa.camionOricare.Equals("X"))
+                        {
+                            List<TaxaMasina> taxaExist = tempListTaxe.Where(x => x.werks == oTaxa.werks && x.camionOricare.Equals("X") && !x.macara.Equals("X") && !x.lift.Equals("X")).ToList();
+                            trateazaTaxe(taxaExist, oTaxa, tempListTaxe);
+
+                        }
+                    }
+                    else
+                    {
+                        if (oTaxa.camionIveco.Equals("X"))
+                        {
+                            List<TaxaMasina> taxaExist = tempListTaxe.Where(x => x.werks == oTaxa.werks && x.camionIveco.Equals("X") && (x.macara.Equals("X") || x.lift.Equals("X"))).ToList();
+                            trateazaTaxe(taxaExist, oTaxa, tempListTaxe);
+
+                        }
+
+                        if (oTaxa.camionScurt.Equals("X"))
+                        {
+                            List<TaxaMasina> taxaExist = tempListTaxe.Where(x => x.werks == oTaxa.werks && x.camionScurt.Equals("X") && (x.macara.Equals("X") || x.lift.Equals("X"))).ToList();
+                            trateazaTaxe(taxaExist, oTaxa, tempListTaxe);
+
+                        }
+
+                        if (oTaxa.camionOricare.Equals("X"))
+                        {
+                            List<TaxaMasina> taxaExist = tempListTaxe.Where(x => x.werks == oTaxa.werks && x.camionOricare.Equals("X") && (x.macara.Equals("X") || x.lift.Equals("X"))).ToList();
+                            trateazaTaxe(taxaExist, oTaxa, tempListTaxe);
+                        }
+                    }
+
+                }
+
+
+            }
+
+            setTaxeDivizii(listTaxeMasini, tempListTaxe);
+
+            return tempListTaxe;
+
+
+        }
+
+        private void setTaxeDivizii(List<TaxaMasina> listTaxeServiciu, List<TaxaMasina> listTaxeDeterm)
+        {
+
+            List<TaxaMasina> listTaxeMasina;
+
+            foreach (TaxaMasina taxaDeterm in listTaxeDeterm)
+            {
+                listTaxeMasina = new List<TaxaMasina>();
+
+                foreach (TaxaMasina taxaServ in listTaxeServiciu)
+                {
+
+                    if (taxaDeterm.werks.Equals(taxaServ.werks))
+                    {
+
+                        if (transpFaraMacara(taxaDeterm) && transpFaraMacara(taxaServ))
+                        {
+
+                            if (taxaDeterm.camionIveco.Equals("X") && taxaDeterm.camionIveco.Equals(taxaServ.camionIveco))
+                            {
+                                listTaxeMasina.Add(determTaxeDepart(taxaServ));
+                            }
+                            else if (taxaDeterm.camionScurt.Equals("X") && taxaDeterm.camionScurt.Equals(taxaServ.camionScurt))
+                            {
+                                listTaxeMasina.Add(determTaxeDepart(taxaServ));
+                            }
+                            else if (taxaDeterm.camionOricare.Equals("X") && taxaDeterm.camionOricare.Equals(taxaServ.camionOricare))
+                            {
+                                listTaxeMasina.Add(determTaxeDepart(taxaServ));
+                            }
+                        }
+                        else if (!transpFaraMacara(taxaDeterm) && !transpFaraMacara(taxaServ))
+                        {
+                            if (taxaDeterm.camionIveco.Equals("X") && taxaDeterm.camionIveco.Equals(taxaServ.camionIveco))
+                            {
+                                listTaxeMasina.Add(determTaxeDepart(taxaServ));
+                            }
+                            else if (taxaDeterm.camionScurt.Equals("X") && taxaDeterm.camionScurt.Equals(taxaServ.camionScurt))
+                            {
+                                listTaxeMasina.Add(determTaxeDepart(taxaServ));
+                            }
+                            else if (taxaDeterm.camionOricare.Equals("X") && taxaDeterm.camionOricare.Equals(taxaServ.camionOricare))
+                            {
+                                listTaxeMasina.Add(determTaxeDepart(taxaServ));
+                            }
+                        }
+
+                    }
+
+                }
+
+                taxaDeterm.taxeDivizii = listTaxeMasina;
+
+            }
+
+
+        }
+
+
+        private TaxaMasina determTaxeDepart(TaxaMasina taxaServ)
+        {
+            TaxaMasina taxaMasina = new TaxaMasina();
+
+            taxaMasina.spart = taxaServ.spart;
+            taxaMasina.matnrTransport = taxaServ.matnrTransport;
+            taxaMasina.taxaTransport = taxaServ.taxaTransport;
+            taxaMasina.maktxTransport = taxaServ.maktxTransport;
+            taxaMasina.traty = taxaServ.traty;
+            taxaMasina.taxaAcces = taxaServ.taxaAcces;
+            taxaMasina.taxaZona = taxaServ.taxaZona;
+            taxaMasina.taxaMacara = taxaServ.taxaMacara;
+            taxaMasina.nrPaleti = taxaServ.nrPaleti;
+
+
+            if (Double.Parse(taxaServ.taxaAcces) > 0)
+            {
+                taxaMasina.matnrAcces = taxaServ.matnrAcces;
+                taxaMasina.maktxAcces = taxaServ.maktxAcces;
+                taxaMasina.taxaAcces = taxaServ.taxaAcces;
+            }
+
+            if (Double.Parse(taxaServ.taxaZona) > 0)
+            {
+                taxaMasina.matnrZona = taxaServ.matnrZona;
+                taxaMasina.maktxZona = taxaServ.maktxZona;
+                taxaMasina.taxaZona = taxaServ.taxaZona;
+            }
+
+            if (Double.Parse(taxaServ.taxaMacara) > 0)
+            {
+                taxaMasina.matnrMacara = taxaServ.matnrMacara;
+                taxaMasina.maktxMacara = taxaServ.maktxMacara;
+            }
+
+            if (Double.Parse(taxaServ.taxaUsor) > 0)
+            {
+                taxaMasina.matnrUsor = taxaServ.matnrUsor;
+                taxaMasina.maktxUsor = taxaServ.maktxUsor;
+                taxaMasina.taxaUsor = taxaServ.taxaUsor;
+            }
+
+            return taxaMasina;
+        }
+
+        private bool transpFaraMacara(TaxaMasina taxaMasina)
+        {
+            return !taxaMasina.macara.Equals("X") && !taxaMasina.lift.Equals("X");
+        }
+
+        private void actualizeazaTaxe(TaxaMasina taxaExist, TaxaMasina taxaNoua)
+        {
+            taxaExist.nrPaleti = (Double.Parse(taxaExist.nrPaleti) + Double.Parse(taxaNoua.nrPaleti)).ToString();
+
+            if (Double.Parse(taxaExist.taxaMacara) == 0)
+                taxaExist.taxaMacara = (Double.Parse(taxaNoua.taxaMacara)).ToString();
+
+            taxaExist.taxaZona = (Double.Parse(taxaExist.taxaZona) + Double.Parse(taxaNoua.taxaZona)).ToString();
+            taxaExist.taxaAcces = (Double.Parse(taxaExist.taxaAcces) + Double.Parse(taxaNoua.taxaAcces)).ToString();
+            taxaExist.taxaTransport = (Double.Parse(taxaExist.taxaTransport) + Double.Parse(taxaNoua.taxaTransport)).ToString();
+            taxaExist.taxaUsor = (Double.Parse(taxaExist.taxaUsor) + Double.Parse(taxaNoua.taxaUsor)).ToString();
+            setNumeTaxe(taxaExist, taxaNoua);
+        }
+
+        private void trateazaTaxe(List<TaxaMasina> listTaxe, TaxaMasina taxaNoua, List<TaxaMasina> taxeNoi)
+        {
+            if (listTaxe.Count > 0)
+            {
+                actualizeazaTaxe(listTaxe[0], taxaNoua);
+            }
+            else
+            {
+                adaugaTaxa(taxeNoi, taxaNoua);
+            }
+        }
+
+        private void adaugaTaxa(List<TaxaMasina> listTaxe, TaxaMasina oTaxa)
+        {
+            TaxaMasina taxaMasina = new TaxaMasina();
+            taxaMasina.werks = oTaxa.werks;
+            taxaMasina.vstel = oTaxa.vstel;
+
+            taxaMasina.camionIveco = oTaxa.camionIveco;
+            taxaMasina.camionScurt = oTaxa.camionScurt;
+            taxaMasina.camionOricare = oTaxa.camionOricare;
+            taxaMasina.macara = oTaxa.macara;
+            taxaMasina.lift = oTaxa.lift;
+
+            taxaMasina.taxaMacara = oTaxa.taxaMacara;
+            taxaMasina.matnrMacara = oTaxa.matnrMacara;
+
+            taxaMasina.maktxMacara = oTaxa.maktxMacara;
+            taxaMasina.nrPaleti = oTaxa.nrPaleti;
+
+            taxaMasina.matnrUsor = oTaxa.matnrUsor;
+            taxaMasina.maktxUsor = oTaxa.maktxUsor;
+            taxaMasina.taxaUsor = oTaxa.taxaUsor;
+
+            taxaMasina.matnrZona = oTaxa.matnrZona;
+            taxaMasina.maktxZona = oTaxa.maktxZona;
+            taxaMasina.taxaZona = oTaxa.taxaZona;
+            taxaMasina.taxaAcces = oTaxa.taxaAcces;
+            taxaMasina.matnrAcces = oTaxa.matnrAcces;
+            taxaMasina.maktxAcces = oTaxa.maktxAcces;
+            taxaMasina.matnrTransport = oTaxa.matnrTransport;
+            taxaMasina.maktxTransport = oTaxa.maktxTransport;
+            taxaMasina.taxaTransport = oTaxa.taxaTransport;
+            taxaMasina.spart = oTaxa.spart;
+            taxaMasina.traty = oTaxa.traty;
+            listTaxe.Add(taxaMasina);
+        }
+
+
+        private void setNumeTaxe(TaxaMasina taxaExist, TaxaMasina taxaNoua)
+        {
+
+
+            if (taxaNoua.matnrZona.Trim().Length > 0)
+            {
+                taxaExist.matnrZona = taxaNoua.matnrZona;
+                taxaExist.maktxZona = taxaNoua.maktxZona;
+            }
+
+            if (taxaNoua.matnrAcces.Trim().Length > 0)
+            {
+                taxaExist.matnrAcces = taxaNoua.matnrAcces;
+                taxaExist.maktxAcces = taxaNoua.maktxAcces;
+            }
 
         }
 

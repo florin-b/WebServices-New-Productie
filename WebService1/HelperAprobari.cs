@@ -127,7 +127,7 @@ namespace WebService1
 
         private static bool isUserAprobari_11(string tipUser)
         {
-            return tipUser.Contains("IP") || tipUser.Equals("SMR") || tipUser.Equals("SSCM");
+            return tipUser.Contains("IP") || tipUser.Equals("SMR") || tipUser.Equals("SSCM") || tipUser.Equals("CONSCOL");
         }
 
 
