@@ -191,7 +191,7 @@ namespace WebService1
             cmd.Parameters[0].Value = starePlatitor.NrInmatr;
 
             cmd.Parameters.Add(":judet", OracleType.VarChar, 9).Direction = ParameterDirection.Input;
-            cmd.Parameters[1].Value = getCodJudet(starePlatitor.NrInmatr.Trim(), starePlatitor.Judet);
+            cmd.Parameters[1].Value = starePlatitor.scod_Judet;
 
             cmd.Parameters.Add(":numeJudet", OracleType.VarChar, 60).Direction = ParameterDirection.Input;
             cmd.Parameters[2].Value = starePlatitor.Judet;
@@ -264,7 +264,7 @@ namespace WebService1
             cmd.Parameters[3].Value = starePlatitor.NrInmatr;
 
             cmd.Parameters.Add(":judet", OracleType.VarChar, 9).Direction = ParameterDirection.Input;
-            cmd.Parameters[4].Value = getCodJudet(starePlatitor.NrInmatr.Trim(), starePlatitor.Judet);
+            cmd.Parameters[4].Value = starePlatitor.scod_Judet;
 
             cmd.Parameters.Add(":numeJudet", OracleType.VarChar, 60).Direction = ParameterDirection.Input;
             cmd.Parameters[5].Value = starePlatitor.Judet;

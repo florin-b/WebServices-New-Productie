@@ -188,7 +188,23 @@ namespace WebService1
             return listMails;
         }
 
+        public static bool isConditiiAV16(string tipCmd, string tipUserSap, string departAgent)
+        {
+            if (departAgent == null)
+                return false;
 
+            if (!departAgent.Equals("16"))
+                return false;
+
+            if (!tipCmd.Equals("0"))
+                return false;
+
+            if (!tipUserSap.Equals("SD") && !tipUserSap.Equals("DV"))
+                return false;
+
+            return true;
+
+        }
 
         public static string checkROCnpClient(string cnpClient)
         {

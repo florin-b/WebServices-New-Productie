@@ -1084,7 +1084,16 @@ namespace WebService1
                 cmd.CommandText = " select distinct spart from sapprd.knvp p where p.mandt = '900' and p.kunnr = " +
                                   " (select k.cod from clienti k where k.tip2 in ('1000', 'OCAV', 'OCAZ') and k.tip_pers='PJ'  " +
                                   " and k.cui = TRANSLATE(:codCui, '0' || TRANSLATE(:codCui, '.0123456789', '.'), '0') and rownum = 1 )" +
-                                    condAgent + " and p.vtweg = '10' and p.parvw in ('VE','ZC') order by spart ";
+                                    condAgent + " and p.vtweg = '10' and p.parvw in ('VE','ZC') " +
+                                  " union " +
+                                  " select distinct spart from sapprd.knvv v where v.mandt = '900' and " +
+                                  " v.kunnr = (select k.cod from websap.clienti k where k.tip2 in ('1000', 'OCAV', 'OCAZ') and k.tip_pers = 'PJ' " +
+                                  " and k.cui = TRANSLATE(:codCui, '0' || TRANSLATE(:codCui, '.0123456789', '.'), '0') and rownum = 1 ) " +
+                                  " and v.vtweg = '10' and v.kdgrp in ('01','20') " +
+                                  " and not exists(select 1 from sapprd.knvp p1 where p1.mandt = '900' and p1.kunnr = v.kunnr and p1.vtweg = v.vtweg and " +
+                                  " p1.spart = v.spart and p1.parvw in ('VE', 'ZC')) order by spart ";
+
+
 
                 cmd.CommandType = CommandType.Text;
                 cmd.Parameters.Clear();
@@ -1113,7 +1122,6 @@ namespace WebService1
                         diviziiClient += divizie + ";";
                     }
                 }
-
 
                 oReader.Close();
                 oReader.Dispose();
@@ -1206,7 +1214,13 @@ namespace WebService1
                     condAgent = " ";
 
                 cmd.CommandText = " select distinct spart from sapprd.knvp p where p.mandt = '900' and p.kunnr =:codClient " +
-                                  condAgent + " and p.vtweg = '10' and p.parvw in ('VE','ZC') order by spart ";
+                    condAgent + " and p.vtweg = '10' and p.parvw in ('VE','ZC') " +
+                  " union " +
+                  " select distinct spart from sapprd.knvv v where v.mandt = '900' and " +
+                  " v.kunnr =:codClient " +
+                  " and v.vtweg = '10' and v.kdgrp in ('01','20') " +
+                  " and not exists(select 1 from sapprd.knvp p1 where p1.mandt = '900' and p1.kunnr = v.kunnr and p1.vtweg = v.vtweg and " +
+                  " p1.spart = v.spart and p1.parvw in ('VE', 'ZC')) order by spart ";
 
                 cmd.CommandType = CommandType.Text;
                 cmd.Parameters.Clear();
@@ -2448,6 +2462,7 @@ namespace WebService1
                 {
                     raspunsClient.codClient = outParam.EpKunnr;
                     raspunsClient.msg = "";
+                    raspunsClient.diviziiClient = getDiviziiClientStatic(dateClientSap.tipAngajat, dateClientSap.codDepart);
                 }
                 else
                 {
@@ -2512,6 +2527,7 @@ namespace WebService1
                 {
                     raspunsClient.codClient = outParam.EpKunnr;
                     raspunsClient.msg = "";
+                    raspunsClient.diviziiClient = getDiviziiClientStatic(dateClientSap.tipAngajat, dateClientSap.codDepart);
                 }
                 else
                 {
@@ -2523,10 +2539,45 @@ namespace WebService1
             }
             catch (Exception ex)
             {
-                ErrorHandling.sendErrorToMail(ex.ToString());
+                ErrorHandling.sendErrorToMail(ex.ToString() + " \n\n" + dateClientPJ);
             }
 
             return serializer.Serialize(raspunsClient);
+        }
+
+        public static string getDiviziiClientStatic(string tipAngajat, string codDepart)
+        {
+            string diviziiClient = "";
+
+            if (tipAngajat.Equals("AV") || tipAngajat.Equals("SD"))
+            {
+                if (codDepart.Equals("16"))
+                    diviziiClient = "03;040;041;09;11;";
+                else if (codDepart.Contains("04"))
+                    diviziiClient = "040;041;11;";
+                else
+                    diviziiClient = codDepart + ";11;";
+            }
+            else
+                diviziiClient = "01;02;03;040;041;05;06;07;08;09;11;";
+
+            return diviziiClient;
+
+        }
+
+        public static string getDiviziiClient(string codClient, string codAgent)
+        {
+            string diviziiClient = "";
+
+            OracleConnection connection = new OracleConnection();
+            connection.ConnectionString = DatabaseConnections.ConnectToProdEnvironment();
+            connection.Open();
+
+            diviziiClient = getDiviziiClient(connection, codClient, codAgent);
+            connection.Close();
+            connection.Dispose();
+
+            return diviziiClient;
         }
 
 

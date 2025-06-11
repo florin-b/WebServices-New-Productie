@@ -515,6 +515,7 @@ namespace WebService1
     {
         public string nume;
         public string cod;
+        public string depart;
     }
 
 

@@ -52,6 +52,8 @@ namespace WebService1
         public string numeArticol;
         public string cantArticol;
         public string umArticol;
+        public string filiala;
+        public List<CantitateFiliala> paletiFiliala;
 
         public override string ToString()
         {
@@ -64,5 +66,13 @@ namespace WebService1
         public string filiala;
         public List<ArticolCalculDesc> listArticole;
 
+    }
+
+    public class CantitateFiliala
+    {
+        public string filiala;
+        public string cantitate;
+        public string pretUnitPalet;
+        public string cantTotal;
     }
 }

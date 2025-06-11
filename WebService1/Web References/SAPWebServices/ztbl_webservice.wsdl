@@ -928,6 +928,11 @@
           <xsd:maxLength value="200" />
         </xsd:restriction>
       </xsd:simpleType>
+      <xsd:simpleType name="char75">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="75" />
+        </xsd:restriction>
+      </xsd:simpleType>
       <xsd:simpleType name="char80">
         <xsd:restriction base="xsd:string">
           <xsd:maxLength value="80" />
@@ -1020,6 +1025,7 @@
           <xsd:element name="MeinsPalet" type="n0:unit3" />
           <xsd:element name="FurnizorPalet" type="n0:char10" />
           <xsd:element name="PretPalet" type="n0:curr15.2" />
+          <xsd:element name="WerksPalet" type="n0:char4" />
         </xsd:sequence>
       </xsd:complexType>
       <xsd:complexType name="ZileIncarc">
@@ -3248,7 +3254,7 @@
           <xsd:element name="Fiscalcode" type="n0:char20" />
           <xsd:element name="Companyname" type="tns:char80" />
           <xsd:element name="Companyemail" type="n0:char241" />
-          <xsd:element name="Companystreet" type="n0:char60" />
+          <xsd:element name="Companystreet" type="tns:char75" />
           <xsd:element name="Companynumber" type="n0:char10" />
           <xsd:element name="Companycity" type="n0:char40" />
           <xsd:element name="Companycounty" type="n0:char20" />

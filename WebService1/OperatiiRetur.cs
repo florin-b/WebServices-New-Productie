@@ -697,7 +697,7 @@ namespace WebService1
                 condDepart = " and p.spart = substr(:depart,0,2) ";
 
             if (codDepartament.Equals("16"))
-                condDepart = " and p.spart in ('03','06','09') ";
+                condDepart = " and p.spart in ('03','04','09') ";
 
 
             string critFiliala = "";

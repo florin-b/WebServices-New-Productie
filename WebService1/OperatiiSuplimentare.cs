@@ -753,6 +753,61 @@ namespace WebService1
 
         }
 
+        public static bool isConditiiDep16(string depart)
+        {
+
+            if (depart == null)
+                return false;
+
+            return depart.Equals("03") || depart.Contains("04") || depart.Equals("09");
+
+        }
+
+        public static List<Agent> getAgentiDep16(OracleConnection connection, string filiala)
+        {
+            List<Agent> listAgenti = new List<Agent>();
+
+            OracleDataReader oReader = null;
+            OracleCommand cmd = connection.CreateCommand();
+
+            try
+            {
+
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = " select nume, cod from agenti where activ = 1 and divizie = '16' and filiala = :filiala order by nume ";
+
+                cmd.Parameters.Add(":filiala", OracleType.VarChar, 12).Direction = ParameterDirection.Input;
+                cmd.Parameters[0].Value = filiala;
+
+                oReader = cmd.ExecuteReader();
+                Agent unAgent;
+                if (oReader.HasRows)
+                {
+                    while (oReader.Read())
+                    {
+                        unAgent = new Agent();
+                        unAgent.nume = oReader.GetString(0);
+                        unAgent.cod = oReader.GetString(1);
+                        unAgent.depart = "16";
+                        listAgenti.Add(unAgent);
+                    }
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                ErrorHandling.sendErrorToMail(ex.ToString());
+            }
+            finally
+            {
+                DatabaseConnections.CloseConnections(oReader, cmd);
+            }
+
+
+            return listAgenti;
+        }
+
         public static string getPlafonNumerar(OracleConnection connection)
         {
 

@@ -29358,6 +29358,8 @@ namespace WebService1.SAPWebServices {
         
         private decimal pretPaletField;
         
+        private string werksPaletField;
+        
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         public string SpartMarfa {
@@ -29465,6 +29467,17 @@ namespace WebService1.SAPWebServices {
             }
             set {
                 this.pretPaletField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string WerksPalet {
+            get {
+                return this.werksPaletField;
+            }
+            set {
+                this.werksPaletField = value;
             }
         }
     }

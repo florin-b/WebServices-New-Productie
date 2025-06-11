@@ -6836,16 +6836,16 @@ namespace WebService1
                 }
 
 
-                
-                if (Utils.isFilialaMicaDep04(connection,filiala, depart) || depart.Equals("04"))
+
+                if (Utils.isFilialaMicaDep04(connection, filiala, depart) || depart.Equals("04"))
                 {
-                    cmd.CommandText = " select distinct a.nume, a.cod from agenti a, sapprd.zpern_filiale b where (a.filiala=:fil or b.prctr=:fil " + filialaIP + " ) and b.pernr(+) = a.cod and " +
+                    cmd.CommandText = " select distinct a.nume, a.cod, a.divizie from agenti a, sapprd.zpern_filiale b where (a.filiala=:fil or b.prctr=:fil " + filialaIP + " ) and b.pernr(+) = a.cod and " +
                                      "  substr(a.divizie,0,2) =substr(:div,0,2)  " + condTipAg + " and a.activ = 1 order by nume ";
                 }
                 else
                 {
-                    cmd.CommandText = " select distinct a.nume, a.cod from agenti a, sapprd.zpern_filiale b where (a.filiala=:fil or b.prctr=:fil " + filialaIP + " ) and b.pernr(+) = a.cod and " +
-                                     " a.divizie =:div  " + condTipAg + " and a.activ = 1 order by nume ";
+                    cmd.CommandText = " select distinct a.nume, a.cod, a.divizie from agenti a, sapprd.zpern_filiale b where (a.filiala=:fil or b.prctr=:fil " + filialaIP + " ) and b.pernr(+) = a.cod and " +
+                                      " a.divizie =:div  " + condTipAg + " and a.activ = 1 order by nume ";
                 }
 
 
@@ -6875,6 +6875,7 @@ namespace WebService1
                         unAgent = new Agent();
                         unAgent.nume = oReader.GetString(0);
                         unAgent.cod = oReader.GetString(1);
+                        unAgent.depart = oReader.GetString(2);
                         listAgenti.Add(unAgent);
                     }
 
@@ -6882,6 +6883,10 @@ namespace WebService1
 
                 oReader.Close();
                 oReader.Dispose();
+
+                if (OperatiiSuplimentare.isConditiiDep16(depart))
+                    listAgenti.AddRange(OperatiiSuplimentare.getAgentiDep16(connection, filiala));
+
 
                 JavaScriptSerializer serializer = new JavaScriptSerializer();
                 serializedResult = serializer.Serialize(listAgenti);
@@ -6914,7 +6919,7 @@ namespace WebService1
 
 
         [WebMethod]
-        public string getListComenzi(string filiala, string codUser, string tipCmd, string tipUser, string depart, string interval, int restrictii, string codClient, string tipUserSap, string codSD)
+        public string getListComenzi(string filiala, string codUser, string tipCmd, string tipUser, string depart, string interval, int restrictii, string codClient, string tipUserSap, string codSD, string departAgent)
         {
 
             
@@ -7262,6 +7267,9 @@ namespace WebService1
 
                 
                 string condDepart = "";
+
+                if (Utils.isConditiiAV16(tipCmd, tipUserSap, departAgent))
+                    condDepart = " and substr(a.depart,0,2) = '" + depart.Substring(0, 2) + "' ";
 
                 string sqlAvans = " , 0 avans";
 
@@ -9682,13 +9690,13 @@ namespace WebService1
                     if (articole.Count == 0)
                     {
                         sqlString = " select a.xblnr, k.nume , to_char(to_date(a.fkdat,'yyyymmdd')) emitere,  " +
-                                     " ag.nume agnume ,a.knkli,  sum(decode(b.shkzg,'X',-1,1)*(b.netwr+b.mwsbp)) valoare  from sapprd.vbrk a, " +
+                                     " ag.nume agnume ,a.kunag,  sum(decode(b.shkzg,'X',-1,1)*(b.netwr+b.mwsbp)) valoare  from sapprd.vbrk a, " +
                                      " sapprd.vbpa v, clienti k, agenti ag,sapprd.vbrp b where a.mandt='900' and v.mandt='900' and b.mandt='900'  " +
-                                      listFiliale + " and v.vbeln=a.vbeln and b.vbeln = a.vbeln  and a.knkli=k.cod " + conditieClienti +
+                                      listFiliale + " and v.vbeln=a.vbeln and b.vbeln = a.vbeln  and a.kunag=k.cod " + conditieClienti +
                                       conditieDepart + " and a.fksto=' ' and a.fkart not in ('ZF5','ZS1D','ZS2','ZS2C','ZS1','ZFA','ZFAS','ZFAD','ZF5S','ZDLA') and a.fkdat between " +
                                      " '" + dataStart + "' and '" + dataStop + "' " +
                                      " and b.mandt='900' and b.vbeln=a.vbeln and v.pernr=ag.cod " + conditieTipAgenti + conditieAgent +
-                                     " group by a.xblnr, k.nume, a.fkdat, ag.nume  ,a.knkli " +
+                                     " group by a.xblnr, k.nume, a.fkdat, ag.nume  ,a.kunag " +
                                      " order by ag.nume, k.nume,a.fkdat  ";
 
 

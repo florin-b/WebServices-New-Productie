@@ -2268,6 +2268,7 @@ namespace WebService1
                     artPalet.pretUnit = itemPalet.PretPalet.ToString();
                     artPalet.cantArticol = itemPalet.CantMarfa.ToString();
                     artPalet.umArticol = itemPalet.MeinsMarfa;
+                    artPalet.filiala = itemPalet.WerksPalet;
                     listPaleti.Add(artPalet);
 
 
@@ -2325,18 +2326,21 @@ namespace WebService1
                             trateazaTaxe(taxaExist, oTaxa, tempListTaxe);
                         }
 
-                        if (oTaxa.camionScurt.Equals("X"))
+                        else if (oTaxa.camionScurt.Equals("X"))
                         {
                             List<TaxaMasina> taxaExist = tempListTaxe.Where(x => x.werks == oTaxa.werks && x.camionScurt.Equals("X") && !x.macara.Equals("X") && !x.lift.Equals("X")).ToList();
                             trateazaTaxe(taxaExist, oTaxa, tempListTaxe);
-
                         }
 
-                        if (oTaxa.camionOricare.Equals("X"))
+                        else if (oTaxa.camionOricare.Equals("X"))
                         {
                             List<TaxaMasina> taxaExist = tempListTaxe.Where(x => x.werks == oTaxa.werks && x.camionOricare.Equals("X") && !x.macara.Equals("X") && !x.lift.Equals("X")).ToList();
                             trateazaTaxe(taxaExist, oTaxa, tempListTaxe);
-
+                        }
+                        else
+                        {
+                            List<TaxaMasina> taxaExist = tempListTaxe.Where(x => x.werks == oTaxa.werks && !x.camionOricare.Equals("X") && !x.macara.Equals("X") && !x.lift.Equals("X")).ToList();
+                            trateazaTaxe(taxaExist, oTaxa, tempListTaxe);
                         }
                     }
                     else
@@ -2345,17 +2349,16 @@ namespace WebService1
                         {
                             List<TaxaMasina> taxaExist = tempListTaxe.Where(x => x.werks == oTaxa.werks && x.camionIveco.Equals("X") && (x.macara.Equals("X") || x.lift.Equals("X"))).ToList();
                             trateazaTaxe(taxaExist, oTaxa, tempListTaxe);
-
                         }
 
-                        if (oTaxa.camionScurt.Equals("X"))
+                        else if (oTaxa.camionScurt.Equals("X"))
                         {
                             List<TaxaMasina> taxaExist = tempListTaxe.Where(x => x.werks == oTaxa.werks && x.camionScurt.Equals("X") && (x.macara.Equals("X") || x.lift.Equals("X"))).ToList();
                             trateazaTaxe(taxaExist, oTaxa, tempListTaxe);
 
                         }
 
-                        if (oTaxa.camionOricare.Equals("X"))
+                        else if (oTaxa.camionOricare.Equals("X"))
                         {
                             List<TaxaMasina> taxaExist = tempListTaxe.Where(x => x.werks == oTaxa.werks && x.camionOricare.Equals("X") && (x.macara.Equals("X") || x.lift.Equals("X"))).ToList();
                             trateazaTaxe(taxaExist, oTaxa, tempListTaxe);
@@ -2446,6 +2449,7 @@ namespace WebService1
             taxaMasina.taxaZona = taxaServ.taxaZona;
             taxaMasina.taxaMacara = taxaServ.taxaMacara;
             taxaMasina.nrPaleti = taxaServ.nrPaleti;
+            taxaMasina.taxaUsor = taxaServ.taxaUsor;
 
 
             if (Double.Parse(taxaServ.taxaAcces) > 0)
