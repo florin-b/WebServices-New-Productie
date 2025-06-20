@@ -854,5 +854,47 @@ namespace WebService1
         }
 
 
+        public static string getDepartComanda(OracleConnection connection, string idComanda, string status)
+        {
+            string departComanda = "-1";
+
+            OracleDataReader oReader = null;
+
+            try
+            {
+                OracleCommand cmd = connection.CreateCommand();
+
+                string query = " select depart from sapprd.zcomhead_tableta where id=:cmdId ";
+
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = query;
+                cmd.Parameters.Clear();
+
+                cmd.Parameters.Add(":cmdId", OracleType.Number, 11).Direction = ParameterDirection.Input;
+                cmd.Parameters[0].Value = idComanda;
+
+                oReader = cmd.ExecuteReader();
+
+                if (oReader.HasRows)
+                {
+                    oReader.Read();
+                    departComanda = oReader.GetString(0).ToString();
+                }
+
+                oReader.Close();
+                oReader.Dispose();
+                cmd.Dispose();
+
+            }
+            catch (Exception ex)
+            {
+                ErrorHandling.sendErrorToMail(ex.ToString());
+            }
+
+
+            return status + "comanda " + idComanda +"  depart : " + departComanda;
+        }
+
+
     }
 }

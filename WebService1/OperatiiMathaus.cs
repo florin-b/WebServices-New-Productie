@@ -1427,10 +1427,7 @@ namespace WebService1
 
                 if (antetCmdMathaus != null)
                 {
-                    if (Utils.isUserTestDB(antetCmdMathaus.codPers))
-                        dateTransport = getTransportService_new(antetCmdMathaus, comandaMathaus, canal, datePoligon);
-                    else
-                        dateTransport = getTransportService(antetCmdMathaus, comandaMathaus, canal, datePoligon);
+                    dateTransport = getTransportService(antetCmdMathaus, comandaMathaus, canal, datePoligon);
                 }
 
                 bool stocSap = false;
@@ -1587,7 +1584,7 @@ namespace WebService1
                 DateTransportMathaus dateTransport = null;
 
                 if (antetCmdMathaus != null)
-                    dateTransport = getTransportService(antetCmdMathaus, comandaMathaus, canal, datePoligon);
+                    dateTransport = getTransportService_old(antetCmdMathaus, comandaMathaus, canal, datePoligon);
 
                 foreach (DateArticolMathaus articolMathaus in comandaMathaus.deliveryEntryDataList)
                 {
@@ -1834,7 +1831,7 @@ namespace WebService1
         }
 
 
-        public DateTransportMathaus getTransportService(AntetCmdMathaus antetCmd, ComandaMathaus comandaMathaus, string canal, DatePoligon datePoligon)
+        public DateTransportMathaus getTransportService_old(AntetCmdMathaus antetCmd, ComandaMathaus comandaMathaus, string canal, DatePoligon datePoligon)
         {
             DateTransportMathaus dateTransport = new DateTransportMathaus();
             List<CostTransportMathaus> listCostTransp = new List<CostTransportMathaus>();
@@ -2033,7 +2030,7 @@ namespace WebService1
         }
 
 
-        public DateTransportMathaus getTransportService_new(AntetCmdMathaus antetCmd, ComandaMathaus comandaMathaus, string canal, DatePoligon datePoligon)
+        public DateTransportMathaus getTransportService(AntetCmdMathaus antetCmd, ComandaMathaus comandaMathaus, string canal, DatePoligon datePoligon)
         {
 
 
@@ -2275,10 +2272,6 @@ namespace WebService1
                 }
 
                 connection.Close();
-
-                ErrorHandling.sendErrorToMail("getTransportService: " +"\n\n" + new JavaScriptSerializer().Serialize(inParam)
-                    + "\n\n" + new JavaScriptSerializer().Serialize(resp));
-
 
             }
             catch (Exception ex)

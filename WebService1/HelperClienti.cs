@@ -309,6 +309,11 @@ namespace WebService1
 
         }
 
+        public static bool isConditiiCodNominal(string codClient)
+        {
+            return codClient != null && codClient.Length != 10 && !codClient.StartsWith("411");
+        }
+
         public static string getDiviziiClientDep16(string diviziiClient)
         {
 

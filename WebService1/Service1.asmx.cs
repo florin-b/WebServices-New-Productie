@@ -94,7 +94,7 @@ namespace WebService1
 
             DatePoligon datePoligon = ser.Deserialize<DatePoligon>(poligon);
 
-            new OperatiiMathaus().getTransportService(antetComandaMathaus, comandaMathaus, canal, datePoligon);
+            new OperatiiMathaus().getTransportService_old(antetComandaMathaus, comandaMathaus, canal, datePoligon);
 
         }
 
@@ -12521,7 +12521,7 @@ namespace WebService1
                 string depart = "00";
                 string tempDepart = "00";  //pentru comenzile ged facute de agenti
                 //consilieri
-                if (tipUser.Equals("CV") || tipUser.Equals("SITE"))
+                if (tipUser.Equals("CV") || tipUser.Equals("SITE") || tipUserSap.Equals("CVA"))
                 {
                     depart = "11";
 
@@ -12858,6 +12858,11 @@ namespace WebService1
                 cmd.Parameters[25].Value = adrLivrNoua;
 
                 cmd.Parameters.Add(":depart", OracleType.VarChar, 6).Direction = ParameterDirection.Input;
+
+                if (tipUser.Equals("CV") || tipUser.Equals("SITE") || tipUserSap.Equals("CVA"))
+                    depart = "11";
+
+
                 cmd.Parameters[26].Value = depart;
 
                 cmd.Parameters.Add(":obsplata", OracleType.VarChar, 300).Direction = ParameterDirection.Input;
@@ -13224,6 +13229,8 @@ namespace WebService1
                     //sf. actualizare
 
                     //scriere comanda in SAP
+
+                    
 
                     //vanzare din GED cu transp. ARBSQ se calculeaza intai pretul
                     double pretTransp = 0;
