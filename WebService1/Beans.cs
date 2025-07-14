@@ -272,6 +272,7 @@ namespace WebService1
         public string necesarAprobariCV;
         public string valTransportSap;
         public string parrentId;
+        public string site;
 
     }
 
@@ -465,6 +466,7 @@ namespace WebService1
         public string tipClientInstPublica;
         public bool isAprobatDistrib;
         public bool isComandaACZC;
+        public string site;
 
     }
 

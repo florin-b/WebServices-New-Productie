@@ -157,6 +157,13 @@ namespace WebService1
                     string condExtraClient = " and exists (select 1 from sapprd.knvp p where p.mandt = '900' and p.kunnr = c.cod  and p.vtweg = '10' " +
                                             " and p.spart = '" + departAg + "' and p.parvw in ('VE', 'ZC')  and p.pernr = '" + codUser + "' ) ";
 
+                    if (tipUserSap != null && tipUserSap.Equals("CVOB"))
+                    {
+                        condClient = "";
+                        condExtraClient = " and exists (select 1 from sapprd.knvp p where p.mandt = '900' and p.kunnr = c.cod  and p.vtweg = '10' " +
+                                          " and p.parvw in ('VE', 'ZC')  and p.pernr = '" + codUser + "' ) ";
+                    }
+
                     if (depart.Equals("16"))
                     {
                         condExtraClient = " and exists (select 1 from sapprd.knvp p where p.mandt = '900' and p.kunnr = c.cod  and p.vtweg = '10' " +

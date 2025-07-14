@@ -509,7 +509,7 @@ namespace WebService1
                     case "1":
 
                         //adrese de livrare
-                        retVal = getAdreseLivrareClient(codClient, "");
+                        retVal = getAdreseLivrareClient(codClient, "","");
 
                         //peroana de contact
                         connection = new OracleConnection();
@@ -2342,7 +2342,7 @@ namespace WebService1
 
 
         [WebMethod]
-        public string getAdreseLivrareClient(string codClient, string filiala)
+        public string getAdreseLivrareClient(string codClient, string filiala, string tipUserSap)
         {
 
             string serializedResult = " ";
@@ -2382,13 +2382,7 @@ namespace WebService1
 
                 cmd.Parameters.Add(":codClient", OracleType.VarChar, 54).Direction = ParameterDirection.Input;
                 cmd.Parameters[0].Value = codClient;
-                /*
-                if (filiala != null && filiala.Length == 4)
-                {
-                    cmd.Parameters.Add(":filiala", OracleType.VarChar, 6).Direction = ParameterDirection.Input;
-                    cmd.Parameters[1].Value = filiala;
-                }
-                */
+  
 
                 oReader = cmd.ExecuteReader();
 
@@ -7292,7 +7286,7 @@ namespace WebService1
                                 " a.ul, a.accept1, a.accept2, '0' tip , ag.nume, decode(a.pmnttrms,'',' ',a.pmnttrms) pmnttrms, a.datac, nvl(a.docin,-1), " +
                                 " nvl(a.adr_noua,-1), a.city ||', '|| a.adr_livrare, '11' divizie,'-1' nume_client, a.depart, " +
                                 " a.aprob_cv_necesar, a.aprob_cv_realiz, a.cod_client cod_client_generic_ged, cond_cv conditii, nvl(ag.nrtel,'-1') telAgent, a.client_raft " +
-                                sqlAvans + " , a.lifnr, cl.nume nume_cl, a.ora_accept1, a.ora_accept2, a.ac_zc, a.canal " +
+                                sqlAvans + " , a.lifnr, cl.nume nume_cl, a.ora_accept1, a.ora_accept2, a.ac_zc, a.canal, a.site " +
                                 "  from sapprd.zcomhead_tableta a, " +
                                 " agenti ag, sapprd.zcomsuperav sav, clienti cl " +
                                 " where ag.cod = a.cod_agent and cl.cod = a.cod_client " + tipComanda + condData + condClient + condRestr +
@@ -7316,7 +7310,7 @@ namespace WebService1
                                 " , ag.nume, decode(a.pmnttrms,'',' ',a.pmnttrms) pmnttrms, a.datac, nvl(a.docin,-1) docin1, " +
                                 " nvl(a.adr_noua,-1) adr_noua1, a.city ||', '|| a.adr_livrare adr_livrare1, ag.divizie, a.nume_client, a.depart, " +
                                 " a.aprob_cv_necesar , a.aprob_cv_realiz, ' ' cod_client_generic_ged, ' ' conditii, nvl(ag.nrtel,'-1') telAgent,a.client_raft " +
-                                 sqlAvans + " , a.lifnr, ' ' nume_cl, a.ora_accept1, a.ora_accept2, a.ac_zc, a.canal " +
+                                 sqlAvans + " , a.lifnr, ' ' nume_cl, a.ora_accept1, a.ora_accept2, a.ac_zc, a.canal, a.site " +
                                 " from sapprd.zcomhead_tableta a, " +
                                 " clienti b, agenti ag, clie_tip cl, sapprd.zcomsuperav sav " + tabelaComenziEmise + tabelaHome + tabDV +
                                 " where a.cod_client=b.cod and ag.cod = a.cod_agent " + tipComanda + condDV + condData + condRestr + condClient + condDepart + condHome +
@@ -7329,7 +7323,7 @@ namespace WebService1
                     if (tipCmd.Equals("2") && !depart.StartsWith("04"))
                     {
                         sqlString = " select x.id, x.nume1, to_char(to_date(x.datac,'yyyymmdd')), x.valoare, x.status, x.cod_client, x.cmdsap, x.status_aprov, x.fact_red, x.ul, x.accept1, x.accept2, x.tip, x.nume, x.pmnttrms, x.datac, x.docin1, " +
-                                    " x.adr_noua1, x.adr_livrare1, x.divizie, x.nume_client, x.depart, x.aprob_cv_necesar, x.aprob_cv_realiz,x.cod_client_generic_ged,x.conditii, x.telAgent,x.client_raft, x.avans, x.lifnr, x.nume_cl, x.ora_accept1, x.ora_accept2, x.ac_zc, x.canal " +
+                                    " x.adr_noua1, x.adr_livrare1, x.divizie, x.nume_client, x.depart, x.aprob_cv_necesar, x.aprob_cv_realiz,x.cod_client_generic_ged,x.conditii, x.telAgent,x.client_raft, x.avans, x.lifnr, x.nume_cl, x.ora_accept1, x.ora_accept2, x.ac_zc, x.canal, x.site " +
                                     " from ( " + sqlString + " ) x where rownum<=15 ";
                     }
 
@@ -7434,6 +7428,7 @@ namespace WebService1
 
                         comanda.isAprobatDistrib = HelperComenzi.isComandaDistribAprobata(comanda.accept1, oReader.GetString(oReader.GetOrdinal("ora_accept1")), comanda.accept2, oReader.GetString(oReader.GetOrdinal("ora_accept2")));
                         comanda.isComandaACZC = oReader.GetString(oReader.GetOrdinal("ac_zc")).Equals("X");
+                       // comanda.site = oReader.GetString(oReader.GetOrdinal("site"));
 
                         if (tipUser == "DV")
                         {
@@ -9653,16 +9648,16 @@ namespace WebService1
                     if (depart.Equals("11"))    //consilieri
                     {
                         if (agent.Equals("0"))
-                            conditieTipAgenti = " and  v.parvw = 'ZC' and ag.filiala = '" + filiala + "' and ag.divizie='11' ";
+                            conditieTipAgenti = " and ag.filiala = '" + filiala + "' and ag.divizie='11' ";
                         else
-                            conditieTipAgenti = " and  v.parvw in ('ZC','VE') ";
+                            conditieTipAgenti = " ";
 
 
                         conditieDepart = " ";
                     }
                     else   //agenti
                     {
-                        conditieTipAgenti = " and v.parvw='VE' and upper(ag.nume) not like '%IMPUTATII%'  and  " +
+                        conditieTipAgenti = "  and upper(ag.nume) not like '%IMPUTATII%'  and  " +
                                              " ( substr(divizie,0,2) like '" + depart.Substring(0, 2) + "%' or substr(old_div,0,2) like '" + depart.Substring(0, 2) + "%')";
 
                         if (!depart.Equals("10"))
@@ -9693,9 +9688,9 @@ namespace WebService1
                                      " ag.nume agnume ,a.kunag,  sum(decode(b.shkzg,'X',-1,1)*(b.netwr+b.mwsbp)) valoare  from sapprd.vbrk a, " +
                                      " sapprd.vbpa v, clienti k, agenti ag,sapprd.vbrp b where a.mandt='900' and v.mandt='900' and b.mandt='900'  " +
                                       listFiliale + " and v.vbeln=a.vbeln and b.vbeln = a.vbeln  and a.kunag=k.cod " + conditieClienti +
-                                      conditieDepart + " and a.fksto=' ' and a.fkart not in ('ZF5','ZS1D','ZS2','ZS2C','ZS1','ZFA','ZFAS','ZFAD','ZF5S','ZDLA') and a.fkdat between " +
+                                      conditieDepart + " and a.fksto=' ' and a.fkart not in ('ZF5','ZS1D','ZS2','ZS2C','ZS1','ZS3','ZFA','ZFAS','ZFAD','ZF5S','ZDLA') and a.fkdat between " +
                                      " '" + dataStart + "' and '" + dataStop + "' " +
-                                     " and b.mandt='900' and b.vbeln=a.vbeln and v.pernr=ag.cod " + conditieTipAgenti + conditieAgent +
+                                     " and b.mandt='900' and b.vbeln=a.vbeln AND v.parvw <> 'ZO' and v.pernr=ag.cod " + conditieTipAgenti + conditieAgent +
                                      " group by a.xblnr, k.nume, a.fkdat, ag.nume  ,a.kunag " +
                                      " order by ag.nume, k.nume,a.fkdat  ";
 
@@ -9711,7 +9706,7 @@ namespace WebService1
                             sqlString = "select b.matkl cod,st.nume matdesc ,ag.nume agnume, sum(decode(a.fkart,'ZFRA',0,'ZFRB',0,decode(b.shkzg,'X',-b.fklmg,b.fklmg))) cant, " +
                                         " sum(decode(b.shkzg,'X',-1,1)*(b.netwr+b.mwsbp)*b.kursk) valoare from sapprd.vbrk a, sapprd.vbrp b, sapprd.vbpa v,sintetice st, " +
                                         " articole ar,agenti ag where a.mandt='900' and b.mandt='900' and v.mandt='900'  " + listFiliale +
-                                        " and v.vbeln=a.vbeln and ag.cod(+)=v.pernr and a.fksto=' ' and a.fkart not in ('ZF5','ZS1D','ZS2','ZS2C','ZS1','ZFA','ZFAS','ZF5S','ZDLA') " +
+                                        " and v.vbeln=a.vbeln AND v.parvw <> 'ZO' and ag.cod(+)=v.pernr and a.fksto=' ' and a.fkart not in ('ZF5','ZS1D','ZS2','ZS3','ZS2C','ZS1','ZFA','ZFAS','ZF5S','ZDLA') " +
                                         " and a.fkdat between '" + dataStart + "' and '" + dataStop + "' and b.vbeln=a.vbeln " + conditieTipAgenti + conditieAgent +
                                         " and b.matnr=ar.cod and ar.sintetic=st.cod and ar.sintetic in " + listArticole + " group by b.matkl , " +
                                         " st.nume ,v.pernr,ag.nume,b.meins order by agnume , b.matkl ,st.nume asc ";
@@ -9722,8 +9717,8 @@ namespace WebService1
                             sqlString = "select decode(length(b.matnr),18,substr(b.matnr,-8),b.matnr) cod,ar.nume matdesc ,ag.nume agnume, " +
                                          " sum(decode(a.fkart,'ZFRA',0,'ZFRB',0,decode(b.shkzg,'X',-b.fklmg,b.fklmg))) cant, sum(decode(b.shkzg,'X',-1,1)*(b.netwr+b.mwsbp)*b.kursk) valoare " +
                                          " from sapprd.vbrk a, sapprd.vbrp b, sapprd.vbpa v,sintetice st,articole ar,agenti ag where a.mandt='900' " +
-                                         " and b.mandt='900' and v.mandt='900' " + listFiliale + " and v.vbeln=a.vbeln " +
-                                         " and ag.cod(+)=v.pernr and a.fksto=' ' and a.fkart not in ('ZF5','ZS1D','ZS2','ZS2C','ZS1','ZFA','ZFAS','ZF5S','ZDLA') " +
+                                         " and b.mandt='900' and v.mandt='900' " + listFiliale + " AND v.parvw <> 'ZO' and v.vbeln=a.vbeln " +
+                                         " and ag.cod(+)=v.pernr and a.fksto=' ' and a.fkart not in ('ZF5','ZS1D','ZS2','ZS2C','ZS1','ZS3','ZFA','ZFAS','ZF5S','ZDLA') " +
                                          " and a.fkdat between '" + dataStart + "' and '" + dataStop + "' " +
                                          " and b.vbeln=a.vbeln " + conditieTipAgenti + conditieAgent +
                                          " and b.matnr=ar.cod and " +
@@ -9848,7 +9843,7 @@ namespace WebService1
             }
             catch (Exception ex)
             {
-                sendErrorToMail(ex.ToString());
+                sendErrorToMail(ex.ToString() + " \n\n " + reportParams);
                 raportData = "-1";
             }
             finally
@@ -12902,7 +12897,7 @@ namespace WebService1
                 string strUserSite;
                 if (tipUserSap != null && tipUserSap.Equals("CVO"))
                     strUserSite = "X";
-                else if (tipUserSap != null && tipUserSap.Equals("CVOB"))
+                else if ((tipUserSap != null && tipUserSap.Equals("CVOB")) || (comandaVanzare.site != null && comandaVanzare.site.Equals("B")))
                     strUserSite = "B";
                 else
                     strUserSite = comandaVanzare.userSite;

@@ -1570,6 +1570,8 @@ namespace DistributieWebServices
 
         public void getMasiniPlecateInCursa()
         {
+           /*
+            
 
             OracleConnection connection = new OracleConnection();
             OracleCommand cmd = null;
@@ -1588,11 +1590,7 @@ namespace DistributieWebServices
                 cmd = connection.CreateCommand();
 
 
-                /*
-                query = " select b.numarb, b.masina, b.cod_sofer, k.datbg,k.uatbg , round((sysdate - to_date(k.datbg || ' ' || k.uatbg, 'yyyymmdd HH24:mi:ss')) * 24 * 60,-1) minute " +
-                        " from websap.borderouri b join sapprd.vttk k on b.numarb = k.tknum where k.mandt = '900' and b.sttrg = 6 and datbg = to_char(sysdate, 'yyyymmdd') " +
-                        " and fili in ('GL10','DJ10','NT10','IS10') and not exists (select 1 from SAPPRD.zsmsclienti where mandt='900' and borderou = b.numarb and codsofer = b.cod_sofer) ";
-                */
+             
 
                 query = " select b.numarb, b.masina, b.cod_sofer, k.datbg,k.uatbg , round((sysdate - to_date(k.datbg || ' ' || k.uatbg, 'yyyymmdd HH24:mi:ss')) * 24 * 60,-1) minute " +
                         " from websap.borderouri b join sapprd.vttk k on b.numarb = k.tknum where k.mandt = '900' and b.sttrg = 6 and datbg = to_char(sysdate, 'yyyymmdd') " +
@@ -1621,7 +1619,7 @@ namespace DistributieWebServices
 
                                 foreach (NotificareClient notificare in listNotificari)
                                 {
-                                    Sms.logSmsBorderou(connection, oReader.GetString(0), notificare.codClient, notificare.codAdresa, notificare.nrTelefon);
+                                   // Sms.logSmsBorderou(connection, oReader.GetString(0), notificare.codClient, notificare.codAdresa, notificare.nrTelefon);
 
                                    // ErrorHandling.sendErrorToMail("SMS Clienti automat : " + oReader.GetString(0)  + ", " + notificare.codClient + " , " + notificare.codAdresa + " , " + notificare.nrTelefon);
                                 }
@@ -1650,6 +1648,7 @@ namespace DistributieWebServices
                 DatabaseConnections.CloseConnections(oReader, cmd, connection);
             }
 
+            */
 
         }
 

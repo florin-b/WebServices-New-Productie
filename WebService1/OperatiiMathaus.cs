@@ -1402,7 +1402,7 @@ namespace WebService1
                         else if (dateArticol.ulStoc != null && dateArticol.ulStoc.Equals("BV90"))
                             articolComanda.deliveryWarehouse = "BV90";
                         else if (canal != null && canal.Equals("20") && (dateArticol.ulStoc == null || !dateArticol.ulStoc.Equals("BV90")))
-                            articolComanda.deliveryWarehouse = dateArticol.productCode.StartsWith("0000000000111") ? getULGed(comanda.sellingPlant) : comanda.sellingPlant.Split(',')[0];
+                            articolComanda.deliveryWarehouse = comanda.sellingPlant.Split(',')[0];
                         else
                             articolComanda.deliveryWarehouse = dateArticol.productCode.StartsWith("0000000000111") ? getULGed(comanda.sellingPlant) : comanda.sellingPlant.Split(',')[0];
 
@@ -1632,7 +1632,7 @@ namespace WebService1
                 urlDeliveryService = "https://wse1-dmz-prod.arabesque.ro/arbsqintegration/optimiseDeliveryB2B";
 
 
-                if (canal.Equals("10"))
+                if (canal.Equals("10") || canal.Equals("60"))
                     urlDeliveryService = "https://wse1-dmz-prod.arabesque.ro/arbsqintegration/cumulativeOptimiseDeliveryB2B";
                 else
                 {
